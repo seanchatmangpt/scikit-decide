@@ -5,16 +5,17 @@ from pathlib import Path
 from typing import Iterable, List
 
 import pandas as pd
+from models import Intent, Recommendation
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
-from models import Intent, Recommendation
 
 
 def load_data(data_dir: str | Path = "data") -> tuple[pd.DataFrame, pd.DataFrame]:
     data_path = Path(data_dir)
     catalog = pd.read_csv(data_path / "catalog.csv")
-    circulation = pd.read_csv(data_path / "circulation.csv", parse_dates=["checkout_date"])
+    circulation = pd.read_csv(
+        data_path / "circulation.csv", parse_dates=["checkout_date"]
+    )
     catalog["available"] = catalog["available"].astype(str).str.lower().eq("true")
     catalog["series"] = catalog["series"].fillna("")
     return catalog, circulation
@@ -34,7 +35,11 @@ class HybridRecommender:
         self.catalog = catalog.copy()
         self.circulation = circulation.copy().sort_values("checkout_date")
         self.book_index = {book_id: i for i, book_id in enumerate(self.catalog.book_id)}
-        corpus = (self.catalog["subjects"].fillna("") + " " + self.catalog["description"].fillna("")).tolist()
+        corpus = (
+            self.catalog["subjects"].fillna("")
+            + " "
+            + self.catalog["description"].fillna("")
+        ).tolist()
         self.vectorizer = TfidfVectorizer(stop_words="english")
         self.item_matrix = self.vectorizer.fit_transform(corpus)
         self.co_counts = self._build_co_circulation()
@@ -57,7 +62,9 @@ class HybridRecommender:
         rows = self.circulation[self.circulation.student_id == student_id]
         return rows.sort_values("checkout_date").book_id.tolist()
 
-    def recommend(self, student_id: str, intent: Intent | None = None, top_k: int = 5) -> List[Recommendation]:
+    def recommend(
+        self, student_id: str, intent: Intent | None = None, top_k: int = 5
+    ) -> List[Recommendation]:
         intent = intent or Intent(themes=[])
         borrowed = self.borrowed_books(student_id)
         if not borrowed:
@@ -67,23 +74,46 @@ class HybridRecommender:
         profile_vector = self.item_matrix[profile_indices].mean(axis=0)
         content_scores = cosine_similarity(profile_vector.A, self.item_matrix).flatten()
 
-        max_co = max([count for src in borrowed for count in self.co_counts.get(src, {}).values()] or [1])
+        max_co = max(
+            [
+                count
+                for src in borrowed
+                for count in self.co_counts.get(src, {}).values()
+            ]
+            or [1]
+        )
         rows = []
         for row in self.catalog.itertuples(index=False):
             if not row.available:
                 continue
             if intent.exclude_recently_borrowed and row.book_id in borrowed:
                 continue
-            if intent.max_pages is not None and int(row.length_pages) > intent.max_pages:
+            if (
+                intent.max_pages is not None
+                and int(row.length_pages) > intent.max_pages
+            ):
                 continue
             if intent.avoid_long_series and row.series:
                 continue
 
             content = float(content_scores[self.book_index[row.book_id]])
-            co = sum(self.co_counts.get(src, Counter()).get(row.book_id, 0) for src in borrowed) / max_co
+            co = (
+                sum(
+                    self.co_counts.get(src, Counter()).get(row.book_id, 0)
+                    for src in borrowed
+                )
+                / max_co
+            )
             intent_match = self._intent_match(row, intent.themes)
-            curated_boost = 1.0 if "library" in str(row.subjects).lower() or "books" in str(row.subjects).lower() else 0.0
-            score = 0.45 * content + 0.30 * co + 0.20 * intent_match + 0.05 * curated_boost
+            curated_boost = (
+                1.0
+                if "library" in str(row.subjects).lower()
+                or "books" in str(row.subjects).lower()
+                else 0.0
+            )
+            score = (
+                0.45 * content + 0.30 * co + 0.20 * intent_match + 0.05 * curated_boost
+            )
             rows.append((score, row, content, co, intent_match, curated_boost))
 
         rows.sort(key=lambda item: item[0], reverse=True)
@@ -107,7 +137,9 @@ class HybridRecommender:
         return hits / len(list(themes)) if themes else 0.0
 
     @staticmethod
-    def _to_recommendation(score, row, content, co, intent_match, curated_boost) -> Recommendation:
+    def _to_recommendation(
+        score, row, content, co, intent_match, curated_boost
+    ) -> Recommendation:
         explanation = (
             f"Recommended because it matches prior borrowing patterns "
             f"and has catalog evidence for {row.subjects}."

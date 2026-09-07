@@ -3,9 +3,11 @@
 The production design can swap this deterministic parser for an LLM call that returns
 this same schema. The recommender never lets the language layer directly rank books.
 """
+
 from __future__ import annotations
 
 import re
+
 from models import Intent
 
 THEME_TERMS = {
@@ -41,6 +43,14 @@ def parse_librarian_request(text: str) -> Intent:
     if match:
         max_pages = int(match.group(1))
 
-    avoid_long_series = any(phrase in normalized for phrase in ["not part of a long series", "avoid long series", "standalone"])
+    avoid_long_series = any(
+        phrase in normalized
+        for phrase in ["not part of a long series", "avoid long series", "standalone"]
+    )
 
-    return Intent(themes=themes, exclude_recently_borrowed=True, max_pages=max_pages, avoid_long_series=avoid_long_series)
+    return Intent(
+        themes=themes,
+        exclude_recently_borrowed=True,
+        max_pages=max_pages,
+        avoid_long_series=avoid_long_series,
+    )

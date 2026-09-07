@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Dict, List
 
+
 @dataclass(frozen=True)
 class Recommendation:
     book_id: str
@@ -8,6 +9,7 @@ class Recommendation:
     score: float
     signals: Dict[str, float | bool | str]
     explanation: str
+
 
 @dataclass(frozen=True)
 class Intent:

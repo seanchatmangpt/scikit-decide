@@ -1,5 +1,5 @@
-from pathlib import Path
 import sys
+from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -20,7 +20,9 @@ def test_recommendations_exclude_recently_borrowed_books():
 
 
 def test_librarian_request_becomes_structured_constraints():
-    intent = parse_librarian_request("Something funny, preferably a mystery, and not part of a long series.")
+    intent = parse_librarian_request(
+        "Something funny, preferably a mystery, and not part of a long series."
+    )
     assert "humor" in intent.themes
     assert "mystery" in intent.themes
     assert intent.avoid_long_series is True
@@ -29,5 +31,12 @@ def test_librarian_request_becomes_structured_constraints():
 def test_receipt_signals_are_present():
     catalog, circulation = load_data(DATA_DIR)
     recommender = HybridRecommender(catalog, circulation)
-    rec = recommender.recommend("S104", parse_librarian_request("funny mystery"), top_k=1)[0]
-    assert {"content_similarity", "co_circulation", "intent_match", "available"}.issubset(rec.signals)
+    rec = recommender.recommend(
+        "S104", parse_librarian_request("funny mystery"), top_k=1
+    )[0]
+    assert {
+        "content_similarity",
+        "co_circulation",
+        "intent_match",
+        "available",
+    }.issubset(rec.signals)
