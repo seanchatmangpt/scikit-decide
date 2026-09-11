@@ -5,7 +5,44 @@ the witness that's still alive — the sheet gets corrected to match it, not the
 around. Every line below is either a measured win (command run, output checked, in this
 session) or a recorded negative (attempted, blocked, reason named) — no self-graded claims.
 
-Last update: **pass 23** (2026-09-02) — **Pass 22's zero-branching finding confirmed at true
+Last update: **pass 24** (2026-09-05) — **21 PRs merged to master (#104–#124), not run or
+re-verified this pass** — this entry files the real PR/commit record only; no command in this
+list was executed this session, so no row claims `ALIVE`/`measured win` beyond what each PR's
+own CI gate already required to merge. Grouped by theme:
+
+- **CI hardening** (7 PRs): `#105` matched the renamed `autofde_lab` wheel glob in
+  integration/docs jobs; `#106` moved the `agentic-fabric` `concurrency.group` inside the
+  matrix job; `#107`/`#108` installed the docs wheel via `uv` (twice — `#107` for the
+  `[tool.uv.sources]` git redirect generally, `#108` scoped to `ci.yml`'s own docs job)
+  after `#110` established installing locked git-sourced deps via `uv export` instead of
+  `wheel[all]`; `#113` scoped the MiniZinc AppImage `LD_LIBRARY_PATH` to only the steps that
+  run `minizinc`; `#121` exported `PYTHONPATH` for Ray-spawned workers in the integration job
+  (the same class of fix `standing-law.md`'s collision-repair history already documents for
+  local `just test-full`, applied here to CI).
+- **HDDL planning** (1 PR): `#104` added a native HTN/HDDL plugin via Unified Planning +
+  Aries.
+- **`planner_league` / reasoning identity and admission caps** (12 PRs, per each commit's own
+  "cap N" framing where stated): `#114` solves both sides of a `LeagueMatch` on the admitted
+  world (V2030.1.1 cap 1); `#115` makes `PayoffHypergraph.add()` refuse a non-`PayoffObservation`;
+  `#118` binds episode information partitions to a validated catalog and real `AuthorityModel`
+  grants (cap 4); `#119` binds `PolicySpec.parameters` to a real solver and refuses unknown ids
+  (cap 3); `#109` retains refused probes as typed `DeadEdge` topology (cap 10); `#111` adds a
+  typed `LabResultStanding` that refuses to become production standing (cap 9); `#112` adds a
+  real `red_disturbance` adversarial episode (cap 6); `#116` adds a typed per-episode
+  `BenchmarkVector` over real `gymact` Receipts (cap 5); `#117` adds `PromotionGraduationPacket`
+  joining `PromotionCandidate` to `PolicySpec`/`LeagueMatch` (cap 8); `#120` adds a DfCM Pareto
+  comparison over lawful cloud/security scenarios (cap 7); `#122` adds a typed `AgentBinding` —
+  `Agent` as a fourth identity distinct from Planner/Policy/Role; `#123` and `#124` each close a
+  named production-standing boundary gap (exploration payoff outcomes, then `ExperimentReceipt`)
+  — the same `technicalStanding`/`organizationalStanding` split this repo's
+  `.claude/rules/standing-law.md` and `.claude/rules/fde-authority-boundary.md` already require,
+  now applied to two more object types.
+
+Not verified in this pass: whether these 21 merges leave `just test` / `just test-full` green on
+current `master`, or whether the `planner_league` cap sequence (1, 3–10) is now complete against
+its own frozen manifest. Both are real, checkable next steps, not claimed here.
+
+Prior update: **pass 23** (2026-09-02) — **Pass 22's zero-branching finding confirmed at true
 scale, not a small-sample artifact.** Measured the real total first: GraphQL commit-count query
 across all 382 real `seanchatmangpt` repos, last 30 days → **27,613 real commits**, confirming
 the portfolio's own "~24k commits/month" figure was real (order of magnitude matches). Fetched

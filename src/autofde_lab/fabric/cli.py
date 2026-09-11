@@ -173,6 +173,7 @@ def dmedi_solve_payoff(
     from autofde_lab.reasoning.dflss_solve_payoff_bridge import (
         admit_dflss_solve_payoff,
     )
+    from autofde_lab.reasoning.lab_standing import dflss_solve_payoff_production_claim
     from autofde_lab.reasoning.payoff_bundle import (
         decode_payoff_bundle,
         encode_payoff_bundle,
@@ -223,6 +224,11 @@ def dmedi_solve_payoff(
 
     payload: dict[str, Any] = {
         "standing": result.standing,
+        # `standing` is real, legitimate evidence within the lab domain
+        # (`V2030.1.1-PRD-ARD.md` capability 9). `production_claim` is the
+        # typed refusal every lab-scoped standing must carry across the
+        # lab/production boundary -- see `reasoning.lab_standing`.
+        "production_claim": dflss_solve_payoff_production_claim(result),
         "reason": result.reason,
         "admitted": result.admitted,
         "left_outcome": _dflss_solve_payoff_outcome_dict(result.left_outcome),
