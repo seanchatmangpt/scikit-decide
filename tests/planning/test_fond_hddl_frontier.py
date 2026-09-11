@@ -77,9 +77,7 @@ def test_same_world_state_with_incompatible_hddl_progress_is_rejected() -> None:
 
     assert not check.valid
     assert check.hierarchy_rejected_action_states == frozenset({"s0"})
-    assert check.rejected_progress_witnesses == frozenset(
-        {("s0", "progress-blocks")}
-    )
+    assert check.rejected_progress_witnesses == frozenset({("s0", "progress-blocks")})
 
 
 def test_missing_and_malformed_hierarchy_progress_are_typed_failures() -> None:
