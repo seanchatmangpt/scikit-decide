@@ -7,14 +7,22 @@ other CLI-shaped solver/validator) are declared once, invoked without a shell, a
 invocation is receipted with a bounded, typed outcome instead of a bare exception.
 
 FOND policy checks remain candidate-only: they validate finite policy-graph properties
-but do not admit, authorize, execute, or promote a policy.
+but do not admit, authorize, execute, or promote a policy. FOND↔HDDL frontier checks
+retain HDDL task-network progress as a separate state dimension and carry the same
+candidate-only authority ceiling.
 
 Public surface: ``EngineConfig``, ``EnginesConfig``, ``probe_engine``, ``run_engine``,
-``FONDProblem``, ``CandidatePolicy``, ``PolicySemantics``, ``PolicyCheck``, and
-``check_candidate_policy``.
+``FONDProblem``, ``CandidatePolicy``, ``PolicySemantics``, ``PolicyCheck``,
+``check_candidate_policy``, ``HDDLProgressWitness``, ``FONDHDDLFrontierCheck``, and
+``check_fond_hddl_frontier_closure``.
 """
 
 from .config import EngineConfig, EnginesConfig, OutputMode
+from .fond_hddl import (
+    FONDHDDLFrontierCheck,
+    HDDLProgressWitness,
+    check_fond_hddl_frontier_closure,
+)
 from .fond_policy import (
     CandidatePolicy,
     FONDProblem,
@@ -30,11 +38,14 @@ __all__ = [
     "EngineOutcome",
     "EngineRunReceipt",
     "EnginesConfig",
+    "FONDHDDLFrontierCheck",
     "FONDProblem",
+    "HDDLProgressWitness",
     "OutputMode",
     "PolicyCheck",
     "PolicySemantics",
     "check_candidate_policy",
+    "check_fond_hddl_frontier_closure",
     "probe_engine",
     "run_engine",
 ]
