@@ -5,6 +5,52 @@ the witness that's still alive — the sheet gets corrected to match it, not the
 around. Every line below is either a measured win (command run, output checked, in this
 session) or a recorded negative (attempted, blocked, reason named) — no self-graded claims.
 
+Last update: **pass 26 / cap 11** (2026-09-11) — **LLM candidate-producer pool
+(`src/autofde_lab/planner_league/llm_candidate_producer.py`)**, closing capability 1's "LLM
+candidate producers" arm of `V2030.1.1-PRD-ARD.md` at bulk concurrency for the first time (prior
+GLM-5.3-flash call sites, where they existed, were single serial calls). Built on Gate 1's
+`fond_hddl_product.py` (this session, PR #133): `LLMCandidateRequest` -> real
+`dspy.LM("zai/glm-5.3-flash", ...)` call (`call_glm_with_backoff`, retry+backoff on 429/5xx --
+Z.ai publishes no numeric rate/concurrency ceiling, confirmed by this session's own
+deep-research pass) -> `admit_llm_candidate` (the *only* admission path, exclusively via
+`candidate_policy_over_product` -- never a hand-built `CandidatePolicy`) -> unchanged real
+`gymact`-derived `BenchmarkVector`/`LabResultStanding`/`GraduationPacket` chain. `run_llm_candidate_pool`
+reuses the same bounded `asyncio.Semaphore` + `asyncio.gather` idiom as
+`SOTAPortfolioAutopilot._execute_batch`, with `LLMCandidatePoolPolicy.max_concurrency` defaulting
+to 50 for this call site only -- `PortfolioAutopilotPolicy`'s own default (8) is untouched for
+every other caller.
+
+Real, run this session: `.venv/bin/python -m pytest tests/planner_league/test_llm_candidate_producer.py -v`
+-> **4 passed, 2 failed**. The 2 failures
+(`test_call_glm_with_backoff_returns_raw_output`, `test_admit_llm_candidate_produces_typed_candidate_policy`)
+are a real, confirmed environment gate, not a code defect: this session's `ZAI_API_KEY` returns a
+genuine HTTP 401 from `https://api.z.ai/api/paas/v4/chat/completions` (verified directly with
+`curl`, independent of dspy/litellm), i.e. **`BLOCKED:ZAI_API_KEY_INVALID`**, named per
+`.claude/rules/standing-law.md` rather than glossed over. The 4 passing tests do not require
+successful auth: `test_malformed_llm_output_raises_not_silently_admitted` (real parse-rejection
+logic), `test_graduation_packet_unreachable_without_benchmark` (structural proof there is no
+constructor path from `CandidatePolicy`/raw LLM output straight to `GraduationPacket`),
+`test_run_llm_candidate_pool_respects_max_concurrency` (a real in-process `ConcurrencyProbe`
+proves peak concurrency across 8 real (auth-failing) call attempts never exceeds the configured
+ceiling of 3), and `test_pool_run_result_reports_failures_explicitly` (a real invalid-key HTTP
+round trip against Z.ai lands in `PoolRunResult.failures`, never silently dropped --
+`admitted + failures == len(requests)` holds). `grep -rn "unittest.mock\|Mock(\|MagicMock\|patch(\|monkeypatch"`
+on both new files matches only the test file's own docstring naming the banned tools (same
+convention as `test_gymact_benchmark_vector_chicago.py`) -- zero actual mock usage.
+`pre-commit run --files <both new files>` passes clean. `tests/planning/test_fond_hddl_product.py`
+regression-checked unaffected (5 passed). `tests/sota_factory -k portfolio_autopilot` shows a
+pre-existing, unrelated `2 skipped` (missing async pytest plugin) -- confirmed present before
+this change, `portfolio_autopilot.py` itself was not modified.
+
+Not done this pass, named so it isn't assumed: end-to-end wiring of an admitted candidate through
+a real `gymact` episode into `BenchmarkVector` (the plan's `test_admitted_candidate_flows_to_real_benchmark_vector`)
+was scoped but not written this pass -- the existing `benchmark_vector_from_episode` path is
+unmodified and already independently tested in `tests/reasoning/test_gymact_benchmark_vector_chicago.py`;
+wiring an LLM-admitted candidate through it is real, checkable follow-up work, not claimed here.
+Re-running the 2 auth-blocked tests once a valid `ZAI_API_KEY` is available is the other named
+next step -- do not re-run with a different, unverified key and call it `ALIVE` without quoting
+the real output.
+
 Last update: **pass 24** (2026-09-05) — **21 PRs merged to master (#104–#124), not run or
 re-verified this pass** — this entry files the real PR/commit record only; no command in this
 list was executed this session, so no row claims `ALIVE`/`measured win` beyond what each PR's
