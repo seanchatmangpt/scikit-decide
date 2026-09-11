@@ -5,6 +5,34 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.26.6...3.29)
 PROJECT(skdecide)
 
+# Auto-initialize the required cpp/sdk/* git submodules (nng, pybind11,
+# backward-cpp, json, PEGTL, spdlog, Catch2, nngpp) if they haven't been
+# checked out yet. `uv sync` invokes this CMake configure step directly and
+# does not itself run `git submodule update --init --recursive` first, so a
+# fresh clone/worktree without that manual step used to fail here with
+# "ADD_SUBDIRECTORY: cpp/sdk/nng does not contain a CMakeLists.txt". CI
+# already checks out with `submodules: recursive`, so this is a no-op there;
+# this block closes the gap for local `uv sync` bootstraps. Detects an
+# uninitialized submodule by the presence of the top-level .git (repo or
+# worktree) and the absence of CMakeLists.txt inside cpp/sdk/nng (the
+# canonical always-required one).
+IF(EXISTS "${CMAKE_SOURCE_DIR}/../.git" AND NOT EXISTS "${CMAKE_SOURCE_DIR}/sdk/nng/CMakeLists.txt")
+    FIND_PACKAGE(Git QUIET)
+    IF(GIT_FOUND)
+        MESSAGE(STATUS "cpp/sdk/* submodules not initialized -- running 'git submodule update --init --recursive'")
+        EXECUTE_PROCESS(
+            COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive -- cpp/sdk
+            WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/.."
+            RESULT_VARIABLE SUBMODULE_INIT_RESULT
+        )
+        IF(NOT SUBMODULE_INIT_RESULT EQUAL "0")
+            MESSAGE(FATAL_ERROR "Failed to auto-initialize cpp/sdk/* git submodules (exit ${SUBMODULE_INIT_RESULT}). Run 'git submodule update --init --recursive' manually and re-run the build.")
+        ENDIF()
+    ELSE()
+        MESSAGE(FATAL_ERROR "cpp/sdk/* git submodules are not initialized and 'git' was not found to auto-initialize them. Run 'git submodule update --init --recursive' manually and re-run the build.")
+    ENDIF()
+ENDIF()
+
 # Allow third-party SDK libraries with old cmake_minimum_required (e.g. backward-cpp 3.0, spdlog 3.10...3.21)
 SET(CMAKE_POLICY_VERSION_MINIMUM 3.5)
 
