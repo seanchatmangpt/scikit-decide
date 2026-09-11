@@ -99,7 +99,8 @@ from __future__ import annotations
 
 import asyncio
 import concurrent.futures
-from dataclasses import dataclass
+import json
+from dataclasses import asdict, dataclass
 from enum import StrEnum
 from pathlib import Path
 from typing import Any, Callable, Mapping, Protocol
@@ -115,6 +116,7 @@ from autofde_lab.reasoning.breed_ensemble import BreedEnsembleMember, run_breed_
 from autofde_lab.reasoning.hearsay_cross_check import _bullet_lines, hypotheses_to_breed_input
 from autofde_lab.reasoning.k8s_signatures import DiagnoseKubernetesFault
 from autofde_lab.reasoning.sre_troubleshooting_pipeline import SreTroubleshootingPipeline
+from autofde_lab_planner.engine import CompositePlannerEngine
 
 __all__ = [
     "DecisionOutcome",
@@ -127,6 +129,35 @@ __all__ = [
     "build_gated_react_tools",
     "run_dspy_diagnosis",
 ]
+
+# ---------------------------------------------------------------------------
+# CompositePlannerEngine wiring -- the real resource kinds
+# ``CompositePlannerEngine.run_diagnosis()`` reads (see
+# ``autofde_lab_planner/engine.py``'s own ``run_diagnosis`` signature),
+# expressed as (run_diagnosis kwarg, kubectl resource name, is-namespaced)
+# triples. ``configmaps_json`` is deliberately excluded here -- it needs a
+# real two-namespace merge (app namespace for flagd-config, kube-system for
+# the coredns ConfigMap; see ``run_composite_diagnosis`` below for why) that
+# does not fit this generic one-resource-one-field plan. ``raw_traces_by_service``
+# (B6 OTel trace diffing) and ``elevated_revision_deployments`` are also
+# excluded -- genuinely not derivable from a plain kubectl read (the former
+# needs real Jaeger trace data, the latter needs historical revision
+# comparison), an honest, named gap rather than a fabricated value.
+_COMPOSITE_DIAGNOSIS_RESOURCE_PLAN: tuple[tuple[str, str, bool], ...] = (
+    ("deployments_json", "deployments", True),
+    ("services_json", "services", True),
+    ("secrets_json", "secrets", True),
+    ("pods_json", "pods", True),
+    ("events_json", "events", True),
+    ("ingresses_json", "ingresses", True),
+    ("cronjobs_json", "cronjobs", True),
+    ("pvcs_json", "persistentvolumeclaims", True),
+    ("resourcequotas_json", "resourcequotas", True),
+    ("limitranges_json", "limitranges", True),
+    ("service_accounts_json", "serviceaccounts", True),
+    ("cluster_roles_json", "clusterroles", False),
+    ("cluster_role_bindings_json", "clusterrolebindings", False),
+)
 
 
 def _run_coroutine_sync(coro: Any) -> Any:
@@ -336,7 +367,113 @@ def build_gated_react_tools(
         grounded_facts.update(_collect_string_leaves(result))
         return str(result)
 
-    return [run_kubectl, observe_cluster_state]
+    def _kubectl_get_json(resource: str, *, resource_namespace: str | None) -> Any:
+        """Real, gated ``kubectl get <resource> -o json`` read, parsed into
+        a real Python structure -- the parsing half of ``run_kubectl``
+        above, ported (not imported) from
+        ``gymact_diagnosis_driver.py``'s own ``_kubectl_json`` helper for
+        the same "duplicate a private driver helper rather than couple the
+        two driver modules together" reason ``_run_coroutine_sync``'s
+        docstring already gives. Always a bare list read (``get <kind> -o
+        json``, never a specific resource name) -- nothing here can trip
+        the grounding guard, matching ``run_kubectl``'s own documented
+        "bare list/read commands ... are never flagged" rule.
+        """
+        cmd = f"kubectl get {resource} -o json"
+        if resource_namespace is not None:
+            cmd = f"{cmd} -n {resource_namespace}"
+        cap = capabilities_by_binding["run_kubectl"]
+        gate.guard_capability(cap)
+        result = _run_coroutine_sync(environment.actuate(cap, {"command": cmd}))
+        grounded_facts.update(_collect_string_leaves(result))
+        text_blocks = result.get("result_text", []) if isinstance(result, dict) else []
+        raw = "".join(b.get("text", "") for b in text_blocks if isinstance(b, dict))
+        if not raw:
+            # Some real environments (and this repo's own test fakes) hand
+            # back an already-decoded payload directly rather than a
+            # wrapped result_text block -- honor that shape too rather than
+            # silently discarding real data into an empty result.
+            return result if isinstance(result, (dict, list)) else None
+        if raw.strip().startswith("Command Rejected:"):
+            raise RuntimeError(f"real kubectl command rejected by sregym: {raw.strip()}")
+        try:
+            return json.loads(raw)
+        except (json.JSONDecodeError, TypeError):
+            return None
+
+    def run_composite_diagnosis() -> str:
+        """Deterministically diagnose (and propose remediation for) the
+        real, live, namespace-scoped cluster state by gathering the real
+        resource kinds ``CompositePlannerEngine.run_diagnosis()`` reads --
+        via the SAME real, gated ``run_kubectl`` capability actuation
+        ``run_kubectl`` above uses, just automated across every resource
+        kind instead of one LLM-chosen command at a time -- and composing
+        all 16 real, individually Chicago-tested detectors/remediators
+        (``autofde_lab_planner.engine.CompositePlannerEngine``) over that
+        real state in-process. No LLM judgment, no subprocess, no mock.
+
+        Prefer this FIRST over a long manual run_kubectl/observe_cluster_state
+        investigation whenever a deterministic pass over the well-known
+        Category-B/expanded fault mechanisms (probe faults, flagd config
+        drift, missing/corrupted objects, Ingress/targetPort misroutes,
+        CronJob mutation, scheduling deadlocks, CoreDNS faults, workload/
+        rolling-update misconfigs, DNS policy overrides, hostPort
+        conflicts, PVC claim mismatch/multi-attach, RBAC misconfigs,
+        ResourceQuota exhaustion, LimitRange violations) could settle the
+        question outright -- use run_kubectl/observe_cluster_state
+        afterward only to dig into whatever this call did not cover (e.g.
+        OTel trace anomalies, which need real Jaeger data this tool does
+        not gather).
+
+        Returns a JSON string with a ``diagnosis`` field (the real,
+        structured ``CategoryBDiagnosis`` -- every detector's real findings
+        plus the engine's own natural-language ``diagnosis_text``) and a
+        ``mitigation`` field (the real, structured ``CategoryBMitigation``
+        -- the real remediation commands and deployments to wait on)."""
+        fetched: dict[str, Any] = {}
+        for field_name, resource, namespaced in _COMPOSITE_DIAGNOSIS_RESOURCE_PLAN:
+            fetched[field_name] = _kubectl_get_json(
+                resource, resource_namespace=namespace if namespaced else None
+            )
+        if fetched.get("deployments_json") is None:
+            # run_diagnosis's deployments_json is NOT Optional -- every
+            # detector iterates it unconditionally. A real but empty read
+            # (no deployments, or a decode failure) must still produce a
+            # real, iterable, empty structure, never None.
+            fetched["deployments_json"] = {"items": []}
+
+        # configmaps_json is a real two-namespace merge: the engine passes
+        # this SAME field to both the flagd-config detector (app namespace)
+        # and the CoreDNS detector (kube-system's "coredns" ConfigMap) --
+        # see engine.py's own `detect_coredns_faults(configmaps_json=configmaps_json,
+        # namespace="kube-system")` call, which reads from the very same
+        # list the flagd detector does, not a second, separate field.
+        app_configmaps = _kubectl_get_json("configmaps", resource_namespace=namespace)
+        kube_system_configmaps = _kubectl_get_json("configmaps", resource_namespace="kube-system")
+        app_cm_items = (
+            app_configmaps.get("items", []) if isinstance(app_configmaps, dict) else (app_configmaps or [])
+        )
+        kube_cm_items = (
+            kube_system_configmaps.get("items", [])
+            if isinstance(kube_system_configmaps, dict)
+            else (kube_system_configmaps or [])
+        )
+        fetched["configmaps_json"] = {"items": [*app_cm_items, *kube_cm_items]}
+        fetched["flagd_configmap_json"] = next(
+            (
+                cm
+                for cm in app_cm_items
+                if isinstance(cm, dict) and (cm.get("metadata") or {}).get("name") == "flagd-config"
+            ),
+            None,
+        )
+
+        engine = CompositePlannerEngine(namespace=namespace)
+        diagnosis = engine.run_diagnosis(**fetched)
+        mitigation = engine.run_mitigation(diagnosis)
+        return json.dumps({"diagnosis": asdict(diagnosis), "mitigation": asdict(mitigation)}, default=str)
+
+    return [run_kubectl, observe_cluster_state, run_composite_diagnosis]
 
 
 # ---------------------------------------------------------------------------

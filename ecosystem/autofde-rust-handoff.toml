@@ -1,0 +1,51 @@
+schema = "autofde-lab.rust-handoff/1"
+release = "26.8.19"
+standing = "PARTIAL_ALIVE"
+authority = "SELECT_ONLY"
+crown_requires_exact_execution = true
+
+[source]
+repository = "seanchatmangpt/autofde-lab"
+base_revision = "d3537444802beb8b5c9fe94d37f31b062309b6d6"
+ontology = "ontology/lab.ttl"
+interop_ontology = "ontology/interop.ttl"
+
+[manufacturer]
+repository = "seanchatmangpt/ggen"
+revision = "7fc324df397973004059c37b752a365315d7bfb8"
+request_schema = "autofde.manufacture-request/1"
+receipt_schema = "autofde.manufacture-receipt/2"
+validator = "ggen:autofde-capability-bundle/2"
+authority_mode = "external-only"
+do_authority = false
+
+[consumer]
+repository = "seanchatmangpt/autofde"
+revision = "91daa89c9f29fc69b8997ac8d3ad8981641e239a"
+bundle_schema = "autofde.capability-bundle/1"
+runtime_abi = "autofde.runtime/26.8.8"
+
+[gymact]
+repository = "seanchatmangpt/gymact"
+admitted_revision = "524d0bc8633d8534f500d67f27384ce9368c0863"
+candidate_revision = "51b217cbd9a5d037278eeeb66a6ae2123f6df680"
+promotion_policy = "candidate must qualify against exact Lab/ggen/AutoFDE subject before pyproject.toml and uv.lock may move"
+
+[qualification]
+receipt_schema = "autofde-lab.rust-handoff-receipt/1"
+success_standing = "ALIVE"
+verifier = "scripts/verify_autofde_rust_handoff.py"
+required_checks = [
+  "lab_exact_head_descends_from_base",
+  "lab_select_only",
+  "lab_interop_contract_present",
+  "ggen_exact_revision",
+  "manufacture_request_schema",
+  "construct_only_authority",
+  "autofde_exact_revision",
+  "capability_bundle_schema",
+  "runtime_abi",
+  "revision_binding",
+  "gymact_admitted_pin_unchanged",
+  "gymact_candidate_exact_revision",
+]

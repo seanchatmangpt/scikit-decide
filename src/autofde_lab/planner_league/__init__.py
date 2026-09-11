@@ -1,5 +1,6 @@
 """Role-conditioned planner league public surface."""
 
+from .agent_binding import AgentBinding, identity_quadruple, match_from_bindings
 from .catalog import (
     ACTION_PROJECTIONS,
     BUDGETS,
@@ -26,6 +27,7 @@ from .psro import PolicySpaceResponseOracle, PsroReceipt, PsroState, PsroStep
 
 __all__ = [
     "ACTION_PROJECTIONS",
+    "AgentBinding",
     "BUDGETS",
     "CompatibilityResult",
     "CompatibilityStanding",
@@ -47,4 +49,6 @@ __all__ = [
     "PsroStep",
     "ROLE_SPECS",
     "WORLD_CLASSES",
+    "identity_quadruple",
+    "match_from_bindings",
 ]

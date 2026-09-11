@@ -1,0 +1,75 @@
+name: HDDL proof
+
+on:
+  pull_request:
+    paths:
+      - "pyproject.toml"
+      - "uv.lock"
+      - "src/autofde_lab/hub/domain/hddl/**"
+      - "src/autofde_lab/hub/solver/hddl/**"
+      - "tests/domains/python/test_hddl_bridge_domain.py"
+      - ".github/workflows/hddl-proof.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  BOOST_DIR: 3rdparty/boost
+  BOOST_VERSION: "1.85.0"
+
+jobs:
+  lock-consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.10.0"
+      - name: Verify frozen dependency graph
+        run: uv lock --check
+
+  hddl-execution:
+    runs-on: ubuntu-latest
+    steps:
+      # `uv sync --extra hddl` runs a real editable install, which triggers
+      # scikit-build-core's native C++ extension build -- that build's
+      # CMakeLists.txt ADD_SUBDIRECTORY()s cpp/sdk/{nng,pybind11,json,...},
+      # real git submodules. actions/checkout's default submodules: false
+      # left them empty, confirmed live on this exact PR: `CMake Error ...
+      # does not contain a CMakeLists.txt file` for every cpp/sdk/* path,
+      # `Unknown CMake command "PYBIND11_ADD_MODULE"` once pybind11's own
+      # CMake module was unavailable as a result. recursive is required,
+      # not just cpp/sdk/*, per this repo's other native-build workflows'
+      # own convention.
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.10.0"
+      # Real, second native-build gap found on this exact PR after the
+      # submodule fix above: `CMake Error ... Boost_INCLUDE_DIR-NOTFOUND`
+      # -- cpp/CMakeLists.txt real-requires Boost headers, which
+      # ubuntu-latest runners don't ship. Same real fix .github/workflows/
+      # ci.yml's `wheel` job already uses: download+cache the headers-only
+      # release tarball, point Boost_ROOT at it.
+      - uses: actions/cache@v4
+        id: boost-cache
+        with:
+          path: ${{ env.BOOST_DIR }}
+          key: boost-${{ env.BOOST_VERSION }}
+      - name: Install Boost headers
+        if: steps.boost-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p "$BOOST_DIR"
+          curl --fail --silent --show-error --location \
+            "https://archives.boost.io/release/$BOOST_VERSION/source/boost_${BOOST_VERSION//./_}.tar.bz2" \
+            | tar jxf - -C "$BOOST_DIR" --strip-components=1 \
+              "boost_${BOOST_VERSION//./_}/boost"
+      - name: Resolve HDDL execution capsule
+        run: |
+          export Boost_ROOT="$GITHUB_WORKSPACE/$BOOST_DIR"
+          uv sync --no-default-groups --extra hddl --group test
+      - name: Execute real HDDL parse, Aries solve, decomposition, and replay
+        run: uv run --no-default-groups --extra hddl --group test pytest tests/domains/python/test_hddl_bridge_domain.py -q

@@ -1,0 +1,228 @@
+{
+  "events": [
+    {
+      "changed_paths": [],
+      "event_id": "e00000",
+      "kind": "branch_created",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "open-workstream",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "",
+      "timestamp": "2026-08-31T12:00:00Z"
+    },
+    {
+      "changed_paths": ["src/beam4pm/runtime.ex"],
+      "event_id": "e00001",
+      "kind": "commit",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "implement-runtime",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "1111111111111111111111111111111111111111",
+      "timestamp": "2026-08-31T12:01:00Z"
+    },
+    {
+      "changed_paths": ["tests/runtime_test.exs"],
+      "event_id": "e00002",
+      "kind": "commit",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "falsify-runtime",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "2222222222222222222222222222222222222222",
+      "timestamp": "2026-08-31T12:02:00Z"
+    },
+    {
+      "changed_paths": ["infra/aws/main.tf"],
+      "event_id": "e00003",
+      "kind": "commit",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "manufacture-infrastructure",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "3333333333333333333333333333333333333333",
+      "timestamp": "2026-08-31T12:03:00Z"
+    },
+    {
+      "changed_paths": ["Dockerfile", "k8s/deployment.yaml"],
+      "event_id": "e00004",
+      "kind": "commit",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "qualify-container",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "4444444444444444444444444444444444444444",
+      "timestamp": "2026-08-31T12:04:00Z"
+    },
+    {
+      "changed_paths": ["security/iam-policy.json"],
+      "event_id": "e00005",
+      "kind": "commit",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "enforce-authority",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "5555555555555555555555555555555555555555",
+      "timestamp": "2026-08-31T12:05:00Z"
+    },
+    {
+      "changed_paths": ["src/beam4pm/otel.ex"],
+      "event_id": "e00006",
+      "kind": "commit",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "instrument-observability",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "6666666666666666666666666666666666666666",
+      "timestamp": "2026-08-31T12:06:00Z"
+    },
+    {
+      "changed_paths": [".github/workflows/ci.yml"],
+      "event_id": "e00007",
+      "kind": "commit",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "repair-exact-head-ci",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "7777777777777777777777777777777777777777",
+      "timestamp": "2026-08-31T12:07:00Z"
+    },
+    {
+      "changed_paths": ["docs/runbook.md"],
+      "event_id": "e00008",
+      "kind": "commit",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "publish-runbook",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "8888888888888888888888888888888888888888",
+      "timestamp": "2026-08-31T12:08:00Z"
+    },
+    {
+      "changed_paths": [],
+      "event_id": "e00009",
+      "kind": "pull_request",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "open-pr",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "",
+      "timestamp": "2026-08-31T12:09:00Z"
+    },
+    {
+      "changed_paths": [],
+      "event_id": "e00010",
+      "kind": "workflow_run",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "exact-head-green",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "",
+      "timestamp": "2026-08-31T12:10:00Z"
+    },
+    {
+      "changed_paths": [],
+      "event_id": "e00011",
+      "kind": "merge",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "merge-qualified-head",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "",
+      "timestamp": "2026-08-31T12:11:00Z"
+    },
+    {
+      "changed_paths": [],
+      "event_id": "e00012",
+      "kind": "release",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "publish-release",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "",
+      "timestamp": "2026-08-31T12:12:00Z"
+    },
+    {
+      "changed_paths": [],
+      "event_id": "e00013",
+      "kind": "default_branch_containment",
+      "labels": [],
+      "metadata": {
+        "episode": "august-full-stack-example",
+        "intent": "prove-default-branch-containment",
+        "objective": "close-full-stack-delivery-loop"
+      },
+      "parent_ids": [],
+      "ref": "feat/full-stack",
+      "repository": "seanchatmangpt/beam4pm",
+      "sha": "",
+      "timestamp": "2026-08-31T12:13:00Z"
+    }
+  ]
+}

@@ -340,6 +340,18 @@ class PayoffHypergraph:
     observations: list[PayoffObservation] = field(default_factory=list)
 
     def add(self, observation: PayoffObservation) -> None:
+        # `PayoffObservation.__post_init__` is the receipted-execution gate;
+        # this isinstance check is what actually makes it the *only* door.
+        # Found by the V2030.1.1 cap 1 adversarial refute pass (#114):
+        # `add()` accepted a `LeagueSolveOutcome` (candidate-plan evidence,
+        # deliberately never a `PayoffObservation`) silently, and only
+        # failed later, downstream, in `_scores()` with an unrelated
+        # `AttributeError: 'LeagueSolveOutcome' object has no attribute
+        # 'match'` -- a second, unguarded door into this hypergraph.
+        if not isinstance(observation, PayoffObservation):
+            raise TypeError(
+                f"REFUSED:PAYOFF_HYPERGRAPH_REQUIRES_PAYOFF_OBSERVATION:{type(observation).__name__}"
+            )
         self.observations.append(observation)
 
     def _scores(
