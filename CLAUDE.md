@@ -142,7 +142,13 @@ page, so they stay inline.
 `uv sync --extra=all -v`; `pre-commit run --all-files`.
 Python 3.10+ per `pyproject.toml`; the verified working dev environment is
 3.13.9 — treat 3.13 as current, not merely supported. CMake/C++20/pybind11
-for the compiled extension.
+for the compiled extension. The `cpp/sdk/*` git submodules (nng, pybind11,
+backward-cpp, json, PEGTL, spdlog, Catch2, nngpp) no longer need a manual
+`git submodule update --init --recursive` before this command: `cpp/CMakeLists.txt`
+auto-initializes them at configure time if missing, so `uv sync --extra=all -v`
+alone is sufficient from a fresh, submodule-uninitialized clone or worktree.
+`vendor/gyms/*` submodules are unaffected (reference-only, `update = none`,
+never required by the build).
 
 **Known first-sync race on a genuinely fresh clone: retry once, don't
 loop.** On a from-scratch clone (no prior `.venv`, no cached `uv.lock`
