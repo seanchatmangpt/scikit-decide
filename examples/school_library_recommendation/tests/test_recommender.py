@@ -26,6 +26,7 @@ def test_librarian_request_becomes_structured_constraints():
     assert "humor" in intent.themes
     assert "mystery" in intent.themes
     assert intent.avoid_long_series is True
+    assert intent.objective == "balanced"
 
 
 def test_receipt_signals_are_present():
@@ -38,5 +39,7 @@ def test_receipt_signals_are_present():
         "content_similarity",
         "co_circulation",
         "intent_match",
+        "novelty",
         "available",
+        "policy_id",
     }.issubset(rec.signals)
