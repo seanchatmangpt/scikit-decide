@@ -1,0 +1,26 @@
+;; Hand-authored per plan step (b): xaas's verify-and-commit.hddl domain file
+;; (docs/hddl/verify-and-commit.hddl, copied read-only into this fixtures dir)
+;; parses to methods/tasks/actions but carries no init/goal task network
+;; (confirmed above: "objects = []", "task network { subtasks = [] }" when
+;; parsed as a single file). This problem file supplies the missing initial
+;; state and initial task network so HTNTotalOrderPlanner has something to
+;; solve.
+
+(define (problem verify-and-commit-problem)
+  (:domain verify-and-commit)
+
+  (:objects
+    repo1 - repo
+    changeset1 - change-set
+  )
+
+  (:htn
+    :ordered-subtasks (and
+      (task0 (VERIFY-AND-COMMIT repo1 changeset1))
+    )
+  )
+
+  (:init
+    (edited repo1 changeset1)
+  )
+)
