@@ -96,7 +96,9 @@ class ProductState:
     tau: TaskNetwork
 
     def key(self) -> StateId:
-        return "W={" + ",".join(sorted(self.world)) + "}|tau=(" + ",".join(self.tau) + ")"
+        return (
+            "W={" + ",".join(sorted(self.world)) + "}|tau=(" + ",".join(self.tau) + ")"
+        )
 
 
 @dataclass(frozen=True)
@@ -116,7 +118,9 @@ class ActionTransition:
     successor: ProductState
 
 
-def method_refinements(domain: HDDLDomain, state: ProductState) -> frozenset[MethodRefinement]:
+def method_refinements(
+    domain: HDDLDomain, state: ProductState
+) -> frozenset[MethodRefinement]:
     """All X --m--> X' for methods of tau's head compound task admitted by W."""
 
     if not state.tau:
@@ -132,7 +136,9 @@ def method_refinements(domain: HDDLDomain, state: ProductState) -> frozenset[Met
     )
 
 
-def ready_action_transitions(domain: HDDLDomain, state: ProductState) -> frozenset[ActionTransition]:
+def ready_action_transitions(
+    domain: HDDLDomain, state: ProductState
+) -> frozenset[ActionTransition]:
     """All X --(a,o)--> X' when tau's head is a primitive task enabled in W."""
 
     if not state.tau:
@@ -286,7 +292,9 @@ def flat_fond_problem_from_product(
     return reachability.fond_problem
 
 
-def candidate_policy_over_product(actions: Mapping[StateId, ActionId]) -> CandidatePolicy:
+def candidate_policy_over_product(
+    actions: Mapping[StateId, ActionId],
+) -> CandidatePolicy:
     """Thin constructor so callers never hand-build `fond_policy` types."""
 
     return CandidatePolicy(actions=dict(actions))

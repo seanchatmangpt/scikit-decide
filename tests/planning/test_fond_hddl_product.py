@@ -72,7 +72,9 @@ def _deterministic_build_domain() -> HDDLDomain:
     return HDDLDomain(tasks=tasks, methods=methods, actions=actions)
 
 
-def test_deterministic_hddl_reduction_matches_manual_decomposition_and_execution() -> None:
+def test_deterministic_hddl_reduction_matches_manual_decomposition_and_execution() -> (
+    None
+):
     domain = _deterministic_build_domain()
     initial = ProductState(world=frozenset({"source-ready"}), tau=("build",))
 
@@ -184,7 +186,9 @@ def test_flat_fond_reduction_matches_hand_built_plain_fond_problem() -> None:
 # ---------------------------------------------------------------------------
 
 
-def test_incompatible_world_and_hddl_frontier_is_rejected_not_silently_accepted() -> None:
+def test_incompatible_world_and_hddl_frontier_is_rejected_not_silently_accepted() -> (
+    None
+):
     tasks = {
         "deploy": Task("deploy", primitive=False),
         "ship": Task("ship", primitive=True),
@@ -244,7 +248,9 @@ def test_incompatible_world_and_hddl_frontier_is_rejected_not_silently_accepted(
     # product-derived permission (ready_action_transitions is empty here), so
     # a policy that picks "ship" anyway must be rejected there too.
     world_state_id = "w-unapproved"
-    witnesses = {world_state_id: frozenset({HDDLProgressWitness("deploy-frontier", frozenset())})}
+    witnesses = {
+        world_state_id: frozenset({HDDLProgressWitness("deploy-frontier", frozenset())})
+    }
     frontier_problem = FONDProblem(
         initial_state=world_state_id,
         goal_states=frozenset({"w-shipped"}),
@@ -292,8 +298,18 @@ def test_strong_cyclic_retry_is_fair_repeatable_not_repair_required() -> None:
         },
         methods={
             "ensure-installed": (
-                Method("already-installed", "ensure-installed", frozenset({"installed"}), ()),
-                Method("retry-install", "ensure-installed", frozenset(), ("install", "ensure-installed")),
+                Method(
+                    "already-installed",
+                    "ensure-installed",
+                    frozenset({"installed"}),
+                    (),
+                ),
+                Method(
+                    "retry-install",
+                    "ensure-installed",
+                    frozenset(),
+                    ("install", "ensure-installed"),
+                ),
             )
         },
         actions={"install": action},
@@ -306,7 +322,9 @@ def test_strong_cyclic_retry_is_fair_repeatable_not_repair_required() -> None:
     reachability = build_fond_problem(domain, initial, is_goal)
     retrying = ProductState(world=frozenset(), tau=("ensure-installed",))
     attempting = ProductState(world=frozenset(), tau=("install", "ensure-installed"))
-    installed_pending = ProductState(world=frozenset({"installed"}), tau=("ensure-installed",))
+    installed_pending = ProductState(
+        world=frozenset({"installed"}), tau=("ensure-installed",)
+    )
     policy = candidate_policy_over_product(
         {
             retrying.key(): "refine:retry-install",
@@ -353,7 +371,9 @@ def test_deterministic_compile_error_is_repair_required_not_fair_repeatable() ->
     # A deterministic single-outcome failure is not repairable by fair retry
     # under EITHER FOND semantics -- blind retry policy is invalid, full stop.
     for semantics in (PolicySemantics.STRONG, PolicySemantics.STRONG_CYCLIC):
-        check = check_candidate_policy(reachability.fond_problem, policy, semantics=semantics)
+        check = check_candidate_policy(
+            reachability.fond_problem, policy, semantics=semantics
+        )
         assert not check.valid
         assert initial.key() in check.cannot_reach_goal_states
 
