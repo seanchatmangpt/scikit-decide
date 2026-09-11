@@ -25,7 +25,7 @@ import os
 from unified_planning.io import PDDLReader
 
 from autofde_lab.hub.domain.htn import HTNDomain, HTNTotalOrderPlanner
-from autofde_lab.hub.domain.htn.planner import _eval_condition, _apply_effects
+from autofde_lab.hub.domain.htn.planner import _apply_effects, _eval_condition
 
 HERE = os.path.dirname(__file__)
 FIXTURES = os.path.join(HERE, "htn_fixtures")
@@ -121,15 +121,11 @@ class TestHTNTotalOrderPlannerBundledFixture:
         state = domain._get_initial_state_()
         total_cost = 0.0
         while not domain._is_terminal(state):
-            actions = list(
-                domain._get_applicable_actions_from(state).get_elements()
-            )
+            actions = list(domain._get_applicable_actions_from(state).get_elements())
             assert len(actions) == 1
             action = actions[0]
             next_state = domain._get_next_state(state, action)
-            total_cost += domain._get_transition_value(
-                state, action, next_state
-            ).cost
+            total_cost += domain._get_transition_value(state, action, next_state).cost
             state = next_state
         assert total_cost == len(domain.plan)
         assert domain._get_goals_().contains(state)

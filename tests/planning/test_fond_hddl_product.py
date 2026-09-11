@@ -35,7 +35,6 @@ from autofde_lab.planning.fond_policy import (
     check_candidate_policy,
 )
 
-
 # ---------------------------------------------------------------------------
 # (a) deterministic-HDDL reduction
 # ---------------------------------------------------------------------------

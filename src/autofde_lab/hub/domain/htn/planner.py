@@ -149,8 +149,7 @@ class _ProblemContext:
 
     def get(self):
         assert self._problem is not None, (
-            "HTNTotalOrderPlanner: FORALL evaluated before a problem context "
-            "was set"
+            "HTNTotalOrderPlanner: FORALL evaluated before a problem context was set"
         )
         return self._problem
 
@@ -289,12 +288,9 @@ class HTNTotalOrderPlanner:
         # Primitive: a real InstantaneousAction with this name.
         if self.problem.has_action(task_name):
             action = self.problem.action(task_name)
-            bindings = {
-                p.name: arg for p, arg in zip(action.parameters, args)
-            }
+            bindings = {p.name: arg for p, arg in zip(action.parameters, args)}
             if all(
-                _eval_condition(pre, bindings, state)
-                for pre in action.preconditions
+                _eval_condition(pre, bindings, state) for pre in action.preconditions
             ):
                 ga = GroundAction(task_name, args)
                 next_state = _apply_effects(action, bindings, state)
@@ -316,9 +312,7 @@ class HTNTotalOrderPlanner:
         for param, arg in zip(method.achieved_task.parameters, args):
             base_bindings[param.name] = arg
 
-        extra_params = [
-            p for p in method.parameters if p.name not in base_bindings
-        ]
+        extra_params = [p for p in method.parameters if p.name not in base_bindings]
         candidate_sets = [
             [o.name for o in self.problem.objects(p.type)] for p in extra_params
         ]
@@ -330,8 +324,7 @@ class HTNTotalOrderPlanner:
                 bindings[p.name] = obj_name
 
             if not all(
-                _eval_condition(pre, bindings, state)
-                for pre in method.preconditions
+                _eval_condition(pre, bindings, state) for pre in method.preconditions
             ):
                 continue
 

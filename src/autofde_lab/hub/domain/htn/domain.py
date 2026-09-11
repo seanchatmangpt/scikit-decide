@@ -130,9 +130,7 @@ class HTNDomain(DeterministicPlanningDomain, UnrestrictedActions):
         act_def = self._problem.action(action.name)
         from autofde_lab.hub.domain.htn.planner import _apply_effects
 
-        bindings = {
-            p.name: arg for p, arg in zip(act_def.parameters, action.args)
-        }
+        bindings = {p.name: arg for p, arg in zip(act_def.parameters, action.args)}
         next_atoms = _apply_effects(act_def, bindings, memory.atoms)
         return HTNState(next_atoms, memory.step + 1)
 
