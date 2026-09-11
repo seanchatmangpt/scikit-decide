@@ -4,7 +4,9 @@ on:
   pull_request:
     branches: [master]
     paths:
+      - "src/autofde_lab/agent/continuous_planning.py"
       - "src/autofde_lab/gymact/brce_plan.py"
+      - "tests/agent/test_continuous_planning.py"
       - "tests/ecosystem/test_autofde_gymact_brce_crown.py"
       - ".github/workflows/autofde-gymact-brce-crown.yml"
   workflow_dispatch:
@@ -18,11 +20,14 @@ concurrency:
 
 jobs:
   crown:
-    name: Exact-head AutoFDE -> POWL -> GymAct BRCE -> verified world
+    name: Exact-head AutoFDE -> cached POWL -> GymAct BRCE -> verified world
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      GYMACT_SUBJECT_SHA: 51b217cbd9a5d037278eeeb66a6ae2123f6df680
+      # During this PR, pin the exact GymAct feature head that carries the
+      # planned-BRCE API. Before merge this pin is advanced to the merged
+      # GymAct default-branch SHA and the crown is rerun against that identity.
+      GYMACT_SUBJECT_SHA: 574e57b30294aa5f3a64105c767e262b32363417
       WASM4PM_COMPAT_SHA: 577e2d1d8bdfe27d96f61c63f3ea120994e8bfda
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -60,14 +65,16 @@ jobs:
           python - <<'PY'
           import importlib.metadata
           import gymact.brce
+          import gymact.planning
           import gymact.runtime
           print("gymact_version=" + importlib.metadata.version("gymact"))
           print("wasm4pm_compat_pydantic_version=" + importlib.metadata.version("wasm4pm-compat-pydantic"))
           PY
 
-      - name: Execute exact cross-repo crown
+      - name: Execute exact continuous-planning and cross-repo crown
         env:
           PYTHONPATH: src
         run: >-
           python -m pytest -vv
+          tests/agent/test_continuous_planning.py
           tests/ecosystem/test_autofde_gymact_brce_crown.py

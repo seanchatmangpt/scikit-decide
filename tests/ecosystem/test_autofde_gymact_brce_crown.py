@@ -1,6 +1,8 @@
-"""Chicago crown: autonomous AutoFDE POWL -> GymAct BRCE -> real consequence."""
+"""Chicago crown: cached AutoFDE POWL -> GymAct BRCE -> real consequence."""
 
 from __future__ import annotations
+
+from dataclasses import replace
 
 import pytest
 from gymact.action_contract import (
@@ -18,7 +20,15 @@ from gymact.models import MaterializationIntent, Standing
 from gymact.providers import MemoryProvider
 from gymact.runtime import ProductionGymAct
 
+from autofde_lab.agent.continuous_planning import (
+    PlanApplicability,
+    PlanArtifact,
+    PlanningContext,
+)
+from autofde_lab.fabric.powl import parse_powl_turtle, project_plan_to_powl
 from autofde_lab.gymact.brce_plan import AdmittedActuationSession
+from autofde_lab.powl.algebra import Atom
+from autofde_lab.powl.turtle_bridge import powl_model_to_node
 
 BASE = "urn:autofde-lab:test:brce-plan"
 AUTHORITY = f"{BASE}:authority"
@@ -26,6 +36,9 @@ SET_ACTION = f"{BASE}/set"
 INCREMENT_ACTION = f"{BASE}/increment"
 SET_CAPABILITY = "urn:gymact:memory:capability:set"
 INCREMENT_CAPABILITY = "urn:gymact:memory:capability:increment"
+PLAN_LINES = ("(set counter ten)", "(increment counter five)")
+PLAN_GOAL = "restore-counter"
+PLAN_FACT = "counter-world-materialized"
 
 
 def _request(
@@ -128,20 +141,55 @@ def _authorized_bundle(episode_id: str) -> dict[str, BrokerRequest]:
     }
 
 
+def _cached_plan() -> PlanArtifact:
+    turtle = project_plan_to_powl(
+        PLAN_LINES,
+        BASE,
+        planner_run="run-autofde-lab-autonomous-brce",
+    )
+    tree = powl_model_to_node(parse_powl_turtle(turtle))
+    return PlanArtifact(
+        model=tree,
+        applicability=PlanApplicability(
+            goal=PLAN_GOAL,
+            required_facts=frozenset({PLAN_FACT}),
+            required_capabilities=frozenset({SET_CAPABILITY, INCREMENT_CAPABILITY}),
+            constraint_digest="autofde-test-policy-v1",
+            semantic_revision="gymact-brce-plan-v1",
+        ),
+        planner="autofde-lab-powl",
+        family_id="counter-recovery",
+        version=1,
+        required_authority_classes=("bounded-episode-operator",),
+    )
+
+
+def _planning_context(*, include_required_fact: bool = True) -> PlanningContext:
+    facts = frozenset({PLAN_FACT}) if include_required_fact else frozenset()
+    return PlanningContext(
+        goal=PLAN_GOAL,
+        facts=facts,
+        capabilities=frozenset({SET_CAPABILITY, INCREMENT_CAPABILITY}),
+        constraint_digest="autofde-test-policy-v1",
+        semantic_revision="gymact-brce-plan-v1",
+    )
+
+
 @pytest.mark.asyncio
-async def test_chicago_session_autonomously_actuates_complete_plan_only_via_brce() -> (
-    None
-):
+async def test_cached_plan_autonomously_actuates_complete_plan_only_via_brce() -> None:
     runtime, episode_id = await _runtime_and_episode()
     session = AdmittedActuationSession(
         broker=BRCEBroker(runtime),
         request_binding=_authorized_bundle(episode_id),
         scope_ref=_episode_scope(episode_id),
     )
+    cached_plan = _cached_plan()
 
     execution = session.run(
-        ["(set counter ten)", "(increment counter five)"],
+        PLAN_LINES,
         base_iri=BASE,
+        plan_artifact=cached_plan,
+        planning_context=_planning_context(),
     )
 
     assert execution.alive is True
@@ -149,6 +197,21 @@ async def test_chicago_session_autonomously_actuates_complete_plan_only_via_brce
         Standing.ALIVE,
         Standing.ALIVE,
     ]
+    assert len(execution.plan_binding_digests) == 2
+    assert len(set(execution.plan_binding_digests)) == 2
+    assert all(
+        transition.receipt.planning_provenance_digest is not None
+        for transition in execution.transitions
+    )
+    assert (
+        len(
+            {
+                transition.receipt.planning_provenance_digest
+                for transition in execution.transitions
+            }
+        )
+        == 2
+    )
     assert all(
         transition.receipt.principal == "urn:autofde-lab:test:principal"
         for transition in execution.transitions
@@ -172,6 +235,47 @@ async def test_chicago_session_autonomously_actuates_complete_plan_only_via_brce
 
 
 @pytest.mark.asyncio
+async def test_cached_plan_model_drift_is_refused_before_first_do() -> None:
+    runtime, episode_id = await _runtime_and_episode()
+    session = AdmittedActuationSession(
+        broker=BRCEBroker(runtime),
+        request_binding=_authorized_bundle(episode_id),
+        scope_ref=_episode_scope(episode_id),
+    )
+    stale_plan = replace(_cached_plan(), model=Atom("stale-cached-plan"))
+
+    with pytest.raises(ValueError, match="REFUSED:PLAN_MODEL_IDENTITY_DRIFT"):
+        session.run(
+            PLAN_LINES,
+            base_iri=BASE,
+            plan_artifact=stale_plan,
+            planning_context=_planning_context(),
+        )
+
+    assert (await runtime.observe(episode_id)).state == {}
+
+
+@pytest.mark.asyncio
+async def test_cached_plan_applicability_is_refused_before_first_do() -> None:
+    runtime, episode_id = await _runtime_and_episode()
+    session = AdmittedActuationSession(
+        broker=BRCEBroker(runtime),
+        request_binding=_authorized_bundle(episode_id),
+        scope_ref=_episode_scope(episode_id),
+    )
+
+    with pytest.raises(PermissionError, match="REFUSED:PLAN_APPLICABILITY"):
+        session.run(
+            PLAN_LINES,
+            base_iri=BASE,
+            plan_artifact=_cached_plan(),
+            planning_context=_planning_context(include_required_fact=False),
+        )
+
+    assert (await runtime.observe(episode_id)).state == {}
+
+
+@pytest.mark.asyncio
 async def test_chicago_preflight_refuses_identity_drift_before_first_do() -> None:
     runtime, episode_id = await _runtime_and_episode()
     bundle = _authorized_bundle(episode_id)
@@ -192,10 +296,7 @@ async def test_chicago_preflight_refuses_identity_drift_before_first_do() -> Non
     with pytest.raises(
         ValueError, match="REFUSED:BROKER_REQUEST_ACTION_IDENTITY_DRIFT"
     ):
-        session.run(
-            ["(set counter ten)", "(increment counter five)"],
-            base_iri=BASE,
-        )
+        session.run(PLAN_LINES, base_iri=BASE)
 
     assert (await runtime.observe(episode_id)).state == {}
 
@@ -222,9 +323,6 @@ async def test_chicago_preflight_refuses_out_of_scope_bundle_before_first_do() -
     )
 
     with pytest.raises(PermissionError, match="REFUSED:ACTUATION_SCOPE_MISMATCH"):
-        session.run(
-            ["(set counter ten)", "(increment counter five)"],
-            base_iri=BASE,
-        )
+        session.run(PLAN_LINES, base_iri=BASE)
 
     assert (await runtime.observe(episode_id)).state == {}

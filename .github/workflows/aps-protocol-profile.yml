@@ -1,0 +1,35 @@
+name: APS protocol profile qualification
+
+on:
+  pull_request:
+    paths:
+      - "ontology/aps-autofde-profile.ttl"
+      - "ontology/shapes/aps-autofde-profile.shacl.ttl"
+      - "tests/fixtures/aps/**"
+      - "tests/test_aps_protocol_profile_chicago.py"
+      - ".github/workflows/aps-protocol-profile.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    name: APS → AutoFDE semantic bridge
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - name: Install focused verifier toolchain
+        run: python -m pip install "pytest==8.3.5" "rdflib==7.5.0" "ruff==0.14.0"
+      - name: Enforce authored Python quality
+        run: |
+          ruff check --select I,F401 tests/test_aps_protocol_profile_chicago.py
+          ruff format --check tests/test_aps_protocol_profile_chicago.py
+      - name: Execute APS profile Chicago verifier
+        run: python -m pytest -q tests/test_aps_protocol_profile_chicago.py

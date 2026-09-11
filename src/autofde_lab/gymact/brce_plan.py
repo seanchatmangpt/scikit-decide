@@ -11,6 +11,13 @@ finite, caller-authorized request bundle and then drives the complete admitted
 plan without per-step caller intervention. The whole bundle is mechanically
 preflighted before the first DO so structural identity/scope defects cannot
 produce an avoidable prefix consequence.
+
+When a cached :class:`~autofde_lab.agent.continuous_planning.PlanArtifact` is
+supplied, this boundary additionally proves that the artifact names the exact
+projected POWL model and freshly admits it against the supplied planning
+context before the first DO. Cache presence is therefore never execution
+admission. The resulting plan identity is carried through GymAct's powerless
+PreparedAction and its exclusive BRCE boundary into the verified receipt.
 """
 
 from __future__ import annotations
@@ -26,10 +33,16 @@ from gymact.brce import BRCEBroker, BrokerRequest
 from gymact.crown_runtime import VerifiedTransition
 from gymact.models import Standing
 
+from autofde_lab.agent.continuous_planning import (
+    PlanArtifact,
+    PlanningContext,
+    admit_plan,
+)
 from autofde_lab.fabric.powl import parse_powl_turtle, project_plan_to_powl
 from autofde_lab.ocel.log import OcelLog
 from autofde_lab.ocel.powl_replay import ActionBinding, replay_structural_fires
 from autofde_lab.powl.algebra import Atom, PartialOrder, PowlNode
+from autofde_lab.powl.identity import node_id
 from autofde_lab.powl.turtle_bridge import powl_model_to_node
 
 __all__ = [
@@ -46,6 +59,7 @@ class AdmittedPowlExecution:
     powl_turtle: str
     ocel_log: OcelLog
     transitions: tuple[VerifiedTransition, ...]
+    plan_binding_digests: tuple[str, ...] = ()
 
     @property
     def alive(self) -> bool:
@@ -88,6 +102,8 @@ class AdmittedActuationSession:
         problem_path: str | None = None,
         planner_run: str = "run-autofde-lab-autonomous-brce",
         domain_iri: str | None = None,
+        plan_artifact: PlanArtifact | None = None,
+        planning_context: PlanningContext | None = None,
     ) -> AdmittedPowlExecution:
         """Autonomously execute one admitted plan inside this exact scope."""
         return execute_plan_lines_via_gymact_brce(
@@ -100,6 +116,8 @@ class AdmittedActuationSession:
             problem_path=problem_path,
             planner_run=planner_run,
             domain_iri=domain_iri,
+            plan_artifact=plan_artifact,
+            planning_context=planning_context,
         )
 
 
@@ -185,6 +203,52 @@ def _preflight_request_bundle(
             )
 
 
+def _admit_cached_plan(
+    tree: PowlNode,
+    *,
+    plan_artifact: PlanArtifact | None,
+    planning_context: PlanningContext | None,
+) -> None:
+    """Prove cached-plan structure and applicability before any broker preflight."""
+    if (plan_artifact is None) != (planning_context is None):
+        raise ValueError(
+            "REFUSED:INCOMPLETE_PLAN_ADMISSION: plan_artifact and planning_context "
+            "must be supplied together"
+        )
+    if plan_artifact is None:
+        return
+    projected_sha256 = node_id(tree)
+    if projected_sha256 != plan_artifact.model_sha256:
+        raise ValueError(
+            "REFUSED:PLAN_MODEL_IDENTITY_DRIFT: "
+            f"projected={projected_sha256} cached={plan_artifact.model_sha256}"
+        )
+    assert planning_context is not None
+    admission = admit_plan(plan_artifact, planning_context)
+    if not admission.admitted:
+        codes = ",".join(code.value for code in admission.codes)
+        raise PermissionError(f"REFUSED:PLAN_APPLICABILITY:{codes}")
+
+
+def _plan_step_identity(
+    tree: PowlNode,
+    *,
+    plan_artifact: PlanArtifact,
+    atom_index: int,
+    atom: Atom,
+) -> tuple[str, tuple[str, ...]]:
+    """Return deterministic step identity and direct structural parent identities."""
+    step_id = f"{plan_artifact.exact_key}:{atom_index}:{atom.label}"
+    if not isinstance(tree, PartialOrder):
+        return step_id, ()
+    parent_ids = tuple(
+        f"{plan_artifact.exact_key}:{edge.src}:{tree.children[edge.src].label}"
+        for edge in sorted(tree.order)
+        if edge.dst == atom_index and isinstance(tree.children[edge.src], Atom)
+    )
+    return step_id, parent_ids
+
+
 def execute_plan_lines_via_gymact_brce(
     plan_lines: Sequence[str],
     *,
@@ -196,6 +260,8 @@ def execute_plan_lines_via_gymact_brce(
     problem_path: str | None = None,
     planner_run: str = "run-autofde-lab-brce",
     domain_iri: str | None = None,
+    plan_artifact: PlanArtifact | None = None,
+    planning_context: PlanningContext | None = None,
 ) -> AdmittedPowlExecution:
     """Project POWL geometry and execute every fired action through GymAct BRCE.
 
@@ -204,6 +270,11 @@ def execute_plan_lines_via_gymact_brce(
     ``PreparedAction`` and identity-bound ``ExecutionGrant``; this function
     is intentionally incapable of manufacturing either. The complete bundle
     is mechanically preflighted before structural replay begins.
+
+    A cached ``plan_artifact`` is optional for legacy callers. If supplied,
+    ``planning_context`` is mandatory: exact structural identity and fresh
+    applicability admission are both proven before broker preflight and the
+    plan digest is then carried through GymAct's exclusive BRCE DO path.
     """
     turtle = project_plan_to_powl(
         plan_lines,
@@ -223,6 +294,11 @@ def execute_plan_lines_via_gymact_brce(
             "per structural activity in this flat execution adapter"
         )
 
+    _admit_cached_plan(
+        tree,
+        plan_artifact=plan_artifact,
+        planning_context=planning_context,
+    )
     _preflight_request_bundle(
         atoms,
         request_binding,
@@ -230,9 +306,10 @@ def execute_plan_lines_via_gymact_brce(
     )
 
     transitions: list[VerifiedTransition] = []
+    plan_binding_digests: list[str] = []
     action_bindings: dict[str, ActionBinding] = {}
 
-    for atom in atoms:
+    for atom_index, atom in enumerate(atoms):
         action_ref = atom.action
         assert isinstance(action_ref, str)
         request = request_binding[action_ref]
@@ -242,13 +319,45 @@ def execute_plan_lines_via_gymact_brce(
             *,
             expected_action: str = action_ref,
             bound_request: BrokerRequest = request,
+            bound_atom: Atom = atom,
+            bound_atom_index: int = atom_index,
         ) -> dict[str, Any]:
             if atom_attrs.get("action") != expected_action:
                 raise ValueError(
                     "REFUSED:POWL_ACTION_IDENTITY_DRIFT: "
                     f"fired={atom_attrs.get('action')!r} expected={expected_action!r}"
                 )
-            transition = _run_async(broker.execute(bound_request))
+            if plan_artifact is None:
+                transition = _run_async(broker.execute(bound_request))
+            else:
+                try:
+                    from gymact.planning import (
+                        PlanProvenance,
+                        bind_plan,
+                        execute_planned,
+                    )
+                except ImportError as exc:
+                    raise RuntimeError(
+                        "UNSUPPORTED:GYMACT_PLAN_PROVENANCE_API"
+                    ) from exc
+                step_id, parent_step_ids = _plan_step_identity(
+                    tree,
+                    plan_artifact=plan_artifact,
+                    atom_index=bound_atom_index,
+                    atom=bound_atom,
+                )
+                provenance = PlanProvenance(
+                    plan_id=plan_artifact.exact_key,
+                    plan_version=str(plan_artifact.version),
+                    plan_step_id=step_id,
+                    parent_step_ids=parent_step_ids,
+                    expected_state_digest=None,
+                    required_authority_classes=plan_artifact.required_authority_classes,
+                )
+                planned = bind_plan(bound_request, provenance)
+                planned_transition = _run_async(execute_planned(broker, planned))
+                transition = planned_transition.transition
+                plan_binding_digests.append(planned_transition.binding.binding_digest)
             transitions.append(transition)
             return {
                 "standing": transition.standing.value,
@@ -267,4 +376,5 @@ def execute_plan_lines_via_gymact_brce(
         powl_turtle=turtle,
         ocel_log=ocel_log,
         transitions=tuple(transitions),
+        plan_binding_digests=tuple(plan_binding_digests),
     )

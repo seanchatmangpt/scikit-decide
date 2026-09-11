@@ -5,7 +5,107 @@ the witness that's still alive — the sheet gets corrected to match it, not the
 around. Every line below is either a measured win (command run, output checked, in this
 session) or a recorded negative (attempted, blocked, reason named) — no self-graded claims.
 
-Last update: **pass 20** (2026-08-09) — **Real, unbiased, representative-sample measurement,
+Last update: **pass 24** (2026-09-05) — **21 PRs merged to master (#104–#124), not run or
+re-verified this pass** — this entry files the real PR/commit record only; no command in this
+list was executed this session, so no row claims `ALIVE`/`measured win` beyond what each PR's
+own CI gate already required to merge. Grouped by theme:
+
+- **CI hardening** (7 PRs): `#105` matched the renamed `autofde_lab` wheel glob in
+  integration/docs jobs; `#106` moved the `agentic-fabric` `concurrency.group` inside the
+  matrix job; `#107`/`#108` installed the docs wheel via `uv` (twice — `#107` for the
+  `[tool.uv.sources]` git redirect generally, `#108` scoped to `ci.yml`'s own docs job)
+  after `#110` established installing locked git-sourced deps via `uv export` instead of
+  `wheel[all]`; `#113` scoped the MiniZinc AppImage `LD_LIBRARY_PATH` to only the steps that
+  run `minizinc`; `#121` exported `PYTHONPATH` for Ray-spawned workers in the integration job
+  (the same class of fix `standing-law.md`'s collision-repair history already documents for
+  local `just test-full`, applied here to CI).
+- **HDDL planning** (1 PR): `#104` added a native HTN/HDDL plugin via Unified Planning +
+  Aries.
+- **`planner_league` / reasoning identity and admission caps** (12 PRs, per each commit's own
+  "cap N" framing where stated): `#114` solves both sides of a `LeagueMatch` on the admitted
+  world (V2030.1.1 cap 1); `#115` makes `PayoffHypergraph.add()` refuse a non-`PayoffObservation`;
+  `#118` binds episode information partitions to a validated catalog and real `AuthorityModel`
+  grants (cap 4); `#119` binds `PolicySpec.parameters` to a real solver and refuses unknown ids
+  (cap 3); `#109` retains refused probes as typed `DeadEdge` topology (cap 10); `#111` adds a
+  typed `LabResultStanding` that refuses to become production standing (cap 9); `#112` adds a
+  real `red_disturbance` adversarial episode (cap 6); `#116` adds a typed per-episode
+  `BenchmarkVector` over real `gymact` Receipts (cap 5); `#117` adds `PromotionGraduationPacket`
+  joining `PromotionCandidate` to `PolicySpec`/`LeagueMatch` (cap 8); `#120` adds a DfCM Pareto
+  comparison over lawful cloud/security scenarios (cap 7); `#122` adds a typed `AgentBinding` —
+  `Agent` as a fourth identity distinct from Planner/Policy/Role; `#123` and `#124` each close a
+  named production-standing boundary gap (exploration payoff outcomes, then `ExperimentReceipt`)
+  — the same `technicalStanding`/`organizationalStanding` split this repo's
+  `.claude/rules/standing-law.md` and `.claude/rules/fde-authority-boundary.md` already require,
+  now applied to two more object types.
+
+Not verified in this pass: whether these 21 merges leave `just test` / `just test-full` green on
+current `master`, or whether the `planner_league` cap sequence (1, 3–10) is now complete against
+its own frozen manifest. Both are real, checkable next steps, not claimed here.
+
+Prior update: **pass 23** (2026-09-02) — **Pass 22's zero-branching finding confirmed at true
+scale, not a small-sample artifact.** Measured the real total first: GraphQL commit-count query
+across all 382 real `seanchatmangpt` repos, last 30 days → **27,613 real commits**, confirming
+the portfolio's own "~24k commits/month" figure was real (order of magnitude matches). Fetched
+full commit+PR+merge history (no per-file detail, for speed at this scale) for the 15 repos
+covering 90.1% of that volume (24,886/27,613 commits) — `ggen-marketplace` (8150),
+`chatman-ecosystem` (4508), `ggen-ecosystem` (3947), `gymact` (2040), `chatgpt-cloud-elixir`
+(1870), `autofde-lab` (1066), `ex4pm`, `ggen`, `beam4pm`, `wasm4pm`, `ash_r2rml`, `semantica`,
+`wasm4pm-compat`, `ferroplan`, `tcps` — 27,247 real events, compiled into **1,432 real episodes
+/ 27,050 real steps**. Re-ran the branching check at this scale: **0 of 1,432 episodes ever had
+more than 1 simultaneously-admissible step** (475/1432 single-step outright), identical to pass
+22's small-sample result. This includes the ggen ecosystem's own dominant repos
+(`ggen-marketplace`, `ggen-ecosystem`, `ggen` itself) — the zero-branching finding is not an
+artifact of which repos were sampled; it holds across the real dominant volume of this
+portfolio's actual last-30-days activity. `kind_priority` policy closed 1432/1432 to ALIVE,
+zero deadlocks — again not evidence of capability, for the same reason as pass 22.
+
+Prior update: **pass 22** (2026-09-02) — **Real month-of-history replay experiment: current
+compiled plans contain zero branching, so no non-LLM (or LLM) policy's competence is actually
+tested by REPLAY mode yet — a real, critical negative finding, not a capability claim.**
+Fetched real GitHub history (`fetch_github_events`) for the last 30 days across
+`seanchatmangpt/autofde-lab` (2239 events), `seanchatmangpt/ggen` (1787), `-ggen-create` (451),
+`-ggen-legacy` (412) — 4889 real events, compiled into 418 real episodes / 2373 steps. Two
+distinct deterministic non-LLM policies (`greedy_first`: lexicographically-first admissible
+step; `kind_priority`: fixed kind-order preference) each closed **418/418 episodes to `ALIVE`,
+zero deadlocks**. That number is **not evidence of capability**: a direct check found **0 of
+418 episodes ever had more than 1 simultaneously-admissible step** (217/418 are single-step
+chains outright) — `compile_history`'s dependency-fallback (`elif index: previous =
+event_to_step[...]`) imposes a strict total order whenever real history carries no explicit
+causal `depends_on` metadata, which is almost always. With the admissible frontier never
+exceeding 1, there is no decision point for any policy — good, bad, non-LLM, or LLM — to be
+distinguished on. This is real, first-party evidence for exactly the gap named in this
+session's own earlier GymAct-architecture discussion: REPLAY mode needs real branching
+(CI-failure/repair-attempt alternatives, a transition model) before "can a non-LLM agent do
+full-stack dev" is an answerable question against this substrate — it currently is not.
+`workflow_run` hit a 1000-event cap for two repos (GitHub's endpoint result ceiling), so the
+per-repo event counts above are a lower bound, not exhaustive, for that one kind.
+
+Prior update: **pass 21** (2026-09-01) — **v26.9.1: merged both additive branches named in
+`docs/jira/v26.9.1/PLAN.md`, real evidence per PR.** `feat/fortune5-safe-dfcm-sim` → PR #94,
+merge `2bf2871f`: `.venv/bin/python -m pytest tests/simulation/test_fortune5_safe.py -v` → 6
+passed; `pytest tests/simulation/ -v` → 6 passed, no regression; zero
+`unittest.mock|Mock(|MagicMock|patch(|monkeypatch` matches. First PR run failed real CI
+(`ruff-check`/`ruff-format` pre-commit hooks) — fixed with the repo-pinned `ruff` v0.14.0
+(from `.pre-commit-config.yaml`, not the venv's absent ruff), re-verified 6/6 still pass,
+re-pushed, CI green. `adapt/aps-autofde-protocol` → PR #95, merge `d2242c39`:
+`pytest tests/test_aps_protocol_profile_chicago.py -v` → 5 passed, zero mock matches; an
+independent `pyshacl.validate()` run (not just the test suite's own rdflib structural checks)
+of `ontology/aps-autofde-profile.ttl` against `ontology/shapes/aps-autofde-profile.shacl.ttl`
+→ **Conforms: True**. Post-merge on combined `master`,
+`pytest tests/simulation/ tests/test_aps_protocol_profile_chicago.py
+tests/agent/test_life_autonomic_case_study.py -v` → 14 passed, no cross-branch
+interaction. Separately: `docs/archive/` created per
+`docs/CLAUDE.md`'s convention, populated by a real 32-file triage+adversarial-verify workflow
+(64 agents) over every `docs/2026-08-*.md` snapshot — 31/32 stay in place (cited by an active
+`.claude/rules/*.md` file, cited by another live doc, or no specific covering successor);
+only `docs/2026-08-08-corrections.md` moved, its claimed successor (`docs/STATUS.md`, this
+file, line ~383) independently re-verified to carry the corrected figures verbatim.
+`README.md` rewritten to state the repo's actual identity/law instead of unmodified
+scikit-decide-fork boilerplate, with a documentation map to this file,
+`docs/ecosystem-standing.md`, `docs/diataxis/README.md`, `FORWARD_DEPLOYMENT.md`, and
+`docs/jira/v26.9.1/PLAN.md`.
+
+Prior update: **pass 20** (2026-08-09) — **Real, unbiased, representative-sample measurement,
 complete: AutoFDE Lab does not beat sregym's published SOTA.** A real, programmatically-
 generated stride-5 systematic sample (25 of 123 active registrations, computed once via
 `ProblemRegistry().get_problem_ids(all=True)`, never hand-edited) was run to completion

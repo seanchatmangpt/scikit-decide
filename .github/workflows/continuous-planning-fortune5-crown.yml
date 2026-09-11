@@ -1,0 +1,99 @@
+name: Continuous planning Fortune-5 crown
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "src/autofde_lab/agent/continuous_planning.py"
+      - "src/autofde_lab/agent/persistent_plan_cache.py"
+      - "src/autofde_lab/gymact/brce_plan.py"
+      - "tests/agent/test_continuous_planning.py"
+      - "tests/agent/test_continuous_planning_enterprise.py"
+      - "tests/ecosystem/test_autofde_gymact_brce_crown.py"
+      - "scripts/benchmark_continuous_planning.py"
+      - ".github/workflows/continuous-planning-fortune5-crown.yml"
+      - ".github/workflows/autofde-gymact-brce-crown.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: continuous-planning-f5-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qualify:
+    name: Python ${{ matrix.python }} durability / stress / replay
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    env:
+      GYMACT_SUBJECT_SHA: 574e57b30294aa5f3a64105c767e262b32363417
+      WASM4PM_COMPAT_SHA: 577e2d1d8bdfe27d96f61c63f3ea120994e8bfda
+      PYTHONWARNINGS: error::ResourceWarning
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      - name: Admit exact subject
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="${{ github.event.pull_request.head.sha || github.sha }}"
+          actual="$(git rev-parse HEAD)"
+          test "$actual" = "$expected"
+          printf 'autofde_subject_sha=%s\ngymact_subject_sha=%s\n' "$actual" "$GYMACT_SUBJECT_SHA"
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Resolve exact validation capsule
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install \
+            "numpy==2.2.6" \
+            "pytest==8.4.2" \
+            "pytest-asyncio>=1,<2" \
+            "wrapt>=2.2.1,<3" \
+            "pynng>=0.6.2" \
+            "pathos>=0.2.7" \
+            "discrete-optimization>=0.9.0" \
+            "wasm4pm-compat-pydantic @ git+https://github.com/seanchatmangpt/wasm4pm-compat.git@$WASM4PM_COMPAT_SHA#subdirectory=python" \
+            "gymact @ git+https://github.com/seanchatmangpt/gymact.git@$GYMACT_SUBJECT_SHA"
+
+      - name: Execute durability, corruption and concurrency falsifiers
+        env:
+          PYTHONPATH: src
+        run: >-
+          python -m pytest -vv
+          tests/agent/test_continuous_planning.py
+          tests/agent/test_continuous_planning_enterprise.py
+          tests/ecosystem/test_autofde_gymact_brce_crown.py
+
+      - name: Execute machine-readable benchmark
+        if: matrix.python == '3.12'
+        env:
+          PYTHONPATH: src
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/fortune5
+          python scripts/benchmark_continuous_planning.py | tee artifacts/fortune5/continuous-planning-benchmark.json
+          python -m json.tool artifacts/fortune5/continuous-planning-benchmark.json >/dev/null
+
+      - name: Retain qualification evidence
+        if: always() && matrix.python == '3.12'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: continuous-planning-fortune5-${{ github.event.pull_request.head.sha || github.sha }}
+          path: artifacts/fortune5/
+          if-no-files-found: error
+          retention-days: 30
