@@ -134,7 +134,9 @@ def temporal_policy_court(
             ids = {rec.book_id for rec in recommendations}
             hits += int(row.book_id in ids)
             recommended_ids.update(ids)
-            novelty_values.extend(float(rec.signals["novelty"]) for rec in recommendations)
+            novelty_values.extend(
+                float(rec.signals["novelty"]) for rec in recommendations
+            )
             personalization_values.extend(
                 (
                     float(rec.signals["content_similarity"])
@@ -176,10 +178,12 @@ def pareto_frontier(evaluations: Iterable[PolicyEvaluation]) -> list[PolicyEvalu
             if other.policy.policy_id == candidate.policy.policy_id:
                 continue
             not_worse = all(
-                getattr(other, metric) >= getattr(candidate, metric) for metric in metrics
+                getattr(other, metric) >= getattr(candidate, metric)
+                for metric in metrics
             )
             strictly_better = any(
-                getattr(other, metric) > getattr(candidate, metric) for metric in metrics
+                getattr(other, metric) > getattr(candidate, metric)
+                for metric in metrics
             )
             if not_worse and strictly_better:
                 dominated = True
@@ -207,7 +211,10 @@ def select_policy(
 
     selected = sorted(
         frontier,
-        key=lambda evaluation: (-objective_score(evaluation), evaluation.policy.policy_id),
+        key=lambda evaluation: (
+            -objective_score(evaluation),
+            evaluation.policy.policy_id,
+        ),
     )[0]
     return selected.policy, frontier
 
@@ -331,9 +338,7 @@ def _intent_probe_score(
         recommendations = recommender.recommend(
             "SYNTHETIC-COLD-START", probe, top_k=top_k, policy=policy
         )
-        values.extend(
-            float(rec.signals["intent_match"]) for rec in recommendations
-        )
+        values.extend(float(rec.signals["intent_match"]) for rec in recommendations)
     return _mean(values)
 
 
