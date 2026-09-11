@@ -1,0 +1,67 @@
+name: Payoff bundle qualification
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "src/autofde_lab/reasoning/payoff_bundle.py"
+      - "src/autofde_lab/fabric/cli.py"
+      - "tests/reasoning/test_payoff_bundle_chicago.py"
+      - "tests/fabric/test_dmedi_solve_payoff_bundle_cli_chicago.py"
+      - ".github/workflows/payoff-bundle-qualification.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  payoff-bundle:
+    name: Exact-head payoff bundle court
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          submodules: false
+          persist-credentials: false
+
+      - name: Assert exact subject identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="${{ github.event.pull_request.head.sha || github.sha }}"
+          actual="$(git rev-parse HEAD)"
+          test "${actual}" = "${expected}"
+          printf 'exact_head=%s\n' "${actual}"
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+
+      - name: Install bounded test dependencies
+        run: |
+          python -m pip install \
+            "numpy==2.2.6" \
+            "pytest==8.3.5" \
+            "typer>=0.12" \
+            "wrapt>=2.2.1,<3" \
+            "pynng>=0.6.2" \
+            "pathos>=0.2.7" \
+            "discrete-optimization>=0.9.0"
+
+      - name: Refuse mockist seams
+        shell: bash
+        run: |
+          ! grep -nE 'unittest\.mock|\bMock\(|\bMagicMock\(|\bpatch\(|monkeypatch' \
+            tests/reasoning/test_payoff_bundle_chicago.py \
+            tests/fabric/test_dmedi_solve_payoff_bundle_cli_chicago.py
+
+      - name: Execute payoff bundle owning courts
+        env:
+          PYTHONPATH: src
+        run: |
+          python -m pytest -v \
+            tests/reasoning/test_payoff_bundle_chicago.py \
+            tests/fabric/test_dmedi_solve_payoff_bundle_cli_chicago.py

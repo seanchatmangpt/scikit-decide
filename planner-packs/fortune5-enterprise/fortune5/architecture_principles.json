@@ -1,0 +1,17 @@
+{
+  "schema": "urn:autofde:fortune5:architecture-principles:v1",
+  "principles": [
+    {"id":"P01","name":"Business outcome traceability","law":"Every architecture decision MUST trace to an admitted business capability, objective, risk, or regulatory obligation."},
+    {"id":"P02","name":"Zero ambient authority","law":"Planning and generation have no consequence authority. DO occurs only through explicit principal/capability/resource admission."},
+    {"id":"P03","name":"Re-observe after consequence","law":"Every consequential transition invalidates stale future assumptions; the next planning episode starts from independently observed state."},
+    {"id":"P04","name":"Preserve reversible options","law":"Prefer reversible and portable transformations until evidence justifies irreversible commitment."},
+    {"id":"P05","name":"Data is governed by contract","law":"Data classification, residency, lineage, retention, ownership, and recovery requirements are planning inputs."},
+    {"id":"P06","name":"Identity is the primary control plane","law":"Human, workload, service, and agent identities are explicit; least privilege and short-lived authority are defaults."},
+    {"id":"P07","name":"Failure is designed, not discovered","law":"Verifier, rollback/recovery, degraded mode, and failure injection exist before production handoff."},
+    {"id":"P08","name":"Observability is architecture","law":"Required evidence for SLO, security, cost, lineage, and process conformance is part of the design."},
+    {"id":"P09","name":"Exit before entry","law":"Provider, product, model, and vendor exit constraints are evaluated before lock-in is accepted."},
+    {"id":"P10","name":"Cost is a constrained state variable","law":"Unit economics, budget envelopes, capacity, and cost-failure modes participate in plan selection."},
+    {"id":"P11","name":"Standards become machine constraints","law":"Policy/control requirements should be represented as ontology, shapes, rules, tests, or proofs rather than prose-only review."},
+    {"id":"P12","name":"Compile away solved cognition","law":"Repeated, verified reasoning is projected into ggen packs, planner domains, tests, policies, or proofs and removed from the novelty path."}
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "urn:autofde:planner-program-catalog:v1",
+  "program_count": 21,
+  "programs": [
+    {"id":"00-ecosystem-meta-planning","role":"meta","objective":"plan over problem formulation, planner routing, falsification and lawful closure"},
+    {"id":"10-role-conditioned-planner-league","role":"league","objective":"measure planner competence by role, opponent, world, information and budget"},
+    {"id":"20-counterplanner-falsification","role":"falsifier","objective":"find minimal counterexamples to candidate plans"},
+    {"id":"30-one-edge-replan","role":"meta","objective":"execute one admitted edge, re-observe, invalidate stale suffix and reselect planner"},
+    {"id":"40-semantic-manufacture","role":"manufacture","objective":"plan ggen projections from admitted semantic deltas"},
+    {"id":"50-closure-curriculum","role":"curriculum","objective":"select worlds at the planner capability frontier"},
+    {"id":"60-cognition-compile-away","role":"industrialize","objective":"compile repeated verified cognition into deterministic system structure"},
+    {"id":"70-cross-repo-enterprise-closure","role":"enterprise","objective":"plan marketplace→ggen→AutoFDE→GymAct/SREGym→evidence closure"},
+    {"id":"80-novelty-frontier","role":"novelty","objective":"use model workers only after registered routes expose a real gap"},
+    {"id":"90-enterprise-architecture-crown","role":"enterprise-architect","objective":"close mandatory enterprise viewpoints before architecture handoff"},
+    {"id":"100-multicloud-portability","role":"platform-architect","objective":"plan reversible provider and region placement with explicit exit"},
+    {"id":"110-zero-trust-authority","role":"security-architect","objective":"plan principal/capability/resource authority without ambient DO"},
+    {"id":"120-resilience-continuity","role":"sre","objective":"plan failure domains, degraded modes and recovery evidence"},
+    {"id":"130-data-information-architecture","role":"data-architect","objective":"plan ownership, contracts, lineage, classification, residency and recovery"},
+    {"id":"140-finops-capacity","role":"finops","objective":"plan unit economics, capacity, quota and cost-shock resilience"},
+    {"id":"150-governance-compliance","role":"governance","objective":"translate standards and controls into machine-checkable admission/evidence"},
+    {"id":"160-operating-model-team-topology","role":"operating-model","objective":"align durable ownership with technical dependency boundaries"},
+    {"id":"170-vendor-exit-supply-chain","role":"supply-chain","objective":"plan provenance, substitution, vendor exit and artifact standing"},
+    {"id":"180-ai-agent-governance","role":"ai-governance","objective":"bound model/agent/tool authority, evaluation and fallback"},
+    {"id":"190-portfolio-partial-order","role":"portfolio","objective":"maximize safe parallel enterprise change while preserving hard dependencies"},
+    {"id":"200-enterprise-digital-twin","role":"observer","objective":"reconcile architecture model with observed enterprise/process state"}
+  ],
+  "law": "Each program is candidate-side planning only. No program creates runtime authority or certifies its own consequence."
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "urn:autofde:transition-protocol:v1",
+  "loop": [
+    "admit O*_t",
+    "formulate competing planning representations",
+    "compile eligible planner routes",
+    "run planner population",
+    "manufacture candidate plan graphs",
+    "run counter-planner population",
+    "eliminate refused/falsified trajectories",
+    "select surviving next edge or admitted parallel cut",
+    "construct verifier + recovery",
+    "construct typed ActuationIntent",
+    "external BRCE authority/policy admission",
+    "DO one bounded consequential edge or admitted parallel cut",
+    "independently observe O*_(t+1)",
+    "verify + receipt + replay",
+    "invalidate stale suffix",
+    "re-select planner",
+    "compile stable cognition into ggen/rules/tests"
+  ],
+  "external_barriers": {
+    "authority": "never created by a plan",
+    "transition_receipt": "never created by a plan",
+    "ground_truth": "never writable by actor policy"
+  }
+}

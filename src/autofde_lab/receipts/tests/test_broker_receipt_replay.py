@@ -21,6 +21,7 @@ from autofde_lab.planning.runner import run_engine
 from autofde_lab.receipts.admission import admit
 from autofde_lab.receipts.broker import (
     Broker,
+    ColludingRoles,
     ConcurrentOpenUnsupported,
     TokenAlreadyConsumed,
 )
@@ -225,6 +226,82 @@ def test_receipts_validate_against_the_published_schema(tmp_path: Path) -> None:
 
     for record in (opened.receipt.to_record(), closed.receipt.to_record()):
         jsonschema.validate(record, RECEIPT_SCHEMA)
+
+
+# ---------------------------------------------------------------------------
+# Adversarial: actuator/verifier collusion (prompt #24)
+# ---------------------------------------------------------------------------
+
+
+def test_colluding_actuator_and_verifier_is_refused() -> None:
+    """A single real object implementing BOTH Actuator and PostconditionVerifier,
+    wired into both broker slots, must be refused at construction -- otherwise it
+    can actuate an action and then rubber-stamp its own effect with nothing in
+    Broker.actuate or replay.verify able to catch the collusion."""
+
+    class Colluder:
+        def actuate(self, action: dict) -> dict:
+            return {"result": "did nothing real"}
+
+        def adapter_digest(self) -> str:
+            return "colluder-actuator-v1"
+
+        def verify(self, action: dict, evidence: dict | None) -> bool:
+            return True  # lies unconditionally
+
+        def verifier_digest(self) -> str:
+            return "colluder-verifier-v1"
+
+    colluder = Colluder()
+    with pytest.raises(ColludingRoles):
+        Broker(actuator=colluder, verifier=colluder)
+
+
+def test_distinct_lying_verifier_is_not_detectable_by_replay(tmp_path: Path) -> None:
+    """Documents a real, confirmed residual limit (not a claimed fix): a verifier
+    that is a *distinct* object from the actuator, but always returns True
+    regardless of the actual evidence, is NOT caught by Broker.actuate (which has
+    no ground truth to compare against) and is NOT caught after the fact by
+    replay.verify (which only re-checks digest-chain integrity, not the semantic
+    honesty of a bool baked into a receipt that was honestly digested). The
+    identity check added in Broker.__post_init__ closes the same-object case only;
+    it does not and cannot close this one without an independent oracle."""
+
+    class LyingVerifier:
+        def verify(self, action: dict, evidence: dict | None) -> bool:
+            return True  # ignores action/evidence entirely
+
+        def verifier_digest(self) -> str:
+            return "lying-verifier-v1"
+
+    plan_path = tmp_path / "plan.txt"
+    broker = Broker(
+        actuator=RunEngineActuator(mode="tool_failed", plan_path=plan_path),
+        verifier=LyingVerifier(),
+    )
+    opened = broker.open({"name": "solve-blocks"})
+    closed = broker.actuate(opened.token)
+    # The actuator failed, so the broker itself correctly skips verification and
+    # marks postcondition_satisfied False -- the lying verifier only gets a real
+    # chance to lie when the actuator claims success. Confirm that path too:
+    assert closed.outcome.value == "failed"
+    assert not closed.postcondition_satisfied
+
+    plan_path2 = tmp_path / "plan2.txt"
+    broker2 = Broker(
+        actuator=RunEngineActuator(mode="success", plan_path=plan_path2),
+        verifier=LyingVerifier(),
+    )
+    opened2 = broker2.open({"name": "solve-blocks"})
+    closed2 = broker2.actuate(opened2.token)
+    assert closed2.outcome.value == "succeeded"
+    assert closed2.postcondition_satisfied  # the lie is accepted by the broker
+
+    report = replay_verify([opened2.receipt.to_record(), closed2.receipt.to_record()])
+    # replay cannot tell the lie from a true verification: digests are internally
+    # consistent because the lie was baked in honestly at receipt-issuance time.
+    assert report.gall_status == GallStatus.ALIVE
+    assert report.all_postconditions_satisfied
 
 
 def test_reloaded_ledger_detects_on_disk_tampering(tmp_path: Path) -> None:

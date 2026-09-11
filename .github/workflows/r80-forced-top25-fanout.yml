@@ -1,0 +1,48 @@
+name: R80 ForcedTop25 GGEN Consumer
+on:
+  pull_request:
+    paths:
+      - 'fanout/r80/**'
+      - '.github/workflows/r80-forced-top25-fanout.yml'
+permissions:
+  contents: read
+jobs:
+  construct:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout exact consumer head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Admit exact consumer head
+        run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
+      - name: Checkout exact ggen constructor
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: seanchatmangpt/ggen
+          ref: ddfa602bfbab57b7ed5150f61b0acac7a41e3020
+          path: .constructor/ggen
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@nightly
+        with:
+          toolchain: nightly-2026-06-22
+      - name: Build exact ggen constructor
+        run: cargo +nightly-2026-06-22 build --release -p ggen-cli-lib --bin ggen --manifest-path .constructor/ggen/Cargo.toml
+      - name: Manufacture consumer subject
+        working-directory: fanout/r80
+        run: ../../.constructor/ggen/target/release/ggen sync run
+      - name: Verify exact generated consequence
+        run: |
+          python3 - <<'PY'
+          import json
+          p='fanout/r80/generated/forced-top25/3.json'
+          d=json.load(open(p))
+          assert d['consumer_repo']=='seanchatmangpt/autofde-lab'
+          assert d['producer_head']=='92e319a927db0b10e6b74a04a1ac490e1d0bb466'
+          assert d['compatibility_state']=='COMPATIBLE_READY'
+          assert d['authority']=='VERIFY|CONSTRUCT'
+          assert d['consequential_do'] is False
+          print('R80_CONSUMER=ALIVE')
+          PY
