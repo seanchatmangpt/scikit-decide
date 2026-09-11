@@ -144,6 +144,25 @@ Python 3.10+ per `pyproject.toml`; the verified working dev environment is
 3.13.9 — treat 3.13 as current, not merely supported. CMake/C++20/pybind11
 for the compiled extension.
 
+**Known first-sync race on a genuinely fresh clone: retry once, don't
+loop.** On a from-scratch clone (no prior `.venv`, no cached `uv.lock`
+resolution), the *first* `uv sync --extra=all` can fail with
+`AssertionError: Metadata mismatch in METADATA` raised from inside
+scikit-build-core. Root cause: `uv` rewrites `uv.lock` in place during that
+first sync (the lock has no cached resolution yet), and this repo's own
+package version is computed from git's VCS dirty-bit twice during that same
+sync (once for the sdist metadata, once for the wheel build) — the `uv.lock`
+rewrite flips the working tree from clean to dirty between those two
+computations, so the two metadata blocks disagree and scikit-build-core's
+consistency assertion trips. An immediately repeated, identical `uv sync
+--extra=all` always succeeds, because `uv.lock` is now stable and the
+dirty-bit no longer flips mid-run. This is a real, reproducible one-time
+race (confirmed on two separate fresh clones), not flaky infra — if the
+first `uv sync --extra=all -v` fails with that exact assertion, re-run the
+same command once before treating it as a real failure. Do not paper over a
+*different* failure with a blind retry loop; this is a named, narrow
+exception for this specific error signature only.
+
 **Tests: use `.venv/bin/python -m pytest ...`, not `uv run pytest ...`.**
 `uv run` re-checks the native build on every invocation (a full CMake/Ninja
 pass, tens of seconds to minutes on an unchanged tree) before pytest even
