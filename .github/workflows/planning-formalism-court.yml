@@ -71,7 +71,10 @@ jobs:
         env:
           PYTHONPATH: src
         run: |
+          # Runtime entry-point discovery is packaging evidence and remains in the
+          # installed-wheel/full-integration rail. This court is formalism semantics.
           python -m pytest -q \
             tests/planning/test_fond_policy.py \
             tests/planning/test_fond_hddl_frontier.py \
-            tests/domains/python/test_hddl_bridge_domain.py
+            tests/domains/python/test_hddl_bridge_domain.py::test_hddl_parse_solve_decompose_and_execute_real_plan \
+            tests/domains/python/test_hddl_bridge_domain.py::test_hddl_domain_refuses_flat_problem
