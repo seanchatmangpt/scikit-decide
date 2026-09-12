@@ -5,6 +5,25 @@ the witness that's still alive — the sheet gets corrected to match it, not the
 around. Every line below is either a measured win (command run, output checked, in this
 session) or a recorded negative (attempted, blocked, reason named) — no self-graded claims.
 
+**Correction (2026-09-11, same day, different session key)**: pass 26/cap 11's
+`BLOCKED:ZAI_API_KEY_INVALID` below was itself wrong, in a precise, checkable way -- the key
+tested there was genuinely invalid (real 401, confirmed via `curl`), but a second, real key
+found at `~/.env` produces a *different* real error: `curl` against the same endpoint with that
+key returns **HTTP 429**, and running the same 2 blocked tests with it
+(`.venv/bin/python -m pytest tests/planner_league/test_llm_candidate_producer.py -v`, real
+output) surfaces `dspy.utils.exceptions.LMRateLimitError: ... ZaiException - Insufficient
+balance or no resource package. Please recharge.` after the real `BackoffPolicy` retried 5 times
+over ~77s and exhausted. The correct blocker is **`BLOCKED:ZAI_ACCOUNT_INSUFFICIENT_BALANCE`**,
+not an invalid key -- the account behind this key needs a Z.ai balance/resource-package top-up
+before these 2 tests can pass. Result unchanged either way: **4 passed, 2 failed**, per
+`.claude/rules/standing-law.md`'s discipline that a corrected premise gets re-derived and the
+retraction stays visible next to the original claim rather than silently edited away
+(`docs/CLAUDE.md` invariant 2). No code change was needed or made -- the backoff/retry mechanism
+performed exactly as designed against a real, different real-world failure mode than the one
+first observed, which is itself confirming evidence for `BackoffPolicy`'s retry-status-code
+design (429 is retried; only after retries are exhausted does the underlying billing error
+surface).
+
 Last update: **pass 26 / cap 11** (2026-09-11) — **LLM candidate-producer pool
 (`src/autofde_lab/planner_league/llm_candidate_producer.py`)**, closing capability 1's "LLM
 candidate producers" arm of `V2030.1.1-PRD-ARD.md` at bulk concurrency for the first time (prior
