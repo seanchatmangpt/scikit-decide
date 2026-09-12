@@ -50,6 +50,16 @@ from ..sota_factory.portfolio_autopilot import PortfolioAutopilotPolicy
 
 DEFAULT_MODEL_ID = "zai/glm-5.3-flash"
 
+# litellm's default base URL for the "zai/" provider prefix is the
+# pay-as-you-go endpoint (https://api.z.ai/api/paas/v4), which requires a
+# per-token balance. A GLM Coding Plan subscription key instead draws from
+# plan quota and must be called against the dedicated coding-plan endpoint
+# -- confirmed live this session: the pay-as-you-go endpoint returned a real
+# "Insufficient balance or no resource package" error for a Coding Plan key,
+# and the same key against this endpoint returns HTTP 200. Overridable via
+# ZAI_API_BASE for callers on a different plan/endpoint.
+DEFAULT_ZAI_API_BASE = "https://api.z.ai/api/coding/paas/v4"
+
 
 @dataclass(frozen=True, slots=True)
 class LLMCandidateRequest:
@@ -267,6 +277,27 @@ async def call_glm_with_backoff(
     raise last_exc
 
 
+def _extract_completion_text(result: object) -> str:
+    """`dspy.LM.__call__` returns a list of completions; a reasoning model
+    like GLM-5.3-flash returns each completion as a `{"text": ...,
+    "reasoning_content": ...}` dict rather than a plain string (confirmed
+    live this session against the real Z.ai coding-plan endpoint) -- only
+    `"text"` is the model's actual answer. A plain-string completion (a
+    non-reasoning model) is returned as-is. Never `str()` a dict: that
+    produces a Python-repr string with single quotes, which is not valid
+    JSON and would silently corrupt every downstream parse."""
+
+    completion = result[0] if isinstance(result, list) else result
+    if isinstance(completion, dict):
+        text = completion.get("text")
+        if not isinstance(text, str):
+            raise LLMCandidateParseError(
+                f"completion dict has no string 'text' field: {completion!r}"
+            )
+        return text
+    return str(completion)
+
+
 async def _real_glm_call(request: LLMCandidateRequest, model_id: str) -> str:
     """A real, blocking `dspy.LM` call to Z.ai, run off the event loop via
     `asyncio.to_thread` so it composes with the semaphore-gated pool below.
@@ -277,9 +308,12 @@ async def _real_glm_call(request: LLMCandidateRequest, model_id: str) -> str:
     api_key = os.environ.get("ZAI_API_KEY")
     if not api_key:
         raise RuntimeError("ZAI_API_KEY is required for a real GLM-5.3-flash call")
+    api_base = os.environ.get("ZAI_API_BASE", DEFAULT_ZAI_API_BASE)
 
     def _call() -> str:
-        lm = dspy.LM(model_id, api_key=api_key, max_tokens=2000, cache=False)
+        lm = dspy.LM(
+            model_id, api_key=api_key, api_base=api_base, max_tokens=2000, cache=False
+        )
         prompt = (
             "You are choosing one action per state for a partially-ordered "
             "planning frontier. Reply with ONLY a JSON object mapping each "
@@ -289,7 +323,7 @@ async def _real_glm_call(request: LLMCandidateRequest, model_id: str) -> str:
             f"Seed: {request.prompt_seed}"
         )
         result = lm(prompt, temperature=request.temperature)
-        return str(result[0]) if isinstance(result, list) else str(result)
+        return _extract_completion_text(result)
 
     return await asyncio.to_thread(_call)
 
