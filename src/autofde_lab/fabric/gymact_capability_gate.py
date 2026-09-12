@@ -13,10 +13,11 @@ against the real target environment.
 
 from __future__ import annotations
 
-import tomllib
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+
+import tomllib
 
 __all__ = [
     "CapabilityGate",
@@ -32,7 +33,9 @@ DEFAULT_MANIFEST_PATH = Path(__file__).with_name("gymact_capabilities.toml")
 class CapabilityRefused(PermissionError):
     """A requested gymact binding is outside the admitted projection."""
 
-    def __init__(self, binding: str, *, allowed: frozenset[str], environment: str) -> None:
+    def __init__(
+        self, binding: str, *, allowed: frozenset[str], environment: str
+    ) -> None:
         self.binding = binding
         self.allowed = allowed
         self.environment = environment
@@ -83,7 +86,9 @@ class CapabilityGate:
         source_graph: str = "",
     ) -> None:
         self._entries = entries
-        self._by_name: dict[str, CapabilityManifestEntry] = {entry.name: entry for entry in entries}
+        self._by_name: dict[str, CapabilityManifestEntry] = {
+            entry.name: entry for entry in entries
+        }
         if len(self._by_name) != len(entries):
             raise ValueError("REFUSED:DUPLICATE_CAPABILITY_IN_PROJECTION")
         self.environment = environment
