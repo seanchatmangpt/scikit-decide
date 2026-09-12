@@ -10,7 +10,6 @@ from autofde_lab.fabric.gymact_capability_gate import (
     CapabilityProjectionDrift,
 )
 
-
 gymact = pytest.importorskip(
     "gymact",
     reason="real external gymact package unavailable; named skip, never mocked success",
@@ -35,7 +34,7 @@ def test_omitted_real_capability_is_a_named_refusal(tmp_path) -> None:
     observed = real_names()
     omitted = sorted(observed)[-1]
     manifest = tmp_path / "omitted.toml"
-    lines = ['[gymact]', 'environment = "sregym"', '']
+    lines = ["[gymact]", 'environment = "sregym"', ""]
     for name in sorted(observed - {omitted}):
         lines.extend(
             [
@@ -62,7 +61,7 @@ def test_projection_with_stale_entry_and_omission_reports_both(tmp_path) -> None
     omitted = sorted(observed)[0]
     stale = "not_a_real_sregym_binding"
     manifest = tmp_path / "two_way_drift.toml"
-    lines = ['[gymact]', 'environment = "sregym"', '']
+    lines = ["[gymact]", 'environment = "sregym"', ""]
     for name in sorted((observed - {omitted}) | {stale}):
         lines.extend(
             [
