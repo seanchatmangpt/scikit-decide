@@ -5,6 +5,31 @@ the witness that's still alive — the sheet gets corrected to match it, not the
 around. Every line below is either a measured win (command run, output checked, in this
 session) or a recorded negative (attempted, blocked, reason named) — no self-graded claims.
 
+**Resolution (2026-09-11/12, pass 27)**: both root causes behind pass 26/cap 11's blocked tests
+were found and fixed for real, in `llm_candidate_producer.py`, no test changes needed:
+
+1. litellm's `"zai/"` provider prefix defaults to the pay-as-you-go endpoint
+   (`https://api.z.ai/api/paas/v4`); the working key found at `~/.env` is a GLM **Coding Plan**
+   subscription key, which only authenticates against `https://api.z.ai/api/coding/paas/v4`
+   (confirmed: real `curl` 429 "Insufficient balance" against the former, real 200 against the
+   latter, same key). `_real_glm_call` now passes `api_base` explicitly (`DEFAULT_ZAI_API_BASE`,
+   overridable via `ZAI_API_BASE`).
+2. Once auth succeeded, a second real bug surfaced: GLM-5.3-flash is a reasoning model --
+   `dspy.LM(...)` returns each completion as `{"text": ..., "reasoning_content": ...}`, not a
+   plain string. The prior code did `str(result[0])`, which stringifies the dict into
+   Python-repr (single-quoted), silently corrupting every JSON parse. `_extract_completion_text`
+   now reads the `"text"` field explicitly and raises `LLMCandidateParseError` if absent, rather
+   than guessing.
+
+Real, run this session after both fixes:
+`.venv/bin/python -m pytest tests/planner_league/test_llm_candidate_producer.py -v` ->
+**6 passed** (was 4/6) -- both previously-blocked tests now exercise a real, successful
+GLM-5.3-flash round trip end to end, output correctly parsed into an admitted `CandidatePolicy`.
+`tests/planning/test_fond_hddl_product.py` regression-checked unaffected (5 passed). `pre-commit`
+clean. Same-machine sweep found two more live files with the identical endpoint bug outside this
+repo (`~/cre/scripts/zai_chat.sh`, `~/chatmangpt/OSA/.../openai_compat_provider.ex`) -- out of
+this repo's scope, named for the record, not fixed here.
+
 Last update: **pass 26 / cap 11** (2026-09-11) — **LLM candidate-producer pool
 (`src/autofde_lab/planner_league/llm_candidate_producer.py`)**, closing capability 1's "LLM
 candidate producers" arm of `V2030.1.1-PRD-ARD.md` at bulk concurrency for the first time (prior
