@@ -62,7 +62,7 @@ from autofde_lab.eds import (
     run_shell_receipt,
     verify_claim,
 )
-from autofde_lab.ocel.log import OcelLog
+from autofde_lab.ocel.log import OcelAttributeValue, OcelLog
 from autofde_lab.ocel.model import OcelObject
 from autofde_lab.planning.fond_hddl_product import (
     HDDLDomain,
@@ -346,14 +346,14 @@ def test_full_eds_program_o_star_pi_do_e_o_star_loop_end_to_end() -> None:
         "PolicyAdmitted",
         [("policy-1", "admitted")],
         timestamp_ns=1,
-        attributes={"valid": policy_check.valid},
+        attributes={"valid": OcelAttributeValue.boolean(policy_check.valid)},
     )
     log = log.append_event(
         "e2",
         "ReceiptRecorded",
         [("policy-1", "planned_by"), ("receipt-1", "observed")],
         timestamp_ns=2,
-        attributes={"exit_code": receipt.exit_code},
+        attributes={"exit_code": OcelAttributeValue.integer(receipt.exit_code)},
     )
     log = log.append_event(
         "e3",
