@@ -93,7 +93,9 @@ def test_solve_end_to_end_real_subprocess_real_domain_real_cpp_solver() -> None:
     assert payload["request"]["domain"] == "Maze"
     assert payload["request"]["max_steps"] == 60
     assert isinstance(payload["receipt_sha256"], str) and payload["receipt_sha256"]
-    assert isinstance(payload["trajectory_sha256"], str) and payload["trajectory_sha256"]
+    assert (
+        isinstance(payload["trajectory_sha256"], str) and payload["trajectory_sha256"]
+    )
     steps = payload["steps"]
     assert len(steps) > 0
     # Every emitted transition is a real rollout step, not a placeholder.
