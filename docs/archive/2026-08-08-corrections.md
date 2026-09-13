@@ -1,3 +1,9 @@
+> **Archived 2026-09-01** — superseded by `docs/STATUS.md`, which carries the corrected
+> planner-inventory figures below verbatim (grep for "57 classified" / "8 UNSUPPORTED" in
+> `docs/STATUS.md`). Moved here per `docs/CLAUDE.md`'s archive convention, not deleted —
+> its own text already says its content lives in `docs/STATUS.md`/`docs/ecosystem-standing.md`.
+> The content below is unmodified from the original.
+
 # Corrections
 
 Corrections to claims made earlier in this session's own commit messages.

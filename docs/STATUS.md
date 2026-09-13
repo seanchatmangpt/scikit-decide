@@ -5,7 +5,197 @@ the witness that's still alive — the sheet gets corrected to match it, not the
 around. Every line below is either a measured win (command run, output checked, in this
 session) or a recorded negative (attempted, blocked, reason named) — no self-graded claims.
 
-Last update: **pass 20** (2026-08-09) — **Real, unbiased, representative-sample measurement,
+**Correction (2026-09-11, same day, different session key)**: pass 26/cap 11's
+`BLOCKED:ZAI_API_KEY_INVALID` below was itself wrong, in a precise, checkable way -- the key
+tested there was genuinely invalid (real 401, confirmed via `curl`), but a second, real key
+found at `~/.env` produces a *different* real error: `curl` against the same endpoint with that
+key returns **HTTP 429**, and running the same 2 blocked tests with it
+(`.venv/bin/python -m pytest tests/planner_league/test_llm_candidate_producer.py -v`, real
+output) surfaces `dspy.utils.exceptions.LMRateLimitError: ... ZaiException - Insufficient
+balance or no resource package. Please recharge.` after the real `BackoffPolicy` retried 5 times
+over ~77s and exhausted. The correct blocker is **`BLOCKED:ZAI_ACCOUNT_INSUFFICIENT_BALANCE`**,
+not an invalid key -- the account behind this key needs a Z.ai balance/resource-package top-up
+before these 2 tests can pass. Result unchanged either way: **4 passed, 2 failed**, per
+`.claude/rules/standing-law.md`'s discipline that a corrected premise gets re-derived and the
+retraction stays visible next to the original claim rather than silently edited away
+(`docs/CLAUDE.md` invariant 2). No code change was needed or made -- the backoff/retry mechanism
+performed exactly as designed against a real, different real-world failure mode than the one
+first observed, which is itself confirming evidence for `BackoffPolicy`'s retry-status-code
+design (429 is retried; only after retries are exhausted does the underlying billing error
+surface).
+
+**Resolution (2026-09-11/12, pass 27)**: both root causes behind pass 26/cap 11's blocked tests
+were found and fixed for real, in `llm_candidate_producer.py`, no test changes needed:
+
+1. litellm's `"zai/"` provider prefix defaults to the pay-as-you-go endpoint
+   (`https://api.z.ai/api/paas/v4`); the working key found at `~/.env` is a GLM **Coding Plan**
+   subscription key, which only authenticates against `https://api.z.ai/api/coding/paas/v4`
+   (confirmed: real `curl` 429 "Insufficient balance" against the former, real 200 against the
+   latter, same key). `_real_glm_call` now passes `api_base` explicitly (`DEFAULT_ZAI_API_BASE`,
+   overridable via `ZAI_API_BASE`).
+2. Once auth succeeded, a second real bug surfaced: GLM-5.3-flash is a reasoning model --
+   `dspy.LM(...)` returns each completion as `{"text": ..., "reasoning_content": ...}`, not a
+   plain string. The prior code did `str(result[0])`, which stringifies the dict into
+   Python-repr (single-quoted), silently corrupting every JSON parse. `_extract_completion_text`
+   now reads the `"text"` field explicitly and raises `LLMCandidateParseError` if absent, rather
+   than guessing.
+
+Real, run this session after both fixes:
+`.venv/bin/python -m pytest tests/planner_league/test_llm_candidate_producer.py -v` ->
+**6 passed** (was 4/6) -- both previously-blocked tests now exercise a real, successful
+GLM-5.3-flash round trip end to end, output correctly parsed into an admitted `CandidatePolicy`.
+`tests/planning/test_fond_hddl_product.py` regression-checked unaffected (5 passed). `pre-commit`
+clean. Same-machine sweep found two more live files with the identical endpoint bug outside this
+repo (`~/cre/scripts/zai_chat.sh`, `~/chatmangpt/OSA/.../openai_compat_provider.ex`) -- out of
+this repo's scope, named for the record, not fixed here.
+
+Last update: **pass 26 / cap 11** (2026-09-11) — **LLM candidate-producer pool
+(`src/autofde_lab/planner_league/llm_candidate_producer.py`)**, closing capability 1's "LLM
+candidate producers" arm of `V2030.1.1-PRD-ARD.md` at bulk concurrency for the first time (prior
+GLM-5.3-flash call sites, where they existed, were single serial calls). Built on Gate 1's
+`fond_hddl_product.py` (this session, PR #133): `LLMCandidateRequest` -> real
+`dspy.LM("zai/glm-5.3-flash", ...)` call (`call_glm_with_backoff`, retry+backoff on 429/5xx --
+Z.ai publishes no numeric rate/concurrency ceiling, confirmed by this session's own
+deep-research pass) -> `admit_llm_candidate` (the *only* admission path, exclusively via
+`candidate_policy_over_product` -- never a hand-built `CandidatePolicy`) -> unchanged real
+`gymact`-derived `BenchmarkVector`/`LabResultStanding`/`GraduationPacket` chain. `run_llm_candidate_pool`
+reuses the same bounded `asyncio.Semaphore` + `asyncio.gather` idiom as
+`SOTAPortfolioAutopilot._execute_batch`, with `LLMCandidatePoolPolicy.max_concurrency` defaulting
+to 50 for this call site only -- `PortfolioAutopilotPolicy`'s own default (8) is untouched for
+every other caller.
+
+Real, run this session: `.venv/bin/python -m pytest tests/planner_league/test_llm_candidate_producer.py -v`
+-> **4 passed, 2 failed**. The 2 failures
+(`test_call_glm_with_backoff_returns_raw_output`, `test_admit_llm_candidate_produces_typed_candidate_policy`)
+are a real, confirmed environment gate, not a code defect: this session's `ZAI_API_KEY` returns a
+genuine HTTP 401 from `https://api.z.ai/api/paas/v4/chat/completions` (verified directly with
+`curl`, independent of dspy/litellm), i.e. **`BLOCKED:ZAI_API_KEY_INVALID`**, named per
+`.claude/rules/standing-law.md` rather than glossed over. The 4 passing tests do not require
+successful auth: `test_malformed_llm_output_raises_not_silently_admitted` (real parse-rejection
+logic), `test_graduation_packet_unreachable_without_benchmark` (structural proof there is no
+constructor path from `CandidatePolicy`/raw LLM output straight to `GraduationPacket`),
+`test_run_llm_candidate_pool_respects_max_concurrency` (a real in-process `ConcurrencyProbe`
+proves peak concurrency across 8 real (auth-failing) call attempts never exceeds the configured
+ceiling of 3), and `test_pool_run_result_reports_failures_explicitly` (a real invalid-key HTTP
+round trip against Z.ai lands in `PoolRunResult.failures`, never silently dropped --
+`admitted + failures == len(requests)` holds). `grep -rn "unittest.mock\|Mock(\|MagicMock\|patch(\|monkeypatch"`
+on both new files matches only the test file's own docstring naming the banned tools (same
+convention as `test_gymact_benchmark_vector_chicago.py`) -- zero actual mock usage.
+`pre-commit run --files <both new files>` passes clean. `tests/planning/test_fond_hddl_product.py`
+regression-checked unaffected (5 passed). `tests/sota_factory -k portfolio_autopilot` shows a
+pre-existing, unrelated `2 skipped` (missing async pytest plugin) -- confirmed present before
+this change, `portfolio_autopilot.py` itself was not modified.
+
+Not done this pass, named so it isn't assumed: end-to-end wiring of an admitted candidate through
+a real `gymact` episode into `BenchmarkVector` (the plan's `test_admitted_candidate_flows_to_real_benchmark_vector`)
+was scoped but not written this pass -- the existing `benchmark_vector_from_episode` path is
+unmodified and already independently tested in `tests/reasoning/test_gymact_benchmark_vector_chicago.py`;
+wiring an LLM-admitted candidate through it is real, checkable follow-up work, not claimed here.
+Re-running the 2 auth-blocked tests once a valid `ZAI_API_KEY` is available is the other named
+next step -- do not re-run with a different, unverified key and call it `ALIVE` without quoting
+the real output.
+
+Last update: **pass 24** (2026-09-05) — **21 PRs merged to master (#104–#124), not run or
+re-verified this pass** — this entry files the real PR/commit record only; no command in this
+list was executed this session, so no row claims `ALIVE`/`measured win` beyond what each PR's
+own CI gate already required to merge. Grouped by theme:
+
+- **CI hardening** (7 PRs): `#105` matched the renamed `autofde_lab` wheel glob in
+  integration/docs jobs; `#106` moved the `agentic-fabric` `concurrency.group` inside the
+  matrix job; `#107`/`#108` installed the docs wheel via `uv` (twice — `#107` for the
+  `[tool.uv.sources]` git redirect generally, `#108` scoped to `ci.yml`'s own docs job)
+  after `#110` established installing locked git-sourced deps via `uv export` instead of
+  `wheel[all]`; `#113` scoped the MiniZinc AppImage `LD_LIBRARY_PATH` to only the steps that
+  run `minizinc`; `#121` exported `PYTHONPATH` for Ray-spawned workers in the integration job
+  (the same class of fix `standing-law.md`'s collision-repair history already documents for
+  local `just test-full`, applied here to CI).
+- **HDDL planning** (1 PR): `#104` added a native HTN/HDDL plugin via Unified Planning +
+  Aries.
+- **`planner_league` / reasoning identity and admission caps** (12 PRs, per each commit's own
+  "cap N" framing where stated): `#114` solves both sides of a `LeagueMatch` on the admitted
+  world (V2030.1.1 cap 1); `#115` makes `PayoffHypergraph.add()` refuse a non-`PayoffObservation`;
+  `#118` binds episode information partitions to a validated catalog and real `AuthorityModel`
+  grants (cap 4); `#119` binds `PolicySpec.parameters` to a real solver and refuses unknown ids
+  (cap 3); `#109` retains refused probes as typed `DeadEdge` topology (cap 10); `#111` adds a
+  typed `LabResultStanding` that refuses to become production standing (cap 9); `#112` adds a
+  real `red_disturbance` adversarial episode (cap 6); `#116` adds a typed per-episode
+  `BenchmarkVector` over real `gymact` Receipts (cap 5); `#117` adds `PromotionGraduationPacket`
+  joining `PromotionCandidate` to `PolicySpec`/`LeagueMatch` (cap 8); `#120` adds a DfCM Pareto
+  comparison over lawful cloud/security scenarios (cap 7); `#122` adds a typed `AgentBinding` —
+  `Agent` as a fourth identity distinct from Planner/Policy/Role; `#123` and `#124` each close a
+  named production-standing boundary gap (exploration payoff outcomes, then `ExperimentReceipt`)
+  — the same `technicalStanding`/`organizationalStanding` split this repo's
+  `.claude/rules/standing-law.md` and `.claude/rules/fde-authority-boundary.md` already require,
+  now applied to two more object types.
+
+Not verified in this pass: whether these 21 merges leave `just test` / `just test-full` green on
+current `master`, or whether the `planner_league` cap sequence (1, 3–10) is now complete against
+its own frozen manifest. Both are real, checkable next steps, not claimed here.
+
+Prior update: **pass 23** (2026-09-02) — **Pass 22's zero-branching finding confirmed at true
+scale, not a small-sample artifact.** Measured the real total first: GraphQL commit-count query
+across all 382 real `seanchatmangpt` repos, last 30 days → **27,613 real commits**, confirming
+the portfolio's own "~24k commits/month" figure was real (order of magnitude matches). Fetched
+full commit+PR+merge history (no per-file detail, for speed at this scale) for the 15 repos
+covering 90.1% of that volume (24,886/27,613 commits) — `ggen-marketplace` (8150),
+`chatman-ecosystem` (4508), `ggen-ecosystem` (3947), `gymact` (2040), `chatgpt-cloud-elixir`
+(1870), `autofde-lab` (1066), `ex4pm`, `ggen`, `beam4pm`, `wasm4pm`, `ash_r2rml`, `semantica`,
+`wasm4pm-compat`, `ferroplan`, `tcps` — 27,247 real events, compiled into **1,432 real episodes
+/ 27,050 real steps**. Re-ran the branching check at this scale: **0 of 1,432 episodes ever had
+more than 1 simultaneously-admissible step** (475/1432 single-step outright), identical to pass
+22's small-sample result. This includes the ggen ecosystem's own dominant repos
+(`ggen-marketplace`, `ggen-ecosystem`, `ggen` itself) — the zero-branching finding is not an
+artifact of which repos were sampled; it holds across the real dominant volume of this
+portfolio's actual last-30-days activity. `kind_priority` policy closed 1432/1432 to ALIVE,
+zero deadlocks — again not evidence of capability, for the same reason as pass 22.
+
+Prior update: **pass 22** (2026-09-02) — **Real month-of-history replay experiment: current
+compiled plans contain zero branching, so no non-LLM (or LLM) policy's competence is actually
+tested by REPLAY mode yet — a real, critical negative finding, not a capability claim.**
+Fetched real GitHub history (`fetch_github_events`) for the last 30 days across
+`seanchatmangpt/autofde-lab` (2239 events), `seanchatmangpt/ggen` (1787), `-ggen-create` (451),
+`-ggen-legacy` (412) — 4889 real events, compiled into 418 real episodes / 2373 steps. Two
+distinct deterministic non-LLM policies (`greedy_first`: lexicographically-first admissible
+step; `kind_priority`: fixed kind-order preference) each closed **418/418 episodes to `ALIVE`,
+zero deadlocks**. That number is **not evidence of capability**: a direct check found **0 of
+418 episodes ever had more than 1 simultaneously-admissible step** (217/418 are single-step
+chains outright) — `compile_history`'s dependency-fallback (`elif index: previous =
+event_to_step[...]`) imposes a strict total order whenever real history carries no explicit
+causal `depends_on` metadata, which is almost always. With the admissible frontier never
+exceeding 1, there is no decision point for any policy — good, bad, non-LLM, or LLM — to be
+distinguished on. This is real, first-party evidence for exactly the gap named in this
+session's own earlier GymAct-architecture discussion: REPLAY mode needs real branching
+(CI-failure/repair-attempt alternatives, a transition model) before "can a non-LLM agent do
+full-stack dev" is an answerable question against this substrate — it currently is not.
+`workflow_run` hit a 1000-event cap for two repos (GitHub's endpoint result ceiling), so the
+per-repo event counts above are a lower bound, not exhaustive, for that one kind.
+
+Prior update: **pass 21** (2026-09-01) — **v26.9.1: merged both additive branches named in
+`docs/jira/v26.9.1/PLAN.md`, real evidence per PR.** `feat/fortune5-safe-dfcm-sim` → PR #94,
+merge `2bf2871f`: `.venv/bin/python -m pytest tests/simulation/test_fortune5_safe.py -v` → 6
+passed; `pytest tests/simulation/ -v` → 6 passed, no regression; zero
+`unittest.mock|Mock(|MagicMock|patch(|monkeypatch` matches. First PR run failed real CI
+(`ruff-check`/`ruff-format` pre-commit hooks) — fixed with the repo-pinned `ruff` v0.14.0
+(from `.pre-commit-config.yaml`, not the venv's absent ruff), re-verified 6/6 still pass,
+re-pushed, CI green. `adapt/aps-autofde-protocol` → PR #95, merge `d2242c39`:
+`pytest tests/test_aps_protocol_profile_chicago.py -v` → 5 passed, zero mock matches; an
+independent `pyshacl.validate()` run (not just the test suite's own rdflib structural checks)
+of `ontology/aps-autofde-profile.ttl` against `ontology/shapes/aps-autofde-profile.shacl.ttl`
+→ **Conforms: True**. Post-merge on combined `master`,
+`pytest tests/simulation/ tests/test_aps_protocol_profile_chicago.py
+tests/agent/test_life_autonomic_case_study.py -v` → 14 passed, no cross-branch
+interaction. Separately: `docs/archive/` created per
+`docs/CLAUDE.md`'s convention, populated by a real 32-file triage+adversarial-verify workflow
+(64 agents) over every `docs/2026-08-*.md` snapshot — 31/32 stay in place (cited by an active
+`.claude/rules/*.md` file, cited by another live doc, or no specific covering successor);
+only `docs/2026-08-08-corrections.md` moved, its claimed successor (`docs/STATUS.md`, this
+file, line ~383) independently re-verified to carry the corrected figures verbatim.
+`README.md` rewritten to state the repo's actual identity/law instead of unmodified
+scikit-decide-fork boilerplate, with a documentation map to this file,
+`docs/ecosystem-standing.md`, `docs/diataxis/README.md`, `FORWARD_DEPLOYMENT.md`, and
+`docs/jira/v26.9.1/PLAN.md`.
+
+Prior update: **pass 20** (2026-08-09) — **Real, unbiased, representative-sample measurement,
 complete: AutoFDE Lab does not beat sregym's published SOTA.** A real, programmatically-
 generated stride-5 systematic sample (25 of 123 active registrations, computed once via
 `ProblemRegistry().get_problem_ids(all=True)`, never hand-edited) was run to completion

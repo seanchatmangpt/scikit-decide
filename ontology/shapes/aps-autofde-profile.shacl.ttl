@@ -1,0 +1,47 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+# Preserve APS's source-admission law at the AutoFDE trial boundary.
+afl:AdmittedKnowledgeShape
+    a sh:NodeShape ;
+    sh:targetClass afl:AdmittedKnowledge ;
+    sh:or (
+        [ sh:property [ sh:path prov:specializationOf ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path prov:wasDerivedFrom ; sh:minCount 1 ] ]
+    ) ;
+    sh:property [ sh:path afl:belongsToTrial ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path afl:admissionWitness ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+# Contracts are executable semantic boundaries, not prose labels.
+afl:ProtocolContractShape
+    a sh:NodeShape ;
+    sh:targetClass afl:ProtocolContract ;
+    sh:property [ sh:path afl:contractInvariant ; sh:minCount 1 ] ;
+    sh:property [ sh:path afl:contractPostcondition ; sh:minCount 1 ] ;
+    sh:property [ sh:path afl:contractConsequence ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+# A falsifier is useful only when it names what it can refute.
+afl:CandidateFalsifierShape
+    a sh:NodeShape ;
+    sh:targetClass afl:CandidateFalsifier ;
+    sh:property [ sh:path afl:falsifiesCandidate ; sh:minCount 1 ] .
+
+# Intent may only point at a commitment that has already crossed the governed candidate set.
+# Binding authority here still does not perform afl:Actuation.
+afl:ProtocolActuationIntentShape
+    a sh:NodeShape ;
+    sh:targetClass afl:ProtocolActuationIntent ;
+    sh:property [ sh:path afl:intentCommitment ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path afl:intentAuthority ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+# A completed reconstitution is an evidence-bearing trial coordinate, not a narrative claim.
+afl:ReconstitutionTrialShape
+    a sh:NodeShape ;
+    sh:targetClass afl:ReconstitutionTrial ;
+    sh:property [ sh:path afl:reconstitutionKnowledge ; sh:minCount 1 ] ;
+    sh:property [ sh:path afl:reconstitutionContract ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path afl:reconstitutionCandidate ; sh:minCount 1 ] ;
+    sh:property [ sh:path afl:reconstitutionFalsifier ; sh:minCount 1 ] ;
+    sh:property [ sh:path afl:reconstitutionWitness ; sh:minCount 1 ] ;
+    sh:property [ sh:path afl:reconstitutionStanding ; sh:minCount 1 ] .
