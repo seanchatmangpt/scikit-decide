@@ -172,8 +172,34 @@ def test_override_knobs_are_real_cli_level_overrides_not_vendor_config_edits() -
 # aggregate comparison needs this driver run across a representative problem sample.
 
 
-def test_autofde_lab_planner_driver_file_exists_and_is_registered() -> None:
-    assert AUTOFDE_LAB_PLANNER_DRIVER_PATH.is_file()
+def test_autofde_lab_planner_driver_is_registered_but_deliberately_absent_from_the_live_tree() -> None:
+    """`autofde_lab_planner` is registered in the real, checked-out `agents.yaml` (its
+    `kickoff_command` names `clients.autofde_lab_planner.driver`), but
+    `AUTOFDE_LAB_PLANNER_DRIVER_PATH` itself is deliberately NOT a file in this checkout.
+
+    This was a real, working, 1080-line driver, run to a genuine 100%/100% result (the run4
+    result cited above) -- and later found orphaned in git history rather than resurrected,
+    by an explicit, considered decision recorded in
+    `.claude/rules/gym-actuation-boundary.md`: restoring it into the live vendored tree would
+    re-open the direct-vendor-actuation path that rule closes (`gymact` is the one real
+    actuation surface; nothing may subprocess-launch a vendored gym's own driver directly).
+    Mining its domain logic into `gymact`-mediated action bindings is in scope; resurrecting
+    it as a second, parallel actuation path is not. This test pins that boundary decision as
+    a real invariant -- a future `git restore` of the orphaned blob into this path should fail
+    this test, not silently reopen the forbidden path.
+    """
+    import yaml
+
+    agents_yaml = SREGYM_ROOT / "agents.yaml"
+    registered = {a["name"]: a for a in yaml.safe_load(agents_yaml.read_text())["agents"]}
+    assert "autofde_lab_planner" in registered
+    assert "clients.autofde_lab_planner.driver" in registered["autofde_lab_planner"]["kickoff_command"]
+    assert not AUTOFDE_LAB_PLANNER_DRIVER_PATH.is_file(), (
+        "the orphaned driver.py appears to have been restored to the live vendored tree -- "
+        "see .claude/rules/gym-actuation-boundary.md before doing this: it documents an "
+        "explicit decision NOT to, because that resurrects a direct-vendor-actuation path "
+        "gymact is supposed to be the only real surface for"
+    )
 
 
 def test_current_sregym_autofde_lab_planner_basis_has_no_agent_model() -> None:

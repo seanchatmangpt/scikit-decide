@@ -20,8 +20,20 @@ def _load_generator():
 
 
 def _sources() -> list[Path]:
+    """The 50 catalogued sources are exactly the ``NN_*.mmd`` numbered set.
+
+    ``docs/c4/autofde_lab_planner_*.mmd`` is deliberately unnumbered -- see
+    ``docs/autofde-lab-planner-generalized-architecture.md``'s own "See also"
+    section: "this set is named ``autofde_lab_planner_*.mmd`` to avoid
+    colliding with that catalog's own sequence." A blanket ``*.mmd`` glob
+    would silently pull in that intentionally-excluded set (and break on its
+    unnumbered filenames), so this only matches names starting with digits.
+    """
     return sorted(
-        [*ROOT.glob('docs/c4/*.mmd'), *ROOT.glob('docs/diagrams/*.mmd')],
+        [
+            *ROOT.glob('docs/c4/[0-9]*.mmd'),
+            *ROOT.glob('docs/diagrams/[0-9]*.mmd'),
+        ],
         key=lambda p: int(p.name.split('_', 1)[0]),
     )
 

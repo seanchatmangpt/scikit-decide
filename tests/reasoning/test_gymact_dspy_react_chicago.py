@@ -317,9 +317,10 @@ def test_gym_act_react_diagnoser_delegates_to_explicit_decision_backend(tmp_path
     assert len(backend.calls) == 1
     assert backend.calls[0]["namespace"] == "social-network"
     assert backend.calls[0]["max_iters"] == 3
-    # Real tools (run_kubectl, observe_cluster_state) were really built and
-    # handed to the backend, even though this fake backend never calls them.
-    assert backend.calls[0]["tool_count"] == 2
+    # Real tools (run_kubectl, observe_cluster_state, run_composite_diagnosis)
+    # were really built and handed to the backend, even though this fake
+    # backend never calls them.
+    assert backend.calls[0]["tool_count"] == 3
 
 
 # ---------------------------------------------------------------------------

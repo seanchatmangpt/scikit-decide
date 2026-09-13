@@ -61,3 +61,4 @@
     arch:relationshipCount 8 ;
     arch:sourceDigest "73ad22486af90c2d122bf8fba2834de28646e4d557921ce2c5ed4cb4c54619bf" ;
     arch:sourcePath "docs/c4/10_sota_lab_deployment.mmd" .
+

@@ -1,0 +1,11 @@
+[project]
+name = "autofde-lab-r80-forced-top25-consumer"
+
+[ontology]
+source = "ontology.ttl"
+
+[templates]
+dir = "templates"
+
+[packs]
+forced-top25-admissibility-factory-pack = { git = "https://github.com/seanchatmangpt/ggen-marketplace.git", version = "92e319a927db0b10e6b74a04a1ac490e1d0bb466", subdir = "packs/forced-top25-admissibility-factory-pack" }

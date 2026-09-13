@@ -1,0 +1,132 @@
+name: AutoFDE Rust handoff qualification
+
+on:
+  pull_request:
+    branches:
+      - master
+      - integration/all-relevant-20260819
+    paths:
+      - ecosystem/autofde-rust-handoff.toml
+      - scripts/verify_autofde_rust_handoff.py
+      - ontology/interop.ttl
+      - pyproject.toml
+      - uv.lock
+      - .github/workflows/autofde-rust-handoff.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autofde-rust-handoff-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qualify:
+    name: Exact graph qualification
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact Lab subject
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Assert exact Lab subject
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="${{ github.event.pull_request.head.sha || github.sha }}"
+          actual="$(git rev-parse HEAD)"
+          test "${actual}" = "${expected}"
+          printf 'lab_revision=%s\n' "${actual}"
+
+      - id: contract
+        name: Read admitted handoff graph
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import os
+          import tomllib
+          from pathlib import Path
+
+          contract = tomllib.loads(Path("ecosystem/autofde-rust-handoff.toml").read_text())
+          outputs = {
+              "ggen_repository": contract["manufacturer"]["repository"],
+              "ggen_revision": contract["manufacturer"]["revision"],
+              "autofde_repository": contract["consumer"]["repository"],
+              "autofde_revision": contract["consumer"]["revision"],
+              "gymact_repository": contract["gymact"]["repository"],
+              "gymact_revision": contract["gymact"]["candidate_revision"],
+          }
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as handle:
+              for key, value in outputs.items():
+                  handle.write(f"{key}={value}\n")
+          PY
+
+      - name: Checkout exact ggen manufacturer
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: ${{ steps.contract.outputs.ggen_repository }}
+          ref: ${{ steps.contract.outputs.ggen_revision }}
+          path: _deps/ggen
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Checkout exact Rust AutoFDE consumer
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: ${{ steps.contract.outputs.autofde_repository }}
+          ref: ${{ steps.contract.outputs.autofde_revision }}
+          path: _deps/autofde
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Checkout candidate GymAct subject
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: ${{ steps.contract.outputs.gymact_repository }}
+          ref: ${{ steps.contract.outputs.gymact_revision }}
+          path: _deps/gymact
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Qualify Lab to Rust handoff
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/verify_autofde_rust_handoff.py \
+            --lab . \
+            --ggen _deps/ggen \
+            --autofde _deps/autofde \
+            --gymact _deps/gymact \
+            | tee autofde-rust-handoff-receipt.json
+
+      - name: Replay qualification receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          receipt = json.loads(Path("autofde-rust-handoff-receipt.json").read_text())
+          observed = receipt.pop("receipt_digest")
+          canonical = json.dumps(receipt, sort_keys=True, separators=(",", ":")).encode()
+          expected = "sha256:" + hashlib.sha256(canonical).hexdigest()
+          assert observed == expected, (observed, expected)
+          assert receipt["standing"] == "ALIVE"
+          assert receipt["authority"]["do_authority"] is False
+          print("REPLAY_MATCH")
+          PY
+
+      - name: Preserve exact qualification receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: autofde-rust-handoff-${{ github.event.pull_request.head.sha || github.sha }}
+          path: autofde-rust-handoff-receipt.json
+          if-no-files-found: error

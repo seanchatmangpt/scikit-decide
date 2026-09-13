@@ -59,3 +59,8 @@ jobs:
 
       - name: Manufacture and execute Fortune-5 law court
         run: bash scripts/verify-fortune5-ggen.sh
+
+      - name: Execute enterprise architecture board court
+        env:
+          PYTHONPATH: src
+        run: python -m pytest -q tests/fortune5/test_enterprise_architecture_board.py

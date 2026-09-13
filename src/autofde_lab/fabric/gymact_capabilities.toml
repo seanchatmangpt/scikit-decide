@@ -15,10 +15,19 @@
 # ~/gymact package (`import gymact`) directly, never a local wrapper/shadow
 # package of that name.
 #
-# Real capability set verified this session directly from
-# `~/gymact/src/gymact/gyms/sregym.py`'s `SREGYM_CAPABILITIES` tuple (5
-# entries; there is no jaeger/loki/prometheus capability in the real gymact
-# source -- only these 5 exist). `SregymEnvironment.verify()` is NOT a
+# Real capability set re-verified 2026-08-12 directly from
+# `~/gymact/src/gymact/gyms/sregym.py`'s `SREGYM_CAPABILITIES` tuple: 14
+# entries. The original 5 (observe_cluster_state, run_kubectl,
+# submit_diagnosis, submit_mitigation, get_benchmark_status) plus 9
+# observability-read additions upstream in gymact since this manifest was
+# first written -- 4 real Jaeger MCP reads, 3 real Loki MCP reads, and 2 real
+# Prometheus MCP reads, all Consequence.DO (same kernel-dispatch reason as
+# observe_cluster_state above: gymact refuses any Consequence.READ capability
+# routed through gym.act(), so DO is the only classification that is
+# actually true for these too). None of the 9 read injected-fault ground
+# truth or scoring internals -- they surface only what a real operator's
+# observability stack (traces/logs/metrics/alerts) already exposes.
+# `SregymEnvironment.verify()` is NOT a
 # `Capability` at all: it is a plain coroutine method on the environment,
 # never wrapped in the `actuate(capability, payload)` dispatch table, so it
 # is structurally unreachable through this capability surface regardless of
@@ -58,6 +67,51 @@ reason = "Submits the agent's OWN diagnosis to sregym's conductor for external g
 name = "submit_mitigation"
 consequence = "DO"
 reason = "Submits the agent's OWN mitigation to sregym's conductor for external grading. Same rationale as submit_diagnosis: outbound submission of the agent's own answer, not a read of ground truth."
+
+[[capability]]
+name = "jaeger_get_services"
+consequence = "DO"
+reason = "Real Jaeger MCP get_services -- lists real service names from sregym's observability stack. Read-leaning but classified DO for the same kernel-dispatch reason as observe_cluster_state: gymact refuses any Consequence.READ capability routed through gym.act(). No ground truth or scoring internals exposed."
+
+[[capability]]
+name = "jaeger_get_operations"
+consequence = "DO"
+reason = "Real Jaeger MCP get_operations -- real operations for one named service. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "jaeger_get_traces"
+consequence = "DO"
+reason = "Real Jaeger MCP get_traces -- real traces for one service in a real time window. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "jaeger_get_dependency_graph"
+consequence = "DO"
+reason = "Real Jaeger MCP get_dependency_graph -- real service dependency graph over a real time window. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "loki_get_logs"
+consequence = "DO"
+reason = "Real Loki MCP get_logs -- real logs matching a real LogQL query. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "loki_get_labels"
+consequence = "DO"
+reason = "Real Loki MCP get_labels -- real available label names. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "loki_get_label_values"
+consequence = "DO"
+reason = "Real Loki MCP get_label_values -- real values for one named label. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "prometheus_get_metrics"
+consequence = "DO"
+reason = "Real Prometheus MCP get_metrics -- real metric values for a real PromQL query. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "prometheus_get_alerts"
+consequence = "DO"
+reason = "Real Prometheus MCP get_alerts -- real currently-firing alerts. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
 
 # NOTE: "verify" is deliberately NOT listed here. An earlier pass in this
 # session added a fake "verify" entry so gymact_diagnosis_driver's

@@ -19,6 +19,8 @@ imports = [
     "ontology/world-transformation-taxonomy.ttl",
     "ontology/togaf-artifacts.ttl",
     "ontology/gymact-certification.ttl",
+    "ontology/autofde-lab-capabilities.ttl",
+    "ontology/planner-league.ttl",
 ]
 base_iri = "urn:autofde-lab:"
 
@@ -118,6 +120,13 @@ query = { file = "queries/gymact-certification/manifest.rq" }
 template = { file = "templates/constitution_module.py.tera" }
 output_file = "src/autofde_lab/reasoning/gymact_certification_types.py"
 mode = "Create"
+
+[[generation.rules]]
+name = "planner-league-catalog"
+query = { file = "queries/planner-league/catalog.rq" }
+template = { file = "templates/planner_league_catalog.py.tera" }
+output_file = "src/autofde_lab/planner_league/catalog.py"
+mode = "Overwrite"
 
 [sync]
 enabled = true

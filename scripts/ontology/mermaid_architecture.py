@@ -101,9 +101,18 @@ def diagram_kind(text: str):
 
 
 def source_files() -> list[Path]:
+    """The 50 catalogued sources are exactly the ``NN_*.mmd`` numbered set.
+
+    ``docs/c4/autofde_lab_planner_*.mmd`` is deliberately unnumbered -- see
+    ``docs/autofde-lab-planner-generalized-architecture.md``'s own "See also"
+    section: that set is named to avoid colliding with this catalog's own
+    sequence. A blanket ``*.mmd`` glob would silently pull it in (and crash
+    on its unnumbered filenames), so this only matches names starting with
+    digits.
+    """
     files = []
     for d in SOURCE_DIRS:
-        files.extend(sorted(d.glob('*.mmd')))
+        files.extend(sorted(d.glob('[0-9]*.mmd')))
     return sorted(files, key=lambda p: int(p.name.split('_', 1)[0]))
 
 

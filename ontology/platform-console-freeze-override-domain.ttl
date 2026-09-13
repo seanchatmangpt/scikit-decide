@@ -1,0 +1,124 @@
+@prefix pd: <urn:autofde-lab:planning-domain:> .
+@prefix ex: <urn:autofde-lab:planning-domain:platform-console-freeze-override:> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Real ontology/platform-console-freeze-override-domain.ttl fixture: the
+# eager-forging-sparrow-plan slice of the platform-console fabric-capability
+# planning domain (per ~/.claude/plans/eager-forging-sparrow.md Phase 3),
+# encoding exactly the 3 in-scope capabilities from that plan's Phase 1/2
+# (castle.verb.inventory-components, castle.verb.inventory-goals,
+# approval.freeze-override) over the console-snapshot route's ground-fact
+# predicate names: (deployed castle), (frozen <org>),
+# (freeze-override-approved <org>), (job-complete <verb>).
+#
+# RECONCILIATION NOTE: this is a deliberately separate file from
+# ontology/platform-console-domain.ttl, not a merged/superset fixture.
+# autofde_lab.fabric.rdf_domain.compile_rdf_to_pddl's own documented
+# contract (rdf_domain.py's compile_rdf_to_pddl docstring/implementation)
+# requires the graph to contain EXACTLY ONE pd:Problem when
+# domain_iri/problem_iri are not given -- and this fixture's own
+# test_platform_console_domain_roundtrip_chicago.py /
+# test_platform_console_capability_plan_chicago.py call
+# compile_rdf_to_pddl(FIXTURE) / compile_rdf_to_pddl_files(FIXTURE, ...)
+# with NO iri arguments, asserting one specific, exact, minimal 2-action
+# domain.pddl/problem.pddl text. ontology/platform-console-domain.ttl (the
+# committed capability-suite fixture) structurally contains 3 pd:Problem
+# individuals and ~30 pd:Action individuals over an entirely different
+# predicate vocabulary (org-exists/approved/frozen/... rather than
+# deployed/frozen/freeze-override-approved/job-complete), which
+# test_platform_console_domain_compiles_chicago.py /
+# test_platform_console_full_capability_suite_chicago.py /
+# test_platform_console_domain_mutation_chicago.py depend on verbatim (3
+# problems, ~30 actions, explicit domain_iri/problem_iri arguments every
+# time). Putting a 4th pd:Problem into that file would not reconcile
+# anything: compile_rdf_to_pddl(FIXTURE) with no problem_iri would then
+# raise RdfDomainError("expected exactly one pd:Problem ... found 4"),
+# breaking this file's own two zero-argument-compile tests. The two fixture
+# shapes are used with incompatible calling conventions (implicit-single-
+# problem vs. explicit-iri-multi-problem) against the SAME default-lookup
+# code path in the same module, so they cannot share one physical Turtle
+# file without one of the two call sites breaking. Two real, independent
+# fixture files -- each internally self-consistent and each exercised end
+# to end by its own suite -- is the smallest real fix; see this session's
+# report for the full analysis.
+
+<urn:autofde-lab:ontology:platform-console-freeze-override-domain>
+    a owl:Ontology ;
+    dcterms:title "Platform console freeze-override capability planning domain (eager-forging-sparrow Phase 3 slice)" ;
+    dcterms:description "The 3 in-scope eager-forging-sparrow-plan capabilities (castle.verb.inventory-components, castle.verb.inventory-goals, approval.freeze-override), encoded as pd:Action individuals conforming to ontology/rdf-planning-domain.ttl over the console-snapshot route's real predicate names, so the existing compile_rdf_to_pddl -> pddl_engine.solve_to_plan_file -> project_plan_to_powl pipeline can plan over them unmodified." ;
+    dcterms:created "2026-08-19"^^xsd:date .
+
+ex:domain a pd:Domain ;
+    pd:domainName "platform-console" ;
+    pd:hasPredicate ex:pred-deployed, ex:pred-frozen, ex:pred-freeze-override-approved, ex:pred-job-complete ;
+    pd:hasAction ex:action-freeze-override, ex:action-run-verb .
+
+# -- Predicates (console-snapshot-route vocabulary) ---------------------
+
+ex:pred-deployed a pd:Predicate ; pd:predicateName "deployed" ;
+    pd:hasParameter [ pd:parameterName "c" ; pd:parameterIndex 0 ] .
+ex:pred-frozen a pd:Predicate ; pd:predicateName "frozen" ;
+    pd:hasParameter [ pd:parameterName "o" ; pd:parameterIndex 0 ] .
+ex:pred-freeze-override-approved a pd:Predicate ; pd:predicateName "freeze-override-approved" ;
+    pd:hasParameter [ pd:parameterName "o" ; pd:parameterIndex 0 ] .
+ex:pred-job-complete a pd:Predicate ; pd:predicateName "job-complete" ;
+    pd:hasParameter [ pd:parameterName "v" ; pd:parameterIndex 0 ] .
+
+# -- Actions --------------------------------------------------------------
+
+# approval.freeze-override -- the maker-checker gate: an org must already
+# be frozen before the override can be approved.
+ex:action-freeze-override a pd:Action ;
+    pd:actionName "freeze-override" ;
+    pd:hasParameter [ pd:parameterName "o" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "frozen" ;
+          pd:hasArgument [ pd:argument "o" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "freeze-override-approved" ;
+          pd:hasArgument [ pd:argument "o" ; pd:argumentIndex 0 ] ] .
+
+# castle.verb.* -- both castle verbs (inventory-components, inventory-goals)
+# ground onto this single run-verb action, gated behind the org's
+# freeze-override approval and the castle resource being deployed.
+ex:action-run-verb a pd:Action ;
+    pd:actionName "run-verb" ;
+    pd:hasParameter
+        [ pd:parameterName "c" ; pd:parameterIndex 0 ] ,
+        [ pd:parameterName "o" ; pd:parameterIndex 1 ] ,
+        [ pd:parameterName "v" ; pd:parameterIndex 2 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "deployed" ;
+          pd:hasArgument [ pd:argument "c" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "freeze-override-approved" ;
+          pd:hasArgument [ pd:argument "o" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "job-complete" ;
+          pd:hasArgument [ pd:argument "v" ; pd:argumentIndex 0 ] ] .
+
+# -- Problem ----------------------------------------------------------
+# Real castle resource "castle" already deployed, org "org1" already
+# frozen; goal both castle verbs' jobs complete for org1. A real Astar
+# solve must gate both run-verb applications behind freeze-override, since
+# (freeze-override-approved org1) is not asserted in :init.
+
+ex:problem-1 a pd:Problem ;
+    pd:problemName "platform-console-1" ;
+    pd:forDomain ex:domain ;
+    pd:hasObject
+        [ pd:objectName "castle" ] ,
+        [ pd:objectName "org1" ] ,
+        [ pd:objectName "v-inventory-components" ] ,
+        [ pd:objectName "v-inventory-goals" ] ;
+    pd:init
+        [ a pd:Atom ; pd:ofPredicate "deployed" ;
+          pd:hasArgument [ pd:argument "castle" ; pd:argumentIndex 0 ] ] ,
+        [ a pd:Atom ; pd:ofPredicate "frozen" ;
+          pd:hasArgument [ pd:argument "org1" ; pd:argumentIndex 0 ] ] ;
+    pd:goal
+        [ a pd:Atom ; pd:ofPredicate "job-complete" ;
+          pd:hasArgument [ pd:argument "v-inventory-components" ; pd:argumentIndex 0 ] ] ,
+        [ a pd:Atom ; pd:ofPredicate "job-complete" ;
+          pd:hasArgument [ pd:argument "v-inventory-goals" ; pd:argumentIndex 0 ] ] .

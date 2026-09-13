@@ -1,0 +1,29 @@
+{
+  "schema": "urn:autofde:planner-pack-index:v1",
+  "frozen_autofde_head": "d47ce62018fec51751b2b615ca300e44afe903ab",
+  "entrypoints": {
+    "pddl_domain": "pddl/autofde-meta-planning-domain.pddl",
+    "primary_problem": "pddl/problems/00_ecosystem_full_crown.pddl",
+    "world_cyber_problem": "pddl/problems/10_world_cyber_self_play.pddl",
+    "post_receipt_problem": "pddl/problems/20_post_receipt_replan_compile_away.pddl",
+    "league": "league/planner_league.json",
+    "transition_protocol": "league/transition_protocol.json",
+    "runner": "tools/run_meta_plan.py"
+  },
+  "claim_ceiling": "CANDIDATE_PLANNING_SUBJECTS_NO_AUTHORITY_NO_DO",
+  "fortune5_enterprise_architecture": {
+    "domain": "pddl/autofde-fortune5-enterprise-architecture-domain.pddl",
+    "problems": "pddl/enterprise_problems/",
+    "principles": "fortune5/architecture_principles.json",
+    "viewpoints": "fortune5/architecture_viewpoints.json",
+    "governance": "fortune5/governance_gates.json",
+    "role_matrix": "fortune5/planner_role_matrix.json",
+    "rdf_bridge": "rdf/fortune5-enterprise-architecture.ttl",
+    "claim_ceiling": "CANDIDATE_ENTERPRISE_ARCHITECTURE_PLANNING_NO_PRODUCTION_AUTHORITY",
+    "reference_architecture": "fortune5/reference_architecture.json",
+    "decision_rights": "fortune5/decision_rights.json",
+    "risk_register": "fortune5/risk_register.json",
+    "traceability": "fortune5/traceability_matrix.json",
+    "acceptance_crown": "fortune5/enterprise_architecture_crown.json"
+  }
+}

@@ -135,6 +135,125 @@ def cache_hotset(
     _emit(get_fabric(cache_path).cache_hotset())
 
 
+def _dflss_solve_payoff_outcome_dict(outcome: Any) -> dict[str, Any]:
+    return {
+        "planner_id": outcome.planner_id,
+        "standing": outcome.standing,
+        "reason": outcome.reason,
+        "plan_length": outcome.plan_length,
+    }
+
+
+@app.command("dmedi-solve-payoff")
+def dmedi_solve_payoff(
+    left_planner: str = typer.Argument(..., help="Left planner id, e.g. Astar"),
+    right_planner: str = typer.Argument(..., help="Right planner id, e.g. LRTAstar"),
+    world_id: str = typer.Option("generic_enterprise", help="LeagueMatch world id"),
+    role_id: str = typer.Option(
+        "plan_constructor", help="LeagueMatch role id for both sides"
+    ),
+    observation_projection_id: str = typer.Option("full_observation"),
+    budget_id: str = typer.Option("balanced"),
+    input_payoff_bundle: Path | None = typer.Option(
+        None,
+        "--input-payoff-bundle",
+        help="Read a deterministic payoff-evidence bundle and seed the in-process hypergraph",
+    ),
+) -> None:
+    """Drive two real planners through the DMEDI-curriculum PDDL problem and
+    emit one receipt-bearing head-to-head observation plus a portable payoff
+    bundle.
+
+    Without ``--input-payoff-bundle`` the hypergraph is fresh, preserving the
+    previous behavior. With it, only already-receipted observations that pass
+    bundle digest and structural admission are loaded before the new attempt.
+    This is evidence transport, not persistence authority or actuation.
+    """
+    from autofde_lab.planner_league import PayoffHypergraph
+    from autofde_lab.reasoning.dflss_solve_payoff_bridge import (
+        admit_dflss_solve_payoff,
+    )
+    from autofde_lab.reasoning.lab_standing import dflss_solve_payoff_production_claim
+    from autofde_lab.reasoning.payoff_bundle import (
+        decode_payoff_bundle,
+        encode_payoff_bundle,
+    )
+
+    hypergraph = PayoffHypergraph()
+    seeded_observation_count = 0
+    if input_payoff_bundle is not None:
+        try:
+            prior_observations = decode_payoff_bundle(
+                input_payoff_bundle.read_text(encoding="utf-8")
+            )
+        except OSError as exc:
+            _emit(
+                {
+                    "standing": "REFUSED",
+                    "reason": f"REFUSED:PAYOFF_BUNDLE_READ:{type(exc).__name__}",
+                    "admitted": False,
+                    "seeded_observation_count": 0,
+                    "hypergraph_observation_count": 0,
+                }
+            )
+            raise typer.Exit(code=3) from exc
+        except ValueError as exc:
+            _emit(
+                {
+                    "standing": "REFUSED",
+                    "reason": str(exc),
+                    "admitted": False,
+                    "seeded_observation_count": 0,
+                    "hypergraph_observation_count": 0,
+                }
+            )
+            raise typer.Exit(code=3) from exc
+        for observation in prior_observations:
+            hypergraph.add(observation)
+        seeded_observation_count = len(prior_observations)
+
+    result = admit_dflss_solve_payoff(
+        left_planner,
+        right_planner,
+        hypergraph=hypergraph,
+        world_id=world_id,
+        role_id=role_id,
+        observation_projection_id=observation_projection_id,
+        budget_id=budget_id,
+    )
+
+    payload: dict[str, Any] = {
+        "standing": result.standing,
+        # `standing` is real, legitimate evidence within the lab domain
+        # (`V2030.1.1-PRD-ARD.md` capability 9). `production_claim` is the
+        # typed refusal every lab-scoped standing must carry across the
+        # lab/production boundary -- see `reasoning.lab_standing`.
+        "production_claim": dflss_solve_payoff_production_claim(result),
+        "reason": result.reason,
+        "admitted": result.admitted,
+        "left_outcome": _dflss_solve_payoff_outcome_dict(result.left_outcome),
+        "right_outcome": _dflss_solve_payoff_outcome_dict(result.right_outcome),
+        "observation": None
+        if result.observation is None
+        else {
+            "left_score": result.observation.left_score,
+            "right_score": result.observation.right_score,
+            "receipt_id": result.observation.receipt_id,
+            "world_id": result.observation.match.world_id,
+            "left_role_id": result.observation.match.left_role_id,
+            "right_role_id": result.observation.match.right_role_id,
+            "left_planner_id": result.observation.match.left_policy.planner_id,
+            "right_planner_id": result.observation.match.right_policy.planner_id,
+        },
+        "seeded_observation_count": seeded_observation_count,
+        "hypergraph_observation_count": len(hypergraph.observations),
+        "payoff_bundle": json.loads(encode_payoff_bundle(hypergraph.observations)),
+    }
+    _emit(payload)
+    if not result.admitted:
+        raise typer.Exit(code=3)
+
+
 @app.command("serve-mcp")
 def serve_mcp(
     dspy_compile: bool = typer.Option(

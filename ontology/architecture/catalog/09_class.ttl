@@ -61,3 +61,4 @@
     arch:relationshipCount 7 ;
     arch:sourceDigest "893f2f360d243ed29ead580eafc517cefe6bb72243bcd95bc0b7a29e1c383638" ;
     arch:sourcePath "docs/diagrams/45_class_experiment_configuration.mmd" .
+

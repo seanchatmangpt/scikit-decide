@@ -31,9 +31,17 @@ from k8s_deploy_deadend_guard import (  # noqa: E402
 def _cluster_reachable() -> bool:
     if shutil.which("kubectl") is None:
         return False
-    proc = subprocess.run(
-        ["kubectl", "cluster-info"], capture_output=True, text=True, timeout=10.0
-    )
+    try:
+        proc = subprocess.run(
+            ["kubectl", "cluster-info"], capture_output=True, text=True, timeout=10.0
+        )
+    except subprocess.TimeoutExpired:
+        # A stale/unreachable kubeconfig context can make `kubectl` itself hang past
+        # its own internal timeouts instead of failing fast -- this is real evidence
+        # of "not reachable", not a collection-time crash. Caught here (not left to
+        # propagate) so the module-level skipif below can classify it the same as any
+        # other real UNREACHABLE, matching this file's own "skips honestly" contract.
+        return False
     return proc.returncode == 0
 
 

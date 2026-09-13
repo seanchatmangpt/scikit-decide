@@ -1,0 +1,208 @@
+name: mmdio Planning DFCM Export Crown
+
+on:
+  pull_request:
+    paths:
+      - "src/autofde_lab/interchange/**"
+      - "tests/interchange/test_mmdio_planning.py"
+      - "docs/mmdio-planning-export.md"
+      - "docs/mmdio-planning-dfcm.md"
+      - ".github/workflows/mmdio-planning-export-crown.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mmdio-planning-export-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out exact AutoFDE candidate
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+
+      - name: Assert exact head
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+
+      - name: Install Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install focused test capsule
+        run: python -m pip install --disable-pip-version-check pytest==9.1.1
+
+      - name: Compile exporter and execute focused laws
+        run: |
+          python -m compileall -q src/autofde_lab/interchange tests/interchange/test_mmdio_planning.py
+          python -m pytest -q -c /dev/null tests/interchange/test_mmdio_planning.py
+
+      - name: Manufacture five formalism exports
+        run: |
+          python - <<'PY'
+          import importlib.util
+          import json
+          from pathlib import Path
+          import sys
+
+          path = Path("tests/interchange/test_mmdio_planning.py")
+          spec = importlib.util.spec_from_file_location("afl_mmdio_crown_fixtures", path)
+          assert spec is not None and spec.loader is not None
+          fixtures = importlib.util.module_from_spec(spec)
+          sys.modules[spec.name] = fixtures
+          spec.loader.exec_module(fixtures)
+          m = fixtures.m
+
+          out = Path("/tmp/autofde-mmdio")
+          out.mkdir(parents=True, exist_ok=True)
+          exports = {
+              "pddl": m.export_pddl_domain(
+                  fixtures.DeterministicDomain(), subject="enterprise-pddl"
+              ),
+              "ppddl": m.export_ppddl_domain(
+                  fixtures.ProbabilisticDomain(), subject="enterprise-ppddl"
+              ),
+              "pddl+": m.export_tpddl_domain(
+                  fixtures.TemporalDomain(), subject="enterprise-pddl-plus"
+              ),
+              "rddl": m.export_rddl_rollout(
+                  fixtures.RDDLDomain(), [1, 2, 3], subject="enterprise-rddl"
+              ),
+              "powl-2.0": m.export_powl(
+                  fixtures.PartialOrder(
+                      (
+                          fixtures.Atom("rights"),
+                          fixtures.Atom("marketing"),
+                          fixtures.Atom("release"),
+                      ),
+                      {fixtures.OrderEdge(0, 2)},
+                  ),
+                  subject="enterprise-powl",
+              ),
+          }
+          for formalism, export in exports.items():
+              export.write_json(out / f"{formalism.replace('+', 'plus')}.json")
+          print(json.dumps({
+              "schema": m.SCHEMA,
+              "formalisms": sorted(exports),
+              "count": len(exports),
+              "claim": m.CLAIM_CEILING,
+          }, sort_keys=True))
+          PY
+
+      - name: Check out exact proven mmdio DFCM planning contract
+        uses: actions/checkout@v4
+        with:
+          repository: seanchatmangpt/mmdio
+          ref: c8af82335a3f279fc4a73660e51a8d98b0349b21
+          path: _oracle/mmdio
+          fetch-depth: 1
+
+      - name: DFCM-admit exports and manufacture all evidence outcomes
+        env:
+          PYTHONPATH: _oracle/mmdio/src
+        run: |
+          python - <<'PY' | tee /tmp/autofde-mmdio-dfcm.json
+          import json
+          from pathlib import Path
+          from mmdio.planning import (
+              generate_planning_bundle,
+              load_planning_graph,
+              write_planning_bundle,
+          )
+
+          source = Path("/tmp/autofde-mmdio")
+          docs_root = Path("/tmp/autofde-mmdio-docs")
+          docs_root.mkdir(parents=True, exist_ok=True)
+
+          formalisms = []
+          candidates = admitted = refused = receipts = 0
+          subjects = []
+
+          for path in sorted(source.glob("*.json")):
+              graph = load_planning_graph(path)
+              bundle = generate_planning_bundle(graph)
+              bundle.verify()
+              matrix = bundle.dfcm_matrix()
+              if matrix.candidate_count != 8:
+                  raise SystemExit(
+                      f"{graph.formalism}: expected 8 DFCM candidates, "
+                      f"observed {matrix.candidate_count}"
+                  )
+
+              target = docs_root / graph.formalism.replace("+", "plus")
+              write_planning_bundle(bundle, target)
+
+              actual_refusals = list((target / "refusals").glob("*.refusal.json"))
+              if len(actual_refusals) != matrix.refused_count:
+                  raise SystemExit(
+                      f"{graph.formalism}: refusal artifact cardinality drift"
+                  )
+              if len(bundle.receipts) != matrix.admitted_count:
+                  raise SystemExit(
+                      f"{graph.formalism}: receipt/admission cardinality drift"
+                  )
+
+              formalisms.append(graph.formalism)
+              candidates += matrix.candidate_count
+              admitted += matrix.admitted_count
+              refused += matrix.refused_count
+              receipts += len(bundle.receipts)
+              subjects.append({
+                  "formalism": graph.formalism,
+                  "planning_digest": graph.digest(),
+                  "dfcm_digest": matrix.digest(),
+                  "admitted": sorted(
+                      cell.projection_name for cell in matrix.admitted
+                  ),
+                  "refused": sorted(
+                      cell.projection_name for cell in matrix.refused
+                  ),
+              })
+
+          if set(formalisms) != {"pddl", "ppddl", "pddl+", "rddl", "powl-2.0"}:
+              raise SystemExit(f"formalism coverage drift: {sorted(formalisms)!r}")
+          if candidates != 40:
+              raise SystemExit(f"expected 40 DFCM cells, observed {candidates}")
+          if admitted + refused != candidates:
+              raise SystemExit(
+                  f"DFCM closure failed admitted={admitted} refused={refused}"
+              )
+          if receipts != admitted:
+              raise SystemExit(
+                  f"receipt closure failed admitted={admitted} receipts={receipts}"
+              )
+
+          print(json.dumps({
+              "schema": "autofde.mmdio-dfcm-cross-repo-crown/1",
+              "mmdio_head": "c8af82335a3f279fc4a73660e51a8d98b0349b21",
+              "formalisms": sorted(formalisms),
+              "candidate_count": candidates,
+              "admitted_count": admitted,
+              "refused_count": refused,
+              "receipts_verified": receipts,
+              "subjects": subjects,
+              "claim": "NATIVE_PLANNING_SEMANTICS_TO_DFCM_MMDIO_PROJECTION_ONLY",
+          }, sort_keys=True))
+          PY
+
+      - name: Install pinned Mermaid oracle
+        working-directory: _oracle/mmdio/tests/oracle
+        run: npm ci
+
+      - name: Parse every DFCM-admitted planning document with Mermaid 11.16.0
+        run: |
+          mapfile -t diagrams < <(
+            find /tmp/autofde-mmdio-docs -name '*.mmd' -print | sort
+          )
+          test "${#diagrams[@]}" -gt 0
+          node _oracle/mmdio/tests/oracle/planning_oracle.mjs "${diagrams[@]}"

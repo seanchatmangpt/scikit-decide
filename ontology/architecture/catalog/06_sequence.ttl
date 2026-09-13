@@ -61,3 +61,4 @@
     arch:relationshipCount 14 ;
     arch:sourceDigest "35d86cc468085afe7b9a2131533eb5465c1d59a97c0781ff78b85440306ab698" ;
     arch:sourcePath "docs/diagrams/30_sequence_promotion_to_runtime.mmd" .
+

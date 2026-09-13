@@ -1,8 +1,14 @@
 from __future__ import annotations
 
+from dataclasses import replace
+
 import pytest
 
-from autofde_lab.autofde.domain_pack import DomainPack, ProjectionContract, SourceProvenance
+from autofde_lab.autofde.domain_pack import (
+    DomainPack,
+    ProjectionContract,
+    SourceProvenance,
+)
 
 
 def projection(role: str) -> ProjectionContract:
@@ -36,20 +42,35 @@ def pack(*, projections: tuple[ProjectionContract, ...] | None = None) -> Domain
         remediation_morphologies=("route-repair",),
         verification_rules=("verify:reachability",),
         projections=projections
-        or tuple(projection(role) for role in ("world", "reasoning", "manufacture", "runtime")),
+        or tuple(
+            projection(role)
+            for role in ("world", "reasoning", "manufacture", "runtime")
+        ),
     )
 
 
-def test_domain_pack_requires_all_four_projection_roles() -> None:
+def test_domain_pack_requires_all_four_projection_roles_and_digest_binds_content() -> (
+    None
+):
     subject = pack()
+    same_subject = pack()
+    changed_subject = replace(subject, ontology_digest="sha256:different-ontology")
+
     assert subject.projection("world").generator_ref == "ggen:world"
     assert subject.projection("runtime").schema_ref == "schema:runtime"
-    assert subject.digest == subject.digest
+    assert subject.digest == same_subject.digest
+    assert subject.digest != changed_subject.digest
 
 
 def test_missing_projection_role_is_refused() -> None:
     with pytest.raises(ValueError, match="DOMAIN_PACK_PROJECTION_CLOSURE_REFUSED"):
-        pack(projections=(projection("world"), projection("reasoning"), projection("manufacture")))
+        pack(
+            projections=(
+                projection("world"),
+                projection("reasoning"),
+                projection("manufacture"),
+            )
+        )
 
 
 def test_duplicate_projection_role_is_refused() -> None:
@@ -60,7 +81,9 @@ def test_duplicate_projection_role_is_refused() -> None:
                 projection("reasoning"),
                 projection("manufacture"),
                 projection("runtime"),
-                ProjectionContract("projection:runtime:2", "runtime", "schema:r2", "ggen:r2"),
+                ProjectionContract(
+                    "projection:runtime:2", "runtime", "schema:r2", "ggen:r2"
+                ),
             )
         )
 
