@@ -1,0 +1,45 @@
+classDiagram
+    class ExperimentConfig {
+      +experiment_id: str
+      +replication_count: int
+    }
+    class GymBasisRef {
+      +gym_id: str
+      +basis_digest: str
+    }
+    class DecisionBasisRef {
+      +decision_id: str
+      +basis_digest: str
+    }
+    class ExperimentBasis {
+      +seed: int
+      +probe_budget: int
+      +time_limit: float
+      +horizon: int
+    }
+    class Perturbation {
+      +perturbation_id: str
+      +kind: str
+    }
+    class ObjectiveWeights {
+      +success: float
+      +cost: float
+      +latency: float
+      +robustness: float
+    }
+    class Trial {
+      +trial_id: str
+      +status: str
+    }
+    class Result {
+      +score: float
+      +standing: str
+    }
+
+    ExperimentConfig --> GymBasisRef
+    ExperimentConfig --> DecisionBasisRef
+    ExperimentConfig --> ExperimentBasis
+    ExperimentConfig o-- "*" Perturbation
+    ExperimentConfig --> ObjectiveWeights
+    ExperimentConfig "1" o-- "*" Trial
+    Trial --> Result

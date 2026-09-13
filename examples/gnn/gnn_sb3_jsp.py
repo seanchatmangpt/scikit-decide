@@ -2,10 +2,10 @@ import numpy as np
 from domains import GraphJspDomain
 from graph_jsp_env.disjunctive_graph_jsp_env import DisjunctiveGraphJspEnv
 
-from skdecide.hub.solver.stable_baselines import StableBaseline
-from skdecide.hub.solver.stable_baselines.gnn import GraphPPO
-from skdecide.hub.solver.stable_baselines.gnn.ppo_mask import MaskableGraphPPO
-from skdecide.utils import rollout
+from autofde_lab.hub.solver.stable_baselines import StableBaseline
+from autofde_lab.hub.solver.stable_baselines.gnn import GraphPPO
+from autofde_lab.hub.solver.stable_baselines.gnn.ppo_mask import MaskableGraphPPO
+from autofde_lab.utils import rollout
 
 jsp = np.array(
     [

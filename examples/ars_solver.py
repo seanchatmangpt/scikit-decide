@@ -1,7 +1,7 @@
 import gymnasium as gym
 
-from skdecide.hub.solver.ars import ars
-from skdecide.utils import load_registered_domain, rollout
+from autofde_lab.hub.solver.ars import ars
+from autofde_lab.utils import load_registered_domain, rollout
 
 if __name__ == "__main__":
     try_domains = [

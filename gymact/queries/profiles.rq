@@ -1,0 +1,13 @@
+PREFIX ga: <https://github.com/seanchatmangpt/autofde-lab/ns/gymact#>
+PREFIX dct: <http://purl.org/dc/terms/>
+SELECT ?profile_slug ?profile_title ?model ?adapter ?operation_code
+WHERE {
+  ?profile a ga:InteractionProfile ;
+           ga:slug ?profile_slug ;
+           dct:title ?profile_title ;
+           ga:interactionModel ?model ;
+           ga:mapsAdapterFamily ?adapter ;
+           ga:supportsOperation ?op .
+  ?op ga:operationCode ?operation_code .
+}
+ORDER BY ?profile_slug ?adapter ?operation_code

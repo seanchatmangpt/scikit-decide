@@ -1,0 +1,15 @@
+{
+  "schema":"urn:autofde:fortune5:risk-register:v1",
+  "risks":[
+    {"id":"R01","risk":"planner or model acquires ambient authority","treatment":["BRCE exclusive DO","capability scoping","authority receipts"],"court":"110-zero-trust-authority"},
+    {"id":"R02","risk":"architecture optimized for one provider and cannot exit","treatment":["provider portfolio","exit testing","portable state contracts"],"court":"100-multicloud-portability"},
+    {"id":"R03","risk":"stale observation makes correct plan wrong after first transition","treatment":["one-edge execution","re-observe","planner reselection"],"court":"30-one-edge-replan"},
+    {"id":"R04","risk":"control/compliance remains prose and drifts from implementation","treatment":["machine projections","SHACL/policy/tests","evidence freshness"],"court":"150-governance-compliance"},
+    {"id":"R05","risk":"resilience claims are untested","treatment":["failure manufacture","game days","recovery verification"],"court":"120-resilience-continuity"},
+    {"id":"R06","risk":"cost or quota failure defeats technically valid architecture","treatment":["FinOps/capacity planning","cost-shock scenarios"],"court":"140-finops-capacity"},
+    {"id":"R07","risk":"ownership boundaries do not match technical dependencies","treatment":["team topology/ownership planning","portfolio dependency graph"],"court":"160-operating-model-team-topology"},
+    {"id":"R08","risk":"AI/agent layer bypasses enterprise controls","treatment":["agent role/tool capability contracts","evaluation/fallback","same BRCE boundary"],"court":"180-ai-agent-governance"},
+    {"id":"R09","risk":"software/vendor supply chain invalidates production standing","treatment":["provenance","substitution","exit","artifact evidence"],"court":"170-vendor-exit-supply-chain"},
+    {"id":"R10","risk":"architecture truth diverges from actual enterprise state","treatment":["digital twin","process conformance","drift planning"],"court":"200-enterprise-digital-twin"}
+  ]
+}

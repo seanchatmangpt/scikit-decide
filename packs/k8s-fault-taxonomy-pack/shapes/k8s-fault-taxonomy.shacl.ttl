@@ -1,0 +1,54 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# Real SHACL constraints for ontology/k8s-fault-taxonomy.ttl. These are the
+# exact invariants scripts/verify_ggen_generation.py already depends on
+# structurally (every axis class carries rdfs:isDefinedBy, every axis
+# individual is real SKOS vocabulary) -- this shape file makes that
+# dependency independently checkable via a standard SHACL validator
+# (pyshacl), not only this repo's bespoke rdflib script.
+
+# The 4 real axis classes, individually targeted -- each must carry
+# rdfs:isDefinedBy pointing at this ontology.
+afl:ComponentIsDefinedByShape a sh:NodeShape ;
+    sh:targetNode afl:Component ;
+    sh:property [ sh:path rdfs:isDefinedBy ; sh:hasValue <urn:autofde-lab:ontology:k8s-fault-taxonomy> ; sh:minCount 1 ] .
+
+afl:FailureModeIsDefinedByShape a sh:NodeShape ;
+    sh:targetNode afl:FailureMode ;
+    sh:property [ sh:path rdfs:isDefinedBy ; sh:hasValue <urn:autofde-lab:ontology:k8s-fault-taxonomy> ; sh:minCount 1 ] .
+
+afl:AppTopologyIsDefinedByShape a sh:NodeShape ;
+    sh:targetNode afl:AppTopology ;
+    sh:property [ sh:path rdfs:isDefinedBy ; sh:hasValue <urn:autofde-lab:ontology:k8s-fault-taxonomy> ; sh:minCount 1 ] .
+
+afl:SeverityIsDefinedByShape a sh:NodeShape ;
+    sh:targetNode afl:Severity ;
+    sh:property [ sh:path rdfs:isDefinedBy ; sh:hasValue <urn:autofde-lab:ontology:k8s-fault-taxonomy> ; sh:minCount 1 ] .
+
+# Every real individual of each axis must carry skos:inScheme and
+# skos:prefLabel -- the exact shape the SPARQL cross-product query and
+# the generated fixture builder both rely on (metric-name/label
+# derivation).
+afl:ComponentIndividualShape a sh:NodeShape ;
+    sh:targetClass afl:Component ;
+    sh:property [ sh:path skos:inScheme ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path skos:prefLabel ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype <http://www.w3.org/2001/XMLSchema#string> ] .
+
+afl:FailureModeIndividualShape a sh:NodeShape ;
+    sh:targetClass afl:FailureMode ;
+    sh:property [ sh:path skos:inScheme ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path skos:prefLabel ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype <http://www.w3.org/2001/XMLSchema#string> ] .
+
+afl:AppTopologyIndividualShape a sh:NodeShape ;
+    sh:targetClass afl:AppTopology ;
+    sh:property [ sh:path skos:inScheme ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path skos:prefLabel ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype <http://www.w3.org/2001/XMLSchema#string> ] .
+
+afl:SeverityIndividualShape a sh:NodeShape ;
+    sh:targetClass afl:Severity ;
+    sh:property [ sh:path skos:inScheme ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path skos:prefLabel ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype <http://www.w3.org/2001/XMLSchema#string> ] .

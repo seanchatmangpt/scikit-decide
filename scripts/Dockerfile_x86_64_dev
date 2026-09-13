@@ -3,6 +3,6 @@ ARG BASE_IMAGE=quay.io/pypa/manylinux2014_x86_64:latest
 FROM $BASE_IMAGE as build
 
 RUN mkdir /scripts
-COPY scripts/build-skdecide_dev.sh /scripts/
+COPY scripts/build-autofde_lab_dev.sh /scripts/
 
-RUN /scripts/build-skdecide_dev.sh
+RUN /scripts/build-autofde_lab_dev.sh

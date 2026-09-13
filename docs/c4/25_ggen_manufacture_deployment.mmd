@@ -1,0 +1,27 @@
+C4Deployment
+title ggen Manufacturing Plane — Deployment
+
+Deployment_Node(authoring, "Authoring / Research Host") {
+  Container(lab, "AutoFDE SOTA Lab", "Python")
+  Container(ontology, "Ontology + SHACL Source", "RDF / TTL")
+}
+Deployment_Node(build, "Build Host / CI") {
+  Container(ggen, "ggen", "Rust")
+  Container(cache, "Build / Generation Cache", "Filesystem / CAS")
+}
+Deployment_Node(repo, "Source Control") {
+  Container(git, "Git Repository", "Git")
+}
+Deployment_Node(registry, "Artifact Registry") {
+  Container(bundle, "Generated Runtime Bundle", "OCI / tar / release artifact")
+}
+Deployment_Node(prod, "Production Host") {
+  Container(runtime, "AutoFDE Runtime", "Rust")
+}
+
+Rel(lab, ontology, "Admits basis changes")
+Rel(ontology, ggen, "Manufacturing input")
+Rel(ggen, cache, "Reads/writes deterministic cache")
+Rel(ggen, git, "Commits generated artifacts + receipts")
+Rel(ggen, bundle, "Publishes digest-pinned bundle")
+Rel(bundle, runtime, "Deploys to")

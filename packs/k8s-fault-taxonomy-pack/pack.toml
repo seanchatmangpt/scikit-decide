@@ -1,0 +1,31 @@
+[pack]
+name = "autofde-lab-k8s-fault-taxonomy-pack"
+version = "0.1.0"
+description = """
+Internal, marketplace-pack-shaped wrapper (pack.toml/README.md/shapes/) around this repo's
+existing ontology/k8s-fault-taxonomy.ttl + queries/k8s-fault/cross_product.rq +
+templates/k8s_fault_universe.py.tera generation (see ggen.toml's "k8s-fault-universes" rule).
+Does not duplicate the ontology/query/template -- those stay at the repo root, unchanged, and
+remain the sole source ggen.toml generates from. This pack adds only what the root-level
+generation lacked relative to real ~/ggen-marketplace convention: a versioned manifest and an
+independently-checkable SHACL shape.
+
+Uses a real, well-known, publicly-documented Kubernetes troubleshooting vocabulary
+(crash-loop/OOM-kill/image-pull/pending/not-ready/RBAC/DNS failure modes), explicitly NOT
+sourced from or claimed to match actual CKA/CKAD certification curriculum text -- see
+ontology/k8s-fault-taxonomy.ttl's own dcterms:description for the full statement.
+
+Internal only -- not published to ~/ggen-marketplace. No standing decision to distribute this
+externally has been made; building this only closes the audit-shape gap named in
+docs/2026-08-11-autonomic-loop-gap-ledger.md.
+"""
+authors = ["AutoFDE Lab"]
+license = "MIT"
+
+[pack.canonical_surfaces]
+ontology = "ontology/k8s-fault-taxonomy.ttl"
+query = "queries/k8s-fault/cross_product.rq"
+template = "templates/k8s_fault_universe.py.tera"
+generated = "src/autofde_lab/reasoning/universes/k8s_fault_universes.py"
+gate = "scripts/verify_ggen_generation.py"
+shape = "packs/k8s-fault-taxonomy-pack/shapes/k8s-fault-taxonomy.shacl.ttl"

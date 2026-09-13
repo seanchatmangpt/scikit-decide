@@ -15,9 +15,9 @@
   <code id="gencode" class="language-python"><template v-if="!isSolver"><span class="token keyword">from</span> enum <span class="token keyword">import</span> Enum</template>
   <span class="token keyword">from</span> typing <span class="token keyword">import</span> <span class="token operator">*</span>
 
-  <span class="token keyword">from</span> skdecide <span class="token keyword">import</span> <span class="token operator">*</span>
-  <span class="token keyword">from</span> skdecide.builders.domain <span class="token keyword">import</span> <span class="token operator">*</span><template v-if="isSolver">
-  <span class="token keyword">from</span> skdecide.builders.solver <span class="token keyword">import</span> <span class="token operator">*</span></template>
+  <span class="token keyword">from</span> autofde_lab <span class="token keyword">import</span> <span class="token operator">*</span>
+  <span class="token keyword">from</span> autofde_lab.builders.domain <span class="token keyword">import</span> <span class="token operator">*</span><template v-if="isSolver">
+  <span class="token keyword">from</span> autofde_lab.builders.solver <span class="token keyword">import</span> <span class="token operator">*</span></template>
 
   <template v-if="!isSolver">
   <span class="token comment"># Example of State type (adapt to your needs)</span>

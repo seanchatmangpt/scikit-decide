@@ -1,0 +1,21 @@
+C4Dynamic
+title AutoFDE SOTA Lab — One SOTA Search Cycle
+
+System_Ext(benchmark, "Public Benchmark")
+System_Ext(gymact, "GymAct")
+System(lab, "AutoFDE SOTA Lab")
+System_Ext(ggen, "ggen")
+System_Ext(frontier, "Published Frontier / Evaluator")
+
+Rel(benchmark, lab, "1. Import benchmark contract")
+Rel(gymact, lab, "2. Supply canonical GymBasis")
+Rel(lab, lab, "3. Enumerate DecisionBasis × ExperimentBasis")
+Rel(lab, lab, "4. Apply constraints, dominance pruning, and experiment design")
+Rel(lab, gymact, "5. Execute selected trials")
+Rel(gymact, lab, "6. Return verified evidence and failures")
+Rel(lab, lab, "7. Cluster failures and admit shared repair")
+Rel(lab, ggen, "8. Regenerate affected specializations")
+Rel(ggen, lab, "9. Return manufactured candidates")
+Rel(lab, gymact, "10. Re-evaluate repaired candidates")
+Rel(lab, frontier, "11. Submit/compare benchmark score")
+Rel(frontier, lab, "12. Return SOTA distance / standing")

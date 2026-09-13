@@ -1,0 +1,165 @@
+name: SREGym kind live signature trial
+
+on:
+  workflow_call:
+    inputs:
+      problem:
+        required: true
+        type: string
+      model:
+        required: true
+        type: string
+      noise:
+        required: true
+        type: boolean
+    secrets:
+      GROQ_API_KEY:
+        required: true
+  workflow_dispatch:
+    inputs:
+      problem:
+        description: "Pinned SREGym registry problem id"
+        required: true
+        default: "k8s_target_port-misconfig"
+      model:
+        description: "LiteLLM/DSPy model id"
+        required: true
+        default: "groq/openai/gpt-oss-120b"
+      noise:
+        description: "Enable SREGym noise"
+        type: boolean
+        required: true
+        default: false
+  pull_request:
+    types: [synchronize]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sregym-live-${{ github.event.pull_request.head.ref || github.ref }}-${{ inputs.problem || 'k8s_target_port-misconfig' }}
+  cancel-in-progress: true
+
+jobs:
+  live-kind:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'workflow_call' ||
+      (github.event.pull_request.head.repo.full_name == github.repository &&
+       contains(github.event.pull_request.body || '', '/run-sregym-live'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      SREGYM_SHA: ba07faf1a322f9b6d4a279643bb796aa2f36f64b
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      AUTOFDE_MAX_DISCRIMINATION_ROUNDS: "8"
+      AUTOFDE_MAX_PROCESS_CANDIDATE_ATTEMPTS: "3"
+      PROBLEM_ID: ${{ inputs.problem || 'k8s_target_port-misconfig' }}
+      MODEL_ID: ${{ inputs.model || 'groq/openai/gpt-oss-120b' }}
+      NOISE_ENABLED: ${{ inputs.noise || 'false' }}
+      SIGNATURE_REVISION: SRE-SIG-003
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: "3.12"
+      - name: Bind exact AutoFDE subject
+        run: |
+          expected="${{ github.event.pull_request.head.sha || github.sha }}"
+          observed="$(git rev-parse HEAD)"
+          test "$observed" = "$expected"
+          echo "autofde_head=$observed" >> "$GITHUB_STEP_SUMMARY"
+          echo "AUTOFDE_HEAD=$observed" >> "$GITHUB_ENV"
+      - name: Refuse absent Groq authority
+        run: test -n "$GROQ_API_KEY"
+      - name: Install uv
+        run: python -m pip install "uv>=0.8,<1"
+      - name: Materialize exact SREGym subject
+        run: |
+          git clone https://github.com/SREGym/SREGym.git sregym
+          git -C sregym checkout --detach "$SREGYM_SHA"
+          test "$(git -C sregym rev-parse HEAD)" = "$SREGYM_SHA"
+          git -C sregym submodule update --init --recursive
+          echo "sregym_head=$(git -C sregym rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
+      - name: Install SREGym and signature-agent dependencies
+        run: |
+          cd sregym
+          uv sync
+          uv pip install "dspy==3.1.3"
+      - name: Install signature-driven agent into exact SREGym checkout
+        run: |
+          uv run --project sregym python scripts/sregym/install_autofde_sota.py --sregym-dir sregym
+          grep -n "name: autofde-sota" sregym/agents.yaml
+      - name: Import exact agent capsule before cluster/model spend
+        run: |
+          cd sregym
+          uv run python -c "import clients.autofde.driver; from clients.autofde.autofde_sota import SIGNATURE_REVISION; assert SIGNATURE_REVISION == 'SRE-SIG-003'; print('AUTOFDE_SREGYM_AGENT_IMPORT=ALIVE', SIGNATURE_REVISION)"
+      - name: Install kind v0.27.0
+        run: |
+          curl -fsSLo /tmp/kind https://kind.sigs.k8s.io/dl/v0.27.0/kind-linux-amd64
+          chmod +x /tmp/kind
+          sudo mv /tmp/kind /usr/local/bin/kind
+          kind version
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+      - name: Qualify Linux host for SREGym kind
+        run: |
+          sudo sysctl -w fs.inotify.max_user_instances=1024
+          sudo sysctl -w fs.inotify.max_user_watches=1048576
+          sudo mkdir -p /run/udev
+          docker pull jacksonarthurclark/aiopslab-kind-x86:latest
+          kubectl version --client
+          helm version
+      - name: Build disposable kind cluster using upstream recipe
+        run: |
+          cd sregym
+          bash kind/setup_kind_cluster.sh x86
+      - name: Execute one bounded live SREGym episode
+        shell: bash
+        run: |
+          cd sregym
+          args=(python main.py --agent autofde-sota --model "$MODEL_ID" --judge-model "$MODEL_ID" --problem "$PROBLEM_ID" --n-attempts 1 --agent-timeout 1200)
+          if [[ "$NOISE_ENABLED" == "true" ]]; then args+=(--noise); fi
+          uv run "${args[@]}"
+          result_csv="$(find results -type f -name 'autofde-sota_ALL_results.csv' -print -quit)"
+          if [[ -z "$result_csv" ]]; then
+            echo "::error::SREGym exited without producing an autofde-sota benchmark result"
+            exit 1
+          fi
+          echo "result_csv=$result_csv" >> "$GITHUB_STEP_SUMMARY"
+          cat "$result_csv"
+          mkdir -p ../sregym-evidence
+          python ../scripts/sregym/summarize_result.py "$result_csv" --output "../sregym-evidence/${PROBLEM_ID}.json" --autofde-head "$AUTOFDE_HEAD" --sregym-head "$SREGYM_SHA" --problem-id "$PROBLEM_ID" --model-id "$MODEL_ID" --signature-revision "$SIGNATURE_REVISION"
+          cp "$result_csv" "../sregym-evidence/${PROBLEM_ID}.csv"
+          receipt="$(find . -name 'autofde-sota-receipt.json' -print -quit)"
+          if [[ -n "$receipt" ]]; then cp "$receipt" "../sregym-evidence/${PROBLEM_ID}.receipt.json"; fi
+      - name: Surface exact episode evidence
+        if: always()
+        run: |
+          echo "problem=$PROBLEM_ID" >> "$GITHUB_STEP_SUMMARY"
+          echo "model=$MODEL_ID" >> "$GITHUB_STEP_SUMMARY"
+          find sregym/results -maxdepth 6 -type f -print 2>/dev/null | sort | tail -100 || true
+          find sregym -name 'autofde-sota-receipt.json' -print -exec cat {} \; 2>/dev/null || true
+          cat "sregym-evidence/${PROBLEM_ID}.json" 2>/dev/null || true
+      - name: Export kind diagnostics on failure
+        if: failure()
+        run: |
+          kubectl get nodes -o wide || true
+          kubectl get pods -A -o wide || true
+          kubectl get events -A --sort-by='.lastTimestamp' | tail -100 || true
+          kind export logs /tmp/kind-logs || true
+      - name: Upload live evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sregym-autofde-${{ inputs.problem || 'k8s_target_port-misconfig' }}
+          path: |
+            sregym-evidence/
+            sregym/results/
+            sregym/**/autofde-sota-receipt.json
+            /tmp/kind-logs/
+          if-no-files-found: ignore

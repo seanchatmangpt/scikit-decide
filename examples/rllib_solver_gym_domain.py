@@ -5,9 +5,9 @@
 import gymnasium as gym
 from ray.rllib.algorithms.ppo import PPO
 
-from skdecide.hub.domain.gym import GymDomain
-from skdecide.hub.solver.ray_rllib import RayRLlib
-from skdecide.utils import rollout
+from autofde_lab.hub.domain.gym import GymDomain
+from autofde_lab.hub.solver.ray_rllib import RayRLlib
+from autofde_lab.utils import rollout
 
 # This example shows how to solve the cart pole OpenAI Gym domain using RLlib's PPO
 

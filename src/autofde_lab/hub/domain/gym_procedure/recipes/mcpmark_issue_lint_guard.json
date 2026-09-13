@@ -1,0 +1,41 @@
+{
+  "gym": "mcpmark",
+  "task": "github/easy/mcpmark-cicd/issue_lint_guard",
+  "source_ref": "vendor/gyms/mcpmark/tasks/github/easy/mcpmark-cicd/issue_lint_guard/description.md",
+  "initial_facts": [],
+  "goal_facts": ["workflow_run_succeeded"],
+  "steps": [
+    {
+      "id": "create_branch",
+      "description": "Create a branch called issue-lint-workflow from main in mcpmark-eval/mcpmark-cicd.",
+      "preconditions": [],
+      "establishes": ["branch_created"],
+      "cost": 1.0,
+      "source": "description.md Requirements[1]"
+    },
+    {
+      "id": "add_workflow_file",
+      "description": "Add .github/workflows/issue-lint.yml on the branch: workflow name 'Issue Lint Guard', trigger 'issues' with types:[opened] only, single job 'lint' on ubuntu-latest using Node.js 18 via actions/setup-node, steps in order actions/checkout -> npm ci -> npm run lint.",
+      "preconditions": ["branch_created"],
+      "establishes": ["workflow_file_added"],
+      "cost": 1.0,
+      "source": "description.md Requirements[2]; verify.py required_snippets + step-ordering check (checkout < setup-node < npm ci < npm run lint)"
+    },
+    {
+      "id": "open_pr_and_merge",
+      "description": "Open a pull request titled 'Add issue lint workflow' and get it merged so the workflow file exists on main.",
+      "preconditions": ["workflow_file_added"],
+      "establishes": ["workflow_merged_to_main"],
+      "cost": 1.0,
+      "source": "description.md Requirements[3]; verify.py _download_file(..., ref=main)"
+    },
+    {
+      "id": "trigger_issue_and_wait_for_success",
+      "description": "After the merge, open a new issue titled 'Lint workflow check' to trigger the workflow via the issues:opened event, and wait until the matching Issue Lint Guard run finishes with conclusion 'success'.",
+      "preconditions": ["workflow_merged_to_main"],
+      "establishes": ["workflow_run_succeeded"],
+      "cost": 1.0,
+      "source": "description.md Requirements[4]; verify.py _wait_for_tracking_issue_run (polls workflow runs for display_title=='Lint workflow check', requires status=='completed' and conclusion=='success')"
+    }
+  ]
+}

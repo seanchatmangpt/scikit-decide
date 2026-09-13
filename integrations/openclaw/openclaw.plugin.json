@@ -1,0 +1,80 @@
+{
+  "id": "scikit-decide",
+  "name": "scikit-decide",
+  "description": "Registered planning, scheduling, and reinforcement-learning capabilities from scikit-decide",
+  "version": "0.1.0",
+  "activation": {
+    "onStartup": true
+  },
+  "contracts": {
+    "tools": [
+      "skdecide_catalog",
+      "skdecide_describe",
+      "skdecide_match",
+      "skdecide_run"
+    ]
+  },
+  "toolMetadata": {
+    "skdecide_catalog": {
+      "replaySafe": true
+    },
+    "skdecide_describe": {
+      "replaySafe": true
+    },
+    "skdecide_match": {
+      "optional": true,
+      "replaySafe": false
+    },
+    "skdecide_run": {
+      "optional": true,
+      "replaySafe": false
+    }
+  },
+  "skills": [
+    "./skills"
+  ],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "python": {
+        "type": "string",
+        "minLength": 1,
+        "default": "python",
+        "description": "Python executable."
+      },
+      "cwd": {
+        "type": "string",
+        "description": "scikit-decide checkout or install directory."
+      },
+      "timeoutMs": {
+        "type": "integer",
+        "minimum": 1000,
+        "maximum": 600000,
+        "default": 120000,
+        "description": "Maximum wall-clock time for one bridge process."
+      },
+      "maxOutputBytes": {
+        "type": "integer",
+        "minimum": 1024,
+        "maximum": 16777216,
+        "default": 4194304,
+        "description": "Combined stdout/stderr capture bound."
+      }
+    }
+  },
+  "uiHints": {
+    "python": {
+      "label": "Python executable"
+    },
+    "cwd": {
+      "label": "scikit-decide working directory"
+    },
+    "timeoutMs": {
+      "label": "Tool timeout (milliseconds)"
+    },
+    "maxOutputBytes": {
+      "label": "Maximum bridge output bytes"
+    }
+  }
+}

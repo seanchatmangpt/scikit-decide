@@ -1,0 +1,402 @@
+[
+  {
+    "planner": "AOstar",
+    "outcome": "CRASHED",
+    "plan": [],
+    "duration_s": 0.02944845810998231,
+    "detail": "planner process exited with code 1 without returning an attempt"
+  },
+  {
+    "planner": "Astar",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement"
+    ],
+    "duration_s": 0.015329374931752682,
+    "detail": "proposed inapplicable action 'decrement' at step 1; applicable=['increment']"
+  },
+  {
+    "planner": "pLRTAstar",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.05131908308248967,
+    "detail": "proposed inapplicable action None at step 0; applicable=['decrement', 'increment']"
+  },
+  {
+    "planner": "LRTAstar",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.016700625070370734,
+    "detail": "proposed inapplicable action 'increment' at step 2; applicable=[]"
+  },
+  {
+    "planner": "MCTS",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014814750058576465,
+    "detail": "RuntimeError: Cannot sample an empty space."
+  },
+  {
+    "planner": "UCT",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014754000003449619,
+    "detail": "RuntimeError: Cannot sample an empty space."
+  },
+  {
+    "planner": "BFWS",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.01496441604103893,
+    "detail": "proposed inapplicable action 'increment' at step 1; applicable=['decrement']"
+  },
+  {
+    "planner": "IW",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.7780567919835448,
+    "detail": "proposed inapplicable action 'increment' at step 1; applicable=['decrement']"
+  },
+  {
+    "planner": "RIW",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.016933541977778077,
+    "detail": "RuntimeError: In sequential mode, nodes labelled as unsolved must have unsolved children."
+  },
+  {
+    "planner": "LRTDP",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.014825582969933748,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "ILAOstar",
+    "outcome": "CRASHED",
+    "plan": [],
+    "duration_s": 0.024450624943710864,
+    "detail": "planner process exited with code 1 without returning an attempt"
+  },
+  {
+    "planner": "pAstar",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01414816698525101,
+    "detail": "KeyError: State(facts=frozenset({'counter=0', 'containerized=True', 'solved=False', 'steps=0', 'target=3'}))"
+  },
+  {
+    "planner": "MARTDP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.012774375034496188,
+    "detail": "ValueError: SKDECIDE exception: MA-RTDP algorithm needs python domain for implementing get_agent_applicable_actions()"
+  },
+  {
+    "planner": "MAHD",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.010740165947936475,
+    "detail": "TypeError: MAHD.__init__() got an unexpected keyword argument 'domain_factory'"
+  },
+  {
+    "planner": "MaxentIRL",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.012913665967062116,
+    "detail": "AttributeError: 'Discrete' object has no attribute 'low'"
+  },
+  {
+    "planner": "POMCP",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment",
+      "decrement"
+    ],
+    "duration_s": 0.05487179209012538,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "pPOMCP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013310750015079975,
+    "detail": "AttributeError: 'pPOMCP' object has no attribute '_belief'"
+  },
+  {
+    "planner": "RayRLlib",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.010808290913701057,
+    "detail": "TypeError: RayRLlib.__init__() missing 2 required positional arguments: 'algo_class' and 'train_iterations'"
+  },
+  {
+    "planner": "SimpleGreedy",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01326200005132705,
+    "detail": "ValueError: max() iterable argument is empty"
+  },
+  {
+    "planner": "StableBaseline",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01090599992312491,
+    "detail": "TypeError: StableBaseline.__init__() missing 2 required positional arguments: 'algo_class' and 'baselines_policy'"
+  },
+  {
+    "planner": "UPSolver",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.010815749992616475,
+    "detail": "TypeError: UPSolver.__init__() missing 1 required positional argument: 'operation_mode'"
+  },
+  {
+    "planner": "VI",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.015203208895400167,
+    "detail": "proposed inapplicable action 'increment' at step 2; applicable=[]"
+  },
+  {
+    "planner": "PI",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.015030916896648705,
+    "detail": "proposed inapplicable action 'increment' at step 2; applicable=[]"
+  },
+  {
+    "planner": "LDFS",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 25.01159283402376,
+    "detail": "killed after 20.0s wall clock (native solve did not return)"
+  },
+  {
+    "planner": "IDAstar",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 25.01479283394292,
+    "detail": "killed after 20.0s wall clock (native solve did not return)"
+  },
+  {
+    "planner": "RTDPBel",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 2.3763513329904526,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "SSiPP",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.0176987909944728,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "FRET",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.015577082987874746,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "MDPLP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01488833304028958,
+    "detail": "IndexError: map::at:  key not found"
+  },
+  {
+    "planner": "SSPLP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015350666013546288,
+    "detail": "IndexError: map::at:  key not found"
+  },
+  {
+    "planner": "IDual",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment",
+      "decrement"
+    ],
+    "duration_s": 0.015485582989640534,
+    "detail": "proposed inapplicable action 'increment' at step 2; applicable=[]"
+  },
+  {
+    "planner": "GPCI",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.014870874932967126,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "SARSOP",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.015664416016079485,
+    "detail": "proposed inapplicable action 'increment' at step 1; applicable=['decrement']"
+  },
+  {
+    "planner": "DESPOT",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.0940582500770688,
+    "detail": "proposed inapplicable action 'increment' at step 2; applicable=[]"
+  },
+  {
+    "planner": "EHC",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.016234041890129447,
+    "detail": "RuntimeError: SKDECIDE exception: EHC failed \u2014 no improving state found"
+  },
+  {
+    "planner": "FF",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013249624986201525,
+    "detail": "TypeError: FF solver requires a PDDLDomain or PPDDLDomain"
+  },
+  {
+    "planner": "FFReplan",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01582429197151214,
+    "detail": "TypeError: FFReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLReplan",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01552295801229775,
+    "detail": "TypeError: PPDDLReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "FFDetHindsight",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014373165904544294,
+    "detail": "TypeError: FFDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLDetHindsight",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014050040976144373,
+    "detail": "TypeError: PPDDLDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPReplan",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement"
+    ],
+    "duration_s": 0.015576208010315895,
+    "detail": "proposed inapplicable action 'decrement' at step 1; applicable=['increment']"
+  },
+  {
+    "planner": "SSPDetHindsight",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.019953083945438266,
+    "detail": "proposed inapplicable action 'increment' at step 2; applicable=[]"
+  },
+  {
+    "planner": "RFF",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013819208019413054,
+    "detail": "TypeError: RFF solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLPlanMerger",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013561666943132877,
+    "detail": "TypeError: PPDDLPlanMerger solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPPlanMerger",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment",
+      "decrement"
+    ],
+    "duration_s": 0.09908479102887213,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "Witness",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement"
+    ],
+    "duration_s": 0.029719082987867296,
+    "detail": "proposed inapplicable action 'decrement' at step 1; applicable=['increment']"
+  },
+  {
+    "planner": "HSVI",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement"
+    ],
+    "duration_s": 0.01729870808776468,
+    "detail": "proposed inapplicable action 'decrement' at step 1; applicable=['increment']"
+  },
+  {
+    "planner": "GoalHSVI",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement"
+    ],
+    "duration_s": 0.017451666994020343,
+    "detail": "proposed inapplicable action 'decrement' at step 1; applicable=['increment']"
+  },
+  {
+    "planner": "DSPyPolicy",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 1.7001072498969734,
+    "detail": "proposed inapplicable action 'increment' at step 1; applicable=['decrement']"
+  }
+]

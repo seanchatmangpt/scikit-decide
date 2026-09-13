@@ -1,0 +1,174 @@
+name: OpenClaw interoperability
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "src/autofde_lab/openclaw_*.py"
+      - "tests/test_openclaw_bridge.py"
+      - "integrations/openclaw/**"
+      - ".github/workflows/openclaw-crown.yml"
+  push:
+    branches:
+      - master
+      - feat/openclaw-ecosystem-interop-crown
+    paths:
+      - "src/autofde_lab/openclaw_*.py"
+      - "tests/test_openclaw_bridge.py"
+      - "integrations/openclaw/**"
+      - ".github/workflows/openclaw-crown.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  exact-host:
+    runs-on: ubuntu-slim
+    timeout-minutes: 15
+    env:
+      OPENCLAW_STATE_DIR: ${{ github.workspace }}/.openclaw-ci/state
+      OPENCLAW_CONFIG_PATH: ${{ github.workspace }}/.openclaw-ci/state/openclaw.json
+      OPENCLAW_TEST_FAST: "1"
+      PYTHONPATH: ${{ github.workspace }}/src
+      OPENCLAW_NATIVE_TOOL_RECEIPT: ${{ github.workspace }}/.openclaw-ci/native-tool.json
+    steps:
+      - uses: actions/checkout@v4
+      - name: Admit exact subject
+        run: test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.22.3"
+
+      - name: Verify bounded Python bridge
+        run: |
+          python -m pip install "pytest>=6.2.2,<8.4" "numpy>=2.0"
+          python -m py_compile src/autofde_lab/openclaw_runtime.py src/autofde_lab/openclaw_bridge.py
+          python -m pytest tests/test_openclaw_bridge.py -q
+
+      - name: Install exact OpenClaw toolchain
+        working-directory: integrations/openclaw
+        run: npm install --ignore-scripts --no-audit --no-fund
+
+      - name: Build, generate, validate, and execute native tool
+        working-directory: integrations/openclaw
+        run: |
+          npm run build
+          npx openclaw plugins build --root . --entry ./dist/index.js
+          git diff --exit-code -- package.json openclaw.plugin.json dist/index.js
+          npx openclaw plugins validate --root . --entry ./dist/index.js
+          npm test
+          test -s "$OPENCLAW_NATIVE_TOOL_RECEIPT"
+          npm pack --dry-run --json > "$RUNNER_TEMP/openclaw-package.json"
+
+      - name: Prove linked plugin and bundled skill in exact host
+        working-directory: integrations/openclaw
+        run: |
+          mkdir -p "$OPENCLAW_STATE_DIR"
+          npx openclaw plugins install --link "$GITHUB_WORKSPACE/integrations/openclaw"
+          npx openclaw plugins enable scikit-decide
+          npx openclaw plugins inspect scikit-decide --runtime --json > "$RUNNER_TEMP/openclaw-plugin.json"
+          npx openclaw skills info scikit-decide --json > "$RUNNER_TEMP/openclaw-skill.json"
+
+      - name: Prove stdio MCP through OpenClaw client
+        run: |
+          npx --prefix integrations/openclaw openclaw mcp add scikit-decide \
+            --command python \
+            --arg=-m \
+            --arg=autofde_lab.openclaw_bridge \
+            --arg=mcp \
+            --cwd "$GITHUB_WORKSPACE" \
+            --env "PYTHONPATH=$GITHUB_WORKSPACE/src" \
+            --no-probe
+          npx --prefix integrations/openclaw openclaw mcp doctor scikit-decide --probe --json \
+            > "$RUNNER_TEMP/openclaw-mcp.json"
+
+      - name: Manufacture exact-head receipt
+        env:
+          OPENCLAW_VERSION: "2026.7.1-2"
+        run: |
+          npx --prefix integrations/openclaw openclaw --version > "$RUNNER_TEMP/openclaw-version.txt"
+          python - <<'PY'
+          import datetime as dt
+          import hashlib
+          import json
+          import os
+          import pathlib
+          import platform
+          import subprocess
+
+          root = pathlib.Path(os.environ["RUNNER_TEMP"])
+          observed = {
+              "native_tool": pathlib.Path(os.environ["OPENCLAW_NATIVE_TOOL_RECEIPT"]),
+              "plugin_runtime": root / "openclaw-plugin.json",
+              "skill": root / "openclaw-skill.json",
+              "mcp": root / "openclaw-mcp.json",
+              "package": root / "openclaw-package.json",
+          }
+          payloads = {name: json.loads(path.read_text()) for name, path in observed.items()}
+          rendered = {name: json.dumps(payload, sort_keys=True) for name, payload in payloads.items()}
+          expected_tools = {
+              "skdecide_catalog",
+              "skdecide_describe",
+              "skdecide_match",
+              "skdecide_run",
+          }
+
+          native = payloads["native_tool"]
+          assert native["status"] == "REFUSED:INVALID_ARGUMENT"
+          assert native["error"]["code"] == "INVALID_KIND"
+          assert native["receipt"]["status"] == native["status"]
+          for field in ("input_sha256", "output_sha256"):
+              value = native["receipt"][field]
+              assert len(value) == 64 and all(c in "0123456789abcdef" for c in value)
+
+          for tool in expected_tools:
+              assert tool in rendered["plugin_runtime"], f"plugin runtime omitted {tool}"
+              assert tool in rendered["mcp"], f"MCP probe omitted {tool}"
+          assert "scikit-decide" in rendered["skill"]
+          assert "chatman-ai-openclaw-scikit-decide-0.1.0.tgz" in rendered["package"]
+
+          hashes = {
+              name: hashlib.sha256(path.read_bytes()).hexdigest()
+              for name, path in observed.items()
+          }
+          actual_head = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+          assert actual_head == os.environ["GITHUB_SHA"]
+          receipt = {
+              "status": "ALIVE",
+              "timestamp": dt.datetime.now(dt.timezone.utc).isoformat(),
+              "subject": {
+                  "repository": os.environ["GITHUB_REPOSITORY"],
+                  "head_sha": actual_head,
+                  "openclaw": os.environ["OPENCLAW_VERSION"],
+                  "openclaw_reported": (root / "openclaw-version.txt").read_text().strip(),
+                  "node": subprocess.check_output(["node", "--version"], text=True).strip(),
+                  "python": platform.python_version(),
+              },
+              "executed": {
+                  "python_bridge": True,
+                  "openclaw_metadata_generation": True,
+                  "openclaw_metadata_validation": True,
+                  "native_tool_bridge": True,
+                  "linked_plugin_runtime": True,
+                  "bundled_skill_discovery": True,
+                  "mcp_probe": True,
+                  "npm_pack": True,
+              },
+              "hashes": hashes,
+              "observed": payloads,
+          }
+          output = pathlib.Path("openclaw-interop-receipt.json")
+          output.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
+          print(output.read_text())
+          PY
+
+      - name: Upload replay receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: openclaw-interop-receipt-${{ github.sha }}
+          path: openclaw-interop-receipt.json
+          if-no-files-found: error
+          retention-days: 30

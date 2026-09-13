@@ -1,6 +1,6 @@
-from skdecide.hub.domain.mastermind import MasterMind
-from skdecide.hub.solver.pomcp import pPOMCP
-from skdecide.utils import rollout
+from autofde_lab.hub.domain.mastermind import MasterMind
+from autofde_lab.hub.solver.pomcp import pPOMCP
+from autofde_lab.utils import rollout
 
 
 def test_pomcp():

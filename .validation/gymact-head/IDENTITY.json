@@ -1,0 +1,16 @@
+{
+  "repository": "seanchatmangpt/gymact",
+  "base_sha": "c839d76125bde97b9eb3dfd82f0e08a1b9dcdf96",
+  "head_sha": "d74587d9161fd50378751708553b8b1d6370add7",
+  "version": "26.8.7",
+  "changed_runtime_blobs": {
+    "src/gymact/discovery.py": "aca403246dcd80577833ab9586ca39fccf919d37",
+    "src/gymact/gyms/opaque_procedure.py": "850deff4111ad8d6e0c6d1122f487f9e35dbbdc0"
+  },
+  "comparison": {
+    "ahead_by": 1,
+    "behind_by": 0,
+    "runtime_files_added": 2,
+    "test_files_added": 1
+  }
+}

@@ -4,16 +4,16 @@ from collections.abc import Callable
 import gymnasium as gym
 import numpy as np
 
-from skdecide.hub.domain.gym import (
+from autofde_lab.hub.domain.gym import (
     GymDiscreteActionDomain,
     GymDomain,
     GymPlanningDomain,
     GymWidthDomain,
 )
-from skdecide.hub.domain.gym.gym import AsGymnasiumEnv
-from skdecide.hub.domain.maze.maze import Maze
-from skdecide.hub.solver.cgp import CGP
-from skdecide.hub.space.gym.gym import ListSpace
+from autofde_lab.hub.domain.gym.gym import AsGymnasiumEnv
+from autofde_lab.hub.domain.maze.maze import Maze
+from autofde_lab.hub.solver.cgp import CGP
+from autofde_lab.hub.space.gym.gym import ListSpace
 
 
 class D(GymPlanningDomain, GymWidthDomain, GymDiscreteActionDomain):
@@ -99,10 +99,18 @@ def test_gymdomain4iw():
 def test_asgymnasiumenv():
     domain = Maze()
     domain.reset()
+    # AsGymnasiumEnv is implemented directly against gymnasium's modern
+    # Env contract (not via the now-removed
+    # gymnasium.wrappers.compatibility.EnvCompatibility), so it works the
+    # same real way on both gymnasium<1 and gymnasium>=1 -- verified real
+    # on the actually-installed gymnasium version, whichever it is.
     env = AsGymnasiumEnv(domain=domain, render_mode="human")
-    env.reset()
-    env.step(env.action_space.sample())
+    observation, info = env.reset()
+    observation, reward, terminated, truncated, info = env.step(
+        env.action_space.sample()
+    )
     env.render()
+    assert env.unwrapped is env
     env.close()
 
 
@@ -320,7 +328,11 @@ def test_discretisation():
             status=gym.spaces.MultiBinary(n),
         )
     )
-    assert isinstance(gym_action_space.spaces, OrderedDict)
+    # gymnasium>=1 always normalizes `Dict.spaces` to a plain `dict` (insertion-ordered
+    # since Python 3.7, but no longer specifically an `OrderedDict` instance) -- see
+    # gymnasium.spaces.Dict.__init__, which does `dict(spaces.items())` even when an
+    # OrderedDict is passed in. Assert the real, current contract instead.
+    assert isinstance(gym_action_space.spaces, dict)
     keys = list(gym_action_space.spaces.keys())
     gym_env.action_space = gym_action_space
     an_original_action = gym_action_space.sample()

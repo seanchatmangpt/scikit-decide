@@ -1,0 +1,26 @@
+{
+  "gym": "itbench",
+  "task": "sre/scenario_1_opentelemetry_demo_flood_homepage",
+  "source_ref": "vendor/gyms/itbench/scenarios/sre/library/indexes/scenarios/1.json (solutions[0][0].steps)",
+  "initial_facts": ["flag_loadGeneratorFloodHomepage_on"],
+  "goal_facts": ["deployments_restarted"],
+  "steps": [
+    {
+      "id": "disable_feature_flag",
+      "description": "kubectl -n otel-demo edit configmap flagd-config -- disable the feature flag (loadGeneratorFloodHomepage) by manually editing the contents of the ConfigMap.",
+      "preconditions": ["flag_loadGeneratorFloodHomepage_on"],
+      "establishes": ["feature_flag_disabled"],
+      "removes": ["flag_loadGeneratorFloodHomepage_on"],
+      "cost": 1.0,
+      "source": "scenarios/1.json solutions[0][0].steps[0]"
+    },
+    {
+      "id": "restart_deployments",
+      "description": "kubectl -n otel-demo rollout restart deployment -- restart all of the Deployment workloads.",
+      "preconditions": ["feature_flag_disabled"],
+      "establishes": ["deployments_restarted"],
+      "cost": 1.0,
+      "source": "scenarios/1.json solutions[0][0].steps[1]"
+    }
+  ]
+}

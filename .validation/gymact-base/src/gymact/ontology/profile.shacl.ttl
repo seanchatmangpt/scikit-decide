@@ -1,0 +1,52 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix prof: <http://www.w3.org/ns/dx/prof/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:gymact:shape:profile>
+    a sh:NodeShape ;
+    sh:targetClass prof:Profile ;
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+        sh:maxCount 1
+    ] ;
+    sh:property [
+        sh:path dct:description ;
+        sh:minCount 1
+    ] ;
+    sh:property [
+        sh:path prof:isProfileOf ;
+        sh:minCount 8
+    ] ;
+    sh:property [
+        sh:path prof:hasResource ;
+        sh:minCount 1
+    ] .
+
+<urn:gymact:shape:resource-descriptor>
+    a sh:NodeShape ;
+    sh:targetClass prof:ResourceDescriptor ;
+    sh:property [
+        sh:path dct:format ;
+        sh:minCount 1
+    ] .
+
+<urn:gymact:shape:capability>
+    a sh:NodeShape ;
+    sh:targetClass sosa:Procedure ;
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "A GymAct capability represented as sosa:Procedure must declare exactly one string dct:title."
+    ] ;
+    sh:property [
+        sh:path dct:type ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( <urn:gymact:consequence:read> <urn:gymact:consequence:do> ) ;
+        sh:message "A GymAct capability must classify consequence as READ or DO using the profile SKOS concepts."
+    ] .

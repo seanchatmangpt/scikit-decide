@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from skdecide import Space
+from autofde_lab import Space
 
 
 # EVOLVE-BLOCK-START

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+slug="${1:?usage: sync-gyms.sh <vendor-slug>}"
+case "$slug" in
+{%- for row in sparql_results %}
+  {{ row.slug }})
+    git -c submodule.forwardbench-{{ row.slug }}.update=checkout submodule update --init --depth 1 -- {{ row["path"] | default(value="") | json_encode() }}
+    ;;
+{%- endfor %}
+  *) echo "REFUSED:UNKNOWN_FORWARD_BENCH_VENDOR:$slug" >&2; exit 64 ;;
+esac

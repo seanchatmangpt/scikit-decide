@@ -4,14 +4,14 @@ import numpy as np
 import pytest
 import torch as th
 
-from skdecide import rollout
-from skdecide.hub.solver.stable_baselines import StableBaseline
-from skdecide.hub.solver.stable_baselines.autoregressive.ppo.autoregressive_ppo import (
+from autofde_lab import rollout
+from autofde_lab.hub.solver.stable_baselines import StableBaseline
+from autofde_lab.hub.solver.stable_baselines.autoregressive.ppo.autoregressive_ppo import (
     AutoregressiveGraphPPO,
     AutoregressivePPO,
 )
-from skdecide.hub.solver.utils.gnn.torch_layers import Graph2NodeLayer
-from skdecide.hub.solver.utils.torch.utils import extract_module_parameters_values
+from autofde_lab.hub.solver.utils.gnn.torch_layers import Graph2NodeLayer
+from autofde_lab.hub.solver.utils.torch.utils import extract_module_parameters_values
 
 
 def test_autoregressive_ppo_w_gym_env(graph_walk_env):

@@ -37,9 +37,9 @@ def try_importing_all_submodules(package):
 
 
 def test_importing_all_submodules():
-    import skdecide
+    import autofde_lab
 
-    try_importing_all_submodules(skdecide)
+    try_importing_all_submodules(autofde_lab)
 
 
 if __name__ == "__main__":

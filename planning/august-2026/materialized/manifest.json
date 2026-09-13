@@ -1,0 +1,34 @@
+{
+  "authority": {
+    "do_authority": false,
+    "mode": "SIMULATION_ONLY"
+  },
+  "complete_history_observed": false,
+  "corpus_digest": "b1ef7e6152dce7c3a574b2f22a4995d8d2c1b3686f64d71bc098b1fefcdc8a31",
+  "episode_count": 1,
+  "observed_commit_count": 8,
+  "period": "2026-08",
+  "plan_digests": [
+    "63af20a55b0d260c3d3b4064182913aeb2082a5e3d95acbc16464177163f04a2"
+  ],
+  "reported_commit_count": 24340,
+  "repositories": [
+    "seanchatmangpt/beam4pm"
+  ],
+  "schema": "urn:autofde-lab:software-manufacturing-corpus:1",
+  "source_digest": "5ee016edf29b158a84bde3d98706886c360bceeb9ef2f6b1fc5d079637f0494d",
+  "source_event_count": 14,
+  "surfaces": {
+    "ci_cd": 1,
+    "cloud": 1,
+    "container": 1,
+    "docs": 1,
+    "github": 14,
+    "iac": 1,
+    "observability": 1,
+    "release": 1,
+    "security": 1,
+    "source": 2,
+    "tests": 1
+  }
+}

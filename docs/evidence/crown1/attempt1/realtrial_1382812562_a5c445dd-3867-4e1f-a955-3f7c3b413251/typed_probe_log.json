@@ -1,0 +1,183 @@
+{
+  "probe_log": [
+    {
+      "action": "pick_key[key=0]",
+      "applicable": true,
+      "observed_pre_facts": [
+        "dead_end=False",
+        "depth=2",
+        "final_open=False",
+        "held_key=-1",
+        "holding_key=False",
+        "locks_open=0",
+        "rack_jammed=False",
+        "solved=False"
+      ],
+      "delta_added": [
+        "held_key=0",
+        "holding_key=True"
+      ],
+      "delta_removed": [
+        "held_key=-1",
+        "holding_key=False"
+      ]
+    },
+    {
+      "action": "pick_key[key=1]",
+      "applicable": false,
+      "observed_pre_facts": [
+        "dead_end=False",
+        "depth=2",
+        "final_open=False",
+        "held_key=0",
+        "holding_key=True",
+        "locks_open=0",
+        "rack_jammed=False",
+        "solved=False"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "drop_key",
+      "applicable": true,
+      "observed_pre_facts": [
+        "dead_end=False",
+        "depth=2",
+        "final_open=False",
+        "held_key=0",
+        "holding_key=True",
+        "locks_open=0",
+        "rack_jammed=False",
+        "solved=False"
+      ],
+      "delta_added": [
+        "held_key=-1",
+        "holding_key=False"
+      ],
+      "delta_removed": [
+        "held_key=0",
+        "holding_key=True"
+      ]
+    },
+    {
+      "action": "open_lock",
+      "applicable": false,
+      "observed_pre_facts": [
+        "dead_end=False",
+        "depth=2",
+        "final_open=False",
+        "held_key=-1",
+        "holding_key=False",
+        "locks_open=0",
+        "rack_jammed=False",
+        "solved=False"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "force_latch",
+      "applicable": true,
+      "observed_pre_facts": [
+        "dead_end=False",
+        "depth=2",
+        "final_open=False",
+        "held_key=-1",
+        "holding_key=False",
+        "locks_open=0",
+        "rack_jammed=False",
+        "solved=False"
+      ],
+      "delta_added": [
+        "locks_open=1",
+        "rack_jammed=True"
+      ],
+      "delta_removed": [
+        "locks_open=0",
+        "rack_jammed=False"
+      ]
+    },
+    {
+      "action": "pick_key[key=0]",
+      "applicable": false,
+      "observed_pre_facts": [
+        "dead_end=False",
+        "depth=2",
+        "final_open=False",
+        "held_key=-1",
+        "holding_key=False",
+        "locks_open=1",
+        "rack_jammed=True",
+        "solved=False"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "pick_key[key=1]",
+      "applicable": false,
+      "observed_pre_facts": [
+        "dead_end=False",
+        "depth=2",
+        "final_open=False",
+        "held_key=-1",
+        "holding_key=False",
+        "locks_open=1",
+        "rack_jammed=True",
+        "solved=False"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "drop_key",
+      "applicable": false,
+      "observed_pre_facts": [
+        "dead_end=False",
+        "depth=2",
+        "final_open=False",
+        "held_key=-1",
+        "holding_key=False",
+        "locks_open=1",
+        "rack_jammed=True",
+        "solved=False"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "open_lock",
+      "applicable": false,
+      "observed_pre_facts": [
+        "dead_end=False",
+        "depth=2",
+        "final_open=False",
+        "held_key=-1",
+        "holding_key=False",
+        "locks_open=1",
+        "rack_jammed=True",
+        "solved=False"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "force_latch",
+      "applicable": false,
+      "observed_pre_facts": [
+        "dead_end=False",
+        "depth=2",
+        "final_open=False",
+        "held_key=-1",
+        "holding_key=False",
+        "locks_open=1",
+        "rack_jammed=True",
+        "solved=False"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    }
+  ],
+  "representation_losses": {}
+}

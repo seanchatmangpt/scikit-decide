@@ -36,8 +36,8 @@ import sys
 from docopt import docopt
 from dotenv import load_dotenv
 
-from skdecide import rollout
-from skdecide.hub.solver.openevolve import (
+from autofde_lab import rollout
+from autofde_lab.hub.solver.openevolve import (
     IntegratedOpenEvolve,
 )
 
@@ -100,7 +100,7 @@ save_dir = f"{output_dir}/final"
 domain_factory = lambda: create_domain(beluga_json_main)
 domain = domain_factory()  # generate the pddl files
 
-# retrieve domain pddl def to inject in prompt  (created when instanciating the skdecide domains)
+# retrieve domain pddl def to inject in prompt  (created when instanciating the autofde_lab domains)
 with open(f"{os.path.dirname(beluga_json_main)}/domain.pddl", "rt") as f:
     pddl_domain_def = f.read()
 

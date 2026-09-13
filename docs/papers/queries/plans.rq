@@ -1,0 +1,5 @@
+PREFIX afb: <https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#>
+PREFIX dct: <http://purl.org/dc/terms/>
+SELECT ?adapter ?title
+WHERE { ?p a afb:ExecutionPlan ; afb:adapterFamily ?adapter ; dct:title ?title . }
+ORDER BY ?adapter

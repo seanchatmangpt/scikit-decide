@@ -2,7 +2,7 @@ import random
 
 from skd_domains.skd_pddl_domain import SkdPDDLDomain
 
-from skdecide import Space
+from autofde_lab import Space
 
 
 # EVOLVE-BLOCK-START

@@ -14,10 +14,10 @@ import pytest
 from ray.rllib.algorithms.dqn import DQN
 from stable_baselines3 import PPO
 
-from skdecide import DeterministicPlanningDomain, ImplicitSpace, Space, Value
-from skdecide.builders.domain import UnrestrictedActions
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
-from skdecide.utils import load_registered_solver
+from autofde_lab import DeterministicPlanningDomain, ImplicitSpace, Space, Value
+from autofde_lab.builders.domain import UnrestrictedActions
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.utils import load_registered_solver
 
 logger = logging.getLogger(__name__)
 

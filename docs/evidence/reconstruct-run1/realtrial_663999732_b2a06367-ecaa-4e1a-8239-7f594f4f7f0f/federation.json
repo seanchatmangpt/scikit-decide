@@ -1,0 +1,456 @@
+[
+  {
+    "planner": "AOstar",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.015997375012375414,
+    "detail": ""
+  },
+  {
+    "planner": "Astar",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.017808749922551215,
+    "detail": ""
+  },
+  {
+    "planner": "pLRTAstar",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.015493124956265092,
+    "detail": ""
+  },
+  {
+    "planner": "LRTAstar",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.015945457969792187,
+    "detail": ""
+  },
+  {
+    "planner": "MCTS",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.016311499988660216,
+    "detail": "RuntimeError: Cannot sample an empty space."
+  },
+  {
+    "planner": "UCT",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01572158292401582,
+    "detail": "RuntimeError: Cannot sample an empty space."
+  },
+  {
+    "planner": "BFWS",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.015175124979577959,
+    "detail": ""
+  },
+  {
+    "planner": "IW",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.01541154203005135,
+    "detail": ""
+  },
+  {
+    "planner": "RIW",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01618962490465492,
+    "detail": "RuntimeError: In sequential mode, nodes labelled as unsolved must have unsolved children."
+  },
+  {
+    "planner": "LRTDP",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.015273708035238087,
+    "detail": ""
+  },
+  {
+    "planner": "ILAOstar",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.01551079098135233,
+    "detail": ""
+  },
+  {
+    "planner": "pAstar",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.015570624964311719,
+    "detail": ""
+  },
+  {
+    "planner": "MARTDP",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015648166998289526,
+    "detail": "ValueError: SKDECIDE exception: MA-RTDP algorithm needs python domain for implementing get_agent_applicable_actions()"
+  },
+  {
+    "planner": "MAHD",
+    "representation": "recipe",
+    "outcome": "UNSUPPORTED:REQUIRES_CONFIGURATION",
+    "plan": [],
+    "duration_s": 0.012657625018619001,
+    "detail": "constructor requires argument(s) the federation does not supply: multiagent_solver_class, singleagent_solver_class, multiagent_domain_factory; solver is check_domain-applicable but not runnable with defaults"
+  },
+  {
+    "planner": "MaxentIRL",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014572500018402934,
+    "detail": "AttributeError: 'Discrete' object has no attribute 'low'"
+  },
+  {
+    "planner": "POMCP",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.022379833040758967,
+    "detail": ""
+  },
+  {
+    "planner": "pPOMCP",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013993875007145107,
+    "detail": "AttributeError: 'pPOMCP' object has no attribute '_belief'"
+  },
+  {
+    "planner": "RayRLlib",
+    "representation": "recipe",
+    "outcome": "UNSUPPORTED:REQUIRES_CONFIGURATION",
+    "plan": [],
+    "duration_s": 0.011493292055092752,
+    "detail": "constructor requires argument(s) the federation does not supply: algo_class, train_iterations; solver is check_domain-applicable but not runnable with defaults"
+  },
+  {
+    "planner": "SimpleGreedy",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.013896207907237113,
+    "detail": ""
+  },
+  {
+    "planner": "StableBaseline",
+    "representation": "recipe",
+    "outcome": "UNSUPPORTED:REQUIRES_CONFIGURATION",
+    "plan": [],
+    "duration_s": 0.011700249975547194,
+    "detail": "constructor requires argument(s) the federation does not supply: algo_class, baselines_policy; solver is check_domain-applicable but not runnable with defaults"
+  },
+  {
+    "planner": "UPSolver",
+    "representation": "recipe",
+    "outcome": "UNSUPPORTED:REQUIRES_CONFIGURATION",
+    "plan": [],
+    "duration_s": 0.012287166086025536,
+    "detail": "constructor requires argument(s) the federation does not supply: operation_mode; solver is check_domain-applicable but not runnable with defaults"
+  },
+  {
+    "planner": "VI",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.016023417003452778,
+    "detail": ""
+  },
+  {
+    "planner": "PI",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.015756750013679266,
+    "detail": ""
+  },
+  {
+    "planner": "LDFS",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.016184458043426275,
+    "detail": ""
+  },
+  {
+    "planner": "IDAstar",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.015623167040757835,
+    "detail": ""
+  },
+  {
+    "planner": "RTDPBel",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 1.2906801250064746,
+    "detail": ""
+  },
+  {
+    "planner": "SSiPP",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.016462000086903572,
+    "detail": ""
+  },
+  {
+    "planner": "FRET",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.015849333023652434,
+    "detail": ""
+  },
+  {
+    "planner": "MDPLP",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.017773292027413845,
+    "detail": "IndexError: map::at:  key not found"
+  },
+  {
+    "planner": "SSPLP",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01752074994146824,
+    "detail": "IndexError: map::at:  key not found"
+  },
+  {
+    "planner": "IDual",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.01660450000781566,
+    "detail": ""
+  },
+  {
+    "planner": "GPCI",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.01650333299767226,
+    "detail": ""
+  },
+  {
+    "planner": "SARSOP",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.016761124948970973,
+    "detail": "proposed inapplicable action 'refine' at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "DESPOT",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.07337204203940928,
+    "detail": ""
+  },
+  {
+    "planner": "EHC",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.016169624985195696,
+    "detail": ""
+  },
+  {
+    "planner": "FF",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01402512495405972,
+    "detail": "TypeError: FF solver requires a PDDLDomain or PPDDLDomain"
+  },
+  {
+    "planner": "FFReplan",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.016081082983873785,
+    "detail": "TypeError: FFReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLReplan",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015897500095888972,
+    "detail": "TypeError: PPDDLReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "FFDetHindsight",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015329250018112361,
+    "detail": "TypeError: FFDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLDetHindsight",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014152999967336655,
+    "detail": "TypeError: PPDDLDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPReplan",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.015732374973595142,
+    "detail": ""
+  },
+  {
+    "planner": "SSPDetHindsight",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.01870495791081339,
+    "detail": ""
+  },
+  {
+    "planner": "RFF",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014561583986505866,
+    "detail": "TypeError: RFF solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLPlanMerger",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01436895807273686,
+    "detail": "TypeError: PPDDLPlanMerger solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPPlanMerger",
+    "representation": "recipe",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.016242707963101566,
+    "detail": ""
+  },
+  {
+    "planner": "Witness",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.015323249972425401,
+    "detail": "proposed inapplicable action 'refine' at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "HSVI",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.01550645800307393,
+    "detail": "proposed inapplicable action 'refine' at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "GoalHSVI",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.01785108307376504,
+    "detail": "proposed inapplicable action 'refine' at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "DSPyPolicy",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "mine"
+    ],
+    "duration_s": 6.6994569581002,
+    "detail": "proposed inapplicable action 'mine' at step 1; applicable=['refine']"
+  },
+  {
+    "planner": "typed_search",
+    "representation": "typed_model",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 6.958295125514269e-05,
+    "detail": ""
+  }
+]

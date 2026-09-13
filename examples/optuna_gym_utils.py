@@ -7,8 +7,8 @@ from typing import Optional
 
 import gymnasium as gym
 
-from skdecide import Value
-from skdecide.hub.domain.gym import (
+from autofde_lab import Value
+from autofde_lab.hub.domain.gym import (
     GymDiscreteActionDomain,
     GymPlanningDomain,
     GymWidthDomain,

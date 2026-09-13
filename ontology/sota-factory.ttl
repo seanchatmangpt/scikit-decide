@@ -1,0 +1,97 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:sota-factory>
+    a owl:Ontology ;
+    owl:imports <urn:autofde-lab:ontology:lab> ,
+                <urn:autofde-lab:ontology:planning> ,
+                <urn:autofde-lab:ontology:evidence> ,
+                <urn:autofde-lab:ontology:standing> ,
+                <urn:autofde-lab:ontology:manufacture> ;
+    dcterms:title "AutoFDE Lab SOTA factory ontology" ;
+    dcterms:description "Semantic constitution for benchmark-targeted architecture search. Published frontier results are target observations; the Lab searches BenchmarkTarget × DecisionBasis × ExperimentBasis and grants DONE only from evidence-bound SOTA standing." ;
+    dcterms:created "2026-08-08"^^xsd:date .
+
+afl:BenchmarkPortfolio a owl:Class , prov:Entity ; rdfs:label "Benchmark portfolio" .
+afl:BenchmarkTarget a owl:Class , prov:Entity ; rdfs:label "Benchmark target" .
+afl:BenchmarkTask a owl:Class , prov:Entity ; rdfs:label "Benchmark task" .
+afl:PublishedFrontierObservation a owl:Class , prov:Entity ; rdfs:label "Published frontier observation" .
+afl:DecisionBasis a owl:Class , prov:Entity ; rdfs:label "Decision basis" .
+afl:BasisChoice a owl:Class , prov:Entity ; rdfs:label "Basis choice" .
+afl:ModelChoice a owl:Class ; rdfs:subClassOf afl:BasisChoice .
+afl:PlannerChoice a owl:Class ; rdfs:subClassOf afl:BasisChoice .
+afl:ToolPolicyChoice a owl:Class ; rdfs:subClassOf afl:BasisChoice .
+afl:RepairPolicyChoice a owl:Class ; rdfs:subClassOf afl:BasisChoice .
+afl:ReplanningPolicyChoice a owl:Class ; rdfs:subClassOf afl:BasisChoice .
+afl:VerificationPolicyChoice a owl:Class ; rdfs:subClassOf afl:BasisChoice .
+afl:ProjectionPolicyChoice a owl:Class ; rdfs:subClassOf afl:BasisChoice .
+afl:MemoryPolicyChoice a owl:Class ; rdfs:subClassOf afl:BasisChoice .
+afl:BudgetPolicy a owl:Class , prov:Entity ; rdfs:label "Budget policy" .
+afl:ExperimentBasis a owl:Class , prov:Entity ; rdfs:label "Experiment basis" .
+afl:ArchitecturePoint a owl:Class , prov:Entity ; rdfs:label "Architecture point" .
+afl:ExperimentPlan a owl:Class , prov:Plan ; rdfs:label "Experiment plan" .
+afl:TrialResult a owl:Class , prov:Entity ; rdfs:label "Trial result" .
+afl:BenchmarkScore a owl:Class , prov:Entity ; rdfs:label "Benchmark score" .
+afl:FailureCluster a owl:Class , prov:Entity ; rdfs:label "Failure cluster" .
+afl:LearningSignal a owl:Class , prov:Entity ; rdfs:label "Learning signal" .
+afl:DefinitionOfDoneReport a owl:Class , prov:Entity ; rdfs:label "Definition of done report" .
+afl:ProofObligation a owl:Class , prov:Entity ; rdfs:label "Proof obligation" .
+
+afl:FrontierStandingValue a owl:Class ; rdfs:subClassOf skos:Concept .
+afl:FrontierStandingScheme a skos:ConceptScheme ; skos:prefLabel "Frontier standing" .
+afl:INCOMPLETE_EVALUATION a afl:FrontierStandingValue ; skos:inScheme afl:FrontierStandingScheme ; skos:prefLabel "INCOMPLETE_EVALUATION" .
+afl:BELOW_FRONTIER a afl:FrontierStandingValue ; skos:inScheme afl:FrontierStandingScheme ; skos:prefLabel "BELOW_FRONTIER" .
+afl:FRONTIER_MATCHED a afl:FrontierStandingValue ; skos:inScheme afl:FrontierStandingScheme ; skos:prefLabel "FRONTIER_MATCHED" .
+afl:SOTA_SURPASSED a afl:FrontierStandingValue ; skos:inScheme afl:FrontierStandingScheme ; skos:prefLabel "SOTA_SURPASSED" .
+
+afl:hasPortfolioTarget a owl:ObjectProperty ; rdfs:domain afl:BenchmarkPortfolio ; rdfs:range afl:BenchmarkTarget .
+afl:targetsBenchmark a owl:ObjectProperty ; rdfs:range afl:BenchmarkTarget .
+afl:hasBenchmarkTask a owl:ObjectProperty ; rdfs:domain afl:BenchmarkTarget ; rdfs:range afl:BenchmarkTask .
+afl:hasFrontierObservation a owl:ObjectProperty ; rdfs:domain afl:BenchmarkTarget ; rdfs:range afl:PublishedFrontierObservation .
+afl:hasDecisionBasis a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:range afl:DecisionBasis .
+afl:hasExperimentBasis a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:range afl:ExperimentBasis .
+afl:hasArchitecturePoint a owl:ObjectProperty ; rdfs:range afl:ArchitecturePoint .
+afl:hasModelChoice a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:DecisionBasis ; rdfs:range afl:ModelChoice .
+afl:hasPlannerChoice a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:DecisionBasis ; rdfs:range afl:PlannerChoice .
+afl:hasToolPolicyChoice a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:DecisionBasis ; rdfs:range afl:ToolPolicyChoice .
+afl:hasRepairPolicyChoice a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:DecisionBasis ; rdfs:range afl:RepairPolicyChoice .
+afl:hasReplanningPolicyChoice a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:DecisionBasis ; rdfs:range afl:ReplanningPolicyChoice .
+afl:hasVerificationPolicyChoice a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:DecisionBasis ; rdfs:range afl:VerificationPolicyChoice .
+afl:hasProjectionPolicyChoice a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:DecisionBasis ; rdfs:range afl:ProjectionPolicyChoice .
+afl:hasMemoryPolicyChoice a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:DecisionBasis ; rdfs:range afl:MemoryPolicyChoice .
+afl:hasBudgetPolicy a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:DecisionBasis ; rdfs:range afl:BudgetPolicy .
+afl:resultForPlan a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:TrialResult ; rdfs:range afl:ExperimentPlan .
+afl:scoreForArchitecture a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:BenchmarkScore ; rdfs:range afl:ArchitecturePoint .
+afl:frontierStanding a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:BenchmarkScore ; rdfs:range afl:FrontierStandingValue .
+afl:hasDefinitionOfDoneReport a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:range afl:DefinitionOfDoneReport .
+afl:hasProofObligation a owl:ObjectProperty ; rdfs:domain afl:DefinitionOfDoneReport ; rdfs:range afl:ProofObligation .
+
+afl:benchmarkId a owl:DatatypeProperty ; rdfs:range xsd:string .
+afl:benchmarkRevision a owl:DatatypeProperty ; rdfs:range xsd:string .
+afl:taskId a owl:DatatypeProperty ; rdfs:range xsd:string .
+afl:primaryMetric a owl:DatatypeProperty ; rdfs:range xsd:string .
+afl:publishedFrontierScore a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+afl:expectedTaskCount a owl:DatatypeProperty ; rdfs:range xsd:positiveInteger .
+afl:evaluatorReference a owl:DatatypeProperty ; rdfs:domain afl:BenchmarkTarget ; rdfs:range xsd:string .
+afl:frontierSourceReference a owl:DatatypeProperty ; rdfs:domain afl:BenchmarkTarget ; rdfs:range xsd:string .
+afl:architectureDigest a owl:DatatypeProperty ; rdfs:range xsd:string .
+afl:experimentPlanId a owl:DatatypeProperty ; rdfs:range xsd:string .
+afl:trialOutcome a owl:DatatypeProperty ; rdfs:range xsd:string .
+afl:evidenceReference a owl:DatatypeProperty ; rdfs:domain afl:TrialResult ; rdfs:range xsd:string .
+afl:attemptedCount a owl:DatatypeProperty ; rdfs:range xsd:nonNegativeInteger .
+afl:passedCount a owl:DatatypeProperty ; rdfs:range xsd:nonNegativeInteger .
+afl:measuredScore a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+afl:optimisticScore a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+afl:frontierMargin a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+afl:coverageRatio a owl:DatatypeProperty ; rdfs:range xsd:decimal .
+afl:failureKind a owl:DatatypeProperty ; rdfs:range xsd:string .
+afl:failureSignature a owl:DatatypeProperty ; rdfs:range xsd:string .
+afl:targetDecisionDimension a owl:DatatypeProperty ; rdfs:range xsd:string .
+afl:obligationId a owl:DatatypeProperty ; rdfs:domain afl:ProofObligation ; rdfs:range xsd:string .
+afl:obligationSatisfied a owl:DatatypeProperty ; rdfs:domain afl:ProofObligation ; rdfs:range xsd:boolean .
+afl:done a owl:DatatypeProperty ; rdfs:domain afl:DefinitionOfDoneReport ; rdfs:range xsd:boolean .

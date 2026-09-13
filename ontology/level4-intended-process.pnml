@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pnml>
+  <net id="net1" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+    <page id="page1">
+      <place id="p_source">
+        <name><text>source</text></name>
+        <initialMarking><text>1</text></initialMarking>
+      </place>
+      <place id="p_sink">
+        <name><text>sink</text></name>
+      </place>
+      <place id="p_loop_ProbeExecuted">
+        <name><text>loop_ProbeExecuted</text></name>
+      </place>
+      <place id="p_loop_PlanConstructed">
+        <name><text>loop_PlanConstructed</text></name>
+      </place>
+      <place id="p0">
+        <name><text>ReceiptEmitted-&gt;ReplayCompleted</text></name>
+      </place>
+      <place id="p1">
+        <name><text>PostconditionVerified-&gt;ReceiptEmitted</text></name>
+      </place>
+      <place id="p2">
+        <name><text>PostconditionObserved-&gt;PostconditionVerified</text></name>
+      </place>
+      <place id="p3">
+        <name><text>ActuationClosed-&gt;PostconditionObserved</text></name>
+      </place>
+      <place id="p4">
+        <name><text>ActuationOpened-&gt;ActuationClosed</text></name>
+      </place>
+      <place id="p5">
+        <name><text>POWLCommitted-&gt;AuthorityAdmitted</text></name>
+      </place>
+      <place id="p6">
+        <name><text>PlanConstructed-&gt;POWLCommitted</text></name>
+      </place>
+      <place id="p7">
+        <name><text>ProbeExecuted-&gt;ModelInferred</text></name>
+      </place>
+      <place id="p8">
+        <name><text>SessionStarted-&gt;CapabilitiesObserved</text></name>
+      </place>
+      <place id="p9">
+        <name><text>TaskAdmitted-&gt;SessionStarted</text></name>
+      </place>
+      <transition id="t_TaskAdmitted">
+        <name><text>TaskAdmitted</text></name>
+      </transition>
+      <transition id="t_SessionStarted">
+        <name><text>SessionStarted</text></name>
+      </transition>
+      <transition id="t_CapabilitiesObserved">
+        <name><text>CapabilitiesObserved</text></name>
+      </transition>
+      <transition id="t_ProbeExecuted">
+        <name><text>ProbeExecuted</text></name>
+      </transition>
+      <transition id="t_ModelInferred">
+        <name><text>ModelInferred</text></name>
+      </transition>
+      <transition id="t_PlanConstructed">
+        <name><text>PlanConstructed</text></name>
+      </transition>
+      <transition id="t_POWLCommitted">
+        <name><text>POWLCommitted</text></name>
+      </transition>
+      <transition id="t_AuthorityAdmitted">
+        <name><text>AuthorityAdmitted</text></name>
+      </transition>
+      <transition id="t_ActuationOpened">
+        <name><text>ActuationOpened</text></name>
+      </transition>
+      <transition id="t_ActuationClosed">
+        <name><text>ActuationClosed</text></name>
+      </transition>
+      <transition id="t_PostconditionObserved">
+        <name><text>PostconditionObserved</text></name>
+      </transition>
+      <transition id="t_PostconditionVerified">
+        <name><text>PostconditionVerified</text></name>
+      </transition>
+      <transition id="t_ReceiptEmitted">
+        <name><text>ReceiptEmitted</text></name>
+      </transition>
+      <transition id="t_ReplayCompleted">
+        <name><text>ReplayCompleted</text></name>
+      </transition>
+      <arc id="p_source_t_TaskAdmitted" source="p_source" target="t_TaskAdmitted">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_ReplayCompleted_p_sink" source="t_ReplayCompleted" target="p_sink">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_ProbeExecuted_p_loop_ProbeExecuted" source="t_ProbeExecuted" target="p_loop_ProbeExecuted">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="p_loop_ProbeExecuted_t_ProbeExecuted" source="p_loop_ProbeExecuted" target="t_ProbeExecuted">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_PlanConstructed_p_loop_PlanConstructed" source="t_PlanConstructed" target="p_loop_PlanConstructed">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="p_loop_PlanConstructed_t_PlanConstructed" source="p_loop_PlanConstructed" target="t_PlanConstructed">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_ReceiptEmitted_p0" source="t_ReceiptEmitted" target="p0">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="p0_t_ReplayCompleted" source="p0" target="t_ReplayCompleted">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_PostconditionVerified_p1" source="t_PostconditionVerified" target="p1">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="p1_t_ReceiptEmitted" source="p1" target="t_ReceiptEmitted">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_PostconditionObserved_p2" source="t_PostconditionObserved" target="p2">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="p2_t_PostconditionVerified" source="p2" target="t_PostconditionVerified">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_ActuationClosed_p3" source="t_ActuationClosed" target="p3">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="p3_t_PostconditionObserved" source="p3" target="t_PostconditionObserved">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_ActuationOpened_p4" source="t_ActuationOpened" target="p4">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="p4_t_ActuationClosed" source="p4" target="t_ActuationClosed">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_POWLCommitted_p5" source="t_POWLCommitted" target="p5">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="p5_t_AuthorityAdmitted" source="p5" target="t_AuthorityAdmitted">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_PlanConstructed_p6" source="t_PlanConstructed" target="p6">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="p6_t_POWLCommitted" source="p6" target="t_POWLCommitted">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_ProbeExecuted_p7" source="t_ProbeExecuted" target="p7">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="p7_t_ModelInferred" source="p7" target="t_ModelInferred">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_SessionStarted_p8" source="t_SessionStarted" target="p8">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="p8_t_CapabilitiesObserved" source="p8" target="t_CapabilitiesObserved">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="t_TaskAdmitted_p9" source="t_TaskAdmitted" target="p9">
+        <inscription><text>1</text></inscription>
+      </arc>
+      <arc id="p9_t_SessionStarted" source="p9" target="t_SessionStarted">
+        <inscription><text>1</text></inscription>
+      </arc>
+    </page>
+    <initialMarking>
+      <place idref="p_source"><text>1</text></place>
+    </initialMarking>
+    <finalmarkings>
+      <marking>
+        <place idref="p_sink"><text>1</text></place>
+      </marking>
+    </finalmarkings>
+  </net>
+</pnml>

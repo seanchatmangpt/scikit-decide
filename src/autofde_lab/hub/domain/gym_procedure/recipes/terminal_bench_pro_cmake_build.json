@@ -1,0 +1,41 @@
+{
+  "gym": "terminal-bench-pro",
+  "task": "cmake-build-for-cpp-console-app",
+  "source_ref": "vendor/gyms/terminal-bench-pro/cmake-build-for-cpp-console-app/{instruction.md,solution/solve.sh,tests/test_outputs.py}",
+  "initial_facts": [],
+  "goal_facts": ["app_output_verified"],
+  "steps": [
+    {
+      "id": "write_cmakelists",
+      "description": "Create /home/project/CMakeLists.txt declaring cmake_minimum_required, project(SimpleMathApp CXX), CMAKE_CXX_STANDARD 17, -O2 flag, and add_executable(app src/main.cpp src/math_lib.cpp) -- the exact heredoc written by solution/solve.sh.",
+      "preconditions": [],
+      "establishes": ["cmakelists_written"],
+      "cost": 1.0,
+      "source": "solution/solve.sh lines 7-21 (cat > CMakeLists.txt << 'EOF' ... EOF); instruction.md requirement 1"
+    },
+    {
+      "id": "run_cmake_configure",
+      "description": "Run `cmake .` in /home/project to configure the build; must exit 0 and generate CMakeCache.txt and Makefile.",
+      "preconditions": ["cmakelists_written"],
+      "establishes": ["cmake_configured"],
+      "cost": 1.0,
+      "source": "tests/test_outputs.py test_project_builds_and_runs (subprocess.run(['cmake', '.'])); instruction.md requirement 2 bullet 1"
+    },
+    {
+      "id": "run_make_build",
+      "description": "Run `make` in /home/project to compile main.cpp and math_lib.cpp into the executable `app`; must exit 0.",
+      "preconditions": ["cmake_configured"],
+      "establishes": ["app_built"],
+      "cost": 1.0,
+      "source": "tests/test_outputs.py test_project_builds_and_runs (subprocess.run(['make'])); instruction.md requirement 2 bullet 2"
+    },
+    {
+      "id": "run_and_verify_output",
+      "description": "Run ./app and verify stdout contains '5 + 3 = 8' then '4 * 7 = 28'.",
+      "preconditions": ["app_built"],
+      "establishes": ["app_output_verified"],
+      "cost": 1.0,
+      "source": "tests/test_outputs.py test_project_builds_and_runs / test_app_output_format; instruction.md requirement 2 bullet 3 and expected output block"
+    }
+  ]
+}

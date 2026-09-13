@@ -1,0 +1,7 @@
+WORKSTATION4_BASE_REFRESH
+repository=seanchatmangpt/autofde-lab
+base=master@a004da26bdf2b0cd2bde434b365dade9916b2fe9
+pre_refresh_head=b852e23760466b9294ad97899df70333f10c291b
+refresh_merge=88482e97d0481bac4e38bfb026cee161789ec522
+standing=REQUALIFYING
+credit=0

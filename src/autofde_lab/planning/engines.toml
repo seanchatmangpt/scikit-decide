@@ -1,0 +1,32 @@
+# Declarative registry of external planner/validator binaries.
+# Every argument is passed directly to subprocess.run(..., shell=False); no shell is
+# involved. Ported pattern from /Users/sac/mfw/mfw-planner/engines.toml.
+#
+# Adjust `program`/`args` to your locally installed tools before using a role.
+# `probe_engine` (version_args) is the way to check a role is actually installed
+# before calling `run_engine` against it.
+
+[classical]
+program = "fast-downward.py"
+args = [
+  "--plan-file", "{plan}",
+  "--alias", "lama-first",
+  "{domain}",
+  "{problem}",
+]
+version_args = ["--help"]
+output_mode = "file"
+success_codes = [0]
+
+[validator]
+program = "Validate"
+args = [
+  "-v",
+  "-t", "0.001",
+  "{domain}",
+  "{problem}",
+  "{plan}",
+]
+version_args = ["-h"]
+output_mode = "none"
+success_codes = [0]

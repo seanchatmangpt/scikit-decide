@@ -12,7 +12,7 @@ release_curl_res = subprocess.run(
         "Accept: application/vnd.github+json",
         "-H",
         "X-GitHub-Api-Version: 2022-11-28",
-        "https://api.github.com/repos/airbus/scikit-decide/releases/tags/nightly",
+        "https://api.github.com/repos/seanchatmangpt/autofde-lab/releases/tags/nightly",
     ],
     capture_output=True,
 )
@@ -27,7 +27,7 @@ subprocess.run(["unzip", "-o", "release.zip"])
 
 # get proper wheel name according to python version used
 wheel_pythonversion_tag = f"cp{sys.version_info.major}{sys.version_info.minor}"
-wheel_path = glob.glob(f"dist/scikit_decide*{wheel_pythonversion_tag}*manylinux*.whl")[
+wheel_path = glob.glob(f"dist/autofde_lab*{wheel_pythonversion_tag}*manylinux*.whl")[
     0
 ]
 

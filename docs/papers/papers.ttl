@@ -1,0 +1,3102 @@
+@prefix afb: <https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix cito: <http://purl.org/spar/cito/> .
+@prefix data: <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix fabio: <http://purl.org/spar/fabio/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix pplan: <http://purl.org/net/p-plan#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <https://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+data:corpus a dcat:Catalog ;
+    dct:accessRights data:policy-live-authority ;
+    dct:conformsTo dct:,
+        pplan:,
+        bibo:,
+        cito:,
+        fabio:,
+        doap:,
+        skos:,
+        dcat:,
+        odrl:,
+        prov:,
+        sh: ;
+    dct:title "ForwardBench / AutoFDE research and gym corpus" ;
+    dcat:dataset data:benchmark-agentbench,
+        data:benchmark-agentdojo,
+        data:benchmark-agentgym,
+        data:benchmark-agentlab,
+        data:benchmark-aiopslab,
+        data:benchmark-androidworld,
+        data:benchmark-arfbench,
+        data:benchmark-asb,
+        data:benchmark-assetopsbench,
+        data:benchmark-azuregoat,
+        data:benchmark-benchbench,
+        data:benchmark-bountytasks,
+        data:benchmark-browsergym,
+        data:benchmark-browsergym-assistantbench,
+        data:benchmark-browsergym-miniwob,
+        data:benchmark-browsergym-openapps,
+        data:benchmark-browsergym-timewarp,
+        data:benchmark-browsergym-visualwebarena,
+        data:benchmark-browsergym-webarena,
+        data:benchmark-browsergym-webarena-verified,
+        data:benchmark-browsergym-weblinx,
+        data:benchmark-browsergym-workarena,
+        data:benchmark-cloudfoxable,
+        data:benchmark-cloudgoat,
+        data:benchmark-crmarena,
+        data:benchmark-cube-counter,
+        data:benchmark-cube-harness,
+        data:benchmark-cube-standard,
+        data:benchmark-cybench,
+        data:benchmark-cyber-defense-benchmark,
+        data:benchmark-cybergym-e2e,
+        data:benchmark-devops-gym,
+        data:benchmark-doomarena,
+        data:benchmark-dynamicmcpbench,
+        data:benchmark-enterprisebench,
+        data:benchmark-frontier-eng,
+        data:benchmark-gcpgoat,
+        data:benchmark-general-agentbench,
+        data:benchmark-harbor,
+        data:benchmark-harbor-catalog,
+        data:benchmark-inspect-evals,
+        data:benchmark-itbench,
+        data:benchmark-itbench-ciso,
+        data:benchmark-itbench-finops,
+        data:benchmark-itbench-sre,
+        data:benchmark-kubernetes-goat,
+        data:benchmark-livemcpbench,
+        data:benchmark-mcp-agentbench,
+        data:benchmark-mcp-bench,
+        data:benchmark-mcp-universe,
+        data:benchmark-mcpmark,
+        data:benchmark-multi-iac-eval,
+        data:benchmark-o11y-bench,
+        data:benchmark-osworld,
+        data:benchmark-pm-llm-benchmark,
+        data:benchmark-qqr,
+        data:benchmark-r2e-gym,
+        data:benchmark-rcaeval,
+        data:benchmark-sadservers,
+        data:benchmark-sciagentarena,
+        data:benchmark-scuba,
+        data:benchmark-sec-bench,
+        data:benchmark-security-first-terraform,
+        data:benchmark-sir-bench,
+        data:benchmark-sre-bench,
+        data:benchmark-sregym,
+        data:benchmark-st-webagentbench,
+        data:benchmark-swe-bench,
+        data:benchmark-tau2-bench,
+        data:benchmark-terminal-bench,
+        data:benchmark-terminal-bench-pro,
+        data:benchmark-terragoat,
+        data:benchmark-the-agent-company,
+        data:benchmark-toolsandbox,
+        data:benchmark-tua-bench,
+        data:benchmark-verifier-first-terraform,
+        data:benchmark-webarena,
+        data:benchmark-wonderbread,
+        data:benchmark-workarena,
+        data:benchmark-world-of-workflows .
+
+data:paper-2403-06749 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2403.06749" ;
+    dct:subject "conformance",
+        "evaluation",
+        "process-mining" ;
+    dct:title "Evaluating Large Language Models in Process Mining: Capabilities, Benchmarks, and Evaluation Strategies" ;
+    dcat:distribution data:distribution-paper-2403-06749-pdf ;
+    afb:arxivId "2403.06749" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:url <https://arxiv.org/abs/2403.06749> .
+
+data:paper-2406-12045 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2406.12045" ;
+    dct:subject "interactive",
+        "policy",
+        "reliability",
+        "tools" ;
+    dct:title "tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains" ;
+    dcat:distribution data:distribution-paper-2406-12045-pdf ;
+    afb:arxivId "2406.12045" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:url <https://arxiv.org/abs/2406.12045> .
+
+data:paper-2410-09024 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2410.09024" ;
+    dct:subject "agents",
+        "safety",
+        "security" ;
+    dct:title "AgentHarm" ;
+    dcat:distribution data:distribution-paper-2410-09024-pdf ;
+    afb:arxivId "2410.09024" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:url <https://arxiv.org/abs/2410.09024> .
+
+data:paper-2508-07575 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2508.07575" ;
+    dct:subject "benchmark",
+        "mcp",
+        "tools" ;
+    dct:title "MCPToolBench++" ;
+    dcat:distribution data:distribution-paper-2508-07575-pdf ;
+    afb:arxivId "2508.07575" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:url <https://arxiv.org/abs/2508.07575> .
+
+data:paper-2511-10049 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2511.10049" ;
+    dct:subject "benchmark-generation",
+        "enterprise",
+        "migration" ;
+    dct:title "Continuous Benchmark Generation for Evaluating Enterprise-scale LLM Agents" ;
+    dcat:distribution data:distribution-paper-2511-10049-pdf ;
+    afb:arxivId "2511.10049" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:url <https://arxiv.org/abs/2511.10049> .
+
+data:paper-2603-20807 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2603.20807" ;
+    dct:subject "benchmark-generation",
+        "psychometrics",
+        "validation" ;
+    dct:title "BenchBench: Benchmarking Automated Benchmark Generation" ;
+    dcat:distribution data:distribution-paper-2603-20807-pdf ;
+    afb:arxivId "2603.20807" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:url <https://arxiv.org/abs/2603.20807> .
+
+data:paper-2604-12290 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2604.12290" ;
+    dct:subject "engineering",
+        "optimization",
+        "simulation",
+        "verifier" ;
+    dct:title "Frontier-Eng: Benchmarking Self-Evolving Agents on Real-World Engineering Tasks with Generative Optimization" ;
+    dcat:distribution data:distribution-paper-2604-12290-pdf ;
+    afb:arxivId "2604.12290" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:url <https://arxiv.org/abs/2604.12290> .
+
+data:paper-2605-12729 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2605.12729" ;
+    dct:subject "aiops",
+        "governance",
+        "netops",
+        "safety" ;
+    dct:title "Large Language Models for Agentic NetOps and AIOps: Architectures, Evaluation, and Safety" ;
+    dcat:distribution data:distribution-paper-2605-12729-pdf ;
+    afb:arxivId "2605.12729" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:url <https://arxiv.org/abs/2605.12729> .
+
+data:paper-2606-12736 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2606.12736" ;
+    dct:subject "agent-agnostic",
+        "interactive",
+        "stepwise-verification" ;
+    dct:title "Benchmarking AI Agents for Addressing Scientific Challenges Across Scales" ;
+    dcat:distribution data:distribution-paper-2606-12736-pdf ;
+    afb:arxivId "2606.12736" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:url <https://arxiv.org/abs/2606.12736> .
+
+data:step-browsergym-6-receipttrajectory a pplan:Step ;
+    dct:title "ReceiptTrajectory" ;
+    pplan:isPrecededBy data:step-browsergym-5-verifyeffect .
+
+data:step-cube-6-receipttrajectory a pplan:Step ;
+    dct:title "ReceiptTrajectory" ;
+    pplan:isPrecededBy data:step-cube-5-verifyeffect .
+
+data:step-gymnasium-6-receipttrajectory a pplan:Step ;
+    dct:title "ReceiptTrajectory" ;
+    pplan:isPrecededBy data:step-gymnasium-5-verifyeffect .
+
+data:step-harbor-6-receipttrajectory a pplan:Step ;
+    dct:title "ReceiptTrajectory" ;
+    pplan:isPrecededBy data:step-harbor-5-verifyeffect .
+
+data:step-kubernetes-6-receipttrajectory a pplan:Step ;
+    dct:title "ReceiptTrajectory" ;
+    pplan:isPrecededBy data:step-kubernetes-5-verifyeffect .
+
+data:step-mcp-6-receipttrajectory a pplan:Step ;
+    dct:title "ReceiptTrajectory" ;
+    pplan:isPrecededBy data:step-mcp-5-verifyeffect .
+
+data:step-native-6-receipttrajectory a pplan:Step ;
+    dct:title "ReceiptTrajectory" ;
+    pplan:isPrecededBy data:step-native-5-verifyeffect .
+
+data:step-terraform-6-receipttrajectory a pplan:Step ;
+    dct:title "ReceiptTrajectory" ;
+    pplan:isPrecededBy data:step-terraform-5-verifyeffect .
+
+data:benchmark-agentdojo a afb:Benchmark ;
+    dct:source data:vendor-agentdojo ;
+    dct:subject data:category-security ;
+    dct:title "Agentdojo" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "agentdojo" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-agentdojo .
+
+data:benchmark-agentgym a afb:Benchmark ;
+    dct:source data:vendor-agentgym ;
+    dct:subject data:category-agents ;
+    dct:title "Agentgym" ;
+    afb:adapterFamily "GYMNASIUM" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "agentgym" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-gymnasium ;
+    afb:vendorProject data:vendor-agentgym .
+
+data:benchmark-agentlab a afb:Benchmark ;
+    dct:source data:vendor-agentlab ;
+    dct:subject data:category-browser ;
+    dct:title "Agentlab" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "agentlab" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-agentlab .
+
+data:benchmark-asb a afb:Benchmark ;
+    dct:source data:vendor-asb ;
+    dct:subject data:category-security ;
+    dct:title "Asb" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "asb" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-asb .
+
+data:benchmark-azuregoat a afb:Benchmark ;
+    dct:source data:vendor-azuregoat ;
+    dct:subject data:category-cloud-security ;
+    dct:title "Azuregoat" ;
+    afb:adapterFamily "TERRAFORM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority true ;
+    afb:slug "azuregoat" ;
+    afb:sourceStanding "BLOCKED:LIVE_CLOUD_AUTHORITY" ;
+    afb:usesPlan data:plan-terraform ;
+    afb:vendorProject data:vendor-azuregoat .
+
+data:benchmark-benchbench a afb:Benchmark ;
+    dct:subject data:category-benchmark-generation ;
+    dct:title "BenchBench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "benchbench" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-native .
+
+data:benchmark-bountytasks a afb:Benchmark ;
+    dct:source data:vendor-bountytasks ;
+    dct:subject data:category-security ;
+    dct:title "Bountytasks" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "bountytasks" ;
+    afb:sourceStanding "PARTIAL_ALIVE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-bountytasks .
+
+data:benchmark-browsergym-assistantbench a afb:Benchmark ;
+    dct:source data:vendor-browsergym ;
+    dct:subject data:category-enterprise ;
+    dct:title "AssistantBench" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "browsergym-assistantbench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-browsergym .
+
+data:benchmark-browsergym-miniwob a afb:Benchmark ;
+    dct:source data:vendor-browsergym ;
+    dct:subject data:category-browser ;
+    dct:title "MiniWoB" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "browsergym-miniwob" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-browsergym .
+
+data:benchmark-browsergym-openapps a afb:Benchmark ;
+    dct:source data:vendor-browsergym ;
+    dct:subject data:category-enterprise ;
+    dct:title "OpenApps" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "browsergym-openapps" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-browsergym .
+
+data:benchmark-browsergym-timewarp a afb:Benchmark ;
+    dct:source data:vendor-browsergym ;
+    dct:subject data:category-browser ;
+    dct:title "TimeWarp" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "browsergym-timewarp" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-browsergym .
+
+data:benchmark-browsergym-visualwebarena a afb:Benchmark ;
+    dct:source data:vendor-browsergym ;
+    dct:subject data:category-browser ;
+    dct:title "VisualWebArena" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "browsergym-visualwebarena" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-browsergym .
+
+data:benchmark-browsergym-webarena a afb:Benchmark ;
+    dct:source data:vendor-browsergym ;
+    dct:subject data:category-browser ;
+    dct:title "WebArena" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "browsergym-webarena" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-browsergym .
+
+data:benchmark-browsergym-webarena-verified a afb:Benchmark ;
+    dct:source data:vendor-browsergym ;
+    dct:subject data:category-browser ;
+    dct:title "WebArenaVerified" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "browsergym-webarena-verified" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-browsergym .
+
+data:benchmark-browsergym-weblinx a afb:Benchmark ;
+    dct:source data:vendor-browsergym ;
+    dct:subject data:category-browser ;
+    dct:title "WebLINX" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "browsergym-weblinx" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-browsergym .
+
+data:benchmark-browsergym-workarena a afb:Benchmark ;
+    dct:source data:vendor-browsergym ;
+    dct:subject data:category-enterprise ;
+    dct:title "WorkArena" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "browsergym-workarena" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-browsergym .
+
+data:benchmark-cloudfoxable a afb:Benchmark ;
+    dct:source data:vendor-cloudfoxable ;
+    dct:subject data:category-cloud-security ;
+    dct:title "Cloudfoxable" ;
+    afb:adapterFamily "TERRAFORM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority true ;
+    afb:slug "cloudfoxable" ;
+    afb:sourceStanding "BLOCKED:LIVE_CLOUD_AUTHORITY" ;
+    afb:usesPlan data:plan-terraform ;
+    afb:vendorProject data:vendor-cloudfoxable .
+
+data:benchmark-cloudgoat a afb:Benchmark ;
+    dct:source data:vendor-cloudgoat ;
+    dct:subject data:category-cloud-security ;
+    dct:title "Cloudgoat" ;
+    afb:adapterFamily "TERRAFORM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority true ;
+    afb:slug "cloudgoat" ;
+    afb:sourceStanding "BLOCKED:LIVE_CLOUD_AUTHORITY" ;
+    afb:usesPlan data:plan-terraform ;
+    afb:vendorProject data:vendor-cloudgoat .
+
+data:benchmark-cube-counter a afb:Benchmark ;
+    dct:source data:vendor-cube-standard ;
+    dct:subject data:category-harness ;
+    dct:title "CUBE canonical counter scenario" ;
+    afb:adapterFamily "CUBE" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "cube-counter" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-cube ;
+    afb:vendorProject data:vendor-cube-standard .
+
+data:benchmark-cube-harness a afb:Benchmark ;
+    dct:source data:vendor-cube-harness ;
+    dct:subject data:category-harness ;
+    dct:title "Cube Harness" ;
+    afb:adapterFamily "CUBE" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "cube-harness" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-cube ;
+    afb:vendorProject data:vendor-cube-harness .
+
+data:benchmark-cybench a afb:Benchmark ;
+    dct:source data:vendor-cybench ;
+    dct:subject data:category-security ;
+    dct:title "Cybench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "cybench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-cybench .
+
+data:benchmark-frontier-eng a afb:Benchmark ;
+    dct:subject data:category-engineering ;
+    dct:title "Frontier-Eng" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "frontier-eng" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-native .
+
+data:benchmark-gcpgoat a afb:Benchmark ;
+    dct:source data:vendor-gcpgoat ;
+    dct:subject data:category-cloud-security ;
+    dct:title "Gcpgoat" ;
+    afb:adapterFamily "TERRAFORM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority true ;
+    afb:slug "gcpgoat" ;
+    afb:sourceStanding "BLOCKED:LIVE_CLOUD_AUTHORITY" ;
+    afb:usesPlan data:plan-terraform ;
+    afb:vendorProject data:vendor-gcpgoat .
+
+data:benchmark-general-agentbench a afb:Benchmark ;
+    dct:source data:vendor-general-agentbench ;
+    dct:subject data:category-agents ;
+    dct:title "General Agentbench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "general-agentbench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-general-agentbench .
+
+data:benchmark-harbor a afb:Benchmark ;
+    dct:source data:vendor-harbor ;
+    dct:subject data:category-harness ;
+    dct:title "Harbor" ;
+    afb:adapterFamily "HARBOR" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "harbor" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-harbor ;
+    afb:vendorProject data:vendor-harbor .
+
+data:benchmark-harbor-catalog a afb:Benchmark ;
+    dct:source data:vendor-harbor ;
+    dct:subject data:category-harness ;
+    dct:title "Harbor third-party benchmark catalog" ;
+    afb:adapterFamily "HARBOR" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "harbor-catalog" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-harbor ;
+    afb:vendorProject data:vendor-harbor .
+
+data:benchmark-inspect-evals a afb:Benchmark ;
+    dct:source data:vendor-inspect-evals ;
+    dct:subject data:category-evaluation ;
+    dct:title "Inspect Evals" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "inspect-evals" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-inspect-evals .
+
+data:benchmark-itbench-ciso a afb:Benchmark ;
+    dct:source data:vendor-itbench ;
+    dct:subject data:category-security ;
+    dct:title "ITBench CISO" ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "itbench-ciso" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-kubernetes ;
+    afb:vendorProject data:vendor-itbench .
+
+data:benchmark-itbench-finops a afb:Benchmark ;
+    dct:source data:vendor-itbench ;
+    dct:subject data:category-finops ;
+    dct:title "ITBench FinOps" ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "itbench-finops" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-kubernetes ;
+    afb:vendorProject data:vendor-itbench .
+
+data:benchmark-itbench-sre a afb:Benchmark ;
+    dct:source data:vendor-itbench ;
+    dct:subject data:category-sre ;
+    dct:title "ITBench SRE" ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "itbench-sre" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-kubernetes ;
+    afb:vendorProject data:vendor-itbench .
+
+data:benchmark-kubernetes-goat a afb:Benchmark ;
+    dct:source data:vendor-kubernetes-goat ;
+    dct:subject data:category-kubernetes-security ;
+    dct:title "Kubernetes Goat" ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "kubernetes-goat" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-kubernetes ;
+    afb:vendorProject data:vendor-kubernetes-goat .
+
+data:benchmark-o11y-bench a afb:Benchmark ;
+    dct:source data:vendor-o11y-bench ;
+    dct:subject data:category-observability ;
+    dct:title "O11Y Bench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "o11y-bench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-o11y-bench .
+
+data:benchmark-sadservers a afb:Benchmark ;
+    dct:source data:vendor-sadservers ;
+    dct:subject data:category-sre ;
+    dct:title "Sadservers" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "sadservers" ;
+    afb:sourceStanding "BLOCKED:SCENARIO_SOURCE_NOT_PUBLIC" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-sadservers .
+
+data:benchmark-sciagentarena a afb:Benchmark ;
+    dct:subject data:category-science ;
+    dct:title "SciAgentArena" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "sciagentarena" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-native .
+
+data:benchmark-sec-bench a afb:Benchmark ;
+    dct:source data:vendor-sec-bench ;
+    dct:subject data:category-security ;
+    dct:title "Sec Bench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "sec-bench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-sec-bench .
+
+data:benchmark-st-webagentbench a afb:Benchmark ;
+    dct:source data:vendor-st-webagentbench ;
+    dct:subject data:category-security ;
+    dct:title "St Webagentbench" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "st-webagentbench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-st-webagentbench .
+
+data:benchmark-swe-bench a afb:Benchmark ;
+    dct:source data:vendor-swe-bench ;
+    dct:subject data:category-software ;
+    dct:title "Swe Bench" ;
+    afb:adapterFamily "HARBOR" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "swe-bench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-harbor ;
+    afb:vendorProject data:vendor-swe-bench .
+
+data:benchmark-tau2-bench a afb:Benchmark ;
+    dct:source data:vendor-tau2-bench ;
+    dct:subject data:category-tools ;
+    dct:title "Tau2 Bench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "tau2-bench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-tau2-bench .
+
+data:benchmark-terminal-bench-pro a afb:Benchmark ;
+    dct:source data:vendor-terminal-bench-pro ;
+    dct:subject data:category-terminal ;
+    dct:title "Terminal Bench Pro" ;
+    afb:adapterFamily "HARBOR" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "terminal-bench-pro" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-harbor ;
+    afb:vendorProject data:vendor-terminal-bench-pro .
+
+data:benchmark-terragoat a afb:Benchmark ;
+    dct:source data:vendor-terragoat ;
+    dct:subject data:category-iac-security ;
+    dct:title "Terragoat" ;
+    afb:adapterFamily "TERRAFORM" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "terragoat" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-terraform ;
+    afb:vendorProject data:vendor-terragoat .
+
+data:benchmark-webarena a afb:Benchmark ;
+    dct:source data:vendor-webarena ;
+    dct:subject data:category-browser ;
+    dct:title "Webarena" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "webarena" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-webarena .
+
+data:category-aiops a skos:Concept ;
+    skos:prefLabel "aiops" .
+
+data:category-benchmark-generation a skos:Concept ;
+    skos:prefLabel "benchmark-generation" .
+
+data:category-devops a skos:Concept ;
+    skos:prefLabel "devops" .
+
+data:category-engineering a skos:Concept ;
+    skos:prefLabel "engineering" .
+
+data:category-evaluation a skos:Concept ;
+    skos:prefLabel "evaluation" .
+
+data:category-finops a skos:Concept ;
+    skos:prefLabel "finops" .
+
+data:category-incident a skos:Concept ;
+    skos:prefLabel "incident" .
+
+data:category-itops a skos:Concept ;
+    skos:prefLabel "itops" .
+
+data:category-kubernetes-security a skos:Concept ;
+    skos:prefLabel "kubernetes-security" .
+
+data:category-observability a skos:Concept ;
+    skos:prefLabel "observability" .
+
+data:category-process-mining a skos:Concept ;
+    skos:prefLabel "process-mining" .
+
+data:category-root-cause-analysis a skos:Concept ;
+    skos:prefLabel "root-cause-analysis" .
+
+data:category-science a skos:Concept ;
+    skos:prefLabel "science" .
+
+data:distribution-paper-2308-03688-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2308.03688> .
+
+data:distribution-paper-2403-06749-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2403.06749> .
+
+data:distribution-paper-2403-07718-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2403.07718> .
+
+data:distribution-paper-2404-07972-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2404.07972> .
+
+data:distribution-paper-2405-14573-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2405.14573> .
+
+data:distribution-paper-2406-12045-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2406.12045> .
+
+data:distribution-paper-2406-13264-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2406.13264> .
+
+data:distribution-paper-2407-05291-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2407.05291> .
+
+data:distribution-paper-2407-12165-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2407.12165> .
+
+data:distribution-paper-2407-13244-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2407.13244> .
+
+data:distribution-paper-2408-04682-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2408.04682> .
+
+data:distribution-paper-2410-09024-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2410.09024> .
+
+data:distribution-paper-2412-05467-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2412.05467> .
+
+data:distribution-paper-2412-14161-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2412.14161> .
+
+data:distribution-paper-2412-17015-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2412.17015> .
+
+data:distribution-paper-2501-06706-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2501.06706> .
+
+data:distribution-paper-2502-05352-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2502.05352> .
+
+data:distribution-paper-2504-07164-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2504.07164> .
+
+data:distribution-paper-2504-14064-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2504.14064> .
+
+data:distribution-paper-2505-18878-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2505.18878> .
+
+data:distribution-paper-2506-02009-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2506.02009> .
+
+data:distribution-paper-2506-03828-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2506.03828> .
+
+data:distribution-paper-2508-01780-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2508.01780> .
+
+data:distribution-paper-2508-07575-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2508.07575> .
+
+data:distribution-paper-2508-14704-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2508.14704> .
+
+data:distribution-paper-2508-20453-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2508.20453> .
+
+data:distribution-paper-2509-05303-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2509.05303> .
+
+data:distribution-paper-2509-09734-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2509.09734> .
+
+data:distribution-paper-2509-24002-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2509.24002> .
+
+data:distribution-paper-2509-26506-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2509.26506> .
+
+data:distribution-paper-2510-27287-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2510.27287> .
+
+data:distribution-paper-2511-10049-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2511.10049> .
+
+data:distribution-paper-2601-11868-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2601.11868> .
+
+data:distribution-paper-2601-20882-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2601.20882> .
+
+data:distribution-paper-2601-22130-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2601.22130> .
+
+data:distribution-paper-2603-15798-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2603.15798> .
+
+data:distribution-paper-2603-20807-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2603.20807> .
+
+data:distribution-paper-2604-12040-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2604.12040> .
+
+data:distribution-paper-2604-12290-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2604.12290> .
+
+data:distribution-paper-2604-19533-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2604.19533> .
+
+data:distribution-paper-2604-21199-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2604.21199> .
+
+data:distribution-paper-2605-07161-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2605.07161> .
+
+data:distribution-paper-2605-12729-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2605.12729> .
+
+data:distribution-paper-2606-04460-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2606.04460> .
+
+data:distribution-paper-2606-08590-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2606.08590> .
+
+data:distribution-paper-2606-12736-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2606.12736> .
+
+data:distribution-paper-2606-28480-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2606.28480> .
+
+data:distribution-paper-2606-29193-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2606.29193> .
+
+data:distribution-paper-2607-20478-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2607.20478> .
+
+data:distribution-paper-2607-20531-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2607.20531> .
+
+data:distribution-paper-2607-26791-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2607.26791> .
+
+data:distribution-paper-2608-02672-pdf a dcat:Distribution ;
+    dct:format "application/pdf" ;
+    dcat:downloadURL <https://arxiv.org/pdf/2608.02672> .
+
+data:paper-2308-03688 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2308.03688" ;
+    dct:relation data:benchmark-agentbench ;
+    dct:subject "agents",
+        "environments",
+        "interactive" ;
+    dct:title "AgentBench: Evaluating LLMs as Agents" ;
+    cito:providesBackgroundFor data:benchmark-agentbench ;
+    dcat:distribution data:distribution-paper-2308-03688-pdf ;
+    afb:arxivId "2308.03688" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-agentbench ;
+    schema:url <https://arxiv.org/abs/2308.03688> .
+
+data:paper-2403-07718 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2403.07718" ;
+    dct:relation data:benchmark-workarena ;
+    dct:subject "browsergym",
+        "enterprise",
+        "knowledge-work",
+        "servicenow" ;
+    dct:title "WorkArena: How Capable Are Web Agents at Solving Common Knowledge Work Tasks?" ;
+    cito:providesBackgroundFor data:benchmark-workarena ;
+    dcat:distribution data:distribution-paper-2403-07718-pdf ;
+    afb:arxivId "2403.07718" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-workarena ;
+    schema:url <https://arxiv.org/abs/2403.07718> .
+
+data:paper-2404-07972 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2404.07972" ;
+    dct:relation data:benchmark-osworld ;
+    dct:subject "computer-use",
+        "execution",
+        "workflow" ;
+    dct:title "OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments" ;
+    cito:providesBackgroundFor data:benchmark-osworld ;
+    dcat:distribution data:distribution-paper-2404-07972-pdf ;
+    afb:arxivId "2404.07972" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-osworld ;
+    schema:url <https://arxiv.org/abs/2404.07972> .
+
+data:paper-2405-14573 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2405.14573" ;
+    dct:relation data:benchmark-androidworld ;
+    dct:subject "agents",
+        "android",
+        "computer-use" ;
+    dct:title "AndroidWorld" ;
+    cito:providesBackgroundFor data:benchmark-androidworld ;
+    dcat:distribution data:distribution-paper-2405-14573-pdf ;
+    afb:arxivId "2405.14573" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-androidworld ;
+    schema:url <https://arxiv.org/abs/2405.14573> .
+
+data:paper-2406-13264 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2406.13264" ;
+    dct:relation data:benchmark-wonderbread ;
+    dct:subject "benchmark",
+        "enterprise",
+        "workflow" ;
+    dct:title "Wonderbread" ;
+    cito:providesBackgroundFor data:benchmark-wonderbread ;
+    dcat:distribution data:distribution-paper-2406-13264-pdf ;
+    afb:arxivId "2406.13264" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-wonderbread ;
+    schema:url <https://arxiv.org/abs/2406.13264> .
+
+data:paper-2407-05291 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2407.05291" ;
+    dct:relation data:benchmark-workarena ;
+    dct:subject "enterprise",
+        "planning",
+        "workflow" ;
+    dct:title "WorkArena++: Towards Compositional Planning and Reasoning-based Common Knowledge Work Tasks" ;
+    cito:providesBackgroundFor data:benchmark-workarena ;
+    dcat:distribution data:distribution-paper-2407-05291-pdf ;
+    afb:arxivId "2407.05291" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-workarena ;
+    schema:url <https://arxiv.org/abs/2407.05291> .
+
+data:paper-2407-12165 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2407.12165" ;
+    dct:relation data:benchmark-aiopslab ;
+    dct:subject "agents",
+        "aiops",
+        "cloud" ;
+    dct:title "AIOpsLab: Design Principles for Autonomous Clouds" ;
+    cito:providesBackgroundFor data:benchmark-aiopslab ;
+    dcat:distribution data:distribution-paper-2407-12165-pdf ;
+    afb:arxivId "2407.12165" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-aiopslab ;
+    schema:url <https://arxiv.org/abs/2407.12165> .
+
+data:paper-2407-13244 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2407.13244" ;
+    dct:relation data:benchmark-pm-llm-benchmark ;
+    dct:subject "benchmark",
+        "process-mining",
+        "procint" ;
+    dct:title "PM-LLM-Benchmark: Evaluating Large Language Models on Process Mining Tasks" ;
+    cito:providesBackgroundFor data:benchmark-pm-llm-benchmark ;
+    dcat:distribution data:distribution-paper-2407-13244-pdf ;
+    afb:arxivId "2407.13244" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-pm-llm-benchmark ;
+    schema:url <https://arxiv.org/abs/2407.13244> .
+
+data:paper-2408-04682 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2408.04682" ;
+    dct:relation data:benchmark-toolsandbox ;
+    dct:subject "benchmark",
+        "policy",
+        "stateful",
+        "tools" ;
+    dct:title "ToolSandbox: A Stateful, Conversational, Interactive Evaluation Benchmark for LLM Tool Use Capabilities" ;
+    cito:providesBackgroundFor data:benchmark-toolsandbox ;
+    dcat:distribution data:distribution-paper-2408-04682-pdf ;
+    afb:arxivId "2408.04682" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-toolsandbox ;
+    schema:url <https://arxiv.org/abs/2408.04682> .
+
+data:paper-2412-05467 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2412.05467" ;
+    dct:relation data:benchmark-browsergym ;
+    dct:subject "browser",
+        "gym",
+        "web" ;
+    dct:title "BrowserGym: A Gym Ecosystem for Web Agent Research" ;
+    cito:providesBackgroundFor data:benchmark-browsergym ;
+    dcat:distribution data:distribution-paper-2412-05467-pdf ;
+    afb:arxivId "2412.05467" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-browsergym ;
+    schema:url <https://arxiv.org/abs/2412.05467> .
+
+data:paper-2412-14161 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2412.14161" ;
+    dct:relation data:benchmark-the-agent-company ;
+    dct:subject "agents",
+        "enterprise",
+        "knowledge-work" ;
+    dct:title "TheAgentCompany" ;
+    cito:providesBackgroundFor data:benchmark-the-agent-company ;
+    dcat:distribution data:distribution-paper-2412-14161-pdf ;
+    afb:arxivId "2412.14161" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-the-agent-company ;
+    schema:url <https://arxiv.org/abs/2412.14161> .
+
+data:paper-2412-17015 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2412.17015" ;
+    dct:relation data:benchmark-rcaeval ;
+    dct:subject "microservices",
+        "root-cause-analysis" ;
+    dct:title "RCAEval" ;
+    cito:providesBackgroundFor data:benchmark-rcaeval ;
+    dcat:distribution data:distribution-paper-2412-17015-pdf ;
+    afb:arxivId "2412.17015" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-rcaeval ;
+    schema:url <https://arxiv.org/abs/2412.17015> .
+
+data:paper-2501-06706 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2501.06706" ;
+    dct:relation data:benchmark-aiopslab ;
+    dct:subject "aiops",
+        "cloud",
+        "gym",
+        "incident" ;
+    dct:title "AIOpsLab: A Holistic Framework to Evaluate AI Agents for Enabling Autonomous Clouds" ;
+    cito:providesBackgroundFor data:benchmark-aiopslab ;
+    dcat:distribution data:distribution-paper-2501-06706-pdf ;
+    afb:arxivId "2501.06706" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-aiopslab ;
+    schema:url <https://arxiv.org/abs/2501.06706> .
+
+data:paper-2502-05352 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2502.05352" ;
+    dct:relation data:benchmark-itbench ;
+    dct:subject "ciso",
+        "cloud",
+        "finops",
+        "itops",
+        "sre" ;
+    dct:title "ITBench: Evaluating AI Agents across Diverse Real-World IT Automation Tasks" ;
+    cito:providesBackgroundFor data:benchmark-itbench ;
+    dcat:distribution data:distribution-paper-2502-05352-pdf ;
+    afb:arxivId "2502.05352" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-itbench ;
+    schema:url <https://arxiv.org/abs/2502.05352> .
+
+data:paper-2504-07164 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2504.07164" ;
+    dct:relation data:benchmark-r2e-gym ;
+    dct:subject "gym",
+        "procedural-generation",
+        "self-play",
+        "verifier" ;
+    dct:title "R2E-Gym: Procedural Environments and Hybrid Verifiers for Scaling Open-Weights SWE Agents" ;
+    cito:providesBackgroundFor data:benchmark-r2e-gym ;
+    dcat:distribution data:distribution-paper-2504-07164-pdf ;
+    afb:arxivId "2504.07164" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-r2e-gym ;
+    schema:url <https://arxiv.org/abs/2504.07164> .
+
+data:paper-2504-14064 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2504.14064" ;
+    dct:relation data:benchmark-doomarena ;
+    dct:subject "agents",
+        "security",
+        "web" ;
+    dct:title "DoomArena" ;
+    cito:providesBackgroundFor data:benchmark-doomarena ;
+    dcat:distribution data:distribution-paper-2504-14064-pdf ;
+    afb:arxivId "2504.14064" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-doomarena ;
+    schema:url <https://arxiv.org/abs/2504.14064> .
+
+data:paper-2505-18878 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2505.18878" ;
+    dct:relation data:benchmark-crmarena ;
+    dct:subject "confidentiality",
+        "crm",
+        "enterprise",
+        "workflow" ;
+    dct:title "CRMArena-Pro: Holistic Assessment of LLM Agents Across Diverse Business Scenarios and Interactions" ;
+    cito:providesBackgroundFor data:benchmark-crmarena ;
+    dcat:distribution data:distribution-paper-2505-18878-pdf ;
+    afb:arxivId "2505.18878" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-crmarena ;
+    schema:url <https://arxiv.org/abs/2505.18878> .
+
+data:paper-2506-02009 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2506.02009" ;
+    dct:relation data:benchmark-itbench ;
+    dct:subject "cloud",
+        "multi-agent",
+        "sre" ;
+    dct:title "STRATUS: Autonomous Reliability Engineering of Modern Clouds" ;
+    cito:providesBackgroundFor data:benchmark-itbench ;
+    dcat:distribution data:distribution-paper-2506-02009-pdf ;
+    afb:arxivId "2506.02009" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-itbench ;
+    schema:url <https://arxiv.org/abs/2506.02009> .
+
+data:paper-2506-03828 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2506.03828" ;
+    dct:relation data:benchmark-assetopsbench ;
+    dct:subject "asset-operations",
+        "enterprise",
+        "maintenance" ;
+    dct:title "AssetOpsBench: Benchmarking AI Agents for Task Automation in Industrial Asset Operations and Maintenance" ;
+    cito:providesBackgroundFor data:benchmark-assetopsbench ;
+    dcat:distribution data:distribution-paper-2506-03828-pdf ;
+    afb:arxivId "2506.03828" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-assetopsbench ;
+    schema:url <https://arxiv.org/abs/2506.03828> .
+
+data:paper-2508-01780 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2508.01780" ;
+    dct:relation data:benchmark-livemcpbench ;
+    dct:subject "live",
+        "mcp",
+        "tools" ;
+    dct:title "LiveMCPBench" ;
+    cito:providesBackgroundFor data:benchmark-livemcpbench ;
+    dcat:distribution data:distribution-paper-2508-01780-pdf ;
+    afb:arxivId "2508.01780" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-livemcpbench ;
+    schema:url <https://arxiv.org/abs/2508.01780> .
+
+data:paper-2508-14704 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2508.14704" ;
+    dct:relation data:benchmark-mcp-universe ;
+    dct:subject "benchmark",
+        "mcp",
+        "tools" ;
+    dct:title "MCP-Universe" ;
+    cito:providesBackgroundFor data:benchmark-mcp-universe ;
+    dcat:distribution data:distribution-paper-2508-14704-pdf ;
+    afb:arxivId "2508.14704" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-mcp-universe ;
+    schema:url <https://arxiv.org/abs/2508.14704> .
+
+data:paper-2508-20453 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2508.20453" ;
+    dct:relation data:benchmark-mcp-bench ;
+    dct:subject "benchmark",
+        "mcp",
+        "tools" ;
+    dct:title "MCP-Bench: Benchmarking Tool-Using LLM Agents with Complex Real-World Tasks via MCP Servers" ;
+    cito:providesBackgroundFor data:benchmark-mcp-bench ;
+    dcat:distribution data:distribution-paper-2508-20453-pdf ;
+    afb:arxivId "2508.20453" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-mcp-bench ;
+    schema:url <https://arxiv.org/abs/2508.20453> .
+
+data:paper-2509-05303 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2509.05303" ;
+    dct:relation data:benchmark-multi-iac-eval ;
+    dct:subject "cdk",
+        "cloudformation",
+        "iac",
+        "terraform" ;
+    dct:title "Multi-IaC-Eval: Benchmarking Cloud Infrastructure as Code Across Multiple Formats" ;
+    cito:providesBackgroundFor data:benchmark-multi-iac-eval ;
+    dcat:distribution data:distribution-paper-2509-05303-pdf ;
+    afb:arxivId "2509.05303" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-multi-iac-eval ;
+    schema:url <https://arxiv.org/abs/2509.05303> .
+
+data:paper-2509-09734 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2509.09734" ;
+    dct:relation data:benchmark-mcp-agentbench ;
+    dct:subject "agents",
+        "mcp",
+        "tools" ;
+    dct:title "MCP-AgentBench" ;
+    cito:providesBackgroundFor data:benchmark-mcp-agentbench ;
+    dcat:distribution data:distribution-paper-2509-09734-pdf ;
+    afb:arxivId "2509.09734" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-mcp-agentbench ;
+    schema:url <https://arxiv.org/abs/2509.09734> .
+
+data:paper-2509-24002 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2509.24002" ;
+    dct:relation data:benchmark-mcpmark ;
+    dct:subject "benchmark",
+        "mcp",
+        "tools" ;
+    dct:title "MCPMark" ;
+    cito:providesBackgroundFor data:benchmark-mcpmark ;
+    dcat:distribution data:distribution-paper-2509-24002-pdf ;
+    afb:arxivId "2509.24002" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-mcpmark ;
+    schema:url <https://arxiv.org/abs/2509.24002> .
+
+data:paper-2509-26506 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2509.26506" ;
+    dct:relation data:benchmark-scuba ;
+    dct:subject "agents",
+        "benchmark",
+        "computer-use" ;
+    dct:title "SCUBA" ;
+    cito:providesBackgroundFor data:benchmark-scuba ;
+    dcat:distribution data:distribution-paper-2509-26506-pdf ;
+    afb:arxivId "2509.26506" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-scuba ;
+    schema:url <https://arxiv.org/abs/2509.26506> .
+
+data:paper-2510-27287 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2510.27287" ;
+    dct:relation data:benchmark-enterprisebench ;
+    dct:subject "access-control",
+        "cross-functional",
+        "enterprise" ;
+    dct:title "Can LLMs Help You at Work? A Sandbox for Evaluating LLM Agents in Enterprise Environments" ;
+    cito:providesBackgroundFor data:benchmark-enterprisebench ;
+    dcat:distribution data:distribution-paper-2510-27287-pdf ;
+    afb:arxivId "2510.27287" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-enterprisebench ;
+    schema:url <https://arxiv.org/abs/2510.27287> .
+
+data:paper-2601-11868 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2601.11868" ;
+    dct:relation data:benchmark-terminal-bench ;
+    dct:subject "benchmark",
+        "systems",
+        "terminal" ;
+    dct:title "Terminal-Bench" ;
+    cito:providesBackgroundFor data:benchmark-terminal-bench ;
+    dcat:distribution data:distribution-paper-2601-11868-pdf ;
+    afb:arxivId "2601.11868" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-terminal-bench ;
+    schema:url <https://arxiv.org/abs/2601.11868> .
+
+data:paper-2601-20882 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2601.20882" ;
+    dct:relation data:benchmark-devops-gym ;
+    dct:subject "cloud",
+        "devops",
+        "gym" ;
+    dct:title "DevOps-Gym" ;
+    cito:providesBackgroundFor data:benchmark-devops-gym ;
+    dcat:distribution data:distribution-paper-2601-20882-pdf ;
+    afb:arxivId "2601.20882" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-devops-gym ;
+    schema:url <https://arxiv.org/abs/2601.20882> .
+
+data:paper-2601-22130 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2601.22130" ;
+    dct:relation data:benchmark-world-of-workflows ;
+    dct:subject "dynamics",
+        "enterprise",
+        "servicenow",
+        "workflow" ;
+    dct:title "World of Workflows: a Benchmark for Bringing World Models to Enterprise Systems" ;
+    cito:providesBackgroundFor data:benchmark-world-of-workflows ;
+    dcat:distribution data:distribution-paper-2601-22130-pdf ;
+    afb:arxivId "2601.22130" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-world-of-workflows ;
+    schema:url <https://arxiv.org/abs/2601.22130> .
+
+data:paper-2603-15798 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2603.15798" ;
+    dct:relation data:benchmark-cube-standard ;
+    dct:subject "benchmark",
+        "gym",
+        "interoperability",
+        "mcp" ;
+    dct:title "CUBE: A Standard for Unifying Agent Benchmarks" ;
+    cito:providesBackgroundFor data:benchmark-cube-standard ;
+    dcat:distribution data:distribution-paper-2603-15798-pdf ;
+    afb:arxivId "2603.15798" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-cube-standard ;
+    schema:url <https://arxiv.org/abs/2603.15798> .
+
+data:paper-2604-12040 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2604.12040" ;
+    dct:relation data:benchmark-sir-bench ;
+    dct:subject "cloud",
+        "forensics",
+        "incident",
+        "security" ;
+    dct:title "SIR-Bench: Evaluating Investigation Depth in Security Incident Response Agents" ;
+    cito:providesBackgroundFor data:benchmark-sir-bench ;
+    dcat:distribution data:distribution-paper-2604-12040-pdf ;
+    afb:arxivId "2604.12040" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-sir-bench ;
+    schema:url <https://arxiv.org/abs/2604.12040> .
+
+data:paper-2604-19533 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2604.19533" ;
+    dct:relation data:benchmark-cyber-defense-benchmark ;
+    dct:subject "benchmark",
+        "cybersecurity",
+        "defense" ;
+    dct:title "Cyber Defense Benchmark" ;
+    cito:providesBackgroundFor data:benchmark-cyber-defense-benchmark ;
+    dcat:distribution data:distribution-paper-2604-19533-pdf ;
+    afb:arxivId "2604.19533" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-cyber-defense-benchmark ;
+    schema:url <https://arxiv.org/abs/2604.19533> .
+
+data:paper-2604-21199 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2604.21199" ;
+    dct:relation data:benchmark-arfbench ;
+    dct:subject "incident",
+        "telemetry",
+        "time-series" ;
+    dct:title "ARFBench: Benchmarking Time Series Question Answering Ability for Software Incident Response" ;
+    cito:providesBackgroundFor data:benchmark-arfbench ;
+    dcat:distribution data:distribution-paper-2604-21199-pdf ;
+    afb:arxivId "2604.21199" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-arfbench ;
+    schema:url <https://arxiv.org/abs/2604.21199> .
+
+data:paper-2605-07161 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2605.07161" ;
+    dct:relation data:benchmark-sregym ;
+    dct:subject "cloud",
+        "live-gym",
+        "sre" ;
+    dct:title "SREGym: A Live Benchmark for AI SRE Agents with High-Fidelity Failure Scenarios" ;
+    cito:providesBackgroundFor data:benchmark-sregym ;
+    dcat:distribution data:distribution-paper-2605-07161-pdf ;
+    afb:arxivId "2605.07161" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-sregym ;
+    schema:url <https://arxiv.org/abs/2605.07161> .
+
+data:paper-2606-04460 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2606.04460" ;
+    dct:relation data:benchmark-cybergym-e2e ;
+    dct:subject "cybersecurity",
+        "end-to-end",
+        "gym" ;
+    dct:title "CyberGym-E2E" ;
+    cito:providesBackgroundFor data:benchmark-cybergym-e2e ;
+    dcat:distribution data:distribution-paper-2606-04460-pdf ;
+    afb:arxivId "2606.04460" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-cybergym-e2e ;
+    schema:url <https://arxiv.org/abs/2606.04460> .
+
+data:paper-2606-08590 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2606.08590" ;
+    dct:relation data:benchmark-sre-bench ;
+    dct:subject "audit",
+        "evidence",
+        "kubernetes",
+        "rca" ;
+    dct:title "Auditable Graph-Guided Root Cause Analysis for Kubernetes Incidents" ;
+    cito:providesBackgroundFor data:benchmark-sre-bench ;
+    dcat:distribution data:distribution-paper-2606-08590-pdf ;
+    afb:arxivId "2606.08590" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-sre-bench ;
+    schema:url <https://arxiv.org/abs/2606.08590> .
+
+data:paper-2606-28480 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2606.28480" ;
+    dct:relation data:benchmark-tua-bench ;
+    dct:subject "agents",
+        "computer-use",
+        "terminal" ;
+    dct:title "TUA-Bench" ;
+    cito:providesBackgroundFor data:benchmark-tua-bench ;
+    dcat:distribution data:distribution-paper-2606-28480-pdf ;
+    afb:arxivId "2606.28480" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-tua-bench ;
+    schema:url <https://arxiv.org/abs/2606.28480> .
+
+data:paper-2606-29193 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2606.29193" ;
+    dct:relation data:benchmark-rcaeval ;
+    dct:subject "aiops",
+        "microservices",
+        "rca",
+        "telemetry" ;
+    dct:title "A Multi-Dataset Benchmark for Evaluating LLM Agents in Microservice Failure Diagnosis" ;
+    cito:providesBackgroundFor data:benchmark-rcaeval ;
+    dcat:distribution data:distribution-paper-2606-29193-pdf ;
+    afb:arxivId "2606.29193" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-rcaeval ;
+    schema:url <https://arxiv.org/abs/2606.29193> .
+
+data:paper-2607-20478 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2607.20478" ;
+    dct:relation data:benchmark-verifier-first-terraform ;
+    dct:subject "iac",
+        "opa",
+        "terraform",
+        "verifier" ;
+    dct:title "Verifier-First Evaluation of Agentic LLMs for Infrastructure-as-Code Generation" ;
+    cito:providesBackgroundFor data:benchmark-verifier-first-terraform ;
+    dcat:distribution data:distribution-paper-2607-20478-pdf ;
+    afb:arxivId "2607.20478" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-verifier-first-terraform ;
+    schema:url <https://arxiv.org/abs/2607.20478> .
+
+data:paper-2607-20531 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2607.20531" ;
+    dct:relation data:benchmark-dynamicmcpbench ;
+    dct:subject "dynamic",
+        "effect-scoring",
+        "mcp" ;
+    dct:title "DynamicMCPBench" ;
+    cito:providesBackgroundFor data:benchmark-dynamicmcpbench ;
+    dcat:distribution data:distribution-paper-2607-20531-pdf ;
+    afb:arxivId "2607.20531" ;
+    afb:retrievalStanding "PDF_PENDING|NOT_REPRODUCED" ;
+    schema:about data:benchmark-dynamicmcpbench ;
+    schema:url <https://arxiv.org/abs/2607.20531> .
+
+data:paper-2607-26791 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2607.26791" ;
+    dct:relation data:benchmark-qqr ;
+    dct:subject "cyber-range",
+        "incident",
+        "post-compromise",
+        "security" ;
+    dct:title "SecRespond: Benchmarking AI Agents for Real-World Post-Compromise Incident Response" ;
+    cito:providesBackgroundFor data:benchmark-qqr ;
+    dcat:distribution data:distribution-paper-2607-26791-pdf ;
+    afb:arxivId "2607.26791" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-qqr ;
+    schema:url <https://arxiv.org/abs/2607.26791> .
+
+data:paper-2608-02672 a bibo:AcademicArticle,
+        fabio:ResearchPaper,
+        schema:ScholarlyArticle ;
+    dct:identifier "arXiv:2608.02672" ;
+    dct:relation data:benchmark-security-first-terraform ;
+    dct:subject "checkov",
+        "iac",
+        "security",
+        "terraform",
+        "trivy" ;
+    dct:title "Security-First Evaluation of Text-to-Terraform: Benchmarking LLMs and SLMs for Secure IaC Generation" ;
+    cito:providesBackgroundFor data:benchmark-security-first-terraform ;
+    dcat:distribution data:distribution-paper-2608-02672-pdf ;
+    afb:arxivId "2608.02672" ;
+    afb:retrievalStanding "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED" ;
+    schema:about data:benchmark-security-first-terraform ;
+    schema:url <https://arxiv.org/abs/2608.02672> .
+
+data:plan-gymnasium a afb:ExecutionPlan ;
+    dct:title "GYMNASIUM ForwardBench bounded execution plan" ;
+    prov:value "SELECT/CONSTRUCT only until explicit environment authority is present" ;
+    afb:adapterFamily "GYMNASIUM" .
+
+data:policy-live-authority a odrl:Policy ;
+    dct:title "Live provider gyms require explicit authority" .
+
+data:step-browsergym-1-observe a pplan:Step ;
+    dct:title "Observe" .
+
+data:step-browsergym-2-selectadapter a pplan:Step ;
+    dct:title "SelectAdapter" ;
+    pplan:isPrecededBy data:step-browsergym-1-observe .
+
+data:step-browsergym-3-preparesandbox a pplan:Step ;
+    dct:title "PrepareSandbox" ;
+    pplan:isPrecededBy data:step-browsergym-2-selectadapter .
+
+data:step-browsergym-4-runscenario a pplan:Step ;
+    dct:title "RunScenario" ;
+    pplan:isPrecededBy data:step-browsergym-3-preparesandbox .
+
+data:step-browsergym-5-verifyeffect a pplan:Step ;
+    dct:title "VerifyEffect" ;
+    pplan:isPrecededBy data:step-browsergym-4-runscenario .
+
+data:step-cube-1-observe a pplan:Step ;
+    dct:title "Observe" .
+
+data:step-cube-2-selectadapter a pplan:Step ;
+    dct:title "SelectAdapter" ;
+    pplan:isPrecededBy data:step-cube-1-observe .
+
+data:step-cube-3-preparesandbox a pplan:Step ;
+    dct:title "PrepareSandbox" ;
+    pplan:isPrecededBy data:step-cube-2-selectadapter .
+
+data:step-cube-4-runscenario a pplan:Step ;
+    dct:title "RunScenario" ;
+    pplan:isPrecededBy data:step-cube-3-preparesandbox .
+
+data:step-cube-5-verifyeffect a pplan:Step ;
+    dct:title "VerifyEffect" ;
+    pplan:isPrecededBy data:step-cube-4-runscenario .
+
+data:step-gymnasium-1-observe a pplan:Step ;
+    dct:title "Observe" .
+
+data:step-gymnasium-2-selectadapter a pplan:Step ;
+    dct:title "SelectAdapter" ;
+    pplan:isPrecededBy data:step-gymnasium-1-observe .
+
+data:step-gymnasium-3-preparesandbox a pplan:Step ;
+    dct:title "PrepareSandbox" ;
+    pplan:isPrecededBy data:step-gymnasium-2-selectadapter .
+
+data:step-gymnasium-4-runscenario a pplan:Step ;
+    dct:title "RunScenario" ;
+    pplan:isPrecededBy data:step-gymnasium-3-preparesandbox .
+
+data:step-gymnasium-5-verifyeffect a pplan:Step ;
+    dct:title "VerifyEffect" ;
+    pplan:isPrecededBy data:step-gymnasium-4-runscenario .
+
+data:step-harbor-1-observe a pplan:Step ;
+    dct:title "Observe" .
+
+data:step-harbor-2-selectadapter a pplan:Step ;
+    dct:title "SelectAdapter" ;
+    pplan:isPrecededBy data:step-harbor-1-observe .
+
+data:step-harbor-3-preparesandbox a pplan:Step ;
+    dct:title "PrepareSandbox" ;
+    pplan:isPrecededBy data:step-harbor-2-selectadapter .
+
+data:step-harbor-4-runscenario a pplan:Step ;
+    dct:title "RunScenario" ;
+    pplan:isPrecededBy data:step-harbor-3-preparesandbox .
+
+data:step-harbor-5-verifyeffect a pplan:Step ;
+    dct:title "VerifyEffect" ;
+    pplan:isPrecededBy data:step-harbor-4-runscenario .
+
+data:step-kubernetes-1-observe a pplan:Step ;
+    dct:title "Observe" .
+
+data:step-kubernetes-2-selectadapter a pplan:Step ;
+    dct:title "SelectAdapter" ;
+    pplan:isPrecededBy data:step-kubernetes-1-observe .
+
+data:step-kubernetes-3-preparesandbox a pplan:Step ;
+    dct:title "PrepareSandbox" ;
+    pplan:isPrecededBy data:step-kubernetes-2-selectadapter .
+
+data:step-kubernetes-4-runscenario a pplan:Step ;
+    dct:title "RunScenario" ;
+    pplan:isPrecededBy data:step-kubernetes-3-preparesandbox .
+
+data:step-kubernetes-5-verifyeffect a pplan:Step ;
+    dct:title "VerifyEffect" ;
+    pplan:isPrecededBy data:step-kubernetes-4-runscenario .
+
+data:step-mcp-1-observe a pplan:Step ;
+    dct:title "Observe" .
+
+data:step-mcp-2-selectadapter a pplan:Step ;
+    dct:title "SelectAdapter" ;
+    pplan:isPrecededBy data:step-mcp-1-observe .
+
+data:step-mcp-3-preparesandbox a pplan:Step ;
+    dct:title "PrepareSandbox" ;
+    pplan:isPrecededBy data:step-mcp-2-selectadapter .
+
+data:step-mcp-4-runscenario a pplan:Step ;
+    dct:title "RunScenario" ;
+    pplan:isPrecededBy data:step-mcp-3-preparesandbox .
+
+data:step-mcp-5-verifyeffect a pplan:Step ;
+    dct:title "VerifyEffect" ;
+    pplan:isPrecededBy data:step-mcp-4-runscenario .
+
+data:step-native-1-observe a pplan:Step ;
+    dct:title "Observe" .
+
+data:step-native-2-selectadapter a pplan:Step ;
+    dct:title "SelectAdapter" ;
+    pplan:isPrecededBy data:step-native-1-observe .
+
+data:step-native-3-preparesandbox a pplan:Step ;
+    dct:title "PrepareSandbox" ;
+    pplan:isPrecededBy data:step-native-2-selectadapter .
+
+data:step-native-4-runscenario a pplan:Step ;
+    dct:title "RunScenario" ;
+    pplan:isPrecededBy data:step-native-3-preparesandbox .
+
+data:step-native-5-verifyeffect a pplan:Step ;
+    dct:title "VerifyEffect" ;
+    pplan:isPrecededBy data:step-native-4-runscenario .
+
+data:step-terraform-1-observe a pplan:Step ;
+    dct:title "Observe" .
+
+data:step-terraform-2-selectadapter a pplan:Step ;
+    dct:title "SelectAdapter" ;
+    pplan:isPrecededBy data:step-terraform-1-observe .
+
+data:step-terraform-3-preparesandbox a pplan:Step ;
+    dct:title "PrepareSandbox" ;
+    pplan:isPrecededBy data:step-terraform-2-selectadapter .
+
+data:step-terraform-4-runscenario a pplan:Step ;
+    dct:title "RunScenario" ;
+    pplan:isPrecededBy data:step-terraform-3-preparesandbox .
+
+data:step-terraform-5-verifyeffect a pplan:Step ;
+    dct:title "VerifyEffect" ;
+    pplan:isPrecededBy data:step-terraform-4-runscenario .
+
+data:category-iac a skos:Concept ;
+    skos:prefLabel "iac" .
+
+data:category-iac-security a skos:Concept ;
+    skos:prefLabel "iac-security" .
+
+data:category-software a skos:Concept ;
+    skos:prefLabel "software" .
+
+data:category-terminal a skos:Concept ;
+    skos:prefLabel "terminal" .
+
+data:category-tools a skos:Concept ;
+    skos:prefLabel "tools" .
+
+data:vendor-agentbench a afb:VendorProject ;
+    dct:title "Agentbench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/THUDM/AgentBench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "agentbench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/agentbench" ;
+    schema:codeRepository <https://github.com/THUDM/AgentBench> .
+
+data:vendor-agentdojo a afb:VendorProject ;
+    dct:title "Agentdojo" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/ethz-spylab/agentdojo.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "agentdojo" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/agentdojo" ;
+    schema:codeRepository <https://github.com/ethz-spylab/agentdojo> .
+
+data:vendor-agentgym a afb:VendorProject ;
+    dct:title "Agentgym" ;
+    afb:adapterFamily "GYMNASIUM" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/WooooDyy/AgentGym.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "agentgym" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/agentgym" ;
+    schema:codeRepository <https://github.com/WooooDyy/AgentGym> .
+
+data:vendor-agentlab a afb:VendorProject ;
+    dct:title "Agentlab" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/ServiceNow/AgentLab.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "agentlab" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/agentlab" ;
+    schema:codeRepository <https://github.com/ServiceNow/AgentLab> .
+
+data:vendor-aiopslab a afb:VendorProject ;
+    dct:title "Aiopslab" ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/microsoft/AIOpsLab.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "aiopslab" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/aiopslab" ;
+    schema:codeRepository <https://github.com/microsoft/AIOpsLab> .
+
+data:vendor-androidworld a afb:VendorProject ;
+    dct:title "Androidworld" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/google-research/android_world.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "androidworld" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/androidworld" ;
+    schema:codeRepository <https://github.com/google-research/android_world> .
+
+data:vendor-asb a afb:VendorProject ;
+    dct:title "Asb" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/agiresearch/ASB.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "asb" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/asb" ;
+    schema:codeRepository <https://github.com/agiresearch/ASB> .
+
+data:vendor-assetopsbench a afb:VendorProject ;
+    dct:title "Assetopsbench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/IBM/AssetOpsBench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "assetopsbench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/assetopsbench" ;
+    schema:codeRepository <https://github.com/IBM/AssetOpsBench> .
+
+data:vendor-azuregoat a afb:VendorProject ;
+    dct:title "Azuregoat" ;
+    afb:adapterFamily "TERRAFORM" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/ine-labs/AzureGoat.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority true ;
+    afb:slug "azuregoat" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "BLOCKED:LIVE_CLOUD_AUTHORITY" ;
+    afb:vendorPath "vendor/gyms/azuregoat" ;
+    schema:codeRepository <https://github.com/ine-labs/AzureGoat> .
+
+data:vendor-bountytasks a afb:VendorProject ;
+    dct:title "Bountytasks" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/bountybench/bountytasks.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "bountytasks" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "PARTIAL_ALIVE" ;
+    afb:vendorPath "vendor/gyms/bountytasks" ;
+    schema:codeRepository <https://github.com/bountybench/bountytasks> .
+
+data:vendor-cloudfoxable a afb:VendorProject ;
+    dct:title "Cloudfoxable" ;
+    afb:adapterFamily "TERRAFORM" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/BishopFox/cloudfoxable.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority true ;
+    afb:slug "cloudfoxable" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "BLOCKED:LIVE_CLOUD_AUTHORITY" ;
+    afb:vendorPath "vendor/gyms/cloudfoxable" ;
+    schema:codeRepository <https://github.com/BishopFox/cloudfoxable> .
+
+data:vendor-cloudgoat a afb:VendorProject ;
+    dct:title "Cloudgoat" ;
+    afb:adapterFamily "TERRAFORM" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/RhinoSecurityLabs/cloudgoat.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority true ;
+    afb:slug "cloudgoat" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "BLOCKED:LIVE_CLOUD_AUTHORITY" ;
+    afb:vendorPath "vendor/gyms/cloudgoat" ;
+    schema:codeRepository <https://github.com/RhinoSecurityLabs/cloudgoat> .
+
+data:vendor-crmarena a afb:VendorProject ;
+    dct:title "Crmarena" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/SalesforceAIResearch/CRMArena.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "crmarena" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/crmarena" ;
+    schema:codeRepository <https://github.com/SalesforceAIResearch/CRMArena> .
+
+data:vendor-cube-harness a afb:VendorProject ;
+    dct:title "Cube Harness" ;
+    afb:adapterFamily "CUBE" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/The-AI-Alliance/cube-harness.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "cube-harness" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/cube-harness" ;
+    schema:codeRepository <https://github.com/The-AI-Alliance/cube-harness> .
+
+data:vendor-cybench a afb:VendorProject ;
+    dct:title "Cybench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/andyzorigin/cybench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "cybench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/cybench" ;
+    schema:codeRepository <https://github.com/andyzorigin/cybench> .
+
+data:vendor-cybergym-e2e a afb:VendorProject ;
+    dct:title "Cybergym E2E" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/sunblaze-ucb/cybergym-e2e.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "cybergym-e2e" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/cybergym-e2e" ;
+    schema:codeRepository <https://github.com/sunblaze-ucb/cybergym-e2e> .
+
+data:vendor-devops-gym a afb:VendorProject ;
+    dct:title "Devops Gym" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/ucsb-mlsec/DevOps-Gym.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "devops-gym" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/devops-gym" ;
+    schema:codeRepository <https://github.com/ucsb-mlsec/DevOps-Gym> .
+
+data:vendor-doomarena a afb:VendorProject ;
+    dct:title "Doomarena" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/ServiceNow/DoomArena.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "doomarena" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/doomarena" ;
+    schema:codeRepository <https://github.com/ServiceNow/DoomArena> .
+
+data:vendor-enterprisebench a afb:VendorProject ;
+    dct:title "Enterprisebench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/ast-fri/EnterpriseBench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "enterprisebench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "BLOCKED:DATA_TERMS_OR_ACCESS" ;
+    afb:vendorPath "vendor/gyms/enterprisebench" ;
+    schema:codeRepository <https://github.com/ast-fri/EnterpriseBench> .
+
+data:vendor-gcpgoat a afb:VendorProject ;
+    dct:title "Gcpgoat" ;
+    afb:adapterFamily "TERRAFORM" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/ine-labs/GCPGoat.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority true ;
+    afb:slug "gcpgoat" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "BLOCKED:LIVE_CLOUD_AUTHORITY" ;
+    afb:vendorPath "vendor/gyms/gcpgoat" ;
+    schema:codeRepository <https://github.com/ine-labs/GCPGoat> .
+
+data:vendor-general-agentbench a afb:VendorProject ;
+    dct:title "General Agentbench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/cxcscmu/General-AgentBench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "general-agentbench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/general-agentbench" ;
+    schema:codeRepository <https://github.com/cxcscmu/General-AgentBench> .
+
+data:vendor-inspect-evals a afb:VendorProject ;
+    dct:title "Inspect Evals" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/UKGovernmentBEIS/inspect_evals.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "inspect-evals" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/inspect-evals" ;
+    schema:codeRepository <https://github.com/UKGovernmentBEIS/inspect_evals> .
+
+data:vendor-kubernetes-goat a afb:VendorProject ;
+    dct:title "Kubernetes Goat" ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/madhuakula/kubernetes-goat.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "kubernetes-goat" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/kubernetes-goat" ;
+    schema:codeRepository <https://github.com/madhuakula/kubernetes-goat> .
+
+data:vendor-mcp-bench a afb:VendorProject ;
+    dct:title "Mcp Bench" ;
+    afb:adapterFamily "MCP" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/Accenture/mcp-bench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "mcp-bench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "BLOCKED:EXTERNAL_API_KEYS" ;
+    afb:vendorPath "vendor/gyms/mcp-bench" ;
+    schema:codeRepository <https://github.com/Accenture/mcp-bench> .
+
+data:vendor-mcp-universe a afb:VendorProject ;
+    dct:title "Mcp Universe" ;
+    afb:adapterFamily "MCP" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/SalesforceAIResearch/MCP-Universe.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "mcp-universe" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "BLOCKED:EXTERNAL_SERVICES_OR_KEYS" ;
+    afb:vendorPath "vendor/gyms/mcp-universe" ;
+    schema:codeRepository <https://github.com/SalesforceAIResearch/MCP-Universe> .
+
+data:vendor-mcpmark a afb:VendorProject ;
+    dct:title "Mcpmark" ;
+    afb:adapterFamily "MCP" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/eval-sys/mcpmark.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "mcpmark" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/mcpmark" ;
+    schema:codeRepository <https://github.com/eval-sys/mcpmark> .
+
+data:vendor-o11y-bench a afb:VendorProject ;
+    dct:title "O11Y Bench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/grafana/o11y-bench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "o11y-bench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/o11y-bench" ;
+    schema:codeRepository <https://github.com/grafana/o11y-bench> .
+
+data:vendor-osworld a afb:VendorProject ;
+    dct:title "Osworld" ;
+    afb:adapterFamily "CUBE" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/xlang-ai/OSWorld.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "osworld" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/osworld" ;
+    schema:codeRepository <https://github.com/xlang-ai/OSWorld> .
+
+data:vendor-qqr a afb:VendorProject ;
+    dct:title "Qqr" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/Alibaba-NLP/qqr.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "qqr" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "PARTIAL_ALIVE" ;
+    afb:vendorPath "vendor/gyms/qqr" ;
+    schema:codeRepository <https://github.com/Alibaba-NLP/qqr> .
+
+data:vendor-r2e-gym a afb:VendorProject ;
+    dct:title "R2E Gym" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/R2E-Gym/R2E-Gym.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "r2e-gym" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/r2e-gym" ;
+    schema:codeRepository <https://github.com/R2E-Gym/R2E-Gym> .
+
+data:vendor-rcaeval a afb:VendorProject ;
+    dct:title "Rcaeval" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/phamquiluan/RCAEval.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "rcaeval" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/rcaeval" ;
+    schema:codeRepository <https://github.com/phamquiluan/RCAEval> .
+
+data:vendor-sadservers a afb:VendorProject ;
+    dct:title "Sadservers" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/SadServers/sadservers.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "sadservers" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "BLOCKED:SCENARIO_SOURCE_NOT_PUBLIC" ;
+    afb:vendorPath "vendor/gyms/sadservers" ;
+    schema:codeRepository <https://github.com/SadServers/sadservers> .
+
+data:vendor-scuba a afb:VendorProject ;
+    dct:title "Scuba" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/SalesforceAIResearch/SCUBA.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "scuba" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/scuba" ;
+    schema:codeRepository <https://github.com/SalesforceAIResearch/SCUBA> .
+
+data:vendor-sec-bench a afb:VendorProject ;
+    dct:title "Sec Bench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/SEC-bench/SEC-bench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "sec-bench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/sec-bench" ;
+    schema:codeRepository <https://github.com/SEC-bench/SEC-bench> .
+
+data:vendor-sre-bench a afb:VendorProject ;
+    dct:title "Sre Bench" ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/agentkube/SRE-bench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "sre-bench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/sre-bench" ;
+    schema:codeRepository <https://github.com/agentkube/SRE-bench> .
+
+data:vendor-sregym a afb:VendorProject ;
+    dct:title "Sregym" ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/SREGym/SREGym.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "sregym" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/sregym" ;
+    schema:codeRepository <https://github.com/SREGym/SREGym> .
+
+data:vendor-st-webagentbench a afb:VendorProject ;
+    dct:title "St Webagentbench" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/segev-shlomov/ST-WebAgentBench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "st-webagentbench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/st-webagentbench" ;
+    schema:codeRepository <https://github.com/segev-shlomov/ST-WebAgentBench> .
+
+data:vendor-swe-bench a afb:VendorProject ;
+    dct:title "Swe Bench" ;
+    afb:adapterFamily "HARBOR" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/SWE-bench/SWE-bench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "swe-bench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/swe-bench" ;
+    schema:codeRepository <https://github.com/SWE-bench/SWE-bench> .
+
+data:vendor-tau2-bench a afb:VendorProject ;
+    dct:title "Tau2 Bench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/sierra-research/tau2-bench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "tau2-bench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/tau2-bench" ;
+    schema:codeRepository <https://github.com/sierra-research/tau2-bench> .
+
+data:vendor-terminal-bench a afb:VendorProject ;
+    dct:title "Terminal Bench" ;
+    afb:adapterFamily "HARBOR" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/harbor-framework/terminal-bench-2.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "terminal-bench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/terminal-bench" ;
+    schema:codeRepository <https://github.com/harbor-framework/terminal-bench-2> .
+
+data:vendor-terminal-bench-pro a afb:VendorProject ;
+    dct:title "Terminal Bench Pro" ;
+    afb:adapterFamily "HARBOR" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/alibaba/terminal-bench-pro.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "terminal-bench-pro" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/terminal-bench-pro" ;
+    schema:codeRepository <https://github.com/alibaba/terminal-bench-pro> .
+
+data:vendor-terragoat a afb:VendorProject ;
+    dct:title "Terragoat" ;
+    afb:adapterFamily "TERRAFORM" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/bridgecrewio/terragoat.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "terragoat" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/terragoat" ;
+    schema:codeRepository <https://github.com/bridgecrewio/terragoat> .
+
+data:vendor-the-agent-company a afb:VendorProject ;
+    dct:title "The Agent Company" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/TheAgentCompany/TheAgentCompany.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "the-agent-company" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/the-agent-company" ;
+    schema:codeRepository <https://github.com/TheAgentCompany/TheAgentCompany> .
+
+data:vendor-toolsandbox a afb:VendorProject ;
+    dct:title "Toolsandbox" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/apple/ToolSandbox.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "toolsandbox" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/toolsandbox" ;
+    schema:codeRepository <https://github.com/apple/ToolSandbox> .
+
+data:vendor-tua-bench a afb:VendorProject ;
+    dct:title "Tua Bench" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/facebookresearch/TUA-Bench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "tua-bench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/tua-bench" ;
+    schema:codeRepository <https://github.com/facebookresearch/TUA-Bench> .
+
+data:vendor-webarena a afb:VendorProject ;
+    dct:title "Webarena" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/web-arena-x/webarena.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "webarena" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/webarena" ;
+    schema:codeRepository <https://github.com/web-arena-x/webarena> .
+
+data:vendor-wonderbread a afb:VendorProject ;
+    dct:title "Wonderbread" ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/HazyResearch/wonderbread.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "wonderbread" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/wonderbread" ;
+    schema:codeRepository <https://github.com/HazyResearch/wonderbread> .
+
+data:vendor-workarena a afb:VendorProject ;
+    dct:title "Workarena" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/ServiceNow/WorkArena.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "workarena" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/workarena" ;
+    schema:codeRepository <https://github.com/ServiceNow/WorkArena> .
+
+data:category-agents a skos:Concept ;
+    skos:prefLabel "agents" .
+
+data:benchmark-agentbench a afb:Benchmark ;
+    dct:source data:vendor-agentbench ;
+    dct:subject data:category-agents ;
+    dct:title "Agentbench" ;
+    prov:wasDerivedFrom data:paper-2308-03688 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "agentbench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-agentbench .
+
+data:benchmark-androidworld a afb:Benchmark ;
+    dct:source data:vendor-androidworld ;
+    dct:subject data:category-computer-use ;
+    dct:title "Androidworld" ;
+    prov:wasDerivedFrom data:paper-2405-14573 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "androidworld" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-androidworld .
+
+data:benchmark-arfbench a afb:Benchmark ;
+    dct:subject data:category-incident ;
+    dct:title "ARFBench" ;
+    prov:wasDerivedFrom data:paper-2604-21199 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "arfbench" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-native .
+
+data:benchmark-assetopsbench a afb:Benchmark ;
+    dct:source data:vendor-assetopsbench ;
+    dct:subject data:category-enterprise ;
+    dct:title "Assetopsbench" ;
+    prov:wasDerivedFrom data:paper-2506-03828 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "assetopsbench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-assetopsbench .
+
+data:benchmark-browsergym a afb:Benchmark ;
+    dct:source data:vendor-browsergym ;
+    dct:subject data:category-browser ;
+    dct:title "Browsergym" ;
+    prov:wasDerivedFrom data:paper-2412-05467 ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "browsergym" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-browsergym .
+
+data:benchmark-crmarena a afb:Benchmark ;
+    dct:source data:vendor-crmarena ;
+    dct:subject data:category-enterprise ;
+    dct:title "Crmarena" ;
+    prov:wasDerivedFrom data:paper-2505-18878 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "crmarena" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-crmarena .
+
+data:benchmark-cube-standard a afb:Benchmark ;
+    dct:source data:vendor-cube-standard ;
+    dct:subject data:category-harness ;
+    dct:title "Cube Standard" ;
+    prov:wasDerivedFrom data:paper-2603-15798 ;
+    afb:adapterFamily "CUBE" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "cube-standard" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-cube ;
+    afb:vendorProject data:vendor-cube-standard .
+
+data:benchmark-cyber-defense-benchmark a afb:Benchmark ;
+    dct:subject data:category-security ;
+    dct:title "Cyber Defense Benchmark" ;
+    prov:wasDerivedFrom data:paper-2604-19533 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "cyber-defense-benchmark" ;
+    afb:sourceStanding "PARTIAL_ALIVE" ;
+    afb:usesPlan data:plan-native .
+
+data:benchmark-cybergym-e2e a afb:Benchmark ;
+    dct:source data:vendor-cybergym-e2e ;
+    dct:subject data:category-security ;
+    dct:title "Cybergym E2E" ;
+    prov:wasDerivedFrom data:paper-2606-04460 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "cybergym-e2e" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-cybergym-e2e .
+
+data:benchmark-devops-gym a afb:Benchmark ;
+    dct:source data:vendor-devops-gym ;
+    dct:subject data:category-devops ;
+    dct:title "Devops Gym" ;
+    prov:wasDerivedFrom data:paper-2601-20882 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "devops-gym" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-devops-gym .
+
+data:benchmark-doomarena a afb:Benchmark ;
+    dct:source data:vendor-doomarena ;
+    dct:subject data:category-security ;
+    dct:title "Doomarena" ;
+    prov:wasDerivedFrom data:paper-2504-14064 ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "doomarena" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-doomarena .
+
+data:benchmark-dynamicmcpbench a afb:Benchmark ;
+    dct:subject data:category-mcp ;
+    dct:title "DynamicMCPBench" ;
+    prov:wasDerivedFrom data:paper-2607-20531 ;
+    afb:adapterFamily "MCP" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "dynamicmcpbench" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-mcp .
+
+data:benchmark-enterprisebench a afb:Benchmark ;
+    dct:source data:vendor-enterprisebench ;
+    dct:subject data:category-enterprise ;
+    dct:title "Enterprisebench" ;
+    prov:wasDerivedFrom data:paper-2510-27287 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "enterprisebench" ;
+    afb:sourceStanding "BLOCKED:DATA_TERMS_OR_ACCESS" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-enterprisebench .
+
+data:benchmark-livemcpbench a afb:Benchmark ;
+    dct:subject data:category-mcp ;
+    dct:title "LiveMCPBench" ;
+    prov:wasDerivedFrom data:paper-2508-01780 ;
+    afb:adapterFamily "MCP" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "livemcpbench" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-mcp .
+
+data:benchmark-mcp-agentbench a afb:Benchmark ;
+    dct:subject data:category-mcp ;
+    dct:title "MCP-AgentBench" ;
+    prov:wasDerivedFrom data:paper-2509-09734 ;
+    afb:adapterFamily "MCP" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "mcp-agentbench" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-mcp .
+
+data:benchmark-mcp-bench a afb:Benchmark ;
+    dct:source data:vendor-mcp-bench ;
+    dct:subject data:category-mcp ;
+    dct:title "Mcp Bench" ;
+    prov:wasDerivedFrom data:paper-2508-20453 ;
+    afb:adapterFamily "MCP" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "mcp-bench" ;
+    afb:sourceStanding "BLOCKED:EXTERNAL_API_KEYS" ;
+    afb:usesPlan data:plan-mcp ;
+    afb:vendorProject data:vendor-mcp-bench .
+
+data:benchmark-mcp-universe a afb:Benchmark ;
+    dct:source data:vendor-mcp-universe ;
+    dct:subject data:category-mcp ;
+    dct:title "Mcp Universe" ;
+    prov:wasDerivedFrom data:paper-2508-14704 ;
+    afb:adapterFamily "MCP" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "mcp-universe" ;
+    afb:sourceStanding "BLOCKED:EXTERNAL_SERVICES_OR_KEYS" ;
+    afb:usesPlan data:plan-mcp ;
+    afb:vendorProject data:vendor-mcp-universe .
+
+data:benchmark-mcpmark a afb:Benchmark ;
+    dct:source data:vendor-mcpmark ;
+    dct:subject data:category-mcp ;
+    dct:title "Mcpmark" ;
+    prov:wasDerivedFrom data:paper-2509-24002 ;
+    afb:adapterFamily "MCP" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "mcpmark" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-mcp ;
+    afb:vendorProject data:vendor-mcpmark .
+
+data:benchmark-multi-iac-eval a afb:Benchmark ;
+    dct:subject data:category-iac ;
+    dct:title "Multi-IaC-Eval" ;
+    prov:wasDerivedFrom data:paper-2509-05303 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "multi-iac-eval" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-native .
+
+data:benchmark-osworld a afb:Benchmark ;
+    dct:source data:vendor-osworld ;
+    dct:subject data:category-computer-use ;
+    dct:title "Osworld" ;
+    prov:wasDerivedFrom data:paper-2404-07972 ;
+    afb:adapterFamily "CUBE" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "osworld" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-cube ;
+    afb:vendorProject data:vendor-osworld .
+
+data:benchmark-pm-llm-benchmark a afb:Benchmark ;
+    dct:subject data:category-process-mining ;
+    dct:title "PM-LLM-Benchmark" ;
+    prov:wasDerivedFrom data:paper-2407-13244 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "pm-llm-benchmark" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-native .
+
+data:benchmark-qqr a afb:Benchmark ;
+    dct:source data:vendor-qqr ;
+    dct:subject data:category-security ;
+    dct:title "Qqr" ;
+    prov:wasDerivedFrom data:paper-2607-26791 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "qqr" ;
+    afb:sourceStanding "PARTIAL_ALIVE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-qqr .
+
+data:benchmark-r2e-gym a afb:Benchmark ;
+    dct:source data:vendor-r2e-gym ;
+    dct:subject data:category-software ;
+    dct:title "R2E Gym" ;
+    prov:wasDerivedFrom data:paper-2504-07164 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "r2e-gym" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-r2e-gym .
+
+data:benchmark-scuba a afb:Benchmark ;
+    dct:source data:vendor-scuba ;
+    dct:subject data:category-computer-use ;
+    dct:title "Scuba" ;
+    prov:wasDerivedFrom data:paper-2509-26506 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "scuba" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-scuba .
+
+data:benchmark-security-first-terraform a afb:Benchmark ;
+    dct:subject data:category-iac-security ;
+    dct:title "Security-First Terraform" ;
+    prov:wasDerivedFrom data:paper-2608-02672 ;
+    afb:adapterFamily "TERRAFORM" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "security-first-terraform" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-terraform .
+
+data:benchmark-sir-bench a afb:Benchmark ;
+    dct:subject data:category-security ;
+    dct:title "SIR-Bench" ;
+    prov:wasDerivedFrom data:paper-2604-12040 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "sir-bench" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-native .
+
+data:benchmark-sre-bench a afb:Benchmark ;
+    dct:source data:vendor-sre-bench ;
+    dct:subject data:category-sre ;
+    dct:title "Sre Bench" ;
+    prov:wasDerivedFrom data:paper-2606-08590 ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "sre-bench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-kubernetes ;
+    afb:vendorProject data:vendor-sre-bench .
+
+data:benchmark-sregym a afb:Benchmark ;
+    dct:source data:vendor-sregym ;
+    dct:subject data:category-sre ;
+    dct:title "Sregym" ;
+    prov:wasDerivedFrom data:paper-2605-07161 ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "sregym" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-kubernetes ;
+    afb:vendorProject data:vendor-sregym .
+
+data:benchmark-terminal-bench a afb:Benchmark ;
+    dct:source data:vendor-terminal-bench ;
+    dct:subject data:category-terminal ;
+    dct:title "Terminal Bench" ;
+    prov:wasDerivedFrom data:paper-2601-11868 ;
+    afb:adapterFamily "HARBOR" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "terminal-bench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-harbor ;
+    afb:vendorProject data:vendor-terminal-bench .
+
+data:benchmark-the-agent-company a afb:Benchmark ;
+    dct:source data:vendor-the-agent-company ;
+    dct:subject data:category-enterprise ;
+    dct:title "The Agent Company" ;
+    prov:wasDerivedFrom data:paper-2412-14161 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "the-agent-company" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-the-agent-company .
+
+data:benchmark-toolsandbox a afb:Benchmark ;
+    dct:source data:vendor-toolsandbox ;
+    dct:subject data:category-tools ;
+    dct:title "Toolsandbox" ;
+    prov:wasDerivedFrom data:paper-2408-04682 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "toolsandbox" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-toolsandbox .
+
+data:benchmark-tua-bench a afb:Benchmark ;
+    dct:source data:vendor-tua-bench ;
+    dct:subject data:category-computer-use ;
+    dct:title "Tua Bench" ;
+    prov:wasDerivedFrom data:paper-2606-28480 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "tua-bench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-tua-bench .
+
+data:benchmark-verifier-first-terraform a afb:Benchmark ;
+    dct:subject data:category-iac ;
+    dct:title "Verifier-First Terraform" ;
+    prov:wasDerivedFrom data:paper-2607-20478 ;
+    afb:adapterFamily "TERRAFORM" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "verifier-first-terraform" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-terraform .
+
+data:benchmark-wonderbread a afb:Benchmark ;
+    dct:source data:vendor-wonderbread ;
+    dct:subject data:category-enterprise ;
+    dct:title "Wonderbread" ;
+    prov:wasDerivedFrom data:paper-2406-13264 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "wonderbread" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-wonderbread .
+
+data:benchmark-world-of-workflows a afb:Benchmark ;
+    dct:subject data:category-enterprise ;
+    dct:title "World of Workflows" ;
+    prov:wasDerivedFrom data:paper-2601-22130 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "world-of-workflows" ;
+    afb:sourceStanding "UNKNOWN_REPOSITORY" ;
+    afb:usesPlan data:plan-native .
+
+data:category-cloud-security a skos:Concept ;
+    skos:prefLabel "cloud-security" .
+
+data:category-computer-use a skos:Concept ;
+    skos:prefLabel "computer-use" .
+
+data:category-sre a skos:Concept ;
+    skos:prefLabel "sre" .
+
+data:plan-cube a afb:ExecutionPlan ;
+    dct:title "CUBE ForwardBench bounded execution plan" ;
+    prov:value "SELECT/CONSTRUCT only until explicit environment authority is present" ;
+    afb:adapterFamily "CUBE" .
+
+data:vendor-cube-standard a afb:VendorProject ;
+    dct:title "Cube Standard" ;
+    afb:adapterFamily "CUBE" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/The-AI-Alliance/cube-standard.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "cube-standard" ;
+    afb:smokeProfile "core" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/cube-standard" ;
+    schema:codeRepository <https://github.com/The-AI-Alliance/cube-standard> .
+
+data:vendor-harbor a afb:VendorProject ;
+    dct:title "Harbor" ;
+    afb:adapterFamily "HARBOR" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/harbor-framework/harbor.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "harbor" ;
+    afb:smokeProfile "core" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/harbor" ;
+    schema:codeRepository <https://github.com/harbor-framework/harbor> .
+
+data:category-harness a skos:Concept ;
+    skos:prefLabel "harness" .
+
+data:plan-harbor a afb:ExecutionPlan ;
+    dct:title "HARBOR ForwardBench bounded execution plan" ;
+    prov:value "SELECT/CONSTRUCT only until explicit environment authority is present" ;
+    afb:adapterFamily "HARBOR" .
+
+data:category-mcp a skos:Concept ;
+    skos:prefLabel "mcp" .
+
+data:plan-mcp a afb:ExecutionPlan ;
+    dct:title "MCP ForwardBench bounded execution plan" ;
+    prov:value "SELECT/CONSTRUCT only until explicit environment authority is present" ;
+    afb:adapterFamily "MCP" .
+
+data:benchmark-aiopslab a afb:Benchmark ;
+    dct:source data:vendor-aiopslab ;
+    dct:subject data:category-aiops ;
+    dct:title "Aiopslab" ;
+    prov:wasDerivedFrom data:paper-2407-12165,
+        data:paper-2501-06706 ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "aiopslab" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-kubernetes ;
+    afb:vendorProject data:vendor-aiopslab .
+
+data:benchmark-itbench a afb:Benchmark ;
+    dct:source data:vendor-itbench ;
+    dct:subject data:category-itops ;
+    dct:title "Itbench" ;
+    prov:wasDerivedFrom data:paper-2502-05352,
+        data:paper-2506-02009 ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "itbench" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-kubernetes ;
+    afb:vendorProject data:vendor-itbench .
+
+data:benchmark-rcaeval a afb:Benchmark ;
+    dct:source data:vendor-rcaeval ;
+    dct:subject data:category-root-cause-analysis ;
+    dct:title "Rcaeval" ;
+    prov:wasDerivedFrom data:paper-2412-17015,
+        data:paper-2606-29193 ;
+    afb:adapterFamily "NATIVE_COMMAND" ;
+    afb:localSafe true ;
+    afb:requiresAuthority false ;
+    afb:slug "rcaeval" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-native ;
+    afb:vendorProject data:vendor-rcaeval .
+
+data:benchmark-workarena a afb:Benchmark ;
+    dct:source data:vendor-workarena ;
+    dct:subject data:category-enterprise ;
+    dct:title "Workarena" ;
+    prov:wasDerivedFrom data:paper-2403-07718,
+        data:paper-2407-05291 ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe false ;
+    afb:requiresAuthority false ;
+    afb:slug "workarena" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:usesPlan data:plan-browsergym ;
+    afb:vendorProject data:vendor-workarena .
+
+data:plan-terraform a afb:ExecutionPlan ;
+    dct:title "TERRAFORM ForwardBench bounded execution plan" ;
+    prov:value "SELECT/CONSTRUCT only until explicit environment authority is present" ;
+    afb:adapterFamily "TERRAFORM" .
+
+data:plan-kubernetes a afb:ExecutionPlan ;
+    dct:title "KUBERNETES ForwardBench bounded execution plan" ;
+    prov:value "SELECT/CONSTRUCT only until explicit environment authority is present" ;
+    afb:adapterFamily "KUBERNETES" .
+
+data:vendor-itbench a afb:VendorProject ;
+    dct:title "Itbench" ;
+    afb:adapterFamily "KUBERNETES" ;
+    afb:localSafe false ;
+    afb:repositoryUrl "https://github.com/itbench-hub/ITBench.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "itbench" ;
+    afb:smokeProfile "none" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/itbench" ;
+    schema:codeRepository <https://github.com/itbench-hub/ITBench> .
+
+data:category-browser a skos:Concept ;
+    skos:prefLabel "browser" .
+
+data:category-enterprise a skos:Concept ;
+    skos:prefLabel "enterprise" .
+
+data:category-security a skos:Concept ;
+    skos:prefLabel "security" .
+
+data:plan-browsergym a afb:ExecutionPlan ;
+    dct:title "BROWSERGYM ForwardBench bounded execution plan" ;
+    prov:value "SELECT/CONSTRUCT only until explicit environment authority is present" ;
+    afb:adapterFamily "BROWSERGYM" .
+
+data:vendor-browsergym a afb:VendorProject ;
+    dct:title "Browsergym" ;
+    afb:adapterFamily "BROWSERGYM" ;
+    afb:localSafe true ;
+    afb:repositoryUrl "https://github.com/ServiceNow/BrowserGym.git"^^xsd:anyURI ;
+    afb:requestedRef "HEAD" ;
+    afb:requiresAuthority false ;
+    afb:slug "browsergym" ;
+    afb:smokeProfile "core" ;
+    afb:sourceStanding "CANDIDATE" ;
+    afb:vendorPath "vendor/gyms/browsergym" ;
+    schema:codeRepository <https://github.com/ServiceNow/BrowserGym> .
+
+data:plan-native a afb:ExecutionPlan ;
+    dct:title "NATIVE_COMMAND ForwardBench bounded execution plan" ;
+    prov:value "SELECT/CONSTRUCT only until explicit environment authority is present" ;
+    afb:adapterFamily "NATIVE_COMMAND" .
+

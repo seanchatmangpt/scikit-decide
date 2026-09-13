@@ -1,0 +1,3 @@
+{
+  "schema":"ggen.tcps-ready-set-consumer/v2","consumer_repo":"seanchatmangpt/autofde-lab","consumer_base":"0b968955f69698fee50e9a132a87de287f15a0e7","consumer_ggen_contract":"OBSERVED","producer_repo":"seanchatmangpt/ggen-marketplace","producer_head":"aef231ceb3e27150366a11b547dd115720230880","producer_pack":"portfolio-epistemic-observability-pack","producer_capability":"R78_TCPS_READY_SET_CAPITAL","allocation_law":"legality-before-priority","authority":"VERIFY|CONSTRUCT","consequential_do":false,"standing":"ADMITTED"
+}

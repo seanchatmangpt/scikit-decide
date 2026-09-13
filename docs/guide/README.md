@@ -32,7 +32,7 @@ Exact prints and outputs may vary depending on which domains/solvers are registe
 This step can be skipped if a domain has already been defined. Otherwise, here is how to load one from the catalog of registered domains:
 
 ```python
-from skdecide import utils
+from autofde_lab import utils
 
 print(utils.get_registered_domains())
 # prints: ['GymDomain', 'MasterMind', 'Maze', 'RockPaperScissors', ...]
@@ -47,10 +47,10 @@ This step can be skipped if a solver is already known to be compatible and selec
 ```python
 compatible_solvers = utils.match_solvers(MyDomain())
 print(compatible_solvers)
-# prints: [<class 'skdecide.hub.solver.p_astar.p_astar.Astar'>, ...]
+# prints: [<class 'autofde_lab.hub.solver.p_astar.p_astar.Astar'>, ...]
 
 # select Python A* solver and instanciate with default parameters
-from skdecide.hub.solver.p_astar import Astar
+from autofde_lab.hub.solver.p_astar import Astar
 mysolver = Astar(domain_factory=MyDomain)
 ```
 

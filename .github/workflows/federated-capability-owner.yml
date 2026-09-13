@@ -1,0 +1,18 @@
+name: Federated Capability Owner
+
+on:
+  pull_request:
+    paths:
+      - 'ecosystem/capability-owner.toml'
+      - '.github/workflows/federated-capability-owner.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  federation:
+    uses: seanchatmangpt/chatman-ecosystem/.github/workflows/federated-capability-owner.yml@7430dfc9b3ca138e703430d25de7c6f48a8d6ade
+    with:
+      control-plane-sha: 7430dfc9b3ca138e703430d25de7c6f48a8d6ade
+      descriptor-path: ecosystem/capability-owner.toml

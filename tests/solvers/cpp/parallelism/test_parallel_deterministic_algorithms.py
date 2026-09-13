@@ -9,17 +9,17 @@ from typing import NamedTuple, Optional
 from pathos.helpers import mp
 from tqdm import tqdm
 
-from skdecide import (
+from autofde_lab import (
     DeterministicPlanningDomain,
     EnvironmentOutcome,
     Space,
     TransitionOutcome,
     Value,
 )
-from skdecide.builders.domain import Actions
-from skdecide.hub.solver.mcts.mcts import MCTS
-from skdecide.hub.space.gym import EnumSpace, ListSpace, MultiDiscreteSpace
-from skdecide.utils import load_registered_solver, rollout
+from autofde_lab.builders.domain import Actions
+from autofde_lab.hub.solver.mcts.mcts import MCTS
+from autofde_lab.hub.space.gym import EnumSpace, ListSpace, MultiDiscreteSpace
+from autofde_lab.utils import load_registered_solver, rollout
 
 
 class State(NamedTuple):

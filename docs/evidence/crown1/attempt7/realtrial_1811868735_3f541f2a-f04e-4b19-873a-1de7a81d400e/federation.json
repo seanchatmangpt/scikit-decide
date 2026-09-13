@@ -1,0 +1,386 @@
+[
+  {
+    "planner": "AOstar",
+    "outcome": "CRASHED",
+    "plan": [],
+    "duration_s": 0.03131433390080929,
+    "detail": "planner process exited with code 1 without returning an attempt"
+  },
+  {
+    "planner": "Astar",
+    "outcome": "REFUSED",
+    "plan": [
+      "pick_key[key=2]"
+    ],
+    "duration_s": 0.01820912503171712,
+    "detail": "proposed inapplicable action 'open_lock' at step 1; applicable=[]"
+  },
+  {
+    "planner": "pLRTAstar",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.07197483303025365,
+    "detail": "proposed inapplicable action None at step 0; applicable=['force_latch', 'pick_key[key=0]', 'pick_key[key=1]', 'pick_key[key=2]']"
+  },
+  {
+    "planner": "LRTAstar",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 0.016996333957649767,
+    "detail": "proposed inapplicable action 'pick_key[key=2]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "MCTS",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01498037506826222,
+    "detail": "RuntimeError: Cannot sample an empty space."
+  },
+  {
+    "planner": "UCT",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014771832968108356,
+    "detail": "RuntimeError: Cannot sample an empty space."
+  },
+  {
+    "planner": "BFWS",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.01641804096288979,
+    "detail": "proposed inapplicable action 'drop_key' at step 0; applicable=['force_latch', 'pick_key[key=0]', 'pick_key[key=1]', 'pick_key[key=2]']"
+  },
+  {
+    "planner": "IW",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 15.045863625011407,
+    "detail": ""
+  },
+  {
+    "planner": "RIW",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.017015625024214387,
+    "detail": "RuntimeError: In sequential mode, nodes labelled as unsolved must have unsolved children."
+  },
+  {
+    "planner": "LRTDP",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 0.016228208085522056,
+    "detail": "proposed inapplicable action 'pick_key[key=1]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "ILAOstar",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 25.012328083976172,
+    "detail": "killed after 20.0s wall clock (native solve did not return)"
+  },
+  {
+    "planner": "pAstar",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.016399082960560918,
+    "detail": "KeyError: State(facts=frozenset({'dead_end=False', 'held_key=-1', 'final_open=False', 'locks_open=0', 'rack_jammed=False', 'depth=3', 'holding_key=False', 'solved=False'}))"
+  },
+  {
+    "planner": "MARTDP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015280292020179331,
+    "detail": "ValueError: SKDECIDE exception: MA-RTDP algorithm needs python domain for implementing get_agent_applicable_actions()"
+  },
+  {
+    "planner": "MAHD",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01294587494339794,
+    "detail": "TypeError: MAHD.__init__() got an unexpected keyword argument 'domain_factory'"
+  },
+  {
+    "planner": "MaxentIRL",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01610887493006885,
+    "detail": "AttributeError: 'Discrete' object has no attribute 'low'"
+  },
+  {
+    "planner": "POMCP",
+    "outcome": "REFUSED",
+    "plan": [
+      "pick_key[key=1]"
+    ],
+    "duration_s": 0.03779620805289596,
+    "detail": "proposed inapplicable action 'pick_key[key=1]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "pPOMCP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01465537492185831,
+    "detail": "AttributeError: 'pPOMCP' object has no attribute '_belief'"
+  },
+  {
+    "planner": "RayRLlib",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.012685041991062462,
+    "detail": "TypeError: RayRLlib.__init__() missing 2 required positional arguments: 'algo_class' and 'train_iterations'"
+  },
+  {
+    "planner": "SimpleGreedy",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015408957959152758,
+    "detail": "ValueError: max() iterable argument is empty"
+  },
+  {
+    "planner": "StableBaseline",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01202758401632309,
+    "detail": "TypeError: StableBaseline.__init__() missing 2 required positional arguments: 'algo_class' and 'baselines_policy'"
+  },
+  {
+    "planner": "UPSolver",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.012613583006896079,
+    "detail": "TypeError: UPSolver.__init__() missing 1 required positional argument: 'operation_mode'"
+  },
+  {
+    "planner": "VI",
+    "outcome": "FAILED",
+    "plan": [
+      "pick_key[key=0]",
+      "drop_key",
+      "pick_key[key=0]",
+      "drop_key",
+      "pick_key[key=0]",
+      "drop_key",
+      "pick_key[key=0]",
+      "drop_key"
+    ],
+    "duration_s": 0.016922625014558434,
+    "detail": "goal not reached within step bound"
+  },
+  {
+    "planner": "PI",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 0.016468708054162562,
+    "detail": "proposed inapplicable action 'open_lock' at step 1; applicable=[]"
+  },
+  {
+    "planner": "LDFS",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 25.01215216598939,
+    "detail": "killed after 20.0s wall clock (native solve did not return)"
+  },
+  {
+    "planner": "IDAstar",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 25.012798415962607,
+    "detail": "killed after 20.0s wall clock (native solve did not return)"
+  },
+  {
+    "planner": "RTDPBel",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 2.1082018329761922,
+    "detail": "proposed inapplicable action 'pick_key[key=0]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "SSiPP",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 0.018342374940402806,
+    "detail": "proposed inapplicable action 'pick_key[key=0]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "FRET",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 25.01257008302491,
+    "detail": "killed after 20.0s wall clock (native solve did not return)"
+  },
+  {
+    "planner": "MDPLP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01693716598674655,
+    "detail": "IndexError: map::at:  key not found"
+  },
+  {
+    "planner": "SSPLP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.016711417003534734,
+    "detail": "IndexError: map::at:  key not found"
+  },
+  {
+    "planner": "IDual",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.018050750019028783,
+    "detail": "proposed inapplicable action 'drop_key' at step 0; applicable=['force_latch', 'pick_key[key=0]', 'pick_key[key=1]', 'pick_key[key=2]']"
+  },
+  {
+    "planner": "GPCI",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.01620541699230671,
+    "detail": "proposed inapplicable action 'drop_key' at step 0; applicable=['force_latch', 'pick_key[key=0]', 'pick_key[key=1]', 'pick_key[key=2]']"
+  },
+  {
+    "planner": "SARSOP",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 0.014914375031366944,
+    "detail": "proposed inapplicable action 'pick_key[key=1]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "DESPOT",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 0.5357189169153571,
+    "detail": "proposed inapplicable action 'force_latch' at step 1; applicable=[]"
+  },
+  {
+    "planner": "EHC",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.0188840419286862,
+    "detail": "RuntimeError: SKDECIDE exception: EHC failed \u2014 no improving state found"
+  },
+  {
+    "planner": "FF",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014533708919771016,
+    "detail": "TypeError: FF solver requires a PDDLDomain or PPDDLDomain"
+  },
+  {
+    "planner": "FFReplan",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01484366599470377,
+    "detail": "TypeError: FFReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLReplan",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01455504191108048,
+    "detail": "TypeError: PPDDLReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "FFDetHindsight",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015159792033955455,
+    "detail": "TypeError: FFDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLDetHindsight",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015079582924954593,
+    "detail": "TypeError: PPDDLDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPReplan",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 0.016902167000807822,
+    "detail": "proposed inapplicable action 'pick_key[key=2]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "SSPDetHindsight",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 0.02577916602604091,
+    "detail": "proposed inapplicable action 'drop_key' at step 1; applicable=[]"
+  },
+  {
+    "planner": "RFF",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015040374943055212,
+    "detail": "TypeError: RFF solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLPlanMerger",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014385125017724931,
+    "detail": "TypeError: PPDDLPlanMerger solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPPlanMerger",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 0.0789701659232378,
+    "detail": "proposed inapplicable action 'pick_key[key=0]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "Witness",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 0.017970792017877102,
+    "detail": "proposed inapplicable action 'pick_key[key=0]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "HSVI",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 0.015092042041942477,
+    "detail": "proposed inapplicable action 'pick_key[key=0]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "GoalHSVI",
+    "outcome": "REFUSED",
+    "plan": [
+      "force_latch"
+    ],
+    "duration_s": 0.01494295906741172,
+    "detail": "proposed inapplicable action 'pick_key[key=0]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "DSPyPolicy",
+    "outcome": "REFUSED",
+    "plan": [
+      "pick_key[key=0]"
+    ],
+    "duration_s": 8.845640082960017,
+    "detail": "proposed inapplicable action 'pick_key[key=0]' at step 1; applicable=['drop_key', 'open_lock']"
+  }
+]

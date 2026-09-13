@@ -1,0 +1,36 @@
+[project]
+name = "autofde-lab-combinatorial-law-court"
+version = "26.8.9"
+description = "Transient ggen manufacture of the SOTA factory combinatorial maximalism court"
+authors = ["Sean Chatman"]
+license = "MIT"
+
+[ontology]
+source = "ontology/combinatorial-maximalism.ttl"
+base_iri = "urn:autofde-lab:sota-factory:"
+
+[ontology.prefixes]
+afl = "urn:autofde-lab:sota-factory:"
+owl = "http://www.w3.org/2002/07/owl#"
+xsd = "http://www.w3.org/2001/XMLSchema#"
+
+[generation]
+output_dir = "."
+
+[[generation.rules]]
+name = "combinatorial-law-court"
+query = { inline = """
+PREFIX afl: <urn:autofde-lab:sota-factory:>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?order ?dimension
+WHERE {
+  ?subject a afl:DecisionDimension ;
+           afl:dimensionOrder ?order ;
+           afl:dimensionName ?dimension .
+}
+ORDER BY xsd:integer(?order) ?dimension
+""" }
+template = { file = "templates/test_combinatorial_laws.py.tera" }
+output_file = "test_combinatorial_laws.py"
+skip_empty = false
+mode = "Overwrite"

@@ -1,0 +1,30 @@
+C4Deployment
+title AutoFDE Ecosystem — Deployment View
+
+Deployment_Node(dev, "Research / Build Host", "Developer workstation or CI runner") {
+  Container(lab, "AutoFDE SOTA Lab", "Python")
+  Container(ggen, "ggen", "Rust")
+  Container(rdf, "RDF / SHACL Tooling", "pySHACL / Oxigraph-compatible stores")
+}
+Deployment_Node(gym_host, "Gym Host", "Local, containerized, or remote environment") {
+  Container(gymact, "GymAct", "Python")
+  Container(envs, "Gym Providers", "Browser / Cloud / Docker / Local / Simulated")
+}
+Deployment_Node(prod, "Production Host", "Governed execution environment") {
+  Container(runtime, "AutoFDE Runtime", "Rust")
+  Container(ledger, "Receipt Ledger", "SQLite / append-only evidence")
+}
+Deployment_Node(external, "External Services") {
+  Container(benchmarks, "Benchmark Evaluators", "Official or faithful evaluators")
+  Container(worlds, "Consequential Systems", "Cloud, browser, code, OS, business systems")
+}
+
+Rel(lab, gymact, "Runs experiments against")
+Rel(lab, ggen, "Requests manufacture")
+Rel(ggen, runtime, "Builds runtime bundles")
+Rel(gymact, envs, "Adapts / materializes")
+Rel(runtime, gymact, "Acts through")
+Rel(runtime, ledger, "Writes receipts")
+Rel(gymact, worlds, "Observes / actuates")
+Rel(lab, benchmarks, "Submits/evaluates benchmark runs")
+Rel(rdf, lab, "Verifies ontology and SHACL standing")

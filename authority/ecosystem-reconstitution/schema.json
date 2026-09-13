@@ -1,0 +1,101 @@
+{
+  "$id": "urn:autofde-lab:gym-fleet-reconstitution:1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authority": {"const": "AUTHORED_INPUT_ONLY"},
+    "corpus_base_sha": {"pattern": "^[0-9a-f]{40}$", "type": "string"},
+    "corpus_repository": {"const": "seanchatmangpt/autofde-lab"},
+    "direct_actuation": {"const": false},
+    "expected_repository_count": {
+      "$comment": "VERIFIER-TIME OBLIGATION: expected_repository_count MUST equal len(repositories). JSON Schema draft 2020-12 has no $data reference, so this cross-field equality cannot be expressed as a schema-level constraint here -- it is enforced by verify_manifest_crossfield.py, not by this schema.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "final_admission_allowed": {"const": false},
+    "head_binding": {"const": "PER_REPOSITORY_DEFAULT_BRANCH_HEAD_AT_OBSERVATION_DAY"},
+    "observation_day": {"pattern": "^\\d{4}-\\d{2}-\\d{2}$", "type": "string"},
+    "program_id": {"minLength": 1, "type": "string"},
+    "reconstitution_law": {"items": {"minLength": 1, "type": "string"}, "minItems": 7, "type": "array", "uniqueItems": true},
+    "repositories": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "canonical_reconstruction_sha": {"pattern": "^[0-9a-f]{40}$", "type": "string"},
+          "default_branch": {"minLength": 1, "type": "string"},
+          "depends_on": {"items": {"type": "string"}, "type": "array", "uniqueItems": true},
+          "product_reconstitution": {"type": "boolean"},
+          "reconstruction_strategy": {"enum": ["MERGED_CONSEQUENCE", "ACTIVE_CANDIDATE", "ACTIVE_AGGREGATE_CANDIDATE", "LAYERED_EXACT_REFS", "LAYERED_MERGED_CONSEQUENCES", "INTEGRATED_WITH_PRESERVED_CANDIDATE", "EXTERNAL_HEAD_BOUND_CORPUS", "LINEAGE_ONLY"]},
+          "repository": {"pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$", "type": "string"},
+          "role": {"pattern": "^[A-Z0-9_]+$", "type": "string"},
+          "sources": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "content_receipts": {
+                  "additionalProperties": {"pattern": "^[0-9a-f]{64}$", "type": "string"},
+                  "type": "object"
+                },
+                "disposition": {"enum": ["INTEGRATED", "INTEGRATED_BRANCH", "ACTIVE_CANDIDATE", "PRESERVED_CANDIDATE", "TRANSPORT_ONLY"]},
+                "id": {"pattern": "^[a-z0-9-]+$", "type": "string"},
+                "kind": {"enum": ["HEAD_COMMIT", "MERGE_COMMIT"]},
+                "merged": {"type": "boolean"},
+                "observed_standing": {"enum": ["ALIVE", "PARTIAL_ALIVE", "UNKNOWN", "BLOCKED", "BUILD_BROKEN", "UNSUPPORTED"]},
+                "pr_state": {"enum": ["open", "closed"]},
+                "pull_request": {"minimum": 1, "type": "integer"},
+                "scope": {"minLength": 1, "type": "string"},
+                "sha": {"pattern": "^[0-9a-f]{40}$", "type": "string"}
+              },
+              "required": ["id", "sha", "kind", "disposition", "pull_request", "pr_state", "merged", "observed_standing", "scope"],
+              "type": "object",
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "disposition": {"enum": ["INTEGRATED", "INTEGRATED_BRANCH"]},
+                      "id": {"not": {"pattern": "-(main-head|default-branch-head)$"}}
+                    },
+                    "required": ["disposition", "id"]
+                  },
+                  "then": {
+                    "properties": {
+                      "merged": {"const": true},
+                      "pr_state": {"const": "closed"}
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {"disposition": {"const": "ACTIVE_CANDIDATE"}},
+                    "required": ["disposition"]
+                  },
+                  "then": {
+                    "properties": {
+                      "merged": {"const": false},
+                      "pr_state": {"const": "open"}
+                    }
+                  }
+                }
+              ]
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "validation_commands": {"items": {"minLength": 1, "type": "string"}, "minItems": 3, "type": "array"}
+        },
+        "required": ["repository", "default_branch", "role", "product_reconstitution", "reconstruction_strategy", "canonical_reconstruction_sha", "depends_on", "sources", "validation_commands"],
+        "type": "object"
+      },
+      "minItems": 1,
+      "maxItems": 50,
+      "type": "array"
+    },
+    "required_broker": {"const": "BRCE"},
+    "required_receipt_obligations": {"items": {"minLength": 1, "type": "string"}, "minItems": 9, "type": "array", "uniqueItems": true},
+    "schema": {"const": "autofde-lab.gym-fleet-reconstitution/1"},
+    "standing": {"const": "UNKNOWN"}
+  },
+  "required": ["schema", "program_id", "observation_day", "corpus_repository", "corpus_base_sha", "head_binding", "authority", "direct_actuation", "final_admission_allowed", "standing", "expected_repository_count", "required_broker", "reconstitution_law", "required_receipt_obligations", "repositories"],
+  "title": "autofde-lab Gym Fleet Reconstitution Manifest",
+  "type": "object"
+}

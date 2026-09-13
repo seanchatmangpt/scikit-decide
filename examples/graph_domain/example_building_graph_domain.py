@@ -8,12 +8,12 @@ A* is then run on both domain to check the computation time impact.
 
 import time
 
-from skdecide.hub.domain.graph_domain.graph_domain_builders import (
+from autofde_lab.hub.domain.graph_domain.graph_domain_builders import (
     DFSExploration,
     FullSpaceExploration,
 )
-from skdecide.hub.domain.maze import Maze
-from skdecide.hub.solver.p_astar import Astar
+from autofde_lab.hub.domain.maze import Maze
+from autofde_lab.hub.solver.p_astar import Astar
 
 
 def example_maze():

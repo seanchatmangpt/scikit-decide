@@ -1,0 +1,142 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix pplan: <http://purl.org/net/p-plan#> .
+@prefix prof: <http://www.w3.org/ns/dx/prof/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix td: <https://www.w3.org/2019/wot/td#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+
+<urn:gymact:profile:v26.8.7>
+    a prof:Profile, prov:Entity ;
+    dct:title "GymAct v26.8.7 public-semantic execution profile" ;
+    dct:description "Application profile for bounded executable benchmark worlds. GymAct owns profile/ABox identities, SKOS concepts, and SHACL shapes, not a competing custom ontology TBox." ;
+    dct:identifier "gymact-v26.8.7" ;
+    dct:hasVersion "26.8.7" ;
+    prof:isProfileOf prov:, pplan:, sosa:, td:, odrl:, sh:, earl:, dqv:, qudt:, dcat:, skos:, time: ;
+    prof:hasResource <urn:gymact:resource:profile-shacl> .
+
+<urn:gymact:resource:profile-shacl>
+    a prof:ResourceDescriptor ;
+    dct:title "GymAct profile SHACL constraints" ;
+    dct:format "text/turtle" ;
+    dct:conformsTo sh: .
+
+<urn:gymact:scheme:roles>
+    a skos:ConceptScheme ;
+    dct:title "GymAct execution roles" .
+
+<urn:gymact:role:contestant>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:roles> ;
+    skos:prefLabel "Contestant" ;
+    skos:definition "The prov:Role of the system under evaluation within an episode -- the agent whose observations, actuations, and outcomes are what the episode is measuring." .
+
+<urn:gymact:role:harness>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:roles> ;
+    skos:prefLabel "Harness" ;
+    skos:definition "The prov:Role of the agent mediating between GymAct's runtime and the actual gym/benchmark implementation -- executes the episode lifecycle (materialize/observe/act/teardown) but is not itself the subject under evaluation." .
+
+<urn:gymact:role:verifier>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:roles> ;
+    skos:prefLabel "Verifier" ;
+    skos:definition "The prov:Role of the agent that independently establishes postcondition truth about observed state -- distinct from whichever agent performed the actuation, per GymAct's consequence law: accepted request != observed effect != verified objective." .
+
+<urn:gymact:scheme:standing>
+    a skos:ConceptScheme ;
+    dct:title "GymAct evidence standing" .
+
+<urn:gymact:standing:unknown>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:standing> ;
+    skos:prefLabel "UNKNOWN" ;
+    skos:definition "No evidence has yet been established for this subject or operation; the standing before any observation, actuation, or verification has occurred." .
+
+<urn:gymact:standing:partial-alive>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:standing> ;
+    skos:prefLabel "PARTIAL_ALIVE" ;
+    skos:definition "The subject exists and responds, but not every required consequential or verification step has itself produced ALIVE evidence -- e.g. one value in this vocabulary used by an external verifier's own report (see gymact.gyms.ggen_legacy)." .
+
+<urn:gymact:standing:alive>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:standing> ;
+    skos:prefLabel "ALIVE" ;
+    skos:definition "A real, independently observed and verified consequence -- not merely an accepted request. Distinct from an actuator's own success report per GymAct's consequence law." .
+
+<urn:gymact:standing:blocked>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:standing> ;
+    skos:prefLabel "BLOCKED" ;
+    skos:definition "An admitted, well-formed operation could not complete because of a provider or internal runtime failure, receipted with an error digest -- distinct from a REFUSED request, which failed admission rather than execution." .
+
+<urn:gymact:standing:build-broken>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:standing> ;
+    skos:prefLabel "BUILD_BROKEN" ;
+    skos:definition "The underlying artifact or tool an operation depends on failed to build or is otherwise unusable -- distinct from BLOCKED, which is a runtime/provider failure of an artifact that does build." .
+
+<urn:gymact:standing:unsupported>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:standing> ;
+    skos:prefLabel "UNSUPPORTED" ;
+    skos:definition "The requested provider, capability, or operation is not registered or not implemented by this runtime -- distinct from REFUSED, which is a decision against a request that IS supported." .
+
+<urn:gymact:standing:refused>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:standing> ;
+    skos:prefLabel "REFUSED" ;
+    skos:definition "An admitted, well-formed request was declined for a specific, receipted reason -- authority not admitted, an idempotency-key conflict, or a semantic constraint such as sending a READ capability to actuate -- never a silent no-op." .
+
+<urn:gymact:scheme:consequence>
+    a skos:ConceptScheme ;
+    dct:title "GymAct capability consequence classes" .
+
+<urn:gymact:consequence:read>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:consequence> ;
+    skos:prefLabel "READ" ;
+    skos:definition "Observation-only capability; represented by SOSA observation semantics and never itself a consequential DO." .
+
+<urn:gymact:consequence:do>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:consequence> ;
+    skos:prefLabel "DO" ;
+    skos:definition "Consequential capability whose execution is represented by SOSA actuation semantics and requires an admitted external authority decision when the environment declares authority required." .
+
+<urn:gymact:scheme:interaction>
+    a skos:ConceptScheme ;
+    dct:title "Observed interaction patterns" ;
+    dct:description "Patterns are hypotheses learned from executable gyms, not ontology classes." .
+
+<urn:gymact:interaction:episodic-step>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:interaction> ;
+    skos:prefLabel "Episodic step" ;
+    skos:definition "Repeated observe/act steps against one materialized environment instance until a terminal condition is reached. Exhibited today by gymact.gyms.cube_counter's reset/increment/decrement loop over CUBE's counter-cube task." .
+
+<urn:gymact:interaction:task-harness>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:interaction> ;
+    skos:prefLabel "Task harness" ;
+    skos:definition "One bounded task invocation followed by an independent verifier judging the outcome, without a step-wise interaction loop. Exhibited today by gymact.gyms.ggen_legacy's one-shot observe/verify against the ggen-legacy verifier binary." .
+
+<urn:gymact:interaction:tool-session>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:interaction> ;
+    skos:prefLabel "Tool session" ;
+    skos:definition "A persistent session exposing discoverable, independently invocable capabilities -- e.g. an MCP server's tool set. Exhibited today by gymact.gyms.mcp_client_session's real MCP tool-discovery/invocation session." .
+
+<urn:gymact:interaction:reconciliation>
+    a skos:Concept ;
+    skos:inScheme <urn:gymact:scheme:interaction> ;
+    skos:prefLabel "Reconciliation" ;
+    skos:definition "Desired-state convergence against an independently observable current state -- e.g. Kubernetes- or Terraform-style control planes. Exhibited today by gymact.gyms.kubernetes_reconciliation (a real local kind/k8s cluster), gymact.gyms.terraform_plan, and gymact.gyms.terraform_docker_apply." .

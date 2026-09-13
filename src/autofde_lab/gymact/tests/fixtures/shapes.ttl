@@ -1,0 +1,20 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix ga:   <https://gymact.dev/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# Minimal SHACL shape: every prov:Activity typed as a GymAct episode must carry
+# a dct:identifier (exactly one, string-typed). Deliberately small so
+# test_profile_shacl.py's conforming/violating fixtures are easy to reason
+# about by inspection.
+
+ga:EpisodeShape
+    a sh:NodeShape ;
+    sh:targetClass prov:Activity ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] .

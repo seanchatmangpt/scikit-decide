@@ -12,8 +12,8 @@ Import modules.
 # %%
 import gymnasium as gym
 
-from skdecide.hub.domain.gym import GymDomain
-from skdecide.utils import rollout
+from autofde_lab.hub.domain.gym import GymDomain
+from autofde_lab.utils import rollout
 
 # %%
 """

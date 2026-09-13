@@ -16,8 +16,8 @@ from __future__ import annotations
 from enum import Enum
 from typing import NamedTuple
 
-from skdecide import DiscreteDistribution, Domain, ImplicitSpace, Value
-from skdecide.builders.domain import (
+from autofde_lab import DiscreteDistribution, Domain, ImplicitSpace, Value
+from autofde_lab.builders.domain import (
     Actions,
     DeterministicInitialized,
     FullyObservable,

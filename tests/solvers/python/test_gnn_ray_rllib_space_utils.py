@@ -2,7 +2,7 @@ import gymnasium as gym
 import numpy as np
 import pytest
 
-from skdecide.hub.solver.ray_rllib.gnn.utils.spaces.space_utils import (
+from autofde_lab.hub.solver.ray_rllib.gnn.utils.spaces.space_utils import (
     convert_dict_to_graph,
     convert_graph_to_dict,
     pad_batched_graph_dict,

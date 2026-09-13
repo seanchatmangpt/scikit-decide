@@ -8,13 +8,13 @@ from typing import Optional
 
 from ray.rllib.algorithms.dqn import DQN
 
-from skdecide.builders.domain.events import Actions
-from skdecide.core import Space, Value
-from skdecide.domains import DeterministicPlanningDomain
-from skdecide.hub.solver.ray_rllib import RayRLlib
-from skdecide.hub.space.gym import EnumSpace, ListSpace, SetSpace
-from skdecide.hub.space.gym.gym import MultiDiscreteSpace
-from skdecide.utils import rollout
+from autofde_lab.builders.domain.events import Actions
+from autofde_lab.core import Space, Value
+from autofde_lab.domains import DeterministicPlanningDomain
+from autofde_lab.hub.solver.ray_rllib import RayRLlib
+from autofde_lab.hub.space.gym import EnumSpace, ListSpace, SetSpace
+from autofde_lab.hub.space.gym.gym import MultiDiscreteSpace
+from autofde_lab.utils import rollout
 
 # This example shows hw to solve the grid world domain with filtered actions using RLlib's DQN
 

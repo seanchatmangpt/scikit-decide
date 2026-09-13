@@ -1,0 +1,5796 @@
+{
+  "eventTypes": [
+    {
+      "name": "decision_catalog",
+      "attributes": [
+        {
+          "name": "domain_count",
+          "type": "integer"
+        },
+        {
+          "name": "solver_count",
+          "type": "integer"
+        }
+      ]
+    },
+    {
+      "name": "decision_match",
+      "attributes": [
+        {
+          "name": "compatible_solver_count",
+          "type": "integer"
+        },
+        {
+          "name": "detail",
+          "type": "string"
+        },
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "decision_solve",
+      "attributes": [
+        {
+          "name": "detail",
+          "type": "string"
+        },
+        {
+          "name": "elapsed_s",
+          "type": "float"
+        },
+        {
+          "name": "receipt_sha256",
+          "type": "string"
+        },
+        {
+          "name": "standing",
+          "type": "string"
+        },
+        {
+          "name": "steps_taken",
+          "type": "integer"
+        }
+      ]
+    }
+  ],
+  "objectTypes": [
+    {
+      "name": "MCPSession",
+      "attributes": [
+        {
+          "name": "server",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "evt-catalog",
+      "type": "decision_catalog",
+      "time": "2026-08-07T17:19:01.809604000Z",
+      "attributes": [
+        {
+          "name": "domain_count",
+          "value": 26
+        },
+        {
+          "name": "solver_count",
+          "value": 57
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-Maze",
+      "type": "decision_match",
+      "time": "2026-08-07T17:19:07.552605000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "MATCHED"
+        },
+        {
+          "name": "compatible_solver_count",
+          "value": 50
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-AOstar-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:19:22.573383000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.02
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-AOstar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-Astar-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:19:24.772498000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.199
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "a66ddda9aed60e2a56f59154ca2763fcb634eeec96f0f27e48e88dd5c75f11fe"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-Astar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-Astar-1",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:19:26.974977000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.202
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "a66ddda9aed60e2a56f59154ca2763fcb634eeec96f0f27e48e88dd5c75f11fe"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-Astar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-AugmentedRandomSearch-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:19:29.928413000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.953
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for Maze"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-AugmentedRandomSearch",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-BFWS-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:19:32.206367000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.277
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver BFWS"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-BFWS",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-DESPOT-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:19:47.228479000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.021
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-DESPOT",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-DSPyPolicy-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:19:51.829815000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 4.601
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "0c02298a7705d42463049e6035a3b71deb33e744273b0fa4ad37c96b09bc7f27"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-DSPyPolicy",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-EHC-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:19:54.187821000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.357
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "e25d83c876e0233b2218faadb12c2b7658d57d1f46b5b2482c6cacf127eabbf6"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-EHC",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-FF-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:19:56.977315000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.789
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for Maze"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-FF",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-FFDetHindsight-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:19:59.899191000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.921
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for Maze"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-FFDetHindsight",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-FFReplan-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:02.684841000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.785
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for Maze"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-FFReplan",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-FRET-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:05.082423000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.397
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "4a878bd6dbd9070e4d838a5043b3e4566f024a9bbe777ec8a66431ba4c2d3d99"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-FRET",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-GPCI-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:07.272237000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.189
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "bf91b44e0726df55e0528d54d66cd2b69cd65237470282e051ba5c9ce1f40692"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-GPCI",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-GoalHSVI-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:09.535145000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.262
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "6956879d8983a60b9244403d67d0c569b7a5c127c7af2653b51f54a4f31f7633"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-GoalHSVI",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-HSVI-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:11.840681000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.305
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "81f540cbbf49950c2996c3ec434edfe02322ce22d09c05b9278c87f3d2628a5f"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-HSVI",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-IDAstar-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:14.321549000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.48
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "4e39eb5cb03c90ad57a670718afc98e776ee108d6e33249b4cfef18abe944c3e"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-IDAstar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-IDual-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:16.599594000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.277
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "9262365d7ffd96d1c27b3de23ae6df4da52324cfa2c84db7b183ce69940b0ed1"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-IDual",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-ILAOstar-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:18.820667000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.22
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "0475c5f11b4c1208e608da86d8243e8ebf5c45b8a2b6fd36de56780c30b1b8c0"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-ILAOstar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-IW-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:21.086666000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.265
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver IW"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-IW",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-LDFS-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:23.285900000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.199
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "18c7210ca5269c8844e10992afbc329b30c1318da25692dde19a56dd7dd563f1"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-LDFS",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-LRTAstar-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:25.499502000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.213
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "0172f3e46bf587768e1fe9d2bae13a7c17db381e7a1dad7eab8e75ec230afd7e"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-LRTAstar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-LRTAstar-1",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:27.794756000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.295
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "0172f3e46bf587768e1fe9d2bae13a7c17db381e7a1dad7eab8e75ec230afd7e"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-LRTAstar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-LRTDP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:30.012124000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.217
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "0a4f99b04d1b96a0a2df04dd689e0febe456dc1339c682e569e3908b57916f3b"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-LRTDP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-MAHD-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:32.271105000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.259
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver MAHD"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MAHD",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-MARTDP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:34.623698000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.352
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver MARTDP"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MARTDP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-MCTS-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:49.637577000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.013
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MCTS",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-MDPLP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:51.927564000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.289
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "77737738edddbfbb0af5334937486b42b74865c311f1f084323964cb273f5a23"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MDPLP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-MaxentIRL-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:54.295710000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.368
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for Maze"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MaxentIRL",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-PI-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:20:56.513198000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.217
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "6011ed8202186d789aea895fd3d1d5760ec3545f5f6d178a82863237f82148d7"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-PI",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-POMCP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:21:10.431904000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 13.918
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "4683f5a3104eb04a0c55333e7d60eb8a950d3d130b394f4ad90e7ccc214751bb"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-POMCP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-PPDDLDetHindsight-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:21:12.883828000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.451
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for Maze"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-PPDDLDetHindsight",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-PPDDLPlanMerger-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:21:15.607462000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.723
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for Maze"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-PPDDLPlanMerger",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-PPDDLReplan-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:21:18.422763000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.814
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for Maze"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-PPDDLReplan",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-RFF-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:21:21.066847000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.643
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for Maze"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-RFF",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-RIW-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:21:23.562769000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.495
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver RIW"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-RIW",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-RTDPBel-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:21:38.580309000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.017
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-RTDPBel",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-RayRLlib-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:21:45.485541000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 6.905
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver RayRLlib"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-RayRLlib",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-SARSOP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:21:47.807230000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.321
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "1019f70408c6a349991264b1e01a480692133485bd8684bd01a0bb42967519a7"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SARSOP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-SSPDetHindsight-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:21:56.847831000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 9.04
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "9454025955113a0a551a08a5d5ca41ce8af0f6b7996d0536a441a2aab0e46066"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SSPDetHindsight",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-SSPLP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:21:59.118706000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.27
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "e1132dce307cff276fa71902aa2bee013b15796bef2529493de43936b8d2d8f1"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SSPLP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-SSPPlanMerger-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:22:01.437169000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.318
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "df9353764b5c28ae43270f23327ebd678845fd4c672755f0fabe1b96cdcd5b78"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SSPPlanMerger",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-SSPReplan-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:22:03.663901000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.226
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "08be0d8c398991ab2221826f0d64bf7a751ddba4ce96ca9640dd66cb511ea9d2"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SSPReplan",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-SSiPP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:22:09.854084000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 6.187
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "cbe2666829be49dce588d286c31851bb962debaeb9c5376d1d0628a22900e39c"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SSiPP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-SimpleGreedy-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:22:12.289406000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.435
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for Maze"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SimpleGreedy",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-StableBaseline-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:22:18.221998000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 5.932
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver StableBaseline"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-StableBaseline",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-UCT-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:22:33.233336000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.01
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-UCT",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-UPSolver-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:22:36.445366000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 3.212
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver UPSolver"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-UPSolver",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-VI-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:22:38.649356000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.203
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "25a0dc64b9b33b8653c75dcd144e4c1ac8614231f60e31ccf694b06ddb972525"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-VI",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-Witness-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:22:53.662193000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.012
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-Witness",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-Maze-pPOMCP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:22:55.977492000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.315
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for Maze"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-pPOMCP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-SimpleGridWorld",
+      "type": "decision_match",
+      "time": "2026-08-07T17:22:56.949326000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "MATCHED"
+        },
+        {
+          "name": "compatible_solver_count",
+          "value": 50
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-AOstar-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:11.963854000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.014
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-AOstar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-Astar-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:13.668105000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.704
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "f166ef4680893a23c1f85d832b5f65334317beec2761752feb18cc68439f3aeb"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-Astar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-Astar-1",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:15.377984000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.709
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "f166ef4680893a23c1f85d832b5f65334317beec2761752feb18cc68439f3aeb"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-Astar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-AugmentedRandomSearch-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:17.205637000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.827
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for SimpleGridWorld"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-AugmentedRandomSearch",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-BFWS-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:18.986475000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.78
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver BFWS"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-BFWS",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-DESPOT-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:34.000769000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.014
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-DESPOT",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-DSPyPolicy-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:38.990456000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 4.989
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "9faeb4cb5927aa777dbd7d09a8bc7b6bc051789224a604b801c3c11009731496"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-DSPyPolicy",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-EHC-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:40.728787000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.738
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "c75a515d5ee51f13a624e8788617a69e4fbae1fd45602d59320be424b8e9693e"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-EHC",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-FF-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:42.651041000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.922
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for SimpleGridWorld"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-FF",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-FFDetHindsight-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:44.550255000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.899
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for SimpleGridWorld"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-FFDetHindsight",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-FFReplan-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:46.439793000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.889
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for SimpleGridWorld"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-FFReplan",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-FRET-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:48.157519000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.717
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "d06dcfa175d30afda97bf58f99456216187e986d9ae09cea5f9a817071b36d0d"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-FRET",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-GPCI-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:49.922078000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.764
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "4a601131722a5f16669cc05cb3780557c132faa2bdcb108c02bd26180f5aa7e2"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-GPCI",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-GoalHSVI-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:51.677167000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.755
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "cbfed78ec70e9e540b1a3fbe5126c34cc00f4703bcdb0566cd492fcd5ba1b3c7"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-GoalHSVI",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-HSVI-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:53.379529000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.702
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "8a9e6a734d6980e43627871753491055e5377263c2ba1bb082b447bf512d9a57"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-HSVI",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-IDAstar-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:55.072533000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.693
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "bcbce315a90f7425b6db5e704a2596d421b5a486c1509b54d3aaf1961ea2e028"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-IDAstar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-IDual-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:56.792141000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.719
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "88d675189fcd5cf6b415d05980450026433a96b3682d155427cc728f8ad92ca1"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-IDual",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-ILAOstar-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:23:58.552581000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.76
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "8e3c02a49bd80038c7e5327956a16fd072d1bc792a0fa92d91bae164f7ca724a"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-ILAOstar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-IW-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:00.370430000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.817
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver IW"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-IW",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-LDFS-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:02.123701000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.753
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "4003a7fc3447bfc9331fabf17e99b346c1f718addce189e0682f510d7d8ef771"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-LDFS",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-LRTAstar-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:03.878545000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.754
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "c43a9cdb9bee47089ee3b8f66d9f1cabab1cb80900952cb95b7622d22860882d"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-LRTAstar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-LRTAstar-1",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:05.673516000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.794
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "c43a9cdb9bee47089ee3b8f66d9f1cabab1cb80900952cb95b7622d22860882d"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-LRTAstar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-LRTDP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:07.467615000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.793
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "dadc016625886459536a1bb83e72cd3dde2cf6da4a0ea11c9ca575c75170dd7b"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-LRTDP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-MAHD-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:09.251110000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.783
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver MAHD"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MAHD",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-MARTDP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:11.087937000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.836
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver MARTDP"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MARTDP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-MCTS-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:26.102911000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.014
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MCTS",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-MDPLP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:27.822165000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.719
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "7cf5cca8d84fb9ea13add0211a68a9268c07fd2614e921ec0c00b96727334eb3"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MDPLP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-MaxentIRL-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:29.975995000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.153
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for SimpleGridWorld"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MaxentIRL",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-PI-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:31.705296000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.729
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "5a7325f91d65432f50ec5f8d685231867ff483975d76601c2c7e02b6f8d5333b"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-PI",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-POMCP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:35.730124000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 4.024
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "e226e2e88e4e1fccf2673c2f9fd67ef5be376326e4844221b22c8d5a509261ef"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-POMCP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-PPDDLDetHindsight-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:38.107038000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.376
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for SimpleGridWorld"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-PPDDLDetHindsight",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-PPDDLPlanMerger-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:40.469461000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.362
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for SimpleGridWorld"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-PPDDLPlanMerger",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-PPDDLReplan-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:42.515798000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.046
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for SimpleGridWorld"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-PPDDLReplan",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-RFF-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:44.420769000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.904
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for SimpleGridWorld"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-RFF",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-RIW-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:24:46.184390000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.763
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver RIW"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-RIW",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-RTDPBel-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:01.197222000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.012
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-RTDPBel",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-RayRLlib-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:06.379658000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 5.182
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver RayRLlib"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-RayRLlib",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-SARSOP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:08.104317000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.724
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "a9876d0b5c23bda17c4c15ca1ae659a35c06723a059ec3cba7ea82fa3643a730"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SARSOP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-SSPDetHindsight-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:12.367040000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 4.262
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "0a4a2423fe36baa833cab136d38d33e5c97e6771f8fdca5d0b179da3568042a7"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SSPDetHindsight",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-SSPLP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:14.115728000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.748
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "0c7468543a2519b6865bf2bf209e0875b7c7259ac0fb91f155c69ef490a4dc9e"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SSPLP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-SSPPlanMerger-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:15.828617000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.712
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "d93935a10bf61f13368cb5dee1aef2c2e4ec4aee18fd06b997df52edd6a654f4"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SSPPlanMerger",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-SSPReplan-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:17.545220000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.716
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "ab281e4cf16c4aad072767095db37a9f5f4efaf9e3f8b4cd679e58d1d733d229"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SSPReplan",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-SSiPP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:19.313163000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.767
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "01b865a4e81230eeea5efa40b981a75fc0dbe0c0e894c651e7644c04973c6a7d"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SSiPP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-SimpleGreedy-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:21.278059000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.964
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for SimpleGridWorld"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SimpleGreedy",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-StableBaseline-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:24.030769000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.752
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver StableBaseline"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-StableBaseline",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-UCT-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:39.042985000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.012
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-UCT",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-UPSolver-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:41.813663000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.77
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver UPSolver"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-UPSolver",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-VI-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:43.512062000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "BOUNDED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.698
+        },
+        {
+          "name": "steps_taken",
+          "value": 15
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "85c7b142aa33a55b214c9560801b6ff1e7fb43e2ae3bd582f31362ff801095ad"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-VI",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-Witness-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:25:58.527529000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.015
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-Witness",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-SimpleGridWorld-pPOMCP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:26:00.308824000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.781
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for SimpleGridWorld"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SimpleGridWorld",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-pPOMCP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-MasterMind",
+      "type": "decision_match",
+      "time": "2026-08-07T17:26:00.963633000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "MATCHED"
+        },
+        {
+          "name": "compatible_solver_count",
+          "value": 14
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-AugmentedRandomSearch-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:26:02.807883000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.844
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for MasterMind"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-AugmentedRandomSearch",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-DESPOT-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:26:07.631284000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "SOLVED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 4.823
+        },
+        {
+          "name": "steps_taken",
+          "value": 3
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "49dc5d03b2b92b4aaabec2062e341a9619e5d72afef6654eb16523a993faa1f9"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-DESPOT",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-DSPyPolicy-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:26:13.915664000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "SOLVED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 6.284
+        },
+        {
+          "name": "steps_taken",
+          "value": 1
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "e61c48d5a58830561c7faf9cef206478f8a6fa0b604d09541090c299876aace4"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-DSPyPolicy",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-GoalHSVI-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:26:28.932914000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.016
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-GoalHSVI",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-HSVI-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:26:43.955564000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.022
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-HSVI",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-MAHD-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:26:45.818538000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.862
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver MAHD"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MAHD",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-MaxentIRL-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:26:48.068375000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.249
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for MasterMind"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MaxentIRL",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-POMCP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:26:49.829450000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "SOLVED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.76
+        },
+        {
+          "name": "steps_taken",
+          "value": 1
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "ea3429cf0de8142189b8a9733fc5d4327b88a1e586e64bd48a2aef04d15ad20e"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-POMCP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-RTDPBel-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:27:04.843682000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "TIMEOUT"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 15.013
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-RTDPBel",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-RayRLlib-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:27:10.226136000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 5.382
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver RayRLlib"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-RayRLlib",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-SARSOP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:27:11.957792000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "SOLVED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.731
+        },
+        {
+          "name": "steps_taken",
+          "value": 2
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "32dacdc1f5eb2498e5d72a1644439dff44a7ef61afeb868dc2ca4e72128a0b52"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-SARSOP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-StableBaseline-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:27:14.794755000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 2.836
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver StableBaseline"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-StableBaseline",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-Witness-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:27:16.490890000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "SOLVED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.696
+        },
+        {
+          "name": "steps_taken",
+          "value": 2
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "fc8a6182adef5b94529b66422ca0b213a53c2253135975c71ebd94137410474b"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-Witness",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-MasterMind-pPOMCP-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:27:18.309890000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.818
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-008: decision execution failed for MasterMind"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MasterMind",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-pPOMCP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-RockPaperScissors",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:18.955017000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "MATCHED"
+        },
+        {
+          "name": "compatible_solver_count",
+          "value": 3
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-RockPaperScissors",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-RockPaperScissors-DSPyPolicy-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:27:23.401038000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "SOLVED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 4.445
+        },
+        {
+          "name": "steps_taken",
+          "value": 10
+        },
+        {
+          "name": "receipt_sha256",
+          "value": "33740015c82f83648b560aee52a589cad124ea013936059f51f46bb6d2e15acc"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-RockPaperScissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-DSPyPolicy",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-RockPaperScissors-MAHD-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:27:25.324955000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 1.923
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver MAHD"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-RockPaperScissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-MAHD",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-solve-RockPaperScissors-RayRLlib-0",
+      "type": "decision_solve",
+      "time": "2026-08-07T17:27:30.524572000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "elapsed_s",
+          "value": 5.199
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_solve': SKD-FABRIC-007: failed to construct solver RayRLlib"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-RockPaperScissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "solver-RayRLlib",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-GymWidthDomain",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:31.180764000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "MATCHED"
+        },
+        {
+          "name": "compatible_solver_count",
+          "value": 0
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-GymWidthDomain",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-ChatmanCleanSession",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:31.298300000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain ChatmanCleanSession"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-ChatmanCleanSession",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-CostDeterministicGymDomain",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:31.369054000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain CostDeterministicGymDomain"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-CostDeterministicGymDomain",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-DeterministicGymDomain",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:31.437848000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain DeterministicGymDomain"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-DeterministicGymDomain",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-FlightPlanningDomain",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:31.906479000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain FlightPlanningDomain"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-FlightPlanningDomain",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-GymDomain",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:31.977789000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain GymDomain"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-GymDomain",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-GymPlanningDomain",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.049635000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain GymPlanningDomain"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-GymPlanningDomain",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-MRCPSP",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.121140000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain MRCPSP"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MRCPSP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-MRCPSPCalendar",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.190945000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain MRCPSPCalendar"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MRCPSPCalendar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-MSRCPSP",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.259056000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain MSRCPSP"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MSRCPSP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-MSRCPSPCalendar",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.328315000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain MSRCPSPCalendar"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-MSRCPSPCalendar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-PDDLDomain",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.398293000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain PDDLDomain"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-PDDLDomain",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-PPDDLDomain",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.467025000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain PPDDLDomain"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-PPDDLDomain",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-RCPSP",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.535387000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain RCPSP"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-RCPSP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-RCPSPCalendar",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.603680000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain RCPSPCalendar"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-RCPSPCalendar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-RDDLDomain",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.674526000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain RDDLDomain"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-RDDLDomain",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-RDDLDomainRL",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.748947000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain RDDLDomainRL"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-RDDLDomainRL",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-RDDLDomainSimplifiedSpaces",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.820793000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain RDDLDomainSimplifiedSpaces"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-RDDLDomainSimplifiedSpaces",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-SMRCPSPCalendar",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.893169000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain SMRCPSPCalendar"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-SMRCPSPCalendar",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-Stochastic_RCPSP",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:32.964969000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain Stochastic_RCPSP"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-Stochastic_RCPSP",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-TPDDLDomain",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:33.038690000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain TPDDLDomain"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-TPDDLDomain",
+          "qualifier": ""
+        }
+      ]
+    },
+    {
+      "id": "evt-match-UPDomain",
+      "type": "decision_match",
+      "time": "2026-08-07T17:27:33.112111000Z",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "REFUSED"
+        },
+        {
+          "name": "detail",
+          "value": "ToolError: Error calling tool 'decision_match': SKD-FABRIC-006: failed to construct domain UPDomain"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "session-mcp-user-simulation-1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain-UPDomain",
+          "qualifier": ""
+        }
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "session-mcp-user-simulation-1",
+      "type": "MCPSession",
+      "attributes": [
+        {
+          "name": "server",
+          "value": "scikit-decide-fabric",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-ChatmanCleanSession",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "ChatmanCleanSession",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-CostDeterministicGymDomain",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "CostDeterministicGymDomain",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-DeterministicGymDomain",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "DeterministicGymDomain",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-FlightPlanningDomain",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "FlightPlanningDomain",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-GymDomain",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "GymDomain",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-GymPlanningDomain",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "GymPlanningDomain",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-GymWidthDomain",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "GymWidthDomain",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-MRCPSP",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "MRCPSP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-MRCPSPCalendar",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "MRCPSPCalendar",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-MSRCPSP",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "MSRCPSP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-MSRCPSPCalendar",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "MSRCPSPCalendar",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-MasterMind",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "MasterMind",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-Maze",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Maze",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-PDDLDomain",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "PDDLDomain",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-PPDDLDomain",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "PPDDLDomain",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-RCPSP",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "RCPSP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-RCPSPCalendar",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "RCPSPCalendar",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-RDDLDomain",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "RDDLDomain",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-RDDLDomainRL",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "RDDLDomainRL",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-RDDLDomainSimplifiedSpaces",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "RDDLDomainSimplifiedSpaces",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-RockPaperScissors",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "RockPaperScissors",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-SMRCPSPCalendar",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "SMRCPSPCalendar",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-SimpleGridWorld",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "SimpleGridWorld",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-Stochastic_RCPSP",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Stochastic_RCPSP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-TPDDLDomain",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "TPDDLDomain",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "domain-UPDomain",
+      "type": "Domain",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "UPDomain",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-AOstar",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "AOstar",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-Astar",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Astar",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-AugmentedRandomSearch",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "AugmentedRandomSearch",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-BFWS",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "BFWS",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-CGP",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "CGP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-CIDual",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "CIDual",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-DESPOT",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "DESPOT",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-DOSolver",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "DOSolver",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-DSPyPolicy",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "DSPyPolicy",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-EHC",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "EHC",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-FF",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "FF",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-FFDetHindsight",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "FFDetHindsight",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-FFReplan",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "FFReplan",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-FRET",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "FRET",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-GPCI",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "GPCI",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-GPHH",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "GPHH",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-GoalHSVI",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "GoalHSVI",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-HSVI",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "HSVI",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-IDAstar",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "IDAstar",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-IDual",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "IDual",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-ILAOstar",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "ILAOstar",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-IW",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "IW",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-LDFS",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "LDFS",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-LRTAstar",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "LRTAstar",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-LRTDP",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "LRTDP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-MAHD",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "MAHD",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-MARTDP",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "MARTDP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-MCTS",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "MCTS",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-MDPLP",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "MDPLP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-MaxentIRL",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "MaxentIRL",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-PI",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "PI",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-POMCP",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "POMCP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-PPDDLDetHindsight",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "PPDDLDetHindsight",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-PPDDLPlanMerger",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "PPDDLPlanMerger",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-PPDDLReplan",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "PPDDLReplan",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-PilePolicy",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "PilePolicy",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-RDDLGurobiSolver",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "RDDLGurobiSolver",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-RDDLJaxSolver",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "RDDLJaxSolver",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-RFF",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "RFF",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-RIW",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "RIW",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-RTDPBel",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "RTDPBel",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-RayRLlib",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "RayRLlib",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-SARSOP",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "SARSOP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-SSPDetHindsight",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "SSPDetHindsight",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-SSPLP",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "SSPLP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-SSPPlanMerger",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "SSPPlanMerger",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-SSPReplan",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "SSPReplan",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-SSiPP",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "SSiPP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-SimpleGreedy",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "SimpleGreedy",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-StableBaseline",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "StableBaseline",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-UCT",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "UCT",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-UPSolver",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "UPSolver",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-VI",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "VI",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-Witness",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "Witness",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-pAstar",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "pAstar",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-pLRTAstar",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "pLRTAstar",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    },
+    {
+      "id": "solver-pPOMCP",
+      "type": "Solver",
+      "attributes": [
+        {
+          "name": "name",
+          "value": "pPOMCP",
+          "time": "1970-01-01T00:00:00.000000000Z"
+        }
+      ],
+      "relationships": []
+    }
+  ]
+}

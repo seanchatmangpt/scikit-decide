@@ -14,14 +14,14 @@ from typing import NamedTuple
 
 import pytest
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     ImplicitSpace,
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     Constrained,
     DeterministicInitialized,
@@ -33,8 +33,8 @@ from skdecide.builders.domain import (
     Sequential,
     SingleAgent,
 )
-from skdecide.core import BoundConstraint
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.core import BoundConstraint
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
 
 
 class State(NamedTuple):
@@ -249,19 +249,19 @@ def rollout(domain, solver, max_steps=100):
 
 class TestIDual:
     def test_import(self):
-        from skdecide.hub.solver.idual import IDual
+        from autofde_lab.hub.solver.idual import IDual
 
         assert IDual is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.idual import IDual
+        from autofde_lab.hub.solver.idual import IDual
 
         dom = DeterministicGridDomain()
         assert IDual.check_domain(dom)
 
     def test_deterministic_grid(self):
         """IDual should find optimal cost=6 on 4x4 deterministic grid."""
-        from skdecide.hub.solver.idual import IDual
+        from autofde_lab.hub.solver.idual import IDual
 
         dom = DeterministicGridDomain()
         with IDual(
@@ -277,12 +277,12 @@ class TestIDual:
     @pytest.mark.parametrize("reference_solver", ["LRTDP", "VI"])
     def test_matches_optimal(self, reference_solver):
         """IDual V(s0) should match VI/LRTDP V* on deterministic grid."""
-        from skdecide.hub.solver.idual import IDual
+        from autofde_lab.hub.solver.idual import IDual
 
         h = lambda d, s: Value(cost=abs(s.x - 3) + abs(s.y - 3))
 
         if reference_solver == "LRTDP":
-            from skdecide.hub.solver.lrtdp import LRTDP
+            from autofde_lab.hub.solver.lrtdp import LRTDP
 
             with LRTDP(
                 domain_factory=lambda: DeterministicGridDomain(),
@@ -291,7 +291,7 @@ class TestIDual:
                 ref.solve()
                 v_ref = ref.get_utility(State(0, 0)).cost
         else:
-            from skdecide.hub.solver.vi import VI
+            from autofde_lab.hub.solver.vi import VI
 
             with VI(
                 domain_factory=lambda: DeterministicGridDomain(),
@@ -312,8 +312,8 @@ class TestIDual:
 
     def test_stochastic_matches_vi(self):
         """IDual V(s0) should match VI on stochastic grid."""
-        from skdecide.hub.solver.idual import IDual
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.idual import IDual
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: StochasticGridDomain(),
@@ -333,7 +333,7 @@ class TestIDual:
 
     def test_stochastic_grid(self):
         """IDual should find near-optimal policy on stochastic grid."""
-        from skdecide.hub.solver.idual import IDual
+        from autofde_lab.hub.solver.idual import IDual
 
         dom = StochasticGridDomain()
         with IDual(
@@ -350,7 +350,7 @@ class TestIDual:
 
     def test_explores_fewer_states(self):
         """IDual with heuristic should explore fewer states than total."""
-        from skdecide.hub.solver.idual import IDual
+        from autofde_lab.hub.solver.idual import IDual
 
         with IDual(
             domain_factory=lambda: DeterministicGridDomain(),
@@ -365,7 +365,7 @@ class TestIDual:
 
     def test_statistics(self):
         """Statistics should be reasonable."""
-        from skdecide.hub.solver.idual import IDual
+        from autofde_lab.hub.solver.idual import IDual
 
         with IDual(
             domain_factory=lambda: DeterministicGridDomain(),
@@ -382,19 +382,19 @@ class TestIDual:
 
 class TestCIDual:
     def test_import(self):
-        from skdecide.hub.solver.idual import CIDual
+        from autofde_lab.hub.solver.idual import CIDual
 
         assert CIDual is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.idual import CIDual
+        from autofde_lab.hub.solver.idual import CIDual
 
         dom = ConstrainedGridDomain()
         assert CIDual.check_domain(dom)
 
     def test_loose_constraint_matches_idual(self):
         """CIDual with very loose constraint should match IDual."""
-        from skdecide.hub.solver.idual import CIDual, IDual
+        from autofde_lab.hub.solver.idual import CIDual, IDual
 
         h = lambda d, s: Value(cost=abs(s.x - 2) + abs(s.y - 2))
 
@@ -418,7 +418,7 @@ class TestCIDual:
 
     def test_feasible_constraint(self):
         """CIDual with feasible constraint should find a policy."""
-        from skdecide.hub.solver.idual import CIDual
+        from autofde_lab.hub.solver.idual import CIDual
 
         dom = ConstrainedGridDomain(3, 3, fuel_budget=10.0)
         with CIDual(
@@ -431,7 +431,7 @@ class TestCIDual:
 
     def test_statistics(self):
         """Statistics should be reasonable."""
-        from skdecide.hub.solver.idual import CIDual
+        from autofde_lab.hub.solver.idual import CIDual
 
         with CIDual(
             domain_factory=lambda: ConstrainedGridDomain(3, 3, fuel_budget=10.0),

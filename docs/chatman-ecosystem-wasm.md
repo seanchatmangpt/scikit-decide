@@ -1,12 +1,12 @@
 # Chatman ecosystem WebAssembly federation
 
-`skdecide.wasm` packages sixteen executable, exact-source-pinned WebAssembly
+`autofde_lab.wasm` packages sixteen executable, exact-source-pinned WebAssembly
 adapters and exposes each one through a typed Python binding. The adapters are
 embedded in the wheel, require no filesystem materialization, import no ambient
 host capabilities, and execute through Wasmtime or Node.js WebAssembly.
 
 ```python
-from skdecide.wasm import ChatmanEcosystem
+from autofde_lab.wasm import ChatmanEcosystem
 
 ecosystem = ChatmanEcosystem()
 result = ecosystem.ggen.self_test()
@@ -43,7 +43,7 @@ is `BUILD_BROKEN`. Verified execution is `ALIVE`. Any guest response containing
 ## Materialization and replay
 
 ```bash
-python -m skdecide.wasm.build --output build/chatman-wasm
+python -m autofde_lab.wasm.build --output build/chatman-wasm
 ```
 
 The command writes all sixteen `.wasm` files, the canonical WIT contract, the

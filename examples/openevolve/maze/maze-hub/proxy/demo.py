@@ -25,13 +25,13 @@ from docopt import docopt
 from dotenv import load_dotenv
 from evaluator import LIST_MAZE_STR
 
-from skdecide import rollout
-from skdecide.hub.domain.maze import Maze
-from skdecide.hub.domain.maze.maze import Action
-from skdecide.hub.solver.openevolve import (
+from autofde_lab import rollout
+from autofde_lab.hub.domain.maze import Maze
+from autofde_lab.hub.domain.maze.maze import Action
+from autofde_lab.hub.solver.openevolve import (
     ProxyOpenEvolve,
 )
-from skdecide.hub.solver.openevolve.code_utils import check_diff_outside_evolveblocks
+from autofde_lab.hub.solver.openevolve.code_utils import check_diff_outside_evolveblocks
 
 load_dotenv()
 if "OPENAI_API_KEY" not in os.environ:

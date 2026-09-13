@@ -1,0 +1,65 @@
+{
+  "gym": "sre-bench",
+  "task": "scenario-0-broken-image-imagepullbackoff",
+  "source_ref": "vendor/gyms/sre-bench/scenerio/README.md#0-broken-image--imagepullbackoff",
+  "initial_facts": [],
+  "goal_facts": ["pod_running"],
+  "steps": [
+    {
+      "id": "observe_pod_status",
+      "description": "View pod status showing ImagePullBackOff: `kubectl get pods -n sre-demo`.",
+      "preconditions": [],
+      "establishes": ["knows_pod_status"],
+      "cost": 1.0,
+      "source": "README.md scenario 0, Detection Signals > Commands to observe"
+    },
+    {
+      "id": "describe_pod_for_error",
+      "description": "Describe pod for detailed error messages: `kubectl describe pod broken-image-demo -n sre-demo`.",
+      "preconditions": ["knows_pod_status"],
+      "establishes": ["knows_pull_error_detail"],
+      "cost": 1.0,
+      "source": "README.md scenario 0, Detection Signals > Commands to observe"
+    },
+    {
+      "id": "identify_incorrect_image_reference",
+      "description": "Identify the incorrect image reference (nonexistent-registry.io/invalid-image:v1.0).",
+      "preconditions": ["knows_pull_error_detail"],
+      "establishes": ["identified_bad_image_ref"],
+      "cost": 1.0,
+      "source": "README.md scenario 0, Mitigation Steps step 1"
+    },
+    {
+      "id": "verify_image_exists_in_registry",
+      "description": "Verify the image exists in the registry.",
+      "preconditions": ["identified_bad_image_ref"],
+      "establishes": ["verified_registry_state"],
+      "cost": 1.0,
+      "source": "README.md scenario 0, Mitigation Steps step 2"
+    },
+    {
+      "id": "check_registry_authentication",
+      "description": "Check registry authentication (imagePullSecrets).",
+      "preconditions": ["verified_registry_state"],
+      "establishes": ["checked_pull_secrets"],
+      "cost": 1.0,
+      "source": "README.md scenario 0, Mitigation Steps step 3"
+    },
+    {
+      "id": "update_deployment_with_correct_image",
+      "description": "Update pod/deployment with correct image.",
+      "preconditions": ["checked_pull_secrets"],
+      "establishes": ["image_reference_fixed"],
+      "cost": 1.0,
+      "source": "README.md scenario 0, Mitigation Steps step 4"
+    },
+    {
+      "id": "verify_pod_starts_successfully",
+      "description": "Verify pod starts successfully.",
+      "preconditions": ["image_reference_fixed"],
+      "establishes": ["pod_running"],
+      "cost": 1.0,
+      "source": "README.md scenario 0, Mitigation Steps step 5"
+    }
+  ]
+}

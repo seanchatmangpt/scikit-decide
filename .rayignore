@@ -1,0 +1,19 @@
+# Ray's runtime_env working_dir auto-upload ignore file (same syntax as
+# .gitignore). Without this, `ray.init()` (called implicitly by any
+# RayRLlib-based solver/test) tries to zip and upload the entire repo
+# working directory to the local Ray cluster on every run -- 2.3GB+ here,
+# mostly test/build data ray never needs for single-machine local runs:
+#   - cpp/tests/data/pddl/  (git submodule, real IPC benchmark PDDL files, ~2.2GB)
+#   - .venv/                (~2.6GB)
+#   - .git/                 (~490MB)
+#   - cpp/sdk/              (vendored C++ dependencies, build artifacts)
+# Exceeding ray's default 512MB runtime_env package size warning/limit is
+# what this file prevents.
+.venv/
+.git/
+cpp/sdk/
+cpp/tests/data/
+build/
+dist/
+node_modules/
+*.pddl

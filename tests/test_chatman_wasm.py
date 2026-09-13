@@ -9,7 +9,7 @@ from typing import Any, Mapping
 
 import pytest
 
-from skdecide.wasm import (
+from autofde_lab.wasm import (
     ABI_VERSION,
     ArtifactIntegrityError,
     ChatmanEcosystem,
@@ -20,8 +20,8 @@ from skdecide.wasm import (
     NodeBackend,
     validate_mfw_envelope,
 )
-from skdecide.wasm._artifacts import ARTIFACTS
-from skdecide.wasm.build import materialize, verify
+from autofde_lab.wasm._artifacts import ARTIFACTS
+from autofde_lab.wasm.build import materialize, verify
 
 
 def node_backend() -> NodeBackend:

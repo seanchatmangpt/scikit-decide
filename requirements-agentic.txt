@@ -1,0 +1,7 @@
+# Optional decision-fabric surfaces. The core scikit-decide package remains usable
+# without these dependencies.
+typer>=0.16,<1
+fastmcp>=3.4.4,<4
+a2a-sdk[http-server]>=1.0.2,<2
+dspy>=3,<4
+uvicorn>=0.35,<1

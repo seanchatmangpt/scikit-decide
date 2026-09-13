@@ -1,7 +1,7 @@
 from typing import Sequence
 
-from skdecide.core import EnumerableSpace
-from skdecide.hub.space.gym import ListSpace
+from autofde_lab.core import EnumerableSpace
+from autofde_lab.hub.space.gym import ListSpace
 
 
 class MyListSpace(EnumerableSpace[int]):

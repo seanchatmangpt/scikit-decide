@@ -2,8 +2,8 @@ from typing import Any, Optional
 
 import numpy as np
 
-from skdecide import Domain, Space, Value
-from skdecide.builders.domain import (
+from autofde_lab import Domain, Space, Value
+from autofde_lab.builders.domain import (
     Actions,
     DeterministicInitialized,
     DeterministicTransitions,
@@ -15,9 +15,9 @@ from skdecide.builders.domain import (
     Sequential,
     SingleAgent,
 )
-from skdecide.hub.domain.maze.maze import Action, State
-from skdecide.hub.domain.maze.maze import Maze as HubMaze
-from skdecide.hub.space.gym import ListSpace
+from autofde_lab.hub.domain.maze.maze import Action, State
+from autofde_lab.hub.domain.maze.maze import Maze as HubMaze
+from autofde_lab.hub.space.gym import ListSpace
 
 
 class D(

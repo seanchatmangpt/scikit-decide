@@ -1,0 +1,13 @@
+PREFIX afb: <https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#>
+SELECT ?slug ?repo ?path ?requested_ref ?adapter ?smoke ?local_safe ?requires_authority
+       ?pinned_revision ?resolution_standing ?smoke_standing
+WHERE {
+  ?v a afb:VendorProject ; afb:slug ?slug ; afb:repositoryUrl ?repo ;
+     afb:vendorPath ?path ; afb:requestedRef ?requested_ref ;
+     afb:adapterFamily ?adapter ; afb:smokeProfile ?smoke ;
+     afb:localSafe ?local_safe ; afb:requiresAuthority ?requires_authority .
+  OPTIONAL { ?v afb:pinnedRevision ?pinned_revision . }
+  OPTIONAL { ?v afb:resolutionStanding ?resolution_standing . }
+  OPTIONAL { ?v afb:smokeStanding ?smoke_standing . }
+}
+ORDER BY ?slug

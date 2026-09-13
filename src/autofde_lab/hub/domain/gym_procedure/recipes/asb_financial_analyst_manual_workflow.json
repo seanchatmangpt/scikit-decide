@@ -1,0 +1,25 @@
+{
+  "gym": "asb",
+  "task": "financial_analyst_agent/manual_workflow",
+  "source_ref": "vendor/gyms/asb/pyopenagi/agents/example/financial_analyst_agent/agent.py FinancialAnalystAgent.manual_workflow",
+  "initial_facts": [],
+  "goal_facts": ["investment_recommendations_provided"],
+  "steps": [
+    {
+      "id": "gather_market_data",
+      "description": "Use the MarketDataAPI tool to gather recent market data and trends.",
+      "preconditions": [],
+      "establishes": ["market_data_gathered"],
+      "cost": 1.0,
+      "source": "agent.py FinancialAnalystAgent.manual_workflow()[0] ({'message': 'Use the MarketDataAPI tool to gather recent market data and trends.', 'tool_use': ['MarketDataAPI']})"
+    },
+    {
+      "id": "postprocess_and_recommend",
+      "description": "Postprocess the gathered data to provide investment recommendations.",
+      "preconditions": ["market_data_gathered"],
+      "establishes": ["investment_recommendations_provided"],
+      "cost": 1.0,
+      "source": "agent.py FinancialAnalystAgent.manual_workflow()[1] ({'message': 'Postprocess the gathered data to provide investment recommendations.', 'tool_use': ['PortfolioManager']})"
+    }
+  ]
+}

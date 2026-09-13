@@ -1,0 +1,37 @@
+{
+  "name": "@chatman-ai/openclaw-scikit-decide",
+  "version": "0.1.0",
+  "description": "Native OpenClaw tools, MCP server projection, and skill for scikit-decide",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "dist/",
+    "skills/",
+    "openclaw.plugin.json",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "plugin:build": "npm run build && openclaw plugins build --root . --entry ./dist/index.js",
+    "plugin:check": "npm run build && openclaw plugins build --root . --entry ./dist/index.js --check && openclaw plugins validate --root . --entry ./dist/index.js",
+    "test": "node --test test/*.test.mjs",
+    "check": "npm run plugin:check && npm test",
+    "pack:dry-run": "npm pack --dry-run --json"
+  },
+  "dependencies": {
+    "typebox": "1.1.39"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.7.1-2"
+  },
+  "openclaw": {
+    "extensions": [
+      "./dist/index.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "22.15.3",
+    "openclaw": "2026.7.1-2",
+    "typescript": "5.8.3"
+  }
+}
