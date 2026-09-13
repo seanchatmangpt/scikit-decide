@@ -67,8 +67,8 @@ _COMPONENTS = (
         name="wasm4pm",
         python_name="wasm4pm",
         repository="https://github.com/seanchatmangpt/wasm4pm",
-        branch="agent/mfw-interop-admission",
-        revision="400f1795cd17845f0723e4e3edf67c3f1e591b36",
+        branch="agent/scikit-decide-source-interop",
+        revision="3936977ece105f1d7d48ff6846000efeecc3cc28",
         capability_class="process-evidence",
     ),
     _component(
