@@ -23,7 +23,6 @@ pytestmark = requires_flight_planning_deps
 
 def _make_domain_factory():
     from pygeodesy.ellipsoidalVincenty import LatLon
-
     from skdecide.hub.domain.flight_planning.aircraft_performance.bean.aircraft_state import (
         AircraftState,
     )

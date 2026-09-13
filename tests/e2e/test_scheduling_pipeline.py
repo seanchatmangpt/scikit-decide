@@ -13,7 +13,6 @@ representative scheduling instance, paired first with the lightweight, pure
 discrete-optimization).
 """
 
-from skdecide import rollout, utils
 from skdecide.builders.domain.scheduling.scheduling_domains_modelling import (
     rebuild_tasks_complete_details_dict,
 )
@@ -22,6 +21,8 @@ from skdecide.hub.solver.do_solver.sgs_policies import (
     BasePolicyMethod,
     PolicyMethodParams,
 )
+
+from skdecide import rollout, utils
 
 from .conftest import requires_discrete_optimization
 
