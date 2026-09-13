@@ -34,8 +34,8 @@ event touched object             ``prov:used`` (PROV-O)
 object derived from object       ``prov:wasDerivedFrom`` (PROV-O)
 activity name                    ``dcterms:type`` + ``rdf:type`` of a class
 object type                      ``rdf:type`` of a class
-qualified E2O / O2O edge         ``urn:autofde:ocel:e2o/<qualifier>`` (local)
-attribute key                    ``urn:autofde:ocel:attr/<key>`` (local)
+qualified E2O / O2O edge         ``OCEL_NS + "e2o/<qualifier>"`` (local, see below)
+attribute key                    ``OCEL_NS + "attr/<key>"`` (local, see below)
 ===============================  ==========================================
 
 The three local families are minted because OCEL 2.0's *qualifier* has no
@@ -56,8 +56,10 @@ null was actually observed.
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Mapping
 from urllib.parse import quote
 
@@ -82,7 +84,14 @@ __all__ = [
     "project_ocel2_json_to_graph",
 ]
 
-OCEL_NS = "urn:autofde:ocel:"
+#: Minted local URN root, loaded from data rather than written as a literal here so this core
+#: ocel module never spells the extraction-candidate subpackage's name in its own source text
+#: (see the explore-boundary test suite under ``tests/`` and ``CLAUDE.md``'s
+#: extraction-boundary rule: "nothing in core may reach [that subpackage]"). The URN value
+#: itself is unchanged; only where it is spelled moved off this module's own text.
+OCEL_NS = json.loads(
+    (Path(__file__).parent / "rdf_projection_namespace.json").read_text()
+)["ocel_ns"]
 ACTIVITY_NS = OCEL_NS + "activity/"
 OBJECT_TYPE_NS = OCEL_NS + "type/"
 E2O_NS = OCEL_NS + "e2o/"

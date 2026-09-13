@@ -106,7 +106,7 @@ from autofde_lab.case_library.outcome_predicate import OracleVerdict, OutcomeVer
 from autofde_lab.fabric.gymact_capability_gate import DEFAULT_MANIFEST_PATH, CapabilityGate
 from autofde_lab.ocel.log import OcelLog
 from autofde_lab.ocel.mcp_session import append_tool_call_event
-from autofde_lab.powl.runner import (
+from autofde_lab.fabric.gymact_pipeline import (
     GYMACT_CHECK_DEPLOYMENTS_LABEL,
     GYMACT_CHECK_NAMESPACE_LABEL,
     GYMACT_CHECK_PODS_LABEL,
@@ -121,11 +121,12 @@ from autofde_lab.powl.runner import (
     GYMACT_SUBMIT_MITIGATION_LABEL,
     GYMACT_VERIFY_LABEL,
     GYMACT_WAIT_FOR_DEPLOY_LABEL,
-    GatedCapabilityBinding,
-    PipelineStallResult,
+    PIPELINE_SPEC,
     build_pipeline_powl_node,
-    run_pipeline,
+    ocel_dict_to_log,
 )
+from gymact.powl.runner import PipelineStallResult, run_pipeline
+from gymact.powl.spec import GatedCapabilityBinding
 from autofde_lab_planner.scanner.registry import ClusterState, scan
 from autofde_lab_planner.scanner.taxonomy import classify
 
@@ -841,12 +842,14 @@ async def run_gymact_mediated_diagnosis(
 
     try:
         model = build_pipeline_powl_node()
-        ocel_log, stall = run_pipeline(
+        raw_ocel_log, stall = run_pipeline(
             model,
+            spec=PIPELINE_SPEC,
             session_id=f"gymact-mediated-{problem_id}",
             action_bindings=action_bindings,
             allow_partial_bindings=True,
         )
+        ocel_log = ocel_dict_to_log(raw_ocel_log)
         if _diagnosis_state_sink is not None:
             _diagnosis_state_sink.update(diagnosis_state)
 

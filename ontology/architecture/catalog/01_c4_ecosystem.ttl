@@ -61,3 +61,4 @@
     arch:relationshipCount 9 ;
     arch:sourceDigest "351541b8f8724f4169664a774a06d7bb151296a605219ec16ea461eb22cfc944" ;
     arch:sourcePath "docs/c4/05_ecosystem_deployment.mmd" .
+

@@ -1,0 +1,41 @@
+name: R83 TCPS Ready-Set Consumer
+on:
+  pull_request:
+    paths:
+      - 'verification/r83-tcps-ready-set/**'
+      - '.github/workflows/r83-tcps-ready-set-consumer.yml'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Checkout exact consumer subject
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Admit exact consumer head
+        run: test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
+      - name: Execute target-local admission court
+        run: python3 verification/r83-tcps-ready-set/verify.py
+      - name: Prove observed local GGEN contract exists
+        run: test -s ggen.toml
+      - name: Checkout exact canonical producer
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: seanchatmangpt/ggen-marketplace
+          ref: aef231ceb3e27150366a11b547dd115720230880
+          path: _r78_producer
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.12'
+      - name: Install bounded producer verifier
+        run: python -m pip install --disable-pip-version-check 'pytest==8.3.5' 'rdflib==7.1.4'
+      - name: Execute canonical R78 producer court
+        run: pytest -q _r78_producer/packs/portfolio-epistemic-observability-pack/tests/test_r78_tcps_ready_set_capital.py
+      - name: Prove zero ambient consequential actuation
+        run: test "$(python -c 'import json; print(str(json.load(open("verification/r83-tcps-ready-set/subject.json"))["consequential_do"]).lower())')" = "false"

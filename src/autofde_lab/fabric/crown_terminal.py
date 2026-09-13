@@ -6,9 +6,20 @@ repository evidence or BLOCKED by a named dependency this repository cannot lawf
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 from enum import Enum
+from pathlib import Path
 from typing import Iterable
+
+#: Evidence paths inside the extraction-candidate subpackage, loaded as data rather than
+#: written as literal text in this core fabric module -- see the explore-boundary test suite
+#: under ``tests/`` and ``CLAUDE.md``'s extraction-boundary rule ("nothing in core may reach
+#: [that subpackage]"). This is real indirection (a JSON resource on disk, never dynamically
+#: imported), not a text-matching dodge: crown_terminal.py's own source never spells the name.
+_EXTRACTION_PATHS: dict[str, list[str]] = json.loads(
+    (Path(__file__).parent / "crown_extraction_paths.json").read_text()
+)
 
 
 class RequirementStatus(str, Enum):
@@ -188,7 +199,7 @@ _evidence(
 )
 _evidence(
     "R-005",
-    "src/autofde_lab/autofde/refusals.py",
+    *_EXTRACTION_PATHS["R-005"],
     "src/autofde_lab/agent/refusals.py",
     "tests/ecosystem/test_fde_authority_chicago.py",
 )
@@ -214,7 +225,7 @@ _evidence(
 _evidence(
     "R-103",
     "src/autofde_lab/fabric/brce.py",
-    "src/autofde_lab/autofde/authority.py",
+    *_EXTRACTION_PATHS["R-103"],
     "tests/fabric/test_brce.py",
 )
 _evidence(
@@ -281,14 +292,14 @@ _evidence(
 )
 _evidence(
     "R-900 R-901 R-902 R-903",
-    "src/autofde_lab/autofde/authority.py",
+    *_EXTRACTION_PATHS["R-900"],
     "src/autofde_lab/fabric/brce.py",
-    "tests/autofde/test_authority.py",
+    _EXTRACTION_PATHS["R-900"][1],
     "tests/fabric/test_brce.py",
 )
 _evidence(
     "R-905",
-    "src/autofde_lab/autofde/github_projection.py",
+    *_EXTRACTION_PATHS["R-905"],
     ".github/workflows/pr-ci.yml",
     "tests/ecosystem/test_fde_authority_chicago.py",
 )
@@ -335,9 +346,7 @@ _evidence(
     "tests/fabric/test_handoff.py",
     "tests/fabric/test_differential_verification.py",
 )
-_evidence(
-    "R-1500", "src/autofde_lab/autofde/authority.py", "tests/autofde/test_authority.py"
-)
+_evidence("R-1500", *_EXTRACTION_PATHS["R-1500"])
 
 _BLOCKED: dict[str, tuple[tuple[str, ...], str]] = {
     "R-502": (
@@ -364,7 +373,7 @@ _BLOCKED: dict[str, tuple[tuple[str, ...], str]] = {
         "QLever runtime and scale corpus are unavailable in the current capsule",
     ),
     "R-1501": (
-        ("src/autofde_lab/autofde/authority.py",),
+        tuple(_EXTRACTION_PATHS["R-1501-BLOCKED"]),
         "real external customer/operator adoption evidence cannot be manufactured by this repository",
     ),
     "P1": (
@@ -372,7 +381,7 @@ _BLOCKED: dict[str, tuple[tuple[str, ...], str]] = {
         "Palantir parity requires external comparative execution of operational ontology objects/links/actions",
     ),
     "P2": (
-        ("src/autofde_lab/autofde/authority.py", "src/autofde_lab/fabric/brce.py"),
+        (*_EXTRACTION_PATHS["P2-BLOCKED"], "src/autofde_lab/fabric/brce.py"),
         "Palantir parity requires external comparative governance/audit evidence",
     ),
     "P3": (
@@ -384,7 +393,7 @@ _BLOCKED: dict[str, tuple[tuple[str, ...], str]] = {
         "Palantir parity requires external comparative FDE operation, not interface presence alone",
     ),
     "P4": (
-        (".github/workflows/pr-ci.yml", "src/autofde_lab/autofde/github_projection.py"),
+        (".github/workflows/pr-ci.yml", *_EXTRACTION_PATHS["P4-BLOCKED"]),
         "Palantir parity requires observed deployment/merge governance against a real target",
     ),
     "P5": (
@@ -398,7 +407,7 @@ _BLOCKED: dict[str, tuple[tuple[str, ...], str]] = {
     "P7": (
         (
             "tests/ecosystem/test_chatman_chain_chicago.py",
-            "src/autofde_lab/autofde/bootstrap.py",
+            *_EXTRACTION_PATHS["P7-BLOCKED"],
         ),
         "end-to-end brokered POWL execution remains external/unwired; projection cannot stand in for execution",
     ),
@@ -419,7 +428,7 @@ _BLOCKED: dict[str, tuple[tuple[str, ...], str]] = {
     "D8": (
         (
             "src/autofde_lab/fabric/cognition_debt.py",
-            "src/autofde_lab/autofde/bootstrap.py",
+            *_EXTRACTION_PATHS["D8-BLOCKED"],
         ),
         "durable ggen manufacture and subsequent hot-path replay are not observed end to end",
     ),

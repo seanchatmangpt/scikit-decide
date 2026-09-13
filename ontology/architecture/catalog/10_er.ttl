@@ -61,3 +61,4 @@
     arch:relationshipCount 6 ;
     arch:sourceDigest "aa4cf3ccf22f84ac9f4f05b1a26ebdcea309dbb663a34d767b2aed9f92e96829" ;
     arch:sourcePath "docs/diagrams/50_er_vendor_oracle_taxonomy.mmd" .
+

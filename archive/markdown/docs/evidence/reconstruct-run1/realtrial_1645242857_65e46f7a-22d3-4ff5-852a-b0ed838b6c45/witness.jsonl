@@ -1,0 +1,1 @@
+{"expression": "counter == target (3)", "goal_id": "urn:level4:goal:65e46f7a-22d3-4ff5-852a-b0ed838b6c45", "kind": "goal_admitted", "target": {"target": "3"}, "task_id": "urn:level4:task:1645242857"}

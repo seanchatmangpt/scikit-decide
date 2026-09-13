@@ -1,0 +1,17 @@
+C4Context
+title AutoFDE SOTA Lab — System Context
+
+Person(researcher, "Researcher / Operator", "Defines objectives and admits basis revisions.")
+System(lab, "AutoFDE SOTA Lab", "Explores solution space, designs experiments, falsifies hypotheses, and learns reusable repairs.")
+System_Ext(gymact, "GymAct", "Canonical GymBasis and environment execution substrate.")
+System_Ext(ggen, "ggen", "Manufacturer of generated specializations.")
+System_Ext(runtime, "AutoFDE Runtime", "Governed production execution.")
+System_Ext(benchmarks, "External Benchmarks", "Official/fidelity evaluators and frontier targets.")
+
+Rel(researcher, lab, "Defines goals, constraints, and admission policy")
+Rel(benchmarks, lab, "Provides benchmark contract and published frontier")
+Rel(gymact, lab, "Provides canonical world basis")
+Rel(lab, gymact, "Runs experiments")
+Rel(lab, ggen, "Manufactures admitted specializations")
+Rel(lab, runtime, "Promotes governed candidates")
+Rel(runtime, lab, "Returns verified consequence and standing")

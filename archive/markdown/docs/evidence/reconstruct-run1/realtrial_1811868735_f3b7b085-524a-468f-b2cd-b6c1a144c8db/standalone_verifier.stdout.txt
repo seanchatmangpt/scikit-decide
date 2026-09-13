@@ -1,0 +1,3 @@
+
+VERDICT: UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3
+INDEPENDENCE: no execution-runtime module imported in this process

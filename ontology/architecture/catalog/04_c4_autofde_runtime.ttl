@@ -59,5 +59,6 @@
     arch:mermaidSyntax "C4Deployment" ;
     arch:parseStanding "PARSED" ;
     arch:relationshipCount 6 ;
-    arch:sourceDigest "aa6d2c12d8b8790c860fea8a61940122748723fe4ba790886b40bab1effcf9bd" ;
+    arch:sourceDigest "055491ffd0901726f69c66a11b8ce10920d65d8df97c6cda68ef6b311ab6c8ab" ;
     arch:sourcePath "docs/c4/20_autofde_runtime_deployment.mmd" .
+

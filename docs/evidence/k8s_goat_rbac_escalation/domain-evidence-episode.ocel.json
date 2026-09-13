@@ -1,0 +1,317 @@
+{
+  "eventTypes": [
+    {
+      "attributes": [
+        {
+          "name": "candidate_order",
+          "type": "integer"
+        },
+        {
+          "name": "elapsed_seconds",
+          "type": "float"
+        },
+        {
+          "name": "plan_length",
+          "type": "integer"
+        },
+        {
+          "name": "strategy",
+          "type": "string"
+        }
+      ],
+      "name": "solver_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "type": "string"
+        },
+        {
+          "name": "step_index",
+          "type": "integer"
+        }
+      ],
+      "name": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "goal_reached",
+          "type": "boolean"
+        },
+        {
+          "name": "standing",
+          "type": "string"
+        },
+        {
+          "name": "verify_mode",
+          "type": "string"
+        },
+        {
+          "name": "winning_strategy",
+          "type": "string"
+        }
+      ],
+      "name": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ],
+      "name": "teardown"
+    }
+  ],
+  "events": [
+    {
+      "attributes": [
+        {
+          "name": "strategy",
+          "value": "astar-plain"
+        },
+        {
+          "name": "candidate_order",
+          "value": 1
+        },
+        {
+          "name": "elapsed_seconds",
+          "value": 0.3059849739074707
+        },
+        {
+          "name": "plan_length",
+          "value": 5
+        }
+      ],
+      "id": "ev:solver_selected:1",
+      "relationships": [
+        {
+          "objectId": "episode:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:17.949997000Z",
+      "type": "solver_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "read_serviceaccount_files"
+        },
+        {
+          "name": "step_index",
+          "value": 0
+        }
+      ],
+      "id": "ev:act:0",
+      "relationships": [
+        {
+          "objectId": "episode:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:17.950260000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "resolve_apiserver_env"
+        },
+        {
+          "name": "step_index",
+          "value": 1
+        }
+      ],
+      "id": "ev:act:1",
+      "relationships": [
+        {
+          "objectId": "episode:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:17.950279000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "authenticate_to_apiserver"
+        },
+        {
+          "name": "step_index",
+          "value": 2
+        }
+      ],
+      "id": "ev:act:2",
+      "relationships": [
+        {
+          "objectId": "episode:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:17.950297000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "list_namespace_secrets"
+        },
+        {
+          "name": "step_index",
+          "value": 3
+        }
+      ],
+      "id": "ev:act:3",
+      "relationships": [
+        {
+          "objectId": "episode:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:17.950304000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "read_and_decode_k8svaultapikey"
+        },
+        {
+          "name": "step_index",
+          "value": 4
+        }
+      ],
+      "id": "ev:act:4",
+      "relationships": [
+        {
+          "objectId": "episode:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:17.950310000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "goal_reached",
+          "value": true
+        },
+        {
+          "name": "verify_mode",
+          "value": "fresh-instance-replay"
+        },
+        {
+          "name": "winning_strategy",
+          "value": "astar-plain"
+        }
+      ],
+      "id": "ev:verify",
+      "relationships": [
+        {
+          "objectId": "episode:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:18.242486000Z",
+      "type": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        }
+      ],
+      "id": "ev:teardown",
+      "relationships": [
+        {
+          "objectId": "episode:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:k8s_goat_rbac_escalation",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:18.242683000Z",
+      "type": "teardown"
+    }
+  ],
+  "objectTypes": [
+    {
+      "attributes": [],
+      "name": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "type": "string"
+        }
+      ],
+      "name": "domain"
+    }
+  ],
+  "objects": [
+    {
+      "attributes": [],
+      "id": "episode:k8s_goat_rbac_escalation",
+      "relationships": [],
+      "type": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "time": "1970-01-01T00:00:00.000000000Z",
+          "value": "K8sGoatRBACEscalation"
+        }
+      ],
+      "id": "domain:k8s_goat_rbac_escalation",
+      "relationships": [],
+      "type": "domain"
+    }
+  ]
+}

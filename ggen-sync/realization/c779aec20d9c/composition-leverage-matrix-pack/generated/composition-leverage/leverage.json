@@ -1,0 +1,7 @@
+{
+  "schema": "ggen.composition-leverage/1",
+  "candidates": [
+  {"candidate":"https://ggen.dev/ontology/composition-leverage-matrix#seedA","leverage":15.2},{"candidate":"https://ggen.dev/ontology/composition-leverage-matrix#seedB","leverage":13.5}
+  ],
+  "actuation_performed": false
+}

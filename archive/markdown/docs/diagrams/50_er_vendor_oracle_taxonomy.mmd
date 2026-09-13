@@ -1,0 +1,41 @@
+erDiagram
+    VENDOR_BENCHMARK ||--|| VENDOR_PROVIDER : uses
+    VENDOR_BENCHMARK ||--o| ORACLE_BINDING : has
+    ORACLE_BINDING }o--|| ORACLE_CATEGORY : classified_as
+    VENDOR_BENCHMARK ||--o{ DEPENDENCY_BLOCKER : may_have
+    VENDOR_BENCHMARK ||--o{ AUTHORITY_REQUIREMENT : requires
+    ORACLE_CATEGORY ||--o| SHARED_ORACLE_MECHANISM : implemented_by
+
+    VENDOR_BENCHMARK {
+      string vendor_id PK
+      string revision
+      string execution_risk
+    }
+    VENDOR_PROVIDER {
+      string provider_class PK
+      string constructor_shape
+    }
+    ORACLE_BINDING {
+      string oracle_binding_id PK
+      string config_value
+    }
+    ORACLE_CATEGORY {
+      string category_id PK
+      string name
+      string standing
+    }
+    SHARED_ORACLE_MECHANISM {
+      string mechanism_id PK
+      string kind
+      string implementation_status
+    }
+    DEPENDENCY_BLOCKER {
+      string blocker_id PK
+      string dependency
+      string status
+    }
+    AUTHORITY_REQUIREMENT {
+      string authority_id PK
+      string scope
+      string risk_class
+    }

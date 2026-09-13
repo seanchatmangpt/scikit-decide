@@ -14,6 +14,8 @@ imports = [
   "../docs/papers/papers.ttl",
   "../docs/papers/gym-lock.ttl",
   "../docs/papers/smoke-lock.ttl",
+  "../ontology/autofde-lab-capabilities.ttl",
+  "../ontology/planner-league.ttl",
 ]
 base_iri = "https://github.com/seanchatmangpt/autofde-lab/data/gymact/"
 
@@ -112,6 +114,13 @@ name = "azure-closed-vertical-bundle"
 query = { file = "queries/closed-vertical.rq" }
 template = { file = "templates/closed-vertical.json.tera" }
 output_file = "generated/azure-closed-vertical.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "planner-league-catalog"
+query = { file = "queries/planner-league.rq" }
+template = { file = "templates/planner-league.json.tera" }
+output_file = "generated/planner-league.json"
 mode = "Overwrite"
 
 [validation]

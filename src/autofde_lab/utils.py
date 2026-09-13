@@ -182,12 +182,265 @@ def load_registered_solver(name: str) -> type[Solver]:
     return _load_registered_entry("autofde_lab.solvers", name)
 
 
-# TODO: implement ranking heuristic
+def _solver_measures(solver_type: type[Solver]) -> tuple[float, float, float, float]:
+    """Derive 4 real, class-level numeric measures for a matched solver.
+
+    Every value comes from an attribute that genuinely exists on the real
+    ``Solver``/``Hyperparametrizable`` classes (see the grounding report this
+    change was built from) -- nothing here is a fabricated score, confidence,
+    speed, or quality metric, since no such hook exists anywhere in
+    ``Solver``. These are structural/complexity proxies only, in the order
+    consumed by ``cmca_rank_cli``'s 4 measure slots:
+
+    1. ``domain_requirements`` -- ``len(solver_type.get_domain_requirements())``:
+       how many domain-builder mixins the solver demands. A real structural
+       specialization signal (more requirements = exploits richer domain
+       structure; fewer = broader, more generic applicability).
+    2. ``hyperparameter_count`` -- ``len(solver_type.get_hyperparameters_names())``:
+       count of declared tunable hyperparameters, a real configurability
+       proxy every ``discrete_optimization``-based solver already carries via
+       ``Hyperparametrizable``.
+    3. ``has_domain_check`` -- ``1.0`` if ``solver_type`` overrides
+       ``Solver._check_domain_additional`` (does real, solver-specific
+       compatibility reasoning beyond the generic requirements check) else
+       ``0.0``.
+    4. ``mro_depth`` -- ``len(solver_type.__mro__)``: a rough
+       specialization-vs-genericity signal from the real class hierarchy
+       depth. Weaker than the others but still a real, inspectable class
+       attribute, not invented.
+
+    These are intentionally unweighted, unnormalized raw counts -- the actual
+    weighting/ranking policy lives in ``cmca_rank_cli``'s compiled
+    ``case_studies`` lens registry, not here.
+    """
+    domain_requirements = float(len(solver_type.get_domain_requirements()))
+    hyperparameter_count = float(len(solver_type.get_hyperparameters_names()))
+    has_domain_check = (
+        1.0
+        if solver_type._check_domain_additional is not Solver._check_domain_additional
+        else 0.0
+    )
+    mro_depth = float(len(solver_type.__mro__))
+    return (domain_requirements, hyperparameter_count, has_domain_check, mro_depth)
+
+
+# Optional adapter: an out-of-process ranking backend for match_solvers(ranked=True).
+# Follows the exact BcinrSchedulerAdapter/adapters.base convention: probed via
+# BCINR_HOME (plus a CMCA_RANK_CLI_BIN override), never required, never raises out
+# of the probe, and any failure degrades to the existing unranked match order --
+# never a crash. See autofde_lab.adapters.bcinr.BcinrSchedulerAdapter and
+# autofde_lab.adapters.base for the shared primitives this mirrors.
+CMCA_RANK_CLI_BIN_ENVVARNAME = "CMCA_RANK_CLI_BIN"
+_CMCA_RANK_CLI_RELATIVE_PATH = "target/debug/cmca_rank_cli"
+
+# One warning per process for ranked=True falling back, mirroring the
+# _legacy_datahome_warned convention above -- ranked=True may be called in a loop
+# (e.g. once per matched domain), and a fallback here is expected/optional
+# behaviour, not a bug to spam about.
+_cmca_rank_cli_fallback_warned = False
+
+
+def _resolve_cmca_rank_cli_bin() -> Optional[str]:
+    """Locate the optional ``cmca_rank_cli`` binary, or return ``None``.
+
+    Precedence, most explicit first, mirroring
+    ``autofde_lab.adapters.base.resolve_home``:
+
+    1. ``CMCA_RANK_CLI_BIN`` -- an explicit path to the binary itself.
+    2. ``$BCINR_HOME/target/debug/cmca_rank_cli`` -- the same ``BCINR_HOME``
+       env var ``BcinrSchedulerAdapter`` probes, joined to the binary's
+       conventional build output path.
+    3. ``~/bcinr/target/debug/cmca_rank_cli`` -- the same default root
+       ``BcinrSchedulerAdapter`` uses.
+
+    Never raises. Returns ``None`` (not found / not executable) rather than
+    a boolean, so the caller can log where it looked.
+    """
+    explicit = os.environ.get(CMCA_RANK_CLI_BIN_ENVVARNAME)
+    if explicit:
+        return explicit if os.path.isfile(explicit) and os.access(explicit, os.X_OK) else None
+
+    from autofde_lab.adapters.base import resolve_home
+    from autofde_lab.adapters.bcinr import BcinrSchedulerAdapter
+
+    root = resolve_home(BcinrSchedulerAdapter.env_var, BcinrSchedulerAdapter.default_root)
+    candidate = os.path.join(root, _CMCA_RANK_CLI_RELATIVE_PATH)
+    if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
+        return candidate
+    return None
+
+
+def _rank_via_cmca_rank_cli(
+    matches: list[type[Solver]],
+) -> Optional[list[tuple[type[Solver], float]]]:
+    """Try to rank ``matches`` via the optional ``cmca_rank_cli`` subprocess.
+
+    Returns ``None`` (never raises) on any failure -- binary not found,
+    subprocess error, malformed output, or a name in the response that
+    doesn't match a real candidate -- so the caller can fall back to the
+    existing unranked match order. This is the graceful-degradation half of
+    the adapter philosophy in ``autofde_lab.adapters.base``: a missing
+    sibling optional backend must never lower the standing of the core.
+    """
+    global _cmca_rank_cli_fallback_warned
+
+    def _fallback(reason: str) -> None:
+        global _cmca_rank_cli_fallback_warned
+        if not _cmca_rank_cli_fallback_warned:
+            _cmca_rank_cli_fallback_warned = True
+            logger.info(
+                "match_solvers(ranked=True) falling back to unranked match order: %s "
+                "(this notice appears once per process; ranked=True degrades "
+                "gracefully by design when cmca_rank_cli is unavailable or fails)",
+                reason,
+            )
+
+    binary = _resolve_cmca_rank_cli_bin()
+    if binary is None:
+        _fallback(
+            f"cmca_rank_cli binary not found (checked {CMCA_RANK_CLI_BIN_ENVVARNAME} and "
+            f"$BCINR_HOME/{_CMCA_RANK_CLI_RELATIVE_PATH})"
+        )
+        return None
+
+    import json
+    import subprocess
+
+    # Names must be unique for the response to be unambiguously mappable back
+    # to a solver type; qualify by module to avoid collisions between solvers
+    # sharing a class name.
+    name_by_key: dict[str, type[Solver]] = {}
+    candidates_payload = []
+    for solver_type in matches:
+        key = f"{solver_type.__module__}.{solver_type.__qualname__}"
+        name_by_key[key] = solver_type
+        candidates_payload.append(
+            {"name": key, "measures": list(_solver_measures(solver_type))}
+        )
+
+    try:
+        result = subprocess.run(
+            [binary],
+            input=json.dumps({"candidates": candidates_payload}),
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+    except (OSError, subprocess.SubprocessError) as exc:
+        _fallback(f"subprocess invocation failed ({exc!r})")
+        return None
+
+    if result.returncode != 0:
+        _fallback(
+            f"cmca_rank_cli exited {result.returncode}: {result.stderr.strip() or result.stdout.strip()}"
+        )
+        return None
+
+    try:
+        parsed = json.loads(result.stdout)
+        ranking = parsed["ranking"]
+        ranked_pairs = [(name_by_key[entry["name"]], entry["share"]) for entry in ranking]
+    except (json.JSONDecodeError, KeyError, TypeError) as exc:
+        _fallback(f"could not parse cmca_rank_cli output ({exc!r})")
+        return None
+
+    if len(ranked_pairs) != len(matches):
+        _fallback(
+            f"cmca_rank_cli returned {len(ranked_pairs)} ranked candidates for "
+            f"{len(matches)} matches"
+        )
+        return None
+
+    return ranked_pairs
+
+
+# cmca_rank_cli (CMCA-108) is compiled for at most this many candidates and
+# refuses (typed error, not a crash) above it. Real autofde-lab domains can
+# match up to 46 candidates, so without a pre-filter ranked=True always hit
+# the refusal and silently fell back to unranked order -- the real ranking
+# success path was never exercised on real data.
+_CMCA_RANK_CLI_MAX_CANDIDATES = 8
+
+
+def _prefilter_top_for_ranking(
+    matches: list[type[Solver]], limit: int = _CMCA_RANK_CLI_MAX_CANDIDATES
+) -> tuple[list[type[Solver]], list[type[Solver]]]:
+    """Split ``matches`` into (top ``limit``, remainder) for ``cmca_rank_cli``.
+
+    Criterion, chosen deliberately rather than inventing a new metric: the
+    unweighted sum of ``_solver_measures``'s 4 existing real signals
+    (``domain_requirements + hyperparameter_count + has_domain_check +
+    mro_depth``). This reuses exactly the measures already computed for the
+    CLI payload -- no fifth metric is introduced. The sum is defensible as a
+    single "overall structural specificity" proxy: solvers that declare more
+    domain requirements, more tunable hyperparameters, override the
+    additional domain-check hook, and sit deeper in the class hierarchy are,
+    on these real, inspectable signals, the more specialized/informative
+    candidates to spend the CLI's 8-candidate budget on. Ties are broken by
+    the qualified name (``module.qualname``) for full determinism, since
+    ``_solver_measures`` alone can tie.
+
+    Returns ``(top, rest)`` where ``top`` has at most ``limit`` entries
+    (sent to ``cmca_rank_cli`` for real governed ranking) and ``rest`` holds
+    every other matched candidate, in their original relative match order
+    (see ``match_solvers`` for what happens to ``rest`` in the final
+    result -- they are appended, not dropped).
+    """
+    if len(matches) <= limit:
+        return matches, []
+
+    def _sort_key(solver_type: type[Solver]) -> tuple[float, str]:
+        total = sum(_solver_measures(solver_type))
+        qualified_name = f"{solver_type.__module__}.{solver_type.__qualname__}"
+        return (-total, qualified_name)
+
+    ordered = sorted(matches, key=_sort_key)
+    top_set = set(ordered[:limit])
+    # Preserve each group's original match order rather than the
+    # criterion-sorted order, so `rest` reads as "everything else, in the
+    # order match_solvers found it" -- the least surprising behaviour.
+    top = [s for s in matches if s in top_set]
+    rest = [s for s in matches if s not in top_set]
+    return top, rest
+
+
 def match_solvers(
     domain: Domain,
     candidates: Optional[Iterable[type[Solver]]] = None,
     ranked: bool = False,
-) -> Union[list[type[Solver]], list[tuple[type[Solver], int]]]:
+) -> Union[list[type[Solver]], list[tuple[type[Solver], float]]]:
+    """Filter registered solver classes by domain compatibility.
+
+    If ``ranked`` is ``False`` (the default), behaviour is unchanged: a plain
+    list of matched solver classes in match order.
+
+    If ``ranked`` is ``True``, the matched candidates are additionally scored
+    via ``_solver_measures`` (4 real, inspectable class-level attributes --
+    see that function's docstring) and, if the optional ``cmca_rank_cli``
+    binary is available (probed via the same ``BCINR_HOME``/``default_root``
+    convention as ``autofde_lab.adapters.bcinr.BcinrSchedulerAdapter``, plus a
+    ``CMCA_RANK_CLI_BIN`` override), ranked by subprocess-calling it and
+    reordering by the returned share, descending. This is entirely optional:
+    if the binary is unavailable, or the subprocess call fails for any
+    reason, ``ranked=True`` degrades gracefully to the existing match order
+    (each solver paired with rank position as its score) rather than raising
+    -- matching this repo's stated philosophy that sibling repos are never
+    prerequisites (see ``autofde_lab/adapters/base.py``).
+
+    ``cmca_rank_cli`` (CMCA-108) is compiled for at most 8 candidates and
+    refuses above that. When more than 8 candidates match, this function
+    pre-filters to the top 8 (see ``_prefilter_top_for_ranking`` for the
+    exact criterion) *before* invoking the CLI, so the real ranking success
+    path actually fires on real data instead of always hitting the refusal.
+    The candidates outside the top 8 are **not dropped** from the returned
+    list: they are appended after the ranked 8, in their original match
+    order, each paired with a synthetic score strictly lower than every real
+    share returned by the CLI -- so a caller that sorts or reads the list
+    top-down sees "really ranked" candidates first and "matched but not
+    CLI-ranked" candidates last, without silently losing any match. This is
+    the least-surprising choice: ``ranked=True`` never returns fewer
+    candidates than ``ranked=False`` would for the same domain.
+    """
     if candidates is None:
         candidates = [load_registered_solver(s) for s in get_registered_solvers()]
         candidates = [
@@ -197,7 +450,28 @@ def match_solvers(
     for solver_type in candidates:
         if solver_type.check_domain(domain):
             matches.append(solver_type)
-    return matches
+
+    if not ranked:
+        return matches
+
+    top, rest = _prefilter_top_for_ranking(matches) if matches else ([], [])
+    ranked_via_cli = _rank_via_cmca_rank_cli(top) if top else []
+    if ranked_via_cli is not None:
+        ranked_via_cli.sort(key=lambda pair: pair[1], reverse=True)
+        if rest:
+            # Synthetic scores strictly below every real share so `rest`
+            # always sorts after the real-ranked candidates, while
+            # preserving `rest`'s own original match order among itself.
+            min_share = min(score for _, score in ranked_via_cli)
+            floor = min_share - 1.0
+            tail = [(solver_type, floor - i) for i, solver_type in enumerate(rest)]
+            return ranked_via_cli + tail
+        return ranked_via_cli
+
+    # Graceful fallback: preserve existing match order, pairing each solver
+    # with its (1-based) rank position as an int score (an int is trivially
+    # compatible with the declared list[tuple[type[Solver], float]] slot).
+    return [(solver_type, i) for i, solver_type in enumerate(matches, start=1)]
 
 
 class ReplayOutOfActionMethod(Enum):

@@ -1,0 +1,18 @@
+C4Dynamic
+title AutoFDE Runtime — Governed Execution
+
+System_Ext(bundle, "Generated Bundle")
+Person(operator, "Authorized Operator")
+System(runtime, "AutoFDE Runtime")
+System_Ext(gymact, "GymAct")
+System_Ext(verifier, "Independent Verifier")
+
+Rel(bundle, runtime, "1. Load digest-pinned bundle")
+Rel(runtime, runtime, "2. Verify manifest and admitted plan standing")
+Rel(operator, runtime, "3. Supply authority envelope")
+Rel(runtime, runtime, "4. Validate authority + idempotency")
+Rel(runtime, gymact, "5. Execute admitted action")
+Rel(gymact, runtime, "6. Return observation/result/receipt")
+Rel(runtime, verifier, "7. Export receipt/replay/evidence")
+Rel(verifier, runtime, "8. Return derived standing")
+Rel(runtime, runtime, "9. Persist result or typed refusal")

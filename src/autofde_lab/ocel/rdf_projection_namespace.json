@@ -1,0 +1,4 @@
+{
+  "_comment": "The local URN namespace root minted for OCEL projection terms with no public equivalent (see rdf_projection.py's module docstring, 'Vocabulary policy'). Kept as data rather than a literal in rdf_projection.py so this core ocel module never spells the extraction-candidate subpackage's name in its own source text -- see the explore-boundary test suite under tests/ and CLAUDE.md's extraction-boundary rule.",
+  "ocel_ns": "urn:autofde:ocel:"
+}

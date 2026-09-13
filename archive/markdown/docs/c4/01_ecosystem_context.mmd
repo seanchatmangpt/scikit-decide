@@ -1,0 +1,19 @@
+C4Context
+title AutoFDE Ecosystem — System Context
+
+Person(researcher, "Researcher / Operator", "Designs experiments, reviews evidence, and admits basis repairs.")
+System_Ext(benchmarks, "External Benchmarks", "OSWorld, WebArena, AgentBench, SWE-bench, IaC-Eval, vendor suites.")
+System(gymact, "GymAct", "Canonical consequential world basis for all decision systems.")
+System(lab, "AutoFDE SOTA Lab", "Discovers, evaluates, falsifies, and learns solution architectures.")
+System(ggen, "ggen", "Ontology-driven manufacturer of projections, scaffolding, and experiment artifacts.")
+System(runtime, "AutoFDE Runtime", "Governed EXPLOIT-only execution and standing.")
+System_Ext(worlds, "External Consequential Worlds", "Browsers, cloud systems, codebases, local systems, business processes.")
+
+Rel(researcher, lab, "Defines/approves experiments and reviews standing")
+Rel(benchmarks, lab, "Supplies benchmark contracts and frontier targets")
+Rel(worlds, gymact, "Adapted into canonical GymBasis")
+Rel(gymact, lab, "Supplies GymBasis and environment contracts")
+Rel(ggen, lab, "Manufactures generated artifacts and projections")
+Rel(lab, runtime, "Admits governed candidates for execution")
+Rel(runtime, gymact, "Executes lawful actions and observes consequences")
+Rel(runtime, lab, "Returns evidence, receipts, replay, and results")

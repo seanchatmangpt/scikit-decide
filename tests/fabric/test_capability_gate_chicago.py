@@ -40,6 +40,15 @@ def test_default_manifest_exists_and_parses() -> None:
             "get_benchmark_status",
             "submit_diagnosis",
             "submit_mitigation",
+            "jaeger_get_services",
+            "jaeger_get_operations",
+            "jaeger_get_traces",
+            "jaeger_get_dependency_graph",
+            "loki_get_logs",
+            "loki_get_labels",
+            "loki_get_label_values",
+            "prometheus_get_metrics",
+            "prometheus_get_alerts",
         }
     )
 
@@ -129,12 +138,14 @@ from gymact.gyms.sregym import SREGYM_CAPABILITIES  # noqa: E402
 
 
 def test_real_sregym_capabilities_are_all_permitted() -> None:
-    """Every real `SREGYM_CAPABILITIES` entry (as of this session: 5,
-    verified directly from `~/gymact/src/gymact/gyms/sregym.py`) is
-    permitted by the shipped manifest -- the diagnosing pipeline's tool
-    surface is not accidentally narrower than what sregym actually offers."""
+    """Every real `SREGYM_CAPABILITIES` entry (re-verified 2026-08-12: 14,
+    directly from `~/gymact/src/gymact/gyms/sregym.py` -- the original 5 plus
+    9 observability-read additions upstream in gymact, see
+    `gymact_capabilities.toml`'s header) is permitted by the shipped manifest
+    -- the diagnosing pipeline's tool surface is not accidentally narrower
+    than what sregym actually offers."""
     gate = CapabilityGate.from_toml(DEFAULT_MANIFEST_PATH)
-    assert len(SREGYM_CAPABILITIES) == 5
+    assert len(SREGYM_CAPABILITIES) == 14
     for capability in SREGYM_CAPABILITIES:
         permitted = gate.guard_capability(capability)
         assert permitted is capability

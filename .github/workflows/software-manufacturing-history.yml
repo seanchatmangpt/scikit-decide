@@ -1,0 +1,149 @@
+name: August software-manufacturing replay
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "src/autofde_lab/agent/software_manufacturing_history.py"
+      - "tests/agent/test_software_manufacturing_history.py"
+      - "planning/august-2026/**"
+      - "docs/case-studies/august-2026-software-manufacturing-replay.md"
+      - ".github/workflows/software-manufacturing-history.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: software-manufacturing-history-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  replay-court:
+    name: Exact-head 24k planning replay court
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GYMACT_SUBJECT_SHA: 574e57b30294aa5f3a64105c767e262b32363417
+      WASM4PM_COMPAT_SHA: 577e2d1d8bdfe27d96f61c63f3ea120994e8bfda
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      - name: Admit exact subject
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="${{ github.event.pull_request.head.sha || github.sha }}"
+          actual="$(git rev-parse HEAD)"
+          test "$actual" = "$expected"
+          printf 'autofde_subject_sha=%s\n' "$actual"
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+
+      - name: Resolve focused validation capsule
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install \
+            "numpy==2.2.6" \
+            "pytest==8.4.2" \
+            "pytest-asyncio>=1,<2" \
+            "wrapt>=2.2.1,<3" \
+            "pynng>=0.6.2" \
+            "pathos>=0.2.7" \
+            "discrete-optimization>=0.9.0" \
+            "wasm4pm-compat-pydantic @ git+https://github.com/seanchatmangpt/wasm4pm-compat.git@$WASM4PM_COMPAT_SHA#subdirectory=python" \
+            "gymact @ git+https://github.com/seanchatmangpt/gymact.git@$GYMACT_SUBJECT_SHA"
+
+      - name: Refuse mockist seams
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -nE 'unittest\.mock|\bMock\(|\bMagicMock\(|\bpatch\(|monkeypatch' \
+            tests/agent/test_software_manufacturing_history.py
+
+      - name: Execute compiler and replay courts
+        env:
+          PYTHONPATH: src
+        run: python -m pytest -q tests/agent/test_software_manufacturing_history.py
+
+      - name: Recompile checked-in planning files
+        shell: bash
+        env:
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          rm -rf artifacts/august-2026
+          mkdir -p artifacts
+          python -m autofde_lab.agent.software_manufacturing_history compile \
+            planning/august-2026/history/full-stack-example.json \
+            artifacts/august-2026/materialized \
+            --period 2026-08 \
+            --reported-commit-count 24340 \
+            | tee artifacts/compile-receipt.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          pairs = (
+              (
+                  Path("planning/august-2026/materialized/manifest.json"),
+                  Path("artifacts/august-2026/materialized/manifest.json"),
+              ),
+              (
+                  Path(
+                      "planning/august-2026/materialized/"
+                      "august-full-stack-example.plan.json"
+                  ),
+                  Path(
+                      "artifacts/august-2026/materialized/"
+                      "august-full-stack-example.plan.json"
+                  ),
+              ),
+          )
+          for expected, actual in pairs:
+              assert json.loads(expected.read_text()) == json.loads(actual.read_text())
+          PY
+
+      - name: Replay materialized full-stack episode
+        shell: bash
+        env:
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          python -m autofde_lab.agent.software_manufacturing_history replay \
+            artifacts/august-2026/materialized/august-full-stack-example.plan.json \
+            | tee artifacts/replay-receipt.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          manifest = json.loads(
+              Path("artifacts/august-2026/materialized/manifest.json").read_text()
+          )
+          receipt = json.loads(Path("artifacts/replay-receipt.json").read_text())
+          assert manifest["reported_commit_count"] == 24340
+          assert manifest["observed_commit_count"] == 8
+          assert manifest["complete_history_observed"] is False
+          assert receipt["state"] == "ALIVE"
+          assert receipt["authority"] == "NONE"
+          assert receipt["do_authority"] is False
+          print(
+              "AUGUST_SOFTWARE_MANUFACTURING_REPLAY_ALIVE",
+              receipt["receipt_sha256"],
+          )
+          PY
+
+      - name: Retain replay evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v4
+        with:
+          name: august-software-manufacturing-${{ github.event.pull_request.head.sha || github.sha }}
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 30

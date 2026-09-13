@@ -1,0 +1,17 @@
+{
+  "schema":"urn:autofde:fortune5:reference-architecture:v1",
+  "planes":[
+    {"id":"business","contains":["capabilities","objectives","KPIs","value streams","risk appetite"]},
+    {"id":"experience","contains":["channels","users","journeys","external contracts"]},
+    {"id":"application","contains":["products","services","bounded contexts","APIs/events","lifecycle"]},
+    {"id":"integration","contains":["API gateway","event backbone","workflow/process","schema/version contracts"]},
+    {"id":"data","contains":["data products","operational stores","analytics","lineage","classification","residency"]},
+    {"id":"ai","contains":["models","agents","evaluations","tool contracts","fallbacks","model/vendor registry"]},
+    {"id":"platform","contains":["cloud","kubernetes","compute","storage","network","developer platform","golden paths"]},
+    {"id":"security","contains":["identity","policy","secrets/keys","segmentation","supply chain","evidence"]},
+    {"id":"operations","contains":["SLO","telemetry","capacity","incident/change","recovery","process conformance"]},
+    {"id":"governance","contains":["principles","controls","exceptions","architecture decisions","FinOps","portfolio","receipts"]}
+  ],
+  "cross_cutting_laws":["subject identity","provenance","authority separation","reversibility","portability/exit","observability","cost","recovery","ownership"],
+  "projection":"ggen manufactures implementation/evidence projections; AutoFDE plans; GymAct executes bounded worlds; BRCE alone admits consequence."
+}

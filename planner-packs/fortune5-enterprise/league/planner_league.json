@@ -1,0 +1,44 @@
+{
+  "schema": "urn:autofde:planner-league:v1",
+  "frozen_autofde_head": "d47ce62018fec51751b2b615ca300e44afe903ab",
+  "registry": {
+    "backend": "autofde_lab.fabric.backend.ScikitDecideBackend",
+    "planner_source": "list_solvers()",
+    "domain_source": "list_domains()",
+    "compatibility_source": "load_domain(...) + match_solvers(domain_instance)",
+    "authoritative_at_runtime": true,
+    "symbolic_slots": ["p01","p02","p03","p04","p05","p06","p07","p08","p09","p10","p11","p12","p13","p14","p15","p16","p17","p18","p19","p20","p21","p22","p23","p24","p25","p26","p27","p28","p29","p30","p31","p32","p33","p34","p35","p36","p37","p38","p39","p40","p41","p42","p43","p44","p45","p46","p47","p48","p49","p50"]
+  },
+  "identity_law": "Planner != Policy != Role != Agent != Authority",
+  "policy_product": ["planner","planner_parameters","objective","observation_projection","action_projection","resource_budget","history_projection"],
+  "roles": [
+    {"id":"accomplish","purpose":"manufacture a trajectory toward desired state"},
+    {"id":"falsify","purpose":"manufacture a typed counterexample trajectory"},
+    {"id":"diagnose","purpose":"select observations/experiments that discriminate hypotheses"},
+    {"id":"recover","purpose":"restore preserved invariants after observed consequence"},
+    {"id":"architect","purpose":"search possibility graphs while preserving optionality"},
+    {"id":"experiment","purpose":"construct non-consequential discriminating experiments"},
+    {"id":"world_generator","purpose":"select learnable boundary worlds from admitted ontology axes"},
+    {"id":"reward_falsifier","purpose":"find score-gaming trajectories that miss intended outcomes"},
+    {"id":"assumption_falsifier","purpose":"find stale/missing observations that reverse route selection"},
+    {"id":"meta_selector","purpose":"select/switch planner for current O*"}
+  ],
+  "cross_play": {
+    "ordered_matchups": true,
+    "historical_policies": true,
+    "role_inversion": true,
+    "planner_switch_per_transition": true,
+    "payoff_dimensions": ["required_postconditions","preservation_laws","authority_refusal_correctness","verifier_success","recovery_success","cost","latency","reversibility","novelty","semantic_coverage"]
+  },
+  "meta_selection": {
+    "candidate_graph": "autofde_lab.autofde.ercc_control_plane.compile_candidate_graph",
+    "primary": "empirical standing over (O*, role, world, opponent, budget, history)",
+    "llm_boundary": "novelty-only after registered/deterministic routes abstain or refuse"
+  },
+  "authority": {
+    "planner_has_do": false,
+    "selected_plan_has_do": false,
+    "handoff": "typed next-edge intent -> BRCE -> GymAct/runtime -> independent observation -> receipt",
+    "stale_suffix_law": "invalidate unexecuted plan suffix after every consequential transition"
+  }
+}

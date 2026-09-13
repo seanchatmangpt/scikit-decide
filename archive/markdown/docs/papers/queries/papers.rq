@@ -1,0 +1,9 @@
+PREFIX afb: <https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX fabio: <http://purl.org/spar/fabio/>
+SELECT ?id ?title ?retrieval ?sha256
+WHERE {
+  ?p a fabio:ResearchPaper ; afb:arxivId ?id ; dct:title ?title ; afb:retrievalStanding ?retrieval .
+  OPTIONAL { ?p afb:sha256 ?sha256 . }
+}
+ORDER BY ?id

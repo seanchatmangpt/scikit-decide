@@ -20,14 +20,38 @@ a real `dspy.Predict` call per move, and the real, registered
 `autofde_lab.self_play.self_play_rollout`. Skipped (not mocked) when
 `GROQ_API_KEY` is unset, per `.claude/rules/testing-chicago-style.md`.
 
-The `real_groq_dspy_lm` fixture and `requires_real_groq_key` marker live in
-`tests/conftest.py`, shared with every other GROQ_API_KEY-gated test in this
-repo.
+The `real_groq_dspy_lm` fixture lives in `tests/conftest.py` (pytest
+auto-discovers and injects it, no import needed). `requires_real_groq_key`
+is redefined locally rather than imported from `tests/conftest.py`, matching
+the convention every `tests/reasoning/*_chicago.py` GROQ-gated file already
+uses: `tests/` has no `__init__.py` markers (see `.claude/rules/standing-law.md`'s
+"Former standing exception" section on the bare-conftest module-name
+collision this repo hit before), so `tests/conftest.py` and any sibling
+`tests/<subdir>/conftest.py` (e.g. `tests/ocel/conftest.py`) both import
+under the same bare module name `conftest` in pytest's default "prepend"
+mode. `from conftest import requires_real_groq_key` is therefore
+order-dependent on which conftest.py pytest happened to import first in
+this process -- it resolved to the wrong module (`tests/ocel/conftest.py`,
+which has no such name) under `just test`'s `-n 4` xdist run, producing a
+real `ImportError` at collection time despite this exact test module
+importing and passing standalone. Defining the mark locally sidesteps the
+collision entirely instead of relying on fragile bare-module resolution.
 """
 
 from __future__ import annotations
 
-from conftest import requires_real_groq_key
+import os
+
+import pytest
+
+requires_real_groq_key = pytest.mark.skipif(
+    not os.environ.get("GROQ_API_KEY"),
+    reason=(
+        "GROQ_API_KEY is not set in this environment -- a real live Groq "
+        "call is required for this test and no mock substitute is used per "
+        ".claude/rules/testing-chicago-style.md."
+    ),
+)
 
 
 @requires_real_groq_key

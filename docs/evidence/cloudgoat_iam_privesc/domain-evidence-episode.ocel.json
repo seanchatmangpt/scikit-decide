@@ -1,0 +1,396 @@
+{
+  "eventTypes": [
+    {
+      "attributes": [
+        {
+          "name": "candidate_order",
+          "type": "integer"
+        },
+        {
+          "name": "elapsed_seconds",
+          "type": "float"
+        },
+        {
+          "name": "plan_length",
+          "type": "integer"
+        },
+        {
+          "name": "strategy",
+          "type": "string"
+        }
+      ],
+      "name": "solver_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "type": "string"
+        },
+        {
+          "name": "step_index",
+          "type": "integer"
+        }
+      ],
+      "name": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "candidate_order",
+          "type": "integer"
+        },
+        {
+          "name": "elapsed_seconds",
+          "type": "float"
+        },
+        {
+          "name": "strategy",
+          "type": "string"
+        }
+      ],
+      "name": "verifier_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "goal_reached",
+          "type": "boolean"
+        },
+        {
+          "name": "standing",
+          "type": "string"
+        },
+        {
+          "name": "verify_mode",
+          "type": "string"
+        },
+        {
+          "name": "winning_strategy",
+          "type": "string"
+        },
+        {
+          "name": "winning_verify_strategy",
+          "type": "string"
+        }
+      ],
+      "name": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ],
+      "name": "teardown"
+    }
+  ],
+  "events": [
+    {
+      "attributes": [
+        {
+          "name": "strategy",
+          "value": "astar-plain"
+        },
+        {
+          "name": "candidate_order",
+          "value": 1
+        },
+        {
+          "name": "elapsed_seconds",
+          "value": 0.34893798828125
+        },
+        {
+          "name": "plan_length",
+          "value": 6
+        }
+      ],
+      "id": "ev:solver_selected:1",
+      "relationships": [
+        {
+          "objectId": "episode:cloudgoat_iam_privesc",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:cloudgoat_iam_privesc",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T01:00:38.049339000Z",
+      "type": "solver_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.enumerate_profiles_and_roles"
+        },
+        {
+          "name": "step_index",
+          "value": 0
+        }
+      ],
+      "id": "ev:act:0",
+      "relationships": [
+        {
+          "objectId": "episode:cloudgoat_iam_privesc",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:cloudgoat_iam_privesc",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T01:00:38.049601000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.swap_admin_role_onto_profile"
+        },
+        {
+          "name": "step_index",
+          "value": 1
+        }
+      ],
+      "id": "ev:act:1",
+      "relationships": [
+        {
+          "objectId": "episode:cloudgoat_iam_privesc",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:cloudgoat_iam_privesc",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T01:00:38.049621000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.create_keypair"
+        },
+        {
+          "name": "step_index",
+          "value": 2
+        }
+      ],
+      "id": "ev:act:2",
+      "relationships": [
+        {
+          "objectId": "episode:cloudgoat_iam_privesc",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:cloudgoat_iam_privesc",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T01:00:38.049632000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.launch_ec2_with_keypair_and_profile"
+        },
+        {
+          "name": "step_index",
+          "value": 3
+        }
+      ],
+      "id": "ev:act:3",
+      "relationships": [
+        {
+          "objectId": "episode:cloudgoat_iam_privesc",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:cloudgoat_iam_privesc",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T01:00:38.049645000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.ssh_to_instance"
+        },
+        {
+          "name": "step_index",
+          "value": 4
+        }
+      ],
+      "id": "ev:act:4",
+      "relationships": [
+        {
+          "objectId": "episode:cloudgoat_iam_privesc",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:cloudgoat_iam_privesc",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T01:00:38.049651000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.terminate_target_instance"
+        },
+        {
+          "name": "step_index",
+          "value": 5
+        }
+      ],
+      "id": "ev:act:5",
+      "relationships": [
+        {
+          "objectId": "episode:cloudgoat_iam_privesc",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:cloudgoat_iam_privesc",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T01:00:38.049661000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "strategy",
+          "value": "fresh-instance-replay"
+        },
+        {
+          "name": "candidate_order",
+          "value": 1
+        },
+        {
+          "name": "elapsed_seconds",
+          "value": 0.0004849433898925781
+        }
+      ],
+      "id": "ev:verifier_selected:1",
+      "relationships": [
+        {
+          "objectId": "episode:cloudgoat_iam_privesc",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:cloudgoat_iam_privesc",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T01:00:38.050171000Z",
+      "type": "verifier_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "goal_reached",
+          "value": true
+        },
+        {
+          "name": "verify_mode",
+          "value": "fresh-instance-replay"
+        },
+        {
+          "name": "winning_strategy",
+          "value": "astar-plain"
+        },
+        {
+          "name": "winning_verify_strategy",
+          "value": "fresh-instance-replay"
+        }
+      ],
+      "id": "ev:verify",
+      "relationships": [
+        {
+          "objectId": "episode:cloudgoat_iam_privesc",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:cloudgoat_iam_privesc",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T01:00:38.050190000Z",
+      "type": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        }
+      ],
+      "id": "ev:teardown",
+      "relationships": [
+        {
+          "objectId": "episode:cloudgoat_iam_privesc",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:cloudgoat_iam_privesc",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T01:00:38.050202000Z",
+      "type": "teardown"
+    }
+  ],
+  "objectTypes": [
+    {
+      "attributes": [],
+      "name": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "type": "string"
+        }
+      ],
+      "name": "domain"
+    }
+  ],
+  "objects": [
+    {
+      "attributes": [],
+      "id": "episode:cloudgoat_iam_privesc",
+      "relationships": [],
+      "type": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "time": "1970-01-01T00:00:00.000000000Z",
+          "value": "CloudGoatIamPrivescDomain"
+        }
+      ],
+      "id": "domain:cloudgoat_iam_privesc",
+      "relationships": [],
+      "type": "domain"
+    }
+  ]
+}

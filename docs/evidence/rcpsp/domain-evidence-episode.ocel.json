@@ -1,0 +1,2121 @@
+{
+  "eventTypes": [
+    {
+      "attributes": [
+        {
+          "name": "candidate_order",
+          "type": "integer"
+        },
+        {
+          "name": "elapsed_seconds",
+          "type": "float"
+        },
+        {
+          "name": "reason",
+          "type": "string"
+        },
+        {
+          "name": "strategy",
+          "type": "string"
+        }
+      ],
+      "name": "solver_refused"
+    },
+    {
+      "attributes": [
+        {
+          "name": "candidate_order",
+          "type": "integer"
+        },
+        {
+          "name": "elapsed_seconds",
+          "type": "float"
+        },
+        {
+          "name": "plan_length",
+          "type": "integer"
+        },
+        {
+          "name": "strategy",
+          "type": "string"
+        }
+      ],
+      "name": "solver_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "type": "string"
+        },
+        {
+          "name": "step_index",
+          "type": "integer"
+        }
+      ],
+      "name": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "goal_reached",
+          "type": "boolean"
+        },
+        {
+          "name": "standing",
+          "type": "string"
+        },
+        {
+          "name": "verify_mode",
+          "type": "string"
+        },
+        {
+          "name": "winning_strategy",
+          "type": "string"
+        }
+      ],
+      "name": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ],
+      "name": "teardown"
+    }
+  ],
+  "events": [
+    {
+      "attributes": [
+        {
+          "name": "strategy",
+          "value": "astar-plain"
+        },
+        {
+          "name": "candidate_order",
+          "value": 1
+        },
+        {
+          "name": "elapsed_seconds",
+          "value": 20.02526617050171
+        },
+        {
+          "name": "reason",
+          "value": "timeout"
+        }
+      ],
+      "id": "ev:solver_refused:1",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:18.411995000Z",
+      "type": "solver_refused"
+    },
+    {
+      "attributes": [
+        {
+          "name": "strategy",
+          "value": "do-solver-cpsat"
+        },
+        {
+          "name": "candidate_order",
+          "value": 2
+        },
+        {
+          "name": "elapsed_seconds",
+          "value": 2.019223690032959
+        },
+        {
+          "name": "plan_length",
+          "value": 75
+        }
+      ],
+      "id": "ev:solver_selected:2",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431528000Z",
+      "type": "solver_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 1\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 0
+        }
+      ],
+      "id": "ev:act:0",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431815000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 3\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 1
+        }
+      ],
+      "id": "ev:act:1",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431852000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 4\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 2
+        }
+      ],
+      "id": "ev:act:2",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431865000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 3
+        }
+      ],
+      "id": "ev:act:3",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431872000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 4
+        }
+      ],
+      "id": "ev:act:4",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431879000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 5
+        }
+      ],
+      "id": "ev:act:5",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431889000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 6
+        }
+      ],
+      "id": "ev:act:6",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431898000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 2\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 7
+        }
+      ],
+      "id": "ev:act:7",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431903000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 7\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 8
+        }
+      ],
+      "id": "ev:act:8",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431940000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 8\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 9
+        }
+      ],
+      "id": "ev:act:9",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431947000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 13\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 10
+        }
+      ],
+      "id": "ev:act:10",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431954000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 11
+        }
+      ],
+      "id": "ev:act:11",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431961000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 12
+        }
+      ],
+      "id": "ev:act:12",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431966000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 10\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 13
+        }
+      ],
+      "id": "ev:act:13",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431973000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 14
+        }
+      ],
+      "id": "ev:act:14",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431979000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 15
+        }
+      ],
+      "id": "ev:act:15",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431985000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 16
+        }
+      ],
+      "id": "ev:act:16",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.431993000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 17
+        }
+      ],
+      "id": "ev:act:17",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432008000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 9\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 18
+        }
+      ],
+      "id": "ev:act:18",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432018000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 18\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 19
+        }
+      ],
+      "id": "ev:act:19",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432026000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 20
+        }
+      ],
+      "id": "ev:act:20",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432032000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 21
+        }
+      ],
+      "id": "ev:act:21",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432041000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 5\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 22
+        }
+      ],
+      "id": "ev:act:22",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432048000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 11\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 23
+        }
+      ],
+      "id": "ev:act:23",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432055000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 15\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 24
+        }
+      ],
+      "id": "ev:act:24",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432063000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 25
+        }
+      ],
+      "id": "ev:act:25",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432071000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 12\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 26
+        }
+      ],
+      "id": "ev:act:26",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432078000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 16\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 27
+        }
+      ],
+      "id": "ev:act:27",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432084000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 28
+        }
+      ],
+      "id": "ev:act:28",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432092000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 29
+        }
+      ],
+      "id": "ev:act:29",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432099000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 14\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 30
+        }
+      ],
+      "id": "ev:act:30",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432105000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 27\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 31
+        }
+      ],
+      "id": "ev:act:31",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432110000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 32
+        }
+      ],
+      "id": "ev:act:32",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432116000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 33
+        }
+      ],
+      "id": "ev:act:33",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432122000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 34
+        }
+      ],
+      "id": "ev:act:34",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432127000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 19\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 35
+        }
+      ],
+      "id": "ev:act:35",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432133000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 36
+        }
+      ],
+      "id": "ev:act:36",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432140000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 37
+        }
+      ],
+      "id": "ev:act:37",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432145000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 38
+        }
+      ],
+      "id": "ev:act:38",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432151000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 20\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 39
+        }
+      ],
+      "id": "ev:act:39",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432157000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 26\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 40
+        }
+      ],
+      "id": "ev:act:40",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432163000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 41
+        }
+      ],
+      "id": "ev:act:41",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432169000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 42
+        }
+      ],
+      "id": "ev:act:42",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432174000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 17\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 43
+        }
+      ],
+      "id": "ev:act:43",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432180000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 44
+        }
+      ],
+      "id": "ev:act:44",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432187000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 45
+        }
+      ],
+      "id": "ev:act:45",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432193000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 46
+        }
+      ],
+      "id": "ev:act:46",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432198000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 47
+        }
+      ],
+      "id": "ev:act:47",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432205000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 48
+        }
+      ],
+      "id": "ev:act:48",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432211000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 25\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 49
+        }
+      ],
+      "id": "ev:act:49",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432216000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 29\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 50
+        }
+      ],
+      "id": "ev:act:50",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432222000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 51
+        }
+      ],
+      "id": "ev:act:51",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432229000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 21\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 52
+        }
+      ],
+      "id": "ev:act:52",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432237000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 22\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 53
+        }
+      ],
+      "id": "ev:act:53",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432242000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 54
+        }
+      ],
+      "id": "ev:act:54",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432248000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 55
+        }
+      ],
+      "id": "ev:act:55",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432254000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 6\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 56
+        }
+      ],
+      "id": "ev:act:56",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432260000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 57
+        }
+      ],
+      "id": "ev:act:57",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432266000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 58
+        }
+      ],
+      "id": "ev:act:58",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432272000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 59
+        }
+      ],
+      "id": "ev:act:59",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432279000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 60
+        }
+      ],
+      "id": "ev:act:60",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432288000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 28\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 61
+        }
+      ],
+      "id": "ev:act:61",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432294000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 62
+        }
+      ],
+      "id": "ev:act:62",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432299000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 23\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 63
+        }
+      ],
+      "id": "ev:act:63",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432305000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 64
+        }
+      ],
+      "id": "ev:act:64",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432311000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 65
+        }
+      ],
+      "id": "ev:act:65",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432317000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 24\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 66
+        }
+      ],
+      "id": "ev:act:66",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432323000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 31\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 67
+        }
+      ],
+      "id": "ev:act:67",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432328000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 68
+        }
+      ],
+      "id": "ev:act:68",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432334000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 69
+        }
+      ],
+      "id": "ev:act:69",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432340000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 70
+        }
+      ],
+      "id": "ev:act:70",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432346000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 30\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 71
+        }
+      ],
+      "id": "ev:act:71",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432352000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 72
+        }
+      ],
+      "id": "ev:act:72",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432358000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : None\nMode : None\nAction type TIME_PR\nTime progress True\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 73
+        }
+      ],
+      "id": "ev:act:73",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432364000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action \nTask : 32\nMode : 1\nAction type START\nTime progress False\nResource : None"
+        },
+        {
+          "name": "step_index",
+          "value": 74
+        }
+      ],
+      "id": "ev:act:74",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:20.432369000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "goal_reached",
+          "value": true
+        },
+        {
+          "name": "verify_mode",
+          "value": "independent-resolve"
+        },
+        {
+          "name": "winning_strategy",
+          "value": "do-solver-cpsat"
+        }
+      ],
+      "id": "ev:verify",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:22.393828000Z",
+      "type": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        }
+      ],
+      "id": "ev:teardown",
+      "relationships": [
+        {
+          "objectId": "episode:rcpsp",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rcpsp",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:47:22.394091000Z",
+      "type": "teardown"
+    }
+  ],
+  "objectTypes": [
+    {
+      "attributes": [],
+      "name": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "type": "string"
+        }
+      ],
+      "name": "domain"
+    }
+  ],
+  "objects": [
+    {
+      "attributes": [],
+      "id": "episode:rcpsp",
+      "relationships": [],
+      "type": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "time": "1970-01-01T00:00:00.000000000Z",
+          "value": "RCPSP"
+        }
+      ],
+      "id": "domain:rcpsp",
+      "relationships": [],
+      "type": "domain"
+    }
+  ]
+}

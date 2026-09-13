@@ -1,0 +1,3 @@
+{% for row in sparql_results -%}
+{{ row["id"] }}
+{% endfor -%}

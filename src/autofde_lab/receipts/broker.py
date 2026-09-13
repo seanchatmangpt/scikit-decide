@@ -41,6 +41,20 @@ class UnknownToken(BrokerError):
     pass
 
 
+class ColludingRoles(BrokerError):
+    """Refused at construction: ``actuator`` and ``verifier`` are the same object.
+    A single object wired into both roles can lie about verification with nothing
+    in ``actuate``/``replay.verify`` able to catch it after the fact — the digest
+    chain only proves the receipt wasn't tampered with post-issuance, not that the
+    verifier's ``bool`` was honest. This is a real, adversarially-confirmed gap
+    (see ``tests/test_broker_receipt_replay.py::test_colluding_actuator_and_verifier_is_refused``
+    and the docstring note below); refusing identical objects at construction closes
+    the cheap, no-effort version of the attack. It does NOT close the harder case of
+    two *distinct* objects that collude out-of-band (e.g. sharing a closure over
+    mutable state) -- that is out of scope for an identity check and is not claimed
+    to be fixed here."""
+
+
 class EffectOutcome(str, Enum):
     SUCCEEDED = "succeeded"
     FAILED = "failed"
@@ -116,6 +130,14 @@ class Broker:
     _consumed: set[str] = field(default_factory=set)
     _sequence: int = 0
     _previous_receipt_digest: str = field(default_factory=lambda: str(Digest.genesis()))
+
+    def __post_init__(self) -> None:
+        if self.actuator is self.verifier:
+            raise ColludingRoles(
+                "actuator and verifier must not be the same object: a colluding "
+                "object could actuate an action and then silently rubber-stamp its "
+                "own effect, defeating the whole point of a separate verifier"
+            )
 
     def open(self, action: dict) -> OpenedAction:
         if self._open:

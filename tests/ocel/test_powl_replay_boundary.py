@@ -48,6 +48,7 @@ scope below -- never `organizationalStanding` or `enterpriseStanding` per
 from __future__ import annotations
 
 import inspect
+import subprocess
 import sys
 
 from autofde_lab.ocel.powl_replay import replay_structural_fires as _rsf
@@ -66,28 +67,64 @@ assert "action_bindings" in inspect.signature(_rsf).parameters, (
 )
 
 
+def _assert_clean_interpreter_never_imports_forbidden_modules(extra_stmt: str = "") -> None:
+    """Run a real, fresh Python subprocess and inspect *its* ``sys.modules``.
+
+    ``sys.modules`` is process-global mutable state. Checking it in-process
+    (as an earlier version of this test did) is only sound if nothing else
+    in the same interpreter has ever imported the forbidden modules first --
+    but under ``pytest-xdist`` many test files, including
+    ``tests/test_ofmf.py`` (which legitimately imports
+    ``autofde_lab.ofmf``), share one worker process. When xdist happened to
+    schedule that file onto the same worker before this one, the in-process
+    check failed on pollution from an unrelated, correct import elsewhere --
+    not on anything ``ocel/powl_replay.py`` itself did. That is a test
+    mechanism bug, not a production bug: the real, load-bearing claim
+    ("importing/using ``ocel.powl_replay`` never pulls in ``SpiffWorkflow``
+    or ``autofde_lab.ofmf``") is preserved exactly, just checked in a fresh
+    subprocess interpreter whose ``sys.modules`` cannot be polluted by any
+    other test file. A real subprocess, not a mock.
+    """
+    script = (
+        "import sys\n"
+        "import autofde_lab.ocel.powl_replay\n"
+        f"{extra_stmt}\n"
+        "leaked = [k for k in sys.modules "
+        "if k == 'SpiffWorkflow' or k.startswith('SpiffWorkflow.') "
+        "or k == 'autofde_lab.ofmf' or k.startswith('autofde_lab.ofmf.')]\n"
+        "print('LEAKED:' + ','.join(leaked))\n"
+    )
+    result = subprocess.run(
+        [sys.executable, "-c", script],
+        capture_output=True,
+        text=True,
+        timeout=60,
+    )
+    assert result.returncode == 0, (
+        f"subprocess boundary check crashed: stdout={result.stdout!r} "
+        f"stderr={result.stderr!r}"
+    )
+    leaked_line = next(
+        (line for line in result.stdout.splitlines() if line.startswith("LEAKED:")),
+        "LEAKED:<missing>",
+    )
+    leaked = [k for k in leaked_line[len("LEAKED:") :].split(",") if k]
+    assert leaked == [], (
+        f"ocel.powl_replay transitively imported/leaked forbidden module(s) "
+        f"in a fresh interpreter: {leaked} -- this crosses the "
+        f"projection/actuation boundary"
+    )
+
+
 def test_powl_replay_never_imports_spiffworkflow_or_ofmf() -> None:
-    """Mechanical boundary check: a real sys.modules inspection after import.
+    """Mechanical boundary check: a real ``sys.modules`` inspection, in a
+    fresh subprocess interpreter, after import.
 
     Not a documentation promise -- if any transitive import chain inside
     ``ocel/powl_replay.py`` ever reaches ``SpiffWorkflow`` or
     ``autofde_lab.ofmf``, this test fails.
     """
-    import autofde_lab.ocel.powl_replay  # noqa: F401
-
-    present = [key for key in FORBIDDEN_MODULE_KEYS if key in sys.modules]
-    assert present == [], (
-        f"ocel.powl_replay transitively imported forbidden module(s): {present} "
-        f"-- this crosses the projection/actuation boundary"
-    )
-    # Also guard against any *submodule* of the forbidden packages sneaking in
-    # under a different key (e.g. "autofde_lab.ofmf.something_else").
-    leaked = [
-        k
-        for k in sys.modules
-        if k.startswith("autofde_lab.ofmf") or k.startswith("SpiffWorkflow")
-    ]
-    assert leaked == [], f"ocel.powl_replay leaked forbidden submodule(s): {leaked}"
+    _assert_clean_interpreter_never_imports_forbidden_modules()
 
 
 def test_replay_structural_fires_produces_ordered_ocel_trace() -> None:
@@ -198,13 +235,20 @@ def test_replay_without_action_bindings_is_zero_actuation_by_default() -> None:
     )
 
     # sys.modules is still clean of the forbidden actuation-adjacent modules
-    # after this call -- the default path opens no new door.
-    leaked = [
-        k
-        for k in sys.modules
-        if k.startswith("autofde_lab.ofmf") or k.startswith("SpiffWorkflow")
-    ]
-    assert leaked == [], f"default-path replay leaked forbidden module(s): {leaked}"
+    # after this call -- the default path opens no new door. Checked in a
+    # fresh subprocess (see the helper's docstring): the in-process
+    # equivalent is unsound under pytest-xdist, whose workers share process
+    # state (and thus sys.modules) across unrelated test files such as
+    # tests/test_ofmf.py, which legitimately imports autofde_lab.ofmf.
+    _assert_clean_interpreter_never_imports_forbidden_modules(
+        extra_stmt=(
+            "from autofde_lab.ocel.powl_replay import plan_lines_to_powl_node, "
+            "replay_structural_fires\n"
+            "m = plan_lines_to_powl_node(['(unstack a b)', '(put-down a)', "
+            "'(pick-up b)', '(stack b a)'])\n"
+            "replay_structural_fires(m, session_id='subprocess-check')"
+        )
+    )
 
 
 def test_replay_action_bindings_are_scoped_to_exact_atom_label_no_leak() -> None:
