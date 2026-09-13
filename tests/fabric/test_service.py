@@ -2,14 +2,14 @@ from __future__ import annotations
 
 import pytest
 
-from skdecide.fabric.models import (
+from autofde_lab.fabric.models import (
     CacheStatus,
     DecisionRefusal,
     DecisionRequest,
     DecisionStanding,
     RefusalCode,
 )
-from skdecide.fabric.service import DecisionFabric
+from autofde_lab.fabric.service import DecisionFabric
 
 
 def exact_request(**overrides: object) -> DecisionRequest:
@@ -54,22 +54,26 @@ def test_solve_emits_receipt_and_second_run_is_cache_hit(
     assert first.trajectory_sha256 == second.trajectory_sha256
 
 
-def test_material_identity_change_invalidates_exact_reuse(
+@pytest.mark.parametrize(
+    ("axis", "before", "after"),
+    [
+        ("policy_digest", "policy:a", "policy:b"),
+        ("randomness_digest", "seed:1", "seed:2"),
+    ],
+)
+def test_identity_change_invalidates_exact_reuse(
     fabric: DecisionFabric,
+    axis: str,
+    before: str,
+    after: str,
 ) -> None:
-    first = fabric.solve(exact_request(policy_digest="policy:a"))
-    changed = fabric.solve(exact_request(policy_digest="policy:b"))
+    """Each parameter is a distinct identity axis, not a redraw of one.
 
-    assert first.cache_status is CacheStatus.MISS
-    assert changed.cache_status is CacheStatus.MISS
-    assert first.input_sha256 != changed.input_sha256
-
-
-def test_randomness_identity_change_invalidates_exact_reuse(
-    fabric: DecisionFabric,
-) -> None:
-    first = fabric.solve(exact_request(randomness_digest="seed:1"))
-    changed = fabric.solve(exact_request(randomness_digest="seed:2"))
+    Collapsed from two byte-identical sibling tests differing only in the
+    field they vary; both axes still fail independently.
+    """
+    first = fabric.solve(exact_request(**{axis: before}))
+    changed = fabric.solve(exact_request(**{axis: after}))
 
     assert first.cache_status is CacheStatus.MISS
     assert changed.cache_status is CacheStatus.MISS

@@ -14,8 +14,8 @@ import torch_geometric as thg
 from pytest_cases import fixture, fixture_union, param_fixture
 from ray.rllib.algorithms.dqn import DQN
 
-from skdecide import rollout
-from skdecide.hub.domain.plado import (
+from autofde_lab import rollout
+from autofde_lab.hub.domain.plado import (
     ActionEncoding,
     ObservationEncoding,
     PladoPddlDomain,
@@ -24,18 +24,18 @@ from skdecide.hub.domain.plado import (
     PladoTransformedObservablePPddlDomain,
     StateEncoding,
 )
-from skdecide.hub.domain.plado.llg_encoder import decode_llg
-from skdecide.hub.domain.plado.plado import BasePladoDomain
-from skdecide.hub.solver.p_astar import Astar
-from skdecide.hub.solver.ray_rllib import RayRLlib
-from skdecide.hub.solver.stable_baselines import StableBaseline
-from skdecide.hub.solver.stable_baselines.autoregressive.ppo.autoregressive_ppo import (
+from autofde_lab.hub.domain.plado.llg_encoder import decode_llg
+from autofde_lab.hub.domain.plado.plado import BasePladoDomain
+from autofde_lab.hub.solver.p_astar import Astar
+from autofde_lab.hub.solver.ray_rllib import RayRLlib
+from autofde_lab.hub.solver.stable_baselines import StableBaseline
+from autofde_lab.hub.solver.stable_baselines.autoregressive.ppo.autoregressive_ppo import (
     AutoregressiveGraphPPO,
     AutoregressivePPO,
 )
-from skdecide.hub.solver.utils.gnn.advanced_gnn import AdvancedGNN
-from skdecide.hub.solver.utils.gnn.torch_layers import Graph2NodeLayer
-from skdecide.hub.solver.utils.torch.utils import extract_module_parameters_values
+from autofde_lab.hub.solver.utils.gnn.advanced_gnn import AdvancedGNN
+from autofde_lab.hub.solver.utils.gnn.torch_layers import Graph2NodeLayer
+from autofde_lab.hub.solver.utils.torch.utils import extract_module_parameters_values
 
 try:
     from plado.semantics.task import State as PladoState

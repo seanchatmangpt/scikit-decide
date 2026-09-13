@@ -1,0 +1,159 @@
+{
+  "probe_log": [
+    {
+      "action": "toggle_switch[index=0]",
+      "applicable": true,
+      "observed_pre_facts": [
+        "master=False",
+        "n_switches=5",
+        "required_count=2",
+        "required_on=0",
+        "solved=False",
+        "switch_0=False",
+        "switch_1=False",
+        "switch_2=False",
+        "switch_3=False",
+        "switch_4=False",
+        "toggles=0"
+      ],
+      "delta_added": [
+        "switch_0=True",
+        "toggles=1"
+      ],
+      "delta_removed": [
+        "switch_0=False",
+        "toggles=0"
+      ]
+    },
+    {
+      "action": "toggle_switch[index=1]",
+      "applicable": true,
+      "observed_pre_facts": [
+        "master=False",
+        "n_switches=5",
+        "required_count=2",
+        "required_on=0",
+        "solved=False",
+        "switch_0=True",
+        "switch_1=False",
+        "switch_2=False",
+        "switch_3=False",
+        "switch_4=False",
+        "toggles=1"
+      ],
+      "delta_added": [
+        "switch_1=True",
+        "toggles=2"
+      ],
+      "delta_removed": [
+        "switch_1=False",
+        "toggles=1"
+      ]
+    },
+    {
+      "action": "toggle_switch[index=2]",
+      "applicable": true,
+      "observed_pre_facts": [
+        "master=False",
+        "n_switches=5",
+        "required_count=2",
+        "required_on=0",
+        "solved=False",
+        "switch_0=True",
+        "switch_1=True",
+        "switch_2=False",
+        "switch_3=False",
+        "switch_4=False",
+        "toggles=2"
+      ],
+      "delta_added": [
+        "required_on=1",
+        "switch_2=True",
+        "toggles=3"
+      ],
+      "delta_removed": [
+        "required_on=0",
+        "switch_2=False",
+        "toggles=2"
+      ]
+    },
+    {
+      "action": "toggle_switch[index=3]",
+      "applicable": true,
+      "observed_pre_facts": [
+        "master=False",
+        "n_switches=5",
+        "required_count=2",
+        "required_on=1",
+        "solved=False",
+        "switch_0=True",
+        "switch_1=True",
+        "switch_2=True",
+        "switch_3=False",
+        "switch_4=False",
+        "toggles=3"
+      ],
+      "delta_added": [
+        "switch_3=True",
+        "toggles=4"
+      ],
+      "delta_removed": [
+        "switch_3=False",
+        "toggles=3"
+      ]
+    },
+    {
+      "action": "toggle_switch[index=4]",
+      "applicable": true,
+      "observed_pre_facts": [
+        "master=False",
+        "n_switches=5",
+        "required_count=2",
+        "required_on=1",
+        "solved=False",
+        "switch_0=True",
+        "switch_1=True",
+        "switch_2=True",
+        "switch_3=True",
+        "switch_4=False",
+        "toggles=4"
+      ],
+      "delta_added": [
+        "required_on=2",
+        "switch_4=True",
+        "toggles=5"
+      ],
+      "delta_removed": [
+        "required_on=1",
+        "switch_4=False",
+        "toggles=4"
+      ]
+    },
+    {
+      "action": "engage_master",
+      "applicable": true,
+      "observed_pre_facts": [
+        "master=False",
+        "n_switches=5",
+        "required_count=2",
+        "required_on=2",
+        "solved=False",
+        "switch_0=True",
+        "switch_1=True",
+        "switch_2=True",
+        "switch_3=True",
+        "switch_4=True",
+        "toggles=5"
+      ],
+      "delta_added": [
+        "master=True",
+        "solved=True"
+      ],
+      "delta_removed": [
+        "master=False",
+        "solved=False"
+      ]
+    }
+  ],
+  "representation_losses": {}
+}

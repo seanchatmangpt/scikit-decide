@@ -1,0 +1,20 @@
+@prefix ea: <urn:autofde:fortune5:ea:> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ea:ArchitectureDecision a skos:Concept ; skos:prefLabel "Architecture decision" .
+ea:BusinessCapability a skos:Concept ; skos:prefLabel "Business capability" .
+ea:ArchitectureViewpoint a skos:Concept ; skos:prefLabel "Architecture viewpoint" .
+ea:PreservationLaw a skos:Concept ; skos:prefLabel "Preservation law" .
+ea:ServiceTier a skos:Concept ; skos:prefLabel "Service tier" .
+ea:RecoveryContract a skos:Concept ; skos:prefLabel "Recovery contract" .
+ea:ExitStrategy a skos:Concept ; skos:prefLabel "Exit strategy" .
+ea:PlannerRole a skos:Concept ; skos:prefLabel "Planner role" .
+ea:Counterexample a skos:Concept ; skos:prefLabel "Counterexample" .
+ea:Receipt a prov:Entity ; dct:description "Replayable evidence binding observation, decision, consequence and verification." .
+ea:AuthorityPolicy a odrl:Policy ; dct:description "Explicit principal/capability/resource consequence authority." .
+ea:ArchitectureFitness a dqv:QualityMeasurement ; dct:description "Machine-checkable viewpoint and invariant closure evidence." .

@@ -1,0 +1,17 @@
+{
+  "schema": "urn:autofde:fortune5:viewpoints:v1",
+  "viewpoints": [
+    {"id":"V01","name":"Business capability","must_answer":["What business outcome changes?","Which capability owns it?","What is the value/risk measure?"]},
+    {"id":"V02","name":"Information/data","must_answer":["What data classes exist?","Where may data reside?","Who owns lineage/retention/recovery?"]},
+    {"id":"V03","name":"Application/service","must_answer":["What bounded contexts/services exist?","What contracts/events/APIs connect them?","What are versioning/deprecation rules?"]},
+    {"id":"V04","name":"Platform/infrastructure","must_answer":["What runtime/topology is required?","What is portable vs provider-specific?","What capacity and quota assumptions exist?"]},
+    {"id":"V05","name":"Security/identity","must_answer":["Which principals can do what to which resources?","How are secrets/keys/tokens issued and revoked?","How is agent authority constrained?"]},
+    {"id":"V06","name":"Resilience","must_answer":["Failure domains?","RTO/RPO?","Degraded modes?","Failover and recovery evidence?"]},
+    {"id":"V07","name":"Operations/SRE","must_answer":["SLOs?","Telemetry?","Runbooks/remediation?","Change and incident boundaries?"]},
+    {"id":"V08","name":"Financial/FinOps","must_answer":["Unit cost?","Budget?","Cost anomaly thresholds?","Capacity commitments and exit exposure?"]},
+    {"id":"V09","name":"Governance/compliance","must_answer":["Controls?","Evidence?","Exceptions?","Decision authority?","Audit/replay?"]},
+    {"id":"V10","name":"Organization/operating model","must_answer":["Product/platform ownership?","RACI?","Team topology?","On-call/support?","Skill/certification needs?"]},
+    {"id":"V11","name":"Portfolio/roadmap","must_answer":["Dependencies?","Sequencing?","Parallel cuts?","Sunsets?","Migration coexistence?"]},
+    {"id":"V12","name":"Vendor/exit","must_answer":["Lock-in accepted?","Substitutes?","Data/code/config export?","Exit test?","Contract dependency?"]}
+  ]
+}

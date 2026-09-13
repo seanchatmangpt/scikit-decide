@@ -1,6 +1,6 @@
 """Execute the deterministic TAI v30.1.1 planning case study."""
 
-from skdecide.hub.domain.tai_v30_1_1 import (
+from autofde_lab.hub.domain.tai_v30_1_1 import (
     INITIAL_STATE,
     POSITIVE_PLAN,
     TAIForwardDeploymentDomain,

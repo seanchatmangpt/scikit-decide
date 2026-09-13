@@ -5,8 +5,8 @@ from typing import Optional, Union
 import numpy as np
 import pytest
 
-from skdecide import Domain, Solver, Space, Value
-from skdecide.builders.domain import (
+from autofde_lab import Domain, Solver, Space, Value
+from autofde_lab.builders.domain import (
     Actions,
     DeterministicInitialized,
     DeterministicTransitions,
@@ -15,12 +15,12 @@ from skdecide.builders.domain import (
     Sequential,
     SingleAgent,
 )
-from skdecide.builders.solver import DeterministicPolicies, Policies
-from skdecide.core import autocast
-from skdecide.hub.domain.maze import Maze
-from skdecide.hub.solver.p_astar import Astar
-from skdecide.hub.space.gym import DiscreteSpace, ListSpace
-from skdecide.utils import (
+from autofde_lab.builders.solver import DeterministicPolicies, Policies
+from autofde_lab.core import autocast
+from autofde_lab.hub.domain.maze import Maze
+from autofde_lab.hub.solver.p_astar import Astar
+from autofde_lab.hub.space.gym import DiscreteSpace, ListSpace
+from autofde_lab.utils import (
     ReplayOutOfActionMethod,
     ReplaySolver,
     RolloutCallback,

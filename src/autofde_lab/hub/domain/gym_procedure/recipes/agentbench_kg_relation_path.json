@@ -1,0 +1,65 @@
+{
+  "gym": "agentbench",
+  "task": "knowledgegraph/4300563004000_grailqa",
+  "source_ref": "vendor/gyms/agentbench/data/knowledgegraph/dev.json (entry qid=4300563004000_grailqa, field \"actions\")",
+  "initial_facts": [],
+  "goal_facts": ["answer_found"],
+  "steps": [
+    {
+      "id": "get_relations_quotation",
+      "description": "get_relations(m.09rl290) -- list relations on the quotation entity \"Did you see that thing? That's Sidat-Singh! The Syracuse Walking Dream!\".",
+      "preconditions": [],
+      "establishes": ["relations_quotation_known"],
+      "cost": 1.0,
+      "source": "dev.json actions[0]"
+    },
+    {
+      "id": "get_neighbors_quotation_author",
+      "description": "get_neighbors(m.09rl290,media_common.quotation.author) -- follow the author relation to bind #0 (Pat Connaughton).",
+      "preconditions": ["relations_quotation_known"],
+      "establishes": ["var0_bound"],
+      "cost": 1.0,
+      "source": "dev.json actions[1]"
+    },
+    {
+      "id": "get_relations_var0",
+      "description": "get_relations(#0) -- list relations on the entity bound to #0.",
+      "preconditions": ["var0_bound"],
+      "establishes": ["relations_var0_known"],
+      "cost": 1.0,
+      "source": "dev.json actions[2]"
+    },
+    {
+      "id": "get_neighbors_var0_position",
+      "description": "get_neighbors(#0,basketball.basketball_player.position_s) -- follow the position relation from #0 to bind #1 (candidate positions).",
+      "preconditions": ["relations_var0_known"],
+      "establishes": ["var1_bound"],
+      "cost": 1.0,
+      "source": "dev.json actions[3]"
+    },
+    {
+      "id": "get_relations_pat_connaughton",
+      "description": "get_relations(m.0j50kb6) -- list relations on the entity Pat Connaughton.",
+      "preconditions": [],
+      "establishes": ["relations_pat_known"],
+      "cost": 1.0,
+      "source": "dev.json actions[4]"
+    },
+    {
+      "id": "get_neighbors_pat_position",
+      "description": "get_neighbors(m.0j50kb6,basketball.basketball_player.position_s) -- follow the position relation from Pat Connaughton to bind #2 (his positions).",
+      "preconditions": ["relations_pat_known"],
+      "establishes": ["var2_bound"],
+      "cost": 1.0,
+      "source": "dev.json actions[5]"
+    },
+    {
+      "id": "intersect_positions",
+      "description": "intersection(#1,#2) -- intersect the two position sets to get the final answer (Guard, m.05ch8k4).",
+      "preconditions": ["var1_bound", "var2_bound"],
+      "establishes": ["answer_found"],
+      "cost": 1.0,
+      "source": "dev.json actions[6]; answer[0].entity_name == \"Guard\""
+    }
+  ]
+}

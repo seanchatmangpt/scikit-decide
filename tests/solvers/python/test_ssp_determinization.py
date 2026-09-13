@@ -19,12 +19,14 @@ sys.path.insert(0, str(test_domains_path))
 
 from stochastic_grid import StochasticGridDomain
 
-pytest.importorskip("skdecide.hub.__skdecide_hub_cpp")
+# See the note in test_pddl_determinization.py: a stale name here degrades
+# to a silent skip, not an error.
+pytest.importorskip("autofde_lab.hub.__autofde_lab_hub_cpp")
 
-from skdecide.core import Value
-from skdecide.hub.solver.sspdethindsight import SSPDetHindsight
-from skdecide.hub.solver.sspplanmerger import SSPPlanMerger
-from skdecide.hub.solver.sspreplan import SSPReplan
+from autofde_lab.core import Value
+from autofde_lab.hub.solver.sspdethindsight import SSPDetHindsight
+from autofde_lab.hub.solver.sspplanmerger import SSPPlanMerger
+from autofde_lab.hub.solver.sspreplan import SSPReplan
 
 
 @pytest.fixture

@@ -1,0 +1,97 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:gymact-certification>
+    a owl:Ontology ;
+    dcterms:title "GymAct Certified conformance vocabulary" ;
+    dcterms:description "Real, ggen-projected typed containers for a real, provider-agnostic conformance profile against gymact's own real, structural (@runtime_checkable typing.Protocol) Environment/EnvironmentProvider contract (~/gymact/src/gymact/providers.py). Closes a real, found gap: gymact has no existing 'Certified'/manifest/conformance concept, and SREGym's own Problem/Oracle contract has no formal schema at all (its Oracle.evaluate ABC signature does not even match either real concrete override). This vocabulary defines what a real conformance check, its result, and a conformance manifest honestly mean -- never a badge, never a fabricated pass. The real checker consuming these types lives in src/autofde_lab/reasoning/gymact_certification_checker.py, hand-written, never ggen-generated (manufacture is provenance, not architecture -- ontology/manufacture.ttl)." ;
+    dcterms:created "2026-08-12"^^xsd:date .
+
+#: Real severity classes a certification check can carry -- structural
+#: (Protocol shape present, no operation executed), behavioral (a real
+#: operation ran and its result shape was checked), or evidence (a real
+#: operation ran AND its receipt was independently verifiable via gymact's
+#: own existing BLAKE3 receipt-chain machinery).
+afl:CheckSeverity a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:gymact-certification> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "Check severity" .
+afl:CheckSeverityScheme a skos:ConceptScheme ; skos:prefLabel "Check severity" .
+afl:STRUCTURAL a afl:CheckSeverity ; skos:inScheme afl:CheckSeverityScheme ; skos:prefLabel "STRUCTURAL" .
+afl:BEHAVIORAL a afl:CheckSeverity ; skos:inScheme afl:CheckSeverityScheme ; skos:prefLabel "BEHAVIORAL" .
+afl:EVIDENCE a afl:CheckSeverity ; skos:inScheme afl:CheckSeverityScheme ; skos:prefLabel "EVIDENCE" .
+
+#: Real conformance levels a CertificationManifest can honestly report --
+#: never conflated with this repo's own standing.ttl vocabulary (a
+#: conformance level is a different real concept from a standing claim).
+afl:ConformanceLevel a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:gymact-certification> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "Conformance level" .
+afl:ConformanceLevelScheme a skos:ConceptScheme ; skos:prefLabel "Conformance level" .
+afl:STRUCTURAL_ONLY a afl:ConformanceLevel ; skos:inScheme afl:ConformanceLevelScheme ; skos:prefLabel "STRUCTURAL_ONLY" .
+afl:SMOKE_TESTED a afl:ConformanceLevel ; skos:inScheme afl:ConformanceLevelScheme ; skos:prefLabel "SMOKE_TESTED" .
+afl:CERT_UNSUPPORTED a afl:ConformanceLevel ; skos:inScheme afl:ConformanceLevelScheme ; skos:prefLabel "CERT_UNSUPPORTED" .
+afl:CERT_BUILD_BROKEN a afl:ConformanceLevel ; skos:inScheme afl:ConformanceLevelScheme ; skos:prefLabel "CERT_BUILD_BROKEN" .
+
+#: CertificationCheck -- one real, atomic, named check definition.
+afl:CertificationCheck a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:gymact-certification> ;
+    rdfs:label "Certification check" ;
+    rdfs:comment "A real, atomic, named conformance check definition -- e.g. 'environment_has_all_seven_methods', 'capability_consequence_is_valid'. Defining this closes the TYPE gap only; the real check logic lives in gymact_certification_checker.py, never generated." .
+afl:checkName a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:CertificationCheck ; rdfs:range xsd:string ; rdfs:label "check name" .
+afl:checkDescription a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:CertificationCheck ; rdfs:range xsd:string ; rdfs:label "check description" .
+afl:checkSeverityRef a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:CertificationCheck ; rdfs:range afl:CheckSeverity ; rdfs:label "check severity" .
+
+#: CertificationCheckResult -- one real, executed check's real outcome.
+afl:CertificationCheckResult a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:gymact-certification> ;
+    rdfs:label "Certification check result" ;
+    rdfs:comment "The real, honest outcome of one real, executed CertificationCheck. resultPassed is a real, external, already-decided bool (matching guard_executor.ExecutionStep.failed's own precedent for when a bare bool is legitimate) -- never a value this repo computes twice. resultEvidenceRef is populated only when the check executed a real gymact operation whose receipt is independently verifiable; a pure structural check leaves it unset, never fabricated." .
+afl:resultCheckRef a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:CertificationCheckResult ; rdfs:range xsd:string ; rdfs:label "result check reference" .
+afl:resultPassed a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:CertificationCheckResult ; rdfs:range xsd:boolean ; rdfs:label "result passed" .
+afl:resultDetail a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:CertificationCheckResult ; rdfs:range xsd:string ; rdfs:label "result detail" .
+afl:resultEvidenceRef a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:CertificationCheckResult ; rdfs:range xsd:string ; rdfs:label "result evidence reference" .
+
+#: CertificationManifest -- the real, top-level output of one checker run
+#: against one real EnvironmentProvider instance.
+afl:CertificationManifest a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:gymact-certification> ;
+    rdfs:label "Certification manifest" ;
+    rdfs:comment "The real, top-level output of one gymact_certification_checker run against one real EnvironmentProvider/Environment instance. manifestConformanceLevel is computed honestly from real check results -- never asserted independent of them. This is never a badge issued in advance of real checks; constructing this type does not itself certify anything." .
+afl:manifestGymName a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:CertificationManifest ; rdfs:range xsd:string ; rdfs:label "manifest gym name" .
+afl:manifestProviderClassRef a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:CertificationManifest ; rdfs:range xsd:string ; rdfs:label "manifest provider class reference" .
+afl:manifestConformanceLevelRef a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:CertificationManifest ; rdfs:range afl:ConformanceLevel ; rdfs:label "manifest conformance level" .
+afl:manifestCheckResultRef a owl:DatatypeProperty ; rdfs:domain afl:CertificationManifest ; rdfs:range xsd:string ; rdfs:label "manifest check result reference" .
+afl:manifestIssuedAtRef a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:CertificationManifest ; rdfs:range xsd:string ; rdfs:label "manifest issued-at reference" .
+afl:manifestComputationReceiptRef a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:CertificationManifest ; rdfs:range xsd:string ; rdfs:label "manifest computation receipt reference" .
+
+#: Real Oracle.evaluate() parameter shapes found by exhaustive, static
+#: (ast-based, never-imports-vendor) scan of every real file under
+#: vendor/gyms/sregym/sregym/conductor/oracles/ this session. The base
+#: Oracle ABC declares evaluate(self, solution, trace, duration) but
+#: matches ZERO real subclasses exactly -- these 5 individuals are the
+#: real, distinct shapes actually found in the vendored source, not a
+#: guessed or idealized taxonomy.
+afl:EvaluateArgShape a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:gymact-certification> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "Evaluate argument shape" .
+afl:EvaluateArgShapeScheme a skos:ConceptScheme ; skos:prefLabel "Evaluate argument shape" .
+afl:NO_ARGS a afl:EvaluateArgShape ; skos:inScheme afl:EvaluateArgShapeScheme ; skos:prefLabel "NO_ARGS" .
+afl:SOLUTION_ONLY a afl:EvaluateArgShape ; skos:inScheme afl:EvaluateArgShapeScheme ; skos:prefLabel "SOLUTION_ONLY" .
+afl:VARARGS a afl:EvaluateArgShape ; skos:inScheme afl:EvaluateArgShapeScheme ; skos:prefLabel "VARARGS" .
+afl:SOLUTION_TRACE_DURATION_OPTIONAL a afl:EvaluateArgShape ; skos:inScheme afl:EvaluateArgShapeScheme ; skos:prefLabel "SOLUTION_TRACE_DURATION_OPTIONAL" .
+afl:SOLUTION_DURATION_NO_TRACE a afl:EvaluateArgShape ; skos:inScheme afl:EvaluateArgShapeScheme ; skos:prefLabel "SOLUTION_DURATION_NO_TRACE" .
+
+#: OracleContractFinding -- one real, statically-scanned oracle class's
+#: real evaluate() shape classification.
+afl:OracleContractFinding a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:gymact-certification> ;
+    rdfs:label "Oracle contract finding" ;
+    rdfs:comment "One real, statically-derived (ast.parse over real vendored source text, never an import) classification of one real Oracle subclass's evaluate() method. This is exhaustive over every file scanned -- every oracle class found gets a real finding, never silently dropped. findingReturnTypeAnnotationMismatch is a real, syntactic heuristic (annotation says one type, a real return statement in the body returns a dict literal) -- named as a heuristic, never claimed as a full type-checker." .
+afl:findingOracleClassName a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:OracleContractFinding ; rdfs:range xsd:string ; rdfs:label "finding oracle class name" .
+afl:findingEvaluateArgShapeRef a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:OracleContractFinding ; rdfs:range afl:EvaluateArgShape ; rdfs:label "finding evaluate arg shape" .
+afl:findingSourceFileRef a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:OracleContractFinding ; rdfs:range xsd:string ; rdfs:label "finding source file reference" .
+afl:findingReturnTypeAnnotationMismatch a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:OracleContractFinding ; rdfs:range xsd:boolean ; rdfs:label "finding return type annotation mismatch" .

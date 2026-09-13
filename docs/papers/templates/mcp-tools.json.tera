@@ -1,0 +1,1 @@
+{"schema_version":1,"authority":"SELECT_ONLY","tools":[{"name":"forwardbench.list","effect":"INSPECT"},{"name":"forwardbench.plan","effect":"SELECT"},{"name":"forwardbench.sync_request","effect":"CONSTRUCT_INTENT"}],"benchmark_count":{{ sparql_results | length }}}

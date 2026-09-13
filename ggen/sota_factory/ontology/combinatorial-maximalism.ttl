@@ -1,0 +1,24 @@
+@prefix afl: <urn:autofde-lab:sota-factory:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:sota-factory:ontology:combinatorial-maximalism>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab combinatorial maximalism manufacture law" ;
+    dcterms:description "Canonical dimensions for the ggen-manufactured fail-closed law court. The court protects full option identity, compatibility-schema closure, deterministic second-order exploration, and explicit refusal of incomplete pairwise coverage." ;
+    dcterms:created "2026-08-09"^^xsd:date .
+
+afl:DecisionDimension a owl:Class .
+afl:dimensionName a owl:DatatypeProperty .
+afl:dimensionOrder a owl:DatatypeProperty .
+
+afl:model a afl:DecisionDimension ; afl:dimensionOrder 10 ; afl:dimensionName "model" .
+afl:planner a afl:DecisionDimension ; afl:dimensionOrder 20 ; afl:dimensionName "planner" .
+afl:toolPolicy a afl:DecisionDimension ; afl:dimensionOrder 30 ; afl:dimensionName "tool_policy" .
+afl:repairPolicy a afl:DecisionDimension ; afl:dimensionOrder 40 ; afl:dimensionName "repair_policy" .
+afl:replanningPolicy a afl:DecisionDimension ; afl:dimensionOrder 50 ; afl:dimensionName "replanning_policy" .
+afl:verificationPolicy a afl:DecisionDimension ; afl:dimensionOrder 60 ; afl:dimensionName "verification_policy" .
+afl:projectionPolicy a afl:DecisionDimension ; afl:dimensionOrder 70 ; afl:dimensionName "projection_policy" .
+afl:memoryPolicy a afl:DecisionDimension ; afl:dimensionOrder 80 ; afl:dimensionName "memory_policy" .
+afl:budget a afl:DecisionDimension ; afl:dimensionOrder 90 ; afl:dimensionName "budget" .

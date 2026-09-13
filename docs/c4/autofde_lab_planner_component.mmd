@@ -1,0 +1,17 @@
+C4Component
+title Generalized Structural Anomaly Scanner — Components (replaces the per-fault-type detector enumeration)
+
+Container_Boundary(scanner, "Generalized Structural Anomaly Scanner") {
+    Component(registry, "ObjectKindAnalyzer Registry", "Python", "One entry per K8s KIND (Deployment, Service, PVC, ConfigMap, ServiceAccount, ResourceQuota, CronJob, Ingress, ...) — NOT one entry per fault type. Adding a new kind is O(1); it is never re-derived per injector method.")
+    Component(baseline, "Baseline / Expected-Shape Model", "Python", "What 'healthy' looks like for a kind: declared image, replica count from spec, referenced object existence, RBAC verb coverage for referenced resources, quota headroom — derived from the object's OWN spec/status, never from a hardcoded app name.")
+    Component(diff, "Structural Diff Engine", "Python", "Real observed state vs baseline, per object, per kind — uniform algorithm: field-level presence/absence/mismatch/threshold-exceeded. One implementation, not N copies.")
+    Component(anomaly, "Anomaly Emitter", "Python", "Typed, uniform Anomaly(kind, object_name, namespace, field, observed, expected, class) records — the SAME shape regardless of which kind produced it.")
+    Component(taxonomy, "Fault-Class Taxonomy Mapper", "Python", "Maps a raw structural anomaly to one of a REAL, finite set of known SRE failure classes (grounded in the actual sregym injector source this session read, generalized past just that source) — this is what feeds the LLM fallback's grounding, and what a genuinely novel anomaly fails to map onto (signal to fall back to reasoning, not silent guessing).")
+}
+
+Rel(registry, baseline, "Looks up the analyzer for each observed kind")
+Rel(baseline, diff, "Expected shape")
+Rel(diff, anomaly, "Structural differences found")
+Rel(anomaly, taxonomy, "Classify, or leave UNCLASSIFIED (honest, not forced)")
+
+UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")

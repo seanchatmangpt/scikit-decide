@@ -1,0 +1,10 @@
+  OK plan_candidate->commitment: 1 explicit POWLCommitment->PlanCandidate edge(s)
+  OK commitment->actuation: 4 explicit Actuation->POWLCommitment edge(s)
+  OK authority->actuation: 3 authority edge(s) on an actuation that is also committed
+  OK actuation->postcondition: 4 observation(s) of a committed+authorized actuation
+  OK postcondition->independent: 4 observation(s) whose observer identity differs from the actuation
+  OK receipt->dag: 3 explicit Receipt->Receipt caused_by edge(s) (ledger records 3 parent refs)
+  OK replay->receipt: 1 Replay edge(s) binding a receipt in the ancestry DAG
+
+VERDICT: ALIVE_EVIDENCE_RECONSTRUCTED
+INDEPENDENCE: no execution-runtime module imported in this process

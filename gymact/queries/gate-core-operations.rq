@@ -1,0 +1,17 @@
+# MESSAGE: GymAct core operation is missing required execution metadata
+PREFIX ga: <https://github.com/seanchatmangpt/autofde-lab/ns/gymact#>
+PREFIX dct: <http://purl.org/dc/terms/>
+SELECT ?op
+WHERE {
+  ?op a ga:Operation .
+  FILTER(
+    NOT EXISTS { ?op ga:operationCode ?code } ||
+    NOT EXISTS { ?op ga:rustVariant ?rust_variant } ||
+    NOT EXISTS { ?op dct:title ?title } ||
+    NOT EXISTS { ?op ga:phase ?phase } ||
+    NOT EXISTS { ?op ga:consequenceClass ?consequence } ||
+    NOT EXISTS { ?op ga:authorityMode ?authority_mode } ||
+    NOT EXISTS { ?op ga:replayClass ?replay_class }
+  )
+}
+ORDER BY ?op

@@ -7,10 +7,10 @@ from discrete_optimization.rcpsp.problem import RcpspProblem, RcpspSolution
 from discrete_optimization.rcpsp.solvers.cpm import CpmRcpspSolver
 from discrete_optimization.rcpsp.utils import compute_graph_rcpsp
 
-from skdecide import Space, TransitionOutcome, Value
-from skdecide.builders.domain import FullyObservable
-from skdecide.domains import RLDomain
-from skdecide.hub.space.gym import BoxSpace, MultiDiscreteSpace
+from autofde_lab import Space, TransitionOutcome, Value
+from autofde_lab.builders.domain import FullyObservable
+from autofde_lab.domains import RLDomain
+from autofde_lab.hub.space.gym import BoxSpace, MultiDiscreteSpace
 
 logger = logging.getLogger(__name__)
 records = []

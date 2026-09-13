@@ -1,0 +1,94 @@
+# Manufactured transiently by ggen from combinatorial-maximalism.ttl.
+# This court is executed from a temporary capsule and is not committed as a generated source tree.
+
+from dataclasses import replace
+
+import pytest
+
+from autofde_lab.sota_factory import BasisChoice, BudgetPolicy, DecisionBasis, DecisionSpace
+from autofde_lab.sota_factory.space import CompatibilityRule, pairwise_covering
+
+EXPECTED_DIMENSIONS = (
+{% for row in sparql_results %}
+    "{{ row.dimension }}",
+{% endfor %}
+)
+
+
+def _space(*, width: int = 3, rules=()) -> DecisionSpace:
+    many = tuple(BasisChoice(f"v{i}") for i in range(width))
+    one = (BasisChoice("only"),)
+    return DecisionSpace(
+        models=many,
+        planners=many,
+        tool_policies=one,
+        repair_policies=one,
+        replanning_policies=one,
+        verification_policies=one,
+        projection_policies=one,
+        memory_policies=one,
+        budgets=(BudgetPolicy("only"),),
+        rules=tuple(rules),
+    )
+
+
+def test_rdf_dimension_contract_matches_runtime() -> None:
+    assert DecisionBasis.DIMENSIONS == EXPECTED_DIMENSIONS
+
+
+def test_same_name_parameter_smuggling_is_not_lawful() -> None:
+    space = _space()
+    baseline = next(space.iter_decisions(limit=1))
+    smuggled = replace(
+        baseline,
+        model=BasisChoice.from_mapping(baseline.model.name, {"temperature": 0.01}),
+    )
+    assert smuggled.model.name == baseline.model.name
+    assert not space.is_lawful(smuggled)
+
+
+def test_same_name_budget_smuggling_is_not_lawful() -> None:
+    space = _space()
+    baseline = next(space.iter_decisions(limit=1))
+    smuggled = replace(baseline, budget=BudgetPolicy("only", max_steps=1_000_000))
+    assert not space.is_lawful(smuggled)
+
+
+def test_unknown_compatibility_dimension_refuses_at_space_admission() -> None:
+    rule = CompatibilityRule.from_mappings(when={"ambient_authority": "yes"})
+    with pytest.raises(ValueError, match="REFUSED:UNKNOWN_COMPATIBILITY_DIMENSION"):
+        _space(rules=(rule,))
+
+
+def test_unknown_compatibility_option_refuses_at_space_admission() -> None:
+    rule = CompatibilityRule.from_mappings(when={"model": "not-admitted"})
+    with pytest.raises(ValueError, match="REFUSED:UNKNOWN_COMPATIBILITY_OPTION"):
+        _space(rules=(rule,))
+
+
+def test_contradictory_compatibility_rule_refuses() -> None:
+    rule = CompatibilityRule.from_mappings(
+        when={"model": "v0"},
+        require={"planner": "v1"},
+        forbid={"planner": "v1"},
+    )
+    with pytest.raises(ValueError, match="REFUSED:CONTRADICTORY_COMPATIBILITY_RULE"):
+        _space(rules=(rule,))
+
+
+def test_pairwise_ceiling_cannot_masquerade_as_covering() -> None:
+    space = _space()
+    baseline = next(space.iter_decisions(limit=1))
+    candidates = space.combinatorial_pairwise_candidates(baseline=baseline)
+    with pytest.raises(ValueError, match="REFUSED:PAIRWISE_COVERAGE_INCOMPLETE"):
+        pairwise_covering(candidates, max_architectures=2, seed=(baseline,))
+
+
+def test_unbounded_pairwise_covering_is_deterministic() -> None:
+    space = _space()
+    baseline = next(space.iter_decisions(limit=1))
+    candidates = space.combinatorial_pairwise_candidates(baseline=baseline)
+    first = pairwise_covering(candidates, seed=(baseline,))
+    second = pairwise_covering(tuple(reversed(candidates)), seed=(baseline,))
+    assert tuple(item.digest for item in first) == tuple(item.digest for item in second)
+    assert first[0].digest == baseline.digest

@@ -15,14 +15,14 @@ from typing import NamedTuple
 
 import pytest
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     ImplicitSpace,
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     DeterministicInitialized,
     EnumerableTransitions,
@@ -33,7 +33,7 @@ from skdecide.builders.domain import (
     Sequential,
     SingleAgent,
 )
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
 
 
 class State(NamedTuple):
@@ -192,12 +192,12 @@ def rollout(domain, solver, max_steps=100):
 
 class TestMDPLP:
     def test_import(self):
-        from skdecide.hub.solver.mdplp import MDPLP
+        from autofde_lab.hub.solver.mdplp import MDPLP
 
         assert MDPLP is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.mdplp import MDPLP
+        from autofde_lab.hub.solver.mdplp import MDPLP
 
         dom = DeterministicGridDomain()
         assert MDPLP.check_domain(dom)
@@ -205,7 +205,7 @@ class TestMDPLP:
     @pytest.mark.parametrize("variant", ["primal", "dual"])
     def test_deterministic_grid(self, variant):
         """LP should find optimal cost=6 on 4x4 deterministic grid."""
-        from skdecide.hub.solver.mdplp import MDPLP
+        from autofde_lab.hub.solver.mdplp import MDPLP
 
         dom = DeterministicGridDomain()
         with MDPLP(
@@ -220,7 +220,7 @@ class TestMDPLP:
 
     def test_primal_dual_agree(self):
         """Primal and dual should give same V(s0) (strong duality)."""
-        from skdecide.hub.solver.mdplp import MDPLP
+        from autofde_lab.hub.solver.mdplp import MDPLP
 
         with MDPLP(
             domain_factory=lambda: StochasticGridDomain(),
@@ -244,8 +244,8 @@ class TestMDPLP:
 
     def test_matches_lrtdp(self):
         """LP should match LRTDP's V* on deterministic grid."""
-        from skdecide.hub.solver.lrtdp import LRTDP
-        from skdecide.hub.solver.mdplp import MDPLP
+        from autofde_lab.hub.solver.lrtdp import LRTDP
+        from autofde_lab.hub.solver.mdplp import MDPLP
 
         h = lambda d, s: Value(cost=abs(s.x - 3) + abs(s.y - 3))
 
@@ -270,7 +270,7 @@ class TestMDPLP:
 
     def test_stochastic_grid(self):
         """LP should find near-optimal policy on stochastic grid."""
-        from skdecide.hub.solver.mdplp import MDPLP
+        from autofde_lab.hub.solver.mdplp import MDPLP
 
         dom = StochasticGridDomain()
         with MDPLP(
@@ -289,7 +289,7 @@ class TestMDPLP:
 
     def test_lp_statistics(self):
         """LP statistics should be reasonable."""
-        from skdecide.hub.solver.mdplp import MDPLP
+        from autofde_lab.hub.solver.mdplp import MDPLP
 
         with MDPLP(
             domain_factory=lambda: DeterministicGridDomain(),
@@ -304,7 +304,7 @@ class TestMDPLP:
 
     def test_variant_validation(self):
         """Invalid variant should raise ValueError."""
-        from skdecide.hub.solver.mdplp import MDPLP
+        from autofde_lab.hub.solver.mdplp import MDPLP
 
         with pytest.raises(ValueError, match="variant"):
             MDPLP(
@@ -315,12 +315,12 @@ class TestMDPLP:
 
 class TestSSPLP:
     def test_import(self):
-        from skdecide.hub.solver.mdplp import SSPLP
+        from autofde_lab.hub.solver.mdplp import SSPLP
 
         assert SSPLP is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.mdplp import SSPLP
+        from autofde_lab.hub.solver.mdplp import SSPLP
 
         dom = DeterministicGridDomain()
         assert SSPLP.check_domain(dom)
@@ -328,7 +328,7 @@ class TestSSPLP:
     @pytest.mark.parametrize("variant", ["primal", "dual"])
     def test_deterministic_grid(self, variant):
         """SSPLP should find optimal cost=6 on 4x4 deterministic grid."""
-        from skdecide.hub.solver.mdplp import SSPLP
+        from autofde_lab.hub.solver.mdplp import SSPLP
 
         dom = DeterministicGridDomain()
         with SSPLP(
@@ -343,7 +343,7 @@ class TestSSPLP:
 
     def test_primal_dual_agree(self):
         """Primal and dual should give same V(s0) (strong duality)."""
-        from skdecide.hub.solver.mdplp import SSPLP
+        from autofde_lab.hub.solver.mdplp import SSPLP
 
         with SSPLP(
             domain_factory=lambda: StochasticGridDomain(),
@@ -365,8 +365,8 @@ class TestSSPLP:
 
     def test_matches_lrtdp(self):
         """SSPLP should match LRTDP's V* on deterministic grid."""
-        from skdecide.hub.solver.lrtdp import LRTDP
-        from skdecide.hub.solver.mdplp import SSPLP
+        from autofde_lab.hub.solver.lrtdp import LRTDP
+        from autofde_lab.hub.solver.mdplp import SSPLP
 
         h = lambda d, s: Value(cost=abs(s.x - 3) + abs(s.y - 3))
 
@@ -390,7 +390,7 @@ class TestSSPLP:
 
     def test_stochastic_grid(self):
         """SSPLP should find near-optimal policy on stochastic grid."""
-        from skdecide.hub.solver.mdplp import SSPLP
+        from autofde_lab.hub.solver.mdplp import SSPLP
 
         dom = StochasticGridDomain()
         with SSPLP(
@@ -408,7 +408,7 @@ class TestSSPLP:
 
     def test_lp_statistics(self):
         """LP statistics should be reasonable."""
-        from skdecide.hub.solver.mdplp import SSPLP
+        from autofde_lab.hub.solver.mdplp import SSPLP
 
         with SSPLP(
             domain_factory=lambda: DeterministicGridDomain(),
@@ -422,7 +422,7 @@ class TestSSPLP:
 
     def test_variant_validation(self):
         """Invalid variant should raise ValueError."""
-        from skdecide.hub.solver.mdplp import SSPLP
+        from autofde_lab.hub.solver.mdplp import SSPLP
 
         with pytest.raises(ValueError, match="variant"):
             SSPLP(

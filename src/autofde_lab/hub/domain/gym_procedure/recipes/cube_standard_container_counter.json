@@ -1,0 +1,70 @@
+{
+  "gym": "cube-standard",
+  "task": "cube-container-counter-episode",
+  "source_ref": "docs/papers/evidence/cube-standard/cube-container-counter-episode.ocel.json",
+  "initial_facts": [],
+  "goal_facts": ["environment_torn_down"],
+  "steps": [
+    {
+      "id": "materialize",
+      "description": "Materialize the cube-container-counter environment (gymact 'materialize' operation).",
+      "preconditions": [],
+      "establishes": ["materialized"],
+      "cost": 1.0,
+      "source": "cube-container-counter-episode.ocel.json events[0] type=materialize capability=urn:gymact:operation:materialize"
+    },
+    {
+      "id": "increment_1",
+      "description": "Invoke the cube-container-counter 'increment' capability (1st act event).",
+      "preconditions": ["materialized"],
+      "establishes": ["count_1"],
+      "cost": 1.0,
+      "source": "cube-container-counter-episode.ocel.json events[1] type=act capability=urn:gymact:cube-container-counter:capability:increment"
+    },
+    {
+      "id": "increment_2",
+      "description": "Invoke the cube-container-counter 'increment' capability (2nd act event).",
+      "preconditions": ["count_1"],
+      "establishes": ["count_2"],
+      "removes": ["count_1"],
+      "cost": 1.0,
+      "source": "cube-container-counter-episode.ocel.json events[2] type=act capability=urn:gymact:cube-container-counter:capability:increment"
+    },
+    {
+      "id": "increment_3",
+      "description": "Invoke the cube-container-counter 'increment' capability (3rd act event).",
+      "preconditions": ["count_2"],
+      "establishes": ["count_3"],
+      "removes": ["count_2"],
+      "cost": 1.0,
+      "source": "cube-container-counter-episode.ocel.json events[3] type=act capability=urn:gymact:cube-container-counter:capability:increment"
+    },
+    {
+      "id": "decrement_1",
+      "description": "Invoke the cube-container-counter 'decrement' capability (4th act event).",
+      "preconditions": ["count_3"],
+      "establishes": ["count_2"],
+      "removes": ["count_3"],
+      "cost": 1.0,
+      "source": "cube-container-counter-episode.ocel.json events[4] type=act capability=urn:gymact:cube-container-counter:capability:decrement"
+    },
+    {
+      "id": "increment_4",
+      "description": "Invoke the cube-container-counter 'increment' capability (5th act event).",
+      "preconditions": ["count_2"],
+      "establishes": ["count_3"],
+      "removes": ["count_2"],
+      "cost": 1.0,
+      "source": "cube-container-counter-episode.ocel.json events[5] type=act capability=urn:gymact:cube-container-counter:capability:increment"
+    },
+    {
+      "id": "teardown",
+      "description": "Tear down the cube-container-counter environment (gymact 'teardown' operation) once the counter has settled at 3.",
+      "preconditions": ["count_3"],
+      "establishes": ["environment_torn_down"],
+      "removes": ["count_3"],
+      "cost": 1.0,
+      "source": "cube-container-counter-episode.ocel.json events[6] type=teardown capability=urn:gymact:operation:teardown"
+    }
+  ]
+}

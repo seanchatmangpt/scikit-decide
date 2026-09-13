@@ -1,0 +1,458 @@
+[
+  {
+    "planner": "AOstar",
+    "representation": "recipe",
+    "outcome": "CRASHED",
+    "plan": [],
+    "duration_s": 0.03172845905646682,
+    "detail": "planner process exited with code 1 without returning an attempt"
+  },
+  {
+    "planner": "Astar",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement"
+    ],
+    "duration_s": 0.018628249992616475,
+    "detail": "proposed inapplicable action 'decrement' at step 1; applicable=['increment']"
+  },
+  {
+    "planner": "pLRTAstar",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.05470416590105742,
+    "detail": "proposed inapplicable action None at step 0; applicable=['decrement', 'increment']"
+  },
+  {
+    "planner": "LRTAstar",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.020206333021633327,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "MCTS",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.018715959042310715,
+    "detail": "RuntimeError: Cannot sample an empty space."
+  },
+  {
+    "planner": "UCT",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.018520249985158443,
+    "detail": "RuntimeError: Cannot sample an empty space."
+  },
+  {
+    "planner": "BFWS",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment",
+      "decrement"
+    ],
+    "duration_s": 0.01868241699412465,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "IW",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.8081295839510858,
+    "detail": "proposed inapplicable action 'increment' at step 1; applicable=['decrement']"
+  },
+  {
+    "planner": "RIW",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.017171666026115417,
+    "detail": "RuntimeError: In sequential mode, nodes labelled as unsolved must have unsolved children."
+  },
+  {
+    "planner": "LRTDP",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.01693441695533693,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "ILAOstar",
+    "representation": "recipe",
+    "outcome": "CRASHED",
+    "plan": [],
+    "duration_s": 0.026483666035346687,
+    "detail": "planner process exited with code 1 without returning an attempt"
+  },
+  {
+    "planner": "pAstar",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015441959025338292,
+    "detail": "KeyError: State(facts=frozenset({'counter=0', 'containerized=True', 'steps=0', 'solved=False', 'target=3'}))"
+  },
+  {
+    "planner": "MARTDP",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014364375034347177,
+    "detail": "ValueError: SKDECIDE exception: MA-RTDP algorithm needs python domain for implementing get_agent_applicable_actions()"
+  },
+  {
+    "planner": "MAHD",
+    "representation": "recipe",
+    "outcome": "UNSUPPORTED:REQUIRES_CONFIGURATION",
+    "plan": [],
+    "duration_s": 0.011677333968691528,
+    "detail": "constructor requires argument(s) the federation does not supply: multiagent_solver_class, singleagent_solver_class, multiagent_domain_factory; solver is check_domain-applicable but not runnable with defaults"
+  },
+  {
+    "planner": "MaxentIRL",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014015708002261817,
+    "detail": "AttributeError: 'Discrete' object has no attribute 'low'"
+  },
+  {
+    "planner": "POMCP",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment",
+      "decrement"
+    ],
+    "duration_s": 0.05431791709270328,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "pPOMCP",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014098291983827949,
+    "detail": "AttributeError: 'pPOMCP' object has no attribute '_belief'"
+  },
+  {
+    "planner": "RayRLlib",
+    "representation": "recipe",
+    "outcome": "UNSUPPORTED:REQUIRES_CONFIGURATION",
+    "plan": [],
+    "duration_s": 0.0125547080533579,
+    "detail": "constructor requires argument(s) the federation does not supply: algo_class, train_iterations; solver is check_domain-applicable but not runnable with defaults"
+  },
+  {
+    "planner": "SimpleGreedy",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014115332975052297,
+    "detail": "ValueError: max() iterable argument is empty"
+  },
+  {
+    "planner": "StableBaseline",
+    "representation": "recipe",
+    "outcome": "UNSUPPORTED:REQUIRES_CONFIGURATION",
+    "plan": [],
+    "duration_s": 0.011636124923825264,
+    "detail": "constructor requires argument(s) the federation does not supply: algo_class, baselines_policy; solver is check_domain-applicable but not runnable with defaults"
+  },
+  {
+    "planner": "UPSolver",
+    "representation": "recipe",
+    "outcome": "UNSUPPORTED:REQUIRES_CONFIGURATION",
+    "plan": [],
+    "duration_s": 0.011486917035654187,
+    "detail": "constructor requires argument(s) the federation does not supply: operation_mode; solver is check_domain-applicable but not runnable with defaults"
+  },
+  {
+    "planner": "VI",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.015792957972735167,
+    "detail": "proposed inapplicable action 'increment' at step 2; applicable=[]"
+  },
+  {
+    "planner": "PI",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.015600415994413197,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "LDFS",
+    "representation": "recipe",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 25.010704707936384,
+    "detail": "killed after 20.0s wall clock (native solve did not return)"
+  },
+  {
+    "planner": "IDAstar",
+    "representation": "recipe",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 25.01484345900826,
+    "detail": "killed after 20.0s wall clock (native solve did not return)"
+  },
+  {
+    "planner": "RTDPBel",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 2.4631577919935808,
+    "detail": "proposed inapplicable action 'increment' at step 2; applicable=[]"
+  },
+  {
+    "planner": "SSiPP",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.01777795795351267,
+    "detail": "proposed inapplicable action 'increment' at step 2; applicable=[]"
+  },
+  {
+    "planner": "FRET",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment",
+      "decrement"
+    ],
+    "duration_s": 0.016746582929044962,
+    "detail": "proposed inapplicable action 'increment' at step 2; applicable=[]"
+  },
+  {
+    "planner": "MDPLP",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.016911542043089867,
+    "detail": "IndexError: map::at:  key not found"
+  },
+  {
+    "planner": "SSPLP",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.016881208051927388,
+    "detail": "IndexError: map::at:  key not found"
+  },
+  {
+    "planner": "IDual",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement"
+    ],
+    "duration_s": 0.01713641604874283,
+    "detail": "proposed inapplicable action 'decrement' at step 1; applicable=['increment']"
+  },
+  {
+    "planner": "GPCI",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.016356916981749237,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "SARSOP",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.01493304199539125,
+    "detail": "proposed inapplicable action 'increment' at step 1; applicable=['decrement']"
+  },
+  {
+    "planner": "DESPOT",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.08946100005414337,
+    "detail": "proposed inapplicable action 'increment' at step 2; applicable=[]"
+  },
+  {
+    "planner": "EHC",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.017108584055677056,
+    "detail": "RuntimeError: SKDECIDE exception: EHC failed \u2014 no improving state found"
+  },
+  {
+    "planner": "FF",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014848125050775707,
+    "detail": "TypeError: FF solver requires a PDDLDomain or PPDDLDomain"
+  },
+  {
+    "planner": "FFReplan",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01531412499025464,
+    "detail": "TypeError: FFReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLReplan",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.017028917092829943,
+    "detail": "TypeError: PPDDLReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "FFDetHindsight",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01727766706608236,
+    "detail": "TypeError: FFDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLDetHindsight",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01702124997973442,
+    "detail": "TypeError: PPDDLDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPReplan",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.01839387498330325,
+    "detail": "proposed inapplicable action 'increment' at step 1; applicable=['decrement']"
+  },
+  {
+    "planner": "SSPDetHindsight",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.023948458023369312,
+    "detail": "proposed inapplicable action 'decrement' at step 2; applicable=[]"
+  },
+  {
+    "planner": "RFF",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.016296833055093884,
+    "detail": "TypeError: RFF solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLPlanMerger",
+    "representation": "recipe",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01653662498574704,
+    "detail": "TypeError: PPDDLPlanMerger solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPPlanMerger",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.07738454104401171,
+    "detail": "proposed inapplicable action 'increment' at step 1; applicable=['decrement']"
+  },
+  {
+    "planner": "Witness",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement"
+    ],
+    "duration_s": 0.033417124999687076,
+    "detail": "proposed inapplicable action 'decrement' at step 1; applicable=['increment']"
+  },
+  {
+    "planner": "HSVI",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement"
+    ],
+    "duration_s": 0.016878125024959445,
+    "detail": "proposed inapplicable action 'decrement' at step 1; applicable=['increment']"
+  },
+  {
+    "planner": "GoalHSVI",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "decrement"
+    ],
+    "duration_s": 0.018469458911567926,
+    "detail": "proposed inapplicable action 'decrement' at step 1; applicable=['increment']"
+  },
+  {
+    "planner": "DSPyPolicy",
+    "representation": "recipe",
+    "outcome": "REFUSED",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 7.423419791972265,
+    "detail": "proposed inapplicable action 'increment' at step 1; applicable=['decrement']"
+  },
+  {
+    "planner": "typed_search",
+    "representation": "typed_model",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.0007770000956952572,
+    "detail": "no typed-model plan within max_len=12"
+  }
+]

@@ -7,26 +7,90 @@
 
 <br>
 <p align="center">
-  <a href="https://github.com/airbus/scikit-decide/actions/workflows/ci.yml?query=branch%3Amaster">
-    <img src="https://img.shields.io/github/actions/workflow/status/airbus/scikit-decide/ci.yml?branch=master&logo=github&label=CI%20status" alt="actions status">
+  <a href="https://github.com/seanchatmangpt/autofde-lab/actions/workflows/ci.yml?query=branch%3Amaster">
+    <img src="https://img.shields.io/github/actions/workflow/status/seanchatmangpt/autofde-lab/ci.yml?branch=master&logo=github&label=CI%20status" alt="actions status">
   </a>
-  <a href="https://github.com/airbus/scikit-decide/tags">
-    <img src="https://img.shields.io/github/tag/airbus/scikit-decide.svg?label=current%20version" alt="version">
+  <a href="https://github.com/seanchatmangpt/autofde-lab/tags">
+    <img src="https://img.shields.io/github/tag/seanchatmangpt/autofde-lab.svg?label=current%20version" alt="version">
   </a>
-  <a href="https://github.com/airbus/scikit-decide/stargazers">
-    <img src="https://img.shields.io/github/stars/airbus/scikit-decide.svg" alt="stars">
+  <a href="https://github.com/seanchatmangpt/autofde-lab/stargazers">
+    <img src="https://img.shields.io/github/stars/seanchatmangpt/autofde-lab.svg" alt="stars">
   </a>
-  <a href="https://github.com/airbus/scikit-decide/network">
-    <img src="https://img.shields.io/github/forks/airbus/scikit-decide.svg" alt="forks">
+  <a href="https://github.com/seanchatmangpt/autofde-lab/network">
+    <img src="https://img.shields.io/github/forks/seanchatmangpt/autofde-lab.svg" alt="forks">
   </a>
 </p>
 <br>
 
-# Scikit-decide for Python
+# AutoFDE Lab
 
-Scikit-decide is an AI framework for Reinforcement Learning, Automated Planning and Scheduling.
+AutoFDE Lab is the foundation layer of the **Chatman Ecosystem**'s Forward Deployment OS: the
+canonical decision, planning, hypothesis, and integration control plane between admitted
+operational state and candidate plans. See `FORWARD_DEPLOYMENT.md` for the portfolio role and
+ownership boundaries this repository operates inside.
 
-This framework was initiated at [Airbus](https://www.airbus.com) AI Research and notably received contributions through the [ANITI](https://aniti.univ-toulouse.fr/en/) and [TUPLES](https://tuples.ai/) projects, and also from [ANU](https://www.anu.edu.au/).
+**It computes candidate plans. It does not actuate.** A planner selects; a broker authorizes;
+an executor performs; a verifier evaluates. Nothing here carries ambient authority to change
+the world, and nothing here is given receipt, admission, or actuation semantics — that path
+runs through OpenClaw and the portfolio's `BRCE.DO` boundary, never directly from this repo.
+
+It is forked from [Airbus scikit-decide](https://github.com/airbus/scikit-decide), an AI
+framework for Reinforcement Learning, Automated Planning and Scheduling, and inherits its full
+domain/solver catalog, C++ solver core, and API surface unchanged (`autofde_lab.*`, with a
+deprecated `skdecide` compatibility alias — see `docs/migration/from-scikit-decide.md`).
+
+This repository establishes **AutoFDE Lab technical standing only** — what the code in this
+tree demonstrably does, evidenced by a test run in the current session (see
+`.claude/rules/standing-law.md`). It establishes none of: AutoFDE product standing (a separate,
+future repository — see `docs/autofde/EXPLORE.md`), organizational standing (accountable
+customer acceptance), or legal standing (this repository confers none; see `NOTICE` and
+`LICENSE`).
+
+The original framework was initiated at [Airbus](https://www.airbus.com) AI Research and
+notably received contributions through the [ANITI](https://aniti.univ-toulouse.fr/en/) and
+[TUPLES](https://tuples.ai/) projects, and also from [ANU](https://www.anu.edu.au/). Renaming
+this fork does not transfer that copyright — see `NOTICE`.
+
+## What's new in v26.9.1
+
+Two additive capabilities merged this cycle, per `docs/jira/v26.9.1/PLAN.md` (that plan's own
+"Last Updated" section carries the full merge closure record):
+
+- **Fortune-5 SAFe DfCM digital twin simulation** — a simulatable full SAFe backlog hierarchy
+  (portfolios, value streams, ARTs, teams, epics/features/stories) for validating DfCM
+  decision-making at Fortune-5 SAFe-portfolio scale. `src/autofde_lab/simulation/fortune5_safe/`,
+  `docs/fortune5-safe-simulation.md`.
+  PR [#94](https://github.com/seanchatmangpt/autofde-lab/pull/94), merge `2bf2871f`.
+- **APS AutoFDE protocol semantic profile** — an RDF/OWL ontology profile with SHACL shape
+  constraints giving cross-agent planning artifacts a verifiable, SHACL-constrained semantic
+  contract, plus a PR-qualifying CI gate. `ontology/aps-autofde-profile.ttl`,
+  `ontology/shapes/aps-autofde-profile.shacl.ttl`,
+  `.github/workflows/aps-protocol-profile.yml`. PR
+  [#95](https://github.com/seanchatmangpt/autofde-lab/pull/95), merge `d2242c39`.
+
+Both verified this session with real, currently-passing commands (Chicago-style — real
+collaborators, no mocks): `.venv/bin/python -m pytest tests/simulation/
+tests/test_aps_protocol_profile_chicago.py -v` → 11 passed; independent `pyshacl.validate()`
+of the new ontology profile against its own shapes → `Conforms: True`.
+
+## Documentation map
+
+- `FORWARD_DEPLOYMENT.md` — this repository's role and ownership boundaries in the portfolio.
+- `docs/STATUS.md` — the in-repo standing ledger (measured wins / recorded negatives / scoped
+  work, per `.claude/rules/standing-law.md`).
+- `docs/ecosystem-standing.md` — the cross-repository standing ledger.
+- `docs/diataxis/README.md` — Diataxis-framework documentation (tutorial / how-to / reference /
+  explanation) for individual capabilities, starting with the autonomic life-planning case
+  study.
+- `docs/jira/v26.9.1/PLAN.md` — the DMEDI plan and merge record for this cycle's two additive
+  capabilities above.
+- `docs/migration/from-scikit-decide.md` — what changed / didn't for anyone with existing code
+  against `pip install scikit-decide`.
+- `NOTICE` / `LICENSE` — provenance and legal terms; renaming this fork did not transfer
+  upstream Airbus copyright.
+
+Docs never establish standing on their own (`docs/CLAUDE.md`) — every "works" claim above
+points at a real command and its real output, not prose alone.
 
 ## Main features
 
@@ -93,23 +157,23 @@ This framework was initiated at [Airbus](https://www.airbus.com) AI Research and
 
 Quick version:
 ```shell
-pip install scikit-decide[all]
+pip install autofde-lab[all]
 ```
-For more details, see the [online documentation](https://airbus.github.io/scikit-decide/install).
+For more details, see the [online documentation](https://seanchatmangpt.github.io/autofde-lab/install).
 
 ## Documentation
 
-The latest documentation is available [online](https://airbus.github.io/scikit-decide).
+The latest documentation is available [online](https://seanchatmangpt.github.io/autofde-lab).
 
 ## Examples
 
 Some educational notebooks are available in `notebooks/` folder.
 Links to launch them online with [binder](https://mybinder.org/) are provided in the
-[Notebooks section](https://airbus.github.io/scikit-decide/notebooks) of the online documentation.
+[Notebooks section](https://seanchatmangpt.github.io/autofde-lab/notebooks) of the online documentation.
 
 More examples can be found as Python scripts in the `examples/` folder, showing how to import or define a domain,
 and how to run or solve it. Most of the examples rely on scikit-decide Hub, an extensible catalog of domains/solvers.
 
 ## Contributing
 
-See more about how to contribute in the [online documentation](https://airbus.github.io/scikit-decide/contribute).
+See more about how to contribute in the [online documentation](https://seanchatmangpt.github.io/autofde-lab/contribute).

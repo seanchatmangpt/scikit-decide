@@ -6,9 +6,9 @@ from typing import Any
 
 import ray
 
-from skdecide.hub.domain.maze.maze import Maze
-from skdecide.hub.solver.ray_rllib import RayRLlib
-from skdecide.optuna_utils import generic_optuna_experiment_monoproblem
+from autofde_lab.hub.domain.maze.maze import Maze
+from autofde_lab.hub.solver.ray_rllib import RayRLlib
+from autofde_lab.optuna_utils import generic_optuna_experiment_monoproblem
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s:%(levelname)s:%(message)s")

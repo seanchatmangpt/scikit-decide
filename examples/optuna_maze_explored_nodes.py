@@ -23,15 +23,15 @@ from discrete_optimization.generic_tools.hyperparameters.hyperparameter import (
 )
 from stable_baselines3 import A2C, PPO
 
-from skdecide import Solver
-from skdecide.core import D, Value
-from skdecide.hub.domain.maze.maze import Maze, State
-from skdecide.hub.solver.astar import Astar
-from skdecide.hub.solver.iw import IW
-from skdecide.hub.solver.mcts import MCTS, UCT
-from skdecide.hub.solver.stable_baselines import StableBaseline
-from skdecide.optuna_utils import generic_optuna_experiment_monoproblem
-from skdecide.utils import match_solvers
+from autofde_lab import Solver
+from autofde_lab.core import D, Value
+from autofde_lab.hub.domain.maze.maze import Maze, State
+from autofde_lab.hub.solver.astar import Astar
+from autofde_lab.hub.solver.iw import IW
+from autofde_lab.hub.solver.mcts import MCTS, UCT
+from autofde_lab.hub.solver.stable_baselines import StableBaseline
+from autofde_lab.optuna_utils import generic_optuna_experiment_monoproblem
+from autofde_lab.utils import match_solvers
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s:%(levelname)s:%(message)s")

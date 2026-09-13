@@ -15,11 +15,11 @@ from __future__ import annotations
 
 import logging
 
-from skdecide.hub.domain.maze.maze import Maze
-from skdecide.hub.solver.astar import Astar
-from skdecide.hub.solver.ray_rllib import RayRLlib
-from skdecide.hub.solver.stable_baselines import StableBaseline
-from skdecide.optuna_utils import generic_optuna_experiment_monoproblem
+from autofde_lab.hub.domain.maze.maze import Maze
+from autofde_lab.hub.solver.astar import Astar
+from autofde_lab.hub.solver.ray_rllib import RayRLlib
+from autofde_lab.hub.solver.stable_baselines import StableBaseline
+from autofde_lab.optuna_utils import generic_optuna_experiment_monoproblem
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s:%(levelname)s:%(message)s")

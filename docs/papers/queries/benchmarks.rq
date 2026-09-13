@@ -1,0 +1,17 @@
+PREFIX afb: <https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#>
+PREFIX dct: <http://purl.org/dc/terms/>
+SELECT ?slug ?title ?adapter ?source_standing ?local_safe ?requires_authority
+       ?vendor_slug ?repo ?path ?pinned_revision ?resolution_standing ?smoke_standing
+WHERE {
+  ?b a afb:Benchmark ; afb:slug ?slug ; dct:title ?title ;
+     afb:adapterFamily ?adapter ; afb:sourceStanding ?source_standing ;
+     afb:localSafe ?local_safe ; afb:requiresAuthority ?requires_authority .
+  OPTIONAL {
+    ?b afb:vendorProject ?v .
+    ?v afb:slug ?vendor_slug ; afb:repositoryUrl ?repo ; afb:vendorPath ?path .
+    OPTIONAL { ?v afb:pinnedRevision ?pinned_revision . }
+    OPTIONAL { ?v afb:resolutionStanding ?resolution_standing . }
+    OPTIONAL { ?v afb:smokeStanding ?smoke_standing . }
+  }
+}
+ORDER BY ?slug

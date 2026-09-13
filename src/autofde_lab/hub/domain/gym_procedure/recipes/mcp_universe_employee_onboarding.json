@@ -1,0 +1,65 @@
+{
+  "gym": "mcp-universe",
+  "task": "mcpmark/notion/company_in_a_box/employee_onboarding",
+  "source_ref": "vendor/gyms/mcp-universe/mcpuniverse/evaluator/mcpmark/notion/company_in_a_box/employee_onboarding/description.md",
+  "initial_facts": [],
+  "goal_facts": ["onboarding_hub_complete"],
+  "steps": [
+    {
+      "id": "create_checklist_database",
+      "description": "Create a new database titled 'Employee Onboarding Checklist' with properties Employee Name (title), Start Date (date), Department (select: Product, Marketing, Sales, HR, Engineering).",
+      "preconditions": [],
+      "establishes": ["checklist_database_created"],
+      "cost": 1.0,
+      "source": "description.md task requirement 1 (property list)"
+    },
+    {
+      "id": "populate_checklist_entries",
+      "description": "Populate the Employee Onboarding Checklist database with 3 sample new-hire pages covering three different departments, every property filled.",
+      "preconditions": ["checklist_database_created"],
+      "establishes": ["checklist_populated"],
+      "cost": 1.0,
+      "source": "description.md task requirement 1 (populate 3 sample new-hire pages)"
+    },
+    {
+      "id": "create_onboarding_hub_page",
+      "description": "Under the top-level page 'Company In A Box', create a new child page titled 'Onboarding Hub'.",
+      "preconditions": ["checklist_populated"],
+      "establishes": ["onboarding_hub_page_created"],
+      "cost": 1.0,
+      "source": "description.md task requirement 2 ('create a new child page titled Onboarding Hub')"
+    },
+    {
+      "id": "embed_checklist_database",
+      "description": "Embed the Employee Onboarding Checklist database at the top of the Onboarding Hub page.",
+      "preconditions": ["onboarding_hub_page_created"],
+      "establishes": ["checklist_embedded"],
+      "cost": 1.0,
+      "source": "description.md task requirement 2, sub-step 1) 'database embedded at the top'"
+    },
+    {
+      "id": "add_benefits_overview_section",
+      "description": "Add a section headed 'Benefits Overview' with linked mentions to >=3 distinct benefit-policy pages from the Company Wiki.",
+      "preconditions": ["checklist_embedded"],
+      "establishes": ["benefits_overview_added"],
+      "cost": 1.0,
+      "source": "description.md task requirement 2, sub-step 2) 'Benefits Overview'"
+    },
+    {
+      "id": "add_30_day_timeline_section",
+      "description": "Add a section headed '30-Day Timeline' with a numbered list of 7 steps covering the first 30 days, each step @-mentioning an existing page or database.",
+      "preconditions": ["benefits_overview_added"],
+      "establishes": ["timeline_added"],
+      "cost": 1.0,
+      "source": "description.md task requirement 2, sub-step 3) '30-Day Timeline'"
+    },
+    {
+      "id": "add_feedback_form_section",
+      "description": "Add a section headed 'Feedback Form' with >=3 to-do items for new hires to check off.",
+      "preconditions": ["timeline_added"],
+      "establishes": ["onboarding_hub_complete"],
+      "cost": 1.0,
+      "source": "description.md task requirement 2, sub-step 4) 'Feedback Form'"
+    }
+  ]
+}

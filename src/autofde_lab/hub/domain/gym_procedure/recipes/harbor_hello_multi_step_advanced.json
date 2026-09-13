@@ -1,0 +1,33 @@
+{
+  "gym": "harbor",
+  "task": "hello-multi-step-advanced",
+  "source_ref": "vendor/gyms/harbor/examples/tasks/hello-multi-step-advanced/task.toml",
+  "initial_facts": [],
+  "goal_facts": ["readme_documented"],
+  "steps": [
+    {
+      "id": "scaffold_greet_script",
+      "description": "Create an executable bash script at /app/greet.sh that prints exactly 'hello' (followed by a newline) when run; must exist, be chmod +x, and exit 0.",
+      "preconditions": [],
+      "establishes": ["greet_script_scaffolded"],
+      "cost": 1.0,
+      "source": "steps/scaffold/instruction.md; task.toml [[steps]] name=\"scaffold\" min_reward=1.0"
+    },
+    {
+      "id": "implement_named_greeting",
+      "description": "Modify /app/greet.sh so it reads the name from /app/config.txt (uploaded to WORKDIR by this step) and prints 'Hello, <name>!' instead of hardcoding 'hello'; verified against EXPECTED_NAME=Harbor / EXPECTED_GREETING='Hello, Harbor!'.",
+      "preconditions": ["greet_script_scaffolded"],
+      "establishes": ["greet_script_implemented"],
+      "cost": 1.0,
+      "source": "steps/implement/instruction.md; task.toml [[steps]] name=\"implement\" min_reward=0.5, verifier.env EXPECTED_NAME/EXPECTED_GREETING, healthcheck 'test -x /app/greet.sh'"
+    },
+    {
+      "id": "document_readme",
+      "description": "Create /app/README.md documenting greet.sh: a level-1 heading 'greet.sh', a mention of config.txt, and a fenced bash code block showing how to run the script, without breaking the existing greet.sh.",
+      "preconditions": ["greet_script_implemented"],
+      "establishes": ["readme_documented"],
+      "cost": 1.0,
+      "source": "steps/document/instruction.md; task.toml [[steps]] name=\"document\" artifacts=[\"/app/README.md\"]"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+sequenceDiagram
+    autonumber
+    actor R as Researcher / Operator
+    participant B as External Benchmark
+    participant G as GymAct
+    participant L as AutoFDE SOTA Lab
+    participant M as ggen
+    participant A as AutoFDE Runtime
+    participant V as Independent Verifier
+
+    R->>L: Admit benchmark objective + constraints
+    B->>L: Benchmark contract + evaluator + frontier target
+    G->>L: Canonical GymBasis
+    L->>L: Enumerate DecisionBasis × ExperimentBasis
+    L->>L: Constraint prune + dominance prune + select probes
+    L->>G: Execute selected experiments
+    G-->>L: Observations + receipts + replay + outcomes
+    L->>L: Cluster failures + propose basis repair
+    L->>M: Manufacture repaired specializations
+    M-->>L: Generated candidates + manifests
+    L->>G: Re-evaluate candidates
+    G-->>L: Verified benchmark results
+    L->>V: Project evidence for independent standing
+    V-->>L: Conforms / typed refusal
+    L->>B: Evaluate score
+    B-->>L: Score + benchmark standing
+    alt SOTA surpassed
+        L->>A: Promote admitted governed bundle
+        A->>G: Execute lawful production DO
+        G-->>V: Consequence evidence
+        V-->>A: Derived standing
+    else Frontier not surpassed
+        L->>L: Learn next discriminating repair
+    end

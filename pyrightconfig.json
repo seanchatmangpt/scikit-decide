@@ -1,0 +1,39 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/pyright/main/packages/vscode-pyright/schemas/pyrightconfig.schema.json",
+
+  "//": "Static-analysis config only. Runtime behaviour is unaffected by this file.",
+
+  "//venv": "Without this, pyright falls back to whatever `python` is on PATH (here: Homebrew 3.14) and reports false 'could not be resolved' for every first-party and third-party import. The project venv is 3.13.9 and contains the editable install of autofde_lab/skdecide plus every extra from `uv sync --extra=all`.",
+  "venvPath": ".",
+  "venv": ".venv",
+  "pythonVersion": "3.13",
+
+  "//extraPaths": "Belt-and-braces for the src/ layout: makes `autofde_lab.*` and `skdecide.*` resolve from the working tree even in a checkout where the editable install has not been made yet.",
+  "extraPaths": ["src"],
+
+  "include": ["src", "tests"],
+
+  "//exclude": "Vendored gyms, build output, and scratch run dirs are not this repo's code to type-check.",
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/.*",
+    "vendor",
+    "build",
+    "TEMP_RLlib",
+    "openevolve_output",
+    "**/openevolve_output",
+    "rddl_movies",
+    "notebooks"
+  ],
+
+  "//typeCheckingMode": "`basic`, deliberately not `strict`: the repo has substantial pre-existing type looseness and strict mode would bury real diagnostics under thousands of annotation-style findings. Import resolution is checked at full strength below.",
+  "typeCheckingMode": "basic",
+
+  "//reportMissing": "Kept at error so a genuinely missing dependency is still surfaced -- this config fixes false import errors, it does not suppress the class.",
+  "reportMissingImports": "error",
+  "reportMissingModuleSource": "warning",
+
+  "//reportMissingTypeStubs": "Many runtime deps here (ray, rdflib plugins, gymnasium ecosystem) ship no stubs; that is not a defect in this repo.",
+  "reportMissingTypeStubs": "none"
+}

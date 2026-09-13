@@ -1,0 +1,49 @@
+{
+  "gym": "devops-gym",
+  "task": "end_to_end/gogs__cpu-usage",
+  "source_ref": "vendor/gyms/devops-gym/tasks/end_to_end/gogs__cpu-usage/README.md (\"Run Manually\" section, steps 1-5)",
+  "initial_facts": [],
+  "goal_facts": ["tests_run"],
+  "steps": [
+    {
+      "id": "set_env_vars",
+      "description": "cd tasks/end_to_end/gogs/cpu-usage; export T_BENCH_TASK_DOCKER_CLIENT_IMAGE_NAME, T_BENCH_TASK_DOCKER_CLIENT_CONTAINER_NAME, T_BENCH_TEST_DIR, T_BENCH_TASK_LOGS_PATH, T_BENCH_CONTAINER_LOGS_PATH, T_BENCH_TASK_AGENT_LOGS_PATH, T_BENCH_CONTAINER_AGENT_LOGS_PATH.",
+      "preconditions": [],
+      "establishes": ["env_vars_set"],
+      "cost": 1.0,
+      "source": "README.md 'Run Manually' step 1 'Set Environment Variables (Optional)'"
+    },
+    {
+      "id": "start_services",
+      "description": "docker-compose build --no-cache; docker-compose up -d; docker cp tests gogs-client:/tests",
+      "preconditions": ["env_vars_set"],
+      "establishes": ["services_started"],
+      "cost": 1.0,
+      "source": "README.md 'Run Manually' step 2 'Start Services'"
+    },
+    {
+      "id": "watch_client_log",
+      "description": "docker logs -f gogs-client-client (expect start.sh running, waiting for the server to start).",
+      "preconditions": ["services_started"],
+      "establishes": ["client_log_observed"],
+      "cost": 1.0,
+      "source": "README.md 'Run Manually' step 3 'Client Log'"
+    },
+    {
+      "id": "start_server",
+      "description": "docker exec -it gogs-client bash; then run ./gogs-build.sh and ./gogs-serve.sh inside the container so the server starts.",
+      "preconditions": ["client_log_observed"],
+      "establishes": ["server_started"],
+      "cost": 1.0,
+      "source": "README.md 'Run Manually' step 4 'Start Server'"
+    },
+    {
+      "id": "run_tests",
+      "description": "Apply solution.sh in the container terminal, then run bash /tests/run-all-tests.sh (or the individual run-build-test.sh / run-monitor-test.sh / run-issue-test.sh / run-testgen-test.sh scripts).",
+      "preconditions": ["server_started"],
+      "establishes": ["tests_run"],
+      "cost": 1.0,
+      "source": "README.md 'Run Manually' step 5 'Run tests'"
+    }
+  ]
+}

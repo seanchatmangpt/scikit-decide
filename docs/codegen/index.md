@@ -1,17 +1,17 @@
 # Code generators
 
 ::: tip Domain specification
-<skdecide-summary></skdecide-summary>
+<autofde_lab-summary></autofde_lab-summary>
 :::
 
-<skdecide-codegen>
+<autofde_lab-codegen>
 
 <template v-slot:SolverSummary>
 
 ::: warning Solver specification
-<skdecide-summary isSolver></skdecide-summary>
+<autofde_lab-summary isSolver></autofde_lab-summary>
 :::
 
 </template>
 
-</skdecide-codegen>
+</autofde_lab-codegen>

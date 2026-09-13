@@ -1,0 +1,237 @@
+{
+  "probe_log": [
+    {
+      "action": "mine",
+      "applicable": true,
+      "observed_pre_facts": [
+        "capacity=4",
+        "catalyst=True",
+        "dead_end=False",
+        "mine_rate=1",
+        "output=0",
+        "raw=0",
+        "refined=0",
+        "solved=False",
+        "target=2"
+      ],
+      "delta_added": [
+        "raw=1"
+      ],
+      "delta_removed": [
+        "raw=0"
+      ]
+    },
+    {
+      "action": "refine",
+      "applicable": false,
+      "observed_pre_facts": [
+        "capacity=4",
+        "catalyst=True",
+        "dead_end=False",
+        "mine_rate=1",
+        "output=0",
+        "raw=0",
+        "refined=0",
+        "solved=False",
+        "target=2"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "assemble",
+      "applicable": false,
+      "observed_pre_facts": [
+        "capacity=4",
+        "catalyst=True",
+        "dead_end=False",
+        "mine_rate=1",
+        "output=0",
+        "raw=0",
+        "refined=0",
+        "solved=False",
+        "target=2"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "burn_catalyst",
+      "applicable": true,
+      "observed_pre_facts": [
+        "capacity=4",
+        "catalyst=True",
+        "dead_end=False",
+        "mine_rate=1",
+        "output=0",
+        "raw=0",
+        "refined=0",
+        "solved=False",
+        "target=2"
+      ],
+      "delta_added": [
+        "catalyst=False",
+        "output=2",
+        "solved=True"
+      ],
+      "delta_removed": [
+        "catalyst=True",
+        "output=0",
+        "solved=False"
+      ]
+    },
+    {
+      "action": "refine",
+      "applicable": false,
+      "observed_pre_facts": [
+        "capacity=4",
+        "catalyst=False",
+        "dead_end=False",
+        "mine_rate=1",
+        "output=2",
+        "raw=0",
+        "refined=0",
+        "solved=True",
+        "target=2"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "refine",
+      "applicable": true,
+      "observed_pre_facts": [
+        "capacity=4",
+        "catalyst=True",
+        "dead_end=False",
+        "mine_rate=1",
+        "output=0",
+        "raw=1",
+        "refined=0",
+        "solved=False",
+        "target=2"
+      ],
+      "delta_added": [
+        "raw=0",
+        "refined=1"
+      ],
+      "delta_removed": [
+        "raw=1",
+        "refined=0"
+      ]
+    },
+    {
+      "action": "assemble",
+      "applicable": false,
+      "observed_pre_facts": [
+        "capacity=4",
+        "catalyst=False",
+        "dead_end=False",
+        "mine_rate=1",
+        "output=2",
+        "raw=0",
+        "refined=0",
+        "solved=True",
+        "target=2"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "assemble",
+      "applicable": false,
+      "observed_pre_facts": [
+        "capacity=4",
+        "catalyst=True",
+        "dead_end=False",
+        "mine_rate=1",
+        "output=0",
+        "raw=1",
+        "refined=0",
+        "solved=False",
+        "target=2"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "assemble",
+      "applicable": true,
+      "observed_pre_facts": [
+        "capacity=4",
+        "catalyst=True",
+        "dead_end=False",
+        "mine_rate=1",
+        "output=0",
+        "raw=0",
+        "refined=1",
+        "solved=False",
+        "target=2"
+      ],
+      "delta_added": [
+        "output=1",
+        "refined=0"
+      ],
+      "delta_removed": [
+        "output=0",
+        "refined=1"
+      ]
+    },
+    {
+      "action": "mine",
+      "applicable": true,
+      "observed_pre_facts": [
+        "capacity=4",
+        "catalyst=True",
+        "dead_end=False",
+        "mine_rate=1",
+        "output=0",
+        "raw=1",
+        "refined=0",
+        "solved=False",
+        "target=2"
+      ],
+      "delta_added": [
+        "raw=2"
+      ],
+      "delta_removed": [
+        "raw=1"
+      ]
+    },
+    {
+      "action": "refine",
+      "applicable": false,
+      "observed_pre_facts": [
+        "capacity=4",
+        "catalyst=True",
+        "dead_end=False",
+        "mine_rate=1",
+        "output=0",
+        "raw=0",
+        "refined=1",
+        "solved=False",
+        "target=2"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "assemble",
+      "applicable": false,
+      "observed_pre_facts": [
+        "capacity=4",
+        "catalyst=True",
+        "dead_end=False",
+        "mine_rate=1",
+        "output=1",
+        "raw=0",
+        "refined=0",
+        "solved=False",
+        "target=2"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    }
+  ],
+  "representation_losses": {}
+}

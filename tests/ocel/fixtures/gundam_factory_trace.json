@@ -1,0 +1,341 @@
+{
+  "objectTypes": [
+    {
+      "name": "WorkflowCase"
+    }
+  ],
+  "eventTypes": [
+    {
+      "name": "Spawn"
+    },
+    {
+      "name": "Factory Entrance"
+    },
+    {
+      "name": "Frame Assembly"
+    },
+    {
+      "name": "Socket Topology"
+    },
+    {
+      "name": "Armor Skin Station"
+    },
+    {
+      "name": "Rig Motion Station"
+    },
+    {
+      "name": "Verification Gate"
+    },
+    {
+      "name": "Receipt Terminal"
+    },
+    {
+      "name": "Exit Or Loop"
+    }
+  ],
+  "objects": [
+    {
+      "id": "case-1781892815576",
+      "type": "WorkflowCase"
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "type": "Spawn",
+      "time": "2026-06-19T18:13:43.490Z",
+      "relationships": [
+        {
+          "objectId": "case-1781892815576",
+          "qualifier": "belongs_to"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "gemini_output",
+          "value": "MCP issues detected. Run /mcp list for status.",
+          "time": "2026-06-19T18:13:43.490Z"
+        },
+        {
+          "name": "stderr",
+          "value": "YOLO mode is enabled. All tool calls will be automatically approved.\nError authenticating: IneligibleTierError: This client is no longer supported for Gemini Code Assist for individuals. To continue using Gemini, please migrate to the Antigravity suite of products: https://antigravity.google.\n    at throwIneligibleOrProjectIdError (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277780:11)\n    at _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277769:5)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {\n  ineligibleTiers: [\n    {\n      reasonCode: 'UNSUPPORTED_CLIENT',\n      reasonMessage: 'This client is no longer supported for Gemini Code Assist for individuals. To continue using Gemini, please migrate to the Antigravity suite of products: https://antigravity.google.',\n      tierId: 'free-tier',\n      tierName: 'Gemini Code Assist for individuals'\n    }\n  ]\n}\nYOLO mode is enabled. All tool calls will be automatically approved.\nAn unexpected critical error occurred:IneligibleTierError: This client is no longer supported for Gemini Code Assist for individuals. To continue using Gemini, please migrate to the Antigravity suite of products: https://antigravity.google.\n    at throwIneligibleOrProjectIdError (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277780:11)\n    at _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277769:5)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+          "time": "2026-06-19T18:13:43.490Z"
+        },
+        {
+          "name": "audit_receipt",
+          "value": "99ae32a977e08a79b2fbfab1a8abc6642678adfe361693b0026d6a0d0aad665f",
+          "time": "2026-06-19T18:13:43.490Z"
+        },
+        {
+          "name": "prev_hash",
+          "value": "99ae32a977e08a79b2fbfab1a8abc6642678adfe361693b0026d6a0d0aad665f",
+          "time": "2026-06-19T18:13:43.490Z"
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "type": "Factory Entrance",
+      "time": "2026-06-19T18:13:52.128Z",
+      "relationships": [
+        {
+          "objectId": "case-1781892815576",
+          "qualifier": "belongs_to"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "gemini_output",
+          "value": "MCP issues detected. Run /mcp list for status.",
+          "time": "2026-06-19T18:13:52.128Z"
+        },
+        {
+          "name": "stderr",
+          "value": "YOLO mode is enabled. All tool calls will be automatically approved.\nError authenticating: IneligibleTierError: This client is no longer supported for Gemini Code Assist for individuals. To continue using Gemini, please migrate to the Antigravity suite of products: https://antigravity.google.\n    at throwIneligibleOrProjectIdError (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277780:11)\n    at _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277769:5)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {\n  ineligibleTiers: [\n    {\n      reasonCode: 'UNSUPPORTED_CLIENT',\n      reasonMessage: 'This client is no longer supported for Gemini Code Assist for individuals. To continue using Gemini, please migrate to the Antigravity suite of products: https://antigravity.google.',\n      tierId: 'free-tier',\n      tierName: 'Gemini Code Assist for individuals'\n    }\n  ]\n}\nYOLO mode is enabled. All tool calls will be automatically approved.\nAn unexpected critical error occurred:IneligibleTierError: This client is no longer supported for Gemini Code Assist for individuals. To continue using Gemini, please migrate to the Antigravity suite of products: https://antigravity.google.\n    at throwIneligibleOrProjectIdError (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277780:11)\n    at _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277769:5)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+          "time": "2026-06-19T18:13:52.128Z"
+        },
+        {
+          "name": "audit_receipt",
+          "value": "51d958f0c143fddb3907c7172da0b88676e4acbe08d3ec016b0b4a5c04c91099",
+          "time": "2026-06-19T18:13:52.128Z"
+        },
+        {
+          "name": "prev_hash",
+          "value": "51d958f0c143fddb3907c7172da0b88676e4acbe08d3ec016b0b4a5c04c91099",
+          "time": "2026-06-19T18:13:52.128Z"
+        }
+      ]
+    },
+    {
+      "id": "e3",
+      "type": "Frame Assembly",
+      "time": "2026-06-19T18:13:58.243Z",
+      "relationships": [
+        {
+          "objectId": "case-1781892815576",
+          "qualifier": "belongs_to"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "gemini_output",
+          "value": "MCP issues detected. Run /mcp list for status.",
+          "time": "2026-06-19T18:13:58.243Z"
+        },
+        {
+          "name": "stderr",
+          "value": "YOLO mode is enabled. All tool calls will be automatically approved.\nError authenticating: IneligibleTierError: This client is no longer supported for Gemini Code Assist for individuals. To continue using Gemini, please migrate to the Antigravity suite of products: https://antigravity.google.\n    at throwIneligibleOrProjectIdError (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277780:11)\n    at _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277769:5)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {\n  ineligibleTiers: [\n    {\n      reasonCode: 'UNSUPPORTED_CLIENT',\n      reasonMessage: 'This client is no longer supported for Gemini Code Assist for individuals. To continue using Gemini, please migrate to the Antigravity suite of products: https://antigravity.google.',\n      tierId: 'free-tier',\n      tierName: 'Gemini Code Assist for individuals'\n    }\n  ]\n}\nYOLO mode is enabled. All tool calls will be automatically approved.\nAn unexpected critical error occurred:Error: Resource has been exhausted (e.g. check quota).\n    at Gaxios._request (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:8578:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async _OAuth2Client.requestAsync (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:10541:16)\n    at async CodeAssistServer.requestPost (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277441:17)\n    at async _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277751:16)",
+          "time": "2026-06-19T18:13:58.243Z"
+        },
+        {
+          "name": "audit_receipt",
+          "value": "8f136cc5e10824fb50d25f12ac13b0d14a19784fdb92f439852aa3538873a46e",
+          "time": "2026-06-19T18:13:58.243Z"
+        },
+        {
+          "name": "prev_hash",
+          "value": "8f136cc5e10824fb50d25f12ac13b0d14a19784fdb92f439852aa3538873a46e",
+          "time": "2026-06-19T18:13:58.243Z"
+        }
+      ]
+    },
+    {
+      "id": "e4",
+      "type": "Socket Topology",
+      "time": "2026-06-19T18:14:03.973Z",
+      "relationships": [
+        {
+          "objectId": "case-1781892815576",
+          "qualifier": "belongs_to"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "gemini_output",
+          "value": "MCP issues detected. Run /mcp list for status.",
+          "time": "2026-06-19T18:14:03.973Z"
+        },
+        {
+          "name": "stderr",
+          "value": "YOLO mode is enabled. All tool calls will be automatically approved.\nError authenticating: _GaxiosError: Resource has been exhausted (e.g. check quota).\n    at Gaxios._request (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:8578:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async _OAuth2Client.requestAsync (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:10541:16)\n    at async CodeAssistServer.requestPost (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277441:17)\n    at async _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277751:16) {\n  config: {\n    url: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser',\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json',\n      'User-Agent': 'GeminiCLI/0.38.2/gemini-3.1-flash-lite-preview (darwin; arm64; terminal) google-api-nodejs-client/9.15.1',\n      Authorization: '<<REDACTED> - See `errorRedactor` option in `gaxios` for configuration>.',\n      'x-goog-api-client': 'gl-node/25.9.0',\n      Accept: 'application/json'\n    },\n    responseType: 'json',\n    body: '{\"tierId\":\"standard-tier\",\"metadata\":{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}}',\n    retryConfig: {\n      retryDelay: 100,\n      retry: 3,\n      noResponseRetries: 3,\n      statusCodesToRetry: [Array],\n      currentRetryAttempt: 0,\n      httpMethodsToRetry: [Array],\n      retryDelayMultiplier: 2,\n      timeOfFirstRequest: 1781892841813,\n      totalTimeout: 9007199254740991,\n      maxRetryDelay: 9007199254740991\n    },\n    paramsSerializer: [Function: paramsSerializer],\n    validateStatus: [Function: validateStatus],\n    errorRedactor: [Function: defaultErrorRedactor]\n  },\n  response: {\n    config: {\n      url: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser',\n      method: 'POST',\n      headers: [Object],\n      responseType: 'json',\n      body: '{\"tierId\":\"standard-tier\",\"metadata\":{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}}',\n      retryConfig: [Object],\n      paramsSerializer: [Function: paramsSerializer],\n      validateStatus: [Function: validateStatus],\n      errorRedactor: [Function: defaultErrorRedactor]\n    },\n    data: { error: [Object] },\n    headers: {\n      'alt-svc': 'h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000',\n      'content-encoding': 'gzip',\n      'content-type': 'application/json; charset=UTF-8',\n      date: 'Fri, 19 Jun 2026 18:14:01 GMT',\n      server: 'ESF',\n      'server-timing': 'gfet4t7; dur=17',\n      'transfer-encoding': 'chunked',\n      vary: 'Origin, X-Origin, Referer',\n      'x-content-type-options': 'nosniff',\n      'x-frame-options': 'SAMEORIGIN',\n      'x-xss-protection': '0'\n    },\n    status: 429,\n    statusText: 'Too Many Requests',\n    request: {\n      responseURL: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser'\n    }\n  },\n  error: undefined,\n  status: 429,\n  code: 429,\n  errors: [\n    {\n      message: 'Resource has been exhausted (e.g. check quota).',\n      domain: 'global',\n      reason: 'rateLimitExceeded'\n    }\n  ],\n  Symbol(gaxios-gaxios-error): '6.7.1'\n}\nYOLO mode is enabled. All tool calls will be automatically approved.\nAn unexpected critical error occurred:Error: Resource has been exhausted (e.g. check quota).\n    at Gaxios._request (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:8578:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async _OAuth2Client.requestAsync (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:10541:16)\n    at async CodeAssistServer.requestPost (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277441:17)\n    at async _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277751:16)",
+          "time": "2026-06-19T18:14:03.973Z"
+        },
+        {
+          "name": "audit_receipt",
+          "value": "e2661b1a00a309b7576d8cd8387f138e99ee04bfce5dfe5c3c369e235b05e4e5",
+          "time": "2026-06-19T18:14:03.973Z"
+        },
+        {
+          "name": "prev_hash",
+          "value": "e2661b1a00a309b7576d8cd8387f138e99ee04bfce5dfe5c3c369e235b05e4e5",
+          "time": "2026-06-19T18:14:03.973Z"
+        }
+      ]
+    },
+    {
+      "id": "e5",
+      "type": "Armor Skin Station",
+      "time": "2026-06-19T18:14:15.074Z",
+      "relationships": [
+        {
+          "objectId": "case-1781892815576",
+          "qualifier": "belongs_to"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "gemini_output",
+          "value": "MCP issues detected. Run /mcp list for status.",
+          "time": "2026-06-19T18:14:15.074Z"
+        },
+        {
+          "name": "stderr",
+          "value": "YOLO mode is enabled. All tool calls will be automatically approved.\nError authenticating: _GaxiosError: Resource has been exhausted (e.g. check quota).\n    at Gaxios._request (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:8578:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async _OAuth2Client.requestAsync (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:10541:16)\n    at async CodeAssistServer.requestPost (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277441:17)\n    at async _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277751:16) {\n  config: {\n    url: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser',\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json',\n      'User-Agent': 'GeminiCLI/0.38.2/gemini-3.1-flash-lite-preview (darwin; arm64; terminal) google-api-nodejs-client/9.15.1',\n      Authorization: '<<REDACTED> - See `errorRedactor` option in `gaxios` for configuration>.',\n      'x-goog-api-client': 'gl-node/25.9.0',\n      Accept: 'application/json'\n    },\n    responseType: 'json',\n    body: '{\"tierId\":\"standard-tier\",\"metadata\":{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}}',\n    retryConfig: {\n      retryDelay: 100,\n      retry: 3,\n      noResponseRetries: 3,\n      statusCodesToRetry: [Array],\n      currentRetryAttempt: 0,\n      httpMethodsToRetry: [Array],\n      retryDelayMultiplier: 2,\n      timeOfFirstRequest: 1781892851432,\n      totalTimeout: 9007199254740991,\n      maxRetryDelay: 9007199254740991\n    },\n    paramsSerializer: [Function: paramsSerializer],\n    validateStatus: [Function: validateStatus],\n    errorRedactor: [Function: defaultErrorRedactor]\n  },\n  response: {\n    config: {\n      url: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser',\n      method: 'POST',\n      headers: [Object],\n      responseType: 'json',\n      body: '{\"tierId\":\"standard-tier\",\"metadata\":{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}}',\n      retryConfig: [Object],\n      paramsSerializer: [Function: paramsSerializer],\n      validateStatus: [Function: validateStatus],\n      errorRedactor: [Function: defaultErrorRedactor]\n    },\n    data: { error: [Object] },\n    headers: {\n      'alt-svc': 'h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000',\n      'content-encoding': 'gzip',\n      'content-type': 'application/json; charset=UTF-8',\n      date: 'Fri, 19 Jun 2026 18:14:11 GMT',\n      server: 'ESF',\n      'server-timing': 'gfet4t7; dur=14',\n      'transfer-encoding': 'chunked',\n      vary: 'Origin, X-Origin, Referer',\n      'x-content-type-options': 'nosniff',\n      'x-frame-options': 'SAMEORIGIN',\n      'x-xss-protection': '0'\n    },\n    status: 429,\n    statusText: 'Too Many Requests',\n    request: {\n      responseURL: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser'\n    }\n  },\n  error: undefined,\n  status: 429,\n  code: 429,\n  errors: [\n    {\n      message: 'Resource has been exhausted (e.g. check quota).',\n      domain: 'global',\n      reason: 'rateLimitExceeded'\n    }\n  ],\n  Symbol(gaxios-gaxios-error): '6.7.1'\n}\nYOLO mode is enabled. All tool calls will be automatically approved.\nAn unexpected critical error occurred:Error: Resource has been exhausted (e.g. check quota).\n    at Gaxios._request (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:8578:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async _OAuth2Client.requestAsync (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:10541:16)\n    at async CodeAssistServer.requestPost (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277441:17)\n    at async _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277751:16)",
+          "time": "2026-06-19T18:14:15.074Z"
+        },
+        {
+          "name": "audit_receipt",
+          "value": "3e42b7663e19b28974b99a4516d81436a81e768ee4e82011b6e38836d3c9d98e",
+          "time": "2026-06-19T18:14:15.074Z"
+        },
+        {
+          "name": "prev_hash",
+          "value": "3e42b7663e19b28974b99a4516d81436a81e768ee4e82011b6e38836d3c9d98e",
+          "time": "2026-06-19T18:14:15.074Z"
+        }
+      ]
+    },
+    {
+      "id": "e6",
+      "type": "Rig Motion Station",
+      "time": "2026-06-19T18:14:21.712Z",
+      "relationships": [
+        {
+          "objectId": "case-1781892815576",
+          "qualifier": "belongs_to"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "gemini_output",
+          "value": "MCP issues detected. Run /mcp list for status.",
+          "time": "2026-06-19T18:14:21.712Z"
+        },
+        {
+          "name": "stderr",
+          "value": "YOLO mode is enabled. All tool calls will be automatically approved.\nError authenticating: _GaxiosError: Resource has been exhausted (e.g. check quota).\n    at Gaxios._request (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:8578:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async _OAuth2Client.requestAsync (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:10541:16)\n    at async CodeAssistServer.requestPost (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277441:17)\n    at async _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277751:16) {\n  config: {\n    url: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser',\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json',\n      'User-Agent': 'GeminiCLI/0.38.2/gemini-3.1-flash-lite-preview (darwin; arm64; terminal) google-api-nodejs-client/9.15.1',\n      Authorization: '<<REDACTED> - See `errorRedactor` option in `gaxios` for configuration>.',\n      'x-goog-api-client': 'gl-node/25.9.0',\n      Accept: 'application/json'\n    },\n    responseType: 'json',\n    body: '{\"tierId\":\"standard-tier\",\"metadata\":{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}}',\n    retryConfig: {\n      retryDelay: 100,\n      retry: 3,\n      noResponseRetries: 3,\n      statusCodesToRetry: [Array],\n      currentRetryAttempt: 0,\n      httpMethodsToRetry: [Array],\n      retryDelayMultiplier: 2,\n      timeOfFirstRequest: 1781892859203,\n      totalTimeout: 9007199254740991,\n      maxRetryDelay: 9007199254740991\n    },\n    paramsSerializer: [Function: paramsSerializer],\n    validateStatus: [Function: validateStatus],\n    errorRedactor: [Function: defaultErrorRedactor]\n  },\n  response: {\n    config: {\n      url: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser',\n      method: 'POST',\n      headers: [Object],\n      responseType: 'json',\n      body: '{\"tierId\":\"standard-tier\",\"metadata\":{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}}',\n      retryConfig: [Object],\n      paramsSerializer: [Function: paramsSerializer],\n      validateStatus: [Function: validateStatus],\n      errorRedactor: [Function: defaultErrorRedactor]\n    },\n    data: { error: [Object] },\n    headers: {\n      'alt-svc': 'h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000',\n      'content-encoding': 'gzip',\n      'content-type': 'application/json; charset=UTF-8',\n      date: 'Fri, 19 Jun 2026 18:14:19 GMT',\n      server: 'ESF',\n      'server-timing': 'gfet4t7; dur=16',\n      'transfer-encoding': 'chunked',\n      vary: 'Origin, X-Origin, Referer',\n      'x-content-type-options': 'nosniff',\n      'x-frame-options': 'SAMEORIGIN',\n      'x-xss-protection': '0'\n    },\n    status: 429,\n    statusText: 'Too Many Requests',\n    request: {\n      responseURL: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser'\n    }\n  },\n  error: undefined,\n  status: 429,\n  code: 429,\n  errors: [\n    {\n      message: 'Resource has been exhausted (e.g. check quota).',\n      domain: 'global',\n      reason: 'rateLimitExceeded'\n    }\n  ],\n  Symbol(gaxios-gaxios-error): '6.7.1'\n}\nYOLO mode is enabled. All tool calls will be automatically approved.\nAn unexpected critical error occurred:Error: Resource has been exhausted (e.g. check quota).\n    at Gaxios._request (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:8578:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async _OAuth2Client.requestAsync (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:10541:16)\n    at async CodeAssistServer.requestPost (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277441:17)\n    at async _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277751:16)",
+          "time": "2026-06-19T18:14:21.712Z"
+        },
+        {
+          "name": "audit_receipt",
+          "value": "993e1ae8d008c58bd216b8a8cb6fc4ed4b9878af80938a9e7c9d07f05f6e1909",
+          "time": "2026-06-19T18:14:21.712Z"
+        },
+        {
+          "name": "prev_hash",
+          "value": "993e1ae8d008c58bd216b8a8cb6fc4ed4b9878af80938a9e7c9d07f05f6e1909",
+          "time": "2026-06-19T18:14:21.712Z"
+        }
+      ]
+    },
+    {
+      "id": "e7",
+      "type": "Verification Gate",
+      "time": "2026-06-19T18:14:27.868Z",
+      "relationships": [
+        {
+          "objectId": "case-1781892815576",
+          "qualifier": "belongs_to"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "gemini_output",
+          "value": "MCP issues detected. Run /mcp list for status.",
+          "time": "2026-06-19T18:14:27.868Z"
+        },
+        {
+          "name": "stderr",
+          "value": "YOLO mode is enabled. All tool calls will be automatically approved.\nError authenticating: _GaxiosError: Resource has been exhausted (e.g. check quota).\n    at Gaxios._request (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:8578:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async _OAuth2Client.requestAsync (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:10541:16)\n    at async CodeAssistServer.requestPost (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277441:17)\n    at async _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277751:16) {\n  config: {\n    url: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser',\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json',\n      'User-Agent': 'GeminiCLI/0.38.2/gemini-3.1-flash-lite-preview (darwin; arm64; terminal) google-api-nodejs-client/9.15.1',\n      Authorization: '<<REDACTED> - See `errorRedactor` option in `gaxios` for configuration>.',\n      'x-goog-api-client': 'gl-node/25.9.0',\n      Accept: 'application/json'\n    },\n    responseType: 'json',\n    body: '{\"tierId\":\"standard-tier\",\"metadata\":{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}}',\n    retryConfig: {\n      retryDelay: 100,\n      retry: 3,\n      noResponseRetries: 3,\n      statusCodesToRetry: [Array],\n      currentRetryAttempt: 0,\n      httpMethodsToRetry: [Array],\n      retryDelayMultiplier: 2,\n      timeOfFirstRequest: 1781892865353,\n      totalTimeout: 9007199254740991,\n      maxRetryDelay: 9007199254740991\n    },\n    paramsSerializer: [Function: paramsSerializer],\n    validateStatus: [Function: validateStatus],\n    errorRedactor: [Function: defaultErrorRedactor]\n  },\n  response: {\n    config: {\n      url: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser',\n      method: 'POST',\n      headers: [Object],\n      responseType: 'json',\n      body: '{\"tierId\":\"standard-tier\",\"metadata\":{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}}',\n      retryConfig: [Object],\n      paramsSerializer: [Function: paramsSerializer],\n      validateStatus: [Function: validateStatus],\n      errorRedactor: [Function: defaultErrorRedactor]\n    },\n    data: { error: [Object] },\n    headers: {\n      'alt-svc': 'h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000',\n      'content-encoding': 'gzip',\n      'content-type': 'application/json; charset=UTF-8',\n      date: 'Fri, 19 Jun 2026 18:14:25 GMT',\n      server: 'ESF',\n      'server-timing': 'gfet4t7; dur=12',\n      'transfer-encoding': 'chunked',\n      vary: 'Origin, X-Origin, Referer',\n      'x-content-type-options': 'nosniff',\n      'x-frame-options': 'SAMEORIGIN',\n      'x-xss-protection': '0'\n    },\n    status: 429,\n    statusText: 'Too Many Requests',\n    request: {\n      responseURL: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser'\n    }\n  },\n  error: undefined,\n  status: 429,\n  code: 429,\n  errors: [\n    {\n      message: 'Resource has been exhausted (e.g. check quota).',\n      domain: 'global',\n      reason: 'rateLimitExceeded'\n    }\n  ],\n  Symbol(gaxios-gaxios-error): '6.7.1'\n}\nYOLO mode is enabled. All tool calls will be automatically approved.\nAn unexpected critical error occurred:Error: Resource has been exhausted (e.g. check quota).\n    at Gaxios._request (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:8578:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async _OAuth2Client.requestAsync (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:10541:16)\n    at async CodeAssistServer.requestPost (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277441:17)\n    at async _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277751:16)",
+          "time": "2026-06-19T18:14:27.868Z"
+        },
+        {
+          "name": "audit_receipt",
+          "value": "76974391bdab5fea171895ac0bfd02fcee1bacd5dacefebb208bcd906e477012",
+          "time": "2026-06-19T18:14:27.868Z"
+        },
+        {
+          "name": "prev_hash",
+          "value": "76974391bdab5fea171895ac0bfd02fcee1bacd5dacefebb208bcd906e477012",
+          "time": "2026-06-19T18:14:27.868Z"
+        }
+      ]
+    },
+    {
+      "id": "e8",
+      "type": "Receipt Terminal",
+      "time": "2026-06-19T18:14:32.890Z",
+      "relationships": [
+        {
+          "objectId": "case-1781892815576",
+          "qualifier": "belongs_to"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "gemini_output",
+          "value": "MCP issues detected. Run /mcp list for status.",
+          "time": "2026-06-19T18:14:32.890Z"
+        },
+        {
+          "name": "stderr",
+          "value": "YOLO mode is enabled. All tool calls will be automatically approved.\nError authenticating: _GaxiosError: Resource has been exhausted (e.g. check quota).\n    at Gaxios._request (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:8578:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async _OAuth2Client.requestAsync (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:10541:16)\n    at async CodeAssistServer.requestPost (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277441:17)\n    at async _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277751:16) {\n  config: {\n    url: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser',\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json',\n      'User-Agent': 'GeminiCLI/0.38.2/gemini-3.1-flash-lite-preview (darwin; arm64; terminal) google-api-nodejs-client/9.15.1',\n      Authorization: '<<REDACTED> - See `errorRedactor` option in `gaxios` for configuration>.',\n      'x-goog-api-client': 'gl-node/25.9.0',\n      Accept: 'application/json'\n    },\n    responseType: 'json',\n    body: '{\"tierId\":\"standard-tier\",\"metadata\":{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}}',\n    retryConfig: {\n      retryDelay: 100,\n      retry: 3,\n      noResponseRetries: 3,\n      statusCodesToRetry: [Array],\n      currentRetryAttempt: 0,\n      httpMethodsToRetry: [Array],\n      retryDelayMultiplier: 2,\n      timeOfFirstRequest: 1781892871215,\n      totalTimeout: 9007199254740991,\n      maxRetryDelay: 9007199254740991\n    },\n    paramsSerializer: [Function: paramsSerializer],\n    validateStatus: [Function: validateStatus],\n    errorRedactor: [Function: defaultErrorRedactor]\n  },\n  response: {\n    config: {\n      url: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser',\n      method: 'POST',\n      headers: [Object],\n      responseType: 'json',\n      body: '{\"tierId\":\"standard-tier\",\"metadata\":{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}}',\n      retryConfig: [Object],\n      paramsSerializer: [Function: paramsSerializer],\n      validateStatus: [Function: validateStatus],\n      errorRedactor: [Function: defaultErrorRedactor]\n    },\n    data: { error: [Object] },\n    headers: {\n      'alt-svc': 'h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000',\n      'content-encoding': 'gzip',\n      'content-type': 'application/json; charset=UTF-8',\n      date: 'Fri, 19 Jun 2026 18:14:31 GMT',\n      server: 'ESF',\n      'server-timing': 'gfet4t7; dur=20',\n      'transfer-encoding': 'chunked',\n      vary: 'Origin, X-Origin, Referer',\n      'x-content-type-options': 'nosniff',\n      'x-frame-options': 'SAMEORIGIN',\n      'x-xss-protection': '0'\n    },\n    status: 429,\n    statusText: 'Too Many Requests',\n    request: {\n      responseURL: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser'\n    }\n  },\n  error: undefined,\n  status: 429,\n  code: 429,\n  errors: [\n    {\n      message: 'Resource has been exhausted (e.g. check quota).',\n      domain: 'global',\n      reason: 'rateLimitExceeded'\n    }\n  ],\n  Symbol(gaxios-gaxios-error): '6.7.1'\n}\nYOLO mode is enabled. All tool calls will be automatically approved.\nAn unexpected critical error occurred:Error: Resource has been exhausted (e.g. check quota).\n    at Gaxios._request (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:8578:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async _OAuth2Client.requestAsync (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:10541:16)\n    at async CodeAssistServer.requestPost (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277441:17)\n    at async _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277751:16)",
+          "time": "2026-06-19T18:14:32.890Z"
+        },
+        {
+          "name": "audit_receipt",
+          "value": "1188d9b9cc88c9adfd46a328a9e6ab3c8e8ef3d8f32032d1306804f32755c0b1",
+          "time": "2026-06-19T18:14:32.890Z"
+        },
+        {
+          "name": "prev_hash",
+          "value": "1188d9b9cc88c9adfd46a328a9e6ab3c8e8ef3d8f32032d1306804f32755c0b1",
+          "time": "2026-06-19T18:14:32.890Z"
+        }
+      ]
+    },
+    {
+      "id": "e9",
+      "type": "Exit Or Loop",
+      "time": "2026-06-19T18:14:39.720Z",
+      "relationships": [
+        {
+          "objectId": "case-1781892815576",
+          "qualifier": "belongs_to"
+        }
+      ],
+      "attributes": [
+        {
+          "name": "gemini_output",
+          "value": "MCP issues detected. Run /mcp list for status.",
+          "time": "2026-06-19T18:14:39.720Z"
+        },
+        {
+          "name": "stderr",
+          "value": "YOLO mode is enabled. All tool calls will be automatically approved.\nError authenticating: _GaxiosError: Resource has been exhausted (e.g. check quota).\n    at Gaxios._request (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:8578:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async _OAuth2Client.requestAsync (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:10541:16)\n    at async CodeAssistServer.requestPost (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277441:17)\n    at async _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277751:16) {\n  config: {\n    url: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser',\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json',\n      'User-Agent': 'GeminiCLI/0.38.2/gemini-3.1-flash-lite-preview (darwin; arm64; terminal) google-api-nodejs-client/9.15.1',\n      Authorization: '<<REDACTED> - See `errorRedactor` option in `gaxios` for configuration>.',\n      'x-goog-api-client': 'gl-node/25.9.0',\n      Accept: 'application/json'\n    },\n    responseType: 'json',\n    body: '{\"tierId\":\"standard-tier\",\"metadata\":{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}}',\n    retryConfig: {\n      retryDelay: 100,\n      retry: 3,\n      noResponseRetries: 3,\n      statusCodesToRetry: [Array],\n      currentRetryAttempt: 0,\n      httpMethodsToRetry: [Array],\n      retryDelayMultiplier: 2,\n      timeOfFirstRequest: 1781892876519,\n      totalTimeout: 9007199254740991,\n      maxRetryDelay: 9007199254740991\n    },\n    paramsSerializer: [Function: paramsSerializer],\n    validateStatus: [Function: validateStatus],\n    errorRedactor: [Function: defaultErrorRedactor]\n  },\n  response: {\n    config: {\n      url: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser',\n      method: 'POST',\n      headers: [Object],\n      responseType: 'json',\n      body: '{\"tierId\":\"standard-tier\",\"metadata\":{\"ideType\":\"IDE_UNSPECIFIED\",\"platform\":\"PLATFORM_UNSPECIFIED\",\"pluginType\":\"GEMINI\"}}',\n      retryConfig: [Object],\n      paramsSerializer: [Function: paramsSerializer],\n      validateStatus: [Function: validateStatus],\n      errorRedactor: [Function: defaultErrorRedactor]\n    },\n    data: { error: [Object] },\n    headers: {\n      'alt-svc': 'h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000',\n      'content-encoding': 'gzip',\n      'content-type': 'application/json; charset=UTF-8',\n      date: 'Fri, 19 Jun 2026 18:14:36 GMT',\n      server: 'ESF',\n      'server-timing': 'gfet4t7; dur=15',\n      'transfer-encoding': 'chunked',\n      vary: 'Origin, X-Origin, Referer',\n      'x-content-type-options': 'nosniff',\n      'x-frame-options': 'SAMEORIGIN',\n      'x-xss-protection': '0'\n    },\n    status: 429,\n    statusText: 'Too Many Requests',\n    request: {\n      responseURL: 'https://cloudcode-pa.googleapis.com/v1internal:onboardUser'\n    }\n  },\n  error: undefined,\n  status: 429,\n  code: 429,\n  errors: [\n    {\n      message: 'Resource has been exhausted (e.g. check quota).',\n      domain: 'global',\n      reason: 'rateLimitExceeded'\n    }\n  ],\n  Symbol(gaxios-gaxios-error): '6.7.1'\n}\nYOLO mode is enabled. All tool calls will be automatically approved.\nAn unexpected critical error occurred:IneligibleTierError: This client is no longer supported for Gemini Code Assist for individuals. To continue using Gemini, please migrate to the Antigravity suite of products: https://antigravity.google.\n    at throwIneligibleOrProjectIdError (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277780:11)\n    at _doSetupUser (file:///opt/homebrew/Cellar/gemini-cli/0.38.2/libexec/lib/node_modules/@google/gemini-cli/bundle/chunk-IWSCP2GY.js:277769:5)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)",
+          "time": "2026-06-19T18:14:39.720Z"
+        },
+        {
+          "name": "audit_receipt",
+          "value": "7b3f9e2fe08a1e5e30e03dbdd49b960ef189eb113f5ffb4460d898b9b7378818",
+          "time": "2026-06-19T18:14:39.720Z"
+        },
+        {
+          "name": "prev_hash",
+          "value": "7b3f9e2fe08a1e5e30e03dbdd49b960ef189eb113f5ffb4460d898b9b7378818",
+          "time": "2026-06-19T18:14:39.720Z"
+        }
+      ]
+    }
+  ]
+}

@@ -13,11 +13,11 @@ Import modules.
 from enum import Enum
 from typing import *
 
-from skdecide import *
-from skdecide.builders.domain import *
-from skdecide.hub.solver.p_astar import Astar
-from skdecide.hub.space.gym import EnumSpace, ListSpace
-from skdecide.utils import rollout
+from autofde_lab import *
+from autofde_lab.builders.domain import *
+from autofde_lab.hub.solver.p_astar import Astar
+from autofde_lab.hub.space.gym import EnumSpace, ListSpace
+from autofde_lab.utils import rollout
 
 # %%
 """

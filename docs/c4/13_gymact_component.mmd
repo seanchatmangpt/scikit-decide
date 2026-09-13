@@ -1,0 +1,32 @@
+C4Component
+title GymAct — Components
+
+Container_Boundary(gymact, "GymAct") {
+  Component(provider_registry, "Provider Registry")
+  Component(adapter_loader, "Adapter Loader")
+  Component(materializer, "Materialization Manager")
+  Component(capability_catalog, "Capability Catalog")
+  Component(authority, "Authority Resolver")
+  Component(observer, "Observation Normalizer")
+  Component(state_typing, "State Typing / Semantic Standing")
+  Component(transition, "Transition Recorder")
+  Component(projector, "Projection Compiler")
+  Component(actuator, "Actuation Dispatcher")
+  Component(dep_guard, "Dependency / Availability Guard")
+  Component(receipts, "Receipt & Replay Recorder")
+  Component(verifier, "Independent Verifier")
+}
+
+Rel(provider_registry, adapter_loader, "Locates provider")
+Rel(adapter_loader, materializer, "Constructs/materializes")
+Rel(materializer, dep_guard, "Checks current dependencies")
+Rel(materializer, capability_catalog, "Exposes capabilities")
+Rel(materializer, authority, "Requires authority when declared")
+Rel(observer, state_typing, "Classifies observed dimensions")
+Rel(state_typing, projector, "Supplies semantic standing")
+Rel(capability_catalog, projector, "Supplies action model")
+Rel(projector, actuator, "Provides lawful action encoding")
+Rel(authority, actuator, "Authorizes DO")
+Rel(actuator, transition, "Produces state transition")
+Rel(transition, receipts, "Records identity-preserving evidence")
+Rel(receipts, verifier, "Supplies replay/receipt chain")

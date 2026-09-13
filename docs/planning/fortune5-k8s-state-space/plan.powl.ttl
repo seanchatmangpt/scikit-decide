@@ -1,0 +1,101 @@
+@prefix powl2: <https://truex.io/ontology/powl2#> .
+@prefix mfwp: <urn:mfw:powl-trace:> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan> a powl2:Model, powl2:PartialOrder ;
+    powl2:derivedFrom <urn:autofde-lab:planning:fortune5-k8s-state-space> ;
+    prov:wasDerivedFrom <urn:autofde-lab:planning:fortune5-k8s-state-space/domain> ;
+    mfwp:domainDigest "blake3:0440cf47b21d0f8ac23f1c91d3ba22447ab1567414ab17a359c3e20eb5e9775c" ;
+    mfwp:problemDigest "blake3:92dd7dbf6c6c7939ad830728a1b8ef02b1a4409db975d7cdecc35d5d7a0b13e9" ;
+    mfwp:plannerRun "Astar-2026-08-10" ;
+    mfwp:projection "total-order" ;
+    powl2:hasChild <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/0> ;
+    powl2:hasChild <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/1> ;
+    powl2:hasChild <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/2> ;
+    powl2:hasChild <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/3> ;
+    powl2:hasChild <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/4> ;
+    powl2:hasChild <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/5> ;
+    powl2:hasChild <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/6> ;
+    powl2:hasChild <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/7> ;
+    mfwp:activityCount "8"^^xsd:integer .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/0> a powl2:ChildBinding ;
+    powl2:childIndex "0"^^xsd:integer ;
+    powl2:childModel <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/0> .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/0> a powl2:Leaf, powl2:ActivityLeaf ;
+    powl2:activityLabel "loosen-dspy-pack-nesting-gate" ;
+    mfwp:implementsAction <urn:autofde-lab:planning:fortune5-k8s-state-space/loosen-dspy-pack-nesting-gate> ;
+    mfwp:planOrdinal "0"^^xsd:integer .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/1> a powl2:ChildBinding ;
+    powl2:childIndex "1"^^xsd:integer ;
+    powl2:childModel <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/1> .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/1> a powl2:Leaf, powl2:ActivityLeaf ;
+    powl2:activityLabel "build-typed-k8s-object-schema" ;
+    mfwp:implementsAction <urn:autofde-lab:planning:fortune5-k8s-state-space/build-typed-k8s-object-schema> ;
+    mfwp:planOrdinal "1"^^xsd:integer .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/2> a powl2:ChildBinding ;
+    powl2:childIndex "2"^^xsd:integer ;
+    powl2:childModel <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/2> .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/2> a powl2:Leaf, powl2:ActivityLeaf ;
+    powl2:activityLabel "index-hearsay-blackboard" ;
+    mfwp:implementsAction <urn:autofde-lab:planning:fortune5-k8s-state-space/index-hearsay-blackboard> ;
+    mfwp:planOrdinal "2"^^xsd:integer .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/3> a powl2:ChildBinding ;
+    powl2:childIndex "3"^^xsd:integer ;
+    powl2:childModel <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/3> .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/3> a powl2:Leaf, powl2:ActivityLeaf ;
+    powl2:activityLabel "build-schema-to-ontology-generator" ;
+    mfwp:implementsAction <urn:autofde-lab:planning:fortune5-k8s-state-space/build-schema-to-ontology-generator> ;
+    mfwp:planOrdinal "3"^^xsd:integer .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/4> a powl2:ChildBinding ;
+    powl2:childIndex "4"^^xsd:integer ;
+    powl2:childModel <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/4> .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/4> a powl2:Leaf, powl2:ActivityLeaf ;
+    powl2:activityLabel "author-k8s-pack" ;
+    mfwp:implementsAction <urn:autofde-lab:planning:fortune5-k8s-state-space/author-k8s-pack> ;
+    mfwp:planOrdinal "4"^^xsd:integer .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/5> a powl2:ChildBinding ;
+    powl2:childIndex "5"^^xsd:integer ;
+    powl2:childModel <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/5> .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/5> a powl2:Leaf, powl2:ActivityLeaf ;
+    powl2:activityLabel "rescale-firing-budget" ;
+    mfwp:implementsAction <urn:autofde-lab:planning:fortune5-k8s-state-space/rescale-firing-budget> ;
+    mfwp:planOrdinal "5"^^xsd:integer .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/6> a powl2:ChildBinding ;
+    powl2:childIndex "6"^^xsd:integer ;
+    powl2:childModel <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/6> .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/6> a powl2:Leaf, powl2:ActivityLeaf ;
+    powl2:activityLabel "build-k8s-state-encoder" ;
+    mfwp:implementsAction <urn:autofde-lab:planning:fortune5-k8s-state-space/build-k8s-state-encoder> ;
+    mfwp:planOrdinal "6"^^xsd:integer .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/7> a powl2:ChildBinding ;
+    powl2:childIndex "7"^^xsd:integer ;
+    powl2:childModel <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/7> .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/step/7> a powl2:Leaf, powl2:ActivityLeaf ;
+    powl2:activityLabel "integrate-with-autofde-cognition" ;
+    mfwp:implementsAction <urn:autofde-lab:planning:fortune5-k8s-state-space/integrate-with-autofde-cognition> ;
+    mfwp:planOrdinal "7"^^xsd:integer .
+
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/0> powl2:precedes <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/1> .
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/1> powl2:precedes <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/2> .
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/2> powl2:precedes <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/3> .
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/3> powl2:precedes <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/4> .
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/4> powl2:precedes <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/5> .
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/5> powl2:precedes <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/6> .
+<urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/6> powl2:precedes <urn:autofde-lab:planning:fortune5-k8s-state-space/plan/binding-slot/7> .

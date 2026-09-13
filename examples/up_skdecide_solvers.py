@@ -12,16 +12,16 @@ from unified_planning.shortcuts import (
     UserType,
 )
 
-from skdecide.hub.domain.up import UPDomain
-from skdecide.hub.solver.p_astar import Astar
-from skdecide.hub.solver.ray_rllib import RayRLlib
-from skdecide.utils import rollout
+from autofde_lab.hub.domain.up import UPDomain
+from autofde_lab.hub.solver.p_astar import Astar
+from autofde_lab.hub.solver.ray_rllib import RayRLlib
+from autofde_lab.utils import rollout
 
 # Example 1: Solving a basic example, the same as
 # https://github.com/aiplan4eu/unified-planning/blob/master/docs/notebooks/01-basic-example.ipynb
 
 print(
-    "\n\n=== EXAMPLE 1: Solving UP's basic example using skdecide's RLlib solver ===\n"
+    "\n\n=== EXAMPLE 1: Solving UP's basic example using autofde_lab's RLlib solver ===\n"
 )
 
 ## Step 1: modeling the UP problem
@@ -89,7 +89,7 @@ if RayRLlib.check_domain(domain):
 # Example 2: Solving a numeric example, the same as https://github.com/aiplan4eu/unified-planning/blob/master/docs/notebooks/02-optimal-planning.ipynb
 
 print(
-    "\n\n=== EXAMPLE 2: Solving UP's numeric example using skdecide's Python A* solver ===\n"
+    "\n\n=== EXAMPLE 2: Solving UP's numeric example using autofde_lab's Python A* solver ===\n"
 )
 
 ## Step 1: modeling the UP problem

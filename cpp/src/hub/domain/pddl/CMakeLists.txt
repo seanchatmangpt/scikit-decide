@@ -318,7 +318,7 @@ IF(BUILD_PYTHON_BINDING OR ONLY_PYTHON)
                 ${INCLUDE_DIRS}
                 ${CMAKE_CURRENT_SOURCE_DIR})
         CMAKE_POLICY(SET CMP0079 NEW)
-        TARGET_LINK_LIBRARIES(__skdecide_hub_cpp PRIVATE
+        TARGET_LINK_LIBRARIES(__autofde_lab_hub_cpp PRIVATE
                 skdecide_pddl
                 $<TARGET_OBJECTS:py_pddl>)
 ENDIF()

@@ -2,8 +2,8 @@ from typing import Any, Optional
 
 import pytest
 
-from skdecide import D, Domain, Space, Value
-from skdecide.builders.domain import (
+from autofde_lab import D, Domain, Space, Value
+from autofde_lab.builders.domain import (
     DeterministicInitialized,
     DeterministicTransitions,
     Initializable,
@@ -13,11 +13,11 @@ from skdecide.builders.domain import (
     TransformedObservable,
     UnrestrictedActions,
 )
-from skdecide.hub.solver.openevolve.public_proxy import (
+from autofde_lab.hub.solver.openevolve.public_proxy import (
     create_public_proxy,
     get_domain_mixin_classes,
 )
-from skdecide.hub.space.gym import DiscreteSpace
+from autofde_lab.hub.space.gym import DiscreteSpace
 
 # --- Mock Domain for Testing ---
 

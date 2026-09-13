@@ -4,9 +4,9 @@
 
 from ray.rllib.algorithms.ppo import PPO
 
-from skdecide.hub.domain.simple_grid_world import SimpleGridWorld
-from skdecide.hub.solver.ray_rllib import RayRLlib
-from skdecide.utils import rollout
+from autofde_lab.hub.domain.simple_grid_world import SimpleGridWorld
+from autofde_lab.hub.solver.ray_rllib import RayRLlib
+from autofde_lab.utils import rollout
 
 # This example shows how to solve the simple grid world domain using RLlib's PPO
 

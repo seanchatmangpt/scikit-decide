@@ -1,19 +1,19 @@
 import pytest
 
-from skdecide.hub.solver.p_astar import Astar
+from autofde_lab.hub.solver.p_astar import Astar
 
 
 def test_aircraft_state():
-    from skdecide.hub.domain.flight_planning.aircraft_performance.bean.aircraft_state import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.bean.aircraft_state import (
         AircraftState,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.performance_model_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.performance_model_enum import (
         PerformanceModelEnum,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.phase_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.phase_enum import (
         PhaseEnum,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.rating_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.rating_enum import (
         RatingEnum,
     )
 
@@ -63,19 +63,19 @@ def test_flight_planning():
     import numpy as np
     from pygeodesy.ellipsoidalVincenty import LatLon
 
-    from skdecide.hub.domain.flight_planning.aircraft_performance.bean.aircraft_state import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.bean.aircraft_state import (
         AircraftState,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.performance_model_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.performance_model_enum import (
         PerformanceModelEnum,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.phase_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.phase_enum import (
         PhaseEnum,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.rating_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.rating_enum import (
         RatingEnum,
     )
-    from skdecide.hub.domain.flight_planning.domain import FlightPlanningDomain
+    from autofde_lab.hub.domain.flight_planning.domain import FlightPlanningDomain
 
     acState_poll_schumann = AircraftState(
         model_type="A320",  # only for OPENAP and POLL_SCHUMANN
@@ -119,19 +119,19 @@ def test_heuristic(heuristic_name):
     import numpy as np
     from pygeodesy.ellipsoidalVincenty import LatLon
 
-    from skdecide.hub.domain.flight_planning.aircraft_performance.bean.aircraft_state import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.bean.aircraft_state import (
         AircraftState,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.performance_model_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.performance_model_enum import (
         PerformanceModelEnum,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.phase_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.phase_enum import (
         PhaseEnum,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.rating_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.rating_enum import (
         RatingEnum,
     )
-    from skdecide.hub.domain.flight_planning.domain import FlightPlanningDomain
+    from autofde_lab.hub.domain.flight_planning.domain import FlightPlanningDomain
 
     acState_poll_schumann = AircraftState(
         model_type="A320",  # only for OPENAP and POLL_SCHUMANN

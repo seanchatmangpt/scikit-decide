@@ -4,14 +4,14 @@ We welcome all contributions to scikit-decide.
 
 You can help by:
 
-- fixing bugs (see [issues](https://github.com/airbus/scikit-decide/issues) with label "bug"),
-- adding new domains or solvers to the hub in `skdecide/hub/`,
+- fixing bugs (see [issues](https://github.com/seanchatmangpt/autofde-lab/issues) with label "bug"),
+- adding new domains or solvers to the hub in `autofde_lab/hub/`,
 - improving the documentation,
 - adding and improving educational notebooks in `notebooks/`.
 
 This is not exhaustive.
 
-The project is hosted on [https://github.com/airbus/scikit-decide](https://github.com/airbus/scikit-decide).
+The project is hosted on [https://github.com/seanchatmangpt/autofde-lab](https://github.com/seanchatmangpt/autofde-lab).
 Contributions to the repository are made by submitting pull requests.
 
 
@@ -58,7 +58,7 @@ Here are the steps to follow:
 
 - Clone the source and got to the "scikit-decide" root directory.
     ```shell
-    git clone --recurse-submodules -j8 https://github.com/airbus/scikit-decide.git
+    git clone --recurse-submodules -j8 https://github.com/seanchatmangpt/autofde-lab.git
     cd scikit-decide
     ```
 
@@ -230,7 +230,7 @@ A quick description of the main features of the notebook.
 Can be on several lines.
 
 Can include a nice thumbnail.
-![Notebook_thumbnail](https://airbus.github.io/scikit-decide/maze.png)
+![Notebook_thumbnail](https://seanchatmangpt.github.io/autofde-lab/maze.png)
 ```
 
 ### Adding unit tests
@@ -260,7 +260,7 @@ Note that a PR needs at least one review by a core developer to be merged.
 
 You may want to add a reference to the main repository to fetch from it and (re)base your changes on it:
 ```shell
-git remote add upstream https://github.com/airbus/scikit-decide
+git remote add upstream https://github.com/seanchatmangpt/autofde-lab
 ```
 
 This [post](https://medium.com/google-developer-experts/how-to-pull-request-d75ac81449a5) points out good practices to follow to submit great pull requests and review them efficiently.

@@ -1,0 +1,273 @@
+{
+  "probe_log": [
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=0",
+        "solved=False",
+        "steps=0",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=1",
+        "steps=1"
+      ],
+      "delta_removed": [
+        "counter=0",
+        "steps=0"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=1",
+        "solved=False",
+        "steps=1",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=0",
+        "steps=2"
+      ],
+      "delta_removed": [
+        "counter=1",
+        "steps=1"
+      ]
+    },
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=0",
+        "solved=False",
+        "steps=2",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=1",
+        "steps=3"
+      ],
+      "delta_removed": [
+        "counter=0",
+        "steps=2"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=1",
+        "solved=False",
+        "steps=3",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=0",
+        "steps=4"
+      ],
+      "delta_removed": [
+        "counter=1",
+        "steps=3"
+      ]
+    },
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=0",
+        "solved=False",
+        "steps=4",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=1",
+        "steps=5"
+      ],
+      "delta_removed": [
+        "counter=0",
+        "steps=4"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=1",
+        "solved=False",
+        "steps=5",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=0",
+        "steps=6"
+      ],
+      "delta_removed": [
+        "counter=1",
+        "steps=5"
+      ]
+    },
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=0",
+        "solved=False",
+        "steps=6",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=1",
+        "steps=7"
+      ],
+      "delta_removed": [
+        "counter=0",
+        "steps=6"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=1",
+        "solved=False",
+        "steps=7",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=0",
+        "steps=8"
+      ],
+      "delta_removed": [
+        "counter=1",
+        "steps=7"
+      ]
+    },
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=0",
+        "solved=False",
+        "steps=8",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=1",
+        "steps=9"
+      ],
+      "delta_removed": [
+        "counter=0",
+        "steps=8"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=1",
+        "solved=False",
+        "steps=9",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=0",
+        "steps=10"
+      ],
+      "delta_removed": [
+        "counter=1",
+        "steps=9"
+      ]
+    },
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=0",
+        "solved=False",
+        "steps=10",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=1",
+        "steps=11"
+      ],
+      "delta_removed": [
+        "counter=0",
+        "steps=10"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=1",
+        "solved=False",
+        "steps=11",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=0",
+        "steps=12"
+      ],
+      "delta_removed": [
+        "counter=1",
+        "steps=11"
+      ]
+    },
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=0",
+        "solved=False",
+        "steps=12",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=1",
+        "steps=13"
+      ],
+      "delta_removed": [
+        "counter=0",
+        "steps=12"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=1",
+        "solved=False",
+        "steps=13",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=0",
+        "steps=14"
+      ],
+      "delta_removed": [
+        "counter=1",
+        "steps=13"
+      ]
+    }
+  ],
+  "representation_losses": {
+    "reward": "UNREPRESENTABLE:CONTINUOUS_DIMENSION_HAS_NO_SOUND_PROPOSITIONAL_ENCODING"
+  }
+}

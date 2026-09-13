@@ -1,0 +1,26 @@
+stateDiagram-v2
+    [*] --> Discovered
+    Discovered --> Classified
+    Classified --> Unsupported: no lawful adapter/oracle path
+    Classified --> RefusalBoundary: intentionally non-engineerable / unsafe
+    Classified --> AdapterMissing
+    Classified --> CapabilityMissing
+    Classified --> AuthorityRequired
+    Classified --> DependencyBlocked
+    Classified --> ReadyForTrial
+
+    AdapterMissing --> ReadyForTrial: shared adapter repair
+    CapabilityMissing --> ReadyForTrial: capability manufactured
+    AuthorityRequired --> ReadyForTrial: authority threaded/admitted
+    DependencyBlocked --> ReadyForTrial: dependency restored
+
+    ReadyForTrial --> BenchmarkExecuted
+    BenchmarkExecuted --> Scored
+    Scored --> BelowFrontier
+    Scored --> FrontierMatched
+    Scored --> SOTASurpassed
+
+    BelowFrontier --> ReadyForTrial: learn + repair
+    FrontierMatched --> ReadyForTrial: seek margin / robustness
+    SOTASurpassed --> IndependentlyVerified
+    IndependentlyVerified --> [*]

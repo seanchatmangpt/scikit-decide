@@ -21,7 +21,7 @@ export default {
   created: async function () {
     try {
       let res = await Axios.get(
-        "https://api.github.com/repos/airbus/scikit-decide/git/trees/gh-pages"
+        "https://api.github.com/repos/seanchatmangpt/autofde-lab/git/trees/gh-pages"
       );
       const versionNode = res.data.tree.find((e) => {
         return e.path.toLowerCase() === "version";

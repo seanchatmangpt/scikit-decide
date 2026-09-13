@@ -1,0 +1,133 @@
+@prefix fdet: <urn:skdecide:fde-term:> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# Shapes for FDE authority envelopes.
+#
+# Modelled on ~/mfw/mfw-planner/shapes/powl2.shacl.ttl, and enforced in Python
+# by skdecide.fabric.fde.validate_authority -- rdflib is not a dependency of
+# this package, so the shapes are declared here and re-expressed there, the
+# same arrangement powl.py already uses for the POWL2 shapes.
+#
+# These shapes constrain the SHAPE of an authority record. They confer nothing.
+# A record that satisfies every shape below is still only a record of a
+# customer act; minting authority is the customer's, and authorizing an
+# occurrence is MFW's broker's.
+
+fdet:AuthorityGrantShape a sh:NodeShape ;
+    sh:targetClass fdet:AuthorityGrant ;
+    sh:property [ sh:path fdet:grantIdentifier ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    # Authority originates with a customer authority identity, never the FDE.
+    sh:property [ sh:path fdet:grantedBy ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:CustomerAuthorityIdentity ] ;
+    sh:property [ sh:path fdet:grantedTo ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path fdet:forCustomer ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:CustomerOrganization ] ;
+    sh:property [ sh:path fdet:basedOnModel ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:CompiledCustomerModel ] ;
+    sh:property [ sh:path fdet:conveysDecisionRight ; sh:minCount 1 ; sh:class fdet:DecisionRight ] ;
+    sh:property [ sh:path fdet:authorizesCapability ; sh:minCount 1 ; sh:class fdet:AuthorizedCapability ] ;
+    sh:property [ sh:path fdet:authorizesOperation ; sh:minCount 1 ; sh:class fdet:AuthorizedOperation ] ;
+    sh:property [ sh:path fdet:resourceScope ; sh:minCount 1 ; sh:class fdet:ResourceScope ] ;
+    sh:property [ sh:path fdet:environmentScope ; sh:minCount 1 ; sh:class fdet:EnvironmentScope ] ;
+    sh:property [ sh:path fdet:validity ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:ValidityInterval ] ;
+    sh:property [ sh:path fdet:consequenceBounds ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:ConsequenceBounds ] ;
+    sh:property [ sh:path fdet:requiresVerifier ; sh:minCount 1 ; sh:class fdet:Verifier ] ;
+    sh:property [ sh:path fdet:requiresPostcondition ; sh:minCount 1 ; sh:class fdet:Postcondition ] ;
+    # Accountable acceptance and accountable retirement are not optional.
+    sh:property [ sh:path fdet:adoptionOwner ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:AdoptionOwner ] ;
+    sh:property [ sh:path fdet:sunsetAuthority ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:SunsetAuthority ] ;
+    sh:property [ sh:path fdet:delegationAllowed ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ;
+    sh:property [ sh:path fdet:executableDigest ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    # A grant is a customer act. It is never a broker authorization, and never
+    # an FDE recommendation dressed up as one.
+    sh:not [ sh:class fdet:BrokerAuthorization ] ;
+    sh:not [ sh:class fdet:FdeRecommendation ] .
+
+fdet:CustomerAuthorityIdentityShape a sh:NodeShape ;
+    sh:targetClass fdet:CustomerAuthorityIdentity ;
+    sh:property [ sh:path fdet:identifier ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    # An unnamed role cannot hold a decision right.
+    sh:property [ sh:path fdet:organizationalRole ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path fdet:actsFor ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:CustomerOrganization ] ;
+    sh:property [ sh:path fdet:holdsDecisionRight ; sh:minCount 1 ; sh:class fdet:DecisionRight ] ;
+    sh:not [ sh:class fdet:FdeIdentity ] .
+
+fdet:CompiledCustomerModelShape a sh:NodeShape ;
+    sh:targetClass fdet:CompiledCustomerModel ;
+    sh:property [ sh:path fdet:modelDigest ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    # A compiled model is a hypothesis until a customer authority validates it.
+    sh:property [ sh:path fdet:validationState ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:ModelValidation ] .
+
+fdet:ModelValidationShape a sh:NodeShape ;
+    sh:targetClass fdet:ModelValidation ;
+    sh:property [ sh:path fdet:validatedBy ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:CustomerAuthorityIdentity ] ;
+    # A named decision, not a boolean. `approved = true` records no decider.
+    sh:property [ sh:path fdet:validationDecision ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    # Pins the exact model bytes validated, so a later edit is detectable.
+    sh:property [ sh:path fdet:validatedModelDigest ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] .
+
+fdet:AuthorizedOperationShape a sh:NodeShape ;
+    sh:targetClass fdet:AuthorizedOperation ;
+    sh:property [ sh:path fdet:underCapability ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:AuthorizedCapability ] ;
+    sh:property [ sh:path fdet:onResource ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:ResourceScope ] ;
+    sh:property [ sh:path fdet:inEnvironment ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:EnvironmentScope ] ;
+    sh:property [ sh:path fdet:requiresDecisionRight ; sh:minCount 1 ; sh:class fdet:DecisionRight ] .
+
+fdet:ValidityIntervalShape a sh:NodeShape ;
+    sh:targetClass fdet:ValidityInterval ;
+    sh:property [ sh:path fdet:notBefore ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:dateTime ] ;
+    sh:property [ sh:path fdet:notAfter ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:dateTime ] .
+
+fdet:ConsequenceBoundsShape a sh:NodeShape ;
+    sh:targetClass fdet:ConsequenceBounds ;
+    sh:property [ sh:path fdet:maxAffectedResources ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ] ;
+    sh:property [ sh:path fdet:maxIrreversibleActions ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ] ;
+    sh:property [ sh:path fdet:maxDurationSeconds ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ] .
+
+fdet:VerifierShape a sh:NodeShape ;
+    sh:targetClass fdet:Verifier ;
+    sh:property [ sh:path fdet:identifier ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    # Independence is asserted structurally, not inferred from the name.
+    sh:property [ sh:path fdet:independentOf ; sh:minCount 1 ] .
+
+fdet:AdoptionOwnerShape a sh:NodeShape ;
+    sh:targetClass fdet:AdoptionOwner ;
+    sh:property [ sh:path fdet:identifier ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path fdet:organizationalRole ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    # An owner with no operating obligation is an owner on paper only.
+    sh:property [ sh:path fdet:operatingObligation ; sh:minCount 1 ; sh:datatype xsd:string ] .
+
+fdet:SunsetAuthorityShape a sh:NodeShape ;
+    sh:targetClass fdet:SunsetAuthority ;
+    sh:property [ sh:path fdet:identifier ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path fdet:underDecisionRight ; sh:minCount 1 ; sh:class fdet:DecisionRight ] .
+
+fdet:AdoptionDecisionShape a sh:NodeShape ;
+    sh:targetClass fdet:AdoptionDecision ;
+    sh:property [ sh:path fdet:decidedBy ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:AdoptionOwner ] ;
+    sh:property [ sh:path fdet:adoptionDecision ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    # Acceptance rests on an independent verdict, never on the producer's word.
+    sh:property [ sh:path fdet:onEvidence ; sh:minCount 1 ; sh:class fdet:VerifierVerdict ] ;
+    sh:property [ sh:path fdet:ownershipAssignedTo ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:AdoptionOwner ] ;
+    sh:property [ sh:path fdet:operatingObligation ; sh:minCount 1 ; sh:datatype xsd:string ] .
+
+fdet:SunsetAuthorizationShape a sh:NodeShape ;
+    sh:targetClass fdet:SunsetAuthorization ;
+    sh:property [ sh:path fdet:authorizedBy ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:SunsetAuthority ] ;
+    sh:property [ sh:path fdet:underDecisionRight ; sh:minCount 1 ; sh:class fdet:DecisionRight ] ;
+    # Retiring against a replacement that is only technically complete is the
+    # organizational form of letting a projector stand in for an executor.
+    sh:property [ sh:path fdet:replacementAdoption ; sh:minCount 1 ; sh:maxCount 1 ; sh:class fdet:AdoptionDecision ] ;
+    sh:property [ sh:path fdet:customerAuthorizedRetirement ; sh:maxCount 1 ; sh:datatype xsd:boolean ] .
+
+fdet:OrganizationalBlockerShape a sh:NodeShape ;
+    sh:targetClass fdet:OrganizationalBlocker ;
+    sh:property [ sh:path fdet:identifier ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path fdet:resolutionMode ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    # A recursive blocker is discharged by an admitted child workflow, never by
+    # an informal escalation that leaves no auditable record.
+    sh:property [ sh:path fdet:resolvedByChildWorkflow ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+fdet:TechnicalConsequenceShape a sh:NodeShape ;
+    sh:targetClass fdet:TechnicalConsequence ;
+    sh:property [ sh:path fdet:producedBy ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path fdet:consequenceDigest ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path fdet:parentResumed ; sh:maxCount 1 ; sh:datatype xsd:boolean ] .

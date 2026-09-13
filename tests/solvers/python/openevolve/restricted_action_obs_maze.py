@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from skdecide import Domain, Space, Value
-from skdecide.builders.domain import (
+from autofde_lab import Domain, Space, Value
+from autofde_lab.builders.domain import (
     Actions,
     DeterministicTransitions,
     Goals,
@@ -13,9 +13,9 @@ from skdecide.builders.domain import (
     SingleAgent,
     TransformedObservable,
 )
-from skdecide.hub.domain.maze.maze import Action, State
-from skdecide.hub.domain.maze.maze import Maze as HubMaze
-from skdecide.hub.space.gym import ListSpace, MultiDiscreteSpace
+from autofde_lab.hub.domain.maze.maze import Action, State
+from autofde_lab.hub.domain.maze.maze import Maze as HubMaze
+from autofde_lab.hub.space.gym import ListSpace, MultiDiscreteSpace
 
 
 @dataclass

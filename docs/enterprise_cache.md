@@ -71,7 +71,7 @@ system errors remain fail-closed and are never recomputed.
 
 ```python
 from pathlib import Path
-from skdecide.caching import (
+from autofde_lab.caching import (
     AttestationSigner,
     CacheConfig,
     CacheFabric,

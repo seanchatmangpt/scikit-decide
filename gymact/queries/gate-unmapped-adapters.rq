@@ -1,0 +1,11 @@
+# MESSAGE: GymAct has no semantic interaction profile for a ForwardBench adapter family
+PREFIX afb: <https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#>
+PREFIX ga: <https://github.com/seanchatmangpt/autofde-lab/ns/gymact#>
+SELECT ?benchmark ?adapter
+WHERE {
+  ?benchmark a afb:Benchmark ; afb:adapterFamily ?adapter .
+  FILTER NOT EXISTS {
+    ?profile a ga:InteractionProfile ; ga:mapsAdapterFamily ?adapter .
+  }
+}
+ORDER BY ?adapter ?benchmark

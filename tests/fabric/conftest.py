@@ -5,9 +5,9 @@ from typing import Any
 
 import pytest
 
-from skdecide.fabric.cache import SQLiteERRCCache
-from skdecide.fabric.models import DecisionRefusal, RefusalCode
-from skdecide.fabric.service import DecisionFabric
+from autofde_lab.fabric.cache import SQLiteERRCCache
+from autofde_lab.fabric.models import DecisionRefusal, RefusalCode
+from autofde_lab.fabric.service import DecisionFabric
 
 
 @dataclass

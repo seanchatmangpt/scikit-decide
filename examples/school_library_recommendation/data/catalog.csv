@@ -1,0 +1,13 @@
+book_id,title,author,subjects,description,grade_band,length_pages,series,available
+B101,The Lightning Thief,Rick Riordan,"mythology adventure humor fantasy","A fast-paced adventure where a boy discovers Greek mythology is real and dangerous.",6-8,377,Percy Jackson,true
+B102,Escape from Mr. Lemoncello's Library,Chris Grabenstein,"mystery puzzles humor library","A group of students solves puzzles inside a fantastical library competition.",4-7,304,Lemoncello,true
+B103,Frindle,Andrew Clements,"school humor creativity realistic","A student invents a new word and accidentally starts a movement.",3-6,112,,true
+B104,The Wild Robot,Peter Brown,"science fiction nature survival empathy","A robot learns to survive and care for animals on a remote island.",3-6,288,Wild Robot,true
+B105,Amulet: The Stonekeeper,Kazu Kibuishi,"graphic novel fantasy adventure family","A graphic fantasy adventure with siblings, strange worlds, and high-stakes rescue.",3-7,192,Amulet,true
+B106,Spy School,Stuart Gibbs,"mystery spies humor action","A middle-school student is recruited into a secret spy academy.",4-7,304,Spy School,true
+B107,The One and Only Ivan,Katherine Applegate,"animals empathy realistic friendship","A gorilla in captivity tells a moving story about friendship and freedom.",3-6,336,,true
+B108,Book Scavenger,Jennifer Chambliss Bertman,"mystery puzzles books adventure","Kids solve clues connected to hidden books and a mysterious literary game.",4-7,368,Book Scavenger,true
+B109,New Kid,Jerry Craft,"graphic novel school humor identity","A graphic novel about navigating a new school and fitting in.",5-8,256,New Kid,true
+B110,The Last Kids on Earth,Max Brallier,"humor monsters adventure graphic","A funny illustrated adventure about kids surviving after monsters arrive.",3-6,240,Last Kids,true
+B111,Front Desk,Kelly Yang,"realistic family immigration empathy","A girl helps run a motel while learning courage and advocacy.",4-7,304,Front Desk,true
+B112,The Parker Inheritance,Varian Johnson,"mystery history puzzle friendship","A layered mystery connecting a town's history with present-day clues.",5-8,352,,true

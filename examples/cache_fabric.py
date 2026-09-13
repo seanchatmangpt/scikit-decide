@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from skdecide.caching import CacheConfig, CachePolicy, cache_domain_factory
+from autofde_lab.caching import CacheConfig, CachePolicy, cache_domain_factory
 
 
 @dataclass(frozen=True)
@@ -36,7 +36,7 @@ def main() -> None:
         namespace="line-domain:model-v1",
         config=CacheConfig(
             memory_max_entries=10_000,
-            persistent_path=Path(".cache/skdecide/line-domain.sqlite3"),
+            persistent_path=Path(".cache/autofde_lab/line-domain.sqlite3"),
         ),
     )
     factory.cache_fabric.clear(reset_stats=True)

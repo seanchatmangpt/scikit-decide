@@ -1,0 +1,64 @@
+@prefix arch: <urn:autofde-lab:architecture:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:architecture:catalog:09_class> a owl:Ontology ;
+    dcterms:title "Generated architecture catalog bundle: 09_class" ;
+    owl:imports <urn:autofde-lab:ontology:architecture> .
+
+<urn:autofde-lab:architecture:diagram:41_class_gym_basis:diagram> a arch:ClassDiagram,
+        arch:Diagram ;
+    dcterms:title "41 class gym basis" ;
+    arch:diagramKind arch:ClassDiagram ;
+    arch:elementCount 10 ;
+    arch:mermaidSyntax "classDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 10 ;
+    arch:sourceDigest "a6456056c3ff436daa31251880eb84b614c2ceb296986790345b2c18fb9a7676" ;
+    arch:sourcePath "docs/diagrams/41_class_gym_basis.mmd" .
+
+<urn:autofde-lab:architecture:diagram:42_class_decision_basis:diagram> a arch:ClassDiagram,
+        arch:Diagram ;
+    dcterms:title "42 class decision basis" ;
+    arch:diagramKind arch:ClassDiagram ;
+    arch:elementCount 9 ;
+    arch:mermaidSyntax "classDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 8 ;
+    arch:sourceDigest "0551939e2b8f6147f4c1ce48d5cda80b1e7a3d463de90af419f9e0169511e578" ;
+    arch:sourcePath "docs/diagrams/42_class_decision_basis.mmd" .
+
+<urn:autofde-lab:architecture:diagram:43_class_evidence_standing:diagram> a arch:ClassDiagram,
+        arch:Diagram ;
+    dcterms:title "43 class evidence standing" ;
+    arch:diagramKind arch:ClassDiagram ;
+    arch:elementCount 13 ;
+    arch:mermaidSyntax "classDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 12 ;
+    arch:sourceDigest "a7c234748005e5af72310bf2058313af5dbd960117425e36025f990a74f8c0ba" ;
+    arch:sourcePath "docs/diagrams/43_class_evidence_standing.mmd" .
+
+<urn:autofde-lab:architecture:diagram:44_class_benchmark_contract:diagram> a arch:ClassDiagram,
+        arch:Diagram ;
+    dcterms:title "44 class benchmark contract" ;
+    arch:diagramKind arch:ClassDiagram ;
+    arch:elementCount 8 ;
+    arch:mermaidSyntax "classDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 7 ;
+    arch:sourceDigest "baa0bd6c528123d3d29e721f272bb5d6ade59be877d9d36ebb6799cf68bf49b9" ;
+    arch:sourcePath "docs/diagrams/44_class_benchmark_contract.mmd" .
+
+<urn:autofde-lab:architecture:diagram:45_class_experiment_configuration:diagram> a arch:ClassDiagram,
+        arch:Diagram ;
+    dcterms:title "45 class experiment configuration" ;
+    arch:diagramKind arch:ClassDiagram ;
+    arch:elementCount 8 ;
+    arch:mermaidSyntax "classDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 7 ;
+    arch:sourceDigest "893f2f360d243ed29ead580eafc517cefe6bb72243bcd95bc0b7a29e1c383638" ;
+    arch:sourcePath "docs/diagrams/45_class_experiment_configuration.mmd" .
+

@@ -18,13 +18,13 @@ from __future__ import annotations
 from enum import Enum
 from typing import NamedTuple
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     Markovian,
     PartiallyObservable,
@@ -34,7 +34,7 @@ from skdecide.builders.domain import (
     UncertainInitialized,
     UncertainTransitions,
 )
-from skdecide.hub.space.gym import EnumSpace, ListSpace
+from autofde_lab.hub.space.gym import EnumSpace, ListSpace
 
 
 class TigerState(NamedTuple):
@@ -140,19 +140,19 @@ class TigerPOMDP(
 
 class TestPOMCP:
     def test_import(self):
-        from skdecide.hub.solver.pomcp import POMCP
+        from autofde_lab.hub.solver.pomcp import POMCP
 
         assert POMCP is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.pomcp import POMCP
+        from autofde_lab.hub.solver.pomcp import POMCP
 
         dom = TigerPOMDP()
         assert POMCP.check_domain(dom)
 
     def test_solves_tiger(self):
         """After solving and querying, tree nodes should be populated."""
-        from skdecide.hub.solver.pomcp import POMCP
+        from autofde_lab.hub.solver.pomcp import POMCP
 
         with POMCP(
             domain_factory=TigerPOMDP,
@@ -173,7 +173,7 @@ class TestPOMCP:
         Uses exploration_constant=110 (= R_hi - R_lo for Tiger POMDP),
         following the POMCP paper's recommendation.
         """
-        from skdecide.hub.solver.pomcp import POMCP
+        from autofde_lab.hub.solver.pomcp import POMCP
 
         with POMCP(
             domain_factory=TigerPOMDP,
@@ -191,7 +191,7 @@ class TestPOMCP:
 
     def test_confident_belief_rarely_opens_wrong(self):
         """With high confidence tiger is left, should almost never open left."""
-        from skdecide.hub.solver.pomcp import POMCP
+        from autofde_lab.hub.solver.pomcp import POMCP
 
         wrong_count = 0
         n_trials = 10
@@ -217,7 +217,7 @@ class TestPOMCP:
 
     def test_statistics(self):
         """Statistics should be reasonable."""
-        from skdecide.hub.solver.pomcp import POMCP
+        from autofde_lab.hub.solver.pomcp import POMCP
 
         with POMCP(
             domain_factory=TigerPOMDP,
@@ -238,7 +238,7 @@ class TestPOMCP:
         1. Correct door opens outnumber wrong ones
         2. Listens outnumber opens (information gathering)
         """
-        from skdecide.hub.solver.pomcp import POMCP
+        from autofde_lab.hub.solver.pomcp import POMCP
 
         dom = TigerPOMDP()
         with POMCP(
@@ -286,7 +286,7 @@ class TestPOMCP:
 
     def test_belief_based_query(self):
         """Belief-based query methods should work."""
-        from skdecide.hub.solver.pomcp import POMCP
+        from autofde_lab.hub.solver.pomcp import POMCP
 
         with POMCP(
             domain_factory=TigerPOMDP,
@@ -307,7 +307,7 @@ class TestPOMCP:
 
     def test_reset_belief(self):
         """reset_belief should not crash."""
-        from skdecide.hub.solver.pomcp import POMCP
+        from autofde_lab.hub.solver.pomcp import POMCP
 
         with POMCP(
             domain_factory=TigerPOMDP,
@@ -326,7 +326,7 @@ class TestPOMCP:
 
     def test_get_last_trajectory(self):
         """get_last_trajectory() should return (observation, action) pairs from the last simulation."""
-        from skdecide.hub.solver.pomcp import POMCP
+        from autofde_lab.hub.solver.pomcp import POMCP
 
         trajectories_seen = []
 

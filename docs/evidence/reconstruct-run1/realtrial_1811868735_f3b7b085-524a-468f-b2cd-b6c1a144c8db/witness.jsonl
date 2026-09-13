@@ -1,0 +1,1 @@
+{"expression": "locks_open == depth (3)", "goal_id": "urn:level4:goal:f3b7b085-524a-468f-b2cd-b6c1a144c8db", "kind": "goal_admitted", "target": {"depth": "3", "seed": "1811868735"}, "task_id": "urn:level4:task:1811868735"}

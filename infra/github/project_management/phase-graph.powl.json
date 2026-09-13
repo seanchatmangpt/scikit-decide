@@ -1,0 +1,92 @@
+{
+  "children": [
+    {
+      "kind": "Atom",
+      "label": "ap-identity"
+    },
+    {
+      "kind": "Atom",
+      "label": "ap-landing-zone"
+    },
+    {
+      "kind": "Atom",
+      "label": "bc-attestation"
+    },
+    {
+      "kind": "Atom",
+      "label": "bc-clock"
+    },
+    {
+      "kind": "Atom",
+      "label": "pi-ci-gate"
+    },
+    {
+      "kind": "Atom",
+      "label": "pi-ci-gate-v0"
+    },
+    {
+      "kind": "Atom",
+      "label": "pi-terraform-module"
+    },
+    {
+      "kind": "Atom",
+      "label": "rk-bounds"
+    },
+    {
+      "kind": "Atom",
+      "label": "rk-scheduler"
+    },
+    {
+      "kind": "Atom",
+      "label": "sf-ontology"
+    },
+    {
+      "kind": "Atom",
+      "label": "sf-refusal-vocab"
+    }
+  ],
+  "kind": "PartialOrder",
+  "note": "Transitive reduction. An absent edge between two nodes in different branches means genuine concurrency, not unknown order.",
+  "order": [
+    [
+      "ap-identity",
+      "bc-clock"
+    ],
+    [
+      "ap-landing-zone",
+      "ap-identity"
+    ],
+    [
+      "bc-clock",
+      "bc-attestation"
+    ],
+    [
+      "pi-terraform-module",
+      "ap-landing-zone"
+    ],
+    [
+      "pi-terraform-module",
+      "rk-scheduler"
+    ],
+    [
+      "rk-bounds",
+      "bc-clock"
+    ],
+    [
+      "rk-scheduler",
+      "rk-bounds"
+    ],
+    [
+      "sf-ontology",
+      "pi-terraform-module"
+    ],
+    [
+      "sf-refusal-vocab",
+      "pi-ci-gate"
+    ],
+    [
+      "sf-refusal-vocab",
+      "pi-ci-gate-v0"
+    ]
+  ]
+}

@@ -3,7 +3,7 @@ name: Agentic Decision Fabric Crown
 on:
   pull_request:
     paths:
-      - "src/skdecide/fabric/**"
+      - "src/autofde_lab/fabric/**"
       - "tests/fabric/**"
       - "docs/agentic-fabric.md"
       - "requirements-agentic.txt"
@@ -13,14 +13,13 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: agentic-fabric-${{ github.event.pull_request.number || github.ref }}-${{ matrix.python-version }}
-  cancel-in-progress: true
-
 jobs:
   exact-head-fabric:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    concurrency:
+      group: agentic-fabric-${{ github.event.pull_request.number || github.ref }}-${{ matrix.python-version }}
+      cancel-in-progress: true
     strategy:
       fail-fast: false
       matrix:
@@ -58,7 +57,7 @@ jobs:
 
       - name: Compile authored fabric surfaces
         run: |
-          python -m compileall -q src/skdecide/fabric tests/fabric
+          python -m compileall -q src/autofde_lab/fabric tests/fabric
 
       - name: Execute cache, service, CLI, MCP, A2A, and DSPy tests
         env:
@@ -71,11 +70,11 @@ jobs:
           PYTHONPATH: src
           SKDECIDE_FABRIC_CACHE: /tmp/scikit-decide-fabric-smoke.sqlite3
         run: |
-          python -m skdecide.fabric --help | grep -q solve
+          python -m autofde_lab.fabric --help | grep -q solve
           python - <<'PY'
-          from skdecide.fabric.a2a import create_app
-          from skdecide.fabric.dspy import DSPyDecisionCompiler
-          from skdecide.fabric.mcp import create_server
+          from autofde_lab.fabric.a2a import create_app
+          from autofde_lab.fabric.dspy import DSPyDecisionCompiler
+          from autofde_lab.fabric.mcp import create_server
 
           assert create_server() is not None
           assert create_app(url="http://127.0.0.1:9999") is not None

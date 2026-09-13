@@ -14,7 +14,7 @@ TIREWORLD_DIR = os.path.join(PDDL_DOMAINS_DIR, "tireworld")
 
 @pytest.fixture
 def pddl_module():
-    from skdecide.hub.domain.pddl import pddl
+    from autofde_lab.hub.domain.pddl import pddl
 
     return pddl
 

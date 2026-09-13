@@ -6,15 +6,15 @@ import gymnasium as gym
 from ray.rllib.algorithms.dqn import DQN
 from ray.rllib.algorithms.ppo import PPO
 
-from skdecide.builders.domain.events import Actions
-from skdecide.core import Space, Value, autocast_all
-from skdecide.domains import DeterministicPlanningDomain
-from skdecide.hub.domain.gym import GymDomain
-from skdecide.hub.domain.rock_paper_scissors import RockPaperScissors
-from skdecide.hub.solver.ray_rllib.ray_rllib import AsRLlibMultiAgentEnv, RayRLlib
-from skdecide.hub.space.gym import EnumSpace, ListSpace, SetSpace
-from skdecide.hub.space.gym.gym import MultiDiscreteSpace
-from skdecide.utils import rollout
+from autofde_lab.builders.domain.events import Actions
+from autofde_lab.core import Space, Value, autocast_all
+from autofde_lab.domains import DeterministicPlanningDomain
+from autofde_lab.hub.domain.gym import GymDomain
+from autofde_lab.hub.domain.rock_paper_scissors import RockPaperScissors
+from autofde_lab.hub.solver.ray_rllib.ray_rllib import AsRLlibMultiAgentEnv, RayRLlib
+from autofde_lab.hub.space.gym import EnumSpace, ListSpace, SetSpace
+from autofde_lab.hub.space.gym.gym import MultiDiscreteSpace
+from autofde_lab.utils import rollout
 
 # Allowed action handling in rllib requires to use Dict spaces for observations, which in turn
 # don't support NamedTuple instances as sub-observations (cloudpickle error), therefore we use

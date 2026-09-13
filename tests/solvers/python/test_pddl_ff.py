@@ -17,7 +17,7 @@ TIREWORLD_PROBLEM = os.path.join(PDDL_DIR, "tireworld", "p01.pddl")
 
 class TestHFFHeuristic:
     def test_hff_construction(self):
-        from skdecide.hub.domain.pddl import HFF, PDDLDomain
+        from autofde_lab.hub.domain.pddl import HFF, PDDLDomain
 
         domain = PDDLDomain(BLOCKS_DOMAIN, BLOCKS_PROBLEM)
         hff = HFF(domain._task, verbose=True)
@@ -25,7 +25,7 @@ class TestHFFHeuristic:
         assert hff.num_relaxed_actions > 0
 
     def test_hff_initial_not_goal(self):
-        from skdecide.hub.domain.pddl import HFF, PDDLDomain
+        from autofde_lab.hub.domain.pddl import HFF, PDDLDomain
 
         domain = PDDLDomain(BLOCKS_DOMAIN, BLOCKS_PROBLEM)
         hff = HFF(domain._task)
@@ -34,12 +34,12 @@ class TestHFFHeuristic:
         assert h_val > 0, "Initial state should have positive h_FF"
 
     def test_hff_goal_zero(self):
-        from skdecide.hub.__skdecide_hub_cpp import _PDDL_GoalChecker_ as GoalChecker
-        from skdecide.hub.__skdecide_hub_cpp import (
+        from autofde_lab.hub.__autofde_lab_hub_cpp import _PDDL_GoalChecker_ as GoalChecker
+        from autofde_lab.hub.__autofde_lab_hub_cpp import (
             _PDDL_SuccessorGenerator_ as SuccGen,
         )
 
-        from skdecide.hub.domain.pddl import HFF, PDDLDomain
+        from autofde_lab.hub.domain.pddl import HFF, PDDLDomain
 
         domain = PDDLDomain(BLOCKS_DOMAIN, BLOCKS_PROBLEM)
         hff = HFF(domain._task)
@@ -78,7 +78,7 @@ class TestHFFHeuristic:
         assert h_val == 0, f"h_FF at goal should be 0, got {h_val}"
 
     def test_hff_leq_hadd(self):
-        from skdecide.hub.domain.pddl import HFF, HAdd, PDDLDomain
+        from autofde_lab.hub.domain.pddl import HFF, HAdd, PDDLDomain
 
         domain = PDDLDomain(BLOCKS_DOMAIN, BLOCKS_PROBLEM)
         hff = HFF(domain._task)
@@ -87,7 +87,7 @@ class TestHFFHeuristic:
         assert hff(init) <= hadd(init), "h_FF should be <= h_add"
 
     def test_hff_helpful_actions(self):
-        from skdecide.hub.domain.pddl import HFF, PDDLDomain
+        from autofde_lab.hub.domain.pddl import HFF, PDDLDomain
 
         domain = PDDLDomain(BLOCKS_DOMAIN, BLOCKS_PROBLEM)
         hff = HFF(domain._task)
@@ -99,7 +99,7 @@ class TestHFFHeuristic:
 
 class TestHFFProbabilistic:
     def test_hff_ppddl(self):
-        from skdecide.hub.domain.pddl import HFF, PPDDLDomain
+        from autofde_lab.hub.domain.pddl import HFF, PPDDLDomain
 
         domain = PPDDLDomain(TIREWORLD_DOMAIN, TIREWORLD_PROBLEM)
         hff = HFF(domain._task, discount_factor=1.0)
@@ -107,7 +107,7 @@ class TestHFFProbabilistic:
         assert hff(init) > 0
 
     def test_hff_discounted(self):
-        from skdecide.hub.domain.pddl import HFF, PPDDLDomain
+        from autofde_lab.hub.domain.pddl import HFF, PPDDLDomain
 
         domain = PPDDLDomain(TIREWORLD_DOMAIN, TIREWORLD_PROBLEM)
         hff = HFF(domain._task, discount_factor=0.9)
@@ -115,7 +115,7 @@ class TestHFFProbabilistic:
         assert hff(init) > 0
 
     def test_hff_deterministic_discount_error(self):
-        from skdecide.hub.domain.pddl import HFF, PDDLDomain
+        from autofde_lab.hub.domain.pddl import HFF, PDDLDomain
 
         domain = PDDLDomain(BLOCKS_DOMAIN, BLOCKS_PROBLEM)
         with pytest.raises(ValueError):
@@ -124,16 +124,16 @@ class TestHFFProbabilistic:
 
 class TestFFSolver:
     def test_ff_solve(self):
-        from skdecide.hub.domain.pddl import PDDLDomain
-        from skdecide.hub.solver.pddl.ff import FF
+        from autofde_lab.hub.domain.pddl import PDDLDomain
+        from autofde_lab.hub.solver.pddl.ff import FF
 
         ff = FF(domain_factory=lambda: PDDLDomain(BLOCKS_DOMAIN, BLOCKS_PROBLEM))
         ff.solve()
         assert ff.get_nb_explored_states() > 0
 
     def test_ff_plan(self):
-        from skdecide.hub.domain.pddl import PDDLDomain
-        from skdecide.hub.solver.pddl.ff import FF
+        from autofde_lab.hub.domain.pddl import PDDLDomain
+        from autofde_lab.hub.solver.pddl.ff import FF
 
         ff = FF(domain_factory=lambda: PDDLDomain(BLOCKS_DOMAIN, BLOCKS_PROBLEM))
         ff.solve()
@@ -141,8 +141,8 @@ class TestFFSolver:
         assert len(plan) > 0, "Plan should be non-empty"
 
     def test_ff_follow_plan(self):
-        from skdecide.hub.domain.pddl import PDDLDomain
-        from skdecide.hub.solver.pddl.ff import FF
+        from autofde_lab.hub.domain.pddl import PDDLDomain
+        from autofde_lab.hub.solver.pddl.ff import FF
 
         ff = FF(domain_factory=lambda: PDDLDomain(BLOCKS_DOMAIN, BLOCKS_PROBLEM))
         ff.solve()
@@ -167,8 +167,8 @@ class TestFFSolver:
         assert steps == len(ff.get_plan()), "Steps should match plan length"
 
     def test_ff_is_solution_defined(self):
-        from skdecide.hub.domain.pddl import PDDLDomain
-        from skdecide.hub.solver.pddl.ff import FF
+        from autofde_lab.hub.domain.pddl import PDDLDomain
+        from autofde_lab.hub.solver.pddl.ff import FF
 
         ff = FF(domain_factory=lambda: PDDLDomain(BLOCKS_DOMAIN, BLOCKS_PROBLEM))
         ff.solve()

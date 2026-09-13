@@ -27,9 +27,9 @@ os.environ.setdefault("RAY_ENABLE_UV_RUN_RUNTIME_ENV", "0")
 import ray
 from pytest_cases import fixture
 
-from skdecide.hub.solver.ray_rllib import RayRLlib
-from skdecide.hub.solver.ray_rllib.gnn.algorithms import GraphPPO
-from skdecide.utils import rollout
+from autofde_lab.hub.solver.ray_rllib import RayRLlib
+from autofde_lab.hub.solver.ray_rllib.gnn.algorithms import GraphPPO
+from autofde_lab.utils import rollout
 
 
 @fixture

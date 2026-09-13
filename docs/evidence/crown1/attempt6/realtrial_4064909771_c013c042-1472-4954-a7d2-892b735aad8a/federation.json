@@ -1,0 +1,387 @@
+[
+  {
+    "planner": "AOstar",
+    "outcome": "CRASHED",
+    "plan": [],
+    "duration_s": 0.029706875095143914,
+    "detail": "planner process exited with code 1 without returning an attempt"
+  },
+  {
+    "planner": "Astar",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=4]"
+    ],
+    "duration_s": 0.01626429194584489,
+    "detail": "proposed inapplicable action 'toggle_switch[index=2]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "pLRTAstar",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.08185516705270857,
+    "detail": "proposed inapplicable action None at step 0; applicable=['toggle_switch[index=0]', 'toggle_switch[index=1]', 'toggle_switch[index=2]', 'toggle_switch[index=3]', 'toggle_switch[index=4]']"
+  },
+  {
+    "planner": "LRTAstar",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 0.01696095895022154,
+    "detail": "proposed inapplicable action 'reset_pair' at step 1; applicable=[]"
+  },
+  {
+    "planner": "MCTS",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01524220802821219,
+    "detail": "RuntimeError: Cannot sample an empty space."
+  },
+  {
+    "planner": "UCT",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.016116582904942334,
+    "detail": "RuntimeError: Cannot sample an empty space."
+  },
+  {
+    "planner": "BFWS",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=4]"
+    ],
+    "duration_s": 0.01600983296521008,
+    "detail": "proposed inapplicable action 'toggle_switch[index=3]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "IW",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 0.01601441705133766,
+    "detail": "proposed inapplicable action 'toggle_switch[index=0]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "RIW",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015597333083860576,
+    "detail": "RuntimeError: In sequential mode, nodes labelled as unsolved must have unsolved children."
+  },
+  {
+    "planner": "LRTDP",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 0.016015958040952682,
+    "detail": "proposed inapplicable action 'toggle_switch[index=1]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "ILAOstar",
+    "outcome": "CRASHED",
+    "plan": [],
+    "duration_s": 0.025480416021309793,
+    "detail": "planner process exited with code 1 without returning an attempt"
+  },
+  {
+    "planner": "pAstar",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014378833002410829,
+    "detail": "KeyError: State(facts=frozenset({'master=False', 'switch_4=False', 'required_count=2', 'switch_2=False', 'switch_0=False', 'switch_3=False', 'toggles=0', 'required_on=0', 'solved=False', 'n_switches=5"
+  },
+  {
+    "planner": "MARTDP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01368629198987037,
+    "detail": "ValueError: SKDECIDE exception: MA-RTDP algorithm needs python domain for implementing get_agent_applicable_actions()"
+  },
+  {
+    "planner": "MAHD",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.010888417018577456,
+    "detail": "TypeError: MAHD.__init__() got an unexpected keyword argument 'domain_factory'"
+  },
+  {
+    "planner": "MaxentIRL",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013073291047476232,
+    "detail": "AttributeError: 'Discrete' object has no attribute 'low'"
+  },
+  {
+    "planner": "POMCP",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=4]"
+    ],
+    "duration_s": 0.03811358299572021,
+    "detail": "proposed inapplicable action 'toggle_switch[index=4]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "pPOMCP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013403792050667107,
+    "detail": "AttributeError: 'pPOMCP' object has no attribute '_belief'"
+  },
+  {
+    "planner": "RayRLlib",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.010944625013507903,
+    "detail": "TypeError: RayRLlib.__init__() missing 2 required positional arguments: 'algo_class' and 'train_iterations'"
+  },
+  {
+    "planner": "SimpleGreedy",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01351937500294298,
+    "detail": "ValueError: max() iterable argument is empty"
+  },
+  {
+    "planner": "StableBaseline",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01101012493018061,
+    "detail": "TypeError: StableBaseline.__init__() missing 2 required positional arguments: 'algo_class' and 'baselines_policy'"
+  },
+  {
+    "planner": "UPSolver",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.011058833100832999,
+    "detail": "TypeError: UPSolver.__init__() missing 1 required positional argument: 'operation_mode'"
+  },
+  {
+    "planner": "VI",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=1]"
+    ],
+    "duration_s": 0.01603091601282358,
+    "detail": "proposed inapplicable action 'reset_pair' at step 1; applicable=[]"
+  },
+  {
+    "planner": "PI",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 0.01590816699899733,
+    "detail": "proposed inapplicable action 'reset_pair' at step 1; applicable=[]"
+  },
+  {
+    "planner": "LDFS",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 25.00977445906028,
+    "detail": "killed after 20.0s wall clock (native solve did not return)"
+  },
+  {
+    "planner": "IDAstar",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 25.01214979204815,
+    "detail": "killed after 20.0s wall clock (native solve did not return)"
+  },
+  {
+    "planner": "RTDPBel",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 2.5910517920274287,
+    "detail": "proposed inapplicable action 'toggle_switch[index=0]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "SSiPP",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 0.016410708893090487,
+    "detail": "proposed inapplicable action 'toggle_switch[index=2]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "FRET",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=4]"
+    ],
+    "duration_s": 0.015548708033747971,
+    "detail": "proposed inapplicable action 'reset_pair' at step 1; applicable=[]"
+  },
+  {
+    "planner": "MDPLP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01540000003296882,
+    "detail": "IndexError: map::at:  key not found"
+  },
+  {
+    "planner": "SSPLP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014959875028580427,
+    "detail": "IndexError: map::at:  key not found"
+  },
+  {
+    "planner": "IDual",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.015974416979588568,
+    "detail": "proposed inapplicable action 'reset_pair' at step 0; applicable=['toggle_switch[index=0]', 'toggle_switch[index=1]', 'toggle_switch[index=2]', 'toggle_switch[index=3]', 'toggle_switch[index=4]']"
+  },
+  {
+    "planner": "GPCI",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 0.015167083009146154,
+    "detail": "proposed inapplicable action 'reset_pair' at step 1; applicable=[]"
+  },
+  {
+    "planner": "SARSOP",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=1]"
+    ],
+    "duration_s": 0.013945915969088674,
+    "detail": "proposed inapplicable action 'toggle_switch[index=2]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "DESPOT",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 0.07431495899800211,
+    "detail": "proposed inapplicable action 'toggle_switch[index=0]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "EHC",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015565917012281716,
+    "detail": "RuntimeError: SKDECIDE exception: EHC failed \u2014 no improving state found"
+  },
+  {
+    "planner": "FF",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01289358304347843,
+    "detail": "TypeError: FF solver requires a PDDLDomain or PPDDLDomain"
+  },
+  {
+    "planner": "FFReplan",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014138291007839143,
+    "detail": "TypeError: FFReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLReplan",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014087666990235448,
+    "detail": "TypeError: PPDDLReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "FFDetHindsight",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013801415916532278,
+    "detail": "TypeError: FFDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLDetHindsight",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01436849997844547,
+    "detail": "TypeError: PPDDLDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPReplan",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=3]"
+    ],
+    "duration_s": 0.016221291036345065,
+    "detail": "proposed inapplicable action 'reset_pair' at step 1; applicable=[]"
+  },
+  {
+    "planner": "SSPDetHindsight",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 0.02184941607993096,
+    "detail": "proposed inapplicable action 'reset_pair' at step 1; applicable=[]"
+  },
+  {
+    "planner": "RFF",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014624916948378086,
+    "detail": "TypeError: RFF solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLPlanMerger",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014471165952272713,
+    "detail": "TypeError: PPDDLPlanMerger solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPPlanMerger",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=1]"
+    ],
+    "duration_s": 0.08077750005759299,
+    "detail": "proposed inapplicable action 'toggle_switch[index=3]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "Witness",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 0.018896750058047473,
+    "detail": "proposed inapplicable action 'toggle_switch[index=1]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "HSVI",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 0.015621541999280453,
+    "detail": "proposed inapplicable action 'toggle_switch[index=1]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "GoalHSVI",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 0.015231875004246831,
+    "detail": "proposed inapplicable action 'toggle_switch[index=1]' at step 1; applicable=[]"
+  },
+  {
+    "planner": "DSPyPolicy",
+    "outcome": "REFUSED",
+    "plan": [
+      "toggle_switch[index=0]"
+    ],
+    "duration_s": 8.395849540946074,
+    "detail": "proposed inapplicable action 'toggle_switch[index=1]' at step 1; applicable=[]"
+  }
+]

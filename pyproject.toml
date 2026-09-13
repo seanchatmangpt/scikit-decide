@@ -1,8 +1,8 @@
 [project]
-name = "scikit-decide"
-description = "The AI framework for Reinforcement Learning, Automated Planning and Scheduling"
+name = "autofde-lab"
+description = "AutoFDE Lab: exploration, falsification, and proof environment for persistent, governed AutoFDE capabilities. Forked from scikit-decide."
 authors=[
-  {name= "Airbus AI Research",  email = "scikit-decide@airbus.com"},
+  {name= "Sean Chatman",  email = "sean@chatmangpt.com"},
 ]
 license = "MIT"
 license-files = ["LICENSE"]
@@ -32,11 +32,21 @@ dependencies = [
     "pathos>=0.2.7",
     "discrete-optimization>=0.9.0",
     "wrapt>=2.2.1",
+    # Real dependency on the standalone GymAct package, resolved from an
+    # exact GitHub revision in `[tool.uv.sources]`, for
+    # `autofde_lab.hub.domain.azuregoat_privesc.gymact_bridge`'s real
+    # `EnvironmentProvider`/`Environment` implementation -- not faked.
+    # Marker added 2026-08-08: gymact declares requires-python >=3.11,<4.0 while
+    # this project declares >=3.10, so uv's 3.10 resolution split was
+    # unsatisfiable and `uv run` failed. The marker excludes gymact from that
+    # split rather than narrowing this project's own supported range.
+    "gymact; python_version >= '3.11'",
 ]
 
 [project.urls]
-documentation = "https://airbus.github.io/scikit-decide/"
-repository = "https://github.com/airbus/scikit-decide"
+documentation = "https://seanchatmangpt.github.io/autofde-lab/"
+repository = "https://github.com/seanchatmangpt/autofde-lab"
+upstream = "https://github.com/airbus/scikit-decide"
 
 [project.optional-dependencies]
 shared = [  # define a common extra to avoid redefining dependencies in both domains and solvers
@@ -46,14 +56,53 @@ shared = [  # define a common extra to avoid redefining dependencies in both dom
     # real declared ceiling (gymnasium<2.0,>=0.29.1). AsLegacyGymV21Env/AsGymnasiumEnv (which
     # wrap pre-gymnasium legacy `gym` environments) require gymnasium<1's now-removed
     # EnvCompatibility/LegacyEnv classes and raise a clear real ImportError if instantiated
-    # on gymnasium>=1 -- see skdecide/hub/domain/gym/gym.py.
+    # on gymnasium>=1 -- see autofde_lab/hub/domain/gym/gym.py.
     "numpy>=2.0; sys_platform != 'darwin' or platform_machine != 'x86_64'",
     "numpy >=1.20.1,<2; sys_platform == 'darwin' and platform_machine == 'x86_64'",
     "scipy>=1.9.2",
-    "unified-planning>=1.1,<1.3",
+    # The `<1.3` ceiling this line carried through 2026-09-04 was a real,
+    # load-bearing pin, not decoration: UP 1.3.0 changed `UPState.__init__`'s
+    # signature (added a required `problems_fluent_set` positional parameter)
+    # -- confirmed live, `TypeError: UPState.__init__() missing 1 required
+    # positional argument: 'problems_fluent_set'` on every
+    # `UPDomain._get_initial_state_()` call under 1.3.0, breaking all 9
+    # `tests/domains/python/test_up_bridge_domain.py` cases. Fixed forward,
+    # this session, rather than re-freezing the ceiling: all 5 real
+    # `UPState(...)` construction sites in `autofde_lab/hub/domain/up/up.py`
+    # now pass `self._problem` (a real `FluentsSetMixin`, confirmed via
+    # `issubclass(Problem, FluentsSetMixin)`) as `problems_fluent_set`.
+    # Re-verified real, this session: 9 passed, 1 pre-existing-unrelated skip
+    # (macOS libomp).
+    "unified-planning>=1.3",
+]
+hddl = [
+    "autofde-lab[shared]",
+    # Latest published Unified Planning + its canonical Aries extra --
+    # real HTN/HDDL engine, no version ceiling held back for compatibility.
+    "unified-planning[aries]>=1.3",
+    # `unified-planning[aries]`'s own only constraint is `up-aries>=0.4.0`.
+    # Verified live at latest (`unified-planning==1.3.0`, `up-aries==0.5.0`,
+    # both current head as of this pin): real Aries HTN solve, real
+    # method-decomposition + primitive-action-projection checks, real
+    # primitive-plan replay through the now-1.3-compatible UPDomain
+    # transition semantics above, real goal verification -- all passing.
+    # (Against the *former* `<1.3` UP ceiling, up-aries 0.5.0's `solver.py`
+    # set a `PlanRequest.warm_start_plan` proto field the older UP's bundled
+    # proto stub didn't define -- that incompatibility is gone now that both
+    # are current: not a versions-of-two-packages problem, a
+    # stale-ceiling-on-one-of-them problem.)
+    "up-aries>=0.5.0",
+]
+receipts = [  # autofde_lab.receipts admission/broker layer: typed process-mining
+    # observation shapes (Receipt/OcelEvent/Evidence/...), see
+    # autofde_lab/receipts/wasm4pm_types.py. Pure pydantic, no native/Rust
+    # dependency. The package is `wasm4pm-compat-pydantic` (module
+    # `wasm4pm_compat_pydantic`) and is resolved from the `python` subdirectory
+    # of an exact wasm4pm-compat GitHub revision below.
+    "wasm4pm-compat-pydantic",
 ]
 domains = [
-    "scikit-decide[shared]", # self-reference allowed by pip since 21.2 (https://github.com/pypa/pip/issues/11296)
+    "autofde-lab[shared]", # self-reference allowed by pip since 21.2 (https://github.com/pypa/pip/issues/11296)
     "matplotlib>=3.3.4",
     "openap>=1.5",
     "pygeodesy>=23.6.12",
@@ -63,14 +112,14 @@ domains = [
     "pygrib==2.1.5; sys_platform == 'darwin' and platform_machine == 'x86_64'",
     "setuptools<82.0.0; sys_platform == 'darwin' and platform_machine == 'x86_64'",  # pkg_resources removed from 82.0.0, and needed by pygrib 2.1.5
     "pyRDDLGym>=2.3, !=2.7",  # verified real: pyRDDLGym 2.6 installs and works (RDDLDomain construction + rollout) on Python 3.13; the `!=2.7` exclusion is unrelated to 3.13 (https://github.com/pyrddlgym-project/pyRDDLGym-gurobi/issues/6) and is kept as-is
-    "pyRDDLGym-rl>=0.2",  # verified real: skdecide.hub.domain.rddl unconditionally imports this (SimplifiedActionRDDLEnv), so it's load-bearing, not optional
+    "pyRDDLGym-rl>=0.2",  # verified real: autofde_lab.hub.domain.rddl unconditionally imports this (SimplifiedActionRDDLEnv), so it's load-bearing, not optional
     "numpy<2.4",  # pyRDDLGym-rl 0.2 (still the latest release on PyPI, uploaded 2024-11-03) calls np.reshape(newshape=...) in SimplifiedActionRDDLEnv; numpy 2.4.0 removed the `newshape` kwarg (deprecated since 2.1, removed in 2.4 per https://numpy.org/doc/2.4/release/2.4.0-notes.html), breaking it on ALL Python versions including 3.13, not just <3.13 as previously assumed here. The upstream fix (https://github.com/pyrddlgym-project/pyRDDLGym-rl/pull/10, merged 2026-03-02) has not been released to PyPI yet -- see https://github.com/pyrddlgym-project/pyRDDLGym-rl/issues/9. Re-narrow this pin once a fixed release ships.
     "rddlrepository>=2.1",
     "plado>=0.1.3",
     "pytz>=2025.2",
 ]
 solvers = [
-    "scikit-decide[shared]", # self-reference allowed by pip since 21.2 (https://github.com/pypa/pip/issues/11296)
+    "autofde-lab[shared]", # self-reference allowed by pip since 21.2 (https://github.com/pypa/pip/issues/11296)
     "joblib>=1.0.1",
     "ray[rllib]>=2.52.1",  # verified real: 2.52.1 is the first PyPI release with cp313 wheels
     # (previously pinned <2.38 because ray made rllib's "new API stack" the default from 2.38/2.40
@@ -101,98 +150,196 @@ pddl = [
 ]
 dspy = [
     "dspy",  # unpinned: DSPyPolicy always targets the most recent dspy release
+    "faker",  # anti-memorization name substitution for gepa_train.py's offline trainset
+]
+ofmf = [
+    # OFMF compatibility closure, including OFMFEngine. Nothing in autofde_lab
+    # imports or registers OFMFEngine; see src/autofde_lab/ofmf/__init__.py.
+    "rdflib",
+    "blake3",
+    "pyshacl",
+    "owlrl",
+    "pyDatalog",
+    "PyShEx",
+    "pyoxigraph",
+    "pyld",
+    "SpiffWorkflow",
+]
+mcp = [
+    # Pin matches requirements-agentic.txt. fabric/mcp.py::create_server() has
+    # always imported fastmcp lazily and converted ImportError to a clear
+    # RuntimeError -- but nothing installed it by default, so `serve-mcp`
+    # never actually started. This extra closes that gap.
+    "fastmcp>=3.4.4,<4",
+]
+gymact = [
+    # GymAct kernel surfaces (src/autofde_lab/gymact/): real FastAPI ASGI app,
+    # real httpx in-process client against it, real Typer CLI. rdflib/pyshacl
+    # come from the `ofmf` extra and fastmcp from `mcp`.
+    # The `gymact` package itself (src/autofde_lab/gymact/kernel.py is a thin
+    # wrapper over gymact.runtime.GymAct, not an independent reimplementation)
+    # is already a base `[project.dependencies]` entry -- GitHub-sourced via
+    # `[tool.uv.sources]` -- so it is not repeated here.
+    "fastapi>=0.115",
+    "httpx>=0.27",
+    "typer>=0.12",
+    # kubernetes==30.1.0 and langchain>=0.3.25 pinned/floored to match
+    # vendor/gyms/sregym/pyproject.toml exactly. Needed only so
+    # tests/sota/test_m1_environment_dependencies.py can import the real,
+    # vendored sregym.conductor package (registry introspection only -- no
+    # cluster actuation, no LLM call) without ModuleNotFoundError;
+    # sregym's own conductor/oracles/diagnosis_oracle.py and
+    # conductor/oracles/llm_as_a_judge/judge.py import `kubernetes` and
+    # `langchain_core` at module scope regardless of whether a cluster is
+    # reachable or a judge call is ever made.
+    "kubernetes==30.1.0",
+    "langchain>=0.3.25",
+]
+ocpq = [
+    # Native PyO3 bindings (wasm4pm-bindings-py) over wasm4pm's real OCPQ
+    # query engine (wasm4pm/src/ocpq_runtime.rs), used by
+    # hub/domain/gym_procedure/level4_ocpq.py to query the Level 4 OCEL log.
+    # Requires a Rust toolchain to build (maturin backend, PEP 517) --
+    # deliberately NOT in `all` for that reason, same policy as other
+    # native-toolchain extras in this file. Not yet pinned to a pushed
+    # wasm4pm git revision (the crate lives at
+    # https://github.com/seanchatmangpt/wasm4pm, subdirectory
+    # crates/wasm4pm-bindings-py, but the revision built and verified in
+    # this session had uncommitted local changes -- pin this to a real
+    # pushed rev, mirroring wasm4pm-compat-pydantic's `[tool.uv.sources]`
+    # entry below, once wasm4pm-bindings-py is published from a clean
+    # commit); until then, build the wheel locally with
+    # `maturin build --release -m wasm4pm/crates/wasm4pm-bindings-py/Cargo.toml`
+    # and install it into this project's venv.
+    #
+    # The bare "wasm4pm" requirement below is commented out, 2026-09-04:
+    # confirmed live this session that it is not resolvable AT ALL by `uv
+    # lock` -- not just on one platform split, but on every split uv's
+    # universal resolver tries (first surfaced as
+    # `python_full_version >= '3.14' and platform_machine == 'x86_64' and
+    # sys_platform == 'darwin'`, then `python_full_version >= '3.12' and
+    # python_full_version < '3.14' and sys_platform == 'win32'` once that one
+    # was narrowed away) -- `wasm4pm was not found in the package registry`.
+    # Because `uv lock` is a universal resolver, an unresolvable requirement
+    # in ANY declared extra blocks `uv lock`/`uv lock --check` project-wide,
+    # regardless of whether that extra is requested. Restore this line (with
+    # a real `[tool.uv.sources]` git pin, once one is verified) rather than
+    # leaving it bare -- a bare PyPI name for a package that isn't published
+    # will always reproduce this exact failure.
+    # "wasm4pm",
 ]
 all = [
     # self-reference allowed by pip since 21.2 (https://github.com/pypa/pip/issues/11296)
-    "scikit-decide[domains, solvers, pddl, dspy]",
+    # "receipts" added back 2026-08-12: `uv sync --extra=all` was silently uninstalling
+    # wasm4pm-compat-pydantic (src/autofde_lab/receipts/wasm4pm_types.py,
+    # src/autofde_lab/constitution/__init__.py, and
+    # hub/domain/gym_procedure/dependency_admission.py all import it) because this list
+    # never actually included the "receipts" extra it lives under, despite `all` being
+    # documented/assumed to mean "everything".
+    "autofde-lab[domains, solvers, pddl, dspy, ofmf, mcp, gymact, receipts, hddl]",
 ]
 
-[project.entry-points."skdecide.domains"]
-GymDomain = "skdecide.hub.domain.gym:GymDomain [domains]"
-DeterministicGymDomain = "skdecide.hub.domain.gym:DeterministicGymDomain [domains]"
-CostDeterministicGymDomain = "skdecide.hub.domain.gym:CostDeterministicGymDomain [domains]"
-GymPlanningDomain = "skdecide.hub.domain.gym:GymPlanningDomain [domains]"
-GymWidthDomain = "skdecide.hub.domain.gym:GymWidthDomain [domains]"
-UPDomain = "skdecide.hub.domain.up:UPDomain [domains]"
-MasterMind = "skdecide.hub.domain.mastermind:MasterMind [domains]"
-Maze = "skdecide.hub.domain.maze:Maze [domains]"
-RockPaperScissors = "skdecide.hub.domain.rock_paper_scissors:RockPaperScissors [domains]"
-SimpleGridWorld = "skdecide.hub.domain.simple_grid_world:SimpleGridWorld [domains]"
-ChatmanCleanSession = "skdecide.hub.domain.chatman_clean_session:ChatmanCleanSessionDomain"
-FlightPlanningDomain = "skdecide.hub.domain.flight_planning:FlightPlanningDomain [domains]"
-MRCPSP = "skdecide.hub.domain.rcpsp:MRCPSP [domains]"
-MRCPSPCalendar = "skdecide.hub.domain.rcpsp:MRCPSPCalendar [domains]"
-RCPSP = "skdecide.hub.domain.rcpsp:RCPSP [domains]"
-RCPSPCalendar = "skdecide.hub.domain.rcpsp:RCPSPCalendar [domains]"
-Stochastic_RCPSP = "skdecide.hub.domain.rcpsp:Stochastic_RCPSP [domains]"
-SMRCPSPCalendar = "skdecide.hub.domain.rcpsp:SMRCPSPCalendar [domains]"
-MSRCPSP = "skdecide.hub.domain.rcpsp:MSRCPSP [domains]"
-MSRCPSPCalendar = "skdecide.hub.domain.rcpsp:MSRCPSPCalendar [domains]"
-RDDLDomain = "skdecide.hub.domain.rddl:RDDLDomain [domains]"
-RDDLDomainRL = "skdecide.hub.domain.rddl:RDDLDomainRL [domains]"
-RDDLDomainSimplifiedSpaces = "skdecide.hub.domain.rddl:RDDLDomainSimplifiedSpaces [domains]"
-PDDLDomain = "skdecide.hub.domain.pddl:PDDLDomain [domains]"
-PPDDLDomain = "skdecide.hub.domain.pddl:PPDDLDomain [domains]"
-TPDDLDomain = "skdecide.hub.domain.pddl:TPDDLDomain [pddl]"
+[project.entry-points."autofde_lab.domains"]
+GymDomain = "autofde_lab.hub.domain.gym:GymDomain [domains]"
+DeterministicGymDomain = "autofde_lab.hub.domain.gym:DeterministicGymDomain [domains]"
+CostDeterministicGymDomain = "autofde_lab.hub.domain.gym:CostDeterministicGymDomain [domains]"
+GymPlanningDomain = "autofde_lab.hub.domain.gym:GymPlanningDomain [domains]"
+GymWidthDomain = "autofde_lab.hub.domain.gym:GymWidthDomain [domains]"
+UPDomain = "autofde_lab.hub.domain.up:UPDomain [domains]"
+HDDLDomain = "autofde_lab.hub.domain.hddl:HDDLDomain [hddl]"
+MasterMind = "autofde_lab.hub.domain.mastermind:MasterMind [domains]"
+Maze = "autofde_lab.hub.domain.maze:Maze [domains]"
+RockPaperScissors = "autofde_lab.hub.domain.rock_paper_scissors:RockPaperScissors [domains]"
+SimpleGridWorld = "autofde_lab.hub.domain.simple_grid_world:SimpleGridWorld [domains]"
+ChatmanCleanSession = "autofde_lab.hub.domain.chatman_clean_session:ChatmanCleanSessionDomain"
+FlightPlanningDomain = "autofde_lab.hub.domain.flight_planning:FlightPlanningDomain [domains]"
+MRCPSP = "autofde_lab.hub.domain.rcpsp:MRCPSP [domains]"
+MRCPSPCalendar = "autofde_lab.hub.domain.rcpsp:MRCPSPCalendar [domains]"
+RCPSP = "autofde_lab.hub.domain.rcpsp:RCPSP [domains]"
+RCPSPCalendar = "autofde_lab.hub.domain.rcpsp:RCPSPCalendar [domains]"
+Stochastic_RCPSP = "autofde_lab.hub.domain.rcpsp:Stochastic_RCPSP [domains]"
+SMRCPSPCalendar = "autofde_lab.hub.domain.rcpsp:SMRCPSPCalendar [domains]"
+MSRCPSP = "autofde_lab.hub.domain.rcpsp:MSRCPSP [domains]"
+MSRCPSPCalendar = "autofde_lab.hub.domain.rcpsp:MSRCPSPCalendar [domains]"
+RDDLDomain = "autofde_lab.hub.domain.rddl:RDDLDomain [domains]"
+RDDLDomainRL = "autofde_lab.hub.domain.rddl:RDDLDomainRL [domains]"
+RDDLDomainSimplifiedSpaces = "autofde_lab.hub.domain.rddl:RDDLDomainSimplifiedSpaces [domains]"
+PDDLDomain = "autofde_lab.hub.domain.pddl:PDDLDomain [domains]"
+PPDDLDomain = "autofde_lab.hub.domain.pddl:PPDDLDomain [domains]"
+HTNDomain = "autofde_lab.hub.domain.htn:HTNDomain [domains]"
+TPDDLDomain = "autofde_lab.hub.domain.pddl:TPDDLDomain [pddl]"
+terragoat_remediation = "autofde_lab.hub.domain.terragoat.terragoat_remediation:TerraGoatRemediation [domains]"
+k8s_goat_rbac_escalation = "autofde_lab.hub.domain.k8s_goat_rbac_escalation.k8s_goat_rbac_escalation:K8sGoatRBACEscalation [domains]"
+azuregoat_privesc = "autofde_lab.hub.domain.azuregoat_privesc.azuregoat_privesc:AzureGoatPrivilegeEscalation [domains]"
+cloudgoat_iam_privesc = "autofde_lab.hub.domain.cloudgoat_iam_privesc.cloudgoat_iam_privesc:CloudGoatIamPrivescDomain [domains]"
+fix_git_recovery = "autofde_lab.hub.domain.fix_git.git_recovery:GitRecoveryDomain [domains]"
 
-[project.entry-points."skdecide.solvers"]
-AOstar = "skdecide.hub.solver.aostar:AOstar [solvers]"
-Astar = "skdecide.hub.solver.astar:Astar [solvers]"
-pLRTAstar = "skdecide.hub.solver.lrtastar:LRTAstar [solvers]"
-LRTAstar = "skdecide.hub.solver.lrtdp:LRTAstar [solvers]"
-MCTS = "skdecide.hub.solver.mcts:MCTS [solvers]"
-UCT = "skdecide.hub.solver.mcts:UCT [solvers]"
-AugmentedRandomSearch = "skdecide.hub.solver.ars:AugmentedRandomSearch [solvers]"
-BFWS = "skdecide.hub.solver.bfws:BFWS [solvers]"
-CGP = "skdecide.hub.solver.cgp:CGP [solvers]"
-IW = "skdecide.hub.solver.iw:IW [solvers]"
-RIW = "skdecide.hub.solver.riw:RIW [solvers]"
-LRTDP = "skdecide.hub.solver.lrtdp:LRTDP [solvers]"
-ILAOstar = "skdecide.hub.solver.ilaostar:ILAOstar [solvers]"
-pAstar = "skdecide.hub.solver.p_astar:Astar [solvers]"
-MARTDP = "skdecide.hub.solver.martdp:MARTDP [solvers]"
-MAHD = "skdecide.hub.solver.mahd:MAHD [solvers]"
-MaxentIRL = "skdecide.hub.solver.maxent_irl:MaxentIRL [solvers]"
-POMCP = "skdecide.hub.solver.pomcp:POMCP [solvers]"
-pPOMCP = "skdecide.hub.solver.pomcp:pPOMCP [solvers]"
-RayRLlib = "skdecide.hub.solver.ray_rllib:RayRLlib [solvers]"
-SimpleGreedy = "skdecide.hub.solver.simple_greedy:SimpleGreedy [solvers]"
-StableBaseline = "skdecide.hub.solver.stable_baselines:StableBaseline [solvers]"
-DOSolver = "skdecide.hub.solver.do_solver:DOSolver [solvers]"
-GPHH = "skdecide.hub.solver.do_solver:GPHH [solvers]"
-PilePolicy = "skdecide.hub.solver.pile_policy_scheduling:PilePolicy [solvers]"
-UPSolver = "skdecide.hub.solver.up:UPSolver [solvers]"
-RDDLJaxSolver = "skdecide.hub.solver.rddl:RDDLJaxSolver [solvers]"
-RDDLGurobiSolver = "skdecide.hub.solver.rddl:RDDLGurobiSolver [solvers]"
-VI = "skdecide.hub.solver.vi:VI [solvers]"
-PI = "skdecide.hub.solver.pi:PI [solvers]"
-LDFS = "skdecide.hub.solver.ldfs:LDFS [solvers]"
-IDAstar = "skdecide.hub.solver.ldfs:IDAstar [solvers]"
-RTDPBel = "skdecide.hub.solver.rtdp_bel:RTDPBel [solvers]"
-SSiPP = "skdecide.hub.solver.ssipp:SSiPP [solvers]"
-FRET = "skdecide.hub.solver.fret:FRET [solvers]"
-MDPLP = "skdecide.hub.solver.mdplp:MDPLP [solvers]"
-SSPLP = "skdecide.hub.solver.mdplp:SSPLP [solvers]"
-IDual = "skdecide.hub.solver.idual:IDual [solvers]"
-CIDual = "skdecide.hub.solver.idual:CIDual [solvers]"
-GPCI = "skdecide.hub.solver.gpci:GPCI [solvers]"
-SARSOP = "skdecide.hub.solver.sarsop:SARSOP [solvers]"
-DESPOT = "skdecide.hub.solver.despot:DESPOT [solvers]"
-EHC = "skdecide.hub.solver.ehc:EHC [solvers]"
-FF = "skdecide.hub.solver.pddl.ff:FF [solvers]"
-FFReplan = "skdecide.hub.solver.pddl.ppddlreplan:FFReplan [solvers]"
-PPDDLReplan = "skdecide.hub.solver.pddl.ppddlreplan:PPDDLReplan [solvers]"
-FFDetHindsight = "skdecide.hub.solver.pddl.ppddldethindsight:FFDetHindsight [solvers]"
-PPDDLDetHindsight = "skdecide.hub.solver.pddl.ppddldethindsight:PPDDLDetHindsight [solvers]"
-SSPReplan = "skdecide.hub.solver.sspreplan:SSPReplan [solvers]"
-SSPDetHindsight = "skdecide.hub.solver.sspdethindsight:SSPDetHindsight [solvers]"
-RFF = "skdecide.hub.solver.pddl.ppddlplanmerger:RFF [solvers]"
-PPDDLPlanMerger = "skdecide.hub.solver.pddl.ppddlplanmerger:PPDDLPlanMerger [solvers]"
-SSPPlanMerger = "skdecide.hub.solver.sspplanmerger:SSPPlanMerger [solvers]"
-Witness = "skdecide.hub.solver.witness:Witness [solvers]"
-HSVI = "skdecide.hub.solver.hsvi:HSVI [solvers]"
-GoalHSVI = "skdecide.hub.solver.hsvi:GoalHSVI [solvers]"
-DSPyPolicy = "skdecide.hub.solver.dspy_policy:DSPyPolicy [dspy]"
+[project.entry-points."autofde_lab.solvers"]
+AOstar = "autofde_lab.hub.solver.aostar:AOstar [solvers]"
+Astar = "autofde_lab.hub.solver.astar:Astar [solvers]"
+pLRTAstar = "autofde_lab.hub.solver.lrtastar:LRTAstar [solvers]"
+LRTAstar = "autofde_lab.hub.solver.lrtdp:LRTAstar [solvers]"
+MCTS = "autofde_lab.hub.solver.mcts:MCTS [solvers]"
+UCT = "autofde_lab.hub.solver.mcts:UCT [solvers]"
+AugmentedRandomSearch = "autofde_lab.hub.solver.ars:AugmentedRandomSearch [solvers]"
+BFWS = "autofde_lab.hub.solver.bfws:BFWS [solvers]"
+CGP = "autofde_lab.hub.solver.cgp:CGP [solvers]"
+IW = "autofde_lab.hub.solver.iw:IW [solvers]"
+RIW = "autofde_lab.hub.solver.riw:RIW [solvers]"
+LRTDP = "autofde_lab.hub.solver.lrtdp:LRTDP [solvers]"
+ILAOstar = "autofde_lab.hub.solver.ilaostar:ILAOstar [solvers]"
+pAstar = "autofde_lab.hub.solver.p_astar:Astar [solvers]"
+MARTDP = "autofde_lab.hub.solver.martdp:MARTDP [solvers]"
+MAHD = "autofde_lab.hub.solver.mahd:MAHD [solvers]"
+MaxentIRL = "autofde_lab.hub.solver.maxent_irl:MaxentIRL [solvers]"
+POMCP = "autofde_lab.hub.solver.pomcp:POMCP [solvers]"
+pPOMCP = "autofde_lab.hub.solver.pomcp:pPOMCP [solvers]"
+RayRLlib = "autofde_lab.hub.solver.ray_rllib:RayRLlib [solvers]"
+SimpleGreedy = "autofde_lab.hub.solver.simple_greedy:SimpleGreedy [solvers]"
+StableBaseline = "autofde_lab.hub.solver.stable_baselines:StableBaseline [solvers]"
+DOSolver = "autofde_lab.hub.solver.do_solver:DOSolver [solvers]"
+GPHH = "autofde_lab.hub.solver.do_solver:GPHH [solvers]"
+PilePolicy = "autofde_lab.hub.solver.pile_policy_scheduling:PilePolicy [solvers]"
+UPSolver = "autofde_lab.hub.solver.up:UPSolver [solvers]"
+HDDLSolver = "autofde_lab.hub.solver.hddl:HDDLSolver [hddl]"
+RDDLJaxSolver = "autofde_lab.hub.solver.rddl:RDDLJaxSolver [solvers]"
+RDDLGurobiSolver = "autofde_lab.hub.solver.rddl:RDDLGurobiSolver [solvers]"
+VI = "autofde_lab.hub.solver.vi:VI [solvers]"
+PI = "autofde_lab.hub.solver.pi:PI [solvers]"
+LDFS = "autofde_lab.hub.solver.ldfs:LDFS [solvers]"
+IDAstar = "autofde_lab.hub.solver.ldfs:IDAstar [solvers]"
+RTDPBel = "autofde_lab.hub.solver.rtdp_bel:RTDPBel [solvers]"
+SSiPP = "autofde_lab.hub.solver.ssipp:SSiPP [solvers]"
+FRET = "autofde_lab.hub.solver.fret:FRET [solvers]"
+MDPLP = "autofde_lab.hub.solver.mdplp:MDPLP [solvers]"
+SSPLP = "autofde_lab.hub.solver.mdplp:SSPLP [solvers]"
+IDual = "autofde_lab.hub.solver.idual:IDual [solvers]"
+CIDual = "autofde_lab.hub.solver.idual:CIDual [solvers]"
+GPCI = "autofde_lab.hub.solver.gpci:GPCI [solvers]"
+SARSOP = "autofde_lab.hub.solver.sarsop:SARSOP [solvers]"
+DESPOT = "autofde_lab.hub.solver.despot:DESPOT [solvers]"
+EHC = "autofde_lab.hub.solver.ehc:EHC [solvers]"
+FF = "autofde_lab.hub.solver.pddl.ff:FF [solvers]"
+FFReplan = "autofde_lab.hub.solver.pddl.ppddlreplan:FFReplan [solvers]"
+PPDDLReplan = "autofde_lab.hub.solver.pddl.ppddlreplan:PPDDLReplan [solvers]"
+FFDetHindsight = "autofde_lab.hub.solver.pddl.ppddldethindsight:FFDetHindsight [solvers]"
+PPDDLDetHindsight = "autofde_lab.hub.solver.pddl.ppddldethindsight:PPDDLDetHindsight [solvers]"
+SSPReplan = "autofde_lab.hub.solver.sspreplan:SSPReplan [solvers]"
+SSPDetHindsight = "autofde_lab.hub.solver.sspdethindsight:SSPDetHindsight [solvers]"
+RFF = "autofde_lab.hub.solver.pddl.ppddlplanmerger:RFF [solvers]"
+PPDDLPlanMerger = "autofde_lab.hub.solver.pddl.ppddlplanmerger:PPDDLPlanMerger [solvers]"
+SSPPlanMerger = "autofde_lab.hub.solver.sspplanmerger:SSPPlanMerger [solvers]"
+Witness = "autofde_lab.hub.solver.witness:Witness [solvers]"
+HSVI = "autofde_lab.hub.solver.hsvi:HSVI [solvers]"
+GoalHSVI = "autofde_lab.hub.solver.hsvi:GoalHSVI [solvers]"
+DSPyPolicy = "autofde_lab.hub.solver.dspy_policy:DSPyPolicy [dspy]"
+
+[project.entry-points."gymact.providers"]
+# Real GymAct provider registration. Discovery is metadata-only
+# (gymact.plugins.discover_provider_plugins/load_provider_plugin) --
+# registering here never imports this module ambiently.
+azuregoat_privesc = "autofde_lab.hub.domain.azuregoat_privesc.gymact_bridge:AzureGoatPrivescProvider"
+software_manufacturing = "autofde_lab.agent.software_manufacturing_gymact_bridge:SoftwareManufacturingProvider"
 
 [dependency-groups]
 dev = [
@@ -211,15 +358,30 @@ test = [
     "graph-jsp-env>=1",
     "pytest-cases>=3.8",
     "optuna>=4.5.0",
+    "pytest-xdist>=3.8", # -n for parallel test workers; see Justfile's `test` target
 ]
 
 [tool.uv]
 default-groups = "all"
 
+[tool.uv.sources]
+wasm4pm-compat-pydantic = { git = "https://github.com/seanchatmangpt/wasm4pm-compat.git", rev = "577e2d1d8bdfe27d96f61c63f3ea120994e8bfda", subdirectory = "python" }
+gymact = { git = "https://github.com/seanchatmangpt/gymact.git", rev = "524d0bc8633d8534f500d67f27384ce9368c0863" }
+
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "-ra -q"
 testpaths = ["tests"]
+# Deliberately NOT --import-mode=importlib here, global -- see
+# docs/STATUS.md Pass 6. importlib mode is the correct fix for two real
+# collisions (tests/solvers/cpp/test_pomcp.py vs .../python/test_pomcp.py;
+# a bare-conftest collision touching tests/solvers/python/{openevolve,
+# autoregressive}), but it's measurably slower than the default "prepend"
+# mode (~2.2x: just test went from ~4.8s to ~11s when this was global).
+# just test's --ignore list already excludes every file involved in either
+# collision, so the hot loop never needs it. It's applied per-invocation
+# instead, only on test-full's partitions that actually touch those files
+# -- see the Justfile.
 
 [build-system]
 requires = ["scikit-build-core>=0.11.6,<1"]
@@ -228,8 +390,8 @@ build-backend = "scikit_build_core.build"
 [tool.scikit-build]
 logging.level = "INFO"
 sdist.exclude = ["cpp/tests/data"]
-wheel.packages = ["src/skdecide"]
-wheel.install-dir = "skdecide/hub"
+wheel.packages = ["src/autofde_lab", "src/skdecide"]
+wheel.install-dir = "autofde_lab/hub"
 metadata.version.provider = "scikit_build_core.metadata.setuptools_scm"
 cmake.source-dir = "cpp"
 build-dir = "build/{wheel_tag}"  # speedup rebuilds (https://scikit-build-core.readthedocs.io/en/latest/configuration/index.html#other-options)

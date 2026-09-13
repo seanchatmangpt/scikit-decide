@@ -1,0 +1,37 @@
+@prefix ga: <https://github.com/seanchatmangpt/autofde-lab/ns/gymact#> .
+@prefix data: <https://github.com/seanchatmangpt/autofde-lab/data/gymact/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+data:profile-episodic-step a ga:InteractionProfile ;
+  ga:slug "episodic-step" ;
+  dct:title "Episodic step environment" ;
+  ga:interactionModel "EPISODIC_STEP" ;
+  ga:mapsAdapterFamily "CUBE", "GYMNASIUM", "BROWSERGYM" ;
+  ga:supportsOperation ga:op-discover, ga:op-materialize, ga:op-configure, ga:op-reset,
+    ga:op-start, ga:op-observe, ga:op-act, ga:op-verify, ga:op-score,
+    ga:op-checkpoint, ga:op-restore, ga:op-teardown .
+
+data:profile-task-harness a ga:InteractionProfile ;
+  ga:slug "task-harness" ;
+  dct:title "Task or job harness" ;
+  ga:interactionModel "TASK_HARNESS" ;
+  ga:mapsAdapterFamily "HARBOR", "NATIVE_COMMAND" ;
+  ga:supportsOperation ga:op-discover, ga:op-materialize, ga:op-configure, ga:op-reset,
+    ga:op-start, ga:op-observe, ga:op-act, ga:op-verify, ga:op-score, ga:op-teardown .
+
+data:profile-tool-session a ga:InteractionProfile ;
+  ga:slug "tool-session" ;
+  dct:title "Tool or service session" ;
+  ga:interactionModel "TOOL_SESSION" ;
+  ga:mapsAdapterFamily "MCP" ;
+  ga:supportsOperation ga:op-discover, ga:op-configure, ga:op-start, ga:op-observe,
+    ga:op-act, ga:op-verify, ga:op-score, ga:op-teardown .
+
+data:profile-reconciliation a ga:InteractionProfile ;
+  ga:slug "reconciliation" ;
+  dct:title "Desired-state reconciliation environment" ;
+  ga:interactionModel "RECONCILIATION" ;
+  ga:mapsAdapterFamily "KUBERNETES", "TERRAFORM" ;
+  ga:supportsOperation ga:op-discover, ga:op-materialize, ga:op-configure, ga:op-reset,
+    ga:op-start, ga:op-observe, ga:op-act, ga:op-verify, ga:op-score,
+    ga:op-checkpoint, ga:op-restore, ga:op-teardown .

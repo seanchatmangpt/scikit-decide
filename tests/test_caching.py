@@ -13,7 +13,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from skdecide.caching import (
+from autofde_lab.caching import (
     CacheAdmissionError,
     CacheConfig,
     CacheDisposition,
@@ -722,7 +722,7 @@ def test_custom_key_function_can_project_large_or_unsupported_inputs():
 
 
 def test_persistent_payload_corruption_is_detected(tmp_path):
-    from skdecide.caching import CacheCorruptionError
+    from autofde_lab.caching import CacheCorruptionError
 
     path = tmp_path / "cache.sqlite3"
     first = make_fabric(persistent_path=path)
@@ -792,7 +792,7 @@ def test_cross_process_singleflight_manufactures_once(tmp_path):
         import sqlite3
         import sys
         import time
-        from skdecide.caching import CacheConfig, CacheFabric, MethodPolicy
+        from autofde_lab.caching import CacheConfig, CacheFabric, MethodPolicy
 
         cache_path, counter_path = sys.argv[1], sys.argv[2]
         fabric = CacheFabric(CacheConfig(persistent_path=cache_path))

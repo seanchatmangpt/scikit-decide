@@ -1,0 +1,80 @@
+name: AutoFDE GymAct BRCE crown
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "src/autofde_lab/agent/continuous_planning.py"
+      - "src/autofde_lab/gymact/brce_plan.py"
+      - "tests/agent/test_continuous_planning.py"
+      - "tests/ecosystem/test_autofde_gymact_brce_crown.py"
+      - ".github/workflows/autofde-gymact-brce-crown.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autofde-gymact-brce-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  crown:
+    name: Exact-head AutoFDE -> cached POWL -> GymAct BRCE -> verified world
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # During this PR, pin the exact GymAct feature head that carries the
+      # planned-BRCE API. Before merge this pin is advanced to the merged
+      # GymAct default-branch SHA and the crown is rerun against that identity.
+      GYMACT_SUBJECT_SHA: 574e57b30294aa5f3a64105c767e262b32363417
+      WASM4PM_COMPAT_SHA: 577e2d1d8bdfe27d96f61c63f3ea120994e8bfda
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      - name: Admit exact AutoFDE subject
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="${{ github.event.pull_request.head.sha || github.sha }}"
+          actual="$(git rev-parse HEAD)"
+          test "$actual" = "$expected"
+          printf 'autofde_subject_sha=%s\ngymact_subject_sha=%s\n' "$actual" "$GYMACT_SUBJECT_SHA"
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.13"
+
+      - name: Resolve exact cross-repo validation capsule
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install \
+            "numpy==2.2.6" \
+            "pytest==8.3.5" \
+            "pytest-asyncio>=0.24,<2" \
+            "wrapt>=2.2.1,<3" \
+            "pynng>=0.6.2" \
+            "pathos>=0.2.7" \
+            "discrete-optimization>=0.9.0" \
+            "wasm4pm-compat-pydantic @ git+https://github.com/seanchatmangpt/wasm4pm-compat.git@$WASM4PM_COMPAT_SHA#subdirectory=python" \
+            "gymact @ git+https://github.com/seanchatmangpt/gymact.git@$GYMACT_SUBJECT_SHA"
+          python - <<'PY'
+          import importlib.metadata
+          import gymact.brce
+          import gymact.planning
+          import gymact.runtime
+          print("gymact_version=" + importlib.metadata.version("gymact"))
+          print("wasm4pm_compat_pydantic_version=" + importlib.metadata.version("wasm4pm-compat-pydantic"))
+          PY
+
+      - name: Execute exact continuous-planning and cross-repo crown
+        env:
+          PYTHONPATH: src
+        run: >-
+          python -m pytest -vv
+          tests/agent/test_continuous_planning.py
+          tests/ecosystem/test_autofde_gymact_brce_crown.py

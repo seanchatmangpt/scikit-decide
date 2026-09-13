@@ -1,0 +1,44 @@
+name: SREGym signature court
+
+on:
+  pull_request:
+    paths:
+      - "src/autofde_lab/sregym_sota/**"
+      - "tests/sregym_sota/**"
+      - "scripts/sregym/**"
+      - ".github/workflows/sregym-signature-court.yml"
+      - ".github/workflows/sregym-kind-live.yml"
+      - ".github/workflows/sregym-lite-signature-matrix.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  signature-court:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: "3.12"
+      - name: Install bounded court dependencies
+        run: |
+          python -m pip install \
+            "pytest==8.3.5" \
+            "numpy>=2,<3" \
+            "dspy==3.1.3" \
+            "pydantic>=2.11,<3" \
+            "fastmcp>=3.4,<4"
+      - name: Compile signature rail
+        env:
+          PYTHONPATH: src
+        run: python -m compileall -q src/autofde_lab/sregym_sota scripts/sregym
+      - name: Execute deterministic signature and epistemic court
+        env:
+          PYTHONPATH: src
+        run: python -m pytest -q tests/sregym_sota

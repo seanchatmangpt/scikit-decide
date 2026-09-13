@@ -1,0 +1,18 @@
+C4Context
+title AutoFDE Lab Planner (generalized SOTA target) — System Context
+
+Person(sre, "SRE Operator / Benchmark Harness", "Triggers a diagnosis+mitigation cycle for a live incident.")
+System(planner, "autofde_lab_planner", "Diagnoses and mitigates Kubernetes faults: a generalized structural anomaly scan first, a grounded LLM reasoning fallback second, a case library that learns from both.")
+System_Ext(cluster, "Kubernetes Cluster", "The real, live cluster under investigation — any app, any namespace, not assumed in advance.")
+System_Ext(sregym, "SREGym Benchmark Harness", "Injects one real fault, exposes kubectl/jaeger/submit as MCP tools, scores the real diagnosis/mitigation.")
+System_Ext(groq, "Groq (paid frontier LLM)", "Real reasoning fallback backend — used only when the generalized scan finds no structural anomaly matching a known symptom pattern.")
+System_Ext(ocel_store, "OCEL 2.0 Store", "Real-time process telemetry — every tool call, every trial, queryable while still running.")
+
+Rel(sre, planner, "Starts a diagnosis+mitigation trial")
+Rel(planner, sregym, "Reads real cluster state, submits diagnosis/mitigation via MCP")
+Rel(sregym, cluster, "Injects the real fault, exposes it via kubectl/jaeger")
+Rel(planner, cluster, "Reads structural state (any object kind), applies remediation (kubectl patch/rollout/scale)")
+Rel(planner, groq, "Reasons over a taxonomy-grounded, checklist-filtered anomaly diff — never over raw unfiltered cluster state")
+Rel(planner, ocel_store, "Records every real tool call and outcome, live")
+
+UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")

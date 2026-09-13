@@ -1,0 +1,39 @@
+STAGE: starting run_gymact_mediated_diagnosis
+STAGE: Traceback
+Traceback (most recent call last):
+  File "/private/tmp/claude-501/-Users-sac-autofde-lab/754a422d-d7db-4d7a-9f22-4e46e79e8cc4/scratchpad/run_trial.py", line 17, in main
+    result = await run_gymact_mediated_diagnosis(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+    )
+    ^
+  File "/Users/sac/autofde-lab/src/autofde_lab/reasoning/gymact_diagnosis_driver.py", line 188, in run_gymact_mediated_diagnosis
+    env = await provider.materialize(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<9 lines>...
+    )
+    ^
+  File "/Users/sac/gymact/src/gymact/gyms/sregym.py", line 478, in materialize
+    return await loop.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<12 lines>...
+    )
+    ^
+  File "/Users/sac/.local/share/uv/python/cpython-3.13.9-macos-aarch64-none/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/sac/gymact/src/gymact/gyms/sregym.py", line 480, in <lambda>
+    lambda: SregymEnvironment(
+            ~~~~~~~~~~~~~~~~~^
+        root=audit.root,
+        ^^^^^^^^^^^^^^^^
+    ...<7 lines>...
+        requires_authority=resolved["requires_authority"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ),
+    ^
+  File "/Users/sac/gymact/src/gymact/gyms/sregym.py", line 247, in __init__
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: sregym conductor API at http://127.0.0.1:8002 did not become ready within 120.0s: last_error=ConnectError('[Errno 61] Connection refused')
+RETURNCODE: 1
