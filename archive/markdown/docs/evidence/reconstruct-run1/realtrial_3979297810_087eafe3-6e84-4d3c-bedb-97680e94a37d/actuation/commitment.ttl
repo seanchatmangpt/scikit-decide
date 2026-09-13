@@ -1,0 +1,8 @@
+@prefix powl: <urn:powl:> .
+<urn:trial:087eafe3-6e84-4d3c-bedb-97680e94a37d> a powl:Commitment ;
+    powl:planDigest "220f81bf978fe490" ;
+    powl:modelDigest "3ac9d7f320c4c633" ;
+    powl:planLength 4 ;
+    powl:sequence ("mine" "refine" "assemble" "burn_catalyst") ;
+    powl:episodeId "ab4b4780a73b42c98ef11dba791f55ac" ;
+    powl:environmentId "urn:gymact:resource-flow:environment:7855fadd3abd4583b27130c836b77f99" .

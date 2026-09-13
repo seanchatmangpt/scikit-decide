@@ -1,0 +1,8 @@
+{
+  "schema": "ggen.fanout-realization-control/1",
+  "authority": "SELECT|CONSTRUCT|VERIFY",
+  "actuation_performed": false,
+  "frontier": [
+  {"realization":"https://ggen.dev/ontology/fanout-realization-control#rA","edge":"https://ggen.dev/ontology/manufacturing-fanout#edgeA","realized_actions":4,"investment":1,"dependency_relief":3,"realized_y":4},{"realization":"https://ggen.dev/ontology/fanout-realization-control#rB","edge":"https://ggen.dev/ontology/manufacturing-fanout#edgeB","realized_actions":2,"investment":1,"dependency_relief":2,"realized_y":2}
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "ggen.capability-lineage-propagation/1",
+  "authority": "CONSTRUCT",
+  "actuation_performed": false,
+  "force_push_allowed": false,
+  "plans": [
+  {"plan":"https://ggen.dev/ontology/capability-lineage-propagation#referencePlan","capability":"https://ggen.dev/ontology/capability-lineage-propagation#referenceCapability","edges":3}
+  ]
+}

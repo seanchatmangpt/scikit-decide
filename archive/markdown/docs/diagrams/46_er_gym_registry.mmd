@@ -1,0 +1,44 @@
+erDiagram
+    GYM ||--o{ PROVIDER : implemented_by
+    PROVIDER ||--o{ CAPABILITY : exposes
+    PROVIDER ||--o{ DEPENDENCY_REQUIREMENT : requires
+    PROVIDER ||--o{ AUTHORITY_REQUIREMENT : requires
+    GYM ||--o{ PROJECTION : supports
+    GYM ||--|| VERIFICATION_CONTRACT : verified_by
+
+    GYM {
+      string gym_id PK
+      string basis_version
+      string risk_class
+    }
+    PROVIDER {
+      string provider_id PK
+      string module_path
+      string class_name
+      boolean materialization_requires_authority
+    }
+    CAPABILITY {
+      string capability_id PK
+      string binding
+      string payload_schema
+    }
+    DEPENDENCY_REQUIREMENT {
+      string dependency_id PK
+      string name
+      string freshness_policy
+    }
+    AUTHORITY_REQUIREMENT {
+      string authority_id PK
+      string scope
+      string risk_class
+    }
+    PROJECTION {
+      string projection_id PK
+      string kind
+      string information_loss
+    }
+    VERIFICATION_CONTRACT {
+      string verification_id PK
+      string postcondition_ref
+      boolean replay_required
+    }

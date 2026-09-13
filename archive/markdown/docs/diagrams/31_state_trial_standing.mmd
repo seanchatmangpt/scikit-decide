@@ -1,0 +1,28 @@
+stateDiagram-v2
+    [*] --> Created
+    Created --> Discovering: trial admitted
+    Discovering --> Modelled: sufficient model learned
+    Discovering --> Unknown: no applicable action / insufficient evidence
+    Discovering --> Blocked: dependency or authority refusal
+
+    Modelled --> Planned: valid plan found
+    Modelled --> Unknown: search budget exhausted
+    Modelled --> Refused: model/projection refused
+
+    Planned --> Committed: governed candidate admitted
+    Planned --> Refused: governance rejects candidate
+
+    Committed --> Executing
+    Executing --> ConsequenceObserved: real actuation succeeds
+    Executing --> Blocked: materialization/authority/dependency refusal
+    Executing --> Failed: provider execution failure
+
+    ConsequenceObserved --> Verifying
+    Verifying --> Level4Alive: SHACL + identity + replay + postcondition pass
+    Verifying --> Failed: falsifier / identity / replay / postcondition failure
+
+    Unknown --> [*]
+    Refused --> [*]
+    Blocked --> [*]
+    Failed --> [*]
+    Level4Alive --> [*]

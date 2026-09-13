@@ -1,0 +1,33 @@
+{
+  "probe_log": [
+    {
+      "action": "increment",
+      "applicable": false,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=0",
+        "solved=False",
+        "steps=0",
+        "target=3"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    },
+    {
+      "action": "decrement",
+      "applicable": false,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=0",
+        "solved=False",
+        "steps=0",
+        "target=3"
+      ],
+      "delta_added": [],
+      "delta_removed": []
+    }
+  ],
+  "representation_losses": {
+    "reward": "UNREPRESENTABLE:CONTINUOUS_DIMENSION_HAS_NO_SOUND_PROPOSITIONAL_ENCODING"
+  }
+}

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+slug="${1:?usage: probe-gyms.sh <vendor-slug>}"
+case "$slug" in
+{%- for row in sparql_results %}
+  {{ row.slug }})
+    test -d {{ row["path"] | default(value="") | json_encode() }}
+    actual="$(git -C {{ row["path"] | default(value="") | json_encode() }} rev-parse HEAD)"
+    expected={{ row["pinned_revision"] | default(value="") | json_encode() }}
+    if [[ -n "$expected" && "$actual" != "$expected" ]]; then echo "REFUSED:GITLINK_DRIFT:$slug:$actual:$expected" >&2; exit 65; fi
+    echo "PINNED:$slug:$actual"
+    ;;
+{%- endfor %}
+  *) echo "REFUSED:UNKNOWN_FORWARD_BENCH_VENDOR:$slug" >&2; exit 64 ;;
+esac

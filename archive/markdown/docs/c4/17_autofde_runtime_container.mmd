@@ -1,0 +1,27 @@
+C4Container
+title AutoFDE Runtime — Containers
+
+Person(operator, "Authorized Operator")
+System_Ext(lab, "AutoFDE SOTA Lab")
+System_Ext(ggen, "ggen")
+System_Ext(gymact, "GymAct")
+
+System_Boundary(runtime, "AutoFDE Runtime") {
+  Container(bundle_loader, "Bundle Loader", "Rust", "Loads digest-pinned generated bundle.")
+  Container(admission, "Admission Gate", "Rust", "Validates plan/policy/bundle standing before execution.")
+  Container(authority, "Authority Gate", "Rust", "Checks execution authority and bounded scope.")
+  Container(executor, "Execution Engine", "Rust", "Executes only admitted actions through GymAct.")
+  Container(receipt, "Receipt Writer", "Rust", "Writes append-only identity-bound execution receipts.")
+  Container(replay, "Replay Exporter", "Rust", "Exports deterministic replay material.")
+}
+
+Rel(lab, ggen, "Admitted candidate")
+Rel(ggen, bundle_loader, "Generated bundle")
+Rel(bundle_loader, admission, "Bundle + manifest")
+Rel(operator, authority, "Authority envelope")
+Rel(admission, authority, "Admitted execution intent")
+Rel(authority, executor, "Authorized DO")
+Rel(executor, gymact, "Actuate / observe")
+Rel(executor, receipt, "Execution facts")
+Rel(receipt, replay, "Receipt chain")
+Rel(replay, lab, "Evidence back to lab")

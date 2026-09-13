@@ -1,0 +1,538 @@
+{
+  "manifest_digest": "64121fbac6f4cfe29b0b68bf138c9c3f2f7d466dc61294bdde9772947587c7de",
+  "denominator": 10,
+  "attempts": [
+    {
+      "attempt_index": 7,
+      "repair_note": "task C rerun, authoritative Standing scoring path",
+      "alive": 0,
+      "standing": {
+        "standing": "UNKNOWN_SET",
+        "alive": [],
+        "unknown": [
+          69813132,
+          663999732,
+          890266799,
+          1327771368,
+          1382812562,
+          1635849486,
+          1645242857,
+          1811868735,
+          3979297810,
+          4064909771
+        ],
+        "not_alive": [],
+        "unwitnessed": [],
+        "foreign": []
+      },
+      "results": [
+        {
+          "seed": 890266799,
+          "run_id": "d553610a-12cf-4dbf-852c-49b06a62bda7",
+          "provider": "cube_counter",
+          "n_probes": 6,
+          "n_planner_attempts": 49,
+          "planners_producing_candidates": [],
+          "disagreement_detected": false,
+          "ocel_ref_violations": [],
+          "replay_mismatches": [],
+          "evidence_dir": "/Users/sac/autofde-lab/docs/evidence/crown1/attempt7/realtrial_890266799_d553610a-12cf-4dbf-852c-49b06a62bda7",
+          "representation_losses": {
+            "reward": "UNREPRESENTABLE:CONTINUOUS_DIMENSION_HAS_NO_SOUND_PROPOSITIONAL_ENCODING"
+          },
+          "n_supported_solvers": 49,
+          "committed_plan": [],
+          "discriminating_probe": null,
+          "step_standings": [],
+          "outcome": "NO_TYPED_VALID_PLAN",
+          "goal_predicate_description": "MODEL goal (base dimensions): counter == target (5); REAL goal: solved is True in the post-execution observation",
+          "typed_derived_dimensions": [
+            "counter"
+          ],
+          "unsound_candidates_rejected": 0,
+          "committed_plan_source": "",
+          "final_state": {},
+          "replay_record_count": 0,
+          "replay_error": null,
+          "ocel_digest": "",
+          "replay_head_digest": null,
+          "standing": {
+            "variant": "UnknownEvidence",
+            "missing": "NO_TYPED_VALID_PLAN",
+            "episode_digest": null
+          }
+        },
+        {
+          "seed": 4064909771,
+          "run_id": "e19881bf-2f9f-4944-a76c-8cd6234ad487",
+          "provider": "switchboard",
+          "n_probes": 12,
+          "n_planner_attempts": 49,
+          "planners_producing_candidates": [],
+          "disagreement_detected": false,
+          "ocel_ref_violations": [],
+          "replay_mismatches": [],
+          "evidence_dir": "/Users/sac/autofde-lab/docs/evidence/crown1/attempt7/realtrial_4064909771_e19881bf-2f9f-4944-a76c-8cd6234ad487",
+          "representation_losses": {},
+          "n_supported_solvers": 49,
+          "committed_plan": [],
+          "discriminating_probe": null,
+          "step_standings": [],
+          "outcome": "NO_TYPED_VALID_PLAN",
+          "goal_predicate_description": "MODEL goal (base dimensions): master and required_on == required_count; REAL goal: solved is True in the post-execution observation",
+          "typed_derived_dimensions": [
+            "required_on",
+            "toggles"
+          ],
+          "unsound_candidates_rejected": 0,
+          "committed_plan_source": "",
+          "final_state": {},
+          "replay_record_count": 0,
+          "replay_error": null,
+          "ocel_digest": "",
+          "replay_head_digest": null,
+          "standing": {
+            "variant": "UnknownEvidence",
+            "missing": "NO_TYPED_VALID_PLAN",
+            "episode_digest": null
+          }
+        },
+        {
+          "seed": 3979297810,
+          "run_id": "b6977405-e017-4d5f-9cb3-1d0364f136b5",
+          "provider": "resource_flow",
+          "n_probes": 12,
+          "n_planner_attempts": 49,
+          "planners_producing_candidates": [],
+          "disagreement_detected": false,
+          "ocel_ref_violations": [],
+          "replay_mismatches": [],
+          "evidence_dir": "/Users/sac/autofde-lab/docs/evidence/crown1/attempt7/realtrial_3979297810_b6977405-e017-4d5f-9cb3-1d0364f136b5",
+          "representation_losses": {},
+          "n_supported_solvers": 49,
+          "committed_plan": [
+            "mine",
+            "refine",
+            "assemble",
+            "burn_catalyst"
+          ],
+          "discriminating_probe": null,
+          "step_standings": [
+            "ALIVE",
+            "ALIVE",
+            "ALIVE",
+            "ALIVE"
+          ],
+          "outcome": "EXECUTED",
+          "goal_predicate_description": "MODEL goal (base dimensions): output >= target (3); REAL goal: solved is True in the post-execution observation",
+          "typed_derived_dimensions": [],
+          "unsound_candidates_rejected": 0,
+          "committed_plan_source": "typed_search",
+          "final_state": {
+            "raw": 0,
+            "refined": 0,
+            "output": 3,
+            "catalyst": false,
+            "capacity": 4,
+            "target": 3,
+            "mine_rate": 1,
+            "solved": true,
+            "dead_end": false
+          },
+          "replay_record_count": 9,
+          "replay_error": null,
+          "ocel_digest": "f5aed20566c2db5a413f0d9a9996c38ac562055c6fd5e5adff67d2ebc86d9ee6",
+          "replay_head_digest": "d0ab3e7eca1c14eb3b1f42020eeda8337e59ed62015a6835925159bd9c65096e",
+          "standing": {
+            "variant": "Level4AliveEvidence",
+            "conformant": {
+              "episode_digest": "f5aed20566c2db5a413f0d9a9996c38ac562055c6fd5e5adff67d2ebc86d9ee6",
+              "conformance": {
+                "conformant": true,
+                "deviations": []
+              },
+              "replay": {
+                "mode": "EVIDENCE_REPLAY",
+                "valid": true,
+                "record_count": 9,
+                "head_digest": "d0ab3e7eca1c14eb3b1f42020eeda8337e59ed62015a6835925159bd9c65096e",
+                "mismatches": []
+              },
+              "receipt_id": "22a08c303a3043a1bc8f27a498c62c06",
+              "postcondition_ref": "final_expected_postcondition:[{\"catalyst\": true, \"output\": 0, \"raw\": 1, \"refined\": 0, \"solved\": false}, {\"catalyst\": true, \"output\": 0, \"raw\": 0, \"refined\": 1, \"solved\": false}, {\"catalyst\": true, \"output\": 1, \"raw\": 0, \"refined\": 0, \"solved\": false}, {\"catalyst\": false, \"raw\": 0, \"refined\": 0}]"
+            },
+            "goal": {
+              "verification_id": "5bb77e5635894d0a98a5338c9dc9496e",
+              "passed": true,
+              "expected_digest": "05dcaf409455262903ba5212629c8b86d20188a076e412c1c9970b644bf1e99c",
+              "observed_digest": "bdfa798ca70f120268453caa80f0c521b3fd56cc0b5d0099ec16b691632263f3",
+              "state_digest": "a4ca95551a3e36d79f529af08329fcdf4328ec0dfa806e84d2e330d53dd47ca9"
+            }
+          }
+        },
+        {
+          "seed": 1811868735,
+          "run_id": "3f541f2a-f04e-4b19-873a-1de7a81d400e",
+          "provider": "lock_and_key",
+          "n_probes": 12,
+          "n_planner_attempts": 49,
+          "planners_producing_candidates": [],
+          "disagreement_detected": false,
+          "ocel_ref_violations": [],
+          "replay_mismatches": [],
+          "evidence_dir": "/Users/sac/autofde-lab/docs/evidence/crown1/attempt7/realtrial_1811868735_3f541f2a-f04e-4b19-873a-1de7a81d400e",
+          "representation_losses": {},
+          "n_supported_solvers": 49,
+          "committed_plan": [],
+          "discriminating_probe": null,
+          "step_standings": [],
+          "outcome": "NO_TYPED_VALID_PLAN",
+          "goal_predicate_description": "MODEL goal (base dimensions): locks_open == depth (3); REAL goal: solved is True in the post-execution observation",
+          "typed_derived_dimensions": [],
+          "unsound_candidates_rejected": 0,
+          "committed_plan_source": "",
+          "final_state": {},
+          "replay_record_count": 0,
+          "replay_error": null,
+          "ocel_digest": "",
+          "replay_head_digest": null,
+          "standing": {
+            "variant": "UnknownEvidence",
+            "missing": "NO_TYPED_VALID_PLAN",
+            "episode_digest": null
+          }
+        },
+        {
+          "seed": 1635849486,
+          "run_id": "1bdd734b-ea20-4763-aee5-369e983d4fd3",
+          "provider": "cube_container_counter",
+          "n_probes": 4,
+          "n_planner_attempts": 49,
+          "planners_producing_candidates": [],
+          "disagreement_detected": false,
+          "ocel_ref_violations": [],
+          "replay_mismatches": [],
+          "evidence_dir": "/Users/sac/autofde-lab/docs/evidence/crown1/attempt7/realtrial_1635849486_1bdd734b-ea20-4763-aee5-369e983d4fd3",
+          "representation_losses": {
+            "reward": "UNREPRESENTABLE:CONTINUOUS_DIMENSION_HAS_NO_SOUND_PROPOSITIONAL_ENCODING"
+          },
+          "n_supported_solvers": 49,
+          "committed_plan": [],
+          "discriminating_probe": null,
+          "step_standings": [],
+          "outcome": "NO_TYPED_VALID_PLAN",
+          "goal_predicate_description": "MODEL goal (base dimensions): counter == target (3); REAL goal: solved is True in the post-execution observation",
+          "typed_derived_dimensions": [
+            "counter"
+          ],
+          "unsound_candidates_rejected": 0,
+          "committed_plan_source": "",
+          "final_state": {},
+          "replay_record_count": 0,
+          "replay_error": null,
+          "ocel_digest": "",
+          "replay_head_digest": null,
+          "standing": {
+            "variant": "UnknownEvidence",
+            "missing": "NO_TYPED_VALID_PLAN",
+            "episode_digest": null
+          }
+        },
+        {
+          "seed": 1645242857,
+          "run_id": "2a6aaea2-3b19-4e8b-b43d-38cb2bfa985f",
+          "provider": "cube_counter",
+          "n_probes": 6,
+          "n_planner_attempts": 49,
+          "planners_producing_candidates": [],
+          "disagreement_detected": false,
+          "ocel_ref_violations": [],
+          "replay_mismatches": [],
+          "evidence_dir": "/Users/sac/autofde-lab/docs/evidence/crown1/attempt7/realtrial_1645242857_2a6aaea2-3b19-4e8b-b43d-38cb2bfa985f",
+          "representation_losses": {
+            "reward": "UNREPRESENTABLE:CONTINUOUS_DIMENSION_HAS_NO_SOUND_PROPOSITIONAL_ENCODING"
+          },
+          "n_supported_solvers": 49,
+          "committed_plan": [],
+          "discriminating_probe": null,
+          "step_standings": [],
+          "outcome": "NO_TYPED_VALID_PLAN",
+          "goal_predicate_description": "MODEL goal (base dimensions): counter == target (3); REAL goal: solved is True in the post-execution observation",
+          "typed_derived_dimensions": [
+            "counter"
+          ],
+          "unsound_candidates_rejected": 0,
+          "committed_plan_source": "",
+          "final_state": {},
+          "replay_record_count": 0,
+          "replay_error": null,
+          "ocel_digest": "",
+          "replay_head_digest": null,
+          "standing": {
+            "variant": "UnknownEvidence",
+            "missing": "NO_TYPED_VALID_PLAN",
+            "episode_digest": null
+          }
+        },
+        {
+          "seed": 1327771368,
+          "run_id": "b7c93a3b-9731-474f-bcb8-267079aab8d7",
+          "provider": "switchboard",
+          "n_probes": 12,
+          "n_planner_attempts": 49,
+          "planners_producing_candidates": [],
+          "disagreement_detected": false,
+          "ocel_ref_violations": [],
+          "replay_mismatches": [],
+          "evidence_dir": "/Users/sac/autofde-lab/docs/evidence/crown1/attempt7/realtrial_1327771368_b7c93a3b-9731-474f-bcb8-267079aab8d7",
+          "representation_losses": {},
+          "n_supported_solvers": 49,
+          "committed_plan": [],
+          "discriminating_probe": null,
+          "step_standings": [],
+          "outcome": "NO_TYPED_VALID_PLAN",
+          "goal_predicate_description": "MODEL goal (base dimensions): master and required_on == required_count; REAL goal: solved is True in the post-execution observation",
+          "typed_derived_dimensions": [
+            "required_on",
+            "toggles"
+          ],
+          "unsound_candidates_rejected": 0,
+          "committed_plan_source": "",
+          "final_state": {},
+          "replay_record_count": 0,
+          "replay_error": null,
+          "ocel_digest": "",
+          "replay_head_digest": null,
+          "standing": {
+            "variant": "UnknownEvidence",
+            "missing": "NO_TYPED_VALID_PLAN",
+            "episode_digest": null
+          }
+        },
+        {
+          "seed": 663999732,
+          "run_id": "88c4b0f0-861d-4664-b5d9-8f99624654c1",
+          "provider": "resource_flow",
+          "n_probes": 12,
+          "n_planner_attempts": 49,
+          "planners_producing_candidates": [
+            "AOstar",
+            "Astar",
+            "BFWS",
+            "DESPOT",
+            "EHC",
+            "FRET",
+            "GPCI",
+            "IDAstar",
+            "IDual",
+            "ILAOstar",
+            "IW",
+            "LDFS",
+            "LRTAstar",
+            "LRTDP",
+            "PI",
+            "POMCP",
+            "RTDPBel",
+            "SSPDetHindsight",
+            "SSPPlanMerger",
+            "SSPReplan",
+            "SSiPP",
+            "SimpleGreedy",
+            "VI",
+            "pAstar",
+            "pLRTAstar"
+          ],
+          "disagreement_detected": false,
+          "ocel_ref_violations": [],
+          "replay_mismatches": [],
+          "evidence_dir": "/Users/sac/autofde-lab/docs/evidence/crown1/attempt7/realtrial_663999732_88c4b0f0-861d-4664-b5d9-8f99624654c1",
+          "representation_losses": {},
+          "n_supported_solvers": 49,
+          "committed_plan": [
+            "burn_catalyst"
+          ],
+          "discriminating_probe": null,
+          "step_standings": [
+            "ALIVE"
+          ],
+          "outcome": "EXECUTED",
+          "goal_predicate_description": "MODEL goal (base dimensions): output >= target (2); REAL goal: solved is True in the post-execution observation",
+          "typed_derived_dimensions": [],
+          "unsound_candidates_rejected": 0,
+          "committed_plan_source": "federation:AOstar",
+          "final_state": {
+            "raw": 0,
+            "refined": 0,
+            "output": 2,
+            "catalyst": false,
+            "capacity": 4,
+            "target": 2,
+            "mine_rate": 1,
+            "solved": true,
+            "dead_end": false
+          },
+          "replay_record_count": 3,
+          "replay_error": null,
+          "ocel_digest": "1ca8742c48862b1e201c4dbedeb5384712380f5cc13de3de48e5645497568731",
+          "replay_head_digest": "08482bf9161aace2869005703da849b23adeca9f039710a81e5ff66360735c6b",
+          "standing": {
+            "variant": "Level4AliveEvidence",
+            "conformant": {
+              "episode_digest": "1ca8742c48862b1e201c4dbedeb5384712380f5cc13de3de48e5645497568731",
+              "conformance": {
+                "conformant": true,
+                "deviations": []
+              },
+              "replay": {
+                "mode": "EVIDENCE_REPLAY",
+                "valid": true,
+                "record_count": 3,
+                "head_digest": "08482bf9161aace2869005703da849b23adeca9f039710a81e5ff66360735c6b",
+                "mismatches": []
+              },
+              "receipt_id": "6b1181b79b1747d58030337c3f429d1b",
+              "postcondition_ref": "final_expected_postcondition:[{\"catalyst\": false, \"raw\": 0, \"refined\": 0}]"
+            },
+            "goal": {
+              "verification_id": "c23a1a5677644cd491e7fbd72a9fc569",
+              "passed": true,
+              "expected_digest": "05dcaf409455262903ba5212629c8b86d20188a076e412c1c9970b644bf1e99c",
+              "observed_digest": "29832a192e8c40b9155145495ca109e99bea04c9d4280213c18a38315f5840bd",
+              "state_digest": "51a37f17c34bb13c0a46c5955bfd3b4f021f0d694380757ada0103c493768859"
+            }
+          }
+        },
+        {
+          "seed": 1382812562,
+          "run_id": "f9a935fd-aef4-4c34-ab8b-36de607f4aa1",
+          "provider": "lock_and_key",
+          "n_probes": 12,
+          "n_planner_attempts": 49,
+          "planners_producing_candidates": [],
+          "disagreement_detected": false,
+          "ocel_ref_violations": [],
+          "replay_mismatches": [],
+          "evidence_dir": "/Users/sac/autofde-lab/docs/evidence/crown1/attempt7/realtrial_1382812562_f9a935fd-aef4-4c34-ab8b-36de607f4aa1",
+          "representation_losses": {},
+          "n_supported_solvers": 49,
+          "committed_plan": [
+            "force_latch",
+            "pick_key[key=1]",
+            "open_lock"
+          ],
+          "discriminating_probe": null,
+          "step_standings": [
+            "ALIVE",
+            "REFUSED",
+            "REFUSED"
+          ],
+          "outcome": "EXECUTED",
+          "goal_predicate_description": "MODEL goal (base dimensions): locks_open == depth (2); REAL goal: solved is True in the post-execution observation",
+          "typed_derived_dimensions": [],
+          "unsound_candidates_rejected": 0,
+          "committed_plan_source": "typed_search",
+          "final_state": {
+            "depth": 2,
+            "locks_open": 1,
+            "held_key": -1,
+            "holding_key": false,
+            "rack_jammed": true,
+            "final_open": false,
+            "solved": false,
+            "dead_end": false
+          },
+          "replay_record_count": 7,
+          "replay_error": null,
+          "ocel_digest": "5534f1f61e88ad28ef16f0d3b5d75e0bd775e663ee1f51d6936c5ca2c1e100f4",
+          "replay_head_digest": "73c8822deacc6fcacc127efe9cfef17d89629691e327a94ee583eccb88c213b7",
+          "standing": {
+            "variant": "ConformantButGoalUnmetEvidence",
+            "conformant": {
+              "episode_digest": "5534f1f61e88ad28ef16f0d3b5d75e0bd775e663ee1f51d6936c5ca2c1e100f4",
+              "conformance": {
+                "conformant": true,
+                "deviations": []
+              },
+              "replay": {
+                "mode": "EVIDENCE_REPLAY",
+                "valid": true,
+                "record_count": 7,
+                "head_digest": "73c8822deacc6fcacc127efe9cfef17d89629691e327a94ee583eccb88c213b7",
+                "mismatches": []
+              },
+              "receipt_id": "74f7b24b797a4ae8b13e3d98db475bb9",
+              "postcondition_ref": "final_expected_postcondition:[{\"held_key\": -1, \"holding_key\": false, \"locks_open\": 1, \"rack_jammed\": true, \"solved\": false}, {\"held_key\": 1, \"holding_key\": true, \"locks_open\": 1, \"rack_jammed\": true, \"solved\": false}, {\"held_key\": -1, \"holding_key\": false, \"locks_open\": 2, \"rack_jammed\": true, \"solved\": true}]"
+            },
+            "goal": {
+              "verification_id": "715b53f25ee14c83aa92761ad5dc9257",
+              "passed": false,
+              "expected_digest": "b3991d4ea84c8fa9c25e8df2aa0539175fd35f59f3376a802175915f877bf109",
+              "observed_digest": "431cdf63e3743587ca998d47d816767765621bfac015ab09e591b719a5a71ff2",
+              "state_digest": "2274209427a8a8457470d1a2120afb76ee6c266f121ec4cef21424b19d9017f4"
+            },
+            "reason": "GOAL_CONSEQUENCE_REPORTED_FALSE:verification_id=715b53f25ee14c83aa92761ad5dc9257"
+          }
+        },
+        {
+          "seed": 69813132,
+          "run_id": "0064ca4a-81cb-4639-9453-5f5e8bcee58f",
+          "provider": "cube_container_counter",
+          "n_probes": 4,
+          "n_planner_attempts": 49,
+          "planners_producing_candidates": [],
+          "disagreement_detected": false,
+          "ocel_ref_violations": [],
+          "replay_mismatches": [],
+          "evidence_dir": "/Users/sac/autofde-lab/docs/evidence/crown1/attempt7/realtrial_69813132_0064ca4a-81cb-4639-9453-5f5e8bcee58f",
+          "representation_losses": {
+            "reward": "UNREPRESENTABLE:CONTINUOUS_DIMENSION_HAS_NO_SOUND_PROPOSITIONAL_ENCODING"
+          },
+          "n_supported_solvers": 49,
+          "committed_plan": [],
+          "discriminating_probe": null,
+          "step_standings": [],
+          "outcome": "NO_TYPED_VALID_PLAN",
+          "goal_predicate_description": "MODEL goal (base dimensions): counter == target (3); REAL goal: solved is True in the post-execution observation",
+          "typed_derived_dimensions": [
+            "counter"
+          ],
+          "unsound_candidates_rejected": 0,
+          "committed_plan_source": "",
+          "final_state": {},
+          "replay_record_count": 0,
+          "replay_error": null,
+          "ocel_digest": "",
+          "replay_head_digest": null,
+          "standing": {
+            "variant": "UnknownEvidence",
+            "missing": "NO_TYPED_VALID_PLAN",
+            "episode_digest": null
+          }
+        }
+      ]
+    }
+  ],
+  "history": [
+    "attempt 7: 0/10 ALIVE (ALIVE=0 UNKNOWN=10 NOT_ALIVE=0) [task C rerun, authoritative Standing scoring path]"
+  ],
+  "standing": {
+    "standing": "UNKNOWN_SET",
+    "alive": [],
+    "unknown": [
+      69813132,
+      663999732,
+      890266799,
+      1327771368,
+      1382812562,
+      1635849486,
+      1645242857,
+      1811868735,
+      3979297810,
+      4064909771
+    ],
+    "not_alive": [],
+    "unwitnessed": [],
+    "foreign": []
+  },
+  "complete": false
+}

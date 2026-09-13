@@ -1,0 +1,109 @@
+[project]
+name = "autofde-forwardbench-corpus"
+version = "0.1.0"
+description = "RDF-first ForwardBench paper/gym registry and generated AutoFDE integration surfaces."
+authors = ["AutoFDE Lab"]
+license = "MIT"
+
+[ontology]
+source = "papers.ttl"
+imports = ["ontology/forwardbench-vocab.ttl", "gym-lock.ttl", "paper-lock.ttl", "smoke-lock.ttl"]
+base_iri = "https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/"
+
+[ontology.prefixes]
+afb = "https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#"
+dct = "http://purl.org/dc/terms/"
+fabio = "http://purl.org/spar/fabio/"
+bibo = "http://purl.org/ontology/bibo/"
+cito = "http://purl.org/spar/cito/"
+doap = "http://usefulinc.com/ns/doap#"
+prov = "http://www.w3.org/ns/prov#"
+pplan = "http://purl.org/net/p-plan#"
+dcat = "http://www.w3.org/ns/dcat#"
+skos = "http://www.w3.org/2004/02/skos/core#"
+schema = "https://schema.org/"
+
+[generation]
+output_dir = "."
+
+[[generation.rules]]
+name = "vendors-tsv"
+query = { file = "queries/vendors.rq" }
+template = { file = "templates/vendors.tsv.tera" }
+output_file = "generated/forwardbench/vendors.tsv"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "registry-json"
+query = { file = "queries/benchmarks.rq" }
+template = { file = "templates/registry.json.tera" }
+output_file = "generated/forwardbench/registry.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "papers-json"
+query = { file = "queries/papers.rq" }
+template = { file = "templates/papers.json.tera" }
+output_file = "generated/forwardbench/papers.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "paper-ids"
+query = { file = "queries/papers.rq" }
+template = { file = "templates/paper-ids.txt.tera" }
+output_file = "generated/forwardbench/paper-ids.txt"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "benchmark-matrix"
+query = { file = "queries/benchmarks.rq" }
+template = { file = "templates/matrix.md.tera" }
+output_file = "generated/forwardbench/BENCHMARK_MATRIX.md"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "mcp-tools"
+query = { file = "queries/benchmarks.rq" }
+template = { file = "templates/mcp-tools.json.tera" }
+output_file = "generated/forwardbench/mcp-tools.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "plans"
+query = { file = "queries/plans.rq" }
+template = { file = "templates/plans.json.tera" }
+output_file = "generated/forwardbench/plans.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "sync-gyms"
+query = { file = "queries/vendors.rq" }
+template = { file = "templates/sync-gyms.sh.tera" }
+output_file = "generated/forwardbench/sync-gyms.sh"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "probe-gyms"
+query = { file = "queries/vendors.rq" }
+template = { file = "templates/probe-gyms.sh.tera" }
+output_file = "generated/forwardbench/probe-gyms.sh"
+mode = "Overwrite"
+
+[validation]
+gates = ["queries/gate-required-fields.rq"]
+strict_mode = true
+
+[sync]
+enabled = true
+on_change = "manual"
+validate_after = true
+conflict_mode = "fail"
+
+[rdf]
+formats = ["turtle"]
+default_format = "turtle"
+strict_validation = false
+
+[templates]
+enable_caching = true
+auto_reload = true
