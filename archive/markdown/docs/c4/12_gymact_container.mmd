@@ -1,0 +1,34 @@
+C4Container
+title GymAct — Containers
+
+Person(decision, "Agent / Planner / Policy / Program")
+System_Ext(lab, "AutoFDE SOTA Lab")
+System_Ext(runtime, "AutoFDE Runtime")
+System_Ext(worlds, "External Environments")
+System_Ext(ggen, "ggen")
+
+System_Boundary(gymact, "GymAct") {
+  Container(adapters, "Environment Adapters", "Python", "Wraps BrowserGym, OSWorld, Terraform, Kubernetes, local gyms, business process gyms, and other providers.")
+  Container(basis, "GymBasis Core", "Python / RDF", "Canonical world/state/observation/capability/authority/transition/goal/invariant/evidence/budget model.")
+  Container(projector, "Projection Engine", "Python", "Produces typed, textual, PDDL, numeric, and process views.")
+  Container(exec, "Execution Kernel", "Python", "Materializes environments, exposes capabilities, applies actions, and observes consequences.")
+  Container(verify, "Verification & Replay", "Python / RDF", "Independent postconditions, receipts, replay, evidence reconstruction.")
+  Container(guard, "Dependency & Availability Guard", "Python", "Checks materialization-time dependencies and current capability availability.")
+  Container(registry, "Registry & Discovery", "Python", "Catalogs gyms, providers, capabilities, and safe-execution metadata.")
+}
+
+Rel(worlds, adapters, "Wrapped by")
+Rel(ggen, adapters, "Generates scaffolding")
+Rel(ggen, basis, "Generates semantic contracts")
+Rel(adapters, basis, "Lowers environment into")
+Rel(basis, projector, "Canonical source of truth")
+Rel(projector, decision, "Provides projection")
+Rel(decision, exec, "Requests actions")
+Rel(adapters, exec, "Supplies provider implementation")
+Rel(registry, adapters, "Discovers / configures")
+Rel(registry, guard, "Provides dependency metadata")
+Rel(guard, exec, "Admits current capability availability")
+Rel(exec, verify, "Produces consequence evidence")
+Rel(verify, runtime, "Supplies verified standing")
+Rel(verify, lab, "Supplies experiment evidence")
+Rel(lab, projector, "Requests experiment-specific projection")

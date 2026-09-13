@@ -1,0 +1,49 @@
+sequenceDiagram
+    title autofde_lab_planner (generalized SOTA target) — one diagnosis+mitigation trial
+
+    participant H as SREGym Harness
+    participant F as Cluster State Fetcher
+    participant S as Structural Anomaly Scanner
+    participant SIG as Symptom Signature Builder
+    participant CL as Case Library (CBR)
+    participant R as DSPy Reasoning Fallback
+    participant G as Groq API
+    participant M as Remediation Dispatcher
+    participant K as Kubernetes Cluster
+    participant O as OCEL Telemetry
+
+    H->>F: trial start (namespace, app)
+    F->>K: kubectl get -o json (every kind present, not a fixed list)
+    K-->>F: real cluster state
+    F->>O: record fetch event
+    F->>S: raw state
+    S->>S: diff vs baseline, per kind, one uniform algorithm
+    S->>SIG: typed anomalies (or none)
+
+    alt no anomaly found
+        SIG->>H: diagnosis = "no anomaly detected" (honest, not forced)
+    else anomaly found
+        SIG->>CL: symptom signature
+        CL->>CL: Jaccard match vs stored AbstractCases
+
+        alt case library hit (>= threshold)
+            CL->>M: rebind template to THIS trial's real object names
+            Note over CL,M: same template, different real target — genuine generalization, not replay
+        else case library miss
+            SIG->>R: symptom signature + real fault taxonomy + structured checklist
+            R->>G: real LLM call, grounded (never open-ended)
+            G-->>R: classified diagnosis + proposed commands
+            R->>O: record real diagnosis event
+            R->>M: diagnosis + commands
+        end
+
+        M->>K: kubectl patch/rollout/scale (real remediation)
+        K-->>M: real outcome
+        M->>O: record real mitigation event
+        M->>H: submit diagnosis + mitigation
+
+        alt outcome CONFIRMED success
+            M->>CL: abstract_raw_case() -- generalize, strip concrete names, store as new AbstractCase
+            Note over M,CL: never stores from an unconfirmed trial (confirmed_outcome must be True)
+        end
+    end

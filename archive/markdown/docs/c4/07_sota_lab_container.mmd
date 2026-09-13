@@ -1,0 +1,35 @@
+C4Container
+title AutoFDE SOTA Lab — Containers
+
+Person(researcher, "Researcher / Operator")
+System_Ext(gymact, "GymAct")
+System_Ext(ggen, "ggen")
+System_Ext(runtime, "AutoFDE Runtime")
+System_Ext(benchmarks, "External Benchmarks")
+
+System_Boundary(lab, "AutoFDE SOTA Lab") {
+  Container(benchmark_compiler, "Benchmark Compiler", "Python", "Converts public benchmark contracts/evaluators into GymAct-compatible experiment definitions.")
+  Container(decision_basis, "Decision Basis & Architecture Space", "Python / RDF", "Planner, policy, verifier, memory, repair, replanning, and compilation options.")
+  Container(experiment_basis, "Experiment Basis", "Python / RDF", "Seed, budget, horizon, perturbation, replication, objective weights, and design strategy.")
+  Container(experiment_compiler, "Experiment Compiler", "Python", "Builds and prunes lawful experiment combinations.")
+  Container(runner, "Experiment Runner / Swarm", "Python", "Executes selected experiments concurrently.")
+  Container(results, "Results & Evidence Store", "RDF / JSON / OCEL", "Stores receipts, traces, scores, failures, and identity-preserving evidence.")
+  Container(learning, "Learning Compiler", "Python", "Clusters failures into shared defects, hypotheses, discriminating probes, and basis repairs.")
+  Container(frontier, "Frontier Comparison", "Python", "Compares benchmark scores to published frontier/SOTA targets.")
+}
+
+Rel(benchmarks, benchmark_compiler, "Benchmark contract / evaluator")
+Rel(gymact, benchmark_compiler, "GymBasis")
+Rel(benchmark_compiler, experiment_compiler, "Compiled benchmark experiment model")
+Rel(decision_basis, experiment_compiler, "Decision options")
+Rel(experiment_basis, experiment_compiler, "Experimental conditions")
+Rel(experiment_compiler, runner, "Selected experiment matrix")
+Rel(runner, gymact, "Executes")
+Rel(runner, results, "Writes evidence/results")
+Rel(results, learning, "Failures/results")
+Rel(learning, decision_basis, "Basis repairs")
+Rel(results, frontier, "Scores / evidence")
+Rel(frontier, researcher, "Reports standing / SOTA distance")
+Rel(researcher, decision_basis, "Approves/advises")
+Rel(learning, ggen, "Requests regenerated artifacts")
+Rel(frontier, runtime, "Promotes only governed winners")

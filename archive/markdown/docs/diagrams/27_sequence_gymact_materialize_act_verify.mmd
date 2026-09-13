@@ -1,0 +1,31 @@
+sequenceDiagram
+    autonumber
+    participant D as Decision System
+    participant GA as GymAct
+    participant AR as Authority Resolver
+    participant P as Provider
+    participant RL as Receipt Ledger
+    participant V as Verifier
+
+    D->>GA: MaterializationIntent(provider, config, authority_ref)
+    GA->>AR: Resolve materialization authority
+    alt Authority denied
+        AR-->>GA: REFUSED
+        GA-->>D: Typed materialization refusal
+    else Authority admitted
+        AR-->>GA: ADMITTED
+        GA->>P: materialize(config)
+        P-->>GA: Episode + capabilities
+        GA->>P: observe()
+        P-->>GA: Observation O
+        GA-->>D: GymBasis / projection
+        D->>GA: ActuationIntent(capability, payload, authority_ref)
+        GA->>AR: Resolve actuation authority
+        AR-->>GA: ADMITTED
+        GA->>P: actuate(capability, payload)
+        P-->>GA: Result + Observation O'
+        GA->>RL: Append identity-bound receipt
+        GA->>V: Postcondition + replay evidence
+        V-->>GA: Verified / refused standing
+        GA-->>D: Consequence + standing
+    end

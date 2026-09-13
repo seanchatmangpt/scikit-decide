@@ -1,0 +1,55 @@
+classDiagram
+    class Gym {
+      +gym_id: str
+      +basis_version: str
+    }
+    class State {
+      +state_id: str
+      +dimensions: Map
+    }
+    class Observation {
+      +observation_id: str
+      +timestamp: datetime
+      +state_ref: str
+    }
+    class Capability {
+      +binding: str
+      +parameters: Schema
+      +risk_class: str
+    }
+    class AuthorityEnvelope {
+      +authority_ref: str
+      +scope: Set
+      +expires_at: datetime
+    }
+    class Transition {
+      +transition_id: str
+      +pre_state: str
+      +post_state: str
+    }
+    class Goal {
+      +predicate_ref: str
+    }
+    class Invariant {
+      +constraint_ref: str
+    }
+    class Budget {
+      +probe_budget: int
+      +time_limit: float
+      +token_limit: int
+    }
+    class VerificationContract {
+      +postcondition_ref: str
+      +replay_required: bool
+    }
+
+    Gym "1" o-- "*" State
+    Gym "1" o-- "*" Capability
+    Gym "1" o-- "*" Goal
+    Gym "1" o-- "*" Invariant
+    Gym "1" o-- "1" Budget
+    Gym "1" o-- "1" VerificationContract
+    Observation "*" --> "1" State
+    Transition "*" --> "1" State : pre/post
+    Transition "*" --> "1" Capability
+    Capability "*" --> "0..1" AuthorityEnvelope

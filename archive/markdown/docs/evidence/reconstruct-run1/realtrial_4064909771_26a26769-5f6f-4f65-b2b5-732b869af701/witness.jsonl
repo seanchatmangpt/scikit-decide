@@ -1,0 +1,1 @@
+{"expression": "master and required_on == required_count", "goal_id": "urn:level4:goal:26a26769-5f6f-4f65-b2b5-732b869af701", "kind": "goal_admitted", "target": {"n_switches": "5", "seed": "4064909771"}, "task_id": "urn:level4:task:4064909771"}

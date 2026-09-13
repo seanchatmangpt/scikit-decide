@@ -1,0 +1,204 @@
+{
+  "probe_log": [
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=0",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=1"
+      ],
+      "delta_removed": [
+        "counter=0"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=1",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=0"
+      ],
+      "delta_removed": [
+        "counter=1"
+      ]
+    },
+    {
+      "action": "increment_by[value=1]",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=0",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=1"
+      ],
+      "delta_removed": [
+        "counter=0"
+      ]
+    },
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=1",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=2"
+      ],
+      "delta_removed": [
+        "counter=1"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=2",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=1"
+      ],
+      "delta_removed": [
+        "counter=2"
+      ]
+    },
+    {
+      "action": "increment_by[value=1]",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=1",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=2"
+      ],
+      "delta_removed": [
+        "counter=1"
+      ]
+    },
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=2",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=3"
+      ],
+      "delta_removed": [
+        "counter=2"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=3",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=2"
+      ],
+      "delta_removed": [
+        "counter=3"
+      ]
+    },
+    {
+      "action": "increment_by[value=1]",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=2",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=3"
+      ],
+      "delta_removed": [
+        "counter=2"
+      ]
+    },
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=3",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=4"
+      ],
+      "delta_removed": [
+        "counter=3"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=4",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=3"
+      ],
+      "delta_removed": [
+        "counter=4"
+      ]
+    },
+    {
+      "action": "increment_by[value=1]",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=3",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=4"
+      ],
+      "delta_removed": [
+        "counter=3"
+      ]
+    },
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "counter=4",
+        "solved=False",
+        "target=5"
+      ],
+      "delta_added": [
+        "counter=5",
+        "solved=True"
+      ],
+      "delta_removed": [
+        "counter=4",
+        "solved=False"
+      ]
+    }
+  ],
+  "representation_losses": {
+    "reward": "UNREPRESENTABLE:CONTINUOUS_DIMENSION_HAS_NO_SOUND_PROPOSITIONAL_ENCODING"
+  }
+}

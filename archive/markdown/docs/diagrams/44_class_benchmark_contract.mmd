@@ -1,0 +1,43 @@
+classDiagram
+    class BenchmarkContract {
+      +benchmark_id: str
+      +version: str
+      +suite: str
+    }
+    class Scenario {
+      +scenario_id: str
+      +seed: int
+    }
+    class EnvironmentBinding {
+      +gym_id: str
+      +adapter_ref: str
+    }
+    class EvaluationContract {
+      +evaluator_kind: str
+      +oracle_category: str
+    }
+    class Metric {
+      +metric_id: str
+      +direction: str
+    }
+    class FrontierObservation {
+      +score: float
+      +source_ref: str
+      +observed_at: datetime
+    }
+    class AuthorityRequirement {
+      +risk_class: str
+      +authority_ref: str
+    }
+    class DependencyRequirement {
+      +dependency: str
+      +freshness_bound: float
+    }
+
+    BenchmarkContract "1" o-- "*" Scenario
+    BenchmarkContract "1" o-- "1" EnvironmentBinding
+    BenchmarkContract "1" o-- "1" EvaluationContract
+    BenchmarkContract "1" o-- "*" Metric
+    BenchmarkContract "1" o-- "*" FrontierObservation
+    BenchmarkContract "1" o-- "*" AuthorityRequirement
+    BenchmarkContract "1" o-- "*" DependencyRequirement
