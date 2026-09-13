@@ -53,6 +53,9 @@ jobs:
             "pynng>=0.6.2" \
             "pathos>=0.2.7" \
             "discrete-optimization>=0.9.0" \
+            "rdflib" \
+            "wasm4pm-compat-pydantic @ git+https://github.com/seanchatmangpt/wasm4pm-compat.git@577e2d1d8bdfe27d96f61c63f3ea120994e8bfda#subdirectory=python" \
+            "gymact @ git+https://github.com/seanchatmangpt/gymact.git@524d0bc8633d8534f500d67f27384ce9368c0863 ; python_version >= '3.11'" \
             -r requirements-agentic.txt
 
       - name: Compile authored fabric surfaces
