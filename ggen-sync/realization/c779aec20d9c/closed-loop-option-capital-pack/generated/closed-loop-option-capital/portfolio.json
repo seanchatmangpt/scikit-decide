@@ -1,0 +1,7 @@
+{
+  "authority": "SELECT",
+  "actuation_performed": false,
+  "policy": "pareto-reversible",
+  "candidates": [
+  ]
+}

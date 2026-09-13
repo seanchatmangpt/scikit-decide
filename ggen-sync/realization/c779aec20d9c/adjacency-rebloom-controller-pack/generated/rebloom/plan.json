@@ -1,0 +1,7 @@
+{
+  "schema": "rebloom.plan.v1",
+  "waves": [
+  {"wave":"https://seanchatmangpt.github.io/ggen-marketplace/ontology/adjacency-rebloom#wave0","max_depth":3,"max_order":3,"requires_receipt":true,"grants_do_authority":false}
+  ],
+  "mode": "construct_only"
+}

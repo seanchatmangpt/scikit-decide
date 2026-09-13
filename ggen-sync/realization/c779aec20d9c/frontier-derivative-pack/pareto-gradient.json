@@ -1,0 +1,6 @@
+{
+  "schema": "ggen.frontier-derivative/v1",
+  "authority": "SELECT",
+  "actuation_performed": false,
+  "rows": [{"candidate":"https://ggen.dev/ontology/frontier-derivative#seed","standing":"ALIVE"}]
+}

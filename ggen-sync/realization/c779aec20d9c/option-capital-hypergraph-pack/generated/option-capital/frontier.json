@@ -1,0 +1,32 @@
+{
+  "schema": "ggen.option-capital.frontier.v1",
+  "selection": "NON_DOMINATED",
+  "authority": "SELECT",
+  "actuationPerformed": false,
+  "candidates": [
+    {
+      "candidate": "https://ggen.dev/ontology/option-capital#r22Candidate",
+      "reversibility": 1,
+      "expectedReuse": 3,
+      "expectedCapabilitySpaceDelta": 6
+    },
+    {
+      "candidate": "https://ggen.dev/ontology/option-capital#candidateFanoutMulticell",
+      "reversibility": 1,
+      "expectedReuse": 2,
+      "expectedCapabilitySpaceDelta": 4
+    },
+    {
+      "candidate": "https://ggen.dev/ontology/option-capital#candidateLineageMulticell",
+      "reversibility": 1,
+      "expectedReuse": 2,
+      "expectedCapabilitySpaceDelta": 4
+    },
+    {
+      "candidate": "https://ggen.dev/ontology/option-capital#candidateFanoutLineage",
+      "reversibility": 1,
+      "expectedReuse": 2,
+      "expectedCapabilitySpaceDelta": 3
+    }
+  ]
+}
