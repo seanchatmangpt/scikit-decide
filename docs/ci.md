@@ -24,7 +24,7 @@ The full rail runs only for pushes to `master`, weekly scheduled qualification, 
 - deterministic repository-wide quality checks;
 - cache qualification on Python 3.10, 3.12, and 3.13;
 - wheel construction on Linux, macOS, and Windows for Python 3.10 and 3.12;
-- one Linux integration authority with MiniZinc, optional solver dependencies, scheduling tests, Python solver tests, and native tests;
+- one Linux integration authority with MiniZinc, optional solver dependencies, scheduling tests, Python solver tests, domain+solver pipeline (`tests/e2e`) evidence, and native tests;
 - source-distribution inspection;
 - documentation construction;
 - tagged GitHub and PyPI publication when credentials are configured;
@@ -92,7 +92,7 @@ A high-risk branch can be escalated through **Actions → Full qualification and
 | Python source smoke | Repair syntax, conflict markers, or source-tree integrity. |
 | Source package | Repair package metadata or source inclusion. |
 | Wheel matrix | Repair the specific operating-system/Python build boundary. |
-| Linux integration | Repair solver, scheduling, MiniZinc, native, or optional-dependency integration. |
+| Linux integration | Repair solver, scheduling, MiniZinc, native, optional-dependency, or domain+solver pipeline (`tests/e2e`) integration. |
 | Documentation | Repair the locked documentation build before deployment. |
 | Full qualification | Diagnose the failed authority before promotion or release. |
 

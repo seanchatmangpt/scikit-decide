@@ -254,9 +254,11 @@ jobs:
             --ignore tests/solvers/python/test_optuna_rayrllib.py
           pytest -vv tests/solvers/python/test_optuna_rayrllib.py
           pytest -vv tests/scheduling
+          pytest -vv tests/e2e
           pytest -vv --ignore-glob 'tests/*/cpp' \
             --ignore tests/solvers/python \
-            --ignore tests/scheduling
+            --ignore tests/scheduling \
+            --ignore tests/e2e
           pytest -vv --timeout=300 tests/*/cpp
 
   docs:
