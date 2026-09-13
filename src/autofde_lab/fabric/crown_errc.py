@@ -227,6 +227,13 @@ def errc_crown_report(
         gate_requirement = by_id[gate]
         if gate_requirement.external_dependency is not None:
             continue
+        if gate_requirement.status is RequirementStatus.SATISFIED:
+            # Already terminal: do not rewrite its evidence from dependency
+            # evidence unless this pass actually admitted a new receipt for
+            # it. Without execution receipts nothing may rewrite the
+            # registry, even when the recomputed evidence would happen to
+            # cover the same requirement set.
+            continue
         if all(
             by_id[dependency].status is RequirementStatus.SATISFIED
             for dependency in dependencies
