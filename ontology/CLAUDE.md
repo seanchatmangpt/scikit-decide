@@ -49,12 +49,37 @@ requirements, 4 `UNSUPPORTED`.
    requirements are outside the derivation (7 solvers are applicable yet not runnable with
    defaults).
 
+# Other files in this directory
+
+Everything above (Role/Authority/Invariants) governs `autofde-lab-capabilities.ttl`
+specifically. Two other file groups share this directory under different rules:
+
+- `autofde-phase-graph.ttl`, `fde-authority-schema.ttl` — hand-authored T-Boxes,
+  pre-existing, unrelated to ggen.
+- `{lab,world,planning,process,authority,evidence,standing,interop,manufacture}.ttl`
+  and `shapes/*.shacl.ttl` — the working-backwards Lab semantic constitution (PR #37,
+  merge `41365ab`), also **hand-authored** (design vocabulary, not a claim the runtime
+  implements every term). Unlike `autofde-lab-capabilities.ttl`, these 9 files are
+  consumed by a real `ggen sync run` (`ggen.toml` at the repo root) that manufactures
+  `src/autofde_lab/constitution/{lab,world,planning,process,authority,evidence,
+  standing,interop}.py` — 8 of the 9 (`manufacture.ttl` excluded; no
+  `ManufactureRun` individual exists yet to project honestly). The 8 target files
+  carry an `rdfs:isDefinedBy <urn:autofde-lab:ontology:X>` triple on every
+  `owl:Class`, added specifically to make this manufacture possible — hand-edit these
+  9 files as needed (they are design vocabulary, not generated output), but never
+  hand-edit `src/autofde_lab/constitution/*.py` — regenerate with `ggen sync run`
+  from the repo root. See `docs/2026-08-08-ggen-manufactures-the-constitution.md`
+  for the full manufacture transcript and the two real defects it caught and fixed.
+
 # Neighboring components
 
 `src/autofde_lab/fabric/ontology.py` (generator), `src/autofde_lab/fabric/coverage.py` (consumer —
 classifies every declared capability against a concrete domain), `src/autofde_lab/utils.py`
 (registry), `tests/ecosystem/test_chatman_chain_chicago.py` (drift assertions),
-`docs/ecosystem-standing.md` §S8.
+`docs/ecosystem-standing.md` §S8. For the PR #37 constitution files: `ggen.toml`,
+`templates/constitution_module.py.tera`, `queries/constitution/*.rq` (repo root),
+`src/autofde_lab/constitution/` (manufactured output),
+`tests/test_constitution_*_chicago.py` (verification).
 
 # Verification
 

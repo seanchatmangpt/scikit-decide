@@ -1,0 +1,650 @@
+{
+  "eventTypes": [
+    {
+      "attributes": [
+        {
+          "name": "candidate_order",
+          "type": "integer"
+        },
+        {
+          "name": "elapsed_seconds",
+          "type": "float"
+        },
+        {
+          "name": "plan_length",
+          "type": "integer"
+        },
+        {
+          "name": "strategy",
+          "type": "string"
+        }
+      ],
+      "name": "solver_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "type": "string"
+        },
+        {
+          "name": "step_index",
+          "type": "integer"
+        }
+      ],
+      "name": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "goal_reached",
+          "type": "boolean"
+        },
+        {
+          "name": "standing",
+          "type": "string"
+        },
+        {
+          "name": "verify_mode",
+          "type": "string"
+        },
+        {
+          "name": "winning_strategy",
+          "type": "string"
+        },
+        {
+          "name": "winning_verify_strategy",
+          "type": "string"
+        }
+      ],
+      "name": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ],
+      "name": "teardown"
+    }
+  ],
+  "events": [
+    {
+      "attributes": [
+        {
+          "name": "strategy",
+          "value": "astar-plain"
+        },
+        {
+          "name": "candidate_order",
+          "value": 1
+        },
+        {
+          "name": "elapsed_seconds",
+          "value": 0.36951112747192383
+        },
+        {
+          "name": "plan_length",
+          "value": 18
+        }
+      ],
+      "id": "ev:solver_selected:1",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.388964000Z",
+      "type": "solver_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 0
+        }
+      ],
+      "id": "ev:act:0",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389195000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 1
+        }
+      ],
+      "id": "ev:act:1",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389217000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 2
+        }
+      ],
+      "id": "ev:act:2",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389231000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 3
+        }
+      ],
+      "id": "ev:act:3",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389239000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 4
+        }
+      ],
+      "id": "ev:act:4",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389244000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 5
+        }
+      ],
+      "id": "ev:act:5",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389250000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 6
+        }
+      ],
+      "id": "ev:act:6",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389255000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 7
+        }
+      ],
+      "id": "ev:act:7",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389261000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 8
+        }
+      ],
+      "id": "ev:act:8",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389267000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 9
+        }
+      ],
+      "id": "ev:act:9",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389274000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 10
+        }
+      ],
+      "id": "ev:act:10",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389279000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 11
+        }
+      ],
+      "id": "ev:act:11",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389285000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 12
+        }
+      ],
+      "id": "ev:act:12",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389291000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 13
+        }
+      ],
+      "id": "ev:act:13",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389296000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 14
+        }
+      ],
+      "id": "ev:act:14",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389302000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 15
+        }
+      ],
+      "id": "ev:act:15",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389308000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 16
+        }
+      ],
+      "id": "ev:act:16",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389314000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 17
+        }
+      ],
+      "id": "ev:act:17",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.389319000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "goal_reached",
+          "value": true
+        },
+        {
+          "name": "verify_mode",
+          "value": "fresh-instance-replay"
+        },
+        {
+          "name": "winning_strategy",
+          "value": "astar-plain"
+        },
+        {
+          "name": "winning_verify_strategy",
+          "value": "independent-resolve"
+        }
+      ],
+      "id": "ev:verify",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.715001000Z",
+      "type": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        }
+      ],
+      "id": "ev:teardown",
+      "relationships": [
+        {
+          "objectId": "episode:simple_grid_world",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:simple_grid_world",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T23:46:29.715203000Z",
+      "type": "teardown"
+    }
+  ],
+  "objectTypes": [
+    {
+      "attributes": [],
+      "name": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "type": "string"
+        }
+      ],
+      "name": "domain"
+    }
+  ],
+  "objects": [
+    {
+      "attributes": [],
+      "id": "episode:simple_grid_world",
+      "relationships": [],
+      "type": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "time": "1970-01-01T00:00:00.000000000Z",
+          "value": "SimpleGridWorld"
+        }
+      ],
+      "id": "domain:simple_grid_world",
+      "relationships": [],
+      "type": "domain"
+    }
+  ]
+}

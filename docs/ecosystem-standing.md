@@ -10,7 +10,10 @@ Every row is a **measured win** (command run this session, output quoted, passed
 **deferred/scoped** (a plan exists, nothing under it executed). Where this sheet and the code
 disagree, the code is the witness.
 
-Last update: **pass 3** (2026-08-06) — the FDE authority boundary named as a distinct gap; a
+Last update: **pass 4** (2026-08-08) — a **new, previously unledgered** linkage between this
+repo and `~/gymact` (discovery → planning → commitment → bounded actuation → OCEL/receipt/
+replay), disjoint from the POWL crown and not moving S1–S7; its frozen ≥10-trial run has **not**
+executed. Pass 3 (2026-08-06) — the FDE authority boundary named as a distinct gap; a
 new standing axis (technical / organizational / enterprise); a second crown question; RP-8
 opened. Everything in pass 3 is **deferred/scoped** except one measured win on
 `decision-engine.py`. Pass 2 (2026-08-06) closed RP-2 by a measured build, demoted S3b on a
@@ -72,6 +75,59 @@ ontology-governed capability discovery
 Measured against that, this session moved the first four steps and proved the fifth-to-ninth
 absent. Reporting the crown as anything other than `BLOCKED` would require a projector to
 stand in for an executor, which is the specific error this file exists to prevent.
+
+## Pass 4 — NEW LINKAGE: autofde-lab ↔ `~/gymact` discovery/actuation bridge (2026-08-08)
+
+**This section records a linkage that did not previously exist in this ledger.** Before this
+pass, `grep -c gymact docs/ecosystem-standing.md` returned `0`: `~/gymact` appears in none of
+the five repositories this file has tracked (`~/mfw`, `~/ggen`, `~/ggen-create`,
+`~/ggen-legacy`, `~/bcinr`), in no stage row S1–S7, and in no repair plan RP-1…RP-8. Nothing
+below continues, strengthens or weakens a prior claim — there is no prior claim to build on.
+
+It is also **disjoint from the POWL crown.** This bridge does not execute a POWL workflow, does
+not close S3c, and does not move S1–S7. Reading any row below as crown progress is the exact
+projector-for-executor substitution this file exists to prevent.
+
+Every row is a `technicalStanding` claim (`.claude/rules/standing-law.md`).
+`organizationalStanding` is `UNKNOWN` for the whole section — no accountable customer
+acceptance exists, and no component here computes one. `enterpriseStanding` is therefore
+unreachable.
+
+Owner split: this repo owns discovery, planning, and the commitment record; `~/gymact` owns the
+environment providers, the episode runtime, and the OCEL 2.0 schema the emitted log is
+validated against.
+
+### Per-transition standing
+
+| # | Transition | Owner | Standing | Witness |
+|---|---|---|---|---|
+| G1 | blind probing → observed transition log | autofde-lab + gymact | `ALIVE` | `level4_gymact_bridge.py`'s `RealBlindEnvironment` drives real GymAct episodes through a subprocess into `~/gymact/.venv` — real interpreter, real provider, no in-process fake. Exercised against `cube_counter` and `cube_container_counter`. |
+| G2 | transition log → `DiscoveredDomain` causal IR | autofde-lab | `ALIVE` | `induce_discovered_domain` + `propose_discriminating_probe` + `refine_from_probe`. On a confounded log where `{A,B,C}` always co-occur and only `B` is causal, naive induction gives `{A,B,C}`; two refinement rounds shrink it to exactly `{B}`, by executing probes rather than reading ground truth. |
+| G2b | observation → typed state dimensions | autofde-lab | `ALIVE` *(refusal included)* | On the real live observation `{counter:int, target:int, reward:float, solved:bool}`: `reward` → `CONTINUOUS`, and the propositional projection returns `UNREPRESENTABLE:CONTINUOUS_DIMENSION_HAS_NO_SOUND_PROPOSITIONAL_ENCODING` instead of emitting a junk atom; `solved` → `BOOLEAN`. The refusal is the load-bearing part. |
+| G3 | discovered domain → candidate plan (federation) | autofde-lab | `PARTIAL_ALIVE` | Real inventory re-measured this pass: **57 solvers registered, 49 `SUPPORTED`, 8 `UNSUPPORTED:CHECK_DOMAIN_FALSE`, 0 `UNAVAILABLE`**, classified by the framework's own `check_domain()` against a real `GymProcedureDomain`. On the real 7-step `agentbench/knowledgegraph` recipe, `Astar`/`LRTDP`/`EHC` each produced an agreeing 7-step `PLAN_CANDIDATE`. `PARTIAL_ALIVE`, not `ALIVE`: `IW`/`BFWS` fail on a `state_features` constructor-signature gap and `SimpleGreedy` on an observation-type mismatch — three real refusals inside the federation, recorded not hidden. |
+| G4 | validated plan → commitment record | autofde-lab | `PARTIAL_ALIVE` *(bounded — commitment, **not** POWL execution)* | `independently_validate` → `ValidatedPlan` → `commit` → `PowlCommitment`, writing a real `commitment.ttl`. **This edge manufactures a commitment record. It does not run a POWL workflow, and it is not S3c.** The S3c finding stands unchanged: no component in the portfolio executes a POWL plan end to end. |
+| G5 | commitment → actuation (`commit_and_execute`) | autofde-lab + gymact | `PARTIAL_ALIVE` | Real actuation against the real `CubeCounterProvider`: `independently_verified=True`, `final_state={'counter': 3, 'target': 3, 'reward': 1.0, 'solved': True}`. `commit_and_execute` is the **only** actuation path, and it refuses a raw plan tuple with `ADVISORY_AUTHORITY_USED_AS_BEARER`. `PARTIAL_ALIVE` because of the defect in the next row. |
+| G5b | per-step postcondition checking inside `execute_verified` | autofde-lab | `BLOCKED:SAME_POSTCONDITION_CHECKED_EVERY_STEP` | `execute_verified` re-checks the **same** expected postcondition after every actuation, so intermediate steps of a multi-step plan are correctly `REFUSED`. Real defect, under repair by a separate agent, **not fixed**. No row above may be read as multi-step actuation working. |
+| G6 | execution → OCEL + receipts + replay | autofde-lab + gymact | `ALIVE` *(scoped to the two providers)* | 7 real receipts in a real `SQLiteReceiptLedger`; the emitted `episode.ocel.json` validated against **gymact's own OCEL 2.0 schema** with **0 referential-integrity violations** (`validate_ocel_referential_integrity`); `replay_ledger` → **0 mismatches**. Real artifacts on disk: `commitment.ttl`, `episode.ocel.json`, `receipts.sqlite3`. |
+| G7 | frozen ≥10-trial crown run | autofde-lab | `UNKNOWN` | **Not executed.** `level4_crown_runner.py` exists and its tamper falsifier is real (`CROWN_MANIFEST_TAMPERED` fires on a one-byte seed edit; `SUPPRESSED_TRIAL` + `DENOMINATOR_CHANGED` fire on an 8-of-10 execution against a 10-trial manifest), but no frozen run has produced a manifest-verified result set. **Level 4 is not complete.** |
+
+### Bounds on the above
+
+- Scoped to two GymAct providers (`cube_counter`, `cube_container_counter`). Nothing
+  generalizes to other providers without executing them.
+- The DSPy advisory layer runs a deterministic fallback path unless an LM is configured; no
+  LM-backed run was executed, so no claim is made about LM-driven discovery quality.
+- An earlier in-session solver-inventory figure of "55 registered / 6 `UNSUPPORTED`" is
+  **retracted**: the re-run this pass measures 57 and 8. Kept visible per this file's rule that
+  corrections are written beside the claim, not edited away.
+
+### Falsifiers for this section
+
+- A frozen ≥10-trial crown run that does not reproduce → G7 stays `UNKNOWN`, and G1–G6 are
+  single-shot observations rather than a rate.
+- Any reading of G4 as POWL workflow execution → refuted by S3c and by
+  `.claude/rules/ecosystem-boundary.md`'s projection-is-not-execution rule.
+- Multi-step `execute_verified` succeeding today → would contradict G5b; it does not.
 
 ## Pass 3 — the FDE authority boundary (2026-08-06)
 

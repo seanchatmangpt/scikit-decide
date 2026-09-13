@@ -1,0 +1,37 @@
+PREFIX afl: <urn:autofde-lab:>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?rowKind ?className ?classComment ?propName ?propComment ?propRange ?propFunctional ?individualName
+WHERE {
+  {
+    ?class a owl:Class ;
+           rdfs:isDefinedBy <urn:autofde-lab:ontology:lab> .
+    BIND("class" AS ?rowKind)
+    BIND(?class AS ?className)
+    OPTIONAL { ?class rdfs:comment ?classComment }
+  }
+  UNION
+  {
+    ?class a owl:Class ;
+           rdfs:isDefinedBy <urn:autofde-lab:ontology:lab> .
+    ?property rdfs:domain ?class .
+    BIND("property" AS ?rowKind)
+    BIND(?class AS ?className)
+    BIND(?property AS ?propName)
+    OPTIONAL { ?property rdfs:comment ?propComment }
+    OPTIONAL { ?property rdfs:range ?propRange }
+    BIND(EXISTS { ?property a owl:FunctionalProperty } AS ?propFunctional)
+  }
+  UNION
+  {
+    ?individualClass a owl:Class ;
+                      rdfs:isDefinedBy <urn:autofde-lab:ontology:lab> .
+    ?individual a ?individualClass .
+    FILTER(?individual != ?individualClass)
+    BIND("value" AS ?rowKind)
+    BIND(?individualClass AS ?className)
+    BIND(?individual AS ?individualName)
+  }
+}
+ORDER BY ?rowKind ?className ?propName ?individualName

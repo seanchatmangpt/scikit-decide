@@ -9,6 +9,7 @@ from __future__ import annotations
 from typing import Any
 
 from autofde_lab.fabric.dspy import DecisionCompiler, compile_request_text
+from autofde_lab.fabric.issue_reasoning import CompiledIssueReasoner
 from autofde_lab.fabric.models import DecisionRequest
 from autofde_lab.fabric.service import DecisionFabric
 from autofde_lab.ocel.mcp_instrumentation import OcelSessionRecorder, instrumented
@@ -19,6 +20,7 @@ def create_server(
     *,
     compiler: DecisionCompiler | None = None,
     ocel_recorder: OcelSessionRecorder | None = None,
+    issue_reasoner: CompiledIssueReasoner | None = None,
 ) -> Any:
     """Create a FastMCP server without duplicating decision semantics.
 
@@ -37,6 +39,7 @@ def create_server(
         ) from error
 
     service = fabric or DecisionFabric()
+    diagnostics = issue_reasoner or CompiledIssueReasoner()
     server = FastMCP("scikit-decide-fabric")
 
     def _record(activity: str, objects_fn):
@@ -85,6 +88,28 @@ def create_server(
     def decision_solve(request: dict[str, Any]) -> dict[str, Any]:
         """Solve and return a receipt-bearing bounded trajectory."""
         return service.solve(DecisionRequest.from_dict(request)).as_dict()
+
+    @server.tool
+    @_record("issue_reasoning_catalog", lambda: [])
+    def issue_reasoning_catalog() -> dict[str, Any]:
+        """List compiled diagnostic archetypes and their evidence contracts."""
+        return {
+            "archetypes": diagnostics.catalog(),
+            "authority": "CANDIDATE_ONLY",
+            "actuation": "REFUSED",
+        }
+
+    @server.tool
+    @_record("issue_reason", lambda evidence: [])
+    def issue_reason(evidence: dict[str, Any] | list[str]) -> dict[str, Any]:
+        """Compile structured issue evidence into a bounded diagnostic candidate.
+
+        The result is not an admission or action.  ``MATCHED`` means the evidence
+        fits a finite compiled diagnostic graph; ``FALLBACK_NOVELTY`` delegates
+        causal discovery to cognition; ``REFUSED_EVIDENCE`` means the selected
+        graph lacks or contradicts required evidence.
+        """
+        return diagnostics.reason(evidence).as_dict()
 
     @server.tool
     @_record("decision_cache_stats", lambda: [])

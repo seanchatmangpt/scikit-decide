@@ -50,10 +50,32 @@ repo's Chicago-school convention. Reuses the shared
 from __future__ import annotations
 
 import os
+from pathlib import Path
 
 import pytest
 
-from conftest import requires_real_turbo_fieldfare_binary_and_model
+# `requires_real_turbo_fieldfare_binary_and_model` is redefined locally rather
+# than imported from `tests/conftest.py`: `tests/` has no `__init__.py`
+# markers (see `.claude/rules/standing-law.md`'s "Former standing exception"
+# section on the bare-conftest module-name collision this repo hit before),
+# so `tests/conftest.py` and any sibling `tests/<subdir>/conftest.py` both
+# import under the same bare module name `conftest` in pytest's default
+# "prepend" mode. `from conftest import requires_real_turbo_fieldfare_binary_and_model`
+# is therefore order-dependent on which conftest.py pytest happened to import
+# first in this process -- exactly the real `ImportError` already found and
+# fixed the same way in `tests/test_self_play_dspy_groq_chicago.py`.
+_TURBO_FIELDFARE_DIR = Path.home() / "turbo-fieldfare"
+_SERVER_BINARY = _TURBO_FIELDFARE_DIR / ".build" / "release" / "TurboFieldfareServer"
+_MODEL_PATH = _TURBO_FIELDFARE_DIR / "scratch" / "gemma4.gturbo"
+
+requires_real_turbo_fieldfare_binary_and_model = pytest.mark.skipif(
+    not (_SERVER_BINARY.exists() and _MODEL_PATH.exists()),
+    reason=(
+        f"Real TurboFieldfareServer binary ({_SERVER_BINARY}) or real model "
+        f"weights ({_MODEL_PATH}) not present -- build/install them per "
+        "turbo-fieldfare's README before running this real end-to-end test."
+    ),
+)
 
 # The RCPSP/MRCPSP instances below come from the `discrete_optimization` benchmark
 # corpus, which is not vendored into this repository. Resolve it from the

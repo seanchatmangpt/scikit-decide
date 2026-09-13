@@ -1,0 +1,92 @@
+@prefix arch: <urn:autofde-lab:architecture:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:architecture>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE architecture diagram ontology" ;
+    dcterms:description "Canonical semantic basis for architecture, behavior, state, class, and entity-relationship diagrams. Mermaid files are observations; generated RDF instance graphs are queryable projections, not a second hand-authored truth." ;
+    dcterms:created "2026-08-08"^^xsd:date .
+
+arch:Diagram a owl:Class, prov:Entity ; rdfs:label "Diagram" .
+arch:ArchitectureElement a owl:Class, prov:Entity ; rdfs:label "Architecture element" .
+arch:Relationship a owl:Class, prov:Entity ; rdfs:label "Relationship" .
+
+arch:Person a owl:Class ; rdfs:subClassOf arch:ArchitectureElement .
+arch:Actor a owl:Class ; rdfs:subClassOf arch:Person .
+arch:Participant a owl:Class ; rdfs:subClassOf arch:ArchitectureElement .
+arch:SoftwareSystem a owl:Class ; rdfs:subClassOf arch:ArchitectureElement .
+arch:ExternalSystem a owl:Class ; rdfs:subClassOf arch:SoftwareSystem .
+arch:Container a owl:Class ; rdfs:subClassOf arch:ArchitectureElement .
+arch:Component a owl:Class ; rdfs:subClassOf arch:ArchitectureElement .
+arch:DeploymentNode a owl:Class ; rdfs:subClassOf arch:ArchitectureElement .
+arch:SystemBoundary a owl:Class ; rdfs:subClassOf arch:ArchitectureElement .
+arch:ContainerBoundary a owl:Class ; rdfs:subClassOf arch:ArchitectureElement .
+arch:State a owl:Class ; rdfs:subClassOf arch:ArchitectureElement .
+arch:Pseudostate a owl:Class ; rdfs:subClassOf arch:State .
+arch:FlowNode a owl:Class ; rdfs:subClassOf arch:ArchitectureElement .
+arch:ModelClass a owl:Class ; rdfs:subClassOf arch:ArchitectureElement .
+arch:ClassMember a owl:Class, prov:Entity .
+arch:DataEntity a owl:Class ; rdfs:subClassOf arch:ArchitectureElement .
+arch:DataAttribute a owl:Class, prov:Entity .
+
+arch:ArchitectureRelationship a owl:Class ; rdfs:subClassOf arch:Relationship .
+arch:Message a owl:Class, prov:Activity ; rdfs:subClassOf arch:Relationship .
+arch:StateTransition a owl:Class, prov:Activity ; rdfs:subClassOf arch:Relationship .
+arch:FlowEdge a owl:Class ; rdfs:subClassOf arch:Relationship .
+arch:ClassRelationship a owl:Class ; rdfs:subClassOf arch:Relationship .
+arch:EntityRelationship a owl:Class ; rdfs:subClassOf arch:Relationship .
+
+arch:DiagramKind a owl:Class ; rdfs:subClassOf skos:Concept .
+arch:C4ContextDiagram a owl:Class, skos:Concept ; rdfs:subClassOf arch:Diagram ; skos:prefLabel "C4 Context" .
+arch:C4ContainerDiagram a owl:Class, skos:Concept ; rdfs:subClassOf arch:Diagram ; skos:prefLabel "C4 Container" .
+arch:C4ComponentDiagram a owl:Class, skos:Concept ; rdfs:subClassOf arch:Diagram ; skos:prefLabel "C4 Component" .
+arch:C4DynamicDiagram a owl:Class, skos:Concept ; rdfs:subClassOf arch:Diagram ; skos:prefLabel "C4 Dynamic" .
+arch:C4DeploymentDiagram a owl:Class, skos:Concept ; rdfs:subClassOf arch:Diagram ; skos:prefLabel "C4 Deployment" .
+arch:SequenceDiagram a owl:Class, skos:Concept ; rdfs:subClassOf arch:Diagram ; skos:prefLabel "Sequence" .
+arch:StateDiagram a owl:Class, skos:Concept ; rdfs:subClassOf arch:Diagram ; skos:prefLabel "State" .
+arch:FlowDiagram a owl:Class, skos:Concept ; rdfs:subClassOf arch:Diagram ; skos:prefLabel "Flow" .
+arch:ClassDiagram a owl:Class, skos:Concept ; rdfs:subClassOf arch:Diagram ; skos:prefLabel "Class" .
+arch:ERDiagram a owl:Class, skos:Concept ; rdfs:subClassOf arch:Diagram ; skos:prefLabel "Entity relationship" .
+
+arch:depicts a owl:ObjectProperty ; rdfs:domain arch:Diagram ; rdfs:range arch:ArchitectureElement .
+arch:hasRelationship a owl:ObjectProperty ; rdfs:domain arch:Diagram ; rdfs:range arch:Relationship .
+arch:belongsToDiagram a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:range arch:Diagram .
+arch:source a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain arch:Relationship ; rdfs:range arch:ArchitectureElement .
+arch:target a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain arch:Relationship ; rdfs:range arch:ArchitectureElement .
+arch:refersTo a owl:ObjectProperty ; rdfs:domain arch:ArchitectureElement ; rdfs:range prov:Entity .
+arch:belongsToClass a owl:ObjectProperty ; rdfs:domain arch:ClassMember ; rdfs:range arch:ModelClass .
+arch:belongsToEntity a owl:ObjectProperty ; rdfs:domain arch:DataAttribute ; rdfs:range arch:DataEntity .
+arch:diagramKind a owl:ObjectProperty ; rdfs:domain arch:Diagram .
+
+arch:localIdentifier a owl:DatatypeProperty ; rdfs:range xsd:string .
+arch:sourcePath a owl:DatatypeProperty, owl:FunctionalProperty ; rdfs:domain arch:Diagram ; rdfs:range xsd:string .
+arch:sourceDigest a owl:DatatypeProperty, owl:FunctionalProperty ; rdfs:domain arch:Diagram ; rdfs:range xsd:string .
+arch:sourceLine a owl:DatatypeProperty ; rdfs:range xsd:integer .
+arch:mermaidSyntax a owl:DatatypeProperty ; rdfs:range xsd:string .
+arch:technology a owl:DatatypeProperty ; rdfs:range xsd:string .
+arch:notation a owl:DatatypeProperty ; rdfs:range xsd:string .
+arch:sequenceIndex a owl:DatatypeProperty ; rdfs:range xsd:integer .
+arch:sourceCardinality a owl:DatatypeProperty ; rdfs:range xsd:string .
+arch:targetCardinality a owl:DatatypeProperty ; rdfs:range xsd:string .
+arch:dataType a owl:DatatypeProperty ; rdfs:range xsd:string .
+arch:keyMarker a owl:DatatypeProperty ; rdfs:range xsd:string .
+arch:elementCount a owl:DatatypeProperty ; rdfs:domain arch:Diagram ; rdfs:range xsd:integer .
+arch:relationshipCount a owl:DatatypeProperty ; rdfs:domain arch:Diagram ; rdfs:range xsd:integer .
+arch:parseStanding a owl:DatatypeProperty ; rdfs:domain arch:Diagram ; rdfs:range xsd:string .
+
+# Canonical cross-diagram referents. Diagram-local nodes may point here with arch:refersTo.
+arch:System_GymAct a arch:SoftwareSystem ; rdfs:label "GymAct" .
+arch:System_AutoFDE_SOTA_Lab a arch:SoftwareSystem ; rdfs:label "AutoFDE SOTA Lab" .
+arch:System_AutoFDE_Runtime a arch:SoftwareSystem ; rdfs:label "AutoFDE Runtime" .
+arch:System_ggen a arch:SoftwareSystem ; rdfs:label "ggen" .
+arch:System_ExternalBenchmarks a arch:ExternalSystem ; rdfs:label "External Benchmarks" .
+arch:System_ExternalEnvironments a arch:ExternalSystem ; rdfs:label "External Environments" .
+arch:System_IndependentVerifier a arch:ExternalSystem ; rdfs:label "Independent Verifier" .
+arch:Actor_ResearcherOperator a arch:Actor ; rdfs:label "Researcher / Operator" .
+arch:Actor_AuthorizedOperator a arch:Actor ; rdfs:label "Authorized Operator" .

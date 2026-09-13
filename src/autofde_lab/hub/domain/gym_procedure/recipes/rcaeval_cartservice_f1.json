@@ -1,0 +1,41 @@
+{
+  "gym": "rcaeval",
+  "task": "code-level-rca-demo/RE3-OB/cartservice_f1",
+  "source_ref": "vendor/gyms/rcaeval/docs/code-level-rca.ipynb",
+  "initial_facts": [],
+  "goal_facts": ["root_cause_identified"],
+  "steps": [
+    {
+      "id": "read_available_logs",
+      "description": "logs = pd.read_csv('data/RE3/RE3-OB/cartservice_f1/2/logs.csv'); ta = 1732279831 (the injected 'Incorrect parameter values' fault's anomaly timestamp).",
+      "preconditions": [],
+      "establishes": ["logs_read"],
+      "cost": 1.0,
+      "source": "code-level-rca.ipynb cell 2-3 ('# 1. Read available logs')"
+    },
+    {
+      "id": "parse_logs_into_time_series",
+      "description": "Separate normal logs from multi-line stack traces per container_name and aggregate each into a per-service, per-15s-bucket time series (logs_df), including a cartservice_stack column.",
+      "preconditions": ["logs_read"],
+      "establishes": ["logs_parsed_to_timeseries"],
+      "cost": 1.0,
+      "source": "code-level-rca.ipynb cell 4-6 ('# 2. Parse logs into time series')"
+    },
+    {
+      "id": "apply_baro",
+      "description": "from RCAEval.e2e import baro; index logs_df by seconds and call baro(logs_df, ta)['ranks'] to rank candidate root-cause indicators.",
+      "preconditions": ["logs_parsed_to_timeseries"],
+      "establishes": ["baro_ranks_computed"],
+      "cost": 1.0,
+      "source": "code-level-rca.ipynb cell 7-9 ('# 4. Apply BARO')"
+    },
+    {
+      "id": "identify_root_cause",
+      "description": "BARO ranks cartservice_stack as the top fine-grained root cause indicator, identifying cartservice as the root cause service (confirmed by inspecting its stack-trace logs).",
+      "preconditions": ["baro_ranks_computed"],
+      "establishes": ["root_cause_identified"],
+      "cost": 1.0,
+      "source": "code-level-rca.ipynb cell 10-13 (plot of cartservice_stack, stack trace inspection, and 'Summary' cell)"
+    }
+  ]
+}

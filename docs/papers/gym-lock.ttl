@@ -44,7 +44,7 @@
 <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-tau2-bench> afb:pinnedRevision "668d3bcd135c02aa3438f987ef45735b7c163ee3" ; afb:resolutionStanding "PINNED" .
 <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-terminal-bench> afb:pinnedRevision "2fd12b88aafdd04a52c298e3940bcb189f9766d6" ; afb:resolutionStanding "PINNED" .
 <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-terminal-bench-pro> afb:pinnedRevision "874af409da6aafebccbf3bc5bb41a2fa4d78784d" ; afb:resolutionStanding "PINNED" .
-<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-terragoat> afb:pinnedRevision "729f8da62c6a85ce4af5ad3d123de97776d954c4" ; afb:resolutionStanding "PINNED" .
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-terragoat> afb:pinnedRevision "6b1c6d4de22f57b0997ebcc70041e175f55de721" ; afb:resolutionStanding "PINNED" .
 <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-the-agent-company> afb:pinnedRevision "98b68ef82a47690c316f42fddb05baafaab56851" ; afb:resolutionStanding "PINNED" .
 <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-toolsandbox> afb:pinnedRevision "165848b9a78cead7ca7fe7c89c688b58e6501219" ; afb:resolutionStanding "PINNED" .
 <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-tua-bench> afb:pinnedRevision "3497fd320abcafaf4797424192c891a593fd7964" ; afb:resolutionStanding "PINNED" .

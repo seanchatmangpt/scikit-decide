@@ -39,7 +39,12 @@ def append_tool_call_event(
     of the following optional keys are carried through as typed OCEL
     attributes when present: ``elapsed_s`` (float), ``steps``/``steps_taken``
     (int), ``receipt_sha256`` (str), ``detail``/``error`` (str, truncated to
-    500 chars), and any other numeric ``*_count`` key.
+    500 chars), ``action_result`` (any value, recorded as its ``str()``,
+    truncated to 500 chars -- e.g. a real bound action callable's return
+    value, see :func:`autofde_lab.ocel.powl_replay.replay_structural_fires`),
+    any other numeric ``*_count`` key, and ``compatible_solvers``
+    (list[str], recorded as an OCEL list attribute -- see
+    :mod:`autofde_lab.ocel.decision_mining`).
 
     Does not call :meth:`OcelLog.validate` -- the caller decides when to
     validate (typically once, after the whole session is logged), matching
@@ -60,9 +65,25 @@ def append_tool_call_event(
         if outcome.get(detail_key):
             attrs["detail"] = OcelAttributeValue.string(str(outcome[detail_key])[:500])
             break
+    # ``detail`` and ``error`` are independent claims (e.g. a POWL action
+    # binding error carries both: ``detail`` the fired Atom's label,
+    # ``error`` the real exception type/message) -- when both are present
+    # the loop above's first-match-wins only ever wrote ``detail``, silently
+    # dropping the real error text. Give ``error`` its own attribute
+    # whenever it is present, regardless of whether ``detail`` also is.
+    if outcome.get("error"):
+        attrs["error"] = OcelAttributeValue.string(str(outcome["error"])[:500])
+    if "action_result" in outcome and outcome["action_result"] is not None:
+        attrs["action_result"] = OcelAttributeValue.string(
+            str(outcome["action_result"])[:500]
+        )
     for key, value in outcome.items():
         if key.endswith("_count") and isinstance(value, int):
             attrs[key] = OcelAttributeValue.integer(value)
+    if isinstance(outcome.get("compatible_solvers"), (list, tuple)):
+        attrs["compatible_solvers"] = OcelAttributeValue.listing(
+            OcelAttributeValue.string(str(s)) for s in outcome["compatible_solvers"]
+        )
 
     return log.append_event(
         event_id,

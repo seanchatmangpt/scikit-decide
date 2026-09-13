@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:gymact="https://github.com/seanchatmangpt/autofde-lab/ns/gymact#"
+                  id="GymActDefinitions"
+                  targetNamespace="https://github.com/seanchatmangpt/autofde-lab/ns/gymact/bpmn">
+  <bpmn:process id="GymActEpisode" name="GymAct Episode" isExecutable="true">
+    <bpmn:startEvent id="start" name="Request"/>
+    <bpmn:serviceTask id="discover" name="Discover" gymact:operation="discover"/>
+    <bpmn:serviceTask id="materialize" name="Materialize" gymact:operation="materialize"/>
+    <bpmn:serviceTask id="configure" name="Configure" gymact:operation="configure"/>
+    <bpmn:serviceTask id="reset" name="Reset" gymact:operation="reset"/>
+    <bpmn:serviceTask id="episode_start" name="Start" gymact:operation="start"/>
+    <bpmn:serviceTask id="observe" name="Observe" gymact:operation="observe"/>
+    <bpmn:exclusiveGateway id="terminal" name="Terminal?"/>
+    <bpmn:serviceTask id="act" name="Act" gymact:operation="act"/>
+    <bpmn:serviceTask id="verify" name="Verify" gymact:operation="verify"/>
+    <bpmn:serviceTask id="score" name="Score" gymact:operation="score"/>
+    <bpmn:serviceTask id="teardown" name="Teardown" gymact:operation="teardown"/>
+    <bpmn:endEvent id="end" name="Closed"/>
+
+    <bpmn:sequenceFlow id="f01" sourceRef="start" targetRef="discover"/>
+    <bpmn:sequenceFlow id="f02" sourceRef="discover" targetRef="materialize"/>
+    <bpmn:sequenceFlow id="f03" sourceRef="materialize" targetRef="configure"/>
+    <bpmn:sequenceFlow id="f04" sourceRef="configure" targetRef="reset"/>
+    <bpmn:sequenceFlow id="f05" sourceRef="reset" targetRef="episode_start"/>
+    <bpmn:sequenceFlow id="f06" sourceRef="episode_start" targetRef="observe"/>
+    <bpmn:sequenceFlow id="f07" sourceRef="observe" targetRef="terminal"/>
+    <bpmn:sequenceFlow id="f08" name="no" sourceRef="terminal" targetRef="act"/>
+    <bpmn:sequenceFlow id="f09" sourceRef="act" targetRef="observe"/>
+    <bpmn:sequenceFlow id="f10" name="yes" sourceRef="terminal" targetRef="verify"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="verify" targetRef="score"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="score" targetRef="teardown"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="teardown" targetRef="end"/>
+  </bpmn:process>
+</bpmn:definitions>

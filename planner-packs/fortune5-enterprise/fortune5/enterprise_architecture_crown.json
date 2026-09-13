@@ -1,0 +1,15 @@
+{
+  "schema": "urn:autofde:fortune5:enterprise-architecture-crown:v1",
+  "claim_ceiling": "CANDIDATE_ENTERPRISE_ARCHITECTURE_PLANNING_NO_PRODUCTION_AUTHORITY",
+  "requires": {
+    "principles": ["P01","P02","P03","P04","P05","P06","P07","P08","P09","P10","P11","P12"],
+    "viewpoints": ["V01","V02","V03","V04","V05","V06","V07","V08","V09","V10","V11","V12"],
+    "governance_gates": ["G0","G1","G2","G3","G4","G5","G6","G7","G8"],
+    "scenario_courts": ["S01","S02","S03","S04","S05","S06","S07","S08","S09","S10"],
+    "planner_programs": ["00-ecosystem-meta-planning","10-role-conditioned-planner-league","100-multicloud-portability","110-zero-trust-authority","120-resilience-continuity","130-data-information-architecture","140-finops-capacity","150-governance-compliance","160-operating-model-team-topology","170-vendor-exit-supply-chain","180-ai-agent-governance","190-portfolio-partial-order","20-counterplanner-falsification","200-enterprise-digital-twin","30-one-edge-replan","40-semantic-manufacture","50-closure-curriculum","60-cognition-compile-away","70-cross-repo-enterprise-closure","80-novelty-frontier","90-enterprise-architecture-crown"],
+    "pddl_enterprise_problems": ["100_merger_integration","110_ai_agent_governance","40_global_platform_greenfield","50_primary_region_loss","60_cloud_provider_exit","70_data_sovereignty_split","80_identity_compromise","90_cost_shock_quota_exhaustion"],
+    "evidence": ["schema validation","PDDL structural validation","manifest digests","AutoFDE candidate plans","POWL projections","GymAct/BRCE receipts when executed"]
+  },
+  "standing_rule": "ALIVE requires the exact subject to satisfy all mandatory gates and the selected scenario courts with receipts/replay. This static pack itself remains CANDIDATE until executed by AutoFDE/GymAct/BRCE.",
+  "standing": "CANDIDATE"
+}

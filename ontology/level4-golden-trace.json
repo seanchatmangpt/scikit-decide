@@ -1,0 +1,2265 @@
+{
+  "attributes": [],
+  "traces": [
+    {
+      "attributes": [
+        {
+          "key": "concept:name",
+          "value": {
+            "type": "String",
+            "content": "golden-0-p1-pl1-c1"
+          },
+          "own_attributes": null
+        }
+      ],
+      "events": [
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "TaskAdmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "SessionStarted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "CapabilitiesObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ModelInferred"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "POWLCommitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "AuthorityAdmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationOpened"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationClosed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionVerified"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReceiptEmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReplayCompleted"
+              },
+              "own_attributes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "attributes": [
+        {
+          "key": "concept:name",
+          "value": {
+            "type": "String",
+            "content": "golden-1-p3-pl1-c1"
+          },
+          "own_attributes": null
+        }
+      ],
+      "events": [
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "TaskAdmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "SessionStarted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "CapabilitiesObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ModelInferred"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "POWLCommitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "AuthorityAdmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationOpened"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationClosed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionVerified"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReceiptEmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReplayCompleted"
+              },
+              "own_attributes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "attributes": [
+        {
+          "key": "concept:name",
+          "value": {
+            "type": "String",
+            "content": "golden-2-p1-pl4-c1"
+          },
+          "own_attributes": null
+        }
+      ],
+      "events": [
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "TaskAdmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "SessionStarted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "CapabilitiesObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ModelInferred"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "POWLCommitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "AuthorityAdmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationOpened"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationClosed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionVerified"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReceiptEmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReplayCompleted"
+              },
+              "own_attributes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "attributes": [
+        {
+          "key": "concept:name",
+          "value": {
+            "type": "String",
+            "content": "golden-3-p1-pl1-c3"
+          },
+          "own_attributes": null
+        }
+      ],
+      "events": [
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "TaskAdmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "SessionStarted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "CapabilitiesObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ModelInferred"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "POWLCommitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "AuthorityAdmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationOpened"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationClosed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionVerified"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReceiptEmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationOpened"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationClosed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionVerified"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReceiptEmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationOpened"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationClosed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionVerified"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReceiptEmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReplayCompleted"
+              },
+              "own_attributes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "attributes": [
+        {
+          "key": "concept:name",
+          "value": {
+            "type": "String",
+            "content": "golden-4-p12-pl50-c4"
+          },
+          "own_attributes": null
+        }
+      ],
+      "events": [
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "TaskAdmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "SessionStarted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "CapabilitiesObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ModelInferred"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "POWLCommitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "AuthorityAdmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationOpened"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationClosed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionVerified"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReceiptEmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationOpened"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationClosed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionVerified"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReceiptEmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationOpened"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationClosed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionVerified"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReceiptEmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationOpened"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationClosed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionVerified"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReceiptEmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReplayCompleted"
+              },
+              "own_attributes": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "attributes": [
+        {
+          "key": "concept:name",
+          "value": {
+            "type": "String",
+            "content": "golden-5-p2-pl2-c2"
+          },
+          "own_attributes": null
+        }
+      ],
+      "events": [
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "TaskAdmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "SessionStarted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "CapabilitiesObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ProbeExecuted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ModelInferred"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PlanConstructed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "POWLCommitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "AuthorityAdmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationOpened"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationClosed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionVerified"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReceiptEmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationOpened"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ActuationClosed"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionObserved"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "PostconditionVerified"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReceiptEmitted"
+              },
+              "own_attributes": null
+            }
+          ]
+        },
+        {
+          "attributes": [
+            {
+              "key": "concept:name",
+              "value": {
+                "type": "String",
+                "content": "ReplayCompleted"
+              },
+              "own_attributes": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "extensions": null,
+  "classifiers": null,
+  "global_trace_attrs": null,
+  "global_event_attrs": null
+}

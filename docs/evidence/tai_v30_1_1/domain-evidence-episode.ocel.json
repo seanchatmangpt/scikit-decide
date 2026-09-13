@@ -1,0 +1,492 @@
+{
+  "eventTypes": [
+    {
+      "attributes": [
+        {
+          "name": "candidate_order",
+          "type": "integer"
+        },
+        {
+          "name": "elapsed_seconds",
+          "type": "float"
+        },
+        {
+          "name": "plan_length",
+          "type": "integer"
+        },
+        {
+          "name": "strategy",
+          "type": "string"
+        }
+      ],
+      "name": "solver_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "type": "string"
+        },
+        {
+          "name": "step_index",
+          "type": "integer"
+        }
+      ],
+      "name": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "goal_reached",
+          "type": "boolean"
+        },
+        {
+          "name": "standing",
+          "type": "string"
+        },
+        {
+          "name": "verify_mode",
+          "type": "string"
+        },
+        {
+          "name": "winning_strategy",
+          "type": "string"
+        }
+      ],
+      "name": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ],
+      "name": "teardown"
+    }
+  ],
+  "events": [
+    {
+      "attributes": [
+        {
+          "name": "strategy",
+          "value": "astar-plain"
+        },
+        {
+          "name": "candidate_order",
+          "value": 1
+        },
+        {
+          "name": "elapsed_seconds",
+          "value": 0.28456592559814453
+        },
+        {
+          "name": "plan_length",
+          "value": 12
+        }
+      ],
+      "id": "ev:solver_selected:1",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762646000Z",
+      "type": "solver_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "TaiAction.compile_enterprise"
+        },
+        {
+          "name": "step_index",
+          "value": 0
+        }
+      ],
+      "id": "ev:act:0",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762877000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "TaiAction.admit_public_model"
+        },
+        {
+          "name": "step_index",
+          "value": 1
+        }
+      ],
+      "id": "ev:act:1",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762894000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "TaiAction.manufacture_keys"
+        },
+        {
+          "name": "step_index",
+          "value": 2
+        }
+      ],
+      "id": "ev:act:2",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762903000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "TaiAction.validate_local_conformance"
+        },
+        {
+          "name": "step_index",
+          "value": 3
+        }
+      ],
+      "id": "ev:act:3",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762909000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "TaiAction.bind_private_parameters"
+        },
+        {
+          "name": "step_index",
+          "value": 4
+        }
+      ],
+      "id": "ev:act:4",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762915000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "TaiAction.admit_runtime"
+        },
+        {
+          "name": "step_index",
+          "value": 5
+        }
+      ],
+      "id": "ev:act:5",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762922000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "TaiAction.grant_authority"
+        },
+        {
+          "name": "step_index",
+          "value": 6
+        }
+      ],
+      "id": "ev:act:6",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762928000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "TaiAction.brce_actuate"
+        },
+        {
+          "name": "step_index",
+          "value": 7
+        }
+      ],
+      "id": "ev:act:7",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762933000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "TaiAction.verify_consequence"
+        },
+        {
+          "name": "step_index",
+          "value": 8
+        }
+      ],
+      "id": "ev:act:8",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762940000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "TaiAction.issue_receipt"
+        },
+        {
+          "name": "step_index",
+          "value": 9
+        }
+      ],
+      "id": "ev:act:9",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762947000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "TaiAction.brce_replay"
+        },
+        {
+          "name": "step_index",
+          "value": 10
+        }
+      ],
+      "id": "ev:act:10",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762952000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "TaiAction.establish_standing"
+        },
+        {
+          "name": "step_index",
+          "value": 11
+        }
+      ],
+      "id": "ev:act:11",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.762957000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "goal_reached",
+          "value": true
+        },
+        {
+          "name": "verify_mode",
+          "value": "fresh-instance-replay"
+        },
+        {
+          "name": "winning_strategy",
+          "value": "astar-plain"
+        }
+      ],
+      "id": "ev:verify",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:58.041546000Z",
+      "type": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        }
+      ],
+      "id": "ev:teardown",
+      "relationships": [
+        {
+          "objectId": "episode:tai_v30_1_1",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:tai_v30_1_1",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:58.041692000Z",
+      "type": "teardown"
+    }
+  ],
+  "objectTypes": [
+    {
+      "attributes": [],
+      "name": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "type": "string"
+        }
+      ],
+      "name": "domain"
+    }
+  ],
+  "objects": [
+    {
+      "attributes": [],
+      "id": "episode:tai_v30_1_1",
+      "relationships": [],
+      "type": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "time": "1970-01-01T00:00:00.000000000Z",
+          "value": "TAIForwardDeploymentDomain"
+        }
+      ],
+      "id": "domain:tai_v30_1_1",
+      "relationships": [],
+      "type": "domain"
+    }
+  ]
+}

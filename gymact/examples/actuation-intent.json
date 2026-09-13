@@ -1,0 +1,11 @@
+{
+  "subject": "cube-standard",
+  "operation": "act",
+  "scenario_id": "counter-debug",
+  "episode_id": "example-episode",
+  "payload": {
+    "action": "increment"
+  },
+  "authority_ref": null,
+  "idempotency_key": "example-episode:7"
+}

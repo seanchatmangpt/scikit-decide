@@ -1,0 +1,36 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:standing>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab derived standing vocabulary" ;
+    dcterms:description "Standing is a derived conclusion over evidence, never an ordinary producer-controlled success flag." ;
+    dcterms:created "2026-08-08"^^xsd:date .
+
+afl:StandingValue a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:standing> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "Standing value" .
+afl:StandingScheme a skos:ConceptScheme ; skos:prefLabel "AutoFDE standing" .
+afl:UNKNOWN a afl:StandingValue ; skos:inScheme afl:StandingScheme ; skos:prefLabel "UNKNOWN" .
+afl:PARTIAL_ALIVE a afl:StandingValue ; skos:inScheme afl:StandingScheme ; skos:prefLabel "PARTIAL_ALIVE" .
+afl:ALIVE a afl:StandingValue ; skos:inScheme afl:StandingScheme ; skos:prefLabel "ALIVE" .
+afl:BLOCKED a afl:StandingValue ; skos:inScheme afl:StandingScheme ; skos:prefLabel "BLOCKED" .
+afl:BUILD_BROKEN a afl:StandingValue ; skos:inScheme afl:StandingScheme ; skos:prefLabel "BUILD_BROKEN" .
+afl:UNSUPPORTED a afl:StandingValue ; skos:inScheme afl:StandingScheme ; skos:prefLabel "UNSUPPORTED" .
+
+afl:StandingAssertion a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:standing> ;
+    rdfs:label "Standing assertion" ; rdfs:comment "A derived, scoped statement about a subject's standing." .
+afl:Refusal a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:standing> ;
+    rdfs:label "Typed refusal" .
+afl:standingSubject a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:StandingAssertion ; rdfs:label "standing subject" .
+afl:standingValue a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:StandingAssertion ; rdfs:range afl:StandingValue ; rdfs:label "standing value" .
+afl:derivedFromWitness a owl:ObjectProperty ; rdfs:domain afl:StandingAssertion ; rdfs:range afl:EvidenceWitness ; rdfs:subPropertyOf prov:wasDerivedFrom ; rdfs:label "derived from witness" .
+afl:refusalCode a owl:DatatypeProperty ; rdfs:domain afl:Refusal ; rdfs:range xsd:string ; rdfs:label "refusal code" .
+afl:refusalReason a owl:DatatypeProperty ; rdfs:domain afl:Refusal ; rdfs:range xsd:string ; rdfs:label "refusal reason" .

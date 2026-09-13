@@ -1,0 +1,672 @@
+[08/09/26 18:39:49] INFO     __main__ - 🔧 Config — agent: autofde_lab_planner, 
+                             agent_model: openai/gemma-4-26b-a4b-it,            
+                             judge_model: openai/gemma-4-26b-a4b-it,            
+                             reasoning_effort: agent default, agent_api_base:   
+                             set, judge_api_base: set                           
+                    INFO     __main__ - 🔍 Running pre-flight check for judge   
+                             model...                                           
+/Users/sac/autofde-lab/vendor/gyms/sregym/.venv/lib/python3.12/site-packages/litellm/_service_logger.py:104: DeprecationWarning: There is no current event loop
+  loop = asyncio.get_event_loop()
+🔧 Initializing LLM backend — model: openai/gemma-4-26b-a4b-it, api_base: set
+[08/09/26 18:39:50] INFO     __main__ - ✅ Judge pre-flight check passed        
+╭───────────────────────────── SREGym API Server ──────────────────────────────╮
+│  ____  ____  _____ ____                                                      │
+│ / ___||  _ \| ____/ ___|_   _ _ __ ___                                       │
+│ \___ \| |_) |  _|| |  _| | | | '_ ` _ \                                      │
+│  ___) |  _ <| |__| |_| | |_| | | | | | |                                     │
+│ |____/|_| \_\_____\____|\__, |_| |_| |_|                                     │
+│                         |___/                                                │
+│                                                                              │
+╰──────────────────────────── http://0.0.0.0:8000 ─────────────────────────────╯
+Available Endpoints                                                             
+
+ • POST /submit: { "solution": "<your-solution>" } → grades the current stage   
+ • GET /status: returns { "stage": "setup" | "diagnosis" | "mitigation" |       
+   "tearing_down" | "done" }                                                    
+/Users/sac/autofde-lab/vendor/gyms/sregym/.venv/lib/python3.12/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+  warnings.warn(  # deprecated in 14.0 - 2024-11-09
+/Users/sac/autofde-lab/vendor/gyms/sregym/.venv/lib/python3.12/site-packages/uvicorn/protocols/websockets/websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+  from websockets.server import WebSocketServerProtocol
+                    INFO     uvicorn.error - Started server process [45682]     
+                    INFO     uvicorn.error - Waiting for application startup.   
+                    INFO     uvicorn.error - Application startup complete.      
+                    INFO     uvicorn.error - Uvicorn running on                 
+                             http://0.0.0.0:8000 (Press CTRL+C to quit)         
+[18:39:51] Starting agent now: autofde_lab_planner                   main.py:219
+           🔒 Starting Kubernetes API proxy to hide chaos            main.py:223
+           namespaces...                                                        
+[08/09/26 18:39:51] INFO     all.sregym.conductor - Starting Kubernetes API     
+                             filtering proxy...                                 
+                    INFO     all.infra.k8s_proxy - Kubernetes API filtering     
+                             proxy started on port 16443                        
+                    INFO     all.infra.k8s_proxy - Hidden namespaces: {'khaos', 
+                             'chaos-mesh'}                                      
+                    INFO     all.infra.k8s_proxy - Hidden labels: {'app':       
+                             {'load-generator', 'locust-fetcher'}, 'job':       
+                             {'workload'}, 'opentelemetry.io/name':             
+                             {'load-generator'}}                                
+                    INFO     all.infra.k8s_proxy - Generated agent kubeconfig at
+                             /Users/sac/.cache/tmp/sregym-agent-kubeconfig      
+                    INFO     all.sregym.conductor - Agent kubeconfig generated  
+                             at: /Users/sac/.cache/tmp/sregym-agent-kubeconfig  
+           🎯 Running single problem:                                main.py:242
+           cfs_cpu_throttling_hotel_reservation                                 
+                                                                     main.py:312
+           🔍 Starting problem: cfs_cpu_throttling_hotel_reservation            
+           (Attempt 1 of 1)                                                     
+                    INFO     all.sregym.conductor - [Session Start] Problem ID: 
+                             cfs_cpu_throttling_hotel_reservation               
+                    INFO     all.sregym.conductor - [STAGE] Start testing on    
+                             problem: cfs_cpu_throttling_hotel_reservation      
+                    INFO     all.sregym.conductor - Fixing Kubernetes... to     
+                             normal state.                                      
+                    INFO     all.sregym.conductor - [FIX] Imbalance leftover if 
+                             any                                                
+                    INFO     all.sregym.conductor - [FIX] KubeletCrash leftover 
+                             if any                                             
+Starting kubelet in kind-worker...
+Kubelet started in kind-worker
+Starting kubelet in kind-worker2...
+Kubelet started in kind-worker2
+Starting kubelet in kind-worker3...
+Kubelet started in kind-worker3
+Waiting for worker nodes {'kind-worker3', 'kind-worker2', 'kind-worker'} to become Ready...
+All worker nodes are Ready.
+[08/09/26 18:39:52] INFO     all.sregym.conductor - [FIX]                       
+                             KubeletEvictionThresholdMisconfig leftover if any  
+Recovering disk pressure in kind-worker...
+Waiting for node kind-worker to become Ready...
+Node kind-worker is Ready.
+Recovering disk pressure in kind-worker2...
+Waiting for node kind-worker2 to become Ready...
+Node kind-worker2 is Ready.
+Recovering disk pressure in kind-worker3...
+Waiting for node kind-worker3 to become Ready...
+Node kind-worker3 is Ready.
+                    INFO     all.sregym.conductor - [FIX] Calico                
+                             IPPool/strictAffinity leftover if any              
+[08/09/26 18:39:56] INFO     all.sregym.conductor - [FIX] Calico route-reflector
+                             label drift leftovers if any                       
+                    ERROR    all.infra.kubectl - Command failed (exit 1):       
+                             kubectl get bgppeer cluster-peer-policy -o json    
+                               stderr: Error from server (NotFound):            
+                             bgppeers.crd.projectcalico.org                     
+                             "cluster-peer-policy" not found                    
+                    ERROR    all.infra.kubectl - Command failed (exit 1):       
+                             kubectl get bgpconfiguration default -o json       
+                               stderr: Error from server (NotFound):            
+                             bgpconfigurations.crd.projectcalico.org "default"  
+                             not found                                          
+                    ERROR    all.infra.kubectl - Command failed (exit 1):       
+                             kubectl get namespace platform-checks -o json      
+                               stderr: Error from server (NotFound): namespaces 
+                             "platform-checks" not found                        
+                    ERROR    all.infra.kubectl - Command failed (exit 1):       
+                             kubectl -n khaos get configmap network-case-state  
+                             -o json                                            
+                               stderr: Error from server (NotFound): namespaces 
+                             "khaos" not found                                  
+                    INFO     all.sregym.conductor - [FIX] Stale CoreDNS NXDOMAIN
+                             templates if any                                   
+No NXDOMAIN templates found in CoreDNS config; nothing to do
+[08/09/26 18:39:57] INFO     all.sregym.conductor - [FIX] Leftover dm-flakey    
+                             infrastructure if any                              
+[dm-flakey] ⚠️ Could not remove dm-flakey on kind-control-plane (may not exist): No running Khaos pod found on node kind-control-plane
+[dm-flakey] ⚠️ Could not remove dm-flakey on kind-worker (may not exist): No running Khaos pod found on node kind-worker
+[dm-flakey] ⚠️ Could not remove dm-flakey on kind-worker2 (may not exist): No running Khaos pod found on node kind-worker2
+[dm-flakey] ⚠️ Could not remove dm-flakey on kind-worker3 (may not exist): No running Khaos pod found on node kind-worker3
+                    INFO     all.sregym.conductor - [FIX] NightlyRebalanceOOM   
+                             kube-system actor leftover if any                  
+                    INFO     all.sregym.conductor - [FIX] Clock drift leftover  
+                             if any                                             
+No leftover node-probe pods found; nothing to do
+                    INFO     all.sregym.conductor - Fix Kubernetes completed.   
+                    INFO     all.sregym.conductor - No tasklist.yml found.      
+                             Defaulting to running diagnosis and mitigation for 
+                             this problem.                                      
+                    INFO     all.sregym.conductor - Undeploying app leftovers...
+[18:39:57] Waiting for namespace deletion...                      kubectl.py:239
+[18:40:35] Namespace 'hotel-reservation' has been deleted.        kubectl.py:247
+[08/09/26 18:40:35] INFO     all.infra.kubectl - Namespace 'hotel-reservation'  
+                             deleted successfully.                              
+           Waiting for namespace deletion...                      kubectl.py:239
+           Namespace 'hotel-reservation' has been deleted.        kubectl.py:247
+[18:40:40] No jobs found with label 'job=workload' in namespace   kubectl.py:322
+           'hotel-reservation'.                                                 
+[08/09/26 18:40:40] INFO     all.sregym.conductor - App leftovers undeployed.   
+                    INFO     all.sregym.conductor - Deploying app...            
+                    INFO     all.infra.cluster_state - Baseline state loaded    
+                             from                                               
+                             /Users/sac/cache_dir/cluster_baseline_state.json   
+                    INFO     all.sregym.conductor - [DEPLOY] Loaded persisted   
+                             cluster baseline state                             
+                    INFO     all.sregym.conductor - [DEPLOY] Setting up         
+                             metrics-server…                                    
+[18:40:43] Waiting for all pods in namespace 'kube-system' to be  kubectl.py:194
+           ready...                                                             
+[18:40:45] All pods in namespace 'kube-system' are ready.         kubectl.py:223
+[08/09/26 18:40:45] INFO     all.sregym.conductor - [DEPLOY] Setting up OpenEBS…
+[18:40:47] Waiting for all pods in namespace 'openebs' to be      kubectl.py:194
+           ready...                                                             
+           All pods in namespace 'openebs' are ready.             kubectl.py:223
+[08/09/26 18:40:47] INFO     all.sregym.conductor - [DEPLOY] Ensuring OpenEBS   
+                             LocalPV-Device StorageClass…                       
+[08/09/26 18:40:48] INFO     all.sregym.conductor - [DEPLOY]                    
+                             StorageClass/openebs-device already exists; leaving
+                             it unchanged                                       
+                    INFO     all.sregym.conductor - [DEPLOY] Deploying          
+                             Prometheus…                                        
+                    WARNING  all.infra.prometheus - Prometheus is already       
+                             running. Skipping redeployment.                    
+                    INFO     all.sregym.conductor - [DEPLOY] Deploying Jaeger…  
+                    INFO     all.sregym.jaeger - Jaeger deployed successfully.  
+                    INFO     all.sregym.conductor - [DEPLOY] Deploying OTel     
+                             Collector…                                         
+                    INFO     all.sregym.otel_collector - OTel Collector deployed
+                             successfully.                                      
+                    INFO     all.sregym.conductor - [DEPLOY] Deploying Loki…    
+                    WARNING  all.infra.loki - Loki is already running. Skipping 
+                             redeployment.                                      
+                    WARNING  all.infra.loki - Promtail is already running.      
+                             Skipping redeployment.                             
+                    INFO     all.sregym.conductor - [DEPLOY] Deploying MCP      
+                             server…                                            
+[08/09/26 18:40:49] INFO     all.sregym.mcp_server - MCP server RBAC resources  
+                             ensured.                                           
+                    INFO     all.sregym.mcp_server - MCP server already running,
+                             skipping redeploy.                                 
+                    INFO     all.sregym.mcp_server - Port-forward is absent or  
+                             stale, restarting.                                 
+[08/09/26 18:40:52] INFO     all.sregym.mcp_server - Port forwarding established
+                             at 9954. MCP_SERVER_PORT set.                      
+                    INFO     all.sregym.conductor - [ENV] Set up necessary      
+                             components: metrics-server, Khaos, OpenEBS,        
+                             Prometheus, Jaeger, Loki                           
+                    INFO     all.sregym.conductor - [DEPLOY] Deploying and      
+                             starting workload                                  
+                    INFO     all.application - Deploying Kubernetes             
+                             configurations in namespace: hotel-reservation     
+                    ERROR    all.infra.kubectl - Command failed (exit 1):       
+                             kubectl get namespace hotel-reservation            
+                               stderr: Error from server (NotFound): namespaces 
+                             "hotel-reservation" not found                      
+                    INFO     all.application - Namespace hotel-reservation not  
+                             found. Creating namespace.                         
+                    INFO     all.application - Namespace hotel-reservation      
+                             created successfully: namespace/hotel-reservation  
+                             created                                            
+                                                                                
+                    INFO     all.infra.kubectl - ConfigMap 'mongo-rate-script'  
+                             created in namespace 'hotel-reservation'           
+                    INFO     all.infra.kubectl - ConfigMap 'mongo-geo-script'   
+                             created in namespace 'hotel-reservation'           
+[08/09/26 18:40:53] INFO     all.infra.kubectl - ConfigMap 'failure-admin-rate' 
+                             created in namespace 'hotel-reservation'           
+                    INFO     all.infra.kubectl - ConfigMap 'failure-admin-geo'  
+                             created in namespace 'hotel-reservation'           
+[18:40:53] Waiting for all pods in namespace 'hotel-reservation'  kubectl.py:194
+           to be ready...                                                       
+[18:41:05] All pods in namespace 'hotel-reservation' are ready.   kubectl.py:223
+[08/09/26 18:41:05] INFO     all.sregym.conductor - [ENV] Deploy application:   
+                             Hotel Reservation                                  
+                    INFO     all.sregym.jaeger - Created ExternalName service   
+                             'jaeger' in namespace 'hotel-reservation' ->       
+                             otel-collector.observe.svc.cluster.local           
+                    INFO     all.sregym.jaeger - Created ExternalName service   
+                             'jaeger-agent' in namespace 'hotel-reservation' -> 
+                             otel-collector.observe.svc.cluster.local           
+                    INFO     all.sregym.jaeger - Created ExternalName service   
+                             'jaeger-collector' in namespace 'hotel-reservation'
+                             -> otel-collector.observe.svc.cluster.local        
+[08/09/26 18:41:06] INFO     all.sregym.jaeger - Created ExternalName service   
+                             'jaeger-query' in namespace 'hotel-reservation' -> 
+                             otel-collector.observe.svc.cluster.local           
+                    INFO     all.infra.workload - Start Workload with Wrk2      
+                    INFO     all.infra.workload - Checking for existing         
+                             ConfigMap 'wrk2-payload-script'...                 
+                    INFO     all.infra.workload - Creating ConfigMap            
+                             'wrk2-payload-script'...                           
+                    INFO     all.infra.workload - ConfigMap                     
+                             'wrk2-payload-script' created successfully.        
+                    INFO     all.infra.workload - Job created: wrk2-job         
+                    INFO     all.sregym.conductor - [ENV] Start workload        
+                    INFO     all.sregym.conductor - App deployed.               
+== Fault Injection ==
+[calibration] sampling 8 services, warmup 30s...
+[calibration] frontend: baseline=312m headroom=2.0 limit=625m
+[calibration] geo: baseline=92m headroom=1.15 limit=105m
+[calibration] profile: baseline=146m headroom=2.0 limit=295m
+[calibration] rate: baseline=134m headroom=2.0 limit=270m
+[calibration] recommendation: baseline=56m headroom=2.0 limit=115m
+[calibration] reservation: baseline=102m headroom=2.0 limit=205m
+[calibration] search: baseline=171m headroom=2.0 limit=345m
+[calibration] user: baseline=26m headroom=2.0 limit=55m
+Injected CPU limit (105m) for service: geo
+Injected CPU limit (295m) for service: profile
+Injected CPU limit (270m) for service: rate
+Injected CPU limit (115m) for service: recommendation
+Injected CPU limit (205m) for service: reservation
+Injected CPU limit (345m) for service: search
+Injected CPU limit (55m) for service: user
+Injected CPU limit (625m) for service: frontend
+[verify] attempt 1/3: settling 30s, then sampling 30s...
+[verify] geo: throttle_rate=2.6% < 5% (fault not visible yet)
+[verify] profile: throttle_rate=0.0% (clean)
+[verify] rate: throttle_rate=0.0% (clean)
+[verify] recommendation: throttle_rate=1.1% (clean)
+[verify] reservation: throttle_rate=0.3% (clean)
+[verify] search: throttle_rate=0.0% (clean)
+[verify] user: throttle_rate=3.9% (clean)
+[verify] frontend: throttle_rate=0.0% (clean)
+[verify] attempt 2/3: settling 30s, then sampling 30s...
+[verify] geo: throttle_rate=44.6% (faulty, expected)
+[verify] profile: throttle_rate=1.3% (clean)
+[verify] rate: throttle_rate=0.0% (clean)
+[verify] recommendation: throttle_rate=4.3% (clean)
+[verify] reservation: throttle_rate=1.3% (clean)
+[verify] search: throttle_rate=1.0% (clean)
+[verify] user: throttle_rate=11.9% too high (limit=55m)
+[verify] frontend: throttle_rate=0.0% (clean)
+[verify] user: 55m -> 85m
+[verify] attempt 3/3: settling 30s, then sampling 30s...
+[verify] geo: throttle_rate=47.2% (faulty, expected)
+[verify] profile: throttle_rate=1.0% (clean)
+[verify] rate: throttle_rate=0.0% (clean)
+[verify] recommendation: throttle_rate=3.3% (clean)
+[verify] reservation: throttle_rate=2.3% (clean)
+[verify] search: throttle_rate=1.0% (clean)
+[verify] user: throttle_rate=1.2% (clean)
+[verify] frontend: throttle_rate=0.0% (clean)
+[verify] target and non-target services are within their expected throttle bands
+Service: geo | Namespace: hotel-reservation
+
+[08/09/26 18:46:36] INFO     all.sregym.conductor - [ENV] Injected fault        
+                    INFO     all.sregym.conductor - [STAGE] Go to stage         
+                             diagnosis                                          
+                    INFO     all.sregym.conductor - ✅ Deployment complete.     
+                             Ready for submission. Current stage is: diagnosis  
+[08/09/26 18:46:37] INFO     all.autofde_lab_planner.driver - Problem ID        
+                             (harness): anon_bfe9e93d516f4517791a90cb25853aeb   
+                    INFO     all.autofde_lab_planner.driver -                   
+                             ************************* Starting                 
+                             [autofde_lab_planner] for [diagnosis]              
+                             *************************                          
+[08/09/26 18:46:37] INFO     uvicorn.access - 127.0.0.1:54592 - "GET /get_app   
+                             HTTP/1.1" 200                                      
+                    INFO     all.autofde_lab_planner.driver - Real app info:    
+                             {'app_name': 'Hotel Reservation', 'namespace':     
+                             'hotel-reservation', 'namespaces':                 
+                             ['hotel-reservation'], 'descriptions': 'A hotel    
+                             reservation application built with Go and gRPC,    
+                             providing backend in-memory and persistent         
+                             databases, a recommender system for hotel          
+                             recommendations, and a functionality to place      
+                             reservations.'} -- namespace=hotel-reservation     
+                             canonical_image=ghcr.io/sregym/hotel-reservation:la
+                             test                                               
+                    INFO     all.autofde_lab_planner.driver - Real, live        
+                             deployment list observed: ['consul', 'frontend',   
+                             'geo', 'jaeger', 'memcached-profile',              
+                             'memcached-rate', 'memcached-reserve',             
+                             'mongodb-geo', 'mongodb-profile', 'mongodb-rate',  
+                             'mongodb-recommendation', 'mongodb-reservation',   
+                             'mongodb-user', 'profile', 'rate',                 
+                             'recommendation', 'reservation', 'search', 'user'] 
+                    INFO     all.autofde_lab_planner.driver - Real, live traced 
+                             (instrumented) services observed:                  
+                             ['recommendation', 'product-reviews', 'ad',        
+                             'accounting', 'email', 'geo', 'search', 'user',    
+                             'product-catalog', 'image-provider', 'checkout',   
+                             'currency', 'quote', 'reservation', 'rate',        
+                             'jaeger-all-in-one', 'frontend', 'load-generator', 
+                             'shipping', 'fraud-detection', 'payment', 'cart',  
+                             'frontend-proxy', 'flagd', 'profile']              
+                    INFO     all.autofde_lab_planner.driver -                   
+                             Application-microservice deployments in scope:     
+                             ['frontend', 'geo', 'profile', 'rate',             
+                             'recommendation', 'reservation', 'search', 'user'] 
+[08/09/26 18:46:39] INFO     all.autofde_lab_planner.driver - Mismatched        
+                             deployments (mechanically detected): []            
+[08/09/26 18:46:42] INFO     all.autofde_lab_planner.driver - Deployments with  
+                             an elevated revision, image mismatch already       
+                             excluded (real anomaly signal): ['frontend', 'geo',
+                             'mongodb-geo', 'mongodb-rate', 'profile', 'rate',  
+                             'recommendation', 'reservation', 'search', 'user'] 
+[08/09/26 18:46:55] INFO     all.autofde_lab_planner.driver - Deployments with  
+                             unready replicas + a nodeSelector (real anomaly):  
+                             []                                                 
+                    INFO     all.autofde_lab_planner.driver - Deployments with  
+                             unready replicas + podAntiAffinity (real deadlock  
+                             signal): []                                        
+[08/09/26 18:46:57] WARNING  all.autofde_lab_planner.driver - Category-B engine 
+                             diagnosis failed: Expecting value: line 174 column 
+                             20 (char 10000)                                    
+                    INFO     all.autofde_lab_planner.driver - Diagnosis         
+                             submission (mechanically derived): Scanned all     
+                             deployments in namespace hotel-reservation: every  
+                             running container image matches the expected       
+                             baseline 'ghcr.io/sregym/hotel-reservation:latest'.
+                             No image misconfiguration detected by this scan.   
+                             Additionally, the following deployments show an    
+                             elevated deployment.kubernetes.io/revision (real   
+                             evidence of a rollout since initial creation),     
+                             independent of the canonical-image comparison      
+                             above: 'frontend', 'geo', 'mongodb-geo',           
+                             'mongodb-rate', 'profile', 'rate',                 
+                             'recommendation', 'reservation', 'search', 'user'  
+                             in namespace hotel-reservation. This is consistent 
+                             with an unexpected recent configuration change to  
+                             one or more of these deployments.                  
+[08/09/26 18:46:57] INFO     uvicorn.access - 127.0.0.1:54891 - "GET            
+                             /submit_mcp/sse/ HTTP/1.1" 307                     
+                    INFO     uvicorn.access - 127.0.0.1:54891 - "GET            
+                             /submit_mcp/sse HTTP/1.1" 200                      
+                    INFO     uvicorn.access - 127.0.0.1:54892 - "POST           
+                             /submit_mcp/messages/?session_id=12109ac914644bcd8b
+                             035953eaf3ef8e HTTP/1.1" 202                       
+                    INFO     uvicorn.access - 127.0.0.1:54892 - "POST           
+                             /submit_mcp/messages/?session_id=12109ac914644bcd8b
+                             035953eaf3ef8e HTTP/1.1" 202                       
+                    INFO     uvicorn.access - 127.0.0.1:54892 - "POST           
+                             /submit_mcp/messages/?session_id=12109ac914644bcd8b
+                             035953eaf3ef8e HTTP/1.1" 202                       
+[08/09/26 18:46:57] INFO     all.sregym.conductor - Evaluating stage 'diagnosis'
+                    INFO     all.sregym.conductor - Start Eval for Diagnosis    
+== LLM-as-a-Judge Evaluation ==
+🔧 Initializing LLM backend — model: openai/gemma-4-26b-a4b-it, api_base: set
+                    INFO     uvicorn.access - 127.0.0.1:54893 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:46:58] INFO     uvicorn.access - 127.0.0.1:54896 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:46:59] INFO     uvicorn.access - 127.0.0.1:54898 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:00] INFO     uvicorn.access - 127.0.0.1:54905 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:01] INFO     uvicorn.access - 127.0.0.1:54907 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:02] INFO     uvicorn.access - 127.0.0.1:54909 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:03] INFO     uvicorn.access - 127.0.0.1:54911 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:04] INFO     uvicorn.access - 127.0.0.1:54913 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:05] INFO     uvicorn.access - 127.0.0.1:54917 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:06] INFO     uvicorn.access - 127.0.0.1:54920 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:07] INFO     uvicorn.access - 127.0.0.1:54926 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:08] INFO     uvicorn.access - 127.0.0.1:54931 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:09] INFO     uvicorn.access - 127.0.0.1:54934 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:10] INFO     uvicorn.access - 127.0.0.1:54936 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:11] INFO     uvicorn.access - 127.0.0.1:54938 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:12] INFO     uvicorn.access - 127.0.0.1:54940 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:13] INFO     uvicorn.access - 127.0.0.1:54942 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:14] INFO     uvicorn.access - 127.0.0.1:54945 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:15] INFO     uvicorn.access - 127.0.0.1:54947 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:16] INFO     uvicorn.access - 127.0.0.1:54950 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:17] INFO     uvicorn.access - 127.0.0.1:54952 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:18] INFO     uvicorn.access - 127.0.0.1:54957 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:19] INFO     uvicorn.access - 127.0.0.1:54959 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:20] INFO     uvicorn.access - 127.0.0.1:54961 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:21] INFO     uvicorn.access - 127.0.0.1:54963 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:22] INFO     uvicorn.access - 127.0.0.1:54965 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:23] INFO     uvicorn.access - 127.0.0.1:54967 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:24] INFO     uvicorn.access - 127.0.0.1:54973 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:25] INFO     uvicorn.access - 127.0.0.1:54978 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:26] INFO     uvicorn.access - 127.0.0.1:54980 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:27] INFO     uvicorn.access - 127.0.0.1:54988 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:28] INFO     uvicorn.access - 127.0.0.1:55000 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:29] INFO     uvicorn.access - 127.0.0.1:55010 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:30] INFO     uvicorn.access - 127.0.0.1:55022 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:31] INFO     uvicorn.access - 127.0.0.1:55033 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:32] INFO     uvicorn.access - 127.0.0.1:55043 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:33] INFO     uvicorn.access - 127.0.0.1:55055 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:34] INFO     uvicorn.access - 127.0.0.1:55061 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:35] INFO     uvicorn.access - 127.0.0.1:55069 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:36] INFO     uvicorn.access - 127.0.0.1:55071 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:37] INFO     uvicorn.access - 127.0.0.1:55073 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:38] INFO     uvicorn.access - 127.0.0.1:55075 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:39] INFO     uvicorn.access - 127.0.0.1:55077 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:40] INFO     uvicorn.access - 127.0.0.1:55079 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:41] INFO     uvicorn.access - 127.0.0.1:55081 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:42] INFO     uvicorn.access - 127.0.0.1:55083 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:43] INFO     uvicorn.access - 127.0.0.1:55103 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:44] INFO     uvicorn.access - 127.0.0.1:55105 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:45] INFO     uvicorn.access - 127.0.0.1:55107 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:46] INFO     uvicorn.access - 127.0.0.1:55109 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:47] INFO     uvicorn.access - 127.0.0.1:55111 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:48] INFO     uvicorn.access - 127.0.0.1:55113 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:49] INFO     uvicorn.access - 127.0.0.1:55115 - "GET /status    
+                             HTTP/1.1" 200                                      
+Checklist parse attempt 1 failed: Invalid JSON: Expecting value: line 9 column 160 (char 1531)
+[08/09/26 18:47:50] INFO     uvicorn.access - 127.0.0.1:55117 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:51] INFO     uvicorn.access - 127.0.0.1:55119 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:52] INFO     uvicorn.access - 127.0.0.1:55121 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:53] INFO     uvicorn.access - 127.0.0.1:55123 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:54] INFO     uvicorn.access - 127.0.0.1:55125 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:55] INFO     uvicorn.access - 127.0.0.1:55127 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:56] INFO     uvicorn.access - 127.0.0.1:55130 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:57] INFO     uvicorn.access - 127.0.0.1:55132 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:58] INFO     uvicorn.access - 127.0.0.1:55134 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:47:59] INFO     uvicorn.access - 127.0.0.1:55136 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:00] INFO     uvicorn.access - 127.0.0.1:55139 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:01] INFO     uvicorn.access - 127.0.0.1:55141 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:02] INFO     uvicorn.access - 127.0.0.1:55143 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:03] INFO     uvicorn.access - 127.0.0.1:55146 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:04] INFO     uvicorn.access - 127.0.0.1:55149 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:05] INFO     uvicorn.access - 127.0.0.1:55151 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:06] INFO     uvicorn.access - 127.0.0.1:55153 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:07] INFO     uvicorn.access - 127.0.0.1:55155 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:08] INFO     uvicorn.access - 127.0.0.1:55158 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:09] INFO     uvicorn.access - 127.0.0.1:55163 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:10] INFO     uvicorn.access - 127.0.0.1:55166 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:11] INFO     uvicorn.access - 127.0.0.1:55169 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:12] INFO     uvicorn.access - 127.0.0.1:55171 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:13] INFO     uvicorn.access - 127.0.0.1:55177 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:14] INFO     uvicorn.access - 127.0.0.1:55185 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:15] INFO     uvicorn.access - 127.0.0.1:55197 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:16] INFO     uvicorn.access - 127.0.0.1:55203 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:17] INFO     uvicorn.access - 127.0.0.1:55209 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:18] INFO     uvicorn.access - 127.0.0.1:55211 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:19] INFO     uvicorn.access - 127.0.0.1:55213 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:20] INFO     uvicorn.access - 127.0.0.1:55217 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:21] INFO     uvicorn.access - 127.0.0.1:55222 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:22] INFO     uvicorn.access - 127.0.0.1:55225 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:23] INFO     uvicorn.access - 127.0.0.1:55227 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:24] INFO     uvicorn.access - 127.0.0.1:55229 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:25] INFO     uvicorn.access - 127.0.0.1:55231 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:26] INFO     uvicorn.access - 127.0.0.1:55233 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:27] INFO     uvicorn.access - 127.0.0.1:55236 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:28] INFO     uvicorn.access - 127.0.0.1:55246 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:29] INFO     uvicorn.access - 127.0.0.1:55252 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:30] INFO     uvicorn.access - 127.0.0.1:55258 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:31] INFO     uvicorn.access - 127.0.0.1:55262 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:32] INFO     uvicorn.access - 127.0.0.1:55265 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:33] INFO     uvicorn.access - 127.0.0.1:55267 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:34] INFO     uvicorn.access - 127.0.0.1:55269 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:35] INFO     uvicorn.access - 127.0.0.1:55271 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:36] INFO     uvicorn.access - 127.0.0.1:55273 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:37] INFO     uvicorn.access - 127.0.0.1:55275 - "GET /status    
+                             HTTP/1.1" 200                                      
+Checklist parse attempt 2 failed: Invalid JSON: Expecting value: line 6 column 9 (char 766)
+JudgeParseError: all retries exhausted – Invalid JSON: Expecting value: line 6 column 9 (char 766)
+❌ Incorrect diagnosis: False (score: 0.0/100)
+   Expected: [fault_spec] component=deployment/geo; namespace=hotel-reservation || The `geo` deployment has a CPU...
+   Got: Scanned all deployments in namespace hotel-reservation: every running container image matches the ex...
+[08/09/26 18:48:38] INFO     all.sregym.conductor - [EVAL] Diagnosis Failed     
+                              TTL: 122.26141786575317                           
+                    INFO     all.sregym.conductor - [STAGE] Go to stage         
+                             mitigation                                         
+[08/09/26 18:48:38] INFO     uvicorn.access - 127.0.0.1:55277 - "GET /status    
+                             HTTP/1.1" 200                                      
+[08/09/26 18:48:38] INFO     all.autofde_lab_planner.driver - Benchmark status  
+                             after diagnosis: mitigation                        
+                    INFO     all.autofde_lab_planner.driver -                   
+                             ************************* Starting                 
+                             [autofde_lab_planner] for [mitigation]             
+                             *************************                          
+                    INFO     all.autofde_lab_planner.driver - Executing real    
+                             rollback: kubectl rollout undo deployment/frontend 
+                             -n hotel-reservation                               
+[08/09/26 18:48:39] INFO     all.autofde_lab_planner.driver - kubectl result:   
+                             deployment.apps/frontend rolled back               
+                                                                                
+                    INFO     all.autofde_lab_planner.driver - Executing real    
+                             rollback: kubectl rollout undo deployment/geo -n   
+                             hotel-reservation                                  
+                    INFO     all.autofde_lab_planner.driver - kubectl result:   
+                             deployment.apps/geo rolled back                    
+                                                                                
+                    INFO     all.autofde_lab_planner.driver - Executing real    
+                             rollback: kubectl rollout undo                     
+                             deployment/mongodb-geo -n hotel-reservation        
+[08/09/26 18:48:40] INFO     all.autofde_lab_planner.driver - kubectl result:   
+                             deployment.apps/mongodb-geo rolled back            
+                                                                                
+                    INFO     all.autofde_lab_planner.driver - Executing real    
+                             rollback: kubectl rollout undo                     
+                             deployment/mongodb-rate -n hotel-reservation       
+[08/09/26 18:48:41] INFO     all.autofde_lab_planner.driver - kubectl result:   
+                             deployment.apps/mongodb-rate rolled back           
+                                                                                
+                    INFO     all.autofde_lab_planner.driver - Executing real    
+                             rollback: kubectl rollout undo deployment/profile  
+                             -n hotel-reservation                               
+                    INFO     all.autofde_lab_planner.driver - kubectl result:   
+                             deployment.apps/profile rolled back                
+                                                                                
+                    INFO     all.autofde_lab_planner.driver - Executing real    
+                             rollback: kubectl rollout undo deployment/rate -n  
+                             hotel-reservation                                  
+[08/09/26 18:48:42] INFO     all.autofde_lab_planner.driver - kubectl result:   
+                             deployment.apps/rate rolled back                   
+                                                                                
+                    INFO     all.autofde_lab_planner.driver - Executing real    
+                             rollback: kubectl rollout undo                     
+                             deployment/recommendation -n hotel-reservation     
+[08/09/26 18:48:43] INFO     all.autofde_lab_planner.driver - kubectl result:   
+                             deployment.apps/recommendation rolled back         
+                                                                                
+                    INFO     all.autofde_lab_planner.driver - Executing real    
+                             rollback: kubectl rollout undo                     
+                             deployment/reservation -n hotel-reservation        
+[08/09/26 18:48:44] INFO     all.autofde_lab_planner.driver - kubectl result:   
+                             deployment.apps/reservation rolled back            
+                                                                                
+                    INFO     all.autofde_lab_planner.driver - Executing real    
+                             rollback: kubectl rollout undo deployment/search -n
+                             hotel-reservation                                  
+                    INFO     all.autofde_lab_planner.driver - kubectl result:   
+                             deployment.apps/search rolled back                 
+                                                                                
+                    INFO     all.autofde_lab_planner.driver - Executing real    
+                             rollback: kubectl rollout undo deployment/user -n  
+                             hotel-reservation                                  
+[08/09/26 18:48:45] INFO     all.autofde_lab_planner.driver - kubectl result:   
+                             deployment.apps/user rolled back                   
+                                                                                
+[08/09/26 18:50:00] WARNING  all.autofde_lab_planner.driver -                   
+                             wait_for_rollout(frontend) did not return within   
+                             the hard 75s backstop; proceeding anyway.          
+                    INFO     all.autofde_lab_planner.driver - Rollout status for
+                             frontend: TIMEOUT: rollout status did not confirm  
+                             convergence within the hard backstop               
+[08/09/26 18:51:15] WARNING  all.autofde_lab_planner.driver -                   
+                             wait_for_rollout(geo) did not return within the    
+                             hard 75s backstop; proceeding anyway.              
+                    INFO     all.autofde_lab_planner.driver - Rollout status for
+                             geo: TIMEOUT: rollout status did not confirm       
+                             convergence within the hard backstop               
+[08/09/26 18:52:16] INFO     uvicorn.error - Shutting down                      
+                    INFO     uvicorn.error - Waiting for application shutdown.  
+                    INFO     uvicorn.error - Application shutdown complete.     
+                    INFO     uvicorn.error - Finished server process [45682]    

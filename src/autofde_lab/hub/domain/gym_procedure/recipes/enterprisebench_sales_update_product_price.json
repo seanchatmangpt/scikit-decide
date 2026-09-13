@@ -1,0 +1,25 @@
+{
+  "gym": "enterprisebench",
+  "task": "Task_Generation/tasks.json[0] (Sales: update discounted price of product B0BQ3K23Y1)",
+  "source_ref": "vendor/gyms/enterprisebench/Task_Generation/tasks.json (element [0], the recorded assistant tool_calls trajectory)",
+  "initial_facts": [],
+  "goal_facts": ["price_updated"],
+  "steps": [
+    {
+      "id": "get_product",
+      "description": "get_product(product_id=\"B0BQ3K23Y1\") -- verify the product exists and read its current price before updating it.",
+      "preconditions": [],
+      "establishes": ["product_looked_up"],
+      "cost": 1.0,
+      "source": "tasks.json[0].messages: first assistant tool_calls entry, function name get_product"
+    },
+    {
+      "id": "update_product",
+      "description": "update_product(product_id=\"B0BQ3K23Y1\", discounted_price=\"\\u20b9279\") -- apply the corrected discounted price to the looked-up product.",
+      "preconditions": ["product_looked_up"],
+      "establishes": ["price_updated"],
+      "cost": 1.0,
+      "source": "tasks.json[0].messages: second assistant tool_calls entry, function name update_product"
+    }
+  ]
+}

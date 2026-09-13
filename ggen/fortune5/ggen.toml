@@ -1,0 +1,84 @@
+[project]
+name = "autofde-lab-fortune5"
+version = "26.8.11"
+description = "ggen manufacture for the Fortune-5 CMD state-space projection"
+authors = ["Sean Chatman"]
+license = "MIT"
+
+[ontology]
+source = "ontology/fortune5-k8s.ttl"
+imports = ["ontology/enterprise-architecture.ttl"]
+base_iri = "urn:autofde-lab:fortune5:"
+
+[ontology.prefixes]
+f5 = "urn:autofde-lab:fortune5:"
+f5ea = "urn:autofde-lab:fortune5:ea:"
+xsd = "http://www.w3.org/2001/XMLSchema#"
+skos = "http://www.w3.org/2004/02/skos/core#"
+
+[generation]
+output_dir = "."
+
+[[generation.rules]]
+name = "fortune5-catalog"
+query = { inline = """
+PREFIX f5: <urn:autofde-lab:fortune5:>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?axisName ?optionName
+WHERE {
+  ?axis a f5:Axis ;
+        f5:axisName ?axisName ;
+        f5:axisOrder ?axisOrder ;
+        f5:hasOption ?option .
+  ?option f5:optionName ?optionName ;
+          f5:optionOrder ?optionOrder .
+}
+ORDER BY xsd:integer(?axisOrder) xsd:integer(?optionOrder) ?optionName
+""" }
+template = { file = "templates/catalog.py.tera" }
+output_file = "catalog.py"
+skip_empty = false
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "fortune5-law-court"
+query = { inline = """
+PREFIX f5: <urn:autofde-lab:fortune5:>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+SELECT ?axisName ?optionName
+WHERE {
+  ?axis a f5:Axis ;
+        f5:axisName ?axisName ;
+        f5:axisOrder ?axisOrder ;
+        f5:hasOption ?option .
+  ?option f5:optionName ?optionName ;
+          f5:optionOrder ?optionOrder .
+}
+ORDER BY xsd:integer(?axisOrder) xsd:integer(?optionOrder) ?optionName
+""" }
+template = { file = "templates/test_fortune5_laws.py.tera" }
+output_file = "test_fortune5_laws.py"
+skip_empty = false
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "fortune5-enterprise-architecture-catalog"
+query = { inline = """
+PREFIX afl: <urn:autofde-lab:>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?category ?identifier ?label WHERE {
+  VALUES (?type ?category) {
+    (afl:EnterpriseArchitectureViewpoint "viewpoint")
+    (afl:EnterpriseRequirementKind "requirement_kind")
+    (afl:EnterpriseRiskClass "risk_class")
+    (afl:EnterpriseArchitecturePrinciple "principle")
+  }
+  ?concept a ?type ; skos:prefLabel ?label .
+  BIND(REPLACE(STR(?concept), "^urn:autofde-lab:", "") AS ?identifier)
+}
+ORDER BY ?category ?identifier
+""" }
+template = { file = "templates/enterprise_architecture_catalog.py.tera" }
+output_file = "enterprise_architecture_catalog.py"
+skip_empty = false
+mode = "Overwrite"

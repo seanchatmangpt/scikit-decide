@@ -534,8 +534,26 @@ def classify_stall(
 
     ``BLOCKED:BOUND_EXHAUSTED`` when a step exists but a declared bound removed
     it; ``BLOCKED:DEADLOCK`` when the structure itself offers nothing.
+
+    Genuine bug found and fixed forward this session
+    (``tests/powl/test_runner_bounds_concurrent_chicago.py``): unlike
+    ``max_node_visits`` (enforced *inside* ``_enabled()``, so a capped
+    successor is structurally removed from the enabled set -- see this
+    module's law 2) and ``max_activity_fires`` (checked directly against
+    ``marking.fires`` right here), ``max_marking_states`` is enforced only
+    *inside* ``fire()`` (a raise, not a removal from ``enabled()``) and had
+    no corresponding check in this function at all. So a marking that hit
+    the ``max_marking_states`` cap but still had a structurally-enabled
+    successor (true whenever the cap is smaller than the model's total leaf
+    count) fell through both branches above and was misreported as
+    ``BLOCKED:DEADLOCK`` -- or, before ``classify_pipeline_stall``'s own
+    fix (below), was never even routed into this function, misreported as
+    "not stalled". The explicit ``completed_paths`` check below mirrors the
+    ``fires`` check immediately above it.
     """
     if marking.fires >= bound.max_activity_fires:
+        return DeadlockKind.BOUND_EXHAUSTED
+    if len(marking.completed_paths) >= bound.max_marking_states:
         return DeadlockKind.BOUND_EXHAUSTED
     uncapped = _enabled(model, (), marking, bound, apply_visit_cap=False)
     if uncapped:

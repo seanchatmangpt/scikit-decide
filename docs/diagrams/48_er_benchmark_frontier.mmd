@@ -1,0 +1,45 @@
+erDiagram
+    BENCHMARK ||--o{ SCENARIO : contains
+    BENCHMARK ||--o{ METRIC : scores_by
+    BENCHMARK ||--o{ FRONTIER_OBSERVATION : has
+    BENCHMARK ||--|| EVALUATION_CONTRACT : evaluated_by
+    EXPERIMENT ||--|| BENCHMARK : targets
+    EXPERIMENT ||--o{ BENCHMARK_RESULT : produces
+    BENCHMARK_RESULT }o--|| METRIC : measures
+    BENCHMARK_RESULT }o--o| FRONTIER_OBSERVATION : compared_to
+
+    BENCHMARK {
+      string benchmark_id PK
+      string version
+      string suite
+    }
+    SCENARIO {
+      string scenario_id PK
+      string task_ref
+    }
+    METRIC {
+      string metric_id PK
+      string name
+      string direction
+    }
+    FRONTIER_OBSERVATION {
+      string frontier_id PK
+      float score
+      string source_ref
+      date observed_at
+    }
+    EVALUATION_CONTRACT {
+      string evaluation_id PK
+      string evaluator_kind
+      string oracle_category
+    }
+    EXPERIMENT {
+      string experiment_id PK
+      string decision_id
+      string gym_id
+    }
+    BENCHMARK_RESULT {
+      string result_id PK
+      float score
+      string standing
+    }

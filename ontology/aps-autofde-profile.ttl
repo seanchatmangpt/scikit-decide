@@ -1,0 +1,186 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix aps: <https://w3id.org/chatman/aps#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:aps-profile>
+    a owl:Ontology ;
+    dcterms:title "Agile Protocol Specification profile for AutoFDE Lab" ;
+    dcterms:description "A bounded semantic adapter from APS v26.8.24 into the AutoFDE Lab constitution. It adds admission, contract, falsifier, intent, and reconstitution subjects without creating a second planner, authority path, actuation path, receipt model, or standing model." ;
+    dcterms:created "2026-08-31"^^xsd:date ;
+    dcterms:source <https://github.com/seanchatmangpt/agile-protocol-specification/tree/b5916330905195b124409ca0e857f43b897ffc80> ;
+    prov:wasDerivedFrom <https://w3id.org/chatman/aps> ;
+    afl:sourceRevision "b5916330905195b124409ca0e857f43b897ffc80" .
+
+# APS composites are specialized into AutoFDE subjects instead of being copied.
+afl:AdmittedKnowledge
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:aps-profile> ;
+    rdfs:subClassOf aps:AdmittedKnowledge ;
+    rdfs:label "APS-admitted knowledge" ;
+    rdfs:comment "Knowledge admitted at one AutoFDE trial coordinate from observable predecessor evidence. UNKNOWN is not admission." .
+
+afl:ProtocolContract
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:aps-profile> ;
+    rdfs:subClassOf aps:Contract ;
+    rdfs:label "APS protocol contract" ;
+    rdfs:comment "An APS contract decomposed onto AutoFDE invariants, postconditions, refusals, consequence class, and optional authority envelope." .
+
+afl:ManufacturingStrategyCandidate
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:aps-profile> ;
+    rdfs:subClassOf aps:ManufacturingStrategy , afl:PlanCandidate ;
+    rdfs:label "APS manufacturing strategy candidate" ;
+    rdfs:comment "A manufacturing strategy remains a candidate. It acquires no commitment or DO authority by being proposed." .
+
+afl:CandidateFalsifier
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:aps-profile> ;
+    rdfs:subClassOf aps:CandidateFalsifier ;
+    rdfs:label "APS candidate falsifier" ;
+    rdfs:comment "A declared condition that can refute a bounded candidate claim; execution of a falsifier is a separate probe/verification activity." .
+
+afl:ProtocolActuationIntent
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:aps-profile> ;
+    rdfs:subClassOf aps:ActuationIntent ;
+    rdfs:label "APS actuation intent" ;
+    rdfs:comment "A receiptable proposal binding a governed commitment to an explicit authority envelope. The intent is not an Actuation and does not bypass BRCE/GymAct." .
+
+afl:ReconstitutionTrial
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:aps-profile> ;
+    rdfs:subClassOf aps:Reconstitution , afl:Trial ;
+    rdfs:label "APS reconstitution trial" ;
+    rdfs:comment "One identity-bounded AutoFDE trial that reconstitutes admitted predecessor evidence into a successor standing assertion." .
+
+# Exact overlap is made explicit only where the two constitutions carry the same subject.
+aps:EvidenceReceipt owl:equivalentClass afl:Receipt .
+aps:StandingAssertion owl:equivalentClass afl:StandingAssertion .
+
+aps:UNKNOWN owl:sameAs afl:UNKNOWN .
+aps:PARTIAL_ALIVE owl:sameAs afl:PARTIAL_ALIVE .
+aps:ALIVE owl:sameAs afl:ALIVE .
+aps:BLOCKED owl:sameAs afl:BLOCKED .
+aps:BUILD_BROKEN owl:sameAs afl:BUILD_BROKEN .
+aps:UNSUPPORTED owl:sameAs afl:UNSUPPORTED .
+
+# APS names REFUSED as a standing concept; AutoFDE deliberately models typed refusal as an
+# evidence-bearing entity. Preserve the stronger target distinction rather than collapsing it.
+aps:REFUSED dcterms:relation afl:Refusal ;
+    rdfs:comment "Adapted as AutoFDE's typed Refusal entity, not as a new StandingValue." .
+
+# Admission and contract decomposition.
+afl:admissionWitness
+    a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:AdmittedKnowledge ;
+    rdfs:range afl:EvidenceWitness ;
+    rdfs:subPropertyOf prov:wasDerivedFrom ;
+    rdfs:label "admission witness" .
+
+afl:contractInvariant
+    a owl:ObjectProperty ;
+    rdfs:domain afl:ProtocolContract ;
+    rdfs:range afl:Invariant ;
+    rdfs:label "contract invariant" .
+
+afl:contractPostcondition
+    a owl:ObjectProperty ;
+    rdfs:domain afl:ProtocolContract ;
+    rdfs:range afl:Postcondition ;
+    rdfs:label "contract postcondition" .
+
+afl:contractRefusal
+    a owl:ObjectProperty ;
+    rdfs:domain afl:ProtocolContract ;
+    rdfs:range afl:Refusal ;
+    rdfs:label "contract refusal" .
+
+afl:contractConsequence
+    a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:ProtocolContract ;
+    rdfs:range afl:ConsequenceClass ;
+    rdfs:label "contract consequence class" .
+
+afl:contractAuthority
+    a owl:ObjectProperty ;
+    rdfs:domain afl:ProtocolContract ;
+    rdfs:range afl:AuthorityEnvelope ;
+    rdfs:label "contract authority envelope" ;
+    rdfs:comment "An explicit grant relevant to the contract. This property itself performs no authorization or actuation." .
+
+# Candidate search and falsification remain upstream of commitment.
+afl:strategyForCandidateSet
+    a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:ManufacturingStrategyCandidate ;
+    rdfs:range afl:CandidateSet ;
+    rdfs:label "strategy for candidate set" .
+
+afl:falsifiesCandidate
+    a owl:ObjectProperty ;
+    rdfs:domain afl:CandidateFalsifier ;
+    rdfs:range afl:PlanCandidate ;
+    rdfs:label "falsifies candidate" .
+
+afl:implementedByProbe
+    a owl:ObjectProperty ;
+    rdfs:domain afl:CandidateFalsifier ;
+    rdfs:range afl:DiscriminatingProbe ;
+    rdfs:label "implemented by discriminating probe" .
+
+# SELECT/CONSTRUCT remain separate from DO. Intent binds an already-governed commitment to
+# explicit authority; only afl:Actuation + authorizedBy crosses the existing DO boundary.
+afl:intentCommitment
+    a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:ProtocolActuationIntent ;
+    rdfs:range afl:POWLCommitment ;
+    rdfs:label "intent commitment" .
+
+afl:intentAuthority
+    a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:ProtocolActuationIntent ;
+    rdfs:range afl:AuthorityEnvelope ;
+    rdfs:label "intent authority" .
+
+# Reconstitution joins the complete protocol receipt chain without manufacturing a parallel one.
+afl:reconstitutionKnowledge
+    a owl:ObjectProperty ;
+    rdfs:domain afl:ReconstitutionTrial ;
+    rdfs:range afl:AdmittedKnowledge ;
+    rdfs:label "reconstitution admitted knowledge" .
+
+afl:reconstitutionContract
+    a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:ReconstitutionTrial ;
+    rdfs:range afl:ProtocolContract ;
+    rdfs:label "reconstitution contract" .
+
+afl:reconstitutionCandidate
+    a owl:ObjectProperty ;
+    rdfs:domain afl:ReconstitutionTrial ;
+    rdfs:range afl:ManufacturingStrategyCandidate ;
+    rdfs:label "reconstitution candidate" .
+
+afl:reconstitutionFalsifier
+    a owl:ObjectProperty ;
+    rdfs:domain afl:ReconstitutionTrial ;
+    rdfs:range afl:CandidateFalsifier ;
+    rdfs:label "reconstitution falsifier" .
+
+afl:reconstitutionWitness
+    a owl:ObjectProperty ;
+    rdfs:domain afl:ReconstitutionTrial ;
+    rdfs:range afl:EvidenceWitness ;
+    rdfs:label "reconstitution evidence witness" .
+
+afl:reconstitutionStanding
+    a owl:ObjectProperty ;
+    rdfs:domain afl:ReconstitutionTrial ;
+    rdfs:range afl:StandingAssertion ;
+    rdfs:label "reconstitution standing assertion" .

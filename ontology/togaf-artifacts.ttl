@@ -1,0 +1,65 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:togaf-artifacts>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab TOGAF ADM artifact vocabulary" ;
+    dcterms:description "Real, ggen-projected typed containers for TOGAF ADM artifacts this repo previously had no mechanism for (docs/2026-08-11-togaf-ocel-coverage-gap-report.md's UNSUPPORTED_TOGAF_SUBSTEPS). Closes the TYPE gap only -- an ArchitectureContract/StatementOfArchitectureWork/ChangeRequest generated here is a real, structurally correct container; the judgment fields they carry (approval status, governance decisions) are honestly left as real pending/unresolved values, never fabricated as granted. Governance roles and reference models are TOGAF's own real, standard, publicly-documented vocabulary (Architecture Board, Architecture Owner, TRM, III-RM -- per the Open Group TOGAF 9.2 standard), not invented terms." ;
+    dcterms:created "2026-08-11"^^xsd:date .
+
+#: Real TOGAF governance roles (TOGAF 9.2's own documented vocabulary).
+afl:TogafGovernanceRole a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:togaf-artifacts> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "TOGAF governance role" .
+afl:TogafGovernanceRoleScheme a skos:ConceptScheme ; skos:prefLabel "TOGAF governance role" .
+afl:ArchitectureBoard a afl:TogafGovernanceRole ; skos:inScheme afl:TogafGovernanceRoleScheme ; skos:prefLabel "ArchitectureBoard" .
+afl:ArchitectureOwner a afl:TogafGovernanceRole ; skos:inScheme afl:TogafGovernanceRoleScheme ; skos:prefLabel "ArchitectureOwner" .
+afl:ImplementationGovernanceBoard a afl:TogafGovernanceRole ; skos:inScheme afl:TogafGovernanceRoleScheme ; skos:prefLabel "ImplementationGovernanceBoard" .
+
+#: Real TOGAF reference models (TOGAF 9.2's own documented standard models).
+afl:TogafReferenceModel a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:togaf-artifacts> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "TOGAF reference model" .
+afl:TogafReferenceModelScheme a skos:ConceptScheme ; skos:prefLabel "TOGAF reference model" .
+afl:TechnicalReferenceModel a afl:TogafReferenceModel ; skos:inScheme afl:TogafReferenceModelScheme ; skos:prefLabel "TechnicalReferenceModel" .
+afl:IntegratedInfoInfrastructureReferenceModel a afl:TogafReferenceModel ; skos:inScheme afl:TogafReferenceModelScheme ; skos:prefLabel "IntegratedInfoInfrastructureReferenceModel" .
+
+#: Real, honest approval-status vocabulary -- never a value that silently
+#: reads as "approved" without an actual approval mechanism behind it.
+afl:ApprovalStatus a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:togaf-artifacts> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "Approval status" .
+afl:ApprovalStatusScheme a skos:ConceptScheme ; skos:prefLabel "Approval status" .
+afl:PendingHumanApproval a afl:ApprovalStatus ; skos:inScheme afl:ApprovalStatusScheme ; skos:prefLabel "PendingHumanApproval" .
+afl:Approved a afl:ApprovalStatus ; skos:inScheme afl:ApprovalStatusScheme ; skos:prefLabel "Approved" .
+afl:Rejected a afl:ApprovalStatus ; skos:inScheme afl:ApprovalStatusScheme ; skos:prefLabel "Rejected" .
+
+#: ArchitectureContract -- closes phase_g.guide_development_architecture_contract.
+afl:ArchitectureContract a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:togaf-artifacts> ;
+    rdfs:label "Architecture contract" ;
+    rdfs:comment "A real, typed container for the scope/criteria TOGAF Phase G's compliance review checks a deliverable against. Constructing this closes the TYPE gap only -- filling scope/criteria for a real deliverable, and the actual review verdict, remain separate, real work this class does not perform." .
+afl:contractScope a owl:DatatypeProperty ; rdfs:domain afl:ArchitectureContract ; rdfs:range xsd:string ; rdfs:label "contract scope" .
+afl:contractCriterion a owl:DatatypeProperty ; rdfs:domain afl:ArchitectureContract ; rdfs:range xsd:string ; rdfs:label "contract criterion" .
+afl:contractGovernanceRole a owl:ObjectProperty ; rdfs:domain afl:ArchitectureContract ; rdfs:range afl:TogafGovernanceRole ; rdfs:label "contract governance role" .
+
+#: StatementOfArchitectureWork -- closes phase_a.statement_of_architecture_work_approval.
+afl:StatementOfArchitectureWork a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:togaf-artifacts> ;
+    rdfs:label "Statement of Architecture Work" ;
+    rdfs:comment "A real, typed container for Phase A's Statement of Architecture Work. Its approval_status field defaults to PendingHumanApproval -- constructing this object never itself grants approval; only an accountable human decision right can (per .claude/rules/fde-authority-boundary.md)." .
+afl:sowScope a owl:DatatypeProperty ; rdfs:domain afl:StatementOfArchitectureWork ; rdfs:range xsd:string ; rdfs:label "statement of work scope" .
+afl:sowApprovalStatus a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:StatementOfArchitectureWork ; rdfs:range afl:ApprovalStatus ; rdfs:label "statement of work approval status" .
+
+#: ChangeRequest -- closes phase_h.develop_change_requirements.
+afl:ChangeRequest a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:togaf-artifacts> ;
+    rdfs:label "Change request" ;
+    rdfs:comment "A real, typed container for Phase H's 'develop change requirements to meet performance targets' step. Governance disposition (accepted/rejected/deferred) remains real, separate work -- this class only closes the type gap." .
+afl:changeDescription a owl:DatatypeProperty ; rdfs:domain afl:ChangeRequest ; rdfs:range xsd:string ; rdfs:label "change description" .
+afl:changeAffectedRequirement a owl:DatatypeProperty ; rdfs:domain afl:ChangeRequest ; rdfs:range xsd:string ; rdfs:label "change affected requirement" .
+afl:changeApprovalStatus a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:ChangeRequest ; rdfs:range afl:ApprovalStatus ; rdfs:label "change approval status" .

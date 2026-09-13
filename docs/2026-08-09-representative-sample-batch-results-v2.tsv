@@ -1,0 +1,5 @@
+problem_id	diagnosis_success	diagnosis_score	mitigation_success	status
+admission_webhook_outage_hotel_reservation	False	0.0	False	OK_rc124
+astronomy_shop_ad_service_image_slow_load	?	?	?	NO_CSV_rc124
+astronomy_shop_payment_service_unreachable	?	?	?	NO_CSV_rc124
+cfs_cpu_throttling_hotel_reservation	?	?	?	NO_CSV_rc124

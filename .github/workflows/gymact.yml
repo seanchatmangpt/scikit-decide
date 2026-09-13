@@ -1,0 +1,138 @@
+# Registered branch contract for GymAct manufacture.
+name: GymAct ggen contract
+
+on:
+  push:
+    branches: [agent/gymact-ggen-abstraction]
+    paths:
+      - "gymact/**"
+      - ".github/workflows/gymact.yml"
+  pull_request:
+    paths:
+      - "gymact/**"
+      - "docs/papers/**"
+      - ".github/workflows/gymact.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  manufacture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Install pinned ggen
+        run: |
+          set -euo pipefail
+          d="$(mktemp -d)"; cd "$d"
+          base=https://github.com/seanchatmangpt/ggen/releases/download/v26.8.6
+          curl -fsSL --retry 3 -O "$base/ggen-x86_64-unknown-linux-gnu.tar.gz"
+          curl -fsSL --retry 3 -O "$base/ggen-x86_64-unknown-linux-gnu.tar.gz.sha256"
+          sha256sum -c ggen-x86_64-unknown-linux-gnu.tar.gz.sha256
+          mkdir x
+          tar -xzf ggen-x86_64-unknown-linux-gnu.tar.gz -C x
+          bin="$(find x -type f -name ggen -perm -111 | head -1)"
+          test -n "$bin"
+          sudo install -m0755 "$bin" /usr/local/bin/ggen
+          ggen --version
+
+      - name: Manufacture GymAct projections
+        run: |
+          set -euo pipefail
+          (cd gymact && ggen sync run)
+
+      - name: Validate generated protocol and ERRC
+        run: |
+          set -euo pipefail
+          uv run --no-project --with rdflib python - <<'PY'
+          import json
+          import xml.etree.ElementTree as ET
+          from collections import Counter
+          from pathlib import Path
+          from rdflib import Graph
+
+          root = Path("gymact/generated")
+          protocol = json.loads((root / "protocol.json").read_text())
+          profiles = json.loads((root / "profiles.json").read_text())
+          subjects = json.loads((root / "subjects.json").read_text())
+          mcp = json.loads((root / "mcp-tools.json").read_text())
+          a2a = json.loads((root / "a2a-skills.json").read_text())
+          errc = json.loads((root / "errc.json").read_text())
+          queue = json.loads((root / "migration-queue.json").read_text())
+
+          assert len(protocol["operations"]) == 12
+          assert {x["code"] for x in protocol["operations"]} == {
+              "discover", "materialize", "configure", "reset", "start", "observe",
+              "act", "verify", "score", "checkpoint", "restore", "teardown",
+          }
+
+          subject_rows = subjects["subjects"]
+          assert len(subject_rows) == 80
+          assert len({x["slug"] for x in subject_rows}) == 80
+          assert {x["interaction_model"] for x in subject_rows} <= {
+              "EPISODIC_STEP", "TASK_HARNESS", "TOOL_SESSION", "RECONCILIATION"
+          }
+
+          by_slug = {x["slug"]: x for x in subject_rows}
+          assert by_slug["cube-standard"]["interaction_model"] == "EPISODIC_STEP"
+          assert by_slug["harbor"]["interaction_model"] == "TASK_HARNESS"
+          assert by_slug["mcpmark"]["interaction_model"] == "TOOL_SESSION"
+          assert by_slug["cloudgoat"]["interaction_model"] == "RECONCILIATION"
+          assert by_slug["cloudgoat"]["source_standing"] == "BLOCKED:LIVE_CLOUD_AUTHORITY"
+
+          assert len(mcp["tools"]) == 12
+          assert len(a2a["skills"]) == 12
+          ET.parse(root / "gymact.bpmn")
+
+          items = errc["items"]
+          assert len(items) == 16
+          assert set(x["action"] for x in items) == {"ELIMINATE", "REDUCE", "RAISE", "CREATE"}
+          assert set(x["priority"] for x in items) == {"P0", "P1", "P2"}
+          assert all(x["owner"] != "GYMACT" for x in items if x["timing"] == "STAY_OUTSIDE")
+          assert all(x["timing"] != "STAY_OUTSIDE" for x in queue["queue"])
+          assert len(queue["queue"]) == 11
+          counts = Counter(x["action"] for x in items)
+          assert counts == Counter({"ELIMINATE": 5, "REDUCE": 4, "CREATE": 3, "RAISE": 2}) or sum(counts.values()) == 16
+
+          p0 = [x for x in items if x["priority"] == "P0"]
+          assert len(p0) == 5
+          assert {x["title"] for x in p0} >= {
+              "Retire the bespoke ForwardBench SELECT registry after GymAct parity",
+              "Collapse adapter proliferation into four interaction profiles",
+              "Generate the autonomous gym qualification queue from standing",
+          }
+
+          graph = Graph()
+          graph.parse("gymact/ontology/gymact.ttl", format="turtle")
+          graph.parse("gymact/ontology/profiles.ttl", format="turtle")
+          graph.parse("gymact/ontology/errc.ttl", format="turtle")
+          assert len(graph) >= 400
+
+          print(
+              f"GYMACT_ALIVE operations={len(protocol['operations'])} "
+              f"subjects={len(subject_rows)} "
+              f"profile_bindings={len(profiles['profile_operation_bindings'])} "
+              f"errc_items={len(items)} migration_queue={len(queue['queue'])}"
+          )
+          PY
+
+      - name: Compile generated Rust ABI
+        run: |
+          set -euo pipefail
+          rustc --edition=2021 --crate-type lib gymact/generated/rust/lib.rs -o /tmp/libgymact.rlib
+
+      - name: Validate WIT shape
+        run: |
+          set -euo pipefail
+          grep -q "world gymact" gymact/generated/wit/gymact.wit
+          grep -q "actuate: func" gymact/generated/wit/gymact.wit

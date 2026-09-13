@@ -13,14 +13,13 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: agentic-fabric-${{ github.event.pull_request.number || github.ref }}-${{ matrix.python-version }}
-  cancel-in-progress: true
-
 jobs:
   exact-head-fabric:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    concurrency:
+      group: agentic-fabric-${{ github.event.pull_request.number || github.ref }}-${{ matrix.python-version }}
+      cancel-in-progress: true
     strategy:
       fail-fast: false
       matrix:

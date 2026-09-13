@@ -39,6 +39,13 @@ export PYTHONPATH := justfile_directory()
 #     free on this macOS box only because of an unrelated libomp skipif --
 #     would run for real on Linux/CI, so it's pulled out structurally rather
 #     than relying on that skip.
+#   - tests/evidence/test_level4_witness_falsifiers_chicago.py -- same shape
+#     as test_level4_ocel_vocabulary_chicago.py below (72.19s excluded from
+#     the "Level 4 crown hot loop" recipe for the identical reason): its
+#     module-scoped fixture runs one real `run_real_trial`, measured
+#     ~73.6s alone (2026-08-08, `pytest tests/evidence/... -v`). 14 real
+#     identity-mutation falsifiers against that one real trial is exactly
+#     the right shape for a Chicago test; it is simply not unit-weight.
 # None of the above is dropped from coverage -- everything excluded here
 # still runs, unrestricted, in test-full below.
 #
@@ -64,7 +71,8 @@ test:
         --ignore=tests/test_self_play_dspy_all_domains_chicago.py \
         --ignore=tests/test_self_play_dspy_turbofieldfare_chicago.py \
         --ignore=tests/test_chatman_wasm.py \
-        --ignore=tests/test_import_all_submodules.py
+        --ignore=tests/test_import_all_submodules.py \
+        --ignore=tests/evidence/test_level4_witness_falsifiers_chicago.py
 
 # Full loop: everything, matching .github/workflows/ci.yml's `integration`
 # job partitioning -- actually 5 pytest invocations, not 4: the python
@@ -89,3 +97,49 @@ test-full:
     .venv/bin/python -m pytest -vv tests/scheduling -n 4
     .venv/bin/python -m pytest -vv --ignore-glob 'tests/*/cpp' --ignore tests/solvers/python --ignore tests/scheduling
     .venv/bin/python -m pytest -vv --timeout=300 tests/*/cpp
+
+# Level 4 crown hot loop: the four Level 4 suites whose wall time is NOT
+# dominated by planner federation. Measured this session (2026-08-08,
+# `.venv/bin/python -m pytest <file> -q --durations=10`, one file per
+# invocation, real `/usr/bin/time -p` wall clock):
+#
+#   test_level4_definition_of_done.py          5.90s   22 passed
+#   test_level4_isolation_chicago.py           3.54s    3 passed
+#   test_level4_shacl_conformance_chicago.py   1.41s    8 passed
+#   test_crown_factor_typed_acceptance.py      1.10s   11 passed
+#   test_level4_ocel_vocabulary_chicago.py    72.19s    <- EXCLUDED here
+#
+# Combined, in one process: 8.54s serial -> 4.84s at -n 4, 44 passed.
+#
+# Why ocel_vocabulary is excluded and NOT skipped: 69.87s of its 72.19s is a
+# single module-scoped fixture, `executed_trial`, running one real
+# `run_real_trial`. cProfile of that trial (cumulative, real run this
+# session) attributes it as:
+#
+#   69.60s  total trial
+#   65.10s  planner_federation.run_federation   <- 94% of the trial
+#             49 x _solve_one_isolated, SERIAL, each fork()s a child that
+#             re-imports the whole solver stack (torch, discrete_optimization,
+#             ...) -- ~1.33s per solver, and the solve itself is a fraction
+#             of that.
+#    4.15s  12 x RealBlindEnvironment.try_action (real gymact subprocess)
+#
+# So this suite is FEDERATION-bound, not gymact-subprocess-bound. The gymact
+# bridge is 6% of the cost. Note separately that `try_action` REPLAYS THE
+# FULL COMMITTED HISTORY on every call (`self._history + prefix + [req]` sent
+# to one subprocess), so actuation work grows O(n^2) in the number of
+# committed probes -- at 12 probes that is still only 4.15s, but it is the
+# term that will dominate if probe budgets grow. Not changed here: that file
+# is owned elsewhere; this is a measurement, not a fix.
+#
+# Nothing is deleted or skipped -- `test-level4-full` below runs all five.
+test-level4:
+    .venv/bin/python -m pytest -q -n 4 \
+        tests/ecosystem/test_level4_definition_of_done.py \
+        tests/ecosystem/test_level4_shacl_conformance_chicago.py \
+        tests/ecosystem/test_crown_factor_typed_acceptance.py \
+        tests/ecosystem/test_level4_isolation_chicago.py
+
+# Every Level 4 suite, federation-bound ones included. Minutes, not seconds.
+test-level4-full:
+    .venv/bin/python -m pytest -q tests/ecosystem

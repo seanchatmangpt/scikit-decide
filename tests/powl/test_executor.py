@@ -100,6 +100,20 @@ def test_precedence_governs_enabling_and_is_read_from_the_closure():
     assert enabled(free, fire(free, INITIAL_MARKING, (2,))) == frozenset({(0,), (1,)})
 
 
+def test_firing_unordered_siblings_in_either_order_yields_equal_markings():
+    """Confluence: for genuinely unordered leaf siblings, the order in which the
+    caller fires them does not affect the resulting Marking. This is the generic
+    executor property behind the gymact concurrent-read blocks (POWL v2
+    Definition 3.11 marked-graph concurrency) -- proven here independent of any
+    driver/runner machinery.
+    """
+    model = PartialOrder((Atom("a"), Atom("b"), Atom("c")))
+    marking_ab = fire(model, fire(model, INITIAL_MARKING, (0,)), (1,))
+    marking_ba = fire(model, fire(model, INITIAL_MARKING, (1,)), (0,))
+    assert marking_ab == marking_ba
+    assert enabled(model, marking_ab) == enabled(model, marking_ba) == frozenset({(2,)})
+
+
 def test_firing_a_path_that_is_not_enabled_is_refused():
     model = PartialOrder((Atom("a"), Atom("b")), frozenset({_oe(0, 1)}))
     with pytest.raises(PowlError) as excinfo:

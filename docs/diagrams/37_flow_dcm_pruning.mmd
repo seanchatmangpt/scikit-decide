@@ -1,0 +1,15 @@
+flowchart TD
+    A["Combinatorial possibility space<br/>Ω = GymBasis × DecisionBasis × ExperimentBasis"] --> B["Ontology / type / SHACL constraints"]
+    B --> C["Lawful space Ω_lawful"]
+    C --> D["Incompatibility + capability pruning"]
+    D --> E["Nondominated candidate set"]
+    E --> F["Covering arrays / discriminating experimental design"]
+    F --> G["Selected experiments E*"]
+    G --> H["Parallel execution"]
+    H --> I["Verified evidence"]
+    I --> J["Active learning / successive halving"]
+    J --> K["Small surviving frontier"]
+    K --> L["Compile / manufacture winning specialization"]
+    I --> M["Failure clusters"]
+    M --> N["Shared basis repair"]
+    N --> B

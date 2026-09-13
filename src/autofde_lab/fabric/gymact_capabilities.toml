@@ -1,0 +1,149 @@
+# Capability allowlist for autofde-lab's SREGym diagnosing pipeline
+# (src/autofde_lab/reasoning/sregym_pipeline.py -> gymact.gyms.sregym.SregymEnvironment).
+#
+# This is the enforcement boundary named in runner.py's non-actuation-boundary
+# docstring for the case where gymact is the target environment: the
+# diagnosing agent may only construct/call a gymact `Capability` whose
+# `binding` name is listed below. `gymact_capability_gate.py` (this file's
+# loader, in the same src/autofde_lab/fabric/ directory) reads this file and
+# refuses (CapabilityRefused) any other binding name -- including names that
+# don't exist yet in gymact today. Adding a capability here is therefore a
+# deliberate, reviewed act, not something that happens by omission.
+#
+# This manifest lives under src/autofde_lab/fabric/, not under
+# src/autofde_lab/gymact/ -- this repo's real gymact usage is the external
+# ~/gymact package (`import gymact`) directly, never a local wrapper/shadow
+# package of that name.
+#
+# Real capability set re-verified 2026-08-12 directly from
+# `~/gymact/src/gymact/gyms/sregym.py`'s `SREGYM_CAPABILITIES` tuple: 14
+# entries. The original 5 (observe_cluster_state, run_kubectl,
+# submit_diagnosis, submit_mitigation, get_benchmark_status) plus 9
+# observability-read additions upstream in gymact since this manifest was
+# first written -- 4 real Jaeger MCP reads, 3 real Loki MCP reads, and 2 real
+# Prometheus MCP reads, all Consequence.DO (same kernel-dispatch reason as
+# observe_cluster_state above: gymact refuses any Consequence.READ capability
+# routed through gym.act(), so DO is the only classification that is
+# actually true for these too). None of the 9 read injected-fault ground
+# truth or scoring internals -- they surface only what a real operator's
+# observability stack (traces/logs/metrics/alerts) already exposes.
+# `SregymEnvironment.verify()` is NOT a
+# `Capability` at all: it is a plain coroutine method on the environment,
+# never wrapped in the `actuate(capability, payload)` dispatch table, so it
+# is structurally unreachable through this capability surface regardless of
+# what this file lists. That is the concrete mechanism that keeps
+# ground-truth/scoring internals gymact-side: they were never exposed as an
+# invocable capability to begin with, and this allowlist additionally
+# guards against a *future* gymact capability quietly adding such exposure
+# and the diagnosing pipeline picking it up unreviewed.
+
+[gymact]
+# Environment provider this manifest applies to (informational; the gate
+# does not currently branch on provider name, but recording it makes an
+# eventual second-environment manifest an additive change, not a rewrite).
+environment = "sregym"
+
+[[capability]]
+name = "observe_cluster_state"
+consequence = "DO"
+reason = "Reads sregym's real conductor /status endpoint. Semantically read-only (no cluster mutation, no ground truth) but classified DO, not READ (corrected 2026-08-11, matching a real fix in ~/gymact/src/gymact/gyms/sregym.py): gymact's own kernel mechanically refuses ANY Consequence.READ capability routed through gym.act(), and SregymEnvironment has no separate observe()-based invocation path for a named query -- gym.act() is the only real way this tool can actually execute, so DO is the only classification that is actually true here. The prior READ classification silently meant every real gym.act() call against this capability was refused before this fix."
+
+[[capability]]
+name = "run_kubectl"
+consequence = "DO"
+reason = "Executes a real kubectl command through sregym's kubectl-mcp server. The core diagnostic tool surface (inspect pods, logs, events, describe resources) -- classified DO because it runs an arbitrary read-leaning kubectl command, not because it exposes ground truth."
+
+[[capability]]
+name = "get_benchmark_status"
+consequence = "DO"
+reason = "Reads sregym's conductor /status endpoint (benchmark-stage view). Semantically read-only (no cluster mutation, no ground truth) but classified DO, not READ (corrected 2026-08-11, matching a real fix in ~/gymact/src/gymact/gyms/sregym.py) -- same rationale as observe_cluster_state above: gymact's own kernel mechanically refuses ANY Consequence.READ capability routed through gym.act(), so DO is the only classification that is actually true here."
+
+[[capability]]
+name = "submit_diagnosis"
+consequence = "DO"
+reason = "Submits the agent's OWN diagnosis to sregym's conductor for external grading. This is the diagnosing pipeline's required deliverable action, not a ground-truth read -- it sends the agent's answer outward, it does not read gymact's answer key. Excluding it would make the pipeline unable to complete its job."
+
+[[capability]]
+name = "submit_mitigation"
+consequence = "DO"
+reason = "Submits the agent's OWN mitigation to sregym's conductor for external grading. Same rationale as submit_diagnosis: outbound submission of the agent's own answer, not a read of ground truth."
+
+[[capability]]
+name = "jaeger_get_services"
+consequence = "DO"
+reason = "Real Jaeger MCP get_services -- lists real service names from sregym's observability stack. Read-leaning but classified DO for the same kernel-dispatch reason as observe_cluster_state: gymact refuses any Consequence.READ capability routed through gym.act(). No ground truth or scoring internals exposed."
+
+[[capability]]
+name = "jaeger_get_operations"
+consequence = "DO"
+reason = "Real Jaeger MCP get_operations -- real operations for one named service. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "jaeger_get_traces"
+consequence = "DO"
+reason = "Real Jaeger MCP get_traces -- real traces for one service in a real time window. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "jaeger_get_dependency_graph"
+consequence = "DO"
+reason = "Real Jaeger MCP get_dependency_graph -- real service dependency graph over a real time window. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "loki_get_logs"
+consequence = "DO"
+reason = "Real Loki MCP get_logs -- real logs matching a real LogQL query. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "loki_get_labels"
+consequence = "DO"
+reason = "Real Loki MCP get_labels -- real available label names. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "loki_get_label_values"
+consequence = "DO"
+reason = "Real Loki MCP get_label_values -- real values for one named label. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "prometheus_get_metrics"
+consequence = "DO"
+reason = "Real Prometheus MCP get_metrics -- real metric values for a real PromQL query. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+[[capability]]
+name = "prometheus_get_alerts"
+consequence = "DO"
+reason = "Real Prometheus MCP get_alerts -- real currently-firing alerts. Same DO rationale as jaeger_get_services; no ground truth or scoring internals exposed."
+
+# NOTE: "verify" is deliberately NOT listed here. An earlier pass in this
+# session added a fake "verify" entry so gymact_diagnosis_driver's
+# gymact_verify binding could be constructed as a GatedCapabilityBinding --
+# but CapabilityGate.stale_entries() correctly flagged this as drift (no
+# real gymact.gyms.sregym.SREGYM_CAPABILITIES entry is named "verify").
+# Fixed forward in runner.py: gymact_verify now takes a bare ActionBinding
+# (same rule as the original nine read-only labels), since
+# SregymEnvironment.verify() was never a gated Capability to begin with --
+# it is a plain coroutine, never wired into actuate()'s dispatch table.
+# Padding this manifest with a fictitious capability to make unrelated code
+# typecheck would have been exactly the kind of false authorization this
+# allowlist exists to prevent.
+
+# Deliberately NOT listed, and therefore refused by capability_gate.py even
+# if gymact adds a same-shaped Capability under one of these names in a
+# future revision without this manifest being reviewed and updated:
+#   - anything that would read injected-fault ground truth (e.g. a
+#     hypothetical "get_injected_fault" / "read_fault_spec" capability)
+#   - anything that would read or drive scoring internals beyond the
+#     bounded pass/fail + observed-state shape verify() itself already
+#     returns (e.g. a hypothetical "score_submission" capability that
+#     exposes the grading rubric) -- verify() itself is not a capability
+#     at all (see the NOTE above: it takes a bare ActionBinding, never a
+#     GatedCapabilityBinding), so there is no "verify" entry in this
+#     manifest to point to; this bullet is a boundary statement about a
+#     hypothetical future capability, not a reference to an existing one.
+#     (Correction, 2026-08-12: this comment previously referred to "the
+#     verify entry above" as if one still existed in this manifest -- it
+#     does not, and per the NOTE above, never should.)
+#
+# capability_gate.py checks capability `.binding` values duck-typed against
+# real `gymact.gyms.sregym.Capability`/`SREGYM_CAPABILITIES` objects -- it
+# imports gymact directly when validating real Capability instances, it
+# never re-implements gymact's own capability model locally.

@@ -1,0 +1,62 @@
+[08/09/26 18:59:29] INFO     __main__ - 🔧 Config — agent: autofde_lab_dspy,    
+                             agent_model: groq/openai/gpt-oss-20b, judge_model: 
+                             groq/openai/gpt-oss-20b, reasoning_effort: agent   
+                             default, agent_api_base: set, judge_api_base: set  
+                    INFO     __main__ - 🔍 Running pre-flight check for judge   
+                             model...                                           
+🔧 Initializing LLM backend — model: groq/openai/gpt-oss-20b, api_base: set
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+                    WARNING  llm_backend.get_llm_backend - OpenAI API error     
+                             occurred: litellm.NotFoundError: GroqException -   
+                             {"error":{"param":"model","code":"model_not_found",
+                             "type":"invalid_request_error","message":"requested
+                              model is not available"}}. Retrying in 1          
+                             seconds... (Attempt 1/5)                           
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+[08/09/26 18:59:30] WARNING  llm_backend.get_llm_backend - OpenAI API error     
+                             occurred: litellm.NotFoundError: GroqException -   
+                             {"error":{"param":"model","code":"model_not_found",
+                             "type":"invalid_request_error","message":"requested
+                              model is not available"}}. Retrying in 2          
+                             seconds... (Attempt 2/5)                           
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+[08/09/26 18:59:32] WARNING  llm_backend.get_llm_backend - OpenAI API error     
+                             occurred: litellm.NotFoundError: GroqException -   
+                             {"error":{"param":"model","code":"model_not_found",
+                             "type":"invalid_request_error","message":"requested
+                              model is not available"}}. Retrying in 4          
+                             seconds... (Attempt 3/5)                           
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+[08/09/26 18:59:36] WARNING  llm_backend.get_llm_backend - OpenAI API error     
+                             occurred: litellm.NotFoundError: GroqException -   
+                             {"error":{"param":"model","code":"model_not_found",
+                             "type":"invalid_request_error","message":"requested
+                              model is not available"}}. Retrying in 8          
+                             seconds... (Attempt 4/5)                           
+
+[1;31mGive Feedback / Get Help: https://github.com/BerriAI/litellm/issues/new[0m
+LiteLLM.Info: If you need to debug this error, use `litellm._turn_on_debug()'.
+
+[08/09/26 18:59:44] WARNING  llm_backend.get_llm_backend - OpenAI API error     
+                             occurred: litellm.NotFoundError: GroqException -   
+                             {"error":{"param":"model","code":"model_not_found",
+                             "type":"invalid_request_error","message":"requested
+                              model is not available"}}. Retrying in 16         
+                             seconds... (Attempt 5/5)                           
+[08/09/26 19:00:00] ERROR    __main__ - ❌ Judge pre-flight check failed: Max   
+                             retries exceeded. Unable to complete the request.  
+                    ERROR    __main__ - The judge uses LiteLLM. Ensure the model
+                             is LiteLLM-compatible or pass a compatible         
+                             --judge-model.                                     

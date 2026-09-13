@@ -1,0 +1,41 @@
+@prefix ga: <https://github.com/seanchatmangpt/autofde-lab/ns/gymact#> .
+@prefix data: <https://github.com/seanchatmangpt/autofde-lab/data/gymact/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pplan: <http://purl.org/net/p-plan#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ga:ClosedVerticalCapability a owl:Class ; rdfs:subClassOf prov:Bundle, pplan:Plan .
+ga:interactionProfile a owl:ObjectProperty ; rdfs:range ga:InteractionProfile .
+ga:hasProcessStep a owl:ObjectProperty ; rdfs:range pplan:Step .
+ga:activityCode a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:predecessorId a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:requiredObjectType a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:processSchema a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:allowedConsequence a owl:DatatypeProperty ; rdfs:range xsd:string .
+
+data:azure-closed-vertical a ga:ClosedVerticalCapability ;
+  dct:title "Azure Closed Vertical" ;
+  ga:slug "azure-closed-vertical" ;
+  ga:interactionProfile data:profile-reconciliation ;
+  ga:processSchema "powl.partial-order.v1" ;
+  ga:authorityMode "REQUIRED" ;
+  ga:allowedConsequence "azure:terraform-apply", "azure:terraform-destroy" ;
+  ga:hasProcessStep data:p01, data:p02, data:p03, data:p04, data:p05, data:p06,
+    data:p07, data:p08, data:p09, data:p10, data:p11, data:p12 .
+
+data:p01 a pplan:Step ; ga:ordinal 10 ; ga:activityCode "incident.observed" ; ga:requiredObjectType "Incident", "AzureSubscription" .
+data:p02 a pplan:Step ; ga:ordinal 20 ; ga:activityCode "rdfdelta.admitted" ; ga:predecessorId "p01" ; ga:requiredObjectType "Incident", "CapabilityBundle" .
+data:p03 a pplan:Step ; ga:ordinal 30 ; ga:activityCode "hook.intent_manufactured" ; ga:predecessorId "p02" ; ga:requiredObjectType "Incident", "AgentSession", "CapabilityBundle" .
+data:p04 a pplan:Step ; ga:ordinal 40 ; ga:activityCode "agent.session_started" ; ga:predecessorId "p03" ; ga:requiredObjectType "AgentSession", "AzureSubscription" .
+data:p05 a pplan:Step ; ga:ordinal 50 ; ga:activityCode "powl.plan_admitted" ; ga:predecessorId "p04" ; ga:requiredObjectType "AgentSession", "CapabilityBundle", "TerraformResource" .
+data:p06 a pplan:Step ; ga:ordinal 60 ; ga:activityCode "authority.admitted" ; ga:predecessorId "p05" ; ga:requiredObjectType "AuthorityEnvelope", "AzureSubscription", "CapabilityBundle" .
+data:p07 a pplan:Step ; ga:ordinal 70 ; ga:activityCode "brce.apply_verified" ; ga:predecessorId "p06" ; ga:requiredObjectType "AuthorityEnvelope", "CapabilityBundle", "AzureSubscription", "TerraformResource" .
+data:p08 a pplan:Step ; ga:ordinal 80 ; ga:activityCode "postcondition.apply_verified" ; ga:predecessorId "p07" ; ga:requiredObjectType "AzureSubscription", "TerraformResource" .
+data:p09 a pplan:Step ; ga:ordinal 90 ; ga:activityCode "brce.destroy_verified" ; ga:predecessorId "p08" ; ga:requiredObjectType "AuthorityEnvelope", "CapabilityBundle", "AzureSubscription", "TerraformResource" .
+data:p10 a pplan:Step ; ga:ordinal 100 ; ga:activityCode "postcondition.destroy_verified" ; ga:predecessorId "p09" ; ga:requiredObjectType "AzureSubscription", "TerraformResource" .
+data:p11 a pplan:Step ; ga:ordinal 110 ; ga:activityCode "orphan_sweep.verified" ; ga:predecessorId "p10" ; ga:requiredObjectType "AzureSubscription", "TerraformResource" .
+data:p12 a pplan:Step ; ga:ordinal 120 ; ga:activityCode "evidence.replay_verified" ; ga:predecessorId "p11" ; ga:requiredObjectType "CapabilityBundle", "AgentSession", "AuthorityEnvelope", "AzureSubscription", "TerraformResource" .

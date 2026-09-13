@@ -1,0 +1,199 @@
+[2026-08-20 20:20:00.104] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.108] [info] A* finished to solve from state State(x=9, y=0) in 0.004 seconds.
+[2026-08-20 20:20:00.111] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.114] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.116] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.119] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.121] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.124] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.126] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.129] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.131] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.134] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.136] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.139] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.141] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.144] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.146] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.149] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.151] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.154] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.156] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.159] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.161] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.164] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.165] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.168] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.170] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.173] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.175] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.178] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.180] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.183] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.185] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.188] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.190] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.193] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.195] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.198] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.200] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.203] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.205] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.208] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.209] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.212] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.214] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.217] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.219] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.222] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.225] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.228] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.230] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.233] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.235] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.238] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.240] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.243] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.245] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.247] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.249] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.252] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.254] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.258] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.260] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.262] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.264] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.267] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.269] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.272] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.274] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.277] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.279] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.282] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.284] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.287] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.289] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.292] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.294] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.297] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.299] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.302] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.304] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.307] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.308] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.311] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.313] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.316] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.318] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.321] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.323] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.328] [info] A* finished to solve from state State(x=9, y=0) in 0.004 seconds.
+[2026-08-20 20:20:00.330] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.333] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.335] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.338] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.340] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.343] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.345] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.348] [info] A* finished to solve from state State(x=9, y=0) in 0.003 seconds.
+[2026-08-20 20:20:00.350] [info] Running sequential A* solver from state State(x=9, y=0)
+[2026-08-20 20:20:00.353] [info] A* finished to solve from state State(x=9, y=0) in 0.002 seconds.
+[2026-08-20 20:20:00.383] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/domain.pddl
+[2026-08-20 20:20:00.386] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/probBLOCKS-3-0.pddl
+[2026-08-20 20:20:00.393] [info] Running sequential A* solver from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)})))
+[2026-08-20 20:20:00.395] [info] A* finished to solve from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)}))) in 0.001 seconds.
+[2026-08-20 20:20:00.395] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/domain.pddl
+[2026-08-20 20:20:00.395] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/probBLOCKS-3-0.pddl
+[2026-08-20 20:20:00.398] [info] Running sequential A* solver from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)})))
+[2026-08-20 20:20:00.398] [info] A* finished to solve from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)}))) in 0 seconds.
+[2026-08-20 20:20:00.398] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/domain.pddl
+[2026-08-20 20:20:00.399] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/probBLOCKS-3-0.pddl
+[2026-08-20 20:20:00.401] [info] Running sequential A* solver from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)})))
+[2026-08-20 20:20:00.402] [info] A* finished to solve from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)}))) in 0 seconds.
+[2026-08-20 20:20:00.402] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/domain.pddl
+[2026-08-20 20:20:00.402] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/probBLOCKS-3-0.pddl
+[2026-08-20 20:20:00.404] [info] Running sequential A* solver from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)})))
+[2026-08-20 20:20:00.405] [info] A* finished to solve from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)}))) in 0 seconds.
+[2026-08-20 20:20:00.405] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/domain.pddl
+[2026-08-20 20:20:00.405] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/probBLOCKS-3-0.pddl
+[2026-08-20 20:20:00.408] [info] Running sequential A* solver from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)})))
+[2026-08-20 20:20:00.408] [info] A* finished to solve from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)}))) in 0 seconds.
+[2026-08-20 20:20:00.408] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/domain.pddl
+[2026-08-20 20:20:00.409] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/probBLOCKS-3-0.pddl
+[2026-08-20 20:20:00.411] [info] Running sequential A* solver from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)})))
+[2026-08-20 20:20:00.412] [info] A* finished to solve from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)}))) in 0 seconds.
+[2026-08-20 20:20:00.412] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/domain.pddl
+[2026-08-20 20:20:00.412] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/probBLOCKS-3-0.pddl
+[2026-08-20 20:20:00.414] [info] Running sequential A* solver from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)})))
+[2026-08-20 20:20:00.415] [info] A* finished to solve from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)}))) in 0 seconds.
+[2026-08-20 20:20:00.415] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/domain.pddl
+[2026-08-20 20:20:00.415] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/probBLOCKS-3-0.pddl
+[2026-08-20 20:20:00.417] [info] Running sequential A* solver from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)})))
+[2026-08-20 20:20:00.418] [info] A* finished to solve from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)}))) in 0 seconds.
+[2026-08-20 20:20:00.418] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/domain.pddl
+[2026-08-20 20:20:00.418] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/probBLOCKS-3-0.pddl
+[2026-08-20 20:20:00.421] [info] Running sequential A* solver from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)})))
+[2026-08-20 20:20:00.422] [info] A* finished to solve from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)}))) in 0 seconds.
+[2026-08-20 20:20:00.422] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/domain.pddl
+[2026-08-20 20:20:00.422] [info] Parsing /Users/sac/autofde-lab/tests/domains/python/pddl_domains/blocks/probBLOCKS-3-0.pddl
+[2026-08-20 20:20:00.425] [info] Running sequential A* solver from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)})))
+[2026-08-20 20:20:00.425] [info] A* finished to solve from state PDDLState(atoms=(frozenset(), frozenset({()}), frozenset({(1,), (2,)}), frozenset({(0,), (1,)}), frozenset({(2, 0)}))) in 0 seconds.
+=== autofde-lab throughput benchmark ===
+python: 3.13.9  platform: darwin
+repo: /Users/sac/autofde-lab
+
+[1/2] Maze + Astar, N=50
+{
+  "domain": "maze/Astar",
+  "n": 50,
+  "total_wall_s": 0.25024620701151434,
+  "solves_per_sec": 199.8032281771983,
+  "mean_ms": 5.004924140230287,
+  "median_ms": 4.873875499470159,
+  "p95_ms": 5.873542002518661,
+  "min_ms": 4.699457997048739,
+  "max_ms": 7.398624999041203
+}
+
+[2/2] PDDLDomain (blocks-3-0) + Astar, N=10
+{
+  "domain": "pddl-blocksworld/Astar",
+  "n": 10,
+  "total_wall_s": 0.027736585005186498,
+  "solves_per_sec": 360.53465118831633,
+  "mean_ms": 2.77365850051865,
+  "median_ms": 2.6049165026051924,
+  "p95_ms": 3.890500003763009,
+  "min_ms": 2.4833339994074777,
+  "max_ms": 3.890500003763009
+}
+
+NOTE: maze and blocksworld results are reported separately and
+must not be averaged together -- different domains, different
+state-space complexity, different per-solve construction cost.
+
+=== RESULTS_JSON ===
+{
+  "maze": {
+    "domain": "maze/Astar",
+    "n": 50,
+    "total_wall_s": 0.25024620701151434,
+    "solves_per_sec": 199.8032281771983,
+    "mean_ms": 5.004924140230287,
+    "median_ms": 4.873875499470159,
+    "p95_ms": 5.873542002518661,
+    "min_ms": 4.699457997048739,
+    "max_ms": 7.398624999041203
+  },
+  "blocksworld": {
+    "domain": "pddl-blocksworld/Astar",
+    "n": 10,
+    "total_wall_s": 0.027736585005186498,
+    "solves_per_sec": 360.53465118831633,
+    "mean_ms": 2.77365850051865,
+    "median_ms": 2.6049165026051924,
+    "p95_ms": 3.890500003763009,
+    "min_ms": 2.4833339994074777,
+    "max_ms": 3.890500003763009
+  }
+}

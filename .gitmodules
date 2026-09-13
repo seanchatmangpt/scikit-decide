@@ -207,7 +207,14 @@
 	update = none
 [submodule "forwardbench-terragoat"]
 	path = vendor/gyms/terragoat
-	url = https://github.com/bridgecrewio/terragoat.git
+	# Re-pointed to a fork whose `main` carries upstream's own real
+	# `fix_outdated_tf` branch content (commit 6b1c6d4), verified this
+	# session: `terraform init` fails on bridgecrewio/terragoat's pinned
+	# master (pre-0.12 legacy HCL quoted type constraints), succeeds cleanly
+	# on this fork's main. Not a fabricated fix -- upstream authored it,
+	# just never merged it to master. See gym-lock.ttl's pinnedRevision and
+	# smoke-lock.ttl's vendor-terragoat entry for the full evidence chain.
+	url = https://github.com/seanchatmangpt/terragoat.git
 	update = none
 [submodule "forwardbench-the-agent-company"]
 	path = vendor/gyms/the-agent-company

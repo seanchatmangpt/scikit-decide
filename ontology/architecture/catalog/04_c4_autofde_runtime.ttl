@@ -1,0 +1,64 @@
+@prefix arch: <urn:autofde-lab:architecture:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:architecture:catalog:04_c4_autofde_runtime> a owl:Ontology ;
+    dcterms:title "Generated architecture catalog bundle: 04_c4_autofde_runtime" ;
+    owl:imports <urn:autofde-lab:ontology:architecture> .
+
+<urn:autofde-lab:architecture:diagram:16_autofde_runtime_context:diagram> a arch:C4ContextDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE Runtime — System Context" ;
+    arch:diagramKind arch:C4ContextDiagram ;
+    arch:elementCount 6 ;
+    arch:mermaidSyntax "C4Context" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 7 ;
+    arch:sourceDigest "2831c8435df10cb01915786d81fc6f8d60dba7d8b7aab51ebc602c9994ea74b0" ;
+    arch:sourcePath "docs/c4/16_autofde_runtime_context.mmd" .
+
+<urn:autofde-lab:architecture:diagram:17_autofde_runtime_container:diagram> a arch:C4ContainerDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE Runtime — Containers" ;
+    arch:diagramKind arch:C4ContainerDiagram ;
+    arch:elementCount 11 ;
+    arch:mermaidSyntax "C4Container" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 10 ;
+    arch:sourceDigest "9e779a88659ec904f9a02b50e7b9091f521e99089457d6fd18dedf6355a38aef" ;
+    arch:sourcePath "docs/c4/17_autofde_runtime_container.mmd" .
+
+<urn:autofde-lab:architecture:diagram:18_autofde_runtime_component:diagram> a arch:C4ComponentDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE Runtime — Components" ;
+    arch:diagramKind arch:C4ComponentDiagram ;
+    arch:elementCount 10 ;
+    arch:mermaidSyntax "C4Component" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 9 ;
+    arch:sourceDigest "4bed7f904bdbced1003190fd7d19eb5357a796a52cba77664745439ebb433b9d" ;
+    arch:sourcePath "docs/c4/18_autofde_runtime_component.mmd" .
+
+<urn:autofde-lab:architecture:diagram:19_autofde_runtime_dynamic:diagram> a arch:C4DynamicDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE Runtime — Governed Execution" ;
+    arch:diagramKind arch:C4DynamicDiagram ;
+    arch:elementCount 5 ;
+    arch:mermaidSyntax "C4Dynamic" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 9 ;
+    arch:sourceDigest "c44224a17f1cde00736a8e858348671c4c36dc2e01902f0d7c725f5c8bf00202" ;
+    arch:sourcePath "docs/c4/19_autofde_runtime_dynamic.mmd" .
+
+<urn:autofde-lab:architecture:diagram:20_autofde_runtime_deployment:diagram> a arch:C4DeploymentDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE Runtime — Deployment" ;
+    arch:diagramKind arch:C4DeploymentDiagram ;
+    arch:elementCount 10 ;
+    arch:mermaidSyntax "C4Deployment" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 6 ;
+    arch:sourceDigest "055491ffd0901726f69c66a11b8ce10920d65d8df97c6cda68ef6b311ab6c8ab" ;
+    arch:sourcePath "docs/c4/20_autofde_runtime_deployment.mmd" .
+

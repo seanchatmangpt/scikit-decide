@@ -541,6 +541,24 @@ def _parse_graph(text: str) -> Dict[str, Dict[str, List[Tuple[str, str, Optional
             raise PowlDecodeError(
                 f"subject must be an absolute IRI in <>, got {statement.split(' ')[0]!r}"
             )
+        # Real defect found and fixed forward this session: a subject IRI
+        # that never closes with ">" on the same statement (e.g.
+        # "<urn:x a powl2:Model .") previously leaked a bare, uncaught
+        # `ValueError: substring not found` from `str.index` straight out
+        # of `parse_powl_turtle` -- confirmed live, pinned as a regression
+        # fixture in
+        # tests/powl/test_turtle_bridge_runner_integration_chicago.py's
+        # test_subject_iri_missing_closing_bracket_leaks_an_unwrapped_value_error
+        # before this fix. This module's own docstring promises "anything
+        # else is REFUSED with a named reason rather than silently
+        # ignored" -- an unclosed subject IRI is exactly that case, and
+        # must raise the same named `PowlDecodeError` every other
+        # malformed-input path here already does, not a raw stdlib
+        # exception with no domain-specific reason.
+        if ">" not in statement:
+            raise PowlDecodeError(
+                f"subject IRI never closes with '>': {statement[:80]!r}"
+            )
         end = statement.index(">")
         subject = statement[1:end]
         remainder = statement[end + 1 :].strip()

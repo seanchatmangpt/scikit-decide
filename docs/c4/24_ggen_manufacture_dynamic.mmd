@@ -1,0 +1,17 @@
+C4Dynamic
+title ggen Manufacturing Plane — Basis Repair to Regenerated Artifact
+
+System_Ext(lab, "AutoFDE SOTA Lab")
+System(ggen, "ggen")
+System_Ext(repo, "Repository")
+System_Ext(runtime, "AutoFDE Runtime")
+
+Rel(lab, ggen, "1. Admit basis repair / selected specialization")
+Rel(ggen, ggen, "2. Load ontology + shapes + target")
+Rel(ggen, ggen, "3. Validate graph constraints")
+Rel(ggen, ggen, "4. Render target-specific projection")
+Rel(ggen, repo, "5. Write generated artifacts")
+Rel(ggen, ggen, "6. Build manifest + digest + receipt")
+Rel(ggen, repo, "7. Verify no hand-coded drift")
+Rel(ggen, runtime, "8. Publish governed bundle")
+Rel(runtime, lab, "9. Return production evidence for next learning cycle")

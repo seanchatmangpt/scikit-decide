@@ -18,16 +18,52 @@ given receipt, admission, or actuation semantics. Actuation runs through
 OpenClaw, never through BRCE (which belongs to other systems in the
 portfolio and has no role here).
 
+The same law applies to gyms. `vendor/gyms/` (sregym, devops-gym,
+enterprisebench, ...) are real, exact-pinned vendored checkouts for
+**reference only** — read their source, cite it, audit/materialize their
+git pin. This repo never imports or subprocess-launches them directly.
+`gymact` (the real, standalone sibling package at `~/gymact`) is the one
+real actuation surface for any gym; every real diagnosis/mitigation trial
+goes through it. See `.claude/rules/gym-actuation-boundary.md`.
+
 Repository: https://github.com/seanchatmangpt/autofde-lab | Upstream:
 https://github.com/airbus/scikit-decide | Docs:
 https://airbus.github.io/scikit-decide/
+
+Check `docs/KNOWN_FACTS.md` before re-implementing domain-construction fallback
+logic, re-deriving the actuation boundary, or manually re-running a "diff two
+runs" idempotency check — read it first, verify against its cited pointer if you
+need more, and add a dated entry if you learn something new that cost real
+re-derivation time.
 
 ## Always in force
 
 @.claude/rules/standing-law.md
 
-That file is imported, not merely referenced, because every status claim in
-every session needs it.
+@.claude/rules/absence-is-not-evidence.md
+
+@.claude/rules/no-dual-bookkeeping.md
+
+@.claude/rules/level4-completion-law.md
+
+All four are imported, not merely referenced — every session needs them, and
+each was written after a specific defect got through:
+
+1. **standing-law** — the status vocabulary every claim carries.
+2. **absence-is-not-evidence** — what may enter O* from O. A learned model
+   that coerces `UNKNOWN` into whatever value suits a planner hands it a
+   certainty the experiment never established; the resulting confident-wrong
+   plan is an *admission* defect, not a planner defect. Written after a frozen
+   crown scored 8/10 against a conjunction in which one factor could not fail.
+3. **no-dual-bookkeeping** — where claims may live. Written after derived
+   Python summary state drifted from the execution record three separate
+   times, each caught only by adversarial audit.
+4. **level4-completion-law** — what completion *is*. Written after edge counts
+   and crown scores were reported as though they were standing.
+
+They share one law: never manufacture semantics from absence, coincidence,
+prediction, or a secondary representation when the primary evidence can carry
+the relation itself.
 
 Everything below is **path-gated**, not imported. Each `.claude/rules/*.md`
 carries YAML `paths:` front-matter and loads only when a matching file is
@@ -61,10 +97,12 @@ never looked at `~/bcinr`. Verify with `/memory` and `/context`, don't assume.
 | reporting status, or writing any Explore-phase report to the user | `.claude/rules/explore-register.md` |
 | about to `git push`, open/merge a PR, release, deploy docs, trigger long CI, or call the OpenClaw bridge | `.claude/rules/actuation-boundary.md` |
 | adding or modifying a domain, solver, or C++ hub solver; or looking for where anything lives | `.claude/rules/architecture.md` |
+| touching `vendor/gyms/**`, `src/autofde_lab/gymact/**`, `src/autofde_lab/reasoning/**`, or `src/autofde_lab/sota/**` — or working on gymact/sregym actuation at all | `.claude/rules/gym-actuation-boundary.md` |
 | making any claim that spans `~/mfw`, `~/ggen`, `~/ggen-create`, `~/ggen-legacy`, or `~/bcinr` | `.claude/rules/ecosystem-boundary.md` **and** `docs/ecosystem-standing.md` |
 | touching `fabric/pddl_engine.py`, `fabric/powl.py`, PDDL requirements, or the capability ontology | `.claude/rules/ecosystem-boundary.md` |
 | reaching for a project skill or agent instead of re-deriving a workflow | `.claude/rules/project-tooling.md` |
 | filing what you just did into the in-repo ledger | `docs/STATUS.md` |
+| writing or reviewing any test | `.claude/rules/testing-chicago-style.md` |
 
 ## Four rules that do not fit in a table
 
@@ -75,7 +113,9 @@ page, so they stay inline.
    exercising `solve()` on a real domain, run this session.** Never
    "compiles," never "the happy path works." Queued CI, a merged PR, and a
    green synthetic check are not evidence — only an executed job against the
-   exact commit is.
+   exact commit is. This is the solver/domain instance of a repo-wide rule:
+   see `.claude/rules/testing-chicago-style.md` for the general no-mocking
+   discipline and its verification requirement.
 
 2. **Projection is not execution.** `fabric/powl.py` writes
    `plan.powl.ttl`; that manufactures a document, it does not run a
@@ -102,7 +142,32 @@ page, so they stay inline.
 `uv sync --extra=all -v`; `pre-commit run --all-files`.
 Python 3.10+ per `pyproject.toml`; the verified working dev environment is
 3.13.9 — treat 3.13 as current, not merely supported. CMake/C++20/pybind11
-for the compiled extension.
+for the compiled extension. The `cpp/sdk/*` git submodules (nng, pybind11,
+backward-cpp, json, PEGTL, spdlog, Catch2, nngpp) no longer need a manual
+`git submodule update --init --recursive` before this command: `cpp/CMakeLists.txt`
+auto-initializes them at configure time if missing, so `uv sync --extra=all -v`
+alone is sufficient from a fresh, submodule-uninitialized clone or worktree.
+`vendor/gyms/*` submodules are unaffected (reference-only, `update = none`,
+never required by the build).
+
+**Known first-sync race on a genuinely fresh clone: retry once, don't
+loop.** On a from-scratch clone (no prior `.venv`, no cached `uv.lock`
+resolution), the *first* `uv sync --extra=all` can fail with
+`AssertionError: Metadata mismatch in METADATA` raised from inside
+scikit-build-core. Root cause: `uv` rewrites `uv.lock` in place during that
+first sync (the lock has no cached resolution yet), and this repo's own
+package version is computed from git's VCS dirty-bit twice during that same
+sync (once for the sdist metadata, once for the wheel build) — the `uv.lock`
+rewrite flips the working tree from clean to dirty between those two
+computations, so the two metadata blocks disagree and scikit-build-core's
+consistency assertion trips. An immediately repeated, identical `uv sync
+--extra=all` always succeeds, because `uv.lock` is now stable and the
+dirty-bit no longer flips mid-run. This is a real, reproducible one-time
+race (confirmed on two separate fresh clones), not flaky infra — if the
+first `uv sync --extra=all -v` fails with that exact assertion, re-run the
+same command once before treating it as a real failure. Do not paper over a
+*different* failure with a blind retry loop; this is a named, narrow
+exception for this specific error signature only.
 
 **Tests: use `.venv/bin/python -m pytest ...`, not `uv run pytest ...`.**
 `uv run` re-checks the native build on every invocation (a full CMake/Ninja

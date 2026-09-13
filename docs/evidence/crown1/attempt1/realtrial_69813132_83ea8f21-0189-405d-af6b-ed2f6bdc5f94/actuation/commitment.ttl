@@ -1,0 +1,6 @@
+@prefix powl: <urn:powl:> .
+<urn:trial:83ea8f21-0189-405d-af6b-ed2f6bdc5f94> a powl:Commitment ;
+    powl:planDigest "93026d8bfa47ffd2" ;
+    powl:modelDigest "225452fe06ba0a44" ;
+    powl:planLength 3 ;
+    powl:sequence ("increment" "increment" "increment") .

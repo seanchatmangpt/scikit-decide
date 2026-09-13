@@ -9,7 +9,7 @@ from typing import Optional, Union
 import numpy as np
 import wrapt
 
-from autofde_lab.core import D, EmptySpace, Mask, Space, autocastable
+from autofde_lab.core import D, Mask, Space, autocastable
 
 __all__ = ["Events", "Actions", "UnrestrictedActions"]
 
@@ -352,9 +352,9 @@ class Actions(Events):
     def _get_enabled_events_from(
         self, memory: D.T_memory[D.T_state]
     ) -> Space[D.T_event]:
-        # TODO: check definition of enabled events (only uncontrollable?)
-        # return self._get_enabled_actions_from(memory)
-        return EmptySpace()
+        """A domain handling only actions (controllable events) has no uncontrollable events,
+        so the enabled events are exactly the applicable actions."""
+        return self._get_applicable_actions_from(memory)
 
 
 class UnrestrictedActions(Actions):

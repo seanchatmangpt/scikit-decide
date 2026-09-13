@@ -1,0 +1,15 @@
+flowchart TD
+    B["Public Benchmark Contract"] --> C["Compile benchmark into GymAct-compatible trial"]
+    C --> D["Select DecisionBasis configuration"]
+    D --> X["Execute official / faithful benchmark tasks"]
+    X --> E["Collect receipts + replay + evaluator outputs"]
+    E --> S["Compute benchmark score S_AutoFDE"]
+    P["Published frontier score S_frontier"] --> CMP{"Compare scores"}
+    S --> CMP
+    CMP -- "S_AutoFDE < S_frontier" --> BELOW["Below frontier<br/>learn next repair"]
+    CMP -- "S_AutoFDE = S_frontier" --> MATCH["Frontier matched<br/>seek robustness/margin"]
+    CMP -- "S_AutoFDE > S_frontier" --> CLAIM["Candidate SOTA surpassed"]
+    CLAIM --> V["Independent reproduction / standing"]
+    V --> FINAL{"Verified?"}
+    FINAL -- Yes --> SOTA["SOTA_SURPASSED"]
+    FINAL -- No --> REFUSE["Claim refused / insufficient evidence"]

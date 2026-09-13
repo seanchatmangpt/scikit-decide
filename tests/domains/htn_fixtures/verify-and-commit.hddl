@@ -1,0 +1,114 @@
+;; verify-and-commit.hddl
+;; Observed this session: every workflow's final "Verify" stage ran this exact
+;; sequence (mix compile --force -> mix ecto.migrate -> mix test -> mock-grep ->
+;; git commit -F). Written down as HDDL instead of re-derived in prose per cycle.
+;;
+;; Real commands each action maps to, so this stays checkable against actual repo
+;; behavior rather than becoming aspirational:
+;;   compile     -> mix compile --force
+;;   migrate     -> mix ecto.migrate (DEV_DB_PORT from docker compose port db 5432)
+;;   test        -> mix test <scoped-paths>
+;;   mock-grep   -> grep -rn "unittest.mock\|Mock(\|MagicMock\|patch(\|monkeypatch\|Mox\b\|:meck\|meck\." <paths>
+;;   commit      -> git add -A && git commit -F <msg-file>  (never -m, per tools.md)
+
+(define (domain verify-and-commit)
+  (:requirements :hierarchy :typing :negative-preconditions)
+
+  (:types
+    repo - object
+    change-set - object
+  )
+
+  (:predicates
+    (edited ?r - repo ?c - change-set)
+    (compiled ?r - repo)
+    (compile-clean ?r - repo)
+    (migrated ?r - repo)
+    (tested ?r - repo)
+    (tests-green ?r - repo)
+    (mock-checked ?r - repo)
+    (mock-clean ?r - repo)
+    (committed ?r - repo ?c - change-set)
+    (pushed ?r - repo ?c - change-set)
+  )
+
+  ;; ---- compound task ----
+  (:task VERIFY-AND-COMMIT
+    :parameters (?r - repo ?c - change-set)
+  )
+
+  ;; Per this repo's Operating Mode (CLAUDE.md): a red/incomplete result does
+  ;; NOT block the commit -- it blocks the CLAIM of "done," not the DO. Both
+  ;; methods below are admissible; the honest-disclosure method is the default
+  ;; because this repo is exploration-mode, not production-gated.
+  (:method m-verify-then-commit-honest
+    :parameters (?r - repo ?c - change-set)
+    :task (VERIFY-AND-COMMIT ?r ?c)
+    :precondition (edited ?r ?c)
+    :ordered-subtasks (and
+      (t1 (compile ?r))
+      (t2 (migrate ?r))
+      (t3 (test ?r))
+      (t4 (mock-grep ?r))
+      (t5 (commit-with-real-status ?r ?c))
+    )
+  )
+
+  ;; ---- primitive actions ----
+  ;; Each :effect only asserts what the real command's exit status actually
+  ;; proves -- compiled != compile-clean; tested != tests-green. A caller must
+  ;; check the clean/green predicate before claiming success in prose.
+
+  (:action compile
+    :parameters (?r - repo)
+    :precondition ()
+    :effect (compiled ?r)
+    ;; real: (compile-clean ?r) asserted only if `mix compile --force` exits 0
+    ;; with no "== Compilation error ==" block in output -- a caller must
+    ;; observe this, not assume it from (compiled ?r) alone.
+  )
+
+  (:action migrate
+    :parameters (?r - repo)
+    :precondition (compiled ?r)
+    :effect (migrated ?r)
+    ;; real: `mix ecto.migrate` idempotent -- "Migrations already up" is a
+    ;; valid terminal state, not a failure.
+  )
+
+  (:action test
+    :parameters (?r - repo)
+    :precondition (migrated ?r)
+    :effect (tested ?r)
+    ;; real: (tests-green ?r) asserted only if the real "N tests, 0 failures"
+    ;; line is observed -- never inferred from (tested ?r) alone.
+  )
+
+  (:action mock-grep
+    :parameters (?r - repo)
+    :precondition (tested ?r)
+    :effect (mock-checked ?r)
+    ;; real: (mock-clean ?r) asserted only if the grep returns zero matches,
+    ;; or every match is a named, justified exception per
+    ;; ~/.claude/rules/testing-chicago-style.md's "one legitimate use."
+  )
+
+  (:action commit-with-real-status
+    :parameters (?r - repo ?c - change-set)
+    :precondition (mock-checked ?r)
+    :effect (and (committed ?r ?c))
+    ;; real: commit message states compile/test/mock-grep results as OBSERVED,
+    ;; distinguishing e.g. "339 tests, 0 failures" (verified) from "not yet
+    ;; re-run" (disclosed, not claimed). git commit -F <file>, never -m.
+  )
+
+  (:action push
+    :parameters (?r - repo ?c - change-set)
+    :precondition (committed ?r ?c)
+    :effect (pushed ?r ?c)
+    ;; real: `git push` -- only after explicit user request or an active
+    ;; standing directive (e.g. the "storm/power outage" checkpoint request
+    ;; this session), per the harness's send-message-class confirmation rule
+    ;; extended to "publish this commit externally."
+  )
+)

@@ -51,6 +51,11 @@ src/autofde_lab/
 ├── core.py, domains.py, solvers.py, utils.py
 ├── builders/domain/, builders/solver/   # capability mixins
 ├── hub/domain/, hub/solver/, hub/space/gym/
+├── constitution/         # ggen-manufactured projection of ontology/{lab,world,planning,
+│                         # process,authority,evidence,standing,interop}.ttl (PR #37) —
+│                         # regenerate via `ggen sync run` from the repo root, never hand-edit
+│                         # the 8 non-__init__ files. Additive only; not wired into any other
+│                         # module. See docs/2026-08-08-ggen-manufactures-the-constitution.md.
 ├── fabric/               # CLI + MCP + A2A layer over the registry — see above
 │   ├── pddl_engine.py    # classical PDDL engine for mfw's external-engine seam — see ecosystem-boundary.md
 │   ├── powl.py           # plan → POWL2 projection (projection only, NOT execution)
@@ -60,7 +65,12 @@ src/autofde_lab/
 └── wasm/                 # Chatman Ecosystem WASM adapters — see docs/chatman-ecosystem-wasm.md
 
 cpp/            # C++20 performance solvers — pybind11 wrapper per solver
-ontology/       # GENERATED capability graph — regenerate, never hand-edit; see ecosystem-boundary.md
+ontology/       # ontology/autofde-lab-capabilities.ttl is GENERATED — regenerate, never
+                # hand-edit; see ecosystem-boundary.md. The 9 files from PR #37
+                # (lab/world/planning/process/authority/evidence/standing/interop/manufacture)
+                # are HAND-AUTHORED (the semantic constitution); ggen.toml + templates/ +
+                # queries/constitution/ at the repo root manufacture src/autofde_lab/constitution/
+                # from 8 of them.
 tests/          # pytest — autocast/, domains/, solvers/, scheduling/, fabric/
 tests/ecosystem/         # cross-repo crown test — drives real sibling binaries; see ecosystem-boundary.md
 notebooks/      # nbmake-tested tutorials

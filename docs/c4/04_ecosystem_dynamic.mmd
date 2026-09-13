@@ -1,0 +1,23 @@
+C4Dynamic
+title AutoFDE Ecosystem — Discover → Falsify → Admit → Execute → Learn
+
+Person(researcher, "Researcher / Operator")
+System_Ext(benchmark, "External Benchmark")
+System(gymact, "GymAct")
+System(lab, "AutoFDE SOTA Lab")
+System(ggen, "ggen")
+System(runtime, "AutoFDE Runtime")
+System(evidence, "Independent Evidence / Standing")
+
+Rel(researcher, benchmark, "1. Selects benchmark/frontier objective")
+Rel(benchmark, gymact, "2. Lowers environment/evaluator into GymBasis contract")
+Rel(gymact, lab, "3. Supplies canonical world basis")
+Rel(lab, lab, "4. Generates and prunes decision/experiment combinations")
+Rel(lab, gymact, "5. Executes discriminating experiments")
+Rel(gymact, evidence, "6. Emits observations, receipts, replay, consequence")
+Rel(evidence, lab, "7. Returns verified results / counterexamples")
+Rel(lab, ggen, "8. Admits winning architecture and manufactures specialization")
+Rel(ggen, runtime, "9. Delivers governed executable bundle")
+Rel(runtime, gymact, "10. Executes lawful DO path")
+Rel(gymact, evidence, "11. Independently verifies consequence")
+Rel(evidence, lab, "12. Feeds learning compiler and frontier comparison")

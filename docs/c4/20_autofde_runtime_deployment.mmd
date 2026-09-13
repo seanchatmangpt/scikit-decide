@@ -1,0 +1,24 @@
+C4Deployment
+title AutoFDE Runtime — Deployment
+
+Deployment_Node(build, "Build / Release Host") {
+  Container(ggen, "ggen", "Rust")
+  Container(bundle, "Immutable Bundle Artifact", "Digest-pinned")
+}
+Deployment_Node(prod, "Runtime Host") {
+  Container(runtime, "AutoFDE Runtime", "Rust")
+  Container(ledger, "Receipt Ledger", "Append-only")
+}
+Deployment_Node(gym, "GymAct Host") {
+  Container(gymact, "GymAct", "Python")
+}
+Deployment_Node(verify, "Independent Verification Host") {
+  Container(verifier, "Verifier", "SHACL / replay / receipt checks")
+}
+
+Rel(ggen, bundle, "Manufactures")
+Rel(bundle, runtime, "Loaded by")
+Rel(runtime, gymact, "Uses GymAct")
+Rel(runtime, ledger, "Writes receipts")
+Rel(ledger, verifier, "Evidence input")
+Rel(gymact, verifier, "Consequence input")

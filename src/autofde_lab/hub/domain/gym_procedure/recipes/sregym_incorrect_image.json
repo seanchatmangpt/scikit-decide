@@ -1,0 +1,33 @@
+{
+  "gym": "sregym",
+  "task": "incorrect_image",
+  "source_ref": "vendor/gyms/sregym/sregym/conductor/problems/incorrect_image.py",
+  "initial_facts": ["fault_injected"],
+  "goal_facts": ["mitigation_verified"],
+  "steps": [
+    {
+      "id": "diagnose_root_cause",
+      "description": "Diagnose the root cause: deployment/product-catalog is configured to pull a non-existent image tag (app-image:latest), causing ImagePullBackOff and upstream checkout timeouts (per IncorrectImage.root_cause / diagnosis_oracle expected description).",
+      "preconditions": ["fault_injected"],
+      "establishes": ["root_cause_known"],
+      "cost": 1.0,
+      "source": "sregym/conductor/problems/incorrect_image.py IncorrectImage.__init__ (build_structured_root_cause)"
+    },
+    {
+      "id": "patch_deployment_image",
+      "description": "Patch the product-catalog deployment's container image from app-image:latest to the correct image ghcr.io/open-telemetry/demo:2.0.2-productcatalogservice.",
+      "preconditions": ["root_cause_known"],
+      "establishes": ["image_patched"],
+      "cost": 1.0,
+      "source": "sregym/generators/fault/inject_app.py ApplicationFaultInjector.recover_incorrect_image, called from IncorrectImage.recover_fault(correct_image=...)"
+    },
+    {
+      "id": "verify_mitigation",
+      "description": "Run the mitigation oracle: fetch the deployment and confirm the container image is no longer app-image:latest (IncorrectImageMitigationOracle.evaluate()).",
+      "preconditions": ["image_patched"],
+      "establishes": ["mitigation_verified"],
+      "cost": 1.0,
+      "source": "sregym/conductor/oracles/incorrect_image_mitigation.py IncorrectImageMitigationOracle.evaluate"
+    }
+  ]
+}

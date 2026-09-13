@@ -1,0 +1,85 @@
+name: Post-AGI merged branch cleanup
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [master]
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    name: Delete only crown-contained branches after PR 85 merge
+    if: github.event.pull_request.merged == true && github.event.pull_request.number == 85
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Admit exact merged subject
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.merge_commit_sha }}"
+          test "${{ github.event.pull_request.head.sha }}" != ""
+          git merge-base --is-ancestor "${{ github.event.pull_request.head.sha }}" HEAD
+
+      - name: Fetch complete remote branch graph
+        shell: bash
+        run: >-
+          git fetch --no-tags origin
+          '+refs/heads/*:refs/remotes/origin/*'
+          --prune
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.13"
+
+      - name: Preflight zero unique branch tips
+        run: python scripts/audit_branch_closure.py | tee /tmp/branch-closure-preflight.json
+
+      - name: Delete contained refs with exact-SHA leases
+        shell: bash
+        run: |
+          set -euo pipefail
+          deleted=0
+          while read -r ref sha; do
+            case "$ref" in
+              origin/HEAD|origin/master) continue ;;
+            esac
+            branch="${ref#origin/}"
+            git merge-base --is-ancestor "$sha" HEAD
+            git push \
+              --force-with-lease="refs/heads/${branch}:${sha}" \
+              origin ":refs/heads/${branch}"
+            printf 'DELETED branch=%s sha=%s\n' "$branch" "$sha"
+            deleted=$((deleted + 1))
+          done < <(
+            git for-each-ref \
+              --format='%(refname:short) %(objectname)' \
+              refs/remotes/origin \
+              | sort
+          )
+          printf 'DELETED_BRANCH_COUNT=%s\n' "$deleted"
+
+      - name: Prove remote branch closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin \
+            '+refs/heads/*:refs/remotes/origin/*' \
+            --prune
+          remaining="$({
+            git for-each-ref --format='%(refname:short)' refs/remotes/origin \
+              | grep -Ev '^origin/(HEAD|master)$' || true
+          })"
+          if [[ -n "$remaining" ]]; then
+            printf 'REFUSED:REMAINING_BRANCHES\n%s\n' "$remaining" >&2
+            exit 1
+          fi
+          printf 'BRANCH_CLEANUP=ALIVE master=%s\n' "$(git rev-parse HEAD)"

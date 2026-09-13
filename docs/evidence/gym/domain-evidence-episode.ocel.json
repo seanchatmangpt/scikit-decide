@@ -1,0 +1,592 @@
+{
+  "eventTypes": [
+    {
+      "attributes": [
+        {
+          "name": "horizon",
+          "type": "integer"
+        },
+        {
+          "name": "seed",
+          "type": "integer"
+        },
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ],
+      "name": "materialize"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "type": "integer"
+        }
+      ],
+      "name": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        },
+        {
+          "name": "trace_length",
+          "type": "integer"
+        },
+        {
+          "name": "verify_mode",
+          "type": "string"
+        }
+      ],
+      "name": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ],
+      "name": "teardown"
+    }
+  ],
+  "events": [
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "seed",
+          "value": 42
+        },
+        {
+          "name": "horizon",
+          "value": 20
+        }
+      ],
+      "id": "ev:materialize",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.308365000Z",
+      "type": "materialize"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 0
+        }
+      ],
+      "id": "ev:act:0",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311181000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 1
+        }
+      ],
+      "id": "ev:act:1",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311196000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 2
+        }
+      ],
+      "id": "ev:act:2",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311203000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 3
+        }
+      ],
+      "id": "ev:act:3",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311208000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 4
+        }
+      ],
+      "id": "ev:act:4",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311213000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 5
+        }
+      ],
+      "id": "ev:act:5",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311218000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 6
+        }
+      ],
+      "id": "ev:act:6",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311222000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 7
+        }
+      ],
+      "id": "ev:act:7",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311226000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 8
+        }
+      ],
+      "id": "ev:act:8",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311231000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 9
+        }
+      ],
+      "id": "ev:act:9",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311235000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 10
+        }
+      ],
+      "id": "ev:act:10",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311239000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 11
+        }
+      ],
+      "id": "ev:act:11",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311244000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 12
+        }
+      ],
+      "id": "ev:act:12",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311248000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 13
+        }
+      ],
+      "id": "ev:act:13",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311253000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 14
+        }
+      ],
+      "id": "ev:act:14",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311257000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 15
+        }
+      ],
+      "id": "ev:act:15",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311261000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 16
+        }
+      ],
+      "id": "ev:act:16",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311265000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 17
+        }
+      ],
+      "id": "ev:act:17",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311270000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 18
+        }
+      ],
+      "id": "ev:act:18",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311274000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 19
+        }
+      ],
+      "id": "ev:act:19",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.311278000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "verify_mode",
+          "value": "seeded-trajectory-replay"
+        },
+        {
+          "name": "trace_length",
+          "value": 21
+        }
+      ],
+      "id": "ev:verify",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.312183000Z",
+      "type": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        }
+      ],
+      "id": "ev:teardown",
+      "relationships": [
+        {
+          "objectId": "episode:gym",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:gym",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:56.312196000Z",
+      "type": "teardown"
+    }
+  ],
+  "objectTypes": [
+    {
+      "attributes": [],
+      "name": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "type": "string"
+        }
+      ],
+      "name": "domain"
+    }
+  ],
+  "objects": [
+    {
+      "attributes": [],
+      "id": "episode:gym",
+      "relationships": [],
+      "type": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "time": "1970-01-01T00:00:00.000000000Z",
+          "value": "GymDomain"
+        }
+      ],
+      "id": "domain:gym",
+      "relationships": [],
+      "type": "domain"
+    }
+  ]
+}

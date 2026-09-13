@@ -129,6 +129,19 @@ def test_missing_binary_is_a_receipted_outcome_not_an_exception() -> None:
     assert not receipt.is_success()
 
 
+def test_probe_engine_missing_binary_is_also_a_receipted_outcome() -> None:
+    cfg = EngineConfig(
+        role="ghost",
+        program="/definitely/not/a/real/binary/xyz",
+        args=(),
+        version_args=("--help",),
+        output_mode=OutputMode.NONE,
+    )
+    receipt = probe_engine(cfg)
+    assert receipt.outcome == EngineOutcome.MISSING_BINARY
+    assert not receipt.is_success()
+
+
 def test_nonzero_exit_is_tool_failed(tmp_path: Path) -> None:
     plan_path = tmp_path / "plan.txt"
     cfg = _fake_cfg("classical", "tool_failed", output_mode=OutputMode.FILE)

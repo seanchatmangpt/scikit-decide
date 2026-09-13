@@ -1,0 +1,64 @@
+@prefix arch: <urn:autofde-lab:architecture:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:architecture:catalog:02_c4_sota_lab> a owl:Ontology ;
+    dcterms:title "Generated architecture catalog bundle: 02_c4_sota_lab" ;
+    owl:imports <urn:autofde-lab:ontology:architecture> .
+
+<urn:autofde-lab:architecture:diagram:06_sota_lab_context:diagram> a arch:C4ContextDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE SOTA Lab — System Context" ;
+    arch:diagramKind arch:C4ContextDiagram ;
+    arch:elementCount 6 ;
+    arch:mermaidSyntax "C4Context" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 7 ;
+    arch:sourceDigest "4fea63dbda8697efe5fb9787b7c44a5bcf25fc428d96b3eb478713bdb9759122" ;
+    arch:sourcePath "docs/c4/06_sota_lab_context.mmd" .
+
+<urn:autofde-lab:architecture:diagram:07_sota_lab_container:diagram> a arch:C4ContainerDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE SOTA Lab — Containers" ;
+    arch:diagramKind arch:C4ContainerDiagram ;
+    arch:elementCount 14 ;
+    arch:mermaidSyntax "C4Container" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 15 ;
+    arch:sourceDigest "18521517df1a988f48369a79efc00d37a986a1c0f921d9761d36641502f8d05e" ;
+    arch:sourcePath "docs/c4/07_sota_lab_container.mmd" .
+
+<urn:autofde-lab:architecture:diagram:08_sota_lab_component:diagram> a arch:C4ComponentDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE SOTA Lab — Components" ;
+    arch:diagramKind arch:C4ComponentDiagram ;
+    arch:elementCount 13 ;
+    arch:mermaidSyntax "C4Component" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 12 ;
+    arch:sourceDigest "ae06befd65a6c1147dc4d19273c897f425466699245ea4139d6d3d4d8c9e29d9" ;
+    arch:sourcePath "docs/c4/08_sota_lab_component.mmd" .
+
+<urn:autofde-lab:architecture:diagram:09_sota_lab_dynamic:diagram> a arch:C4DynamicDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE SOTA Lab — One SOTA Search Cycle" ;
+    arch:diagramKind arch:C4DynamicDiagram ;
+    arch:elementCount 5 ;
+    arch:mermaidSyntax "C4Dynamic" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 12 ;
+    arch:sourceDigest "223d238312c47f02ba36b37c25a4cd6e29d154c1648440f672c87b2c219bd394" ;
+    arch:sourcePath "docs/c4/09_sota_lab_dynamic.mmd" .
+
+<urn:autofde-lab:architecture:diagram:10_sota_lab_deployment:diagram> a arch:C4DeploymentDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE SOTA Lab — Deployment" ;
+    arch:diagramKind arch:C4DeploymentDiagram ;
+    arch:elementCount 14 ;
+    arch:mermaidSyntax "C4Deployment" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 8 ;
+    arch:sourceDigest "73ad22486af90c2d122bf8fba2834de28646e4d557921ce2c5ed4cb4c54619bf" ;
+    arch:sourcePath "docs/c4/10_sota_lab_deployment.mmd" .
+

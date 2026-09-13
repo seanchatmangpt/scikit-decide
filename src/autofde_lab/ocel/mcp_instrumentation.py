@@ -210,6 +210,11 @@ def _outcome_from_result(result: Any, elapsed_s: float) -> dict:
             outcome["receipt_sha256"] = result["receipt_sha256"]
         if isinstance(result.get("compatible_solvers"), (list, tuple)):
             outcome["compatible_solver_count"] = len(result["compatible_solvers"])
+            # Named tuple, not just the count -- lets ocel/decision_mining.py ask
+            # whether a domain's compatible-solver set is deterministic across
+            # matches (the count alone can't distinguish "always these same 3
+            # solvers" from "3 different solvers each time").
+            outcome["compatible_solvers"] = sorted(str(s) for s in result["compatible_solvers"])
         if isinstance(result.get("steps"), (list, tuple)):
             outcome["steps"] = len(result["steps"])
     return outcome

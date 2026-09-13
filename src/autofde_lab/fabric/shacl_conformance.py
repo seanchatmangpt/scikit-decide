@@ -70,6 +70,136 @@ class ShaclConformanceResult:
     shapes_path: Path
 
 
+@dataclass(frozen=True)
+class ShaclViolation:
+    """One `sh:ValidationResult`, read out of the real results graph.
+
+    Shaped deliberately like `gymact`'s `Deviation(index, from, to, reason)`:
+    an ordinal, the two ends of the offending edge (`focus_node` /
+    `value_node`), and a named reason (`source_constraint_component` plus the
+    shape's own `sh:message`). Nothing here is re-derived in Python -- every
+    field is lifted verbatim out of `pyshacl`'s results graph.
+    """
+
+    index: int
+    focus_node: str
+    result_path: str | None
+    source_shape: str | None
+    source_constraint_component: str
+    value_node: str | None
+    message: str
+    severity: str
+
+
+@dataclass(frozen=True)
+class TypedShaclConformance:
+    """Typed conformance evidence: never a bare boolean.
+
+    `status` is one of:
+
+    - `CONFORMS`  -- the real engine ran and reported conformance.
+    - `VIOLATED`  -- the real engine ran and reported violations, which are
+      carried individually in `violations`.
+    - `UNKNOWN:<reason>` -- the check could **not** be computed (missing
+      shapes file, missing engine). Per
+      `.claude/rules/absence-is-not-evidence.md` this is neither a pass nor a
+      fail, and `conforms` is `None`, not `False`.
+    """
+
+    status: str
+    conforms: bool | None
+    violations: tuple[ShaclViolation, ...]
+    report_text: str
+    shapes_path: Path
+    unknown_reason: str | None = None
+
+    @property
+    def violation_count(self) -> int:
+        return len(self.violations)
+
+
+_SH = "http://www.w3.org/ns/shacl#"
+
+
+def _read_results(results_graph) -> tuple[ShaclViolation, ...]:
+    from rdflib import RDF, URIRef
+
+    sh = lambda term: URIRef(_SH + term)  # noqa: E731
+    rows = []
+    for result in results_graph.subjects(RDF.type, sh("ValidationResult")):
+        get = lambda term: results_graph.value(result, sh(term))  # noqa: E731
+        rows.append(
+            (
+                str(get("focusNode")),
+                None if get("resultPath") is None else str(get("resultPath")),
+                None if get("sourceShape") is None else str(get("sourceShape")),
+                str(get("sourceConstraintComponent")),
+                None if get("value") is None else str(get("value")),
+                "" if get("resultMessage") is None else str(get("resultMessage")),
+                "" if get("resultSeverity") is None else str(get("resultSeverity")),
+            )
+        )
+    rows.sort()
+    return tuple(
+        ShaclViolation(
+            index=index,
+            focus_node=focus,
+            result_path=path,
+            source_shape=shape,
+            source_constraint_component=component,
+            value_node=value,
+            message=message,
+            severity=severity,
+        )
+        for index, (focus, path, shape, component, value, message, severity) in enumerate(rows)
+    )
+
+
+def check_graph_shacl(data_graph, shapes_path: Path) -> TypedShaclConformance:
+    """Validate an already-built `rdflib.Graph` against explicit shapes.
+
+    Returns typed evidence. A check that could not be computed comes back
+    `UNKNOWN:<reason>` with `conforms=None` -- never a silent pass and never a
+    failure-by-default.
+    """
+    if not shapes_path.exists():
+        return TypedShaclConformance(
+            status="UNKNOWN:SHAPES_FILE_ABSENT",
+            conforms=None,
+            violations=(),
+            report_text="",
+            shapes_path=shapes_path,
+            unknown_reason=f"shapes file not found: {shapes_path}",
+        )
+    try:
+        import pyshacl
+    except ImportError:  # pragma: no cover - exercised only without the extra
+        return TypedShaclConformance(
+            status="UNKNOWN:SHACL_ENGINE_ABSENT",
+            conforms=None,
+            violations=(),
+            report_text="",
+            shapes_path=shapes_path,
+            unknown_reason="pyshacl/rdflib not importable; install with `uv sync --extra ofmf`",
+        )
+
+    conforms, results_graph, report_text = pyshacl.validate(
+        data_graph,
+        shacl_graph=shapes_path.read_text(),
+        shacl_graph_format="turtle",
+        advanced=True,
+        allow_warnings=False,
+    )
+    violations = _read_results(results_graph)
+    return TypedShaclConformance(
+        status="CONFORMS" if conforms else "VIOLATED",
+        conforms=bool(conforms),
+        violations=violations,
+        report_text=str(report_text),
+        shapes_path=shapes_path,
+    )
+
+
 def check_shacl_conformance(
     turtle: str, *, shapes_path: Path | None = None
 ) -> ShaclConformanceResult:
@@ -97,7 +227,7 @@ def check_shacl_conformance(
             "to enable real SHACL conformance checking"
         ) from exc
 
-    conforms, _results_graph, report_text = pyshacl.validate(
+    conforms, _, report_text = pyshacl.validate(
         turtle,
         shacl_graph=path.read_text(),
         data_graph_format="turtle",

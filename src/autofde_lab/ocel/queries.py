@@ -17,7 +17,12 @@ from __future__ import annotations
 
 import sqlite3
 
-__all__ = ["solver_timeout_rates", "domain_refusal_rate", "session_event_order"]
+__all__ = [
+    "solver_timeout_rates",
+    "domain_refusal_rate",
+    "session_event_order",
+    "all_session_ids",
+]
 
 
 def solver_timeout_rates(conn: sqlite3.Connection) -> list[dict]:
@@ -93,6 +98,16 @@ def domain_refusal_rate(conn: sqlite3.Connection, since_ns: int | None = None) -
         }
         for row in rows
     ]
+
+
+def all_session_ids(conn: sqlite3.Connection) -> list[str]:
+    """Every recorded ``MCPSession`` object id, for corpus-wide (not single-session)
+    mining -- e.g. ``wasm4pm_bridge.discover_and_check(conn, all_session_ids(conn))``.
+    """
+    rows = conn.execute(
+        "SELECT id FROM objects WHERE object_type = 'MCPSession' ORDER BY id"
+    ).fetchall()
+    return [row["id"] for row in rows]
 
 
 def session_event_order(conn: sqlite3.Connection, session_id: str) -> list[dict]:

@@ -222,6 +222,8 @@ def errc_crown_report(
             dependency not in by_id for dependency in dependencies
         ):
             continue
+        if not admitted_ids.intersection(dependencies):
+            continue
         gate_requirement = by_id[gate]
         if gate_requirement.external_dependency is not None:
             continue

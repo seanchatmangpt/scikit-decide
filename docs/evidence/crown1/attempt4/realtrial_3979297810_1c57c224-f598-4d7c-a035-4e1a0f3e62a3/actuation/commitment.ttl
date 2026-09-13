@@ -1,0 +1,6 @@
+@prefix powl: <urn:powl:> .
+<urn:trial:1c57c224-f598-4d7c-a035-4e1a0f3e62a3> a powl:Commitment ;
+    powl:planDigest "220f81bf978fe490" ;
+    powl:modelDigest "3ac9d7f320c4c633" ;
+    powl:planLength 4 ;
+    powl:sequence ("mine" "refine" "assemble" "burn_catalyst") .

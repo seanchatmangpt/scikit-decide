@@ -1,0 +1,19 @@
+stateDiagram-v2
+    [*] --> Proposed
+    Proposed --> Constrained: capability + ontology + authority constraints
+    Constrained --> Pruned: dominated / invalid configuration
+    Constrained --> Selected: informative experiment
+    Selected --> Scheduled
+    Scheduled --> Running
+    Running --> EvidenceCaptured
+    Running --> Blocked: typed external blocker
+    EvidenceCaptured --> Evaluated
+    Evaluated --> Learned: failure cluster / success signal
+    Learned --> RepairProposed
+    RepairProposed --> AdmittedRepair: falsifiers pass
+    RepairProposed --> RejectedRepair: regression or weak evidence
+    AdmittedRepair --> Regenerated
+    Regenerated --> Selected: affected experiments re-enter
+    Pruned --> [*]
+    Blocked --> [*]
+    RejectedRepair --> [*]

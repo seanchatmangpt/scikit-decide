@@ -1,0 +1,55 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:k8s-fault-taxonomy>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab Kubernetes fault-taxonomy vocabulary" ;
+    dcterms:description "Four SKOS-enumerated axes (Component x FailureMode x AppTopology x Severity) whose real SPARQL cross-product (queries/k8s-fault/cross_product.rq) drives ggen's generation of one universe fixture per real combination. A real, well-known, publicly-documented Kubernetes troubleshooting vocabulary (crash-loop/OOM-kill/image-pull/pending/not-ready/RBAC/DNS failure modes -- the same category any standard K8s troubleshooting reference or sregym's own public fault taxonomy covers), explicitly NOT sourced from or claimed to match actual CKA/CKAD certification curriculum text -- that material was not available when this ontology was authored. Widening this taxonomy with real certification-sourced material, if obtained later, only ever touches this file, never the generation pipeline (ggen.toml, the SPARQL query, or the Tera template)." ;
+    dcterms:created "2026-08-10"^^xsd:date .
+
+#: Component axis -- the real Kubernetes object kind a fault is diagnosed against.
+afl:Component a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:k8s-fault-taxonomy> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "Component" .
+afl:ComponentScheme a skos:ConceptScheme ; skos:prefLabel "AutoFDE Kubernetes component" .
+afl:Pod a afl:Component ; skos:inScheme afl:ComponentScheme ; skos:prefLabel "Pod" .
+afl:Node a afl:Component ; skos:inScheme afl:ComponentScheme ; skos:prefLabel "Node" .
+afl:Service a afl:Component ; skos:inScheme afl:ComponentScheme ; skos:prefLabel "Service" .
+afl:PVC a afl:Component ; skos:inScheme afl:ComponentScheme ; skos:prefLabel "PVC" .
+afl:ConfigMap a afl:Component ; skos:inScheme afl:ComponentScheme ; skos:prefLabel "ConfigMap" .
+afl:RBAC a afl:Component ; skos:inScheme afl:ComponentScheme ; skos:prefLabel "RBAC" .
+
+#: FailureMode axis -- the real, standard observable symptom.
+afl:FailureMode a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:k8s-fault-taxonomy> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "Failure mode" .
+afl:FailureModeScheme a skos:ConceptScheme ; skos:prefLabel "AutoFDE Kubernetes failure mode" .
+afl:CrashLoopBackOff a afl:FailureMode ; skos:inScheme afl:FailureModeScheme ; skos:prefLabel "CrashLoopBackOff" .
+afl:OOMKilled a afl:FailureMode ; skos:inScheme afl:FailureModeScheme ; skos:prefLabel "OOMKilled" .
+afl:ImagePullBackOff a afl:FailureMode ; skos:inScheme afl:FailureModeScheme ; skos:prefLabel "ImagePullBackOff" .
+afl:Pending a afl:FailureMode ; skos:inScheme afl:FailureModeScheme ; skos:prefLabel "Pending" .
+afl:NotReady a afl:FailureMode ; skos:inScheme afl:FailureModeScheme ; skos:prefLabel "NotReady" .
+afl:Forbidden a afl:FailureMode ; skos:inScheme afl:FailureModeScheme ; skos:prefLabel "Forbidden" .
+afl:DNSResolutionFailure a afl:FailureMode ; skos:inScheme afl:FailureModeScheme ; skos:prefLabel "DNSResolutionFailure" .
+
+#: AppTopology axis -- the real shape of the application the component sits inside.
+afl:AppTopology a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:k8s-fault-taxonomy> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "Application topology" .
+afl:AppTopologyScheme a skos:ConceptScheme ; skos:prefLabel "AutoFDE application topology" .
+afl:Monolith a afl:AppTopology ; skos:inScheme afl:AppTopologyScheme ; skos:prefLabel "Monolith" .
+afl:Microservices a afl:AppTopology ; skos:inScheme afl:AppTopologyScheme ; skos:prefLabel "Microservices" .
+afl:StatefulWorkload a afl:AppTopology ; skos:inScheme afl:AppTopologyScheme ; skos:prefLabel "StatefulWorkload" .
+
+#: Severity axis -- the real incident-priority band.
+afl:Severity a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:k8s-fault-taxonomy> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "Severity" .
+afl:SeverityScheme a skos:ConceptScheme ; skos:prefLabel "AutoFDE incident severity" .
+afl:P0 a afl:Severity ; skos:inScheme afl:SeverityScheme ; skos:prefLabel "P0" .
+afl:P1 a afl:Severity ; skos:inScheme afl:SeverityScheme ; skos:prefLabel "P1" .
+afl:P2 a afl:Severity ; skos:inScheme afl:SeverityScheme ; skos:prefLabel "P2" .

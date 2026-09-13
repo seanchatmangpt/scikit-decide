@@ -16,6 +16,10 @@ shape (variant names) is transcribed; no code is copied.
 from __future__ import annotations
 
 from enum import StrEnum
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:  # pragma: no cover -- type-checking only, avoids a real circular import
+    from autofde_lab.powl.guard_executor import ExecutionTrace
 
 __all__ = ["PowlRefusal", "PowlError"]
 
@@ -41,6 +45,11 @@ class PowlRefusal(StrEnum):
     INVALID_FREQUENCY = "INVALID_FREQUENCY"
     PROHIBITED_NODE_KIND = "PROHIBITED_NODE_KIND"
     BOUND_EXHAUSTED = "BOUND_EXHAUSTED"
+    AMBIGUOUS_CHOICE_GUARD = "AMBIGUOUS_CHOICE_GUARD"
+    NO_GUARD_MATCHED = "NO_GUARD_MATCHED"
+    TRANSITION_BUDGET_EXHAUSTED = "TRANSITION_BUDGET_EXHAUSTED"
+    ATOM_INVOCATION_FAILED = "ATOM_INVOCATION_FAILED"
+    CHECKPOINT_NODE_MISMATCH = "CHECKPOINT_NODE_MISMATCH"
 
 
 class PowlError(ValueError):
@@ -50,7 +59,15 @@ class PowlError(ValueError):
     (:attr:`detail`).
     """
 
-    def __init__(self, refusal: PowlRefusal, detail: str = "") -> None:
+    def __init__(self, refusal: PowlRefusal, detail: str = "", *, partial_trace: "ExecutionTrace | None" = None) -> None:
         self.refusal: PowlRefusal = refusal
         self.detail: str = detail
+        #: For ATOM_INVOCATION_FAILED only: the real
+        #: `~autofde_lab.powl.guard_executor.ExecutionTrace` accumulated up to
+        #: (and including) the failing step, so a caller can inspect exactly
+        #: what ran before the failure. Typed only under `TYPE_CHECKING` (not
+        #: imported at runtime) to avoid a real circular import from this
+        #: low-level refusals module into `guard_executor`; the real value is
+        #: always an `ExecutionTrace` when set.
+        self.partial_trace = partial_trace
         super().__init__(f"POWL refused: {refusal.value}" + (f" ({detail})" if detail else ""))

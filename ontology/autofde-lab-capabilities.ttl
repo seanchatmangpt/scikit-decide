@@ -240,6 +240,51 @@
     skdt:extrasMarker "domains" ;
     skdt:capabilityCount "0"^^xsd:integer .
 
+<urn:skdecide:capability:domain/azuregoat_privesc> a skdt:Domain ;
+    skdt:identifier "azuregoat_privesc" ;
+    skdt:entryPoint "autofde_lab.hub.domain.azuregoat_privesc.azuregoat_privesc:AzureGoatPrivilegeEscalation [domains]" ;
+    skdt:standing "ALIVE" ;
+    skdt:evidence "imported autofde_lab.hub.domain.azuregoat_privesc.azuregoat_privesc.AzureGoatPrivilegeEscalation" ;
+    skdt:owningModule "autofde_lab.hub.domain.azuregoat_privesc.azuregoat_privesc" ;
+    skdt:extrasMarker "domains" ;
+    skdt:capabilityCount "0"^^xsd:integer .
+
+<urn:skdecide:capability:domain/cloudgoat_iam_privesc> a skdt:Domain ;
+    skdt:identifier "cloudgoat_iam_privesc" ;
+    skdt:entryPoint "autofde_lab.hub.domain.cloudgoat_iam_privesc.cloudgoat_iam_privesc:CloudGoatIamPrivescDomain [domains]" ;
+    skdt:standing "ALIVE" ;
+    skdt:evidence "imported autofde_lab.hub.domain.cloudgoat_iam_privesc.cloudgoat_iam_privesc.CloudGoatIamPrivescDomain" ;
+    skdt:owningModule "autofde_lab.hub.domain.cloudgoat_iam_privesc.cloudgoat_iam_privesc" ;
+    skdt:extrasMarker "domains" ;
+    skdt:capabilityCount "0"^^xsd:integer .
+
+<urn:skdecide:capability:domain/fix_git_recovery> a skdt:Domain ;
+    skdt:identifier "fix_git_recovery" ;
+    skdt:entryPoint "autofde_lab.hub.domain.fix_git.git_recovery:GitRecoveryDomain [domains]" ;
+    skdt:standing "ALIVE" ;
+    skdt:evidence "imported autofde_lab.hub.domain.fix_git.git_recovery.GitRecoveryDomain" ;
+    skdt:owningModule "autofde_lab.hub.domain.fix_git.git_recovery" ;
+    skdt:extrasMarker "domains" ;
+    skdt:capabilityCount "0"^^xsd:integer .
+
+<urn:skdecide:capability:domain/k8s_goat_rbac_escalation> a skdt:Domain ;
+    skdt:identifier "k8s_goat_rbac_escalation" ;
+    skdt:entryPoint "autofde_lab.hub.domain.k8s_goat_rbac_escalation.k8s_goat_rbac_escalation:K8sGoatRBACEscalation [domains]" ;
+    skdt:standing "ALIVE" ;
+    skdt:evidence "imported autofde_lab.hub.domain.k8s_goat_rbac_escalation.k8s_goat_rbac_escalation.K8sGoatRBACEscalation" ;
+    skdt:owningModule "autofde_lab.hub.domain.k8s_goat_rbac_escalation.k8s_goat_rbac_escalation" ;
+    skdt:extrasMarker "domains" ;
+    skdt:capabilityCount "0"^^xsd:integer .
+
+<urn:skdecide:capability:domain/terragoat_remediation> a skdt:Domain ;
+    skdt:identifier "terragoat_remediation" ;
+    skdt:entryPoint "autofde_lab.hub.domain.terragoat.terragoat_remediation:TerraGoatRemediation [domains]" ;
+    skdt:standing "ALIVE" ;
+    skdt:evidence "imported autofde_lab.hub.domain.terragoat.terragoat_remediation.TerraGoatRemediation" ;
+    skdt:owningModule "autofde_lab.hub.domain.terragoat.terragoat_remediation" ;
+    skdt:extrasMarker "domains" ;
+    skdt:capabilityCount "0"^^xsd:integer .
+
 <urn:skdecide:capability:solver/AOstar> a skdt:Solver ;
     skdt:identifier "AOstar" ;
     skdt:entryPoint "autofde_lab.hub.solver.aostar:AOstar [solvers]" ;

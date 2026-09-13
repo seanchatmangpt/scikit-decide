@@ -1,0 +1,64 @@
+@prefix arch: <urn:autofde-lab:architecture:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:architecture:catalog:03_c4_gymact> a owl:Ontology ;
+    dcterms:title "Generated architecture catalog bundle: 03_c4_gymact" ;
+    owl:imports <urn:autofde-lab:ontology:architecture> .
+
+<urn:autofde-lab:architecture:diagram:11_gymact_context:diagram> a arch:C4ContextDiagram,
+        arch:Diagram ;
+    dcterms:title "GymAct — System Context" ;
+    arch:diagramKind arch:C4ContextDiagram ;
+    arch:elementCount 6 ;
+    arch:mermaidSyntax "C4Context" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 7 ;
+    arch:sourceDigest "9fb5a70a4386f44ee5b7a9c84f217697937a17e84c4fdb527e8fcfb0c68d3b68" ;
+    arch:sourcePath "docs/c4/11_gymact_context.mmd" .
+
+<urn:autofde-lab:architecture:diagram:12_gymact_container:diagram> a arch:C4ContainerDiagram,
+        arch:Diagram ;
+    dcterms:title "GymAct — Containers" ;
+    arch:diagramKind arch:C4ContainerDiagram ;
+    arch:elementCount 13 ;
+    arch:mermaidSyntax "C4Container" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 15 ;
+    arch:sourceDigest "4d241d4f2fdd397d39846d86b0e46f2b3ba088ee74e1462a57e8e1afcfc07c91" ;
+    arch:sourcePath "docs/c4/12_gymact_container.mmd" .
+
+<urn:autofde-lab:architecture:diagram:13_gymact_component:diagram> a arch:C4ComponentDiagram,
+        arch:Diagram ;
+    dcterms:title "GymAct — Components" ;
+    arch:diagramKind arch:C4ComponentDiagram ;
+    arch:elementCount 14 ;
+    arch:mermaidSyntax "C4Component" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 13 ;
+    arch:sourceDigest "e4fa161b393c9e5b9d0723f36ea06edd356eace0c87e0016a957fc62b1426c44" ;
+    arch:sourcePath "docs/c4/13_gymact_component.mmd" .
+
+<urn:autofde-lab:architecture:diagram:14_gymact_dynamic:diagram> a arch:C4DynamicDiagram,
+        arch:Diagram ;
+    dcterms:title "GymAct — Materialize, Observe, Actuate, Verify" ;
+    arch:diagramKind arch:C4DynamicDiagram ;
+    arch:elementCount 5 ;
+    arch:mermaidSyntax "C4Dynamic" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 13 ;
+    arch:sourceDigest "f198904f62f4255eda1db099995419e240f8966945d3184dc367a9c762e5f7bf" ;
+    arch:sourcePath "docs/c4/14_gymact_dynamic.mmd" .
+
+<urn:autofde-lab:architecture:diagram:15_gymact_deployment:diagram> a arch:C4DeploymentDiagram,
+        arch:Diagram ;
+    dcterms:title "GymAct — Deployment" ;
+    arch:diagramKind arch:C4DeploymentDiagram ;
+    arch:elementCount 11 ;
+    arch:mermaidSyntax "C4Deployment" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 7 ;
+    arch:sourceDigest "74dcd3c15e28e8434742a1a19425953a84ce972c0a30a2771c5ec870633c23a7" ;
+    arch:sourcePath "docs/c4/15_gymact_deployment.mmd" .
+

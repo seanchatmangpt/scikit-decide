@@ -1,0 +1,18 @@
+stateDiagram-v2
+    [*] --> Hypothesis
+    Hypothesis --> CounterexampleBacked: real failure supports hypothesis
+    Hypothesis --> Rejected: no discriminating evidence
+    CounterexampleBacked --> RepairCandidate
+    RepairCandidate --> Falsification
+    Falsification --> Rejected: target still fails
+    Falsification --> RegressionDetected: prior law broken
+    Falsification --> Admitted: target fixed + non-regression holds
+    Admitted --> Manufactured
+    Manufactured --> CrossGymEvaluation
+    CrossGymEvaluation --> LeverageObserved: same repair transfers
+    CrossGymEvaluation --> NewCounterexample: different latent defect
+    LeverageObserved --> CanonicalBasis
+    NewCounterexample --> Hypothesis
+    RegressionDetected --> RepairCandidate
+    CanonicalBasis --> [*]
+    Rejected --> [*]

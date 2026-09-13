@@ -1,0 +1,60 @@
+erDiagram
+    TRIAL ||--o{ PLANNER_ATTEMPT : contains
+    TRIAL ||--o{ CANDIDATE : produces
+    CANDIDATE ||--o| GOVERNED_CANDIDATE : admitted_as
+    GOVERNED_CANDIDATE ||--|| COMMITMENT : committed_as
+    COMMITMENT ||--o{ ACTUATION : executes
+    ACTUATION ||--|| OBSERVATION : yields
+    ACTUATION ||--|| RECEIPT : receipted_by
+    RECEIPT ||--o| REPLAY : reconstructs
+    TRIAL ||--|| ARTIFACT_MANIFEST : bound_to
+    TRIAL ||--|| STANDING : derives
+
+    TRIAL {
+      string trial_id PK
+      string gym_id
+      int seed
+      string outcome
+    }
+    PLANNER_ATTEMPT {
+      string attempt_id PK
+      string planner_id
+      string result
+    }
+    CANDIDATE {
+      string candidate_id PK
+      string plan_digest
+    }
+    GOVERNED_CANDIDATE {
+      string governed_id PK
+      string admission_receipt
+    }
+    COMMITMENT {
+      string commitment_id PK
+      string authority_ref
+    }
+    ACTUATION {
+      string actuation_id PK
+      string capability
+    }
+    OBSERVATION {
+      string observation_id PK
+      string state_digest
+    }
+    RECEIPT {
+      string receipt_id PK
+      string digest
+    }
+    REPLAY {
+      string replay_id PK
+      boolean valid
+    }
+    ARTIFACT_MANIFEST {
+      string manifest_id PK
+      string artifact_digest
+    }
+    STANDING {
+      string standing_id PK
+      string kind
+      string reason
+    }

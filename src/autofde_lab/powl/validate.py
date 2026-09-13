@@ -45,6 +45,7 @@ from autofde_lab.powl.algebra import (
     ChoiceGraph,
     ChoiceGraphEdge,
     End,
+    Guard,
     OrderEdge,
     PartialOrder,
     PowlNode,
@@ -229,6 +230,8 @@ def _validate_choice_graph(node: ChoiceGraph) -> None:
                 f"ChoiceGraph end index {node.end} has an outgoing edge to {e.dst}",
             )
 
+    _validate_guard_exclusivity(edges, n)
+
     # Cycles are LEGAL here — iteration in POWL 2.0 is a cyclic choice graph.
     # Only reachability and co-reachability are required.
     succ: dict[int, set[int]] = {i: set() for i in range(n)}
@@ -250,6 +253,66 @@ def _validate_choice_graph(node: ChoiceGraph) -> None:
                 PowlRefusal.CHOICE_GRAPH_DISCONNECTED,
                 f"ChoiceGraph node index {i} does not co-reach end={node.end}",
             )
+
+
+def _validate_guard_exclusivity(edges: frozenset[ChoiceGraphEdge], n: int) -> None:
+    """For every source node with more than one outgoing edge WHERE AT LEAST
+    ONE outgoing edge carries a guard: no two outgoing edges may carry the
+    identical guard (a real, checkable structural duplicate — the executor
+    would have no principled way to choose between two edges guarded by the
+    same predicate), and at most one outgoing edge may be unguarded (a real
+    "else" edge) — two or more unguarded edges alongside a guarded one is a
+    genuine ambiguity an executor cannot resolve without guessing.
+
+    Nodes with NO guarded outgoing edges at all are untouched by this rule —
+    a ChoiceGraph with several unguarded outgoing edges from one node is
+    POWL 2.0's own pre-existing, legal free-choice/nondeterministic-branch
+    shape (real fixtures predating this session's guard vocabulary rely on
+    it); this rule only fires once a caller has introduced at least one real
+    guard at that node, at which point leaving other branches ambiguously
+    unguarded is far more likely a real authoring mistake than an
+    intentional nondeterministic fallback.
+
+    This does not (cannot, without evaluating predicates) prove semantic
+    mutual exclusivity of distinct guard predicates -- it is the structural
+    half of that requirement, matching this module's own stated scope
+    ("is this object graph a legal POWL 2.0 model?").
+    """
+    by_src: dict[int, list[ChoiceGraphEdge]] = {i: [] for i in range(n)}
+    for e in edges:
+        by_src[e.src].append(e)
+
+    for src, outgoing in by_src.items():
+        if len(outgoing) < 2:
+            continue
+        guarded = [e for e in outgoing if e.guard is not None]
+        if not guarded:
+            continue
+        unguarded = [e for e in outgoing if e.guard is None]
+        if len(unguarded) > 1:
+            raise PowlError(
+                PowlRefusal.AMBIGUOUS_CHOICE_GUARD,
+                f"ChoiceGraph node index {src} has {len(unguarded)} unguarded "
+                "outgoing edges alongside a guarded edge -- at most one "
+                "unguarded 'else' edge is allowed once guards are in use",
+            )
+        guard_keys: dict[str, int] = {}
+        for e in outgoing:
+            if e.guard is None:
+                continue
+            if not isinstance(e.guard, Guard):
+                raise PowlError(
+                    PowlRefusal.AMBIGUOUS_CHOICE_GUARD,
+                    f"ChoiceGraph node index {src}: edge guard is {type(e.guard).__name__}, not Guard",
+                )
+            if e.guard.key in guard_keys:
+                raise PowlError(
+                    PowlRefusal.AMBIGUOUS_CHOICE_GUARD,
+                    f"ChoiceGraph node index {src} has two outgoing edges sharing "
+                    f"the identical guard {e.guard.predicate_name!r} -- an executor "
+                    "cannot choose between them",
+                )
+            guard_keys[e.guard.key] = e.dst
 
 
 def _traverse(origin: int, adj: dict[int, set[int]]) -> set[int]:

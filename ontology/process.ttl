@@ -1,0 +1,95 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:process>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab partial-order process vocabulary" ;
+    dcterms:description "A research-bounded partial-order process contract. Generating DAG edges are transport syntax; semantic precedence is reachability/transitive closure. Execution is outside this vocabulary." ;
+    dcterms:created "2026-08-08"^^xsd:date .
+
+afl:POWLProcess
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:process> ;
+    rdfs:label "POWL process" .
+afl:ProcessNode
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:process> ;
+    rdfs:label "Process node" .
+afl:TransitionNode
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:process> ;
+    rdfs:subClassOf afl:ProcessNode ;
+    rdfs:label "Transition node" .
+afl:SilentTransition
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:process> ;
+    rdfs:subClassOf afl:TransitionNode ;
+    rdfs:label "Silent transition" .
+afl:PartialOrderComposite
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:process> ;
+    rdfs:subClassOf afl:ProcessNode ;
+    rdfs:label "Partial-order composite" .
+afl:ChoiceGraph
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:process> ;
+    rdfs:subClassOf afl:ProcessNode ;
+    rdfs:label "Choice graph" .
+afl:OrderEdge
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:process> ;
+    rdfs:label "Generating order edge" ;
+    rdfs:comment "One direct/generating precedence edge. The mathematical strict partial-order relation is its acyclic reachability closure." .
+afl:POWLCommitment
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:process> ;
+    rdfs:label "POWL commitment" ;
+    rdfs:comment "An exact partial-order commitment derived only from a governed candidate. It does not itself grant actuation authority." .
+afl:Activity
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:process> ;
+    rdfs:subClassOf afl:ProcessNode ;
+    rdfs:label "Activity" ;
+    rdfs:comment "A labelled process step with an explicit consequence class. DSPy reasons and constructs candidate activities; it never itself performs a DO-consequence activity's real effect -- that routes through GymAct/BRCE, unchanged by this vocabulary." .
+afl:Guard
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:process> ;
+    rdfs:label "Guard" ;
+    rdfs:comment "A named, evaluable predicate on a choice-graph transition. Guard evaluation is deterministic and external to this vocabulary -- the ontology names the predicate, it does not define its truth." .
+
+afl:ConsequenceClass a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:process> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "Consequence class" .
+afl:ConsequenceScheme a skos:ConceptScheme ; skos:prefLabel "AutoFDE activity consequence" .
+afl:PURE a afl:ConsequenceClass ; skos:inScheme afl:ConsequenceScheme ; skos:prefLabel "PURE" ;
+    rdfs:comment "No environmental observation or consequence -- pure computation over already-admitted facts." .
+afl:READ a afl:ConsequenceClass ; skos:inScheme afl:ConsequenceScheme ; skos:prefLabel "READ" ;
+    rdfs:comment "Environmental observation. No mutation." .
+afl:DO a afl:ConsequenceClass ; skos:inScheme afl:ConsequenceScheme ; skos:prefLabel "DO" ;
+    rdfs:comment "Consequential environmental mutation. Must route through BRCE/GymAct; this vocabulary grants no actuation authority by itself." .
+afl:VERIFY a afl:ConsequenceClass ; skos:inScheme afl:ConsequenceScheme ; skos:prefLabel "VERIFY" ;
+    rdfs:comment "Semantically a READ, distinguished because it discharges an expected-effect obligation. Command success is not verification." .
+
+afl:hasConsequence a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:Activity ; rdfs:range afl:ConsequenceClass ; rdfs:label "has consequence" .
+afl:requiredCapabilityClass a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:Activity ; rdfs:range xsd:string ; rdfs:label "required capability class" ; rdfs:comment "A named capability class an executor must resolve to a real, gated capability before this Activity may run -- never resolved by this vocabulary itself." .
+afl:expectedInformationGain a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:Activity ; rdfs:range xsd:double ; rdfs:label "expected information gain" .
+afl:estimatedCost a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:Activity ; rdfs:range xsd:double ; rdfs:label "estimated cost" .
+afl:guardPredicate a owl:DatatypeProperty , owl:FunctionalProperty ; rdfs:domain afl:Guard ; rdfs:range xsd:string ; rdfs:label "guard predicate" ; rdfs:comment "A named predicate identifier (e.g. 'causal_closure') an external, deterministic evaluator resolves against the current epistemic state." .
+afl:guardsEdge a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:Guard ; rdfs:range afl:ProcessNode ; rdfs:label "guards edge" .
+
+afl:hasRootNode a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:POWLProcess ; rdfs:range afl:ProcessNode ; rdfs:label "has root node" .
+afl:hasChildNode a owl:ObjectProperty ; rdfs:domain afl:ProcessNode ; rdfs:range afl:ProcessNode ; rdfs:label "has child node" .
+afl:hasOrderEdge a owl:ObjectProperty ; rdfs:domain afl:PartialOrderComposite ; rdfs:range afl:OrderEdge ; rdfs:label "has generating order edge" .
+afl:beforeNode a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:OrderEdge ; rdfs:range afl:ProcessNode ; rdfs:label "before node" .
+afl:afterNode a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:OrderEdge ; rdfs:range afl:ProcessNode ; rdfs:label "after node" .
+afl:precedes a owl:ObjectProperty , owl:TransitiveProperty ; rdfs:domain afl:ProcessNode ; rdfs:range afl:ProcessNode ; rdfs:label "precedes" ; rdfs:comment "Semantic strict precedence derived from reachability, not necessarily materialized on the wire." .
+afl:commitsTo a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:POWLCommitment ; rdfs:range afl:GovernedCandidate ; rdfs:label "commits to" ; rdfs:comment "The range is deliberately GovernedCandidate, preventing raw plan candidates from being the semantic commitment target." .
+afl:committedProcess a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:POWLCommitment ; rdfs:range afl:POWLProcess ; rdfs:label "committed process" .
+afl:repairOf a owl:ObjectProperty ; rdfs:domain afl:POWLProcess ; rdfs:range afl:POWLProcess ; rdfs:label "repair of" .
+afl:preservesNode a owl:ObjectProperty ; rdfs:domain afl:POWLProcess ; rdfs:range afl:ProcessNode ; rdfs:label "preserves node" .
+afl:affectedByPerturbation a owl:ObjectProperty ; rdfs:domain afl:ProcessNode ; rdfs:range afl:Perturbation ; rdfs:label "affected by perturbation" .

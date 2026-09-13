@@ -29,7 +29,12 @@ LEGACY_SOLVER_ENTRYPOINT_GROUP = "skdecide.solvers"
 # Zero or partial enumeration after a rename must fail loudly against these,
 # not return an empty catalog that looks like a clean but capability-less
 # system.
-EXPECTED_DOMAIN_COUNT = 26
+# 2026-08-08: domain count moved 26 -> 31 after registering 5 gym-derived
+# domains (terragoat_remediation, k8s_goat_rbac_escalation,
+# azuregoat_privesc, cloudgoat_iam_privesc, fix_git_recovery) as real
+# autofde_lab.domains entry points; re-verify with
+# `entry_points(group="autofde_lab.domains")` before citing this number.
+EXPECTED_DOMAIN_COUNT = 31
 EXPECTED_SOLVER_COUNT = 57
 
 NATIVE_EXTENSION_NAME = "__autofde_lab_hub_cpp"

@@ -1,0 +1,6 @@
+@prefix powl: <urn:powl:> .
+<urn:trial:9403595e-b55d-49b6-abaa-92345c521ec5> a powl:Commitment ;
+    powl:planDigest "6256064225b5f416" ;
+    powl:modelDigest "74823eb351265cea" ;
+    powl:planLength 6 ;
+    powl:sequence ("toggle_switch[index=0]" "toggle_switch[index=1]" "toggle_switch[index=2]" "toggle_switch[index=3]" "toggle_switch[index=4]" "engage_master") .

@@ -1,0 +1,382 @@
+{
+  "eventTypes": [
+    {
+      "attributes": [
+        {
+          "name": "horizon",
+          "type": "integer"
+        },
+        {
+          "name": "seed",
+          "type": "integer"
+        },
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ],
+      "name": "materialize"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "type": "integer"
+        }
+      ],
+      "name": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        },
+        {
+          "name": "trace_length",
+          "type": "integer"
+        },
+        {
+          "name": "verify_mode",
+          "type": "string"
+        }
+      ],
+      "name": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ],
+      "name": "teardown"
+    }
+  ],
+  "events": [
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "seed",
+          "value": 424242
+        },
+        {
+          "name": "horizon",
+          "value": 10
+        }
+      ],
+      "id": "ev:materialize",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976285000Z",
+      "type": "materialize"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 0
+        }
+      ],
+      "id": "ev:act:0",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976506000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 1
+        }
+      ],
+      "id": "ev:act:1",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976520000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 2
+        }
+      ],
+      "id": "ev:act:2",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976527000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 3
+        }
+      ],
+      "id": "ev:act:3",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976532000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 4
+        }
+      ],
+      "id": "ev:act:4",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976537000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 5
+        }
+      ],
+      "id": "ev:act:5",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976542000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 6
+        }
+      ],
+      "id": "ev:act:6",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976546000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 7
+        }
+      ],
+      "id": "ev:act:7",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976550000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 8
+        }
+      ],
+      "id": "ev:act:8",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976554000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 9
+        }
+      ],
+      "id": "ev:act:9",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976559000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "verify_mode",
+          "value": "seeded-trajectory-replay"
+        },
+        {
+          "name": "trace_length",
+          "value": 10
+        }
+      ],
+      "id": "ev:verify",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976658000Z",
+      "type": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        }
+      ],
+      "id": "ev:teardown",
+      "relationships": [
+        {
+          "objectId": "episode:rock_paper_scissors",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rock_paper_scissors",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:55.976668000Z",
+      "type": "teardown"
+    }
+  ],
+  "objectTypes": [
+    {
+      "attributes": [],
+      "name": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "type": "string"
+        }
+      ],
+      "name": "domain"
+    }
+  ],
+  "objects": [
+    {
+      "attributes": [],
+      "id": "episode:rock_paper_scissors",
+      "relationships": [],
+      "type": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "time": "1970-01-01T00:00:00.000000000Z",
+          "value": "RockPaperScissors"
+        }
+      ],
+      "id": "domain:rock_paper_scissors",
+      "relationships": [],
+      "type": "domain"
+    }
+  ]
+}

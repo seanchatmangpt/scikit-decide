@@ -1,0 +1,30 @@
+PREFIX afb: <https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#>
+PREFIX ga: <https://github.com/seanchatmangpt/autofde-lab/ns/gymact#>
+PREFIX dct: <http://purl.org/dc/terms/>
+SELECT ?slug ?title ?adapter ?profile_slug ?model ?source_standing
+       ?local_safe ?requires_authority ?vendor_slug ?vendor_path
+       ?pinned_revision ?resolution_standing ?smoke_standing
+WHERE {
+  ?b a afb:Benchmark ;
+     afb:slug ?slug ;
+     dct:title ?title ;
+     afb:adapterFamily ?adapter ;
+     afb:sourceStanding ?source_standing ;
+     afb:localSafe ?local_safe ;
+     afb:requiresAuthority ?requires_authority .
+
+  ?profile a ga:InteractionProfile ;
+           ga:slug ?profile_slug ;
+           ga:interactionModel ?model ;
+           ga:mapsAdapterFamily ?adapter .
+
+  OPTIONAL {
+    ?b afb:vendorProject ?vendor .
+    ?vendor afb:slug ?vendor_slug ;
+            afb:vendorPath ?vendor_path .
+    OPTIONAL { ?vendor afb:pinnedRevision ?pinned_revision . }
+    OPTIONAL { ?vendor afb:resolutionStanding ?resolution_standing . }
+    OPTIONAL { ?vendor afb:smokeStanding ?smoke_standing . }
+  }
+}
+ORDER BY ?slug

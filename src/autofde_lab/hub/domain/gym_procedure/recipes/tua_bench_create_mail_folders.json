@@ -1,0 +1,49 @@
+{
+  "gym": "tua-bench",
+  "task": "108-create-mail-folders",
+  "source_ref": "vendor/gyms/tua-bench/tasks/108-create-mail-folders/solution/solve.sh",
+  "initial_facts": [],
+  "goal_facts": ["university_folder_created"],
+  "steps": [
+    {
+      "id": "kill_thunderbird",
+      "description": "Kill any running Thunderbird process so the profile is not locked (`/usr/local/bin/thunderbird_state.py kill`).",
+      "preconditions": [],
+      "establishes": ["thunderbird_killed"],
+      "cost": 1.0,
+      "source": "solve.sh line 11"
+    },
+    {
+      "id": "locate_profile_dir",
+      "description": "Resolve the Thunderbird profile directory (`PROFILE_DIR=$(thunderbird_state.py profile)`).",
+      "preconditions": ["thunderbird_killed"],
+      "establishes": ["profile_dir_known"],
+      "cost": 1.0,
+      "source": "solve.sh line 12"
+    },
+    {
+      "id": "create_local_folders_root",
+      "description": "Create the `Mail/Local Folders` root directory under the profile (`root.mkdir(parents=True, exist_ok=True)`).",
+      "preconditions": ["profile_dir_known"],
+      "establishes": ["local_folders_root_created"],
+      "cost": 1.0,
+      "source": "solve.sh lines 18-19"
+    },
+    {
+      "id": "create_company_folder",
+      "description": "Create the COMPANY local folder (`COMPANY` and `COMPANY.msf` touched under the Local Folders root).",
+      "preconditions": ["local_folders_root_created"],
+      "establishes": ["company_folder_created"],
+      "cost": 1.0,
+      "source": "solve.sh lines 20-23 (folders[0] = 'COMPANY')"
+    },
+    {
+      "id": "create_university_folder",
+      "description": "Create the UNIVERSITY local folder (`UNIVERSITY` and `UNIVERSITY.msf` touched under the Local Folders root).",
+      "preconditions": ["company_folder_created"],
+      "establishes": ["university_folder_created"],
+      "cost": 1.0,
+      "source": "solve.sh lines 20-23 (folders[1] = 'UNIVERSITY')"
+    }
+  ]
+}

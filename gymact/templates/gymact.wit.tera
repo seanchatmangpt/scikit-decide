@@ -1,0 +1,35 @@
+package seanchatman:gymact@0.1.0;
+
+interface protocol {
+  enum operation {
+{%- for row in sparql_results %}
+    {{ row["code"] }},
+{%- endfor %}
+  }
+
+  record actuation-intent {
+    subject: string,
+    op: operation,
+    scenario-id: option<string>,
+    episode-id: option<string>,
+    payload-json: string,
+    authority-ref: option<string>,
+    idempotency-key: option<string>,
+  }
+
+  record actuation-result {
+    accepted: bool,
+    standing: string,
+    episode-id: option<string>,
+    observation-json: option<string>,
+    effect-json: option<string>,
+    score: option<f64>,
+    receipt-json: string,
+  }
+
+  actuate: func(intent: actuation-intent) -> result<actuation-result, string>;
+}
+
+world gymact {
+  export protocol;
+}

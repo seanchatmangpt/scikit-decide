@@ -19,6 +19,7 @@ from autofde_lab.ocel.log import OcelLog
 from autofde_lab.ocel.mcp_session import append_tool_call_event
 from autofde_lab.ocel.model import OcelAttribute, OcelAttributeValue, OcelObject
 from autofde_lab.ocel.queries import (
+    all_session_ids,
     domain_refusal_rate,
     session_event_order,
     solver_timeout_rates,
@@ -181,3 +182,7 @@ def test_session_event_order(conn: sqlite3.Connection) -> None:
 
 def test_session_event_order_unknown_session_returns_empty(conn: sqlite3.Connection) -> None:
     assert session_event_order(conn, "no-such-session") == []
+
+
+def test_all_session_ids(conn: sqlite3.Connection) -> None:
+    assert all_session_ids(conn) == ["session-1"]

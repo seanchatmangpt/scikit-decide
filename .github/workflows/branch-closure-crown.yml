@@ -1,0 +1,49 @@
+name: Post-AGI branch closure crown
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "scripts/audit_branch_closure.py"
+      - ".github/workflows/branch-closure-crown.yml"
+      - "src/autofde_lab/**"
+      - "tests/**"
+      - "ecosystem/**"
+
+permissions:
+  contents: read
+
+jobs:
+  branch-closure:
+    name: Exact-head branch ancestry closure
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Assert exact subject identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
+
+      - name: Fetch complete remote branch graph
+        shell: bash
+        run: >-
+          git fetch --no-tags origin
+          '+refs/heads/*:refs/remotes/origin/*'
+          --prune
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.13"
+
+      - name: Compile topology verifier
+        run: python -m py_compile scripts/audit_branch_closure.py
+
+      - name: Require every remaining branch to be contained by the crown
+        run: python scripts/audit_branch_closure.py | tee branch-closure.json
