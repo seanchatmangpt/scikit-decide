@@ -1,0 +1,136 @@
+# FDE authority envelope -- Forward-Deployed Architect bridge artifact.
+#
+# COMPILED AND CHECKED by scikit-decide; MINTED BY NOBODY HERE.
+# The grant below is a *customer* act, recorded so that it can be checked.
+# scikit-decide may author exactly one kind in this vocabulary:
+# fdet:FdeRecommendation. See src/skdecide/fabric/fde.py.
+#
+# There is no `approved = true` anywhere in this file, by design. Every
+# decision names its decider, the decision right it was taken under, and the
+# evidence it rests on.
+
+@prefix fde:  <urn:skdecide:fde:> .
+@prefix fdet: <urn:skdecide:fde-term:> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:skdecide:fde:customer/acme> a fdet:CustomerOrganization ;
+    fdet:identifier "ACME-INDUSTRIAL" .
+
+# The forward-deployed architect. Compiles hypotheses; holds no decision right.
+<urn:skdecide:fde:party/fde-architect> a fdet:FdeIdentity ;
+    fdet:identifier "FDE-J-OKAFOR" .
+
+# The customer authority. Decision rights originate here, never with the FDE.
+<urn:skdecide:fde:party/vp-operations> a fdet:CustomerAuthorityIdentity ;
+    fdet:identifier "ACME-VP-OPERATIONS" ;
+    fdet:organizationalRole "VP Operations" ;
+    fdet:actsFor fde:customer/acme ;
+    fdet:holdsDecisionRight fde:right/deploy-replacement ;
+    fdet:holdsDecisionRight fde:right/retire-legacy .
+
+<urn:skdecide:fde:right/deploy-replacement> a fdet:DecisionRight ;
+    fdet:identifier "DR-DEPLOY-REPLACEMENT" .
+
+<urn:skdecide:fde:right/retire-legacy> a fdet:DecisionRight ;
+    fdet:identifier "DR-RETIRE-LEGACY" .
+
+<urn:skdecide:fde:capability/schedule-rebalance> a fdet:AuthorizedCapability ;
+    fdet:identifier "CAP-SCHEDULE-REBALANCE" .
+
+# Declared so it can be referred to; deliberately NOT granted below.
+<urn:skdecide:fde:capability/payroll-adjust> a fdet:AuthorizedCapability ;
+    fdet:identifier "CAP-PAYROLL-ADJUST" .
+
+<urn:skdecide:fde:resource/plant-north> a fdet:ResourceScope ;
+    fdet:identifier "RS-PLANT-NORTH" .
+
+<urn:skdecide:fde:resource/plant-south> a fdet:ResourceScope ;
+    fdet:identifier "RS-PLANT-SOUTH" .
+
+<urn:skdecide:fde:environment/staging> a fdet:EnvironmentScope ;
+    fdet:identifier "ES-STAGING" .
+
+<urn:skdecide:fde:environment/production> a fdet:EnvironmentScope ;
+    fdet:identifier "ES-PRODUCTION" .
+
+<urn:skdecide:fde:operation/rebalance-north> a fdet:AuthorizedOperation ;
+    fdet:identifier "OP-REBALANCE-NORTH" ;
+    fdet:underCapability fde:capability/schedule-rebalance ;
+    fdet:onResource fde:resource/plant-north ;
+    fdet:inEnvironment fde:environment/staging ;
+    fdet:requiresDecisionRight fde:right/deploy-replacement .
+
+<urn:skdecide:fde:validity/window-2026q3> a fdet:ValidityInterval ;
+    fdet:notBefore "2026-07-01T00:00:00Z"^^xsd:dateTime ;
+    fdet:notAfter "2026-09-30T23:59:59Z"^^xsd:dateTime .
+
+<urn:skdecide:fde:bounds/crown> a fdet:ConsequenceBounds ;
+    fdet:maxAffectedResources "12"^^xsd:integer ;
+    fdet:maxIrreversibleActions "0"^^xsd:integer ;
+    fdet:maxDurationSeconds "3600"^^xsd:integer .
+
+# Independent of the FDE and of the manufacturing party. That independence is
+# asserted structurally, not assumed from the verifier's name.
+<urn:skdecide:fde:verifier/ggen-legacy-replay> a fdet:Verifier ;
+    fdet:identifier "GGEN-LEGACY-REPLAY" ;
+    fdet:independentOf fde:party/fde-architect ;
+    fdet:independentOf fde:party/vendor-manufacture .
+
+<urn:skdecide:fde:postcondition/throughput-parity> a fdet:Postcondition ;
+    fdet:identifier "POST-THROUGHPUT-PARITY" ;
+    fdet:postconditionExpression "plant-north throughput >= legacy baseline over 5 consecutive shifts" .
+
+<urn:skdecide:fde:owner/director-operations> a fdet:AdoptionOwner ;
+    fdet:identifier "ACME-DIR-OPERATIONS" ;
+    fdet:organizationalRole "Director of Operations" ;
+    fdet:operatingObligation "24x7 on-call rota staffed by ACME operations" ;
+    fdet:operatingObligation "quarterly control review with named reviewer" .
+
+<urn:skdecide:fde:sunset-authority/vp-operations> a fdet:SunsetAuthority ;
+    fdet:identifier "ACME-VP-OPERATIONS-SUNSET" ;
+    fdet:underDecisionRight fde:right/retire-legacy .
+
+# The FDE's compiled customer model: a falsifiable hypothesis until the
+# customer authority validates it.
+<urn:skdecide:fde:model/acme-v1> a fdet:CompiledCustomerModel ;
+    fdet:identifier "ACME-MODEL-V1" ;
+    fdet:modelDigest "blake3:3f7c1d9a3f7c1d9a3f7c1d9a3f7c1d9a3f7c1d9a3f7c1d9a3f7c1d9a3f7c1d9a" ;
+    fdet:compiledBy fde:party/fde-architect ;
+    fdet:validationState fde:validation/acme-v1 .
+
+<urn:skdecide:fde:validation/acme-v1> a fdet:ModelValidation ;
+    fdet:validatedBy fde:party/vp-operations ;
+    fdet:validationDecision "VALIDATED" ;
+    fdet:validatedModelDigest "blake3:3f7c1d9a3f7c1d9a3f7c1d9a3f7c1d9a3f7c1d9a3f7c1d9a3f7c1d9a3f7c1d9a" .
+
+# The only act kind scikit-decide may itself author.
+<urn:skdecide:fde:recommendation/rebalance-north> a fdet:FdeRecommendation ;
+    fdet:identifier "REC-REBALANCE-NORTH" ;
+    fdet:recommendedBy fde:party/fde-architect ;
+    fdet:recommendsOperation fde:operation/rebalance-north .
+
+<urn:skdecide:fde:grant/AG-0001> a fdet:AuthorityGrant, fdet:CustomerAuthorityGrant ;
+    fdet:grantIdentifier "AG-0001" ;
+    fdet:grantedBy fde:party/vp-operations ;
+    fdet:grantedTo fde:party/fde-architect ;
+    fdet:forCustomer fde:customer/acme ;
+    fdet:basedOnModel fde:model/acme-v1 ;
+    fdet:conveysDecisionRight fde:right/deploy-replacement ;
+    fdet:authorizesCapability fde:capability/schedule-rebalance ;
+    fdet:authorizesOperation fde:operation/rebalance-north ;
+    fdet:resourceScope fde:resource/plant-north ;
+    fdet:environmentScope fde:environment/staging ;
+    fdet:validity fde:validity/window-2026q3 ;
+    fdet:consequenceBounds fde:bounds/crown ;
+    fdet:requiresVerifier fde:verifier/ggen-legacy-replay ;
+    fdet:requiresPostcondition fde:postcondition/throughput-parity ;
+    fdet:adoptionOwner fde:owner/director-operations ;
+    fdet:sunsetAuthority fde:sunset-authority/vp-operations ;
+    fdet:delegationAllowed "false"^^xsd:boolean ;
+    fdet:executableDigest "blake3:9b2e4a709b2e4a709b2e4a709b2e4a709b2e4a709b2e4a709b2e4a709b2e4a70" .
+
+# VIOLATION (falsifier 13): a recursive organizational blocker discharged by a
+# conversation rather than by an admitted child workflow. Nothing is auditable.
+<urn:skdecide:fde:blocker/security-review> a fdet:OrganizationalBlocker ;
+    fdet:identifier "BLK-SECURITY-REVIEW" ;
+    fdet:resolutionMode "INFORMAL_ESCALATION" .

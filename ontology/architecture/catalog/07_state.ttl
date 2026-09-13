@@ -1,0 +1,64 @@
+@prefix arch: <urn:autofde-lab:architecture:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:architecture:catalog:07_state> a owl:Ontology ;
+    dcterms:title "Generated architecture catalog bundle: 07_state" ;
+    owl:imports <urn:autofde-lab:ontology:architecture> .
+
+<urn:autofde-lab:architecture:diagram:31_state_trial_standing:diagram> a arch:Diagram,
+        arch:StateDiagram ;
+    dcterms:title "31 state trial standing" ;
+    arch:diagramKind arch:StateDiagram ;
+    arch:elementCount 15 ;
+    arch:mermaidSyntax "stateDiagram-v2" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 22 ;
+    arch:sourceDigest "b8add12ecc9138c0cbb24a357b178057647f829b656d3a84159db7a062c4e334" ;
+    arch:sourcePath "docs/diagrams/31_state_trial_standing.mmd" .
+
+<urn:autofde-lab:architecture:diagram:32_state_materialization_lifecycle:diagram> a arch:Diagram,
+        arch:StateDiagram ;
+    dcterms:title "32 state materialization lifecycle" ;
+    arch:diagramKind arch:StateDiagram ;
+    arch:elementCount 14 ;
+    arch:mermaidSyntax "stateDiagram-v2" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 17 ;
+    arch:sourceDigest "b6526c87a8e86b031327156c6e273afba7863d75cf063e53bac240d8e2b68bb6" ;
+    arch:sourcePath "docs/diagrams/32_state_materialization_lifecycle.mmd" .
+
+<urn:autofde-lab:architecture:diagram:33_state_experiment_lifecycle:diagram> a arch:Diagram,
+        arch:StateDiagram ;
+    dcterms:title "33 state experiment lifecycle" ;
+    arch:diagramKind arch:StateDiagram ;
+    arch:elementCount 16 ;
+    arch:mermaidSyntax "stateDiagram-v2" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 18 ;
+    arch:sourceDigest "d807b3ce1a7d99f63c5083921700e3d770e0f93fc81cf5ebb59e0bc64fd3e07f" ;
+    arch:sourcePath "docs/diagrams/33_state_experiment_lifecycle.mmd" .
+
+<urn:autofde-lab:architecture:diagram:34_state_basis_revision:diagram> a arch:Diagram,
+        arch:StateDiagram ;
+    dcterms:title "34 state basis revision" ;
+    arch:diagramKind arch:StateDiagram ;
+    arch:elementCount 14 ;
+    arch:mermaidSyntax "stateDiagram-v2" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 17 ;
+    arch:sourceDigest "627b45744bcc25475426eafc95ec2d8fd59061be35389320d59b2d03eacc1f4b" ;
+    arch:sourcePath "docs/diagrams/34_state_basis_revision.mmd" .
+
+<urn:autofde-lab:architecture:diagram:35_state_benchmark_status:diagram> a arch:Diagram,
+        arch:StateDiagram ;
+    dcterms:title "35 state benchmark status" ;
+    arch:diagramKind arch:StateDiagram ;
+    arch:elementCount 17 ;
+    arch:mermaidSyntax "stateDiagram-v2" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 22 ;
+    arch:sourceDigest "d3b065bf4de93a8f175680f501e8d155df597a68913c9a8740116a0727061e9c" ;
+    arch:sourcePath "docs/diagrams/35_state_benchmark_status.mmd" .
+

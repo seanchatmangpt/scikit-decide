@@ -4,8 +4,8 @@ from dataclasses import dataclass
 
 import pytest
 
-from skdecide.fabric.dspy import compile_request_text
-from skdecide.fabric.models import (
+from autofde_lab.fabric.dspy import compile_request_text
+from autofde_lab.fabric.models import (
     DecisionCatalog,
     DecisionRefusal,
     DecisionRequest,

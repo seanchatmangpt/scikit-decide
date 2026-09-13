@@ -14,7 +14,7 @@ from pathlib import Path
 
 import pytest
 
-from skdecide import DiscreteDistribution
+from autofde_lab import DiscreteDistribution
 
 _sarsop_test = Path(__file__).parent / "test_sarsop.py"
 spec = importlib.util.spec_from_file_location("test_sarsop", _sarsop_test)
@@ -30,7 +30,7 @@ TigerPOMDP = _mod.TigerPOMDP
 @pytest.fixture(scope="module")
 def fast_witness_solver():
     """Shared Witness solver with fast parameters for policy-correctness tests."""
-    from skdecide.hub.solver.witness import Witness
+    from autofde_lab.hub.solver.witness import Witness
 
     with Witness(
         domain_factory=TigerPOMDP,
@@ -44,12 +44,12 @@ def fast_witness_solver():
 
 class TestWitness:
     def test_import(self):
-        from skdecide.hub.solver.witness import Witness
+        from autofde_lab.hub.solver.witness import Witness
 
         assert Witness is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.witness import Witness
+        from autofde_lab.hub.solver.witness import Witness
 
         dom = TigerPOMDP()
         assert Witness.check_domain(dom)
@@ -81,8 +81,8 @@ class TestWitness:
 
     def test_exact_matches_sarsop(self):
         """Witness and SARSOP should agree on values at test beliefs."""
-        from skdecide.hub.solver.sarsop import SARSOP
-        from skdecide.hub.solver.witness import Witness
+        from autofde_lab.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.witness import Witness
 
         test_beliefs = [
             DiscreteDistribution(

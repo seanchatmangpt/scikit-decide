@@ -1,0 +1,25 @@
+{
+  "gym": "assetopsbench",
+  "task": "ground_truth_example_1_scenario_3_list_assets_main_site",
+  "source_ref": "vendor/gyms/assetopsbench/docs/guideline/ground_truth_design_guideline.md Section 9 'Example 1: Simple Query (Scenario 3)' lines 1951-1985 (utterance: \"What assets can be found at the MAIN site?\")",
+  "initial_facts": [],
+  "goal_facts": ["answer_given"],
+  "steps": [
+    {
+      "id": "list_assets_for_site_main",
+      "description": "IoTAgent lists assets for site MAIN via the 'assets' tool call with argument site_name='MAIN' (execution_steps step1: action=\"assets\", agent=\"IoTAgent\", arguments={\"site_name\": \"MAIN\"}).",
+      "preconditions": [],
+      "establishes": ["assets_listed"],
+      "cost": 1.0,
+      "source": "ground_truth_design_guideline.md Example 1 execution_steps[0] ('step1')"
+    },
+    {
+      "id": "finish_with_asset_list_answer",
+      "description": "IoTAgent finishes with the answer: 'The assets at the MAIN site are: CQPA AHU 1, CQPA AHU 2B, Chiller 4, Chiller 6, Chiller 9, Chiller 3.' (execution_steps 'finish' step, action=\"Finish\").",
+      "preconditions": ["assets_listed"],
+      "establishes": ["answer_given"],
+      "cost": 1.0,
+      "source": "ground_truth_design_guideline.md Example 1 execution_steps[1] ('finish'); execution_links [{\"source\": \"step1\", \"target\": \"finish\"}]"
+    }
+  ]
+}

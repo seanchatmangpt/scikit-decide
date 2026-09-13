@@ -15,21 +15,21 @@ TIREWORLD_PROBLEM = os.path.join(PDDL_DIR, "tireworld", "p01.pddl")
 
 @pytest.fixture
 def blocks_domain():
-    from skdecide.hub.domain.pddl import PDDLDomain
+    from autofde_lab.hub.domain.pddl import PDDLDomain
 
     return PDDLDomain(BLOCKS_DOMAIN, BLOCKS_PROBLEM)
 
 
 @pytest.fixture
 def hmax(blocks_domain):
-    from skdecide.hub.domain.pddl import HMax
+    from autofde_lab.hub.domain.pddl import HMax
 
     return HMax(blocks_domain._task, verbose=True)
 
 
 @pytest.fixture
 def hadd(blocks_domain):
-    from skdecide.hub.domain.pddl import HAdd
+    from autofde_lab.hub.domain.pddl import HAdd
 
     return HAdd(blocks_domain._task, verbose=True)
 
@@ -55,10 +55,10 @@ class TestDeleteRelaxationHeuristics:
         assert h_add_val >= h_max_val, "h_add should always be >= h_max"
 
     def test_goal_state_zero(self, blocks_domain, hmax, hadd):
-        from skdecide.hub.__skdecide_hub_cpp import (
+        from autofde_lab.hub.__autofde_lab_hub_cpp import (
             _PDDL_GoalChecker_ as CppGoalChecker,
         )
-        from skdecide.hub.__skdecide_hub_cpp import (
+        from autofde_lab.hub.__autofde_lab_hub_cpp import (
             _PDDL_SuccessorGenerator_ as CppSuccessorGenerator,
         )
 
@@ -103,7 +103,7 @@ class TestDeleteRelaxationHeuristics:
         assert hadd(init) < 1e9, "Initial state should not be a dead end"
 
     def test_solver_heuristic(self, blocks_domain, hadd):
-        from skdecide.hub.domain.pddl.domain import PDDLState
+        from autofde_lab.hub.domain.pddl.domain import PDDLState
 
         task = blocks_domain._task
         init_cpp = task.initial_state()
@@ -115,7 +115,7 @@ class TestDeleteRelaxationHeuristics:
 
 @pytest.fixture
 def tireworld_domain():
-    from skdecide.hub.domain.pddl import PPDDLDomain
+    from autofde_lab.hub.domain.pddl import PPDDLDomain
 
     return PPDDLDomain(TIREWORLD_DOMAIN, TIREWORLD_PROBLEM)
 
@@ -125,13 +125,13 @@ class TestPPDDLHeuristics:
 
     @pytest.fixture
     def hmax(self, tireworld_domain):
-        from skdecide.hub.domain.pddl import HMax
+        from autofde_lab.hub.domain.pddl import HMax
 
         return HMax(tireworld_domain._task, verbose=True)
 
     @pytest.fixture
     def hadd(self, tireworld_domain):
-        from skdecide.hub.domain.pddl import HAdd
+        from autofde_lab.hub.domain.pddl import HAdd
 
         return HAdd(tireworld_domain._task, verbose=True)
 
@@ -151,10 +151,10 @@ class TestPPDDLHeuristics:
         assert hadd(init) >= hmax(init), "h_add should always be >= h_max"
 
     def test_ppddl_goal_zero(self, tireworld_domain, hmax, hadd):
-        from skdecide.hub.__skdecide_hub_cpp import (
+        from autofde_lab.hub.__autofde_lab_hub_cpp import (
             _PDDL_GoalChecker_ as CppGoalChecker,
         )
-        from skdecide.hub.__skdecide_hub_cpp import (
+        from autofde_lab.hub.__autofde_lab_hub_cpp import (
             _PDDL_SuccessorGenerator_ as CppSuccessorGenerator,
         )
 
@@ -198,25 +198,25 @@ class TestDiscountedHeuristics:
 
     @pytest.fixture
     def hmax_disc(self, tireworld_domain):
-        from skdecide.hub.domain.pddl import HMax
+        from autofde_lab.hub.domain.pddl import HMax
 
         return HMax(tireworld_domain._task, discount_factor=0.9, verbose=True)
 
     @pytest.fixture
     def hadd_disc(self, tireworld_domain):
-        from skdecide.hub.domain.pddl import HAdd
+        from autofde_lab.hub.domain.pddl import HAdd
 
         return HAdd(tireworld_domain._task, discount_factor=0.9, verbose=True)
 
     @pytest.fixture
     def hmax_undiscounted(self, tireworld_domain):
-        from skdecide.hub.domain.pddl import HMax
+        from autofde_lab.hub.domain.pddl import HMax
 
         return HMax(tireworld_domain._task, discount_factor=1.0)
 
     @pytest.fixture
     def hadd_undiscounted(self, tireworld_domain):
-        from skdecide.hub.domain.pddl import HAdd
+        from autofde_lab.hub.domain.pddl import HAdd
 
         return HAdd(tireworld_domain._task, discount_factor=1.0)
 
@@ -232,10 +232,10 @@ class TestDiscountedHeuristics:
         assert hadd_disc(init) > 0
 
     def test_discounted_goal_zero(self, tireworld_domain, hmax_disc, hadd_disc):
-        from skdecide.hub.__skdecide_hub_cpp import (
+        from autofde_lab.hub.__autofde_lab_hub_cpp import (
             _PDDL_GoalChecker_ as CppGoalChecker,
         )
-        from skdecide.hub.__skdecide_hub_cpp import (
+        from autofde_lab.hub.__autofde_lab_hub_cpp import (
             _PDDL_SuccessorGenerator_ as CppSuccessorGenerator,
         )
 
@@ -294,7 +294,7 @@ class TestDiscountedHeuristics:
         )
 
     def test_deterministic_discount_error(self, blocks_domain):
-        from skdecide.hub.domain.pddl import HMax
+        from autofde_lab.hub.domain.pddl import HMax
 
         with pytest.raises(ValueError, match="probabilistic effects"):
             HMax(blocks_domain._task, discount_factor=0.9)

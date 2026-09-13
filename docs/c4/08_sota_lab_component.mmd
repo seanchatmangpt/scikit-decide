@@ -1,0 +1,30 @@
+C4Component
+title AutoFDE SOTA Lab — Components
+
+Container_Boundary(lab, "AutoFDE SOTA Lab") {
+  Component(bench_parser, "Benchmark Contract Parser")
+  Component(world_binding, "GymBinding Compiler")
+  Component(decision_catalog, "Decision-System Catalog")
+  Component(constraint_solver, "Architecture Constraint Solver")
+  Component(design_selector, "Experimental Design Selector")
+  Component(matrix_builder, "Experiment Matrix Builder")
+  Component(scheduler, "Parallel Experiment Scheduler")
+  Component(result_ingest, "Result Ingestor")
+  Component(failure_cluster, "Failure Clusterer")
+  Component(hypothesis, "Hypothesis & Probe Generator")
+  Component(repair_admission, "Basis Repair Admission")
+  Component(frontier_eval, "Frontier Comparator")
+}
+
+Rel(bench_parser, world_binding, "Normalizes evaluator/environment contract")
+Rel(world_binding, matrix_builder, "Provides GymBasis-compatible benchmark")
+Rel(decision_catalog, constraint_solver, "Provides solution options")
+Rel(constraint_solver, design_selector, "Produces lawful nondominated space")
+Rel(design_selector, matrix_builder, "Chooses discriminating configurations")
+Rel(matrix_builder, scheduler, "Schedules trials")
+Rel(scheduler, result_ingest, "Returns trial evidence")
+Rel(result_ingest, failure_cluster, "Structures failures")
+Rel(failure_cluster, hypothesis, "Produces latent defect clusters")
+Rel(hypothesis, repair_admission, "Proposes bounded repairs")
+Rel(repair_admission, decision_catalog, "Updates admitted basis")
+Rel(result_ingest, frontier_eval, "Supplies benchmark scores")

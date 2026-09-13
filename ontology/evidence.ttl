@@ -1,0 +1,78 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:evidence>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab evidence and replay vocabulary" ;
+    dcterms:description "Defines identity-preserving evidence as one connected causal witness. Counts, matching types, filenames, and directory proximity are insufficient." ;
+    dcterms:created "2026-08-08"^^xsd:date .
+
+afl:Postcondition a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:label "Postcondition" .
+afl:Observer a owl:Class , prov:Agent ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:label "Observer" .
+afl:PostconditionObservation a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:label "Postcondition observation" .
+afl:Receipt a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:label "Receipt" .
+afl:ReceiptDAG a owl:Class , prov:Collection ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:label "Receipt DAG" .
+afl:Replay a owl:Class , prov:Activity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:label "Replay" .
+afl:Artifact a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:label "Artifact" .
+afl:ArtifactManifest a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:label "Artifact manifest" ; rdfs:comment "Binds explicit artifact identities and digests to a trial and exact source/dependency revisions. Filenames are never sufficient identity." .
+afl:SourceRevision a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:label "Source revision" .
+afl:DependencyRevision a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:label "Dependency revision" .
+afl:VerifierRun a owl:Class , prov:Activity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:label "Verifier run" .
+afl:EvidenceWitness a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:label "Evidence witness" .
+afl:Level4Witness a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:evidence> ;
+    rdfs:subClassOf afl:EvidenceWitness ; rdfs:label "Level 4 witness" ; rdfs:comment "A fully joined identity-preserving witness whose standing can be independently reconstructed from persisted evidence." .
+
+afl:observesActuation a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:PostconditionObservation ; rdfs:range afl:Actuation ; rdfs:label "observes actuation" .
+afl:assertsPostcondition a owl:ObjectProperty ; rdfs:domain afl:PostconditionObservation ; rdfs:range afl:Postcondition ; rdfs:label "asserts postcondition" .
+afl:performedBy a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:PostconditionObservation ; rdfs:range afl:Observer ; rdfs:label "performed by" .
+afl:evidencesActuation a owl:ObjectProperty ; rdfs:domain afl:Receipt ; rdfs:range afl:Actuation ; rdfs:label "evidences actuation" .
+afl:evidencesObservation a owl:ObjectProperty ; rdfs:domain afl:Receipt ; rdfs:range afl:PostconditionObservation ; rdfs:label "evidences observation" .
+afl:causedByReceipt a owl:ObjectProperty ; rdfs:domain afl:Receipt ; rdfs:range afl:Receipt ; rdfs:label "caused by receipt" .
+afl:containsReceipt a owl:ObjectProperty ; rdfs:domain afl:ReceiptDAG ; rdfs:range afl:Receipt ; rdfs:subPropertyOf prov:hadMember ; rdfs:label "contains receipt" .
+afl:replaysReceipt a owl:ObjectProperty ; rdfs:domain afl:Replay ; rdfs:range afl:Receipt ; rdfs:label "replays receipt" .
+afl:replayOfTrial a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:Replay ; rdfs:range afl:Trial ; rdfs:subPropertyOf afl:belongsToTrial ; rdfs:label "replay of trial" .
+afl:manifestsArtifact a owl:ObjectProperty ; rdfs:domain afl:ArtifactManifest ; rdfs:range afl:Artifact ; rdfs:label "manifests artifact" .
+afl:bindsEntity a owl:ObjectProperty ; rdfs:domain afl:ArtifactManifest ; rdfs:range prov:Entity ; rdfs:label "binds entity" ; rdfs:comment "Explicit identity binding for an entity participating in a witness." .
+afl:sourceRevision a owl:ObjectProperty ; rdfs:domain afl:ArtifactManifest ; rdfs:range afl:SourceRevision ; rdfs:label "source revision" .
+afl:dependencyRevision a owl:ObjectProperty ; rdfs:domain afl:ArtifactManifest ; rdfs:range afl:DependencyRevision ; rdfs:label "dependency revision" .
+afl:digest a owl:DatatypeProperty ; rdfs:domain prov:Entity ; rdfs:range xsd:string ; rdfs:label "digest" .
+afl:readsManifest a owl:ObjectProperty ; rdfs:domain afl:VerifierRun ; rdfs:range afl:ArtifactManifest ; rdfs:label "reads manifest" .
+afl:derivedByVerifier a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:EvidenceWitness ; rdfs:range afl:VerifierRun ; rdfs:subPropertyOf prov:wasGeneratedBy ; rdfs:label "derived by verifier" .
+afl:witnessFor a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:EvidenceWitness ; rdfs:range afl:Trial ; rdfs:subPropertyOf afl:belongsToTrial ; rdfs:label "witness for" .
+afl:governedCandidate a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:EvidenceWitness ; rdfs:range afl:GovernedCandidate ; rdfs:label "governed candidate" .
+afl:commitment a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:EvidenceWitness ; rdfs:range afl:POWLCommitment ; rdfs:label "commitment" .
+afl:authority a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:EvidenceWitness ; rdfs:range afl:AuthorityEnvelope ; rdfs:label "authority" .
+afl:actuation a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:EvidenceWitness ; rdfs:range afl:Actuation ; rdfs:label "actuation" .
+afl:postconditionObservation a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:EvidenceWitness ; rdfs:range afl:PostconditionObservation ; rdfs:label "postcondition observation" .
+afl:receiptDag a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:EvidenceWitness ; rdfs:range afl:ReceiptDAG ; rdfs:label "receipt DAG" .
+afl:replay a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:EvidenceWitness ; rdfs:range afl:Replay ; rdfs:label "replay" .
+afl:manifest a owl:ObjectProperty , owl:FunctionalProperty ; rdfs:domain afl:EvidenceWitness ; rdfs:range afl:ArtifactManifest ; rdfs:label "manifest" .

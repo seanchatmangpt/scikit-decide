@@ -1,0 +1,49 @@
+{
+  "gym": "r2e-gym",
+  "task": "deepswe_swebench_verified_reproduction",
+  "source_ref": "vendor/gyms/r2e-gym/reproduction/DEEPSWE_REPRODUCTION.MD",
+  "initial_facts": [],
+  "goal_facts": ["swebench_evaluation_results_produced"],
+  "steps": [
+    {
+      "id": "clone_repo_and_install_dependencies",
+      "description": "Clone the R2E-Gym repository, install the uv package manager, create a virtual environment, and install dependencies (git clone git@github.com:agentica-project/R2E-Gym.git; cd R2E-Gym; curl -LsSf https://astral.sh/uv/install.sh | sh; uv venv; source .venv/bin/activate; uv sync && uv pip install -e .).",
+      "preconditions": [],
+      "establishes": ["repo_cloned_and_deps_installed"],
+      "cost": 1.0,
+      "source": "DEEPSWE_REPRODUCTION.MD Setup Instructions step 1"
+    },
+    {
+      "id": "start_vllm_server",
+      "description": "Start the VLLM server serving agentica-org/DeepSWE-Preview with tensor parallelism across 8 GPUs and wait for it to fully load (VLLM_ALLOW_LONG_MAX_MODEL_LEN=1 vllm serve agentica-org/DeepSWE-Preview --tensor-parallel-size 8 --max-model-len $MAX_CONTEXT_LEN --enable_prefix_caching).",
+      "preconditions": ["repo_cloned_and_deps_installed"],
+      "establishes": ["vllm_server_ready"],
+      "cost": 1.0,
+      "source": "DEEPSWE_REPRODUCTION.MD Running DeepSWE Inference step 2"
+    },
+    {
+      "id": "run_agent_evaluation",
+      "description": "Run the DeepSWE agent evaluation on the R2E-Gym/SWE-Bench-Verified dataset via src/r2egym/agenthub/run/edit.py runagent_multiple, producing trajectory results.",
+      "preconditions": ["vllm_server_ready"],
+      "establishes": ["agent_trajectories_produced"],
+      "cost": 1.0,
+      "source": "DEEPSWE_REPRODUCTION.MD Running DeepSWE Inference step 3"
+    },
+    {
+      "id": "generate_submission_file",
+      "description": "Convert the trajectory results to SWE-Bench submission format via src/r2egym/agenthub/trajectory/create_swebench_submission.py.",
+      "preconditions": ["agent_trajectories_produced"],
+      "establishes": ["swebench_submission_generated"],
+      "cost": 1.0,
+      "source": "DEEPSWE_REPRODUCTION.MD Evaluation with SWE-Bench Harness step 4"
+    },
+    {
+      "id": "run_official_swebench_evaluation",
+      "description": "Run the official SWE-Bench evaluation harness (python -m swebench.harness.run_evaluation --dataset_name princeton-nlp/SWE-bench_Verified --predictions_path outputs/swebench_submission.json ...) to produce pass/fail results and summary statistics.",
+      "preconditions": ["swebench_submission_generated"],
+      "establishes": ["swebench_evaluation_results_produced"],
+      "cost": 1.0,
+      "source": "DEEPSWE_REPRODUCTION.MD Evaluation with SWE-Bench Harness step 5"
+    }
+  ]
+}

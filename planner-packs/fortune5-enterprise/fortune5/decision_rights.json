@@ -1,0 +1,14 @@
+{
+  "schema": "urn:autofde:fortune5:decision-rights:v1",
+  "rights": [
+    {"decision":"enterprise principle/standard","accountable":"enterprise architecture","consulted":["security","data","platform","finance","business"],"machine_effect":"updates planning constraints; no DO"},
+    {"decision":"business capability outcome","accountable":"business/product owner","consulted":["enterprise architecture","finance"],"machine_effect":"creates/updates admitted objective only"},
+    {"decision":"security/control baseline","accountable":"security governance","consulted":["enterprise architecture","platform"],"machine_effect":"updates control/authority constraints; no DO"},
+    {"decision":"service tier / SLO","accountable":"service owner","consulted":["SRE","business","architecture"],"machine_effect":"updates resilience/capacity constraints"},
+    {"decision":"data classification/residency","accountable":"data owner/governance","consulted":["security","legal/privacy","architecture"],"machine_effect":"updates placement/access constraints"},
+    {"decision":"architecture option selection","accountable":"named architecture/product authority","consulted":["affected domain owners"],"machine_effect":"selects candidate only"},
+    {"decision":"consequential runtime change","accountable":"explicit principal/resource owner","consulted":["policy engines/approvers as required"],"machine_effect":"BRCE admission required"},
+    {"decision":"post-change success standing","accountable":"independent verifier/evidence policy","consulted":["service owner"],"machine_effect":"receipt/replay determines standing; planner cannot self-certify"}
+  ],
+  "separation_of_duties": "The actor that proposes or plans a consequential change must not be the sole authority that admits and certifies its consequence."
+}

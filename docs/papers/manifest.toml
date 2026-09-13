@@ -1,0 +1,284 @@
+schema_version = 1
+retrieval_mode = "HTML_METADATA_CONVERTED"
+pdf_transport = "GITHUB_ACTIONS_REMOTE_FETCH"
+standing = "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2502.05352"
+title = "ITBench: Evaluating AI Agents across Diverse Real-World IT Automation Tasks"
+priority = "core"
+tags = ["cloud", "itops", "sre", "ciso", "finops"]
+abstract_url = "https://arxiv.org/abs/2502.05352"
+pdf_url = "https://arxiv.org/pdf/2502.05352"
+markdown = "2502.05352.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2501.06706"
+title = "AIOpsLab: A Holistic Framework to Evaluate AI Agents for Enabling Autonomous Clouds"
+priority = "core"
+tags = ["cloud", "aiops", "incident", "gym"]
+abstract_url = "https://arxiv.org/abs/2501.06706"
+pdf_url = "https://arxiv.org/pdf/2501.06706"
+markdown = "2501.06706.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2606.29193"
+title = "A Multi-Dataset Benchmark for Evaluating LLM Agents in Microservice Failure Diagnosis"
+priority = "core"
+tags = ["microservices", "aiops", "rca", "telemetry"]
+abstract_url = "https://arxiv.org/abs/2606.29193"
+pdf_url = "https://arxiv.org/pdf/2606.29193"
+markdown = "2606.29193.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2606.08590"
+title = "Auditable Graph-Guided Root Cause Analysis for Kubernetes Incidents"
+priority = "core"
+tags = ["kubernetes", "rca", "evidence", "audit"]
+abstract_url = "https://arxiv.org/abs/2606.08590"
+pdf_url = "https://arxiv.org/pdf/2606.08590"
+markdown = "2606.08590.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2604.21199"
+title = "ARFBench: Benchmarking Time Series Question Answering Ability for Software Incident Response"
+priority = "adjacent"
+tags = ["incident", "time-series", "telemetry"]
+abstract_url = "https://arxiv.org/abs/2604.21199"
+pdf_url = "https://arxiv.org/pdf/2604.21199"
+markdown = "2604.21199.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2605.12729"
+title = "Large Language Models for Agentic NetOps and AIOps: Architectures, Evaluation, and Safety"
+priority = "core"
+tags = ["netops", "aiops", "safety", "governance"]
+abstract_url = "https://arxiv.org/abs/2605.12729"
+pdf_url = "https://arxiv.org/pdf/2605.12729"
+markdown = "2605.12729.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2509.05303"
+title = "Multi-IaC-Eval: Benchmarking Cloud Infrastructure as Code Across Multiple Formats"
+priority = "core"
+tags = ["iac", "terraform", "cloudformation", "cdk"]
+abstract_url = "https://arxiv.org/abs/2509.05303"
+pdf_url = "https://arxiv.org/pdf/2509.05303"
+markdown = "2509.05303.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2607.20478"
+title = "Verifier-First Evaluation of Agentic LLMs for Infrastructure-as-Code Generation"
+priority = "core"
+tags = ["iac", "terraform", "opa", "verifier"]
+abstract_url = "https://arxiv.org/abs/2607.20478"
+pdf_url = "https://arxiv.org/pdf/2607.20478"
+markdown = "2607.20478.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2608.02672"
+title = "Security-First Evaluation of Text-to-Terraform: Benchmarking LLMs and SLMs for Secure IaC Generation"
+priority = "core"
+tags = ["iac", "terraform", "security", "checkov", "trivy"]
+abstract_url = "https://arxiv.org/abs/2608.02672"
+pdf_url = "https://arxiv.org/pdf/2608.02672"
+markdown = "2608.02672.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2604.12040"
+title = "SIR-Bench: Evaluating Investigation Depth in Security Incident Response Agents"
+priority = "core"
+tags = ["security", "incident", "forensics", "cloud"]
+abstract_url = "https://arxiv.org/abs/2604.12040"
+pdf_url = "https://arxiv.org/pdf/2604.12040"
+markdown = "2604.12040.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2607.26791"
+title = "SecRespond: Benchmarking AI Agents for Real-World Post-Compromise Incident Response"
+priority = "core"
+tags = ["security", "incident", "post-compromise", "cyber-range"]
+abstract_url = "https://arxiv.org/abs/2607.26791"
+pdf_url = "https://arxiv.org/pdf/2607.26791"
+markdown = "2607.26791.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2601.22130"
+title = "World of Workflows: a Benchmark for Bringing World Models to Enterprise Systems"
+priority = "core"
+tags = ["enterprise", "workflow", "servicenow", "dynamics"]
+abstract_url = "https://arxiv.org/abs/2601.22130"
+pdf_url = "https://arxiv.org/pdf/2601.22130"
+markdown = "2601.22130.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2407.13244"
+title = "PM-LLM-Benchmark: Evaluating Large Language Models on Process Mining Tasks"
+priority = "core"
+tags = ["process-mining", "benchmark", "procint"]
+abstract_url = "https://arxiv.org/abs/2407.13244"
+pdf_url = "https://arxiv.org/pdf/2407.13244"
+markdown = "2407.13244.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2403.06749"
+title = "Evaluating Large Language Models in Process Mining: Capabilities, Benchmarks, and Evaluation Strategies"
+priority = "core"
+tags = ["process-mining", "evaluation", "conformance"]
+abstract_url = "https://arxiv.org/abs/2403.06749"
+pdf_url = "https://arxiv.org/pdf/2403.06749"
+markdown = "2403.06749.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2603.15798"
+title = "CUBE: A Standard for Unifying Agent Benchmarks"
+priority = "core"
+tags = ["benchmark", "mcp", "gym", "interoperability"]
+abstract_url = "https://arxiv.org/abs/2603.15798"
+pdf_url = "https://arxiv.org/pdf/2603.15798"
+markdown = "2603.15798.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2408.04682"
+title = "ToolSandbox: A Stateful, Conversational, Interactive Evaluation Benchmark for LLM Tool Use Capabilities"
+priority = "core"
+tags = ["tools", "stateful", "policy", "benchmark"]
+abstract_url = "https://arxiv.org/abs/2408.04682"
+pdf_url = "https://arxiv.org/pdf/2408.04682"
+markdown = "2408.04682.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2406.12045"
+title = "tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains"
+priority = "core"
+tags = ["tools", "policy", "interactive", "reliability"]
+abstract_url = "https://arxiv.org/abs/2406.12045"
+pdf_url = "https://arxiv.org/pdf/2406.12045"
+markdown = "2406.12045.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2403.07718"
+title = "WorkArena: How Capable Are Web Agents at Solving Common Knowledge Work Tasks?"
+priority = "adjacent"
+tags = ["enterprise", "servicenow", "knowledge-work", "browsergym"]
+abstract_url = "https://arxiv.org/abs/2403.07718"
+pdf_url = "https://arxiv.org/pdf/2403.07718"
+markdown = "2403.07718.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2407.05291"
+title = "WorkArena++: Towards Compositional Planning and Reasoning-based Common Knowledge Work Tasks"
+priority = "core"
+tags = ["enterprise", "planning", "workflow"]
+abstract_url = "https://arxiv.org/abs/2407.05291"
+pdf_url = "https://arxiv.org/pdf/2407.05291"
+markdown = "2407.05291.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2510.27287"
+title = "Can LLMs Help You at Work? A Sandbox for Evaluating LLM Agents in Enterprise Environments"
+priority = "core"
+tags = ["enterprise", "access-control", "cross-functional"]
+abstract_url = "https://arxiv.org/abs/2510.27287"
+pdf_url = "https://arxiv.org/pdf/2510.27287"
+markdown = "2510.27287.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2505.18878"
+title = "CRMArena-Pro: Holistic Assessment of LLM Agents Across Diverse Business Scenarios and Interactions"
+priority = "adjacent"
+tags = ["enterprise", "crm", "confidentiality", "workflow"]
+abstract_url = "https://arxiv.org/abs/2505.18878"
+pdf_url = "https://arxiv.org/pdf/2505.18878"
+markdown = "2505.18878.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2404.07972"
+title = "OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments"
+priority = "adjacent"
+tags = ["computer-use", "execution", "workflow"]
+abstract_url = "https://arxiv.org/abs/2404.07972"
+pdf_url = "https://arxiv.org/pdf/2404.07972"
+markdown = "2404.07972.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2308.03688"
+title = "AgentBench: Evaluating LLMs as Agents"
+priority = "adjacent"
+tags = ["agents", "interactive", "environments"]
+abstract_url = "https://arxiv.org/abs/2308.03688"
+pdf_url = "https://arxiv.org/pdf/2308.03688"
+markdown = "2308.03688.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2511.10049"
+title = "Continuous Benchmark Generation for Evaluating Enterprise-scale LLM Agents"
+priority = "core"
+tags = ["benchmark-generation", "enterprise", "migration"]
+abstract_url = "https://arxiv.org/abs/2511.10049"
+pdf_url = "https://arxiv.org/pdf/2511.10049"
+markdown = "2511.10049.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2604.12290"
+title = "Frontier-Eng: Benchmarking Self-Evolving Agents on Real-World Engineering Tasks with Generative Optimization"
+priority = "core"
+tags = ["engineering", "verifier", "optimization", "simulation"]
+abstract_url = "https://arxiv.org/abs/2604.12290"
+pdf_url = "https://arxiv.org/pdf/2604.12290"
+markdown = "2604.12290.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2603.20807"
+title = "BenchBench: Benchmarking Automated Benchmark Generation"
+priority = "core"
+tags = ["benchmark-generation", "psychometrics", "validation"]
+abstract_url = "https://arxiv.org/abs/2603.20807"
+pdf_url = "https://arxiv.org/pdf/2603.20807"
+markdown = "2603.20807.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2504.07164"
+title = "R2E-Gym: Procedural Environments and Hybrid Verifiers for Scaling Open-Weights SWE Agents"
+priority = "core"
+tags = ["gym", "procedural-generation", "verifier", "self-play"]
+abstract_url = "https://arxiv.org/abs/2504.07164"
+pdf_url = "https://arxiv.org/pdf/2504.07164"
+markdown = "2504.07164.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"
+
+[[paper]]
+id = "2606.12736"
+title = "Benchmarking AI Agents for Addressing Scientific Challenges Across Scales"
+priority = "adjacent"
+tags = ["agent-agnostic", "stepwise-verification", "interactive"]
+abstract_url = "https://arxiv.org/abs/2606.12736"
+pdf_url = "https://arxiv.org/pdf/2606.12736"
+markdown = "2606.12736.md"
+standing = "HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"

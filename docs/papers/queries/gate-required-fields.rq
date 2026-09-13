@@ -1,0 +1,13 @@
+# MESSAGE: ForwardBench benchmark is missing a required executable field
+PREFIX afb: <https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#>
+PREFIX dct: <http://purl.org/dc/terms/>
+SELECT ?b WHERE {
+  ?b a afb:Benchmark .
+  FILTER(
+    NOT EXISTS { ?b afb:slug ?slug } ||
+    NOT EXISTS { ?b dct:title ?title } ||
+    NOT EXISTS { ?b afb:adapterFamily ?adapter } ||
+    NOT EXISTS { ?b afb:sourceStanding ?standing }
+  )
+}
+ORDER BY ?b

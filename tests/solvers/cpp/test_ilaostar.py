@@ -14,14 +14,14 @@ from enum import Enum
 from math import sqrt
 from typing import NamedTuple
 
-from skdecide import (
+from autofde_lab import (
     DeterministicPlanningDomain,
     ImplicitSpace,
     Space,
     Value,
 )
-from skdecide.builders.domain import UnrestrictedActions
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.builders.domain import UnrestrictedActions
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
 
 
 class State(NamedTuple):
@@ -111,7 +111,7 @@ class TestILAOstar:
     def test_best_solution_graph_after_solve(self):
         """get_best_solution_graph() should return a non-empty dict of (action, value)
         tuples after solving, with all entries belonging to the best solution graph."""
-        from skdecide.hub.solver.ilaostar import ILAOstar
+        from autofde_lab.hub.solver.ilaostar import ILAOstar
 
         with ILAOstar(
             domain_factory=lambda: GridDomain(),
@@ -138,7 +138,7 @@ class TestILAOstar:
 
     def test_best_solution_graph_subset_of_policy(self):
         """States in get_best_solution_graph() must also appear in get_policy()."""
-        from skdecide.hub.solver.ilaostar import ILAOstar
+        from autofde_lab.hub.solver.ilaostar import ILAOstar
 
         with ILAOstar(
             domain_factory=lambda: GridDomain(),
@@ -158,7 +158,7 @@ class TestILAOstar:
     def test_best_solution_graph_in_callback(self):
         """get_best_solution_graph() called from the callback should grow and be
         structurally valid at every iteration."""
-        from skdecide.hub.solver.ilaostar import ILAOstar
+        from autofde_lab.hub.solver.ilaostar import ILAOstar
 
         snapshots = []
 

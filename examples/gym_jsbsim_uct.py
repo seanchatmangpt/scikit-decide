@@ -12,17 +12,17 @@ import numpy as np
 from gym_jsbsim.catalogs.catalog import Catalog as prp
 from gym_jsbsim.envs.taxi_utils import *
 
-from skdecide import EnvironmentOutcome
-from skdecide.builders.domain import DeterministicInitialized
-from skdecide.core import DiscreteDistribution
-from skdecide.hub.domain.gym import (
+from autofde_lab import EnvironmentOutcome
+from autofde_lab.builders.domain import DeterministicInitialized
+from autofde_lab.core import DiscreteDistribution
+from autofde_lab.hub.domain.gym import (
     GymDiscreteActionDomain,
     GymDomain,
     GymDomainHashable,
     GymDomainStateProxy,
 )
-from skdecide.hub.solver.mcts import UCT
-from skdecide.utils import rollout
+from autofde_lab.hub.solver.mcts import UCT
+from autofde_lab.utils import rollout
 
 # ENV_NAME = 'GymJsbsim-HeadingControlTask-v0'
 ENV_NAME = "GymJsbsim-TaxiapControlTask-v0"

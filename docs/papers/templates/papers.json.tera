@@ -1,0 +1,1 @@
+{"schema_version":1,"papers":[{%- for row in sparql_results %}{"arxiv_id":{{ row["id"] | json_encode() }},"title":{{ row["title"] | json_encode() }},"retrieval_standing":{{ row["retrieval"] | json_encode() }},"sha256":{{ row["sha256"] | default(value="") | json_encode() }}}{% if not loop.last %},{% endif %}{%- endfor %}]}

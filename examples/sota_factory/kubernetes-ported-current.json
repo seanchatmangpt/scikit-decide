@@ -1,0 +1,76 @@
+{
+  "target": {
+    "benchmark_id": "aiopslab-ported-kubernetes-remediation",
+    "revision": "Ported",
+    "published_sota": 63.7,
+    "primary_metric": "e2e_success_percent",
+    "task_ids": [
+      "misconfig_app_hotel_res"
+    ],
+    "expected_task_count": 34,
+    "direction": "MAXIMIZE",
+    "score_scale": 100.0,
+    "evaluator_ref": "real benchmark verifier",
+    "frontier_source_ref": "published frontier target supplied to Lab"
+  },
+  "decision_space": {
+    "models": [
+      {
+        "name": "gemma-4-26b-a4b-local"
+      }
+    ],
+    "planners": [
+      {
+        "name": "terminus-2-current-decision-loop"
+      }
+    ],
+    "tool_policies": [
+      "terminus-2-current-tool-policy"
+    ],
+    "repair_policies": [
+      "terminus-2-current-repair-policy"
+    ],
+    "replanning_policies": [
+      "terminus-2-current-replanning-policy"
+    ],
+    "verification_policies": [
+      "real-benchmark-oracle"
+    ],
+    "projection_policies": [
+      "gymact-current-projection"
+    ],
+    "memory_policies": [
+      "terminus-2-current-memory-policy"
+    ],
+    "budgets": [
+      {
+        "name": "current-run-budget"
+      }
+    ],
+    "rules": []
+  },
+  "baseline": {
+    "model": "gemma-4-26b-a4b-local",
+    "planner": "terminus-2-current-decision-loop",
+    "tool_policy": "terminus-2-current-tool-policy",
+    "repair_policy": "terminus-2-current-repair-policy",
+    "replanning_policy": "terminus-2-current-replanning-policy",
+    "verification_policy": "real-benchmark-oracle",
+    "projection_policy": "gymact-current-projection",
+    "memory_policy": "terminus-2-current-memory-policy",
+    "budget": "current-run-budget"
+  },
+  "experiment_bases": [
+    {
+      "seed": 0,
+      "probe_budget": 0,
+      "replication": 0,
+      "objective_weights": {
+        "score": 1.0
+      }
+    }
+  ],
+  "strategy": "BASELINE_FIRST",
+  "candidate_limit": 10000,
+  "max_architectures": 1
+}

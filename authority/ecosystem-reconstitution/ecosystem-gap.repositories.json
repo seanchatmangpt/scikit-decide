@@ -1,0 +1,275 @@
+{
+  "schema": "autofde-lab.gym-fleet-reconstitution/1",
+  "program_id": "ECOSYSTEM-GAP-RECONSTITUTE-2026-08-13",
+  "observation_day": "2026-08-13",
+  "corpus_repository": "seanchatmangpt/autofde-lab",
+  "corpus_base_sha": "a9982e09d3c4956720a360fb47d0a776309910ef",
+  "head_binding": "PER_REPOSITORY_DEFAULT_BRANCH_HEAD_AT_OBSERVATION_DAY",
+  "authority": "AUTHORED_INPUT_ONLY",
+  "direct_actuation": false,
+  "final_admission_allowed": false,
+  "standing": "UNKNOWN",
+  "expected_repository_count": 5,
+  "required_broker": "BRCE",
+  "reconstitution_law": [
+    "PRESERVE: every source commit named in this manifest must remain independently fetchable at its exact sha; no repository history may be rewritten, squashed, or force-pushed out from under a recorded sha as a side effect of reconstitution.",
+    "FENCE: reconstitution reads and records; it never merges, force-pushes, deletes a branch, or closes a PR on the target repositories as a side effect of authoring this manifest.",
+    "RECONSTRUCTION_LAYERS: candidate state (ACTIVE_CANDIDATE branches, open PRs) and integrated state (merged, default-branch history) are distinct layers and must never be conflated in a single disposition value.",
+    "RECEIPT_CHAIN: every repositories[].sources[] entry SHOULD carry a content_receipts object of {path: sha256hex}, computed by fetching the real bytes of each tracked path at the recorded sha via the GitHub Contents API and hashing them with sha256 (labeled sha256-observation); this is not required on every entry, and its absence on a given entry is not itself a defect, but where present it must be a real, independently computed digest, never asserted from memory.",
+    "FALSIFIER_EXACT_SOURCE_COMMIT: the verifier must hard-refuse if a recorded sha does not resolve to a real, fetchable commit on the named repository.",
+    "FALSIFIER_EXACT_SOURCE_TREE: the verifier must hard-refuse if a recorded content_receipts digest does not match a fresh sha256 computation over the real bytes at the recorded sha.",
+    "FALSIFIER_NO_UNCOMPUTED_DIGEST_CLAIM: the verifier must hard-refuse any content_receipts value that is not exactly 64 lowercase hex characters (a well-formed sha256 digest); a malformed or truncated digest string must never be silently accepted or padded.",
+    "FALSIFIER_NO_DIRECT_ACTUATION: the verifier must hard-refuse any manifest or receipt asserting direct_actuation=true or final_admission_allowed=true, since this program authors input only.",
+    "FALSIFIER_DEPENDENCY_CYCLE: the verifier must hard-refuse if depends_on edges form a cycle across repositories[].",
+    "FALSIFIER_UNDECLARED_VALIDATION: the verifier must hard-refuse a repository entry whose validation_commands were not observed in that repository's own real CI/workflow definitions or scripts at the recorded sha."
+  ],
+  "required_receipt_obligations": [
+    "exact_source_commit",
+    "exact_source_tree",
+    "doctrine_observation",
+    "validation_command_inventory",
+    "negative_falsifier",
+    "deterministic_replay",
+    "ggen_receipt_v2",
+    "independent_verifier",
+    "clean_room_replay"
+  ],
+  "repositories": [
+    {
+      "repository": "seanchatmangpt/gitvan",
+      "default_branch": "main",
+      "role": "GIT_WORKFLOW_AUTOMATION_ENGINE",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "a46182c283ffb7af76e6fabde3efe2b810d75fc7",
+      "depends_on": [],
+      "sources": [
+        {
+          "id": "gitvan-main-head",
+          "sha": "a46182c283ffb7af76e6fabde3efe2b810d75fc7",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 22,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "default-branch HEAD; PR #22 (agent/fortune5-enterprise-hardening-20260812) is the highest-numbered real open PR on this repository at observation time, cited for reference only, not literally about this HEAD commit.",
+          "content_receipts": {
+            "README.md": "b97c899d2c0b0b6313939128e7b4a50013e5a1d9af0e9fa5e046e289d522906b",
+            "package.json": "38e9e33fbc8f5574dbeaa18fbfe9eed85f01a03b5808efe44f91f6c1717402dc",
+            ".github/workflows/test.yml": "0f5ab9ca90c666ea6e653094304e89b32d26a11188bf8894c4b886a3d13327d9"
+          }
+        },
+        {
+          "id": "gitvan-fortune5-enterprise-hardening-candidate",
+          "sha": "8048a5b123dc60692c3aeeff9a4a0362ca6b4461",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 22,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "agent/fortune5-enterprise-hardening-20260812: real open PR #22 (\"Harden GitVan for Fortune-5 enterprise actuation\") against this exact branch, verified via gh pr view 22 -R seanchatmangpt/gitvan (headRefName=agent/fortune5-enterprise-hardening-20260812, headRefOid matches, baseRefName=main, mergedAt=null). .github/workflows/test.yml does not exist at this sha (404 on contents API); it is replaced by other workflow files (e.g. enterprise-readiness.yml, security-gate.yml) not hashed here.",
+          "content_receipts": {
+            "README.md": "b97c899d2c0b0b6313939128e7b4a50013e5a1d9af0e9fa5e046e289d522906b",
+            "package.json": "36657017c1fb7525a0d678e273f9b23345ea68a7d27fcdaa06ccbfbc73afa698"
+          }
+        }
+      ],
+      "validation_commands": [
+        "npm ci",
+        "npm run lint",
+        "npm run build",
+        "npm test"
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/uvmgr",
+      "default_branch": "main",
+      "role": "PYTHON_TOOLCHAIN_LIFECYCLE_MANAGER",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "ba8963c1691349bef15b402ae434310bd2e98eb7",
+      "depends_on": [],
+      "sources": [
+        {
+          "id": "uvmgr-main-head",
+          "sha": "ba8963c1691349bef15b402ae434310bd2e98eb7",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 8,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "PARTIAL_ALIVE",
+          "scope": "default-branch HEAD; PR #8 (agent/merge-crown-tip-20260812, \"merge: consolidate current uvmgr modernization tip\") is the highest-numbered real open PR on this repository at observation time, cited for reference only, not literally about this HEAD commit.",
+          "content_receipts": {
+            "README.md": "40cc41b8dc134367abf76daa82c6a7d13b4c7d9dd55ca0e8ba3acd2161946aec",
+            "pyproject.toml": "f8640496436b343b7470d60d3f28d0236091455fc6ec1aa4158c9c16b5ee16c3",
+            ".github/workflows/ci.yml": "000ab53d48b81ce7266440a63c1f2d4c7c28c4ec8e2ea4ac3032ca59fc13a7c3"
+          }
+        },
+        {
+          "id": "uvmgr-merge-crown-tip-20260812-candidate",
+          "sha": "d8b40963a043e13fa6d768dc32ffdedda1f07f25",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 8,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "agent/merge-crown-tip-20260812: real open PR #8 (\"merge: consolidate current uvmgr modernization tip\") against this exact branch, verified via gh api repos/seanchatmangpt/uvmgr/pulls/8 (head.ref=agent/merge-crown-tip-20260812, head.sha matches, base=main, merged=false).",
+          "content_receipts": {
+            "README.md": "49e6d08a2a9159512a6f84d27caf74529a7e4cce68ec53a126fe019ac05a9354",
+            "pyproject.toml": "4f57e7d042162ad8d20e9f4b794887d2d5829e0a5e88caac982a4c2c49e04c06",
+            ".github/workflows/ci.yml": "0d846d3b776964521eae6f07f34556734f450a093deb73e80d86c8b2a6815aa3"
+          }
+        }
+      ],
+      "validation_commands": [
+        "uv sync --all-extras --group dev --group ci",
+        "uv run poe lint",
+        "uv run poe test"
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/affidavit",
+      "default_branch": "main",
+      "role": "PROVENANCE_RECEIPT_CERTIFICATION_KERNEL",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "383b41dc9c587f8a8a90fe280b9621ec55701a2c",
+      "depends_on": [],
+      "sources": [
+        {
+          "id": "affidavit-main-head",
+          "sha": "383b41dc9c587f8a8a90fe280b9621ec55701a2c",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 50,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "default-branch HEAD; PR #50 (feat/ecosystem-standing-receipts-20260812) is the highest-numbered real open PR on this repository at observation time, cited for reference only, not literally about this HEAD commit.",
+          "content_receipts": {
+            "README.md": "fe5c6cfec1d8fe8417af3dfebd58857bd54f1f0b54987019bcf1fd763a57fa0e",
+            "Cargo.toml": "084b08a2b663d4262ea37a1e31e32c25d1ea6bfdc2a3d03cf34c183b682dcbd2",
+            ".github/workflows/rust.yml": "9f256836e28f851a1e081ca2ae18e32ef7ec08a2e97e28e70dadad13cfa3315c"
+          }
+        },
+        {
+          "id": "affidavit-ecosystem-standing-receipts-candidate",
+          "sha": "5dc78f113e60ba95a4b4594a6da3511334e86024",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 50,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "feat/ecosystem-standing-receipts-20260812: real open PR #50 (\"feat: make Affidavit the ecosystem BCRE federation kernel\") against this exact branch, verified via gh api repos/seanchatmangpt/affidavit/pulls/50 (head.ref=feat/ecosystem-standing-receipts-20260812, head.sha matches, base=main, merged=false)."
+        }
+      ],
+      "validation_commands": [
+        "cargo fmt --all -- --check",
+        "cargo build --all-targets",
+        "cargo test --all-targets",
+        "cargo clippy --all-targets -- -D warnings"
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/bcinr",
+      "default_branch": "main",
+      "role": "BRANCHLESS_COMPUTE_KERNEL",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "d6fefefdb95df5dbbb520afe7b5a4df53aa6e27f",
+      "depends_on": [],
+      "sources": [
+        {
+          "id": "bcinr-main-head",
+          "sha": "d6fefefdb95df5dbbb520afe7b5a4df53aa6e27f",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 27,
+          "pr_state": "closed",
+          "merged": true,
+          "observed_standing": "PARTIAL_ALIVE",
+          "scope": "default-branch HEAD; PR #27 (brand/forward-deployment-os-2026-08) is the highest-numbered real open PR on this repository at observation time, cited for reference only, not literally about this HEAD commit.",
+          "content_receipts": {
+            "README.md": "45e8c9d5b274742c05bc3872b49c66f2e9dfe1df5ba9f2faafcc090018a6eb0e",
+            "Cargo.toml": "86ec463e4cc79c10892d24078c4537644da5598e255761f6fdb81d3679cadc0a",
+            ".github/workflows/ci.yml": "475b52d8886e41c2afbae18504184ec18e6365d5c5f719242a51094c8a7a00b6"
+          }
+        },
+        {
+          "id": "bcinr-forward-deployment-os-2026-08-candidate",
+          "sha": "e727a97dfa0c50d7082ad3300290fd67a12ad85c",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 27,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "brand/forward-deployment-os-2026-08: real open PR #27 (\"docs: document Forward Deployment portfolio context\") against this exact branch, verified via gh api repos/seanchatmangpt/bcinr/pulls?state=open (head.ref=brand/forward-deployment-os-2026-08, head.sha matches, base=main, merged=false).",
+          "content_receipts": {
+            "README.md": "45e8c9d5b274742c05bc3872b49c66f2e9dfe1df5ba9f2faafcc090018a6eb0e",
+            "Cargo.toml": "86ec463e4cc79c10892d24078c4537644da5598e255761f6fdb81d3679cadc0a",
+            ".github/workflows/ci.yml": "a9bf49dfbf26a43bb34476a59508fd5e9e1df6ffad0010bd0370dbbfc2a17857"
+          }
+        }
+      ],
+      "validation_commands": [
+        "cargo clippy --workspace --all-targets --all-features -- -D warnings",
+        "cargo test -p bcinr-cmca --features std",
+        "cargo metadata --locked --format-version 1 --no-deps > /dev/null"
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/homebrew-tap",
+      "default_branch": "main",
+      "role": "PACKAGE_DISTRIBUTION_TAP",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "bf8ed0c61a14772c5840a55d0dbd17a276657a5a",
+      "depends_on": [],
+      "sources": [
+        {
+          "id": "homebrew-tap-main-head",
+          "sha": "bf8ed0c61a14772c5840a55d0dbd17a276657a5a",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 1,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "default-branch HEAD; PR #1 (brand/forward-deployment-os-2026-08, draft) is the highest-numbered real open PR on this repository at observation time, cited for reference only, not literally about this HEAD commit. Real tree at this sha: .github/workflows/publish.yml, .github/workflows/tests.yml, Formula/ggen.rb, README.md. No pyproject.toml/pack.toml/Cargo.toml/package.json present.",
+          "content_receipts": {
+            "README.md": "f01df0d0a88fe7b4f27aca5c1d75cd1a6c3c736886adf36339489615ad61cca0",
+            ".github/workflows/tests.yml": "0d8c99d0c14a32db2472dae772de3394120844f7872e968fba284cdba0514af1",
+            ".github/workflows/publish.yml": "4a9bd8d266c3d6ba86e52dba25cf1714fcf7e73c1dbcc5432cbab95ad33293d1"
+          }
+        },
+        {
+          "id": "homebrew-tap-forward-deployment-os-2026-08-candidate",
+          "sha": "363696ad77a373c25eb1614a4e4688a179e21aaa",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 1,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "brand/forward-deployment-os-2026-08: real open draft PR #1 (\"docs: document Forward Deployment portfolio context\") against this exact branch, verified via gh api repos/seanchatmangpt/homebrew-tap/pulls/1 (head.ref=brand/forward-deployment-os-2026-08, head.sha matches, base=main, draft=true, merged=false). Documentation-only per PR body: adds FORWARD_DEPLOYMENT.md, no code/workflow/dependency/test/build/release/permission/security changes.",
+          "content_receipts": {
+            "README.md": "f01df0d0a88fe7b4f27aca5c1d75cd1a6c3c736886adf36339489615ad61cca0",
+            ".github/workflows/tests.yml": "0d8c99d0c14a32db2472dae772de3394120844f7872e968fba284cdba0514af1",
+            ".github/workflows/publish.yml": "4a9bd8d266c3d6ba86e52dba25cf1714fcf7e73c1dbcc5432cbab95ad33293d1"
+          }
+        }
+      ],
+      "validation_commands": [
+        "brew test-bot --only-tap-syntax",
+        "brew test-bot --only-formulae",
+        "brew test-bot --only-setup"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+C4Component
+title AutoFDE Ecosystem — Cross-System Components
+
+Container_Boundary(gymact, "GymAct") {
+  Component(adapter, "Environment Adapter")
+  Component(registry, "Registry & Discovery")
+  Component(basis, "GymBasis")
+  Component(projector, "Projection Engine")
+  Component(exec_kernel, "Execution Kernel")
+  Component(verify, "Verification & Replay")
+}
+Container_Boundary(lab, "AutoFDE SOTA Lab") {
+  Component(decision, "DecisionBasis")
+  Component(experiment, "Experiment Compiler")
+  Component(runner, "Experiment Runner / Swarm")
+  Component(learner, "Learning Compiler")
+  Component(frontier, "Frontier Comparator")
+}
+Container_Boundary(prod, "Production") {
+  Component(ggen, "ggen Manufacturer")
+  Component(runtime, "AutoFDE Runtime")
+  Component(standing, "Standing Verifier")
+}
+
+Rel(adapter, basis, "Lowers world into")
+Rel(registry, adapter, "Finds/configures")
+Rel(basis, projector, "Projects")
+Rel(projector, decision, "Feeds")
+Rel(decision, experiment, "Enumerates lawful solution options")
+Rel(basis, experiment, "Enumerates lawful world options")
+Rel(experiment, runner, "Generates selected trials")
+Rel(runner, exec_kernel, "Runs against")
+Rel(exec_kernel, verify, "Produces consequence evidence")
+Rel(verify, learner, "Supplies verified failures/results")
+Rel(learner, decision, "Repairs solution basis")
+Rel(frontier, learner, "Provides SOTA distance / comparative signal")
+Rel(experiment, ggen, "Manufacture selected specializations")
+Rel(ggen, runtime, "Produces governed bundle")
+Rel(runtime, standing, "Produces receipts and consequence")
+Rel(standing, learner, "Returns verified standing")

@@ -1,0 +1,64 @@
+@prefix arch: <urn:autofde-lab:architecture:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:architecture:catalog:06_sequence> a owl:Ontology ;
+    dcterms:title "Generated architecture catalog bundle: 06_sequence" ;
+    owl:imports <urn:autofde-lab:ontology:architecture> .
+
+<urn:autofde-lab:architecture:diagram:26_sequence_sota_search_cycle:diagram> a arch:Diagram,
+        arch:SequenceDiagram ;
+    dcterms:title "26 sequence sota search cycle" ;
+    arch:diagramKind arch:SequenceDiagram ;
+    arch:elementCount 7 ;
+    arch:mermaidSyntax "sequenceDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 21 ;
+    arch:sourceDigest "b1c1460f7500d725adcb05aecb5553f70b335ccd23aabbd4723fbcdc4443f945" ;
+    arch:sourcePath "docs/diagrams/26_sequence_sota_search_cycle.mmd" .
+
+<urn:autofde-lab:architecture:diagram:27_sequence_gymact_materialize_act_verify:diagram> a arch:Diagram,
+        arch:SequenceDiagram ;
+    dcterms:title "27 sequence gymact materialize act verify" ;
+    arch:diagramKind arch:SequenceDiagram ;
+    arch:elementCount 6 ;
+    arch:mermaidSyntax "sequenceDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 19 ;
+    arch:sourceDigest "1aaf53da3e83e14c239b092cd0a87abebcd7b6c96f9b89d4c43434d55e2b0915" ;
+    arch:sourcePath "docs/diagrams/27_sequence_gymact_materialize_act_verify.mmd" .
+
+<urn:autofde-lab:architecture:diagram:28_sequence_basis_repair_leverage:diagram> a arch:Diagram,
+        arch:SequenceDiagram ;
+    dcterms:title "28 sequence basis repair leverage" ;
+    arch:diagramKind arch:SequenceDiagram ;
+    arch:elementCount 6 ;
+    arch:mermaidSyntax "sequenceDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 11 ;
+    arch:sourceDigest "175c70402606c790e064333336dfe507743dfd82918bf5b6c87dd8f6612718a9" ;
+    arch:sourcePath "docs/diagrams/28_sequence_basis_repair_leverage.mmd" .
+
+<urn:autofde-lab:architecture:diagram:29_sequence_vendor_benchmark_unlock:diagram> a arch:Diagram,
+        arch:SequenceDiagram ;
+    dcterms:title "29 sequence vendor benchmark unlock" ;
+    arch:diagramKind arch:SequenceDiagram ;
+    arch:elementCount 7 ;
+    arch:mermaidSyntax "sequenceDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 15 ;
+    arch:sourceDigest "34b299007f74d049ee052bd252dab1eef221bf1ad3c3a706b03ad3c3053e0b27" ;
+    arch:sourcePath "docs/diagrams/29_sequence_vendor_benchmark_unlock.mmd" .
+
+<urn:autofde-lab:architecture:diagram:30_sequence_promotion_to_runtime:diagram> a arch:Diagram,
+        arch:SequenceDiagram ;
+    dcterms:title "30 sequence promotion to runtime" ;
+    arch:diagramKind arch:SequenceDiagram ;
+    arch:elementCount 6 ;
+    arch:mermaidSyntax "sequenceDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 14 ;
+    arch:sourceDigest "35d86cc468085afe7b9a2131533eb5465c1d59a97c0781ff78b85440306ab698" ;
+    arch:sourcePath "docs/diagrams/30_sequence_promotion_to_runtime.mmd" .
+

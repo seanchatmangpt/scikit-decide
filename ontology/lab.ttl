@@ -1,0 +1,94 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:lab>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab semantic constitution" ;
+    dcterms:description "Working-backwards vocabulary for bounded consequential worlds, planning, partial-order commitment, authority boundaries, evidence, and derived standing. This is a design constitution, not a claim that the current runtime implements every term." ;
+    dcterms:created "2026-08-08"^^xsd:date .
+
+afl:Gym
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:lab> ;
+    rdfs:label "Gym" ;
+    rdfs:comment "A bounded consequential world with observable state, capabilities, authority, goals/invariants, lawful transitions, verification, and evidence." .
+
+afl:Trial
+    a owl:Class , prov:Activity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:lab> ;
+    rdfs:label "Trial" ;
+    rdfs:comment "One identity-bounded experimental episode. Evidence from different trials must never satisfy one witness." .
+
+afl:Experiment
+    a owl:Class , prov:Activity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:lab> ;
+    rdfs:label "Experiment" .
+
+afl:Goal
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:lab> ;
+    rdfs:label "Goal" .
+
+afl:Invariant
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:lab> ;
+    rdfs:label "Invariant" .
+
+afl:Resource
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:lab> ;
+    rdfs:label "Resource" .
+
+afl:Capability
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:lab> ;
+    rdfs:label "Capability" ;
+    rdfs:comment "Something the system can do. Capability does not imply authority." .
+
+afl:Perturbation
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:lab> ;
+    rdfs:label "Perturbation" ;
+    rdfs:comment "A change to the world used to test adaptation, repair, or replanning." .
+
+afl:belongsToTrial
+    a owl:ObjectProperty ;
+    rdfs:range afl:Trial ;
+    rdfs:label "belongs to trial" .
+
+afl:hasWorld
+    a owl:ObjectProperty ;
+    rdfs:domain afl:Gym ;
+    rdfs:range afl:World ;
+    rdfs:label "has world" .
+
+afl:hasGoal
+    a owl:ObjectProperty ;
+    rdfs:range afl:Goal ;
+    rdfs:label "has goal" .
+
+afl:hasInvariant
+    a owl:ObjectProperty ;
+    rdfs:range afl:Invariant ;
+    rdfs:label "has invariant" .
+
+afl:hasResource
+    a owl:ObjectProperty ;
+    rdfs:range afl:Resource ;
+    rdfs:label "has resource" .
+
+afl:hasCapability
+    a owl:ObjectProperty ;
+    rdfs:range afl:Capability ;
+    rdfs:label "has capability" .
+
+afl:trialId
+    a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:Trial ;
+    rdfs:range xsd:string ;
+    rdfs:label "trial id" .

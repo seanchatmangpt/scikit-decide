@@ -11,20 +11,20 @@ from typing import Any, NamedTuple, Optional
 
 import matplotlib.pyplot as plt
 
-from skdecide.builders.domain.agent import MultiAgent, SingleAgent
-from skdecide.builders.domain.concurrency import Sequential
-from skdecide.builders.domain.dynamics import Simulation, UncertainTransitions
-from skdecide.builders.domain.events import Actions
-from skdecide.builders.domain.goals import Goals
-from skdecide.builders.domain.initialization import (
+from autofde_lab.builders.domain.agent import MultiAgent, SingleAgent
+from autofde_lab.builders.domain.concurrency import Sequential
+from autofde_lab.builders.domain.dynamics import Simulation, UncertainTransitions
+from autofde_lab.builders.domain.events import Actions
+from autofde_lab.builders.domain.goals import Goals
+from autofde_lab.builders.domain.initialization import (
     DeterministicInitialized,
     Initializable,
 )
-from skdecide.builders.domain.memory import Markovian
-from skdecide.builders.domain.observability import FullyObservable
-from skdecide.builders.domain.renderability import Renderable
-from skdecide.builders.domain.value import PositiveCosts
-from skdecide.core import (
+from autofde_lab.builders.domain.memory import Markovian
+from autofde_lab.builders.domain.observability import FullyObservable
+from autofde_lab.builders.domain.renderability import Renderable
+from autofde_lab.builders.domain.value import PositiveCosts
+from autofde_lab.core import (
     DiscreteDistribution,
     Distribution,
     SamplableSpace,
@@ -34,12 +34,12 @@ from skdecide.core import (
     TransitionOutcome,
     Value,
 )
-from skdecide.domains import Domain
-from skdecide.hub.solver.lrtdp import LRTDP
-from skdecide.hub.solver.martdp import MARTDP
-from skdecide.hub.solver.mcts import HMCTS
-from skdecide.hub.space.gym import EnumSpace, ListSpace, MultiDiscreteSpace
-from skdecide.utils import load_registered_solver, rollout
+from autofde_lab.domains import Domain
+from autofde_lab.hub.solver.lrtdp import LRTDP
+from autofde_lab.hub.solver.martdp import MARTDP
+from autofde_lab.hub.solver.mcts import HMCTS
+from autofde_lab.hub.space.gym import EnumSpace, ListSpace, MultiDiscreteSpace
+from autofde_lab.utils import load_registered_solver, rollout
 
 DEFAULT_MAZE = """
 +-+-+-+-+-+-+-+-+-+-+

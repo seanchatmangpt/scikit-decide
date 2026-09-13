@@ -1,0 +1,20 @@
+{
+  "after": 6,
+  "before": 5,
+  "before_counts": {
+    "PlannerCacheHotsetRequest": 5,
+    "PlannerCacheStatsRequest": 5,
+    "PlannerCandidate": 6,
+    "PlannerCatalogRequest": 5,
+    "PlannerMatchRequest": 5
+  },
+  "closed": true,
+  "closed_class": "PlannerCatalogRequest",
+  "delta": 1,
+  "detection_status": "verified_healthy_this_tick",
+  "gap": 1,
+  "invoke_reason": "forced probe after 5 consecutive skips (max_consecutive_skips_before_probe=5)",
+  "invoked": true,
+  "returncode": 0,
+  "skips_since_last_invoke": 0
+}

@@ -6,7 +6,7 @@ import sys
 
 import pytest
 
-from skdecide.optuna_utils import generic_optuna_experiment_monoproblem
+from autofde_lab.optuna_utils import generic_optuna_experiment_monoproblem
 
 try:
     import optuna
@@ -21,8 +21,8 @@ def test_up_bridge_solver_classic():
     from unified_planning.plans import ActionInstance
     from unified_planning.shortcuts import BoolType, OneshotPlanner, UserType
 
-    from skdecide.hub.domain.up import SkUPAction, UPDomain
-    from skdecide.hub.solver.up import UPSolver
+    from autofde_lab.hub.domain.up import SkUPAction, UPDomain
+    from autofde_lab.hub.solver.up import UPSolver
 
     Location = UserType("Location")
     robot_at = unified_planning.model.Fluent("robot_at", BoolType(), l=Location)
@@ -91,8 +91,8 @@ def test_up_bridge_solver_numeric():
         OneshotPlanner,
     )
 
-    from skdecide.hub.domain.up import UPDomain
-    from skdecide.hub.solver.up import UPSolver
+    from autofde_lab.hub.domain.up import UPDomain
+    from autofde_lab.hub.solver.up import UPSolver
 
     x = Fluent("x")
     y = Fluent("y")
@@ -167,8 +167,8 @@ def test_up_bridge_classic_optuna():
     from optuna.samplers import BruteForceSampler
     from unified_planning.shortcuts import BoolType, OneshotPlanner, UserType
 
-    from skdecide.hub.domain.up import UPDomain
-    from skdecide.hub.solver.up import UPSolver
+    from autofde_lab.hub.domain.up import UPDomain
+    from autofde_lab.hub.solver.up import UPSolver
 
     Location = UserType("Location")
     robot_at = unified_planning.model.Fluent("robot_at", BoolType(), l=Location)

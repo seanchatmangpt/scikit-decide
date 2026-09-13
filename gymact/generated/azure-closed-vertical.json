@@ -1,0 +1,91 @@
+{
+  "schema": "autofde.capability-bundle.v1",
+  "name": "azure-closed-vertical",
+  "interaction_model": "RECONCILIATION",
+  "process_schema": "powl.partial-order.v1",
+  "authority": {
+    "mode": "REQUIRED",
+    "scope": "named-test-subscription",
+    "consequences": ["azure:terraform-apply", "azure:terraform-destroy"]
+  },
+  "evidence": {
+    "format": "OCEL 2.0 JSON",
+    "independent_postcondition": true,
+    "orphan_sweep": true,
+    "replay": true
+  },
+  "process": [
+{
+      "id": "p01",
+      "activity": "incident.observed",
+      "predecessors": [],
+      "required_object_types": ["Incident", "AzureSubscription"]
+    },
+{
+      "id": "p02",
+      "activity": "rdfdelta.admitted",
+      "predecessors": ["p01"],
+      "required_object_types": ["Incident", "CapabilityBundle"]
+    },
+{
+      "id": "p03",
+      "activity": "hook.intent_manufactured",
+      "predecessors": ["p02"],
+      "required_object_types": ["Incident", "AgentSession", "CapabilityBundle"]
+    },
+{
+      "id": "p04",
+      "activity": "agent.session_started",
+      "predecessors": ["p03"],
+      "required_object_types": ["AgentSession", "AzureSubscription"]
+    },
+{
+      "id": "p05",
+      "activity": "powl.plan_admitted",
+      "predecessors": ["p04"],
+      "required_object_types": ["AgentSession", "CapabilityBundle", "TerraformResource"]
+    },
+{
+      "id": "p06",
+      "activity": "authority.admitted",
+      "predecessors": ["p05"],
+      "required_object_types": ["AuthorityEnvelope", "AzureSubscription", "CapabilityBundle"]
+    },
+{
+      "id": "p07",
+      "activity": "brce.apply_verified",
+      "predecessors": ["p06"],
+      "required_object_types": ["AuthorityEnvelope", "CapabilityBundle", "AzureSubscription", "TerraformResource"]
+    },
+{
+      "id": "p08",
+      "activity": "postcondition.apply_verified",
+      "predecessors": ["p07"],
+      "required_object_types": ["AzureSubscription", "TerraformResource"]
+    },
+{
+      "id": "p09",
+      "activity": "brce.destroy_verified",
+      "predecessors": ["p08"],
+      "required_object_types": ["AuthorityEnvelope", "CapabilityBundle", "AzureSubscription", "TerraformResource"]
+    },
+{
+      "id": "p10",
+      "activity": "postcondition.destroy_verified",
+      "predecessors": ["p09"],
+      "required_object_types": ["AzureSubscription", "TerraformResource"]
+    },
+{
+      "id": "p11",
+      "activity": "orphan_sweep.verified",
+      "predecessors": ["p10"],
+      "required_object_types": ["AzureSubscription", "TerraformResource"]
+    },
+{
+      "id": "p12",
+      "activity": "evidence.replay_verified",
+      "predecessors": ["p11"],
+      "required_object_types": ["CapabilityBundle", "AgentSession", "AuthorityEnvelope", "AzureSubscription", "TerraformResource"]
+    }
+]
+}

@@ -1,0 +1,231 @@
+{
+  "applied": false,
+  "generator": "autofde_lab.autofde.github_projection",
+  "issues": [
+    {
+      "labels": [
+        "kind-cloud"
+      ],
+      "milestone": "azure-pack",
+      "occurrence": 1,
+      "requires": [
+        "ap-landing-zone"
+      ],
+      "source_node": "ap-identity",
+      "status": "active",
+      "supersedes": null,
+      "title": "Workload identity federation"
+    },
+    {
+      "labels": [
+        "kind-cloud"
+      ],
+      "milestone": "azure-pack",
+      "occurrence": 1,
+      "requires": [
+        "pi-terraform-module"
+      ],
+      "source_node": "ap-landing-zone",
+      "status": "active",
+      "supersedes": null,
+      "title": "Azure landing zone"
+    },
+    {
+      "labels": [
+        "kind-verification"
+      ],
+      "milestone": "breach-clock-crown",
+      "occurrence": 1,
+      "requires": [
+        "bc-clock"
+      ],
+      "source_node": "bc-attestation",
+      "status": "active",
+      "supersedes": null,
+      "title": "Breach attestation record"
+    },
+    {
+      "labels": [
+        "kind-verification"
+      ],
+      "milestone": "breach-clock-crown",
+      "occurrence": 1,
+      "requires": [
+        "ap-identity",
+        "rk-bounds"
+      ],
+      "source_node": "bc-clock",
+      "status": "active",
+      "supersedes": null,
+      "title": "Breach clock"
+    },
+    {
+      "labels": [
+        "kind-infrastructure"
+      ],
+      "milestone": "project-infrastructure",
+      "occurrence": 2,
+      "requires": [
+        "sf-refusal-vocab"
+      ],
+      "source_node": "pi-ci-gate",
+      "status": "active",
+      "supersedes": "pi-ci-gate-v0",
+      "title": "CI gate on the round-trip law"
+    },
+    {
+      "labels": [
+        "kind-infrastructure",
+        "status-superseded"
+      ],
+      "milestone": "project-infrastructure",
+      "occurrence": 1,
+      "requires": [
+        "sf-refusal-vocab"
+      ],
+      "source_node": "pi-ci-gate-v0",
+      "status": "superseded",
+      "supersedes": null,
+      "title": "First CI gate attempt (superseded)"
+    },
+    {
+      "labels": [
+        "kind-infrastructure"
+      ],
+      "milestone": "project-infrastructure",
+      "occurrence": 1,
+      "requires": [
+        "sf-ontology"
+      ],
+      "source_node": "pi-terraform-module",
+      "status": "active",
+      "supersedes": null,
+      "title": "Declarative GitHub project management module"
+    },
+    {
+      "labels": [
+        "kind-runtime"
+      ],
+      "milestone": "runtime-kernel",
+      "occurrence": 1,
+      "requires": [
+        "rk-scheduler"
+      ],
+      "source_node": "rk-bounds",
+      "status": "active",
+      "supersedes": null,
+      "title": "Execution bound accounting"
+    },
+    {
+      "labels": [
+        "kind-runtime"
+      ],
+      "milestone": "runtime-kernel",
+      "occurrence": 1,
+      "requires": [
+        "pi-terraform-module"
+      ],
+      "source_node": "rk-scheduler",
+      "status": "active",
+      "supersedes": null,
+      "title": "Bounded plan-structure scheduler"
+    },
+    {
+      "labels": [
+        "kind-semantic"
+      ],
+      "milestone": "semantic-foundation",
+      "occurrence": 1,
+      "requires": [],
+      "source_node": "sf-ontology",
+      "status": "active",
+      "supersedes": null,
+      "title": "Author the AutoFDE phase-graph ontology"
+    },
+    {
+      "labels": [
+        "kind-semantic"
+      ],
+      "milestone": "semantic-foundation",
+      "occurrence": 1,
+      "requires": [],
+      "source_node": "sf-refusal-vocab",
+      "status": "active",
+      "supersedes": null,
+      "title": "Name every AutoFDE refusal"
+    }
+  ],
+  "labels": [
+    {
+      "color": "1D76DB",
+      "key": "kind-cloud",
+      "name": "Kind:Cloud"
+    },
+    {
+      "color": "B60205",
+      "key": "kind-infrastructure",
+      "name": "Kind:Infrastructure"
+    },
+    {
+      "color": "0E8A16",
+      "key": "kind-runtime",
+      "name": "Kind:Runtime"
+    },
+    {
+      "color": "5319A1",
+      "key": "kind-semantic",
+      "name": "Kind:Semantic"
+    },
+    {
+      "color": "FBCA04",
+      "key": "kind-verification",
+      "name": "Kind:Verification"
+    },
+    {
+      "color": "666666",
+      "key": "status-superseded",
+      "name": "Status:Superseded"
+    }
+  ],
+  "milestones": [
+    {
+      "after": [],
+      "due_date": "2026-08-14",
+      "key": "semantic-foundation",
+      "title": "Semantic Foundation"
+    },
+    {
+      "after": [
+        "semantic-foundation"
+      ],
+      "due_date": "2026-08-21",
+      "key": "project-infrastructure",
+      "title": "Project Infrastructure"
+    },
+    {
+      "after": [
+        "project-infrastructure"
+      ],
+      "due_date": "2026-09-04",
+      "key": "azure-pack",
+      "title": "Azure Pack"
+    },
+    {
+      "after": [
+        "project-infrastructure"
+      ],
+      "due_date": "2026-09-04",
+      "key": "runtime-kernel",
+      "title": "Runtime Kernel"
+    },
+    {
+      "after": [
+        "azure-pack",
+        "runtime-kernel"
+      ],
+      "due_date": "2026-09-18",
+      "key": "breach-clock-crown",
+      "title": "Breach Clock Crown"
+    }
+  ]
+}

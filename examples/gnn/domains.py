@@ -6,7 +6,7 @@ import numpy as np
 from graph_jsp_env.disjunctive_graph_jsp_env import DisjunctiveGraphJspEnv
 from gymnasium.spaces import Box, Discrete, Graph, GraphInstance
 
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     FullyObservable,
     Initializable,
     Markovian,
@@ -16,10 +16,10 @@ from skdecide.builders.domain import (
     SingleAgent,
     UnrestrictedActions,
 )
-from skdecide.core import Mask, Space, TransitionOutcome, Value
-from skdecide.domains import DeterministicPlanningDomain, Domain
-from skdecide.hub.domain.maze.maze import DEFAULT_MAZE, Action, Maze, State
-from skdecide.hub.space.gym import DictSpace, DiscreteSpace, GymSpace, ListSpace
+from autofde_lab.core import Mask, Space, TransitionOutcome, Value
+from autofde_lab.domains import DeterministicPlanningDomain, Domain
+from autofde_lab.hub.domain.maze.maze import DEFAULT_MAZE, Action, Maze, State
+from autofde_lab.hub.space.gym import DictSpace, DiscreteSpace, GymSpace, ListSpace
 
 
 class D(DeterministicPlanningDomain, Renderable):

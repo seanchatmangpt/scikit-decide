@@ -1,0 +1,91 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+<urn:autofde-lab:shape:Level4Witness>
+    a sh:NodeShape ;
+    sh:targetClass afl:Level4Witness ;
+    sh:property [ sh:path afl:witnessFor ; sh:class afl:Trial ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path afl:governedCandidate ; sh:class afl:GovernedCandidate ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path afl:commitment ; sh:class afl:POWLCommitment ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path afl:authority ; sh:class afl:AuthorityEnvelope ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path afl:actuation ; sh:class afl:Actuation ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path afl:postconditionObservation ; sh:class afl:PostconditionObservation ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path afl:receiptDag ; sh:class afl:ReceiptDAG ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path afl:replay ; sh:class afl:Replay ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path afl:manifest ; sh:class afl:ArtifactManifest ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:property [ sh:path afl:derivedByVerifier ; sh:class afl:VerifierRun ; sh:minCount 1 ; sh:maxCount 1 ] ;
+    sh:sparql [
+        sh:message "Level 4 is one joined witness: governed candidate, commitment, authority, actuation, observation, receipt DAG, replay, manifest, verifier, and trial identities must close on the same causal episode." ;
+        sh:select """
+            SELECT $this
+            WHERE {
+              $this afl:witnessFor ?trial ;
+                    afl:governedCandidate ?governed ;
+                    afl:commitment ?commitment ;
+                    afl:authority ?authority ;
+                    afl:actuation ?actuation ;
+                    afl:postconditionObservation ?observation ;
+                    afl:receiptDag ?dag ;
+                    afl:replay ?replay ;
+                    afl:manifest ?manifest ;
+                    afl:derivedByVerifier ?verifier .
+              FILTER NOT EXISTS {
+                ?governed afl:governsCandidate ?candidate ;
+                          afl:admittedFromCandidateSet ?candidateSet ;
+                          afl:belongsToTrial ?trial .
+                ?candidate afl:belongsToTrial ?trial .
+                ?commitment afl:commitsTo ?governed ;
+                            afl:belongsToTrial ?trial .
+                ?actuation afl:realizesCommitment ?commitment ;
+                           afl:authorizedBy ?authority ;
+                           afl:belongsToTrial ?trial ;
+                           prov:wasAssociatedWith ?actor .
+                ?authority afl:authorizesActuation ?actuation ;
+                           afl:belongsToTrial ?trial .
+                ?observation afl:observesActuation ?actuation ;
+                             afl:performedBy ?observer ;
+                             afl:belongsToTrial ?trial .
+                FILTER (?observer != ?actor)
+                ?actuationReceipt afl:evidencesActuation ?actuation ;
+                                   afl:belongsToTrial ?trial .
+                ?observationReceipt afl:evidencesObservation ?observation ;
+                                     afl:belongsToTrial ?trial .
+                ?dag afl:containsReceipt ?actuationReceipt,
+                                         ?observationReceipt ;
+                     afl:belongsToTrial ?trial .
+                ?replay afl:replayOfTrial ?trial ;
+                        afl:replaysReceipt ?replayedReceipt .
+                ?dag afl:containsReceipt ?replayedReceipt .
+                ?manifest afl:belongsToTrial ?trial ;
+                          afl:bindsEntity ?governed,
+                                          ?commitment,
+                                          ?authority,
+                                          ?actuation,
+                                          ?observation,
+                                          ?actuationReceipt,
+                                          ?observationReceipt,
+                                          ?replay ;
+                          afl:sourceRevision ?sourceRevision .
+                ?verifier afl:readsManifest ?manifest .
+              }
+            }
+        """ ;
+    ] .
+
+<urn:autofde-lab:shape:AliveStanding>
+    a sh:NodeShape ;
+    sh:targetClass afl:StandingAssertion ;
+    sh:sparql [
+        sh:message "ALIVE standing must be derived from a Level4Witness rather than asserted without a witness." ;
+        sh:select """
+            SELECT $this
+            WHERE {
+              $this afl:standingValue afl:ALIVE .
+              FILTER NOT EXISTS {
+                $this afl:derivedFromWitness ?witness .
+                ?witness a afl:Level4Witness .
+              }
+            }
+        """ ;
+    ] .

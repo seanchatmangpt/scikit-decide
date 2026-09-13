@@ -1,6 +1,6 @@
 """Plan and execute a Clean-Session task with scikit-decide semantics."""
 
-from skdecide.hub.domain.chatman_clean_session import (
+from autofde_lab.hub.domain.chatman_clean_session import (
     ActuationIntent,
     BrokerReceipt,
     ChatmanCleanSessionDomain,

@@ -1,0 +1,492 @@
+{
+  "eventTypes": [
+    {
+      "name": "act",
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "materialize",
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "verify",
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "objectTypes": [
+    {
+      "name": "episode",
+      "attributes": []
+    },
+    {
+      "name": "environment",
+      "attributes": []
+    },
+    {
+      "name": "capability",
+      "attributes": []
+    }
+  ],
+  "events": [
+    {
+      "id": "8e0bf134015842739515cff9e5104c1f",
+      "type": "materialize",
+      "time": "2026-08-08T15:28:08.886751+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "f39f02e5824949d38b5b5f2145511707"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "431d943e233df31c4298888132c99129d5ef896a0131caec5ac17fa3b08fd43b"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "fdab1c4d594449bdac6d4dfcee857161",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:environment:abce2ed29fcf4e2db1d712a26ef8fc39",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:operation:materialize",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "c2814fc678b84f438d11896c1abfd2b9",
+      "type": "act",
+      "time": "2026-08-08T15:28:08.887661+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "766b48d3243f45adb7526e8236d45764"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "431d943e233df31c4298888132c99129d5ef896a0131caec5ac17fa3b08fd43b"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "b01a9d3ea625f52a08c7fc499d6dc5950afe2c6f9dfcd257ca787bfeedec9912"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "fdab1c4d594449bdac6d4dfcee857161",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:environment:abce2ed29fcf4e2db1d712a26ef8fc39",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:capability:increment",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "f1635801423944648942831ba62a4d01",
+      "type": "verify",
+      "time": "2026-08-08T15:28:08.887999+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "766b48d3243f45adb7526e8236d45764"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "431d943e233df31c4298888132c99129d5ef896a0131caec5ac17fa3b08fd43b"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "b01a9d3ea625f52a08c7fc499d6dc5950afe2c6f9dfcd257ca787bfeedec9912"
+        },
+        {
+          "name": "verification_id",
+          "value": "15c518b35b2049f9b227596ead78b3e9"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "fdab1c4d594449bdac6d4dfcee857161",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:environment:abce2ed29fcf4e2db1d712a26ef8fc39",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:capability:increment",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "0a4c011bdbc7455ca2c532ddeb90791d",
+      "type": "act",
+      "time": "2026-08-08T15:28:08.888369+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "37978ec502d24987a719f57f0745f2d6"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "b01a9d3ea625f52a08c7fc499d6dc5950afe2c6f9dfcd257ca787bfeedec9912"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "d39a04489b5871b81aa254b6c8eec321f0414c02b98559276b77594eca0e356e"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "fdab1c4d594449bdac6d4dfcee857161",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:environment:abce2ed29fcf4e2db1d712a26ef8fc39",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:capability:increment",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "ad5f042bfe424139a593f837ba0208b8",
+      "type": "verify",
+      "time": "2026-08-08T15:28:08.888639+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "37978ec502d24987a719f57f0745f2d6"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "b01a9d3ea625f52a08c7fc499d6dc5950afe2c6f9dfcd257ca787bfeedec9912"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "d39a04489b5871b81aa254b6c8eec321f0414c02b98559276b77594eca0e356e"
+        },
+        {
+          "name": "verification_id",
+          "value": "d6c1972306044f8c9e7cdfef497b32a1"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "fdab1c4d594449bdac6d4dfcee857161",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:environment:abce2ed29fcf4e2db1d712a26ef8fc39",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:capability:increment",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "3e243f20b4b04e74aa1c326bfc37ad01",
+      "type": "act",
+      "time": "2026-08-08T15:28:08.888992+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "72a8e9a6f2eb41f99b97e32a6b4ebfde"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "d39a04489b5871b81aa254b6c8eec321f0414c02b98559276b77594eca0e356e"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "bab17d3a223763226e12fc9eb6c241c62cc7d0f3661a2a2e1b2af116fcd225c7"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "fdab1c4d594449bdac6d4dfcee857161",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:environment:abce2ed29fcf4e2db1d712a26ef8fc39",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:capability:increment",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "5982d20ba4c14a04b4cf562e3552ec9a",
+      "type": "verify",
+      "time": "2026-08-08T15:28:08.889257+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "72a8e9a6f2eb41f99b97e32a6b4ebfde"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "d39a04489b5871b81aa254b6c8eec321f0414c02b98559276b77594eca0e356e"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "bab17d3a223763226e12fc9eb6c241c62cc7d0f3661a2a2e1b2af116fcd225c7"
+        },
+        {
+          "name": "verification_id",
+          "value": "c712b733e75b4c9eb03a5ce3d91097d6"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "fdab1c4d594449bdac6d4dfcee857161",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:environment:abce2ed29fcf4e2db1d712a26ef8fc39",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:capability:increment",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "4f59558bce5b47cbaf8eaf8bd676ed54",
+      "type": "act",
+      "time": "2026-08-08T15:28:08.889563+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "ac5b46752f3c4f6fa4fcd06dc5e41b77"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "bab17d3a223763226e12fc9eb6c241c62cc7d0f3661a2a2e1b2af116fcd225c7"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "a6762a864bff6dc6f006bd1c9dd42ff3e3b32cfc28fd62deb775279621da2855"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "fdab1c4d594449bdac6d4dfcee857161",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:environment:abce2ed29fcf4e2db1d712a26ef8fc39",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:capability:increment",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "63a26e3ed61f43ebb82f6c6f62208ead",
+      "type": "verify",
+      "time": "2026-08-08T15:28:08.889814+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "ac5b46752f3c4f6fa4fcd06dc5e41b77"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "bab17d3a223763226e12fc9eb6c241c62cc7d0f3661a2a2e1b2af116fcd225c7"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "a6762a864bff6dc6f006bd1c9dd42ff3e3b32cfc28fd62deb775279621da2855"
+        },
+        {
+          "name": "verification_id",
+          "value": "9e20eeba92c848d3aa6c8ccfbcdbf338"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "fdab1c4d594449bdac6d4dfcee857161",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:environment:abce2ed29fcf4e2db1d712a26ef8fc39",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:capability:increment",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "1e9297527caf4a17bc61fae7b2f900f7",
+      "type": "act",
+      "time": "2026-08-08T15:28:08.890135+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "b0a8e8784a0d44cc91bf48b17594aa01"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "a6762a864bff6dc6f006bd1c9dd42ff3e3b32cfc28fd62deb775279621da2855"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "1c38fa49e9898058d0f31c065c34989d681e15fbbf66ef5d4f474bd9f11ad722"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "fdab1c4d594449bdac6d4dfcee857161",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:environment:abce2ed29fcf4e2db1d712a26ef8fc39",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:capability:increment",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "15d8d9a4f05e443597ff07307fcf34ae",
+      "type": "verify",
+      "time": "2026-08-08T15:28:08.890366+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "b0a8e8784a0d44cc91bf48b17594aa01"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "a6762a864bff6dc6f006bd1c9dd42ff3e3b32cfc28fd62deb775279621da2855"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "1c38fa49e9898058d0f31c065c34989d681e15fbbf66ef5d4f474bd9f11ad722"
+        },
+        {
+          "name": "verification_id",
+          "value": "1a624bca62d044c0aceb56f16475c367"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "fdab1c4d594449bdac6d4dfcee857161",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:environment:abce2ed29fcf4e2db1d712a26ef8fc39",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:cube-counter:capability:increment",
+          "qualifier": "capability"
+        }
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "fdab1c4d594449bdac6d4dfcee857161",
+      "type": "episode",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:cube-counter:environment:abce2ed29fcf4e2db1d712a26ef8fc39",
+      "type": "environment",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:cube-counter:capability:increment",
+      "type": "capability",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:operation:materialize",
+      "type": "capability",
+      "attributes": []
+    }
+  ]
+}

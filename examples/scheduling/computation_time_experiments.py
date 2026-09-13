@@ -3,11 +3,14 @@ import time
 
 from rcpsp_datasets import get_complete_path
 
-from skdecide import rollout
-from skdecide.hub.domain.rcpsp.rcpsp_sk import RCPSP
-from skdecide.hub.domain.rcpsp.rcpsp_sk_parser import load_domain
-from skdecide.hub.solver.do_solver.do_solver_scheduling import DOSolver, SolvingMethod
-from skdecide.hub.solver.do_solver.sgs_policies import (
+from autofde_lab import rollout
+from autofde_lab.hub.domain.rcpsp.rcpsp_sk import RCPSP
+from autofde_lab.hub.domain.rcpsp.rcpsp_sk_parser import load_domain
+from autofde_lab.hub.solver.do_solver.do_solver_scheduling import (
+    DOSolver,
+    SolvingMethod,
+)
+from autofde_lab.hub.solver.do_solver.sgs_policies import (
     BasePolicyMethod,
     PolicyMethodParams,
 )

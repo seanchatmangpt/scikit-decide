@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from skdecide.fabric.a2a import DecisionAgentProtocol
-from skdecide.fabric.service import DecisionFabric
+from autofde_lab.fabric.a2a import DecisionAgentProtocol
+from autofde_lab.fabric.service import DecisionFabric
 
 
 def test_a2a_protocol_executes_json_without_llm(fabric: DecisionFabric) -> None:

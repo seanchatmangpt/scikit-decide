@@ -1,0 +1,165 @@
+name: Autonomous discovery crown
+
+on:
+  pull_request:
+    paths:
+      - "src/autofde_lab/hub/domain/gym_procedure/**"
+      - "scripts/validate_autonomous_discovery.py"
+      - "tests/test_autonomous_procedure_discovery.py"
+      - ".validation/gymact-base/**"
+      - ".validation/gymact-head/**"
+      - ".github/workflows/autonomous-discovery.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  crown:
+    name: 35-recipe no-leak crown
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout autofde-lab exact head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependency-closed GymAct runtime requirements
+        run: |
+          python -m pip install \
+            "anyio>=4.8,<5" \
+            "blake3>=1.0,<2" \
+            "jsonschema>=4.23,<5" \
+            "rfc3339-validator>=0.1.4,<1" \
+            "pydantic>=2.13,<3" \
+            "pyshacl>=0.40,<1" \
+            "rdflib>=7.1,<8" \
+            "rfc8785>=0.1.4,<1" \
+            "pytest>=8.3,<9" \
+            "pytest-asyncio>=0.25,<2"
+
+      - name: Manufacture identity-bound GymAct exact-head capsule
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import pathlib
+          import shutil
+
+          base_identity = json.loads(
+              pathlib.Path('.validation/gymact-base/IDENTITY.json').read_text()
+          )
+          head_identity = json.loads(
+              pathlib.Path('.validation/gymact-head/IDENTITY.json').read_text()
+          )
+          assert base_identity['source_repository'] == head_identity['repository']
+          assert base_identity['base_sha'] == head_identity['base_sha']
+          assert base_identity['version'] == head_identity['version'] == '26.8.7'
+
+          base_root = pathlib.Path('.validation/gymact-base')
+          capsule = pathlib.Path('.validation/gymact-runtime/src/gymact')
+          if capsule.exists():
+              shutil.rmtree(capsule)
+
+          def git_blob_sha(path: pathlib.Path) -> str:
+              data = path.read_bytes()
+              return hashlib.sha1(
+                  b'blob ' + str(len(data)).encode() + b'\0' + data
+              ).hexdigest()
+
+          expected_base = set(base_identity['files'])
+          observed_base = {
+              path.relative_to(base_root).as_posix()
+              for path in (base_root / 'src/gymact').rglob('*')
+              if path.is_file()
+          }
+          assert observed_base == expected_base, (
+              sorted(observed_base - expected_base),
+              sorted(expected_base - observed_base),
+          )
+          for rel, expected in base_identity['files'].items():
+              actual = git_blob_sha(base_root / rel)
+              assert actual == expected, (rel, actual, expected)
+
+          shutil.copytree(base_root / 'src/gymact', capsule)
+          overlay = pathlib.Path('.validation/gymact-head/src/gymact')
+          shutil.copytree(overlay, capsule, dirs_exist_ok=True)
+
+          for rel, expected in head_identity['changed_runtime_blobs'].items():
+              runtime_rel = pathlib.Path(rel).relative_to('src/gymact')
+              actual = git_blob_sha(capsule / runtime_rel)
+              assert actual == expected, (rel, actual, expected)
+
+          print('GYMACT_BASE_VERSION=' + base_identity['version'])
+          print('GYMACT_BASE_SHA=' + base_identity['base_sha'])
+          print('GYMACT_HEAD_SHA=' + head_identity['head_sha'])
+          print('GYMACT_BASE_CAPSULE=VERIFIED ' + str(len(expected_base)) + '/17')
+          print('GYMACT_EXACT_OVERLAY=VERIFIED')
+          PY
+
+      - name: Compile discovery surfaces
+        env:
+          PYTHONPATH: .validation/gymact-runtime/src
+        run: |
+          python -m py_compile \
+            src/autofde_lab/hub/domain/gym_procedure/discovery.py \
+            src/autofde_lab/hub/domain/gym_procedure/discovery_worker.py \
+            scripts/validate_autonomous_discovery.py \
+            .validation/gymact-runtime/src/gymact/discovery.py \
+            .validation/gymact-runtime/src/gymact/gyms/opaque_procedure.py
+
+      - name: Unit validate isolated autonomous selector
+        run: python -m pytest -q --noconftest tests/test_autonomous_procedure_discovery.py
+
+      - name: Execute full autonomous discovery crown
+        env:
+          PYTHONPATH: .validation/gymact-runtime/src
+          GYMACT_HEAD_SHA: d74587d9161fd50378751708553b8b1d6370add7
+          AUTOFDE_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          python scripts/validate_autonomous_discovery.py \
+            --output reports/autonomous-discovery/receipt.json
+
+      - name: Assert crown receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('reports/autonomous-discovery/receipt.json')
+          receipt = json.loads(path.read_text())
+          assert receipt['schema'] == 'urn:autofde-lab:autonomous-discovery-receipt:v2'
+          assert receipt['standing'] == 'ALIVE', receipt
+          assert receipt['corpus_size'] == 35, receipt['corpus_size']
+          assert receipt['alive'] == 35, receipt['alive']
+          assert receipt['isolated_planner_processes'] == 35
+          assert receipt['gymact_head_sha'] == 'd74587d9161fd50378751708553b8b1d6370add7'
+          assert receipt['autofde_head_sha']
+          assert receipt['planner_boundary'] == 'urn:autofde-lab:discovery-worker:v1'
+          assert all(count == 35 for count in receipt['pattern_counts'].values())
+          assert all(item['goal_verified'] for item in receipt['results'])
+          assert all(item['ocel_schema_valid'] for item in receipt['results'])
+          assert all(item['lifecycle_conformant'] for item in receipt['results'])
+          assert all(
+              item['planner_isolation']['isolated_interpreter']
+              for item in receipt['results']
+          )
+          print('AUTONOMOUS_DISCOVERY_CROWN=ALIVE 35/35')
+          print('PLANNER_PROCESS_ISOLATION=ALIVE 35/35')
+          print('AUTOFDE_HEAD_SHA=' + receipt['autofde_head_sha'])
+          print('GYMACT_HEAD_SHA=' + receipt['gymact_head_sha'])
+          PY
+
+      - name: Upload receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autonomous-discovery-receipt
+          path: reports/autonomous-discovery/receipt.json
+          if-no-files-found: warn

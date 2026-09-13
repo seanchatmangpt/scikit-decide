@@ -13,22 +13,22 @@ from discrete_optimization.rcpsp.solvers_map import (
     PileRcpspSolver,
 )
 
-from skdecide import DiscreteDistribution, Distribution, rollout
-from skdecide.builders.domain.scheduling.conditional_tasks import (
+from autofde_lab import DiscreteDistribution, Distribution, rollout
+from autofde_lab.builders.domain.scheduling.conditional_tasks import (
     WithoutConditionalTasks,
 )
-from skdecide.builders.domain.scheduling.modes import (
+from autofde_lab.builders.domain.scheduling.modes import (
     ConstantModeConsumption,
     ModeConsumption,
 )
-from skdecide.builders.domain.scheduling.preallocations import WithoutPreallocations
-from skdecide.builders.domain.scheduling.preemptivity import (
+from autofde_lab.builders.domain.scheduling.preallocations import WithoutPreallocations
+from autofde_lab.builders.domain.scheduling.preemptivity import (
     WithoutPreemptivity,
 )
-from skdecide.builders.domain.scheduling.resource_availability import (
+from autofde_lab.builders.domain.scheduling.resource_availability import (
     DeterministicResourceAvailabilityChanges,
 )
-from skdecide.builders.domain.scheduling.scheduling_domains import (
+from autofde_lab.builders.domain.scheduling.scheduling_domains import (
     DeterministicSchedulingDomain,
     MultiModeMultiSkillRCPSP,
     MultiModeRCPSPWithCost,
@@ -41,25 +41,37 @@ from skdecide.builders.domain.scheduling.scheduling_domains import (
     SingleModeRCPSP_Stochastic_Durations_WithConditionalTasks,
     State,
 )
-from skdecide.builders.domain.scheduling.scheduling_domains_modelling import (
+from autofde_lab.builders.domain.scheduling.scheduling_domains_modelling import (
     SchedulingActionEnum,
     rebuild_all_tasks_dict,
     rebuild_tasks_complete_details_dict,
     rebuild_tasks_modes_dict,
 )
-from skdecide.builders.domain.scheduling.task_duration import DeterministicTaskDuration
-from skdecide.builders.domain.scheduling.task_progress import DeterministicTaskProgress
-from skdecide.builders.domain.scheduling.time_lag import MaximumOnlyTimeLag, TimeLag
-from skdecide.builders.domain.scheduling.time_windows import EmptyTimeWindow, TimeWindow
-from skdecide.hub.domain.graph_domain.graph_domain_builders import DFS_MDP_Exploration
-from skdecide.hub.domain.rcpsp.rcpsp_sk import build_n_determinist_from_stochastic
-from skdecide.hub.solver.do_solver.do_solver_scheduling import DOSolver, SolvingMethod
-from skdecide.hub.solver.do_solver.gphh import GPHH, ParametersGPHH
-from skdecide.hub.solver.do_solver.sgs_policies import (
+from autofde_lab.builders.domain.scheduling.task_duration import (
+    DeterministicTaskDuration,
+)
+from autofde_lab.builders.domain.scheduling.task_progress import (
+    DeterministicTaskProgress,
+)
+from autofde_lab.builders.domain.scheduling.time_lag import MaximumOnlyTimeLag, TimeLag
+from autofde_lab.builders.domain.scheduling.time_windows import (
+    EmptyTimeWindow,
+    TimeWindow,
+)
+from autofde_lab.hub.domain.graph_domain.graph_domain_builders import (
+    DFS_MDP_Exploration,
+)
+from autofde_lab.hub.domain.rcpsp.rcpsp_sk import build_n_determinist_from_stochastic
+from autofde_lab.hub.solver.do_solver.do_solver_scheduling import (
+    DOSolver,
+    SolvingMethod,
+)
+from autofde_lab.hub.solver.do_solver.gphh import GPHH, ParametersGPHH
+from autofde_lab.hub.solver.do_solver.sgs_policies import (
     BasePolicyMethod,
     PolicyMethodParams,
 )
-from skdecide.hub.solver.p_astar import Astar
+from autofde_lab.hub.solver.p_astar import Astar
 
 logger = logging.getLogger(__name__)
 
@@ -803,7 +815,7 @@ def check_skills(domain: SchedulingDomain, states: list[State]):
         tasks_complete_dict = rebuild_tasks_complete_details_dict(states[-1])
         tasks_modes_dict = rebuild_tasks_modes_dict(states[-1])
         for state in states:
-            from skdecide.builders.domain.scheduling.scheduling_domains import State
+            from autofde_lab.builders.domain.scheduling.scheduling_domains import State
 
             st: State = state
             task_checked = set()

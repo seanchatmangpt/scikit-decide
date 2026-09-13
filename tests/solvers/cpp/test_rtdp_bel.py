@@ -18,7 +18,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import NamedTuple
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     EnumerableSpace,
@@ -26,7 +26,7 @@ from skdecide import (
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     DeterministicInitialized,
     EnumerableTransitions,
@@ -37,7 +37,7 @@ from skdecide.builders.domain import (
     Sequential,
     SingleAgent,
 )
-from skdecide.hub.space.gym import EnumSpace
+from autofde_lab.hub.space.gym import EnumSpace
 
 # --- Tiger POMDP domain ---
 
@@ -162,19 +162,19 @@ class TigerDomain(
 
 class TestRTDPBel:
     def test_import(self):
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         assert RTDPBel is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         dom = TigerDomain()
         assert RTDPBel.check_domain(dom)
 
     def test_solves_tiger(self):
         """RTDP-Bel should find a solution for the Tiger POMDP."""
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         with RTDPBel(
             domain_factory=lambda: TigerDomain(),
@@ -196,7 +196,7 @@ class TestRTDPBel:
     def test_point_belief_optimal_action(self):
         """With a point belief (tiger is known to be left), the optimal
         action is open_right (cost 0). RTDP-Bel should find this."""
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         with RTDPBel(
             domain_factory=lambda: TigerDomain(),
@@ -214,7 +214,7 @@ class TestRTDPBel:
     def test_point_belief_optimal_value(self):
         """With a point belief (tiger_left known), the optimal cost is 0
         (just open the right door). The solver should find V*(s0) = 0."""
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         with RTDPBel(
             domain_factory=lambda: TigerDomain(),
@@ -234,7 +234,7 @@ class TestRTDPBel:
         """With a point belief on tiger_left, the optimal action is
         open_right (cost 0). The solver should never suggest open_left
         which would cost 100."""
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         with RTDPBel(
             domain_factory=lambda: TigerDomain(),
@@ -253,7 +253,7 @@ class TestRTDPBel:
     def test_both_tiger_locations(self):
         """Test that RTDP-Bel finds the correct action for both tiger
         locations when the state is fully known (point belief)."""
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         # Solve with tiger on the left
         with RTDPBel(
@@ -274,7 +274,7 @@ class TestRTDPBel:
 
     def test_get_last_trajectory(self):
         """get_last_trajectory() should return (belief, action) pairs from the last trial."""
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         trajectories_seen = []
 
@@ -330,7 +330,7 @@ class TestRTDPBel:
         """Test the observation-based interaction: solve, then interact
         through observations. The solver should track beliefs internally
         and produce valid actions."""
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         dom = TigerDomain()
 
@@ -366,7 +366,7 @@ class TestRTDPBel:
 
     def test_solving_time(self):
         """get_solving_time should return a positive value after solving."""
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         with RTDPBel(
             domain_factory=lambda: TigerDomain(),
@@ -382,7 +382,7 @@ class TestRTDPBel:
 
     def test_parallel_mode(self):
         """Solver should work in parallel mode with correct results."""
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         with RTDPBel(
             domain_factory=lambda: TigerDomain(),
@@ -406,7 +406,7 @@ class TestRTDPBel:
 
     def test_parallel_mode_callback(self):
         """Callback with thread_id should work in parallel mode."""
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         callback_calls = []
 
@@ -430,7 +430,7 @@ class TestRTDPBel:
     def test_belief_state_policy(self):
         """get_belief_policy should return a dict with frozenset keys
         mapping discretized beliefs to (action, value) pairs."""
-        from skdecide.hub.solver.rtdp_bel import RTDPBel
+        from autofde_lab.hub.solver.rtdp_bel import RTDPBel
 
         with RTDPBel(
             domain_factory=lambda: TigerDomain(),

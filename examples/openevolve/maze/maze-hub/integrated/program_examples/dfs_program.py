@@ -1,4 +1,4 @@
-from skdecide.hub.domain.maze import Maze
+from autofde_lab.hub.domain.maze import Maze
 
 
 # EVOLVE-BLOCK-START

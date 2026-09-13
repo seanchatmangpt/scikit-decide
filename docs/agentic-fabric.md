@@ -30,17 +30,17 @@ The first crown deliberately avoids changing the upstream package extras or defa
 ## CLI
 
 ```bash
-PYTHONPATH=src python -m skdecide.fabric catalog
-PYTHONPATH=src python -m skdecide.fabric match Maze
-PYTHONPATH=src python -m skdecide.fabric solve Maze --solver Astar --max-steps 100
-PYTHONPATH=src python -m skdecide.fabric cache-stats
-PYTHONPATH=src python -m skdecide.fabric cache-hotset
+PYTHONPATH=src python -m autofde_lab.fabric catalog
+PYTHONPATH=src python -m autofde_lab.fabric match Maze
+PYTHONPATH=src python -m autofde_lab.fabric solve Maze --solver Astar --max-steps 100
+PYTHONPATH=src python -m autofde_lab.fabric cache-stats
+PYTHONPATH=src python -m autofde_lab.fabric cache-hotset
 ```
 
 Constructor arguments are JSON objects:
 
 ```bash
-PYTHONPATH=src python -m skdecide.fabric solve DOMAIN \
+PYTHONPATH=src python -m autofde_lab.fabric solve DOMAIN \
   --domain-arguments '{"width":10}' \
   --solver-arguments '{"quiet":true}'
 ```
@@ -48,7 +48,7 @@ PYTHONPATH=src python -m skdecide.fabric solve DOMAIN \
 Exact solve-cache reuse additionally requires bound identities:
 
 ```bash
-PYTHONPATH=src python -m skdecide.fabric solve DOMAIN \
+PYTHONPATH=src python -m autofde_lab.fabric solve DOMAIN \
   --subject-digest 'subject:sha256:...' \
   --policy-digest 'policy:sha256:...' \
   --environment-digest 'environment:sha256:...' \
@@ -60,7 +60,7 @@ Without all four identities, planning still executes but solve-result reuse is r
 ## MCP
 
 ```bash
-PYTHONPATH=src python -m skdecide.fabric.mcp
+PYTHONPATH=src python -m autofde_lab.fabric.mcp
 ```
 
 Tools:
@@ -77,7 +77,7 @@ MCP exposes schema-bound tool use. It does not own solver semantics.
 ## A2A
 
 ```bash
-PYTHONPATH=src python -m skdecide.fabric.a2a
+PYTHONPATH=src python -m autofde_lab.fabric.a2a
 ```
 
 The A2A 1.0 server publishes a discoverable Agent Card and accepts either:

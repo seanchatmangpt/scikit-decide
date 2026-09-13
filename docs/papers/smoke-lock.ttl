@@ -1,0 +1,262 @@
+@prefix afb: <https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-cube-standard>
+  afb:smokeStanding "SCENARIO_RUNS" ;
+  prov:wasDerivedFrom <https://github.com/seanchatmangpt/autofde-lab/actions/runs/31205154790> .
+# SCENARIO_RUNS above means CUBE's own upstream test suite (18/18) was
+# observed passing in this repo's CI. GYMACT_ACTUATED claims below are
+# distinct, stronger claims -- GymAct's own kernel (~/gymact, real
+# GymAct.materialize/act/observe/verify/teardown) actually drove a real CUBE
+# task end to end.
+#
+# Neither claim is bound to a prose description or a source path -- each is
+# bound to its own real OCEL 2.0 log (gymact.ocel.write_ocel_log), built
+# directly from the real Receipts that episode produced, schema-valid
+# against the real official OCEL 2.0 JSON Schema (vendored at
+# ~/gymact/src/gymact/schemas/ocel20-schema.json), with real "date-time"
+# format checking (rfc3339-validator) -- not a no-op format check. Each
+# digest is computed over the exact bytes of its evidence file; anyone can
+# verify either claim themselves with nothing more than `shasum -a 256` on
+# the cited path. Re-extracting `events[].type` from either file (sorted by
+# real `time`) and feeding it to gymact.process.ConformanceChecker
+# reproduces the conformant verdict independently of this file, this repo,
+# or anything I have said about it -- see ~/gymact/tests/test_ocel.py::
+# test_conformance_verdict_is_re_derivable_from_the_log_alone for the exact
+# mechanism. Neither claim has run in CI -- both are local-session standings,
+# not GitHub Actions provenance claims. Scope, in full: two CUBE task
+# variants (below), not CUBE's full task registry, and still 1 of 80
+# ForwardBench subjects -- see docs/plans (autofde-lab session 2026-08-07)
+# for the honest 0/80-wired-before -> 1/80-wired-now count.
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-cube-standard>
+  afb:gymactActuation <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/counter-cube> ;
+  afb:gymactActuation <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/toy-benchmark-container> .
+
+# Claim 1: counter-cube (examples/counter-cube) -- pure in-memory task, no
+# infra provisioning. materialize() only constructs a Python object;
+# reset()/act() never touch a subprocess, container, or network. 4 real
+# receipted operations (materialize, 3x act, teardown = 5 events).
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/counter-cube>
+  afb:gymactStanding "GYMACT_ACTUATED" ;
+  afb:gymactSubject "counter-cube" ;
+  afb:gymactInfra "none" ;
+  afb:gymactEvidencePath "docs/papers/evidence/cube-standard/counter-cube-episode.ocel.json" ;
+  afb:gymactEvidenceFormat "OCEL-2.0-JSON" ;
+  afb:gymactEvidenceDigestAlgorithm "sha256" ;
+  afb:gymactEvidenceDigest "c9287c16c22bae9607caa3dd8c6fb43765e22a8e2da9759846c2c374777bb69a" .
+
+# Claim 2: examples/toy_benchmark, task "count-to-3-with-decrement" -- real
+# container-provisioned task via CUBE's own `LocalInfraConfig` +
+# `ContainerConfig(image="python:3.12-slim")`, run against a real local
+# Docker daemon (colima; verified `docker.from_env().ping() == True` and
+# `docker context inspect` resolved the colima endpoint this session).
+# CUBE's own `Task.reset()` ran a real `container.exec("echo infra-ready")`
+# probe inside the real container before this episode's first `act`. 7 real
+# receipted operations (materialize, 3x increment, decrement, increment,
+# teardown). 5 real containers were created and cleanly exited (`docker ps
+# -a` exit code 137, the expected signal from `container.stop()`) across
+# this session's runs; all removed via `docker rm` afterward -- verified via
+# `docker ps -a`, not merely assumed.
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/toy-benchmark-container>
+  afb:gymactStanding "GYMACT_ACTUATED" ;
+  afb:gymactSubject "toy_benchmark/count-to-3-with-decrement" ;
+  afb:gymactInfra "docker-local-colima" ;
+  afb:gymactEvidencePath "docs/papers/evidence/cube-standard/cube-container-counter-episode.ocel.json" ;
+  afb:gymactEvidenceFormat "OCEL-2.0-JSON" ;
+  afb:gymactEvidenceDigestAlgorithm "sha256" ;
+  afb:gymactEvidenceDigest "e4f762e5afa8851c76d722a2817b3f2f6235a0805086c888fbd6cd6a86bb82d8" .
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-harbor>
+  afb:smokeStanding "BOOTSTRAPS" ;
+  prov:wasDerivedFrom <https://github.com/seanchatmangpt/autofde-lab/actions/runs/31205154790> .
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-browsergym>
+  afb:smokeStanding "BOOTSTRAPS" ;
+  prov:wasDerivedFrom <https://github.com/seanchatmangpt/autofde-lab/actions/runs/31205154790> .
+
+# Batch 3: autonomous discovery-and-actuation, 4 real subjects, via
+# GymAct's generic `GenericDiscoveredProvider` (~/gymact/src/gymact/gyms/
+# discovered.py) driven by a real local LLM (TurboFieldfare, real HTTP to
+# http://127.0.0.1:8080/v1/chat/completions) reading each repo's real README
+# through a real fastmcp `probe_repo` tool -- no per-subject Python written
+# by hand, unlike the two hand-wired CUBE claims above. Every standing below
+# is the exact, unedited output of `~/gymact/scripts/ocel_standing.py
+# ~/gymact/reports/ocel/`, which derives standing purely by re-parsing each
+# subject's own OCEL 2.0 log (schema-validated, conformance-replayed) --
+# never from this driver's own stdout or anything said in chat about it.
+# `BLOCKED` is a correct, complete, receipted outcome for a subject whose
+# LLM-proposed smoke command genuinely failed against a not-yet-installed
+# package -- not a failure to hide.
+#
+# r2e-gym and toolsandbox were re-run after a real bug was found and fixed:
+# the original batch recorded `returncode=None` for both, which this
+# session's own evidence-derivation logic wrongly assumed always meant a
+# real `subprocess.TimeoutExpired`. Re-running each command by hand found
+# two DISTINCT real causes collapsing to the same ambiguous signal: (1) the
+# LLM's recipe used bare `python`, not on PATH in this environment, raising
+# `FileNotFoundError` -- caught by the same `except OSError` branch that
+# also sets returncode=None on a genuine timeout, and (2) a real cold-start
+# effect during a 4-subject batch that a 10s timeout budget didn't survive.
+# Fixed in `discover_and_actuate.py`: the reason evidence now carries
+# `timed_out` and a real `stderr` excerpt explicitly (no longer just
+# `returncode`), and the LLM prompt requires `python3` and a >=20s timeout
+# floor enforced in code, not just requested. Re-run individually (not
+# batched) after the fix.
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/discovered-qqr>
+  afb:gymactStanding "BLOCKED" ;
+  afb:gymactSubject "qqr" ;
+  afb:gymactInfra "discovered-subprocess" ;
+  afb:gymactReason "solved=False returncode=1" ;
+  afb:gymactEvidencePath "docs/papers/evidence/discovered/qqr.ocel.json" ;
+  afb:gymactEvidenceFormat "OCEL-2.0-JSON" ;
+  afb:gymactEvidenceDigestAlgorithm "sha256" ;
+  afb:gymactEvidenceDigest "dc95638353d823392ae64393c64b807060192e4c632e785030d5070a391830ce" .
+
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/discovered-r2e-gym>
+  afb:gymactStanding "BLOCKED" ;
+  afb:gymactSubject "r2e-gym" ;
+  afb:gymactInfra "discovered-subprocess" ;
+  afb:gymactReason "solved=False returncode=1 timed_out=False stderr='ModuleNotFoundError: No module named \\'r2e_gym\\''" ;
+  afb:gymactEvidencePath "docs/papers/evidence/discovered/r2e-gym.ocel.json" ;
+  afb:gymactEvidenceFormat "OCEL-2.0-JSON" ;
+  afb:gymactEvidenceDigestAlgorithm "sha256" ;
+  afb:gymactEvidenceDigest "54c7afa42d7b3337d30a4c40538192f3c262a0ae72cf4522e5f36a2eca5a851f" .
+
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/discovered-sadservers>
+  afb:gymactStanding "GYMACT_ACTUATED" ;
+  afb:gymactSubject "sadservers" ;
+  afb:gymactInfra "discovered-subprocess" ;
+  afb:gymactReason "1 real act event(s) with solved=True evidence, conformant replay" ;
+  afb:gymactEvidencePath "docs/papers/evidence/discovered/sadservers.ocel.json" ;
+  afb:gymactEvidenceFormat "OCEL-2.0-JSON" ;
+  afb:gymactEvidenceDigestAlgorithm "sha256" ;
+  afb:gymactEvidenceDigest "cc87a78a87d197bacafe1036ed922af827217bf95658f8038f175579e8e3d6cb" .
+
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/discovered-toolsandbox>
+  afb:gymactStanding "GYMACT_ACTUATED" ;
+  afb:gymactSubject "toolsandbox" ;
+  afb:gymactInfra "discovered-subprocess" ;
+  afb:gymactReason "1 real act event(s) with solved=True evidence, conformant replay" ;
+  afb:gymactEvidencePath "docs/papers/evidence/discovered/toolsandbox.ocel.json" ;
+  afb:gymactEvidenceFormat "OCEL-2.0-JSON" ;
+  afb:gymactEvidenceDigestAlgorithm "sha256" ;
+  afb:gymactEvidenceDigest "a2d67d4ebff9042a5c131f0e334fc8013031f241565a40a46189a133fbffde6b" .
+
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-qqr>
+  afb:gymactActuation <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/discovered-qqr> .
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-r2e-gym>
+  afb:gymactActuation <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/discovered-r2e-gym> .
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-sadservers>
+  afb:gymactActuation <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/discovered-sadservers> .
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-toolsandbox>
+  afb:gymactActuation <https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/discovered-toolsandbox> .
+
+# Correction (2026-08-07): a working-backwards press release circulated this
+# session claiming "GYMACT_ACTUATED across all 80 ForwardBench subjects...
+# zero unknown... zero blocked... process intelligence via wasm4pm." That
+# claim was audited this session by 5 parallel Explore agents against the
+# real state of this repo and found false on every count it made: real
+# GYMACT_ACTUATED standing above covers 3 subjects total (counter-cube,
+# toolsandbox/count-to-3-with-decrement, sadservers), not 80; qqr and
+# r2e-gym above carry a real BLOCKED standing, so "zero blocked" is false;
+# 28 of the 80 registry subjects (see docs/papers/generated/forwardbench/
+# registry.json cross-referenced against docs/papers/gym-lock.ttl) have
+# never been pinned or resolved at all, so "zero unknown" is false; and no
+# wasm4pm-based process intelligence exists anywhere in this repo's
+# evidence chain -- conformance above is checked by
+# gymact.process.ConformanceChecker (see comment above), not wasm4pm. This
+# comment does not alter, delete, or reinterpret any existing triple in
+# this file; the GYMACT_ACTUATED and BLOCKED standings recorded above
+# remain exactly as they were independently verified. The full audit that
+# found the press release false is recorded outside this repo at
+# ~/.claude/plans/launch-5-lumen-explore-calm-acorn.md (not a path inside
+# this repo; cited for provenance only, not meant to be read as part of
+# this file's own evidence chain).
+
+# vendor-terragoat: excluded from GymAct actuation consideration, real reason,
+# not a silent drop. Cloned for real this session (lands exactly on the
+# already-pinned SHA 729f8da62c6a85ce4af5ad3d123de97776d954c4 in
+# gym-lock.ttl). But its .tf files (under terraform/{aws,azure,gcp,alicloud}/)
+# use pre-0.12 legacy HCL syntax (quoted type constraints, e.g.
+# `type = "string"` in consts.tf) that both installed `terraform` (v1.14.6)
+# and `tofu` (v1.10.6) reject at parse time -- confirmed independently
+# against both real binaries, real `init -backend=false`, real error output,
+# not a guess. This is a genuine tooling-version incompatibility in the
+# subject itself, not a GymAct harness gap: TerraformPlanProvider (real,
+# working, zero apply capability by design -- see
+# gymact/src/gymact/gyms/terraform_plan.py) correctly detects and reports
+# this via a real subprocess check, not a stale file-existence proxy (an
+# earlier version of that check only tested `.tf` file presence, which
+# passed even though `init` genuinely fails -- fixed same session).
+# Not pursuing: patching terragoat's vendored .tf files to force
+# compatibility would corrupt the pinned checkout and stop testing the real
+# subject. No other Terraform-family subject in the corpus has been
+# confirmed compatible either; TerraformPlanProvider itself is not
+# terragoat-specific and remains available if a compatible Terraform subject
+# is added later.
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/vendor-terragoat>
+  afb:gymactStanding "SUPERSEDED" ;
+  afb:gymactReason "the UNSUPPORTED verdict above no longer holds -- see gymact-actuation/terraform-plan-terragoat-alicloud below for the current real evidence" .
+
+# UPDATE, same session: the UNSUPPORTED verdict above was real at the time
+# but has been superseded. Found a real upstream fix: bridgecrewio/terragoat
+# has an unmerged branch `fix_outdated_tf` (commit
+# 6b1c6d4de22f57b0997ebcc70041e175f55de721) that converts exactly the
+# quoted-type-constraint syntax to modern HCL -- verified directly (real
+# `terraform init` succeeds cleanly against it, real providers downloaded,
+# checked in a throwaway git worktree before trusting it). Forked to
+# https://github.com/seanchatmangpt/terragoat with `main` re-pointed at that
+# commit and set as the fork's default branch (`gh api`/`gh repo edit`,
+# independently re-verified via a fresh `git clone --branch main` + real
+# `terraform init`). `.gitmodules`/gym-lock.ttl's vendor-terragoat entry now
+# point at this fork; the vendored checkout was fully re-cloned (not just
+# checked out in place) and its `origin` remote confirmed to be the fork via
+# `git submodule sync`.
+#
+# Two further real, distinct blockers were found and resolved while getting
+# an actual passing test, not assumed away:
+# 1. `terraform/aws/providers.tf` declares a real S3 remote backend
+#    (bucket/key/region required). `TerraformPlanProvider.materialize()`
+#    was missing `-backend=false` on its `init` call -- without it, init
+#    either fails on missing backend attributes or (if supplied) would mean
+#    real Terraform state written to a real AWS S3 bucket, which this
+#    plan-only provider must never risk. Fixed in
+#    gymact/src/gymact/gyms/terraform_plan.py; its docstring's prior claim
+#    ("terragoat declares no remote backend") was simply wrong and is now
+#    corrected in-code.
+# 2. Even with that fix, `terraform/aws` specifically cannot run a real
+#    `plan` locally at all -- `-backend=false` at init leaves the declared
+#    S3 backend unresolved, and `plan` then refuses with a real, reproduced
+#    "Backend initialization required" error (retested from a fully clean
+#    `.terraform` dir, not stale state). This is a structural property of
+#    that one cloud subdirectory, not a harness bug. Switched the target to
+#    `terraform/alicloud`, which declares no remote backend and has no
+#    legacy syntax either -- real `init` and real `plan` both now run to
+#    completion there (`test_terraform_plan.py`: 4/4 real tests pass).
+#
+# Standing is NOT set to GYMACT_ACTUATED below, on purpose. Running
+# `ocel_standing.py` (the sole mechanical arbiter for this claim, per this
+# session's own discipline) against the real episode's real OCEL log
+# reports `BLOCKED`, reason: "act event(s) present but none carry
+# solved=True evidence" -- because `ocel_standing.py`'s standing heuristic
+# was written for the `discovered` provider family's `solved=` marker
+# embedded in receipt.reason, and TerraformPlanProvider never embeds that
+# marker (its own real success signal is a `verify()` boolean, not a
+# `solved=` string). Worse, found live: `GymAct.verify()` does not emit any
+# receipted OCEL event at all -- a real `gym.verify(episode_id, {})` call
+# returned `passed: True` in this session's own driver script, but that
+# fact exists nowhere in the OCEL log itself, only in this script's stdout.
+# That is exactly the class of unreceipted claim this session's own
+# discipline exists to catch, so it is not being papered over here: the
+# test skip (a harness-code gap) is genuinely closed, but the corpus
+# GYMACT_ACTUATED claim is correctly withheld until either (a)
+# `GymAct.verify()` is extended to emit a real receipted event, or (b)
+# `ocel_standing.py` is extended to recognize a provider-family-appropriate
+# success signal beyond the `discovered` family's specific convention.
+# Neither fix is in scope here -- named as real follow-up work, not solved.
+<https://github.com/seanchatmangpt/autofde-lab/data/forwardbench/gymact-actuation/terraform-plan-terragoat-alicloud>
+  afb:gymactStanding "BLOCKED" ;
+  afb:gymactSubject "terragoat/terraform/alicloud" ;
+  afb:gymactInfra "local-terraform-cli" ;
+  afb:gymactReason "act event(s) present but none carry solved=True evidence -- ocel_standing.py's standing heuristic does not yet generalize beyond the discovered-provider family's marker convention, and GymAct.verify() does not emit a receipted OCEL event; real test suite (test_terraform_plan.py) passes 4/4, but that is not the same claim as a mechanically-derived GYMACT_ACTUATED standing" ;
+  afb:gymactEvidencePath "docs/papers/evidence/terraform-plan/terragoat-alicloud-episode.ocel.json" ;
+  afb:gymactEvidenceFormat "OCEL-2.0-JSON" ;
+  afb:gymactEvidenceDigestAlgorithm "sha256" ;
+  afb:gymactEvidenceDigest "dbe17a53f128209d06517218581d18c7c1d73d1d0eb004d410907cd043b3b1a1" .

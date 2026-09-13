@@ -1,0 +1,17 @@
+PREFIX ga: <https://github.com/seanchatmangpt/autofde-lab/ns/gymact#>
+PREFIX dct: <http://purl.org/dc/terms/>
+SELECT ?title ?action ?priority ?owner ?timing ?path ?impact ?effort ?trigger ?falsifier
+WHERE {
+  ?item a ga:ERRCItem ;
+        dct:title ?title ;
+        ga:errcAction ?action ;
+        ga:priority ?priority ;
+        ga:targetOwner ?owner ;
+        ga:migrationTiming ?timing ;
+        ga:sourcePath ?path ;
+        ga:expectedImpact ?impact ;
+        ga:effort ?effort ;
+        ga:migrationTrigger ?trigger ;
+        ga:falsifier ?falsifier .
+}
+ORDER BY ?priority ?action ?title

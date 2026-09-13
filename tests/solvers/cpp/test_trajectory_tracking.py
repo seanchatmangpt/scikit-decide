@@ -14,15 +14,15 @@ from __future__ import annotations
 from enum import Enum
 from typing import NamedTuple
 
-from skdecide import (
+from autofde_lab import (
     DeterministicPlanningDomain,
     GoalPOMDPDomain,
     ImplicitSpace,
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import UnrestrictedActions
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.builders.domain import UnrestrictedActions
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
 
 # ============================================================================
 # Test Domains
@@ -142,7 +142,7 @@ class GridPOMDP(D_POMDP):
 
     def _get_observation_distribution(self, state, action=None):
         # 70% chance of correct observation, 30% of "other"
-        from skdecide import DiscreteDistribution
+        from autofde_lab import DiscreteDistribution
 
         correct_obs = self._state_to_obs[state]
         return DiscreteDistribution([(correct_obs, 0.7), (Observation.obs_other, 0.3)])
@@ -181,7 +181,7 @@ class TestMCTSTrajectory:
 
     def test_mcts_trajectory_changes(self):
         """MCTS get_last_trajectory() returns non-empty (state, action) tuples."""
-        from skdecide.hub.solver.mcts import MCTS
+        from autofde_lab.hub.solver.mcts import MCTS
 
         trajectories_seen = []
 
@@ -216,7 +216,7 @@ class TestPOMCPTrajectory:
 
     def test_pomcp_trajectory_changes(self):
         """POMCP trajectories should change between simulations."""
-        from skdecide.hub.solver.pomcp import POMCP
+        from autofde_lab.hub.solver.pomcp import POMCP
 
         trajectories_seen = []
 
@@ -267,7 +267,7 @@ class TestDESPOTTrajectory:
 
     def test_despot_trajectory_changes(self):
         """DESPOT trajectories should change between exploration iterations."""
-        from skdecide.hub.solver.despot import DESPOT
+        from autofde_lab.hub.solver.despot import DESPOT
 
         trajectories_seen = []
 
@@ -314,7 +314,7 @@ class TestSARSOPTrajectory:
 
     def test_sarsop_trajectory_changes(self):
         """SARSOP trajectories should change between sampling iterations."""
-        from skdecide.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.sarsop import SARSOP
 
         trajectories_seen = []
 
@@ -356,7 +356,7 @@ class TestHSVITrajectory:
 
     def test_hsvi_trajectory_changes(self):
         """HSVI trajectories should change between exploration iterations."""
-        from skdecide.hub.solver.hsvi import HSVI
+        from autofde_lab.hub.solver.hsvi import HSVI
 
         trajectories_seen = []
 
@@ -398,7 +398,7 @@ class TestGoalHSVITrajectory:
 
     def test_goal_hsvi_trajectory_changes(self):
         """Goal-HSVI trajectories should change between exploration iterations."""
-        from skdecide.hub.solver.hsvi import GoalHSVI
+        from autofde_lab.hub.solver.hsvi import GoalHSVI
 
         trajectories_seen = []
 

@@ -1,23 +1,23 @@
-from examples.scheduling.rcpsp_datasets import get_complete_path
-from skdecide.hub.domain.rcpsp.rcpsp_sk import (
+from autofde_lab.hub.domain.rcpsp.rcpsp_sk import (
     RCPSP,
     build_n_determinist_from_stochastic,
     build_stochastic_from_deterministic,
 )
-from skdecide.hub.domain.rcpsp.rcpsp_sk_parser import load_domain
-from skdecide.hub.solver.do_solver.do_solver_scheduling import (
+from autofde_lab.hub.domain.rcpsp.rcpsp_sk_parser import load_domain
+from autofde_lab.hub.solver.do_solver.do_solver_scheduling import (
     DOSolver,
     SolvingMethod,
     from_solution_to_policy,
 )
-from skdecide.hub.solver.do_solver.sgs_policies import (
+from autofde_lab.hub.solver.do_solver.sgs_policies import (
     BasePolicyMethod,
     PolicyMethodParams,
 )
-from skdecide.hub.solver.meta_policy_scheduling.meta_policies import MetaPolicy
-from skdecide.hub.solver.meta_policy_scheduling.policy_evaluator import (
+from autofde_lab.hub.solver.meta_policy_scheduling.meta_policies import MetaPolicy
+from autofde_lab.hub.solver.meta_policy_scheduling.policy_evaluator import (
     rollout_based_policy_estimation_fast_scheduling,
 )
+from examples.scheduling.rcpsp_datasets import get_complete_path
 
 
 # Compare different online policies based on permutation on few sampled scenarios.

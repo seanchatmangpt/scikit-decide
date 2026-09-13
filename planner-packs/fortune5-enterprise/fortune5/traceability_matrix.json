@@ -1,0 +1,14 @@
+{
+  "schema": "urn:autofde:fortune5:traceability-matrix:v1",
+  "rows": [
+    {"concern":"business outcome","principles":["P01"],"viewpoints":["V01"],"gates":["G1"],"programs":["90-enterprise-architecture-crown","190-portfolio-partial-order"],"scenarios":["S01","S07"]},
+    {"concern":"data governance/sovereignty","principles":["P05"],"viewpoints":["V02"],"gates":["G2","G3"],"programs":["130-data-information-architecture"],"scenarios":["S04","S10"]},
+    {"concern":"identity/authority","principles":["P02","P06"],"viewpoints":["V05"],"gates":["G3","G6"],"programs":["110-zero-trust-authority","180-ai-agent-governance"],"scenarios":["S05","S08"]},
+    {"concern":"resilience","principles":["P03","P07"],"viewpoints":["V06","V07"],"gates":["G4","G7"],"programs":["120-resilience-continuity","30-one-edge-replan"],"scenarios":["S02","S06"]},
+    {"concern":"observability/evidence","principles":["P08","P11"],"viewpoints":["V07","V09"],"gates":["G4","G7"],"programs":["150-governance-compliance","200-enterprise-digital-twin"],"scenarios":["S02","S09"]},
+    {"concern":"cost/capacity","principles":["P10"],"viewpoints":["V08"],"gates":["G5"],"programs":["140-finops-capacity"],"scenarios":["S06"]},
+    {"concern":"portability/vendor exit","principles":["P04","P09"],"viewpoints":["V04","V12"],"gates":["G5"],"programs":["100-multicloud-portability","170-vendor-exit-supply-chain"],"scenarios":["S03","S09"]},
+    {"concern":"operating model/portfolio","principles":["P01","P12"],"viewpoints":["V10","V11"],"gates":["G1","G5","G8"],"programs":["160-operating-model-team-topology","190-portfolio-partial-order","60-cognition-compile-away"],"scenarios":["S07"]},
+    {"concern":"AI/agent governance","principles":["P02","P05","P06","P11"],"viewpoints":["V02","V05","V09"],"gates":["G2","G3","G6","G7"],"programs":["180-ai-agent-governance","80-novelty-frontier"],"scenarios":["S08"]}
+  ]
+}

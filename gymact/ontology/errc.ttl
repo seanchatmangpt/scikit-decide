@@ -1,0 +1,145 @@
+@prefix ga: <https://github.com/seanchatmangpt/autofde-lab/ns/gymact#> .
+@prefix data: <https://github.com/seanchatmangpt/autofde-lab/data/gymact/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# 80/20 ERRC portfolio for autofde-lab after the first GymAct abstraction.
+# This graph is deliberately migration-oriented, not a claim that every item
+# already belongs in GymAct. STAY_OUTSIDE items are load-bearing boundaries.
+
+ga:ERRCItem a skos:Concept ;
+  skos:definition "One bounded Eliminate/Reduce/Raise/Create decision with an explicit migration trigger and falsifier." .
+
+ga:errcAction a prov:Property .
+ga:priority a prov:Property .
+ga:targetOwner a prov:Property .
+ga:migrationTiming a prov:Property .
+ga:sourcePath a prov:Property .
+ga:expectedImpact a prov:Property .
+ga:effort a prov:Property .
+ga:migrationTrigger a prov:Property .
+ga:falsifier a prov:Property .
+
+# P0: highest leverage. These remove duplicated benchmark integration work.
+
+data:errc-forwardbench-selector a ga:ERRCItem ;
+  dct:title "Retire the bespoke ForwardBench SELECT registry after GymAct parity" ;
+  ga:errcAction "ELIMINATE" ; ga:priority "P0" ; ga:targetOwner "GYMACT" ; ga:migrationTiming "NOW" ;
+  ga:sourcePath "src/autofde_lab/forwardbench/registry.py" ; ga:expectedImpact "HIGH" ; ga:effort "LOW" ;
+  ga:migrationTrigger "GymAct resolves all 80 subjects and reproduces unknown/authority refusals with no weaker standing." ;
+  ga:falsifier "Any subject, ambiguity, or authority refusal representable by ForwardBench cannot be represented by GymAct without benchmark-specific code." .
+
+data:errc-forwardbench-mcp-plans a ga:ERRCItem ;
+  dct:title "Replace per-benchmark MCP and generic plan projections with the 12-operation GymAct ABI" ;
+  ga:errcAction "ELIMINATE" ; ga:priority "P0" ; ga:targetOwner "GYMACT" ; ga:migrationTiming "NOW" ;
+  ga:sourcePath "docs/papers/generated/forwardbench/mcp-tools.json|docs/papers/generated/forwardbench/plans.json" ;
+  ga:expectedImpact "HIGH" ; ga:effort "LOW" ;
+  ga:migrationTrigger "GymAct MCP/BPMN/A2A projections cover lifecycle operations and retain subject/profile/authority metadata." ;
+  ga:falsifier "A benchmark requires a lifecycle operation that cannot be expressed by the canonical GymAct operation vocabulary." .
+
+data:errc-adapter-proliferation a ga:ERRCItem ;
+  dct:title "Collapse adapter proliferation into four interaction profiles" ;
+  ga:errcAction "REDUCE" ; ga:priority "P0" ; ga:targetOwner "GYMACT" ; ga:migrationTiming "NOW" ;
+  ga:sourcePath "docs/papers/papers.ttl#adapterFamily" ; ga:expectedImpact "HIGH" ; ga:effort "LOW" ;
+  ga:migrationTrigger "CUBE/Gymnasium/BrowserGym map to EPISODIC_STEP; Harbor/native to TASK_HARNESS; MCP to TOOL_SESSION; Terraform/Kubernetes to RECONCILIATION." ;
+  ga:falsifier "A fifth interaction model is required by executed evidence rather than by implementation naming." .
+
+data:errc-qualification-queue a ga:ERRCItem ;
+  dct:title "Generate the autonomous gym qualification queue from standing" ;
+  ga:errcAction "CREATE" ; ga:priority "P0" ; ga:targetOwner "GYMACT" ; ga:migrationTiming "NOW" ;
+  ga:sourcePath "docs/papers/gym-lock.ttl|docs/papers/smoke-lock.ttl" ; ga:expectedImpact "HIGH" ; ga:effort "MEDIUM" ;
+  ga:migrationTrigger "ggen can select local-safe subjects below SCENARIO_RUNS and emit bounded materialize/configure/start/verify/teardown jobs." ;
+  ga:falsifier "Qualification still requires a handwritten workflow for each benchmark family." .
+
+data:errc-hot-loop a ga:ERRCItem ;
+  dct:title "Make sub-five-second local qualification a hard design target" ;
+  ga:errcAction "RAISE" ; ga:priority "P0" ; ga:targetOwner "LAB" ; ga:migrationTiming "STAY_OUTSIDE" ;
+  ga:sourcePath "Justfile|.github/workflows/gymact.yml" ; ga:expectedImpact "HIGH" ; ga:effort "MEDIUM" ;
+  ga:migrationTrigger "Routine local tests remain below 5 seconds and GymAct contract manufacture/validation remains an isolated fast checkpoint." ;
+  ga:falsifier "The fast target excludes a failure mode needed to falsify the changed surface." .
+
+# P1: migrate when the pattern is proven or remove proven duplication.
+
+data:errc-one-shot-workflows a ga:ERRCItem ;
+  dct:title "Retire ForwardBench bootstrap/finalize/persist one-shot workflows" ;
+  ga:errcAction "ELIMINATE" ; ga:priority "P1" ; ga:targetOwner "GYMACT" ; ga:migrationTiming "AFTER_PATTERN" ;
+  ga:sourcePath ".github/workflows/bootstrap-forwardbench-gyms.yml|.github/workflows/finalize-forwardbench-gyms.yml|.github/workflows/persist-forwardbench-gyms.yml" ;
+  ga:expectedImpact "HIGH" ; ga:effort "MEDIUM" ;
+  ga:migrationTrigger "Reusable GymAct qualification can reproduce pin/materialize/smoke/receipt behavior from graph data." ;
+  ga:falsifier "Removing the workflows loses reproducible acquisition or standing evidence not expressible through GymAct operations." .
+
+data:errc-phase-abox-duplicate a ga:ERRCItem ;
+  dct:title "Delete the duplicate hand-authored phase-graph A-Box" ;
+  ga:errcAction "ELIMINATE" ; ga:priority "P1" ; ga:targetOwner "LAB" ; ga:migrationTiming "STAY_OUTSIDE" ;
+  ga:sourcePath "ontology/autofde-phase-graph.ttl|ontology/autofde-phase-graph-instances.ttl" ;
+  ga:expectedImpact "MEDIUM" ; ga:effort "LOW" ;
+  ga:migrationTrigger "T-Box is separated cleanly and the generated A-Box remains equivalence-tested against the live PhaseGraph." ;
+  ga:falsifier "The hand-authored file contains normative T-Box facts that cannot be separated without semantic loss." .
+
+data:errc-capability-pack-copy a ga:ERRCItem ;
+  dct:title "Remove the external ggen pack plus manual copy publication step" ;
+  ga:errcAction "ELIMINATE" ; ga:priority "P1" ; ga:targetOwner "LAB" ; ga:migrationTiming "STAY_OUTSIDE" ;
+  ga:sourcePath "docs/capability-catalog.md|ontology/autofde-lab-capabilities.ttl" ; ga:expectedImpact "MEDIUM" ; ga:effort "LOW" ;
+  ga:migrationTrigger "A repo-local ggen project owns the catalog projection and CI drift gate." ;
+  ga:falsifier "ggen project-root law requires a cross-repo pack for a capability that cannot be expressed locally." .
+
+data:errc-planner-runner a ga:ERRCItem ;
+  dct:title "Extract the planner runner's generic bounded process pattern into GymAct TASK_HARNESS" ;
+  ga:errcAction "REDUCE" ; ga:priority "P1" ; ga:targetOwner "SHARED" ; ga:migrationTiming "AFTER_PATTERN" ;
+  ga:sourcePath "src/autofde_lab/planning/runner.py|src/autofde_lab/planning/config.py" ; ga:expectedImpact "HIGH" ; ga:effort "MEDIUM" ;
+  ga:migrationTrigger "At least two non-planner task harnesses need the same shell-free timeout/outcome/hash receipt semantics." ;
+  ga:falsifier "Planner-specific candidate/output semantics dominate the runner and a generic extraction would weaken typed outcomes." .
+
+data:errc-shacl a ga:ERRCItem ;
+  dct:title "Promote independent SHACL conformance to semantic projection gates" ;
+  ga:errcAction "RAISE" ; ga:priority "P1" ; ga:targetOwner "SHARED" ; ga:migrationTiming "AFTER_PATTERN" ;
+  ga:sourcePath "src/autofde_lab/fabric/shacl_conformance.py" ; ga:expectedImpact "HIGH" ; ga:effort "LOW" ;
+  ga:migrationTrigger "GymAct and ForwardBench publish stable SHACL shapes for their generated RDF contracts." ;
+  ga:falsifier "The proposed shape check duplicates a deterministic ggen SPARQL gate without providing independent semantic coverage." .
+
+data:errc-ocel-receipts a ga:ERRCItem ;
+  dct:title "Make GymAct lifecycle events emit a shared OCEL receipt projection" ;
+  ga:errcAction "RAISE" ; ga:priority "P1" ; ga:targetOwner "SHARED" ; ga:migrationTiming "AFTER_PATTERN" ;
+  ga:sourcePath "src/autofde_lab/ocel/sqlite_store.py|src/autofde_lab/ocel/mcp_session.py" ; ga:expectedImpact "HIGH" ; ga:effort "MEDIUM" ;
+  ga:migrationTrigger "Two GymAct interaction profiles need the same episode/action/effect/verification event model." ;
+  ga:falsifier "Forcing GymAct lifecycle events into the existing OCEL schema loses benchmark-native causal or temporal information." .
+
+data:errc-profile-executors a ga:ERRCItem ;
+  dct:title "Create one executor contract per interaction profile" ;
+  ga:errcAction "CREATE" ; ga:priority "P1" ; ga:targetOwner "GYMACT" ; ga:migrationTiming "AFTER_PATTERN" ;
+  ga:sourcePath "gymact/generated/rust/lib.rs|gymact/generated/wit/gymact.wit" ; ga:expectedImpact "HIGH" ; ga:effort "MEDIUM" ;
+  ga:migrationTrigger "Each profile has at least two executed benchmark implementations proving its lifecycle semantics." ;
+  ga:falsifier "Executor code branches primarily on benchmark slug rather than interaction profile." .
+
+# P2: preserve boundaries while reducing representation debt.
+
+data:errc-powl-representations a ga:ERRCItem ;
+  dct:title "Reduce POWL representation bridges only after GymAct execution traces stabilize" ;
+  ga:errcAction "REDUCE" ; ga:priority "P2" ; ga:targetOwner "SHARED" ; ga:migrationTiming "AFTER_PATTERN" ;
+  ga:sourcePath "src/autofde_lab/fabric/powl.py|src/autofde_lab/powl/algebra.py|src/autofde_lab/ocel/powl_replay.py" ;
+  ga:expectedImpact "MEDIUM" ; ga:effort "HIGH" ;
+  ga:migrationTrigger "GymAct BPMN/POWL projections repeatedly require conversion between the same two POWL representations." ;
+  ga:falsifier "A unification would conflate projection with execution or broaden actuation authority." .
+
+data:errc-ocel-store-boundary a ga:ERRCItem ;
+  dct:title "Keep OCEL SQLite persistence outside GymAct" ;
+  ga:errcAction "REDUCE" ; ga:priority "P2" ; ga:targetOwner "OCEL" ; ga:migrationTiming "STAY_OUTSIDE" ;
+  ga:sourcePath "src/autofde_lab/ocel/sqlite_store.py|src/autofde_lab/ocel/queries.py" ; ga:expectedImpact "MEDIUM" ; ga:effort "LOW" ;
+  ga:migrationTrigger "GymAct consumes an evidence-store interface rather than owning persistence/query semantics." ;
+  ga:falsifier "Benchmark episode semantics cannot be represented without persistence-specific behavior in the GymAct protocol." .
+
+data:errc-domain-solver-boundary a ga:ERRCItem ;
+  dct:title "Keep domain and solver semantics out of GymAct" ;
+  ga:errcAction "REDUCE" ; ga:priority "P2" ; ga:targetOwner "FABRIC" ; ga:migrationTiming "STAY_OUTSIDE" ;
+  ga:sourcePath "src/autofde_lab/hub|ontology/autofde-lab-capabilities.ttl" ; ga:expectedImpact "HIGH" ; ga:effort "LOW" ;
+  ga:migrationTrigger "GymAct treats planners/solvers as tools or task harness capabilities, never as protocol semantics." ;
+  ga:falsifier "GymAct must understand a solver algorithm internally to execute a benchmark lifecycle correctly." .
+
+data:errc-self-play-manufacture a ga:ERRCItem ;
+  dct:title "Create profile-guided self-play that manufactures reusable GymAct bindings" ;
+  ga:errcAction "CREATE" ; ga:priority "P2" ; ga:targetOwner "GYMACT" ; ga:migrationTiming "AFTER_PATTERN" ;
+  ga:sourcePath "docs/papers/papers.ttl|gymact/ontology/profiles.ttl" ; ga:expectedImpact "HIGH" ; ga:effort "HIGH" ;
+  ga:migrationTrigger "Qualification evidence can identify repeated setup/action/verification structures across subjects." ;
+  ga:falsifier "Generated bindings overfit benchmark implementations and do not survive pinned-version changes or scenario mutation." .

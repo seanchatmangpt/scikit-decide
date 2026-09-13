@@ -1,0 +1,289 @@
+# Committed SHACL shapes for a conforming Level 4 causal chain.
+#
+# These shapes are the ONLY expression of these constraints. Nothing in
+# `src/autofde_lab/ocel/rdf_projection.py` or in the conformance module
+# re-states them as Python `if` statements -- `fabric/shacl_conformance.py`
+# exists precisely because such a re-statement drifted from its shapes
+# undetected once already.
+#
+# They are validated against the RDF projection of an OCEL 2.0 log produced by
+# `autofde_lab.ocel.rdf_projection.project_log_to_graph`. Vocabulary and the
+# reason for each locally-minted term are documented in that module's
+# TERM_PROVENANCE table.
+#
+# Core vs sh:sparql -- stated explicitly, because "Core where possible" is a
+# claim that has to be checkable:
+#   SHACL Core:   Level4ActuationShape, Level4PostconditionObservationShape
+#                 (cardinality + class only), Level4ReceiptShape (qualified
+#                 value shapes over an inverse path), Level4ReplayShape
+#                 (cardinality + class -- a dangling reference fails sh:class
+#                 because an unminted node carries no rdf:type).
+#   sh:sparql:    (1) PostconditionObservation-after-Actuation, which compares
+#                 two nodes' event timestamps -- SHACL Core has no cross-node
+#                 value comparison (sh:lessThan compares two paths of the SAME
+#                 focus node, and the timestamps live on the *events*, not on
+#                 the observation/actuation objects).
+#                 (2) same-subject identity between an observation and the
+#                 actuation it observes -- again a cross-node value join.
+#                 (3) Replay head_digest = source Receipt digest -- cross-node
+#                 value join.
+#                 (4) ProbeExecuted-before-ModelInferred: sh:qualifiedMinCount
+#                 supplies the "at least one" half in Core
+#                 (Level4ModelInferredShape), but "precedes in time" is a
+#                 timestamp comparison across two events, so the ordering half
+#                 is SPARQL. Both halves are kept: the Core half names the
+#                 missing-probe case with a sh:QualifiedMinCountConstraintComponent,
+#                 the SPARQL half names the out-of-order case.
+
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ocel:    <urn:autofde:ocel:> .
+@prefix otype:   <urn:autofde:ocel:type/> .
+@prefix oact:    <urn:autofde:ocel:activity/> .
+@prefix e2o:     <urn:autofde:ocel:e2o/> .
+@prefix o2o:     <urn:autofde:ocel:o2o/> .
+@prefix attr:    <urn:autofde:ocel:attr/> .
+@prefix l4:      <urn:autofde:level4:shape/> .
+
+# ─────────────────────────────────────────────────────────────────────────
+# 1. An Actuation relates to exactly one POWLCommitment, one
+#    AuthorityEnvelope, one Environment, one Capability.   [SHACL Core]
+# ─────────────────────────────────────────────────────────────────────────
+
+l4:Level4ActuationShape
+    a sh:NodeShape ;
+    sh:targetClass otype:Actuation ;
+    rdfs:label "A conforming Actuation is bound to its commitment, its authority, its subject and its capability" ;
+
+    sh:property [
+        sh:path o2o:actuates_commitment ;
+        sh:class otype:POWLCommitment ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "actuates_commitment" ;
+        sh:message "Actuation must relate to exactly one POWLCommitment" ;
+    ] ;
+    sh:property [
+        sh:path o2o:authorized_by ;
+        sh:class otype:AuthorityEnvelope ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "authorized_by" ;
+        sh:message "Actuation must relate to exactly one AuthorityEnvelope" ;
+    ] ;
+    sh:property [
+        sh:path o2o:acts_on_environment ;
+        sh:class otype:Environment ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "acts_on_environment" ;
+        sh:message "Actuation must relate to exactly one Environment" ;
+    ] ;
+    sh:property [
+        sh:path o2o:exercises_capability ;
+        sh:class otype:Capability ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "exercises_capability" ;
+        sh:message "Actuation must relate to exactly one Capability" ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────
+# 2. A PostconditionObservation follows its Actuation and refers to the same
+#    subject.                            [Core structure + sh:sparql joins]
+# ─────────────────────────────────────────────────────────────────────────
+
+l4:Level4PostconditionObservationShape
+    a sh:NodeShape ;
+    sh:targetClass otype:PostconditionObservation ;
+    rdfs:label "A PostconditionObservation observes exactly one Actuation, after it, on the same subject" ;
+
+    # Core: structural half.
+    sh:property [
+        sh:path o2o:observes_actuation ;
+        sh:class otype:Actuation ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "observes_actuation" ;
+        sh:message "PostconditionObservation must observe exactly one Actuation" ;
+    ] ;
+
+    # sh:sparql: temporal ordering. The timestamps live on the EVENTS that
+    # link these objects, not on the objects, so this is a cross-node join
+    # that SHACL Core cannot express.
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "PostconditionObserved event must not precede the ActuationOpened event of the Actuation it observes" ;
+        sh:prefixes l4: ;
+        sh:select """
+            SELECT $this ?value
+            WHERE {
+                $this <urn:autofde:ocel:o2o/observes_actuation> ?act .
+                ?obsEvent a <urn:autofde:ocel:activity/PostconditionObserved> ;
+                          <urn:autofde:ocel:e2o/observation> $this ;
+                          <http://www.w3.org/ns/prov#startedAtTime> ?tObs .
+                ?actEvent a <urn:autofde:ocel:activity/ActuationOpened> ;
+                          <urn:autofde:ocel:e2o/actuation> ?act ;
+                          <http://www.w3.org/ns/prov#startedAtTime> ?tAct .
+                FILTER (?tObs < ?tAct)
+                BIND (?act AS ?value)
+            }
+        """ ;
+    ] ;
+
+    # sh:sparql: same-subject identity. Cross-node value join between the
+    # observation's actuation and the environment that actuation acted on.
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "PostconditionObservation must refer to the same subject (Environment) as the Actuation it observes" ;
+        sh:prefixes l4: ;
+        sh:select """
+            SELECT $this ?value
+            WHERE {
+                $this <urn:autofde:ocel:o2o/observes_actuation> ?act .
+                ?act <urn:autofde:ocel:o2o/acts_on_environment> ?actEnv .
+                $this <urn:autofde:ocel:o2o/observes_subject> ?obsEnv .
+                FILTER (?obsEnv != ?actEnv)
+                BIND (?obsEnv AS ?value)
+            }
+        """ ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────
+# 3. A Receipt derives from an Actuation and a PostconditionObservation.
+#    [SHACL Core: qualified value shapes over an inverse path]
+#
+#    The projected edge direction is Actuation --evidenced_by_receipt-->
+#    Receipt, so the Receipt's own view of it is the inverse path.
+# ─────────────────────────────────────────────────────────────────────────
+
+l4:Level4ReceiptShape
+    a sh:NodeShape ;
+    sh:targetClass otype:Receipt ;
+    rdfs:label "A conforming Receipt is evidenced by both an Actuation and a PostconditionObservation" ;
+
+    sh:property [
+        sh:path [ sh:inversePath o2o:evidenced_by_receipt ] ;
+        sh:qualifiedValueShape [ sh:class otype:Actuation ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name "evidenced_by_receipt (inverse, Actuation)" ;
+        sh:message "Receipt must derive from at least one Actuation" ;
+    ] ;
+    sh:property [
+        sh:path [ sh:inversePath o2o:evidenced_by_receipt ] ;
+        sh:qualifiedValueShape [ sh:class otype:PostconditionObservation ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name "evidenced_by_receipt (inverse, PostconditionObservation)" ;
+        sh:message "Receipt must derive from at least one PostconditionObservation" ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────
+# 4. A Replay references the exact source Receipt and binds the same subject
+#    identity.                            [Core reference + sh:sparql digest]
+#
+#    A Replay pointing at a nonexistent Receipt fails the Core half: an
+#    unminted node carries no rdf:type, so sh:class cannot be satisfied. That
+#    is the dangling-reference falsifier, and it is Core, not SPARQL.
+# ─────────────────────────────────────────────────────────────────────────
+
+l4:Level4ReplayShape
+    a sh:NodeShape ;
+    sh:targetClass otype:Replay ;
+    rdfs:label "A conforming Replay references exactly one existing Receipt and binds its digest" ;
+
+    sh:property [
+        sh:path o2o:replays_receipt ;
+        sh:class otype:Receipt ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "replays_receipt" ;
+        sh:message "Replay must reference exactly one existing Receipt" ;
+    ] ;
+    sh:property [
+        sh:path attr:head_digest ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:name "head_digest" ;
+        sh:message "Replay must carry exactly one head_digest" ;
+    ] ;
+
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Replay head_digest must equal the receipt_digest of the Receipt it replays (same subject identity)" ;
+        sh:prefixes l4: ;
+        sh:select """
+            SELECT $this ?value
+            WHERE {
+                $this <urn:autofde:ocel:o2o/replays_receipt> ?receipt .
+                $this <urn:autofde:ocel:attr/head_digest> ?head .
+                ?receipt <urn:autofde:ocel:attr/receipt_digest> ?digest .
+                FILTER (str(?head) != str(?digest))
+                BIND (?head AS ?value)
+            }
+        """ ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────
+# 5. At least one ProbeExecuted precedes ModelInferred.
+#    [Core sh:qualifiedMinCount for existence + sh:sparql for ordering]
+# ─────────────────────────────────────────────────────────────────────────
+
+l4:Level4ModelInferredShape
+    a sh:NodeShape ;
+    sh:targetClass oact:ModelInferred ;
+    rdfs:label "A ModelInferred event rests on at least one ProbeExecuted event over the same Task, strictly earlier" ;
+
+    # Core existence half: the Task this ModelInferred is about must be used
+    # by at least one ProbeExecuted event.
+    sh:property [
+        sh:path ( e2o:task [ sh:inversePath e2o:task ] ) ;
+        sh:qualifiedValueShape [ sh:class oact:ProbeExecuted ] ;
+        sh:qualifiedMinCount 1 ;
+        sh:name "ProbeExecuted over the same Task" ;
+        sh:message "ModelInferred requires at least one ProbeExecuted event on the same Task" ;
+    ] ;
+
+    # SPARQL ordering half.
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Every ProbeExecuted supporting a ModelInferred must occur strictly before it" ;
+        sh:prefixes l4: ;
+        sh:select """
+            SELECT $this ?value
+            WHERE {
+                $this <urn:autofde:ocel:e2o/task> ?task ;
+                      <http://www.w3.org/ns/prov#startedAtTime> ?tModel .
+                ?probe a <urn:autofde:ocel:activity/ProbeExecuted> ;
+                       <urn:autofde:ocel:e2o/task> ?task ;
+                       <http://www.w3.org/ns/prov#startedAtTime> ?tProbe .
+                FILTER (?tProbe >= ?tModel)
+                BIND (?probe AS ?value)
+            }
+        """ ;
+    ] .
+
+l4: sh:declare [
+        sh:prefix "ocel" ;
+        sh:namespace "urn:autofde:ocel:"^^xsd:anyURI ;
+    ] ,
+    [
+        sh:prefix "o2o" ;
+        sh:namespace "urn:autofde:ocel:o2o/"^^xsd:anyURI ;
+    ] ,
+    [
+        sh:prefix "e2o" ;
+        sh:namespace "urn:autofde:ocel:e2o/"^^xsd:anyURI ;
+    ] ,
+    [
+        sh:prefix "oact" ;
+        sh:namespace "urn:autofde:ocel:activity/"^^xsd:anyURI ;
+    ] ,
+    [
+        sh:prefix "prov" ;
+        sh:namespace "http://www.w3.org/ns/prov#"^^xsd:anyURI ;
+    ] .

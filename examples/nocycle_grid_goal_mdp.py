@@ -9,7 +9,7 @@ from enum import IntEnum
 from math import sqrt
 from typing import NamedTuple, Optional
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     EnumerableSpace,
     GoalMDPDomain,
@@ -17,9 +17,9 @@ from skdecide import (
     Space,
     Value,
 )
-from skdecide.builders.domain import Actions
-from skdecide.hub.space.gym import MultiDiscreteSpace
-from skdecide.utils import load_registered_solver, rollout
+from autofde_lab.builders.domain import Actions
+from autofde_lab.hub.space.gym import MultiDiscreteSpace
+from autofde_lab.utils import load_registered_solver, rollout
 
 
 class MyState(NamedTuple):

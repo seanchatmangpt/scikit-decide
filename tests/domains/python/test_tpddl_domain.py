@@ -19,21 +19,21 @@ VENDING_PROBLEM = os.path.join(
 
 @pytest.fixture
 def coffee_ts():
-    from skdecide.hub.domain.pddl import TPDDLDomain
+    from autofde_lab.hub.domain.pddl import TPDDLDomain
 
     return TPDDLDomain(COFFEE_DOMAIN, COFFEE_PROBLEM, mode="time_stepping", dt=1.0)
 
 
 @pytest.fixture
 def coffee_ed():
-    from skdecide.hub.domain.pddl import TPDDLDomain
+    from autofde_lab.hub.domain.pddl import TPDDLDomain
 
     return TPDDLDomain(COFFEE_DOMAIN, COFFEE_PROBLEM, mode="event_driven")
 
 
 @pytest.fixture
 def vending_ts():
-    from skdecide.hub.domain.pddl import TPDDLDomain
+    from autofde_lab.hub.domain.pddl import TPDDLDomain
 
     return TPDDLDomain(VENDING_DOMAIN, VENDING_PROBLEM, mode="time_stepping", dt=0.1)
 
@@ -51,7 +51,7 @@ class TestTPDDLDomainConstruction:
         assert vending_ts is not None
 
     def test_has_z3(self):
-        from skdecide.hub.__skdecide_hub_cpp import (
+        from autofde_lab.hub.__autofde_lab_hub_cpp import (
             _PDDL_TemporalSimulator_ as CppTemporalSimulator,
         )
 
@@ -85,7 +85,7 @@ class TestTPDDLDomainCoffee:
         elements = actions.get_elements()
         assert len(elements) >= 2  # noop + heatwater
 
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         kinds = {a.kind for a in elements}
         assert TPDDLAction.NOOP in kinds
@@ -93,7 +93,7 @@ class TestTPDDLDomainCoffee:
 
     def test_noop_advances_time(self, coffee_ts):
         """Noop in time_stepping mode advances time by dt."""
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         s0 = coffee_ts._get_initial_state_()
         noop = TPDDLAction(TPDDLAction.NOOP)
@@ -106,7 +106,7 @@ class TestTPDDLDomainCoffee:
         actions = coffee_ts._get_applicable_actions_from(s0)
         elements = actions.get_elements()
 
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         heatwater = None
         for a in elements:
@@ -121,7 +121,7 @@ class TestTPDDLDomainCoffee:
 
     def test_temperature_increases_with_heating(self, coffee_ts):
         """After heatwater and time steps, temperature should increase."""
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         s0 = coffee_ts._get_initial_state_()
 
@@ -152,7 +152,7 @@ class TestTPDDLDomainCoffee:
 
     def test_boil_event_fires(self, coffee_ts):
         """After enough time steps, boil event fires when temp >= 100."""
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         s0 = coffee_ts._get_initial_state_()
 
@@ -182,7 +182,7 @@ class TestTPDDLDomainCoffee:
     def test_durative_action_available_after_boil(self, coffee_ts):
         """After boiling, makecoffee durative action should be applicable
         when temperature is in [60, 80] range."""
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         # We need the water to be boiled AND temperature in [60,80]
         # After boiling (temp>=100), stop-heating fires.
@@ -225,7 +225,7 @@ class TestTPDDLDomainCoffee:
 
     def test_transition_value_is_time(self, coffee_ts):
         """Transition cost should be the elapsed time."""
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         s0 = coffee_ts._get_initial_state_()
         noop = TPDDLAction(TPDDLAction.NOOP)
@@ -241,8 +241,8 @@ class TestTPDDLDomainCoffee:
 @pytest.fixture(params=["binary_search", "z3"], ids=["binary_search", "z3"])
 def coffee_ed_engine(request):
     """Coffee domain in event-driven mode, parametrized by engine."""
-    from skdecide.hub.domain.pddl import TPDDLDomain
-    from skdecide.hub.domain.pddl.domain import _HAS_Z3_PYTHON
+    from autofde_lab.hub.domain.pddl import TPDDLDomain
+    from autofde_lab.hub.domain.pddl.domain import _HAS_Z3_PYTHON
 
     use_z3 = request.param == "z3"
     if use_z3 and not _HAS_Z3_PYTHON:
@@ -255,7 +255,7 @@ def coffee_ed_engine(request):
 class TestTPDDLDomainEventDriven:
     def test_event_step_advances_to_event(self, coffee_ed):
         """In event-driven mode, noop should advance to next event."""
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         s0 = coffee_ed._get_initial_state_()
 
@@ -281,7 +281,7 @@ class TestTPDDLDomainEventDriven:
         sees only heating, so the boil event at temp>=100 fires at
         t = (100 - 7) / 2 = 46.5.
         """
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         s0 = coffee_ed_engine._get_initial_state_()
         actions = coffee_ed_engine._get_applicable_actions_from(s0)
@@ -293,7 +293,7 @@ class TestTPDDLDomainEventDriven:
 
     def test_boil_event_fires_correctly(self, coffee_ed_engine):
         """Both engines should cause the boil event to fire."""
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         s0 = coffee_ed_engine._get_initial_state_()
         actions = coffee_ed_engine._get_applicable_actions_from(s0)
@@ -309,7 +309,7 @@ class TestTPDDLDomainEventDriven:
 
     def test_temperature_at_boil(self, coffee_ed_engine):
         """Temperature should reach the threshold at event time."""
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         s0 = coffee_ed_engine._get_initial_state_()
         actions = coffee_ed_engine._get_applicable_actions_from(s0)
@@ -325,7 +325,7 @@ class TestTPDDLDomainEventDriven:
 
     def test_cooling_after_boil(self, coffee_ed_engine):
         """After boil, a second event step should advance to stop-cooling."""
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         s0 = coffee_ed_engine._get_initial_state_()
         actions = coffee_ed_engine._get_applicable_actions_from(s0)
@@ -341,7 +341,7 @@ class TestTPDDLDomainEventDriven:
 
     def test_transition_value_event_driven(self, coffee_ed_engine):
         """Transition cost equals elapsed time in event-driven mode."""
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         s0 = coffee_ed_engine._get_initial_state_()
         actions = coffee_ed_engine._get_applicable_actions_from(s0)
@@ -358,8 +358,8 @@ class TestTPDDLDomainEngineComparison:
 
     def test_engines_produce_same_boil_time(self):
         """Binary search and Z3 should agree on the boil event time."""
-        from skdecide.hub.domain.pddl import TPDDLDomain
-        from skdecide.hub.domain.pddl.domain import _HAS_Z3_PYTHON, TPDDLAction
+        from autofde_lab.hub.domain.pddl import TPDDLDomain
+        from autofde_lab.hub.domain.pddl.domain import _HAS_Z3_PYTHON, TPDDLAction
 
         if not _HAS_Z3_PYTHON:
             pytest.skip("z3-solver not installed")
@@ -394,8 +394,8 @@ class TestTPDDLDomainEngineComparison:
 
     def test_engines_produce_same_boiled_state(self):
         """Both engines should produce the same boiled predicate."""
-        from skdecide.hub.domain.pddl import TPDDLDomain
-        from skdecide.hub.domain.pddl.domain import _HAS_Z3_PYTHON, TPDDLAction
+        from autofde_lab.hub.domain.pddl import TPDDLDomain
+        from autofde_lab.hub.domain.pddl.domain import _HAS_Z3_PYTHON, TPDDLAction
 
         if not _HAS_Z3_PYTHON:
             pytest.skip("z3-solver not installed")
@@ -435,8 +435,8 @@ class TestTPDDLDomainEngineComparison:
 
     def test_z3_precision(self):
         """Z3 should give a more precise event time than binary search."""
-        from skdecide.hub.domain.pddl import TPDDLDomain
-        from skdecide.hub.domain.pddl.domain import _HAS_Z3_PYTHON, TPDDLAction
+        from autofde_lab.hub.domain.pddl import TPDDLDomain
+        from autofde_lab.hub.domain.pddl.domain import _HAS_Z3_PYTHON, TPDDLAction
 
         if not _HAS_Z3_PYTHON:
             pytest.skip("z3-solver not installed")
@@ -465,7 +465,7 @@ class TestTPDDLDomainVendingMachine:
 
     def test_entercoin_applicable(self, vending_ts):
         """Initially, slot is open and light sensor is on, so entercoin works."""
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         s0 = vending_ts._get_initial_state_()
         actions = vending_ts._get_applicable_actions_from(s0)
@@ -476,7 +476,7 @@ class TestTPDDLDomainVendingMachine:
 
     def test_coin_physics(self, vending_ts):
         """After entercoin, coin should fall with acceleration."""
-        from skdecide.hub.domain.pddl.domain import TPDDLAction
+        from autofde_lab.hub.domain.pddl.domain import TPDDLAction
 
         s0 = vending_ts._get_initial_state_()
 
@@ -504,7 +504,7 @@ class TestTPDDLDomainVendingMachine:
 
 class TestTPDDLDomainParameters:
     def test_custom_epsilon(self):
-        from skdecide.hub.domain.pddl import TPDDLDomain
+        from autofde_lab.hub.domain.pddl import TPDDLDomain
 
         domain = TPDDLDomain(
             COFFEE_DOMAIN,

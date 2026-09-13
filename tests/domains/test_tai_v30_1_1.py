@@ -1,4 +1,4 @@
-from skdecide.hub.domain.tai_v30_1_1 import (
+from autofde_lab.hub.domain.tai_v30_1_1 import (
     INITIAL_STATE,
     POSITIVE_PLAN,
     REFUSAL_PLAN,

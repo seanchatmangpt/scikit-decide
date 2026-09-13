@@ -5,7 +5,7 @@
 import getopt
 import sys
 
-from skdecide.hub.domain.pddl import *
+from autofde_lab.hub.domain.pddl import *
 
 if __name__ == "__main__":
     try:

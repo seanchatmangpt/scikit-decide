@@ -1,0 +1,17 @@
+AutoFDE Lab
+
+This project is a fork of scikit-decide (https://github.com/airbus/scikit-decide),
+originally developed by Airbus AI Research and licensed under the MIT License.
+See LICENSE for the full license text and the inherited AIRBUS copyright notice,
+which remains attached to the code it covers.
+
+AutoFDE Lab extends the original codebase with persistent decision agents,
+POWL 2.0 process semantics, OCEL evidence, and an AutoFDE reference vertical.
+These extensions are Copyright (c) Sean Chatman and are also MIT-licensed.
+
+Renaming this fork (from `scikit-decide` / `skdecide` to `autofde-lab` /
+`autofde_lab`) does not alter or transfer the copyright of inherited code.
+Every file that originated in Airbus scikit-decide keeps its original
+"Copyright (c) AIRBUS and its affiliates" header. This NOTICE records the
+fork relationship; it is not a relicense and not a claim of new ownership
+over unmodified upstream code.

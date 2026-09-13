@@ -1,6 +1,6 @@
 # Capability cache fabric
 
-`skdecide.caching` is a multi-tier cache fabric for deterministic planning,
+`autofde_lab.caching` is a multi-tier cache fabric for deterministic planning,
 reinforcement-learning, scheduling, self-play, and solver-support computations.
 It is not a decorator collection and it is not a cache hidden inside one solver.
 It sits at the capability boundary shared by domain factories, solver workers,
@@ -163,7 +163,7 @@ Exceptions are not cached. `None` is cacheable by default but can be excluded.
 ## Basic domain use
 
 ```python
-from skdecide.caching import CachePolicy, cache_domain
+from autofde_lab.caching import CachePolicy, cache_domain
 
 cached = cache_domain(
     domain,
@@ -189,7 +189,7 @@ domain copies share one namespace and fabric:
 ```python
 from pathlib import Path
 
-from skdecide.caching import (
+from autofde_lab.caching import (
     CacheConfig,
     CachePolicy,
     cache_domain_factory,
@@ -202,7 +202,7 @@ cached_factory = cache_domain_factory(
     config=CacheConfig(
         memory_max_entries=100_000,
         memory_max_bytes=512 * 1024 * 1024,
-        persistent_path=Path(".cache/skdecide/rcpsp.sqlite3"),
+        persistent_path=Path(".cache/autofde_lab/rcpsp.sqlite3"),
         persistent_max_bytes=64 * 1024 * 1024 * 1024,
     ),
 )
@@ -219,10 +219,10 @@ SQLite connection while sharing the L2 database and process leases.
 The fabric is not limited to domain methods:
 
 ```python
-from skdecide.caching import CacheFabric, CacheConfig, MethodPolicy
+from autofde_lab.caching import CacheFabric, CacheConfig, MethodPolicy
 
 fabric = CacheFabric(
-    CacheConfig(persistent_path=".cache/skdecide/self-play.sqlite3")
+    CacheConfig(persistent_path=".cache/autofde_lab/self-play.sqlite3")
 )
 
 result = fabric.execute(
@@ -246,7 +246,7 @@ and other lawful intermediate products.
 ## Method-specific policy
 
 ```python
-from skdecide.caching import CachePolicy, MethodPolicy
+from autofde_lab.caching import CachePolicy, MethodPolicy
 
 policy = CachePolicy.model().with_method_policy(
     "get_next_state_distribution",
@@ -272,7 +272,7 @@ or generated model changes.
 ## Explicit modes
 
 ```python
-from skdecide.caching import CacheMode
+from autofde_lab.caching import CacheMode
 
 # Ignore existing values and replace the record.
 with fabric.mode(CacheMode.REFRESH):

@@ -1,0 +1,704 @@
+@prefix pd: <urn:autofde-lab:planning-domain:> .
+@prefix ex: <urn:autofde-lab:planning-domain:platform-console:> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Real ontology/platform-console-domain.ttl fixture: all ~30 fabric
+# capabilities (see this repo's parallel authority-workflow session context)
+# encoded as pd:Action individuals in the pd: vocabulary defined by
+# ontology/rdf-planning-domain.ttl, compiled unmodified by
+# autofde_lab.fabric.rdf_domain.compile_rdf_to_pddl_files and solved
+# unmodified by autofde_lab.fabric.pddl_engine.solve_to_plan_file.
+#
+# Predicate names are the console-snapshot-route's predicate vocabulary as
+# named in the task prompt (deployed, frozen, freeze-override-approved,
+# org-exists, quota-hard-set, reservation-active, partner-exists, etc).
+# INTEGRATION NOTE: the console-snapshot route is being built in parallel by
+# a sibling agent in this session; its exact returned predicate names were not
+# visible when this fixture was authored, so the names below are the ones
+# listed verbatim in the task prompt's CAP_CONTEXT. Reconcile against the
+# route's real output once both land -- this is a real open integration
+# point, not a resolved one.
+#
+# Untyped domain (no pd:Type individuals): every action parameter and every
+# problem object is a bare pd:Object, matching rdf-planning-domain.ttl's
+# "a domain with no pd:Type instances compiles to an untyped
+# (:requirements :strips) domain" note and the existing blocks_rdf_domain.ttl
+# fixture's own style.
+
+<urn:autofde-lab:ontology:platform-console-domain>
+    a owl:Ontology ;
+    dcterms:title "Platform console fabric-capability planning domain" ;
+    dcterms:description "All ~30 platform-console fabric capabilities (CASTLE verbs, approval-gated actions, capability-intrinsic k8s/org/reservation/partner actions), encoded as pd:Action individuals conforming to ontology/rdf-planning-domain.ttl, so the existing compile_rdf_to_pddl_files -> pddl_engine.solve_to_plan_file -> project_plan_to_powl pipeline can plan over them unmodified." ;
+    dcterms:created "2026-08-19"^^xsd:date .
+
+ex:domain a pd:Domain ;
+    pd:domainName "platform-console" ;
+    pd:hasPredicate ex:pred-exists, ex:pred-components-inventoried, ex:pred-goals-inventoried, ex:pred-fortune5-requirements-listed, ex:pred-org-exists, ex:pred-approved, ex:pred-quota-hard-set, ex:pred-tier-set, ex:pred-retention-changed, ex:pred-remediation-suggested, ex:pred-export-updated, ex:pred-deployed, ex:pred-dr-failover-done, ex:pred-dsar-erasure-done, ex:pred-scheduled, ex:pred-frozen, ex:pred-freeze-override-approved, ex:pred-environment-promoted, ex:pred-quarantined, ex:pred-sla-credit-applied, ex:pred-namespace-exists, ex:pred-project-exists, ex:pred-environment-set, ex:pred-secret-exists, ex:pred-backup-exists, ex:pred-job-exists, ex:pred-restore-job-exists, ex:pred-replicas-patched, ex:pred-annotations-set, ex:pred-branding-set, ex:pred-region-set, ex:pred-custom-domain-set, ex:pred-sla-set, ex:pred-auto-remediate-set, ex:pred-reservation-active, ex:pred-partner-exists, ex:pred-partner-updated ;
+    pd:hasAction ex:action-castle-inventory-components, ex:action-castle-inventory-goals, ex:action-castle-fortune5-requirements, ex:action-org-delete, ex:action-quota-override, ex:action-tier-downgrade, ex:action-backup-retention-change, ex:action-k8s-fault-remediate-suggest, ex:action-export-subscription-update, ex:action-dr-failover, ex:action-dsar-erasure, ex:action-castle-schedule, ex:action-freeze-override, ex:action-environment-promote, ex:action-deployment-quarantine, ex:action-sla-credit-apply, ex:action-patch-sla-credit-apply, ex:action-create-namespace, ex:action-create-project, ex:action-delete-project, ex:action-set-project-tier, ex:action-set-project-environment, ex:action-create-secret, ex:action-delete-secret, ex:action-create-backup-job, ex:action-create-restore-job, ex:action-delete-job, ex:action-patch-resource-quota-hard, ex:action-patch-deployment-replicas, ex:action-patch-namespace-annotations, ex:action-create-org, ex:action-delete-org, ex:action-set-org-branding, ex:action-set-org-region, ex:action-set-org-custom-domain, ex:action-set-org-sla, ex:action-set-org-auto-remediate-critical, ex:action-create-reservation, ex:action-cancel-reservation, ex:action-create-partner, ex:action-update-partner, ex:action-delete-partner, ex:action-deploy, ex:action-freeze .
+
+# -- Predicates (console-snapshot-route vocabulary) ---------------------
+
+ex:pred-exists a pd:Predicate ; pd:predicateName "exists" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-components-inventoried a pd:Predicate ; pd:predicateName "components-inventoried" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-goals-inventoried a pd:Predicate ; pd:predicateName "goals-inventoried" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-fortune5-requirements-listed a pd:Predicate ; pd:predicateName "fortune5-requirements-listed" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-org-exists a pd:Predicate ; pd:predicateName "org-exists" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-approved a pd:Predicate ; pd:predicateName "approved" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-quota-hard-set a pd:Predicate ; pd:predicateName "quota-hard-set" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-tier-set a pd:Predicate ; pd:predicateName "tier-set" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-retention-changed a pd:Predicate ; pd:predicateName "retention-changed" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-remediation-suggested a pd:Predicate ; pd:predicateName "remediation-suggested" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-export-updated a pd:Predicate ; pd:predicateName "export-updated" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-deployed a pd:Predicate ; pd:predicateName "deployed" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-dr-failover-done a pd:Predicate ; pd:predicateName "dr-failover-done" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-dsar-erasure-done a pd:Predicate ; pd:predicateName "dsar-erasure-done" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-scheduled a pd:Predicate ; pd:predicateName "scheduled" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-frozen a pd:Predicate ; pd:predicateName "frozen" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-freeze-override-approved a pd:Predicate ; pd:predicateName "freeze-override-approved" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-environment-promoted a pd:Predicate ; pd:predicateName "environment-promoted" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-quarantined a pd:Predicate ; pd:predicateName "quarantined" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-sla-credit-applied a pd:Predicate ; pd:predicateName "sla-credit-applied" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-namespace-exists a pd:Predicate ; pd:predicateName "namespace-exists" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-project-exists a pd:Predicate ; pd:predicateName "project-exists" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-environment-set a pd:Predicate ; pd:predicateName "environment-set" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-secret-exists a pd:Predicate ; pd:predicateName "secret-exists" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-backup-exists a pd:Predicate ; pd:predicateName "backup-exists" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-job-exists a pd:Predicate ; pd:predicateName "job-exists" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-restore-job-exists a pd:Predicate ; pd:predicateName "restore-job-exists" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-replicas-patched a pd:Predicate ; pd:predicateName "replicas-patched" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-annotations-set a pd:Predicate ; pd:predicateName "annotations-set" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-branding-set a pd:Predicate ; pd:predicateName "branding-set" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-region-set a pd:Predicate ; pd:predicateName "region-set" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-custom-domain-set a pd:Predicate ; pd:predicateName "custom-domain-set" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-sla-set a pd:Predicate ; pd:predicateName "sla-set" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-auto-remediate-set a pd:Predicate ; pd:predicateName "auto-remediate-set" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-reservation-active a pd:Predicate ; pd:predicateName "reservation-active" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-partner-exists a pd:Predicate ; pd:predicateName "partner-exists" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-partner-updated a pd:Predicate ; pd:predicateName "partner-updated" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+
+# -- Actions --------------------------------------------------------------
+
+# castle.verb.inventory-components -- reversible, castle-brokered.
+ex:action-castle-inventory-components a pd:Action ;
+    pd:actionName "castle-inventory-components" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "components-inventoried" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# castle.verb.inventory-goals -- reversible, castle-brokered.
+ex:action-castle-inventory-goals a pd:Action ;
+    pd:actionName "castle-inventory-goals" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "goals-inventoried" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# castle.verb.fortune5-requirements -- reversible, castle-brokered.
+ex:action-castle-fortune5-requirements a pd:Action ;
+    pd:actionName "castle-fortune5-requirements" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "fortune5-requirements-listed" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# org.delete -- IRREVERSIBLE, destructive. Approval-gated.
+#   (Negated preconditions are unsupported without the PDDL
+#   :negative-preconditions requirement, which this untyped :strips
+#   domain deliberately does not declare -- matching rdf_domain.py's
+#   existing to_pddl(), left unmodified -- so 'not frozen' is enforced
+#   structurally instead: nothing in this fixture ever asserts frozen
+#   for the irreversible-refused problem's object, and the real gate
+#   this test proves is 'approved' being absent.)
+ex:action-org-delete a pd:Action ;
+    pd:actionName "org-delete" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:NegatedAtom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# quota.override -- reversible. Approval-gated.
+ex:action-quota-override a pd:Action ;
+    pd:actionName "quota-override" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "quota-hard-set" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# tier.downgrade -- reversible. Approval-gated.
+ex:action-tier-downgrade a pd:Action ;
+    pd:actionName "tier-downgrade" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "tier-set" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# backup.retention.change -- reversible. Approval-gated.
+ex:action-backup-retention-change a pd:Action ;
+    pd:actionName "backup-retention-change" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "retention-changed" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# k8s-fault.remediate-suggest -- reversible (no actuation). Approval-gated.
+ex:action-k8s-fault-remediate-suggest a pd:Action ;
+    pd:actionName "k8s-fault-remediate-suggest" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "remediation-suggested" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# export-subscription.update -- reversible. Approval-gated.
+ex:action-export-subscription-update a pd:Action ;
+    pd:actionName "export-subscription-update" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "export-updated" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# dr.failover -- IRREVERSIBLE, destructive. Approval-gated.
+ex:action-dr-failover a pd:Action ;
+    pd:actionName "dr-failover" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "deployed" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "dr-failover-done" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# dsar.erasure -- IRREVERSIBLE. Approval-gated.
+ex:action-dsar-erasure a pd:Action ;
+    pd:actionName "dsar-erasure" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "dsar-erasure-done" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# castle.verb.schedule -- reversible. Approval-gated.
+ex:action-castle-schedule a pd:Action ;
+    pd:actionName "castle-schedule" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "scheduled" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# freeze.override -- reversible, pure gate. Approval-gated.
+ex:action-freeze-override a pd:Action ;
+    pd:actionName "freeze-override" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "frozen" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "freeze-override-approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:NegatedAtom ; pd:ofPredicate "frozen" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# environment.promote -- reversible. Approval-gated.
+ex:action-environment-promote a pd:Action ;
+    pd:actionName "environment-promote" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "environment-promoted" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# deployment.quarantine -- reversible (scale-to-0). Approval-gated.
+ex:action-deployment-quarantine a pd:Action ;
+    pd:actionName "deployment-quarantine" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "deployed" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "quarantined" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# sla.credit.apply -- IRREVERSIBLE, moves real money. Approval-gated.
+ex:action-sla-credit-apply a pd:Action ;
+    pd:actionName "sla-credit-apply" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "sla-credit-applied" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# patch-sla.credit.apply -- IRREVERSIBLE, moves real money. Approval-gated.
+ex:action-patch-sla-credit-apply a pd:Action ;
+    pd:actionName "patch-sla-credit-apply" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "sla-credit-applied" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# createNamespace
+ex:action-create-namespace a pd:Action ;
+    pd:actionName "create-namespace" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "namespace-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# createProject
+ex:action-create-project a pd:Action ;
+    pd:actionName "create-project" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "project-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# deleteProject
+ex:action-delete-project a pd:Action ;
+    pd:actionName "delete-project" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "project-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:NegatedAtom ; pd:ofPredicate "project-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# setProjectTier
+ex:action-set-project-tier a pd:Action ;
+    pd:actionName "set-project-tier" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "project-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "tier-set" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# setProjectEnvironment
+ex:action-set-project-environment a pd:Action ;
+    pd:actionName "set-project-environment" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "project-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "environment-set" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# createSecret
+ex:action-create-secret a pd:Action ;
+    pd:actionName "create-secret" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "namespace-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "secret-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# deleteSecret
+ex:action-delete-secret a pd:Action ;
+    pd:actionName "delete-secret" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "secret-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:NegatedAtom ; pd:ofPredicate "secret-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# createBackupJob
+ex:action-create-backup-job a pd:Action ;
+    pd:actionName "create-backup-job" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "deployed" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "backup-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "job-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# createRestoreJob
+ex:action-create-restore-job a pd:Action ;
+    pd:actionName "create-restore-job" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "backup-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "restore-job-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "job-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# deleteJob
+ex:action-delete-job a pd:Action ;
+    pd:actionName "delete-job" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "job-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:NegatedAtom ; pd:ofPredicate "job-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# patchResourceQuotaHard
+ex:action-patch-resource-quota-hard a pd:Action ;
+    pd:actionName "patch-resource-quota-hard" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "quota-hard-set" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# patchDeploymentReplicas
+ex:action-patch-deployment-replicas a pd:Action ;
+    pd:actionName "patch-deployment-replicas" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "deployed" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "replicas-patched" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# patchNamespaceAnnotations
+ex:action-patch-namespace-annotations a pd:Action ;
+    pd:actionName "patch-namespace-annotations" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "namespace-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "annotations-set" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# createOrg
+ex:action-create-org a pd:Action ;
+    pd:actionName "create-org" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# deleteOrg -- also approval-gated at route level.
+ex:action-delete-org a pd:Action ;
+    pd:actionName "delete-org" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ],
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:NegatedAtom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# setOrgBranding
+ex:action-set-org-branding a pd:Action ;
+    pd:actionName "set-org-branding" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "branding-set" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# setOrgRegion
+ex:action-set-org-region a pd:Action ;
+    pd:actionName "set-org-region" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "region-set" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# setOrgCustomDomain
+ex:action-set-org-custom-domain a pd:Action ;
+    pd:actionName "set-org-custom-domain" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "custom-domain-set" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# setOrgSla
+ex:action-set-org-sla a pd:Action ;
+    pd:actionName "set-org-sla" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "sla-set" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# setOrgAutoRemediateCritical
+ex:action-set-org-auto-remediate-critical a pd:Action ;
+    pd:actionName "set-org-auto-remediate-critical" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "auto-remediate-set" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# createReservation
+ex:action-create-reservation a pd:Action ;
+    pd:actionName "create-reservation" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "reservation-active" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# cancelReservation
+ex:action-cancel-reservation a pd:Action ;
+    pd:actionName "cancel-reservation" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "reservation-active" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:NegatedAtom ; pd:ofPredicate "reservation-active" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# createPartner
+ex:action-create-partner a pd:Action ;
+    pd:actionName "create-partner" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "partner-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# updatePartner
+ex:action-update-partner a pd:Action ;
+    pd:actionName "update-partner" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "partner-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "partner-updated" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# deletePartner
+ex:action-delete-partner a pd:Action ;
+    pd:actionName "delete-partner" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "partner-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:NegatedAtom ; pd:ofPredicate "partner-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# Support action: brings a resource to deployed=true so deployment-
+#   dependent actions (dr-failover, patch-deployment-replicas,
+#   deployment-quarantine, create-backup-job) have a reachable
+#   precondition. Not one of the ~30 console capabilities itself.
+ex:action-deploy a pd:Action ;
+    pd:actionName "deploy" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "deployed" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# Support action: brings a resource to frozen=true so freeze.override
+#   has a reachable precondition. Not one of the ~30 console
+#   capabilities itself.
+ex:action-freeze a pd:Action ;
+    pd:actionName "freeze" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:Atom ; pd:ofPredicate "frozen" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+# -- Problems ---------------------------------------------------------
+# Three real goal states, matching the task's three required scenarios:
+#  1. ex:problem-reversible     -- quota.override, a reversible capability.
+#  2. ex:problem-gated          -- castle.verb.schedule, an approval-gated
+#     capability, reached only via the "approved" precondition being true.
+#  3. ex:problem-irreversible-refused -- org.delete, an IRREVERSIBLE
+#     capability, whose goal (org-exists false) is DELIBERATELY UNREACHABLE
+#     because "approved" is never asserted for the target object -- proving
+#     the precondition gate correctly refuses (Astar returns EXIT_NO_PLAN),
+#     never that the destructive action ran.
+
+ex:problem-reversible a pd:Problem ;
+    pd:problemName "platform-console-reversible" ;
+    pd:forDomain ex:domain ;
+    pd:hasObject [ pd:objectName "res1" ] ;
+    pd:init
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "res1" ; pd:argumentIndex 0 ] ] ,
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "res1" ; pd:argumentIndex 0 ] ] ;
+    pd:goal
+        [ a pd:Atom ; pd:ofPredicate "quota-hard-set" ;
+          pd:hasArgument [ pd:argument "res1" ; pd:argumentIndex 0 ] ] .
+
+ex:problem-gated a pd:Problem ;
+    pd:problemName "platform-console-gated" ;
+    pd:forDomain ex:domain ;
+    pd:hasObject [ pd:objectName "res2" ] ;
+    pd:init
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "res2" ; pd:argumentIndex 0 ] ] ,
+        [ a pd:Atom ; pd:ofPredicate "approved" ;
+          pd:hasArgument [ pd:argument "res2" ; pd:argumentIndex 0 ] ] ;
+    pd:goal
+        [ a pd:Atom ; pd:ofPredicate "scheduled" ;
+          pd:hasArgument [ pd:argument "res2" ; pd:argumentIndex 0 ] ] .
+
+ex:problem-irreversible-refused a pd:Problem ;
+    pd:problemName "platform-console-irreversible-refused" ;
+    pd:forDomain ex:domain ;
+    pd:hasObject [ pd:objectName "res3" ] ;
+    pd:init
+        [ a pd:Atom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "res3" ; pd:argumentIndex 0 ] ] ;
+    pd:goal
+        [ a pd:NegatedAtom ; pd:ofPredicate "org-exists" ;
+          pd:hasArgument [ pd:argument "res3" ; pd:argumentIndex 0 ] ] .
+

@@ -1,0 +1,15 @@
+PREFIX ga: <https://github.com/seanchatmangpt/autofde-lab/ns/gymact#>
+SELECT ?slug ?model ?processSchema ?authorityMode ?id ?activity ?ordinal ?predecessor WHERE {
+  ?cap a ga:ClosedVerticalCapability ;
+       ga:slug ?slug ;
+       ga:interactionProfile ?profile ;
+       ga:processSchema ?processSchema ;
+       ga:authorityMode ?authorityMode ;
+       ga:hasProcessStep ?step .
+  ?profile ga:interactionModel ?model .
+  ?step ga:activityCode ?activity ; ga:ordinal ?ordinal .
+  OPTIONAL { ?step ga:predecessorId ?predecessorRaw }
+  BIND(COALESCE(?predecessorRaw, "") AS ?predecessor)
+  BIND(REPLACE(STR(?step), "^.*/", "") AS ?id)
+}
+ORDER BY ?ordinal

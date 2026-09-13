@@ -18,13 +18,13 @@ from __future__ import annotations
 from enum import Enum
 from typing import NamedTuple
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     EnumerableTransitions,
     Markovian,
@@ -34,7 +34,7 @@ from skdecide.builders.domain import (
     SingleAgent,
     UncertainInitialized,
 )
-from skdecide.hub.space.gym import EnumSpace, ListSpace
+from autofde_lab.hub.space.gym import EnumSpace, ListSpace
 
 
 class TigerState(NamedTuple):
@@ -142,19 +142,19 @@ class TigerPOMDP(
 
 class TestSARSOP:
     def test_import(self):
-        from skdecide.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.sarsop import SARSOP
 
         assert SARSOP is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.sarsop import SARSOP
 
         dom = TigerPOMDP()
         assert SARSOP.check_domain(dom)
 
     def test_solves_tiger(self):
         """After solving, alpha-vectors and beliefs should be populated."""
-        from skdecide.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.sarsop import SARSOP
 
         with SARSOP(
             domain_factory=TigerPOMDP,
@@ -169,7 +169,7 @@ class TestSARSOP:
 
     def test_gap_convergence(self):
         """Gap should be close to epsilon after solving."""
-        from skdecide.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.sarsop import SARSOP
 
         epsilon = 1.0
         with SARSOP(
@@ -186,7 +186,7 @@ class TestSARSOP:
 
     def test_uniform_belief_listen(self):
         """At uniform belief, the best action should be Listen."""
-        from skdecide.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.sarsop import SARSOP
 
         with SARSOP(
             domain_factory=TigerPOMDP,
@@ -206,7 +206,7 @@ class TestSARSOP:
 
     def test_confident_belief_opens(self):
         """With high confidence tiger is left, should open right."""
-        from skdecide.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.sarsop import SARSOP
 
         with SARSOP(
             domain_factory=TigerPOMDP,
@@ -226,7 +226,7 @@ class TestSARSOP:
 
     def test_statistics(self):
         """Statistics should be reasonable."""
-        from skdecide.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.sarsop import SARSOP
 
         with SARSOP(
             domain_factory=TigerPOMDP,
@@ -243,7 +243,7 @@ class TestSARSOP:
 
     def test_observation_based_rollout(self):
         """Rollout with observation-based interface should produce reasonable reward."""
-        from skdecide.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.sarsop import SARSOP
 
         dom = TigerPOMDP()
         with SARSOP(
@@ -274,7 +274,7 @@ class TestSARSOP:
 
     def test_belief_based_query(self):
         """Belief-based query methods should work."""
-        from skdecide.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.sarsop import SARSOP
 
         with SARSOP(
             domain_factory=TigerPOMDP,
@@ -295,7 +295,7 @@ class TestSARSOP:
 
     def test_reset_belief(self):
         """reset_belief should not crash."""
-        from skdecide.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.sarsop import SARSOP
 
         with SARSOP(
             domain_factory=TigerPOMDP,
@@ -316,7 +316,7 @@ class TestSARSOP:
 
     def test_get_last_trajectory(self):
         """get_last_trajectory should return the sampled path from the last iteration."""
-        from skdecide.hub.solver.sarsop import SARSOP
+        from autofde_lab.hub.solver.sarsop import SARSOP
 
         with SARSOP(
             domain_factory=TigerPOMDP,

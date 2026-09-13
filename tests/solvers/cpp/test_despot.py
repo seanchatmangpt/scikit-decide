@@ -18,13 +18,13 @@ from __future__ import annotations
 from enum import Enum
 from typing import NamedTuple
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     Markovian,
     PartiallyObservable,
@@ -34,7 +34,7 @@ from skdecide.builders.domain import (
     UncertainInitialized,
     UncertainTransitions,
 )
-from skdecide.hub.space.gym import EnumSpace, ListSpace
+from autofde_lab.hub.space.gym import EnumSpace, ListSpace
 
 
 class TigerState(NamedTuple):
@@ -142,19 +142,19 @@ class TigerPOMDP(
 
 class TestDESPOT:
     def test_import(self):
-        from skdecide.hub.solver.despot import DESPOT
+        from autofde_lab.hub.solver.despot import DESPOT
 
         assert DESPOT is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.despot import DESPOT
+        from autofde_lab.hub.solver.despot import DESPOT
 
         dom = TigerPOMDP()
         assert DESPOT.check_domain(dom)
 
     def test_solves_tiger(self):
         """After solving and querying, tree nodes should be populated."""
-        from skdecide.hub.solver.despot import DESPOT
+        from autofde_lab.hub.solver.despot import DESPOT
 
         with DESPOT(
             domain_factory=TigerPOMDP,
@@ -173,7 +173,7 @@ class TestDESPOT:
 
     def test_uniform_belief_listen(self):
         """At uniform belief, the best action should be Listen."""
-        from skdecide.hub.solver.despot import DESPOT
+        from autofde_lab.hub.solver.despot import DESPOT
 
         with DESPOT(
             domain_factory=TigerPOMDP,
@@ -192,7 +192,7 @@ class TestDESPOT:
 
     def test_confident_belief_opens(self):
         """With high confidence tiger is left, should open right."""
-        from skdecide.hub.solver.despot import DESPOT
+        from autofde_lab.hub.solver.despot import DESPOT
 
         with DESPOT(
             domain_factory=TigerPOMDP,
@@ -214,7 +214,7 @@ class TestDESPOT:
 
     def test_statistics(self):
         """Statistics should be reasonable."""
-        from skdecide.hub.solver.despot import DESPOT
+        from autofde_lab.hub.solver.despot import DESPOT
 
         with DESPOT(
             domain_factory=TigerPOMDP,
@@ -242,7 +242,7 @@ class TestDESPOT:
         Uses 16 episodes × 15 steps = 240 total steps for stable statistics.
         500ms budget per step gives DESPOT enough time for meaningful planning.
         """
-        from skdecide.hub.solver.despot import DESPOT
+        from autofde_lab.hub.solver.despot import DESPOT
 
         dom = TigerPOMDP()
         with DESPOT(
@@ -300,7 +300,7 @@ class TestDESPOT:
 
     def test_belief_based_query(self):
         """Belief-based query methods should work."""
-        from skdecide.hub.solver.despot import DESPOT
+        from autofde_lab.hub.solver.despot import DESPOT
 
         with DESPOT(
             domain_factory=TigerPOMDP,
@@ -322,7 +322,7 @@ class TestDESPOT:
 
     def test_reset_belief(self):
         """reset_belief should not crash."""
-        from skdecide.hub.solver.despot import DESPOT
+        from autofde_lab.hub.solver.despot import DESPOT
 
         with DESPOT(
             domain_factory=TigerPOMDP,
@@ -346,7 +346,7 @@ class TestDESPOT:
 
     def test_gap(self):
         """Gap should be non-negative."""
-        from skdecide.hub.solver.despot import DESPOT
+        from autofde_lab.hub.solver.despot import DESPOT
 
         with DESPOT(
             domain_factory=TigerPOMDP,
@@ -363,7 +363,7 @@ class TestDESPOT:
 
     def test_parallel_mode(self):
         """Solver should work in parallel mode with correct results."""
-        from skdecide.hub.solver.despot import DESPOT
+        from autofde_lab.hub.solver.despot import DESPOT
 
         with DESPOT(
             domain_factory=TigerPOMDP,

@@ -18,13 +18,13 @@ from __future__ import annotations
 from enum import Enum
 from typing import NamedTuple
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     DeterministicInitialized,
     EnumerableTransitions,
@@ -34,7 +34,7 @@ from skdecide.builders.domain import (
     Sequential,
     SingleAgent,
 )
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
 
 # --- Domain definitions ---
 
@@ -200,7 +200,7 @@ class TestVIDeterministic:
     """
 
     def test_solves_and_finds_optimal_cost(self):
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.vi import VI
 
         dom = DeterministicGridDomain(num_cols=4, num_rows=4)
 
@@ -218,7 +218,7 @@ class TestVIDeterministic:
 
     def test_optimal_policy_directions(self):
         """The optimal policy should only use right and down moves."""
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.vi import VI
 
         dom = DeterministicGridDomain(num_cols=4, num_rows=4)
 
@@ -234,7 +234,7 @@ class TestVIDeterministic:
 
     def test_optimal_value_at_initial_state(self):
         """V*(start) should be -6.0 (reward = -cost for 6 steps of cost 1)."""
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -248,7 +248,7 @@ class TestVIDeterministic:
 
     def test_explored_states_count(self):
         """A 4x4 grid has 16 states; all should be explored."""
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -262,7 +262,7 @@ class TestVIDeterministic:
 
     def test_converged_states(self):
         """After convergence all states should be converged."""
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -277,7 +277,7 @@ class TestVIDeterministic:
 
     def test_policy_completeness(self):
         """Policy should be defined for every non-terminal state."""
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -295,7 +295,7 @@ class TestVIDeterministic:
 
     def test_terminal_value_parameter(self):
         """Custom terminal_value should be reflected in V(terminal)."""
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.vi import VI
 
         terminal_reward = -100.0
 
@@ -312,7 +312,7 @@ class TestVIDeterministic:
 
     def test_callback_receives_state_sets(self):
         """Callback should be able to query explored/converged states."""
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.vi import VI
 
         explored_sizes = []
 
@@ -340,7 +340,7 @@ class TestVIStochastic:
     """
 
     def test_converges(self):
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: StochasticGridDomain(3, 3),
@@ -354,7 +354,7 @@ class TestVIStochastic:
 
     def test_value_lower_than_deterministic(self):
         """Stochastic optimal reward should be < -4 (worse than deterministic)."""
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: StochasticGridDomain(3, 3),
@@ -368,7 +368,7 @@ class TestVIStochastic:
 
     def test_policy_reaches_goal(self):
         """Following the policy should reach the goal."""
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.vi import VI
 
         dom = StochasticGridDomain(3, 3)
 

@@ -1,0 +1,33 @@
+C4Container
+title autofde_lab_planner (generalized SOTA target) — Containers
+
+Person(sre, "SRE Operator / Benchmark Harness")
+System_Ext(cluster, "Kubernetes Cluster")
+System_Ext(groq, "Groq API")
+System_Ext(ocel_db, "docs/ocel/*.ocel2.sqlite")
+
+System_Boundary(planner, "autofde_lab_planner") {
+    Container(fetcher, "Cluster State Fetcher", "Python", "Reads ANY object kind present in the namespace via real kubectl -o json calls — not a fixed list of per-fault JSON slices.")
+    Container(scanner, "Generalized Structural Anomaly Scanner", "Python", "ONE uniform diff pass over the fetched state against a baseline/expected-shape model. Replaces the per-fault-type detector enumeration this session built and then abandoned as non-generalizing. Emits typed anomalies (missing/mismatched/absent/exceeded), not fault-specific dataclasses.")
+    Container(signature, "Symptom Signature Builder", "Python", "Normalizes anomalies into app-agnostic tokens (e.g. 'deployment.replicas_ready=0', 'event.reason=FailedScheduling') — the shared vocabulary both the case library and the LLM fallback key off of.")
+    Container(cases, "Case Library (CBR)", "Python + SQLite", "Symptom-signature-indexed store of abstracted, generalized past solutions (placeholders, not literal names). Checked BEFORE paying LLM cost.")
+    Container(reasoner, "DSPy Reasoning Fallback", "Python + DSPy + Groq", "Invoked only when the scanner+case-library path finds nothing. Grounded in a real fault taxonomy and a structured checklist, not open-ended exploration.")
+    Container(remediator, "Remediation Dispatcher", "Python", "Turns a diagnosis (from scanner+case-library, or from the LLM) into real kubectl commands, executes them, waits for rollout.")
+    Container(ocel, "OCEL Telemetry Recorder", "Python", "Records every real tool call as a real OCEL 2.0 event, live.")
+}
+
+Rel(sre, planner, "Starts a trial")
+Rel(fetcher, cluster, "kubectl get -o json (any kind)")
+Rel(fetcher, scanner, "Raw cluster state")
+Rel(scanner, signature, "Typed structural anomalies")
+Rel(signature, cases, "Query: does a similar symptom signature exist?")
+Rel(cases, remediator, "Hit: rebind stored template to THIS trial's real object names")
+Rel(signature, reasoner, "Miss: symptom signature + taxonomy + checklist")
+Rel(reasoner, groq, "Real LLM call, grounded")
+Rel(reasoner, remediator, "Diagnosis + proposed commands")
+Rel(remediator, cluster, "kubectl patch/rollout/scale")
+Rel(remediator, cases, "Retain: abstract a CONFIRMED success into a new template")
+Rel(fetcher, ocel, "records")
+Rel(remediator, ocel, "records")
+Rel(reasoner, ocel, "records")
+Rel(ocel, ocel_db, "Live flush, one file per trial")

@@ -1,4 +1,4 @@
-name: nb-skdecide-py310
+name: nb-autofde-lab-py310
 channels:
   - pytorch
   - defaults
@@ -15,7 +15,12 @@ dependencies:
     - matplotlib
     - ipywidgets
     - ipympl
-    - scikit-decide[all]==1.0.2
+    # Was: scikit-decide[all]==1.0.2 -- a version this fork's git-derived
+    # setuptools_scm can never produce, so it resolved against Airbus's
+    # published PyPI package instead of this checkout. Install the local
+    # checkout explicitly via Binder's build context (the repo root, one
+    # level up from binder/) rather than a version pin.
+    - -e ..[all]
     - nbgitpuller
     - openap
     - pygeodesy
@@ -26,7 +31,7 @@ dependencies:
     - gymnasium[classic-control]==0.28.1
     - folium
     - pyRDDLGym-jax[dashboard]
-    - git+https://github.com/aiplan4eu/up-skdecide.git
+    - git+https://github.com/aiplan4eu/up-autofde_lab.git
     - optuna
     - optuna-dashboard
     - renderlab

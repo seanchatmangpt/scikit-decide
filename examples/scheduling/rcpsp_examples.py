@@ -3,19 +3,22 @@ from discrete_optimization.rcpsp.solvers_map import (
     CpRcpspSolver,
 )
 
-from examples.scheduling.rcpsp_datasets import get_complete_path
-from examples.scheduling.rcpsp_multiskill_datasets import get_data_available_ms
-from skdecide import rollout
-from skdecide.hub.domain.rcpsp.rcpsp_sk import MSRCPSP, RCPSP
-from skdecide.hub.domain.rcpsp.rcpsp_sk_parser import (
+from autofde_lab import rollout
+from autofde_lab.hub.domain.rcpsp.rcpsp_sk import MSRCPSP, RCPSP
+from autofde_lab.hub.domain.rcpsp.rcpsp_sk_parser import (
     load_domain,
     load_multiskill_domain,
 )
-from skdecide.hub.solver.do_solver.do_solver_scheduling import DOSolver, SolvingMethod
-from skdecide.hub.solver.do_solver.sgs_policies import (
+from autofde_lab.hub.solver.do_solver.do_solver_scheduling import (
+    DOSolver,
+    SolvingMethod,
+)
+from autofde_lab.hub.solver.do_solver.sgs_policies import (
     BasePolicyMethod,
     PolicyMethodParams,
 )
+from examples.scheduling.rcpsp_datasets import get_complete_path
+from examples.scheduling.rcpsp_multiskill_datasets import get_data_available_ms
 
 
 def random_walk():
@@ -43,7 +46,7 @@ def random_walk():
         plot_task_gantt,
     )
 
-    from skdecide.hub.solver.do_solver.sk_to_do_binding import (
+    from autofde_lab.hub.solver.do_solver.sk_to_do_binding import (
         from_last_state_to_solution,
     )
 

@@ -1,0 +1,33 @@
+C4Container
+title AutoFDE Ecosystem — Container View
+
+Person(researcher, "Researcher / Operator")
+System_Ext(benchmarks, "External Benchmarks")
+System_Ext(worlds, "External Worlds")
+
+System_Boundary(ecosystem, "AutoFDE Ecosystem") {
+  Container(gym_registry, "GymAct Registry", "Python", "Catalogs gyms, providers, capabilities, authority requirements, and safe-execution metadata.")
+  Container(gym_basis, "GymBasis Core", "Python / RDF", "Canonical world, state, observation, capability, authority, transition, goal, invariant, evidence, and budget model.")
+  Container(projection, "GymAct Projection Engine", "Python", "Produces typed, textual, PDDL, numeric, process, or planner-specific projections.")
+  Container(decision_basis, "DecisionBasis", "Python / RDF", "Canonical solution-system basis: planner, policy, verifier, memory, repair, replanning, compilation.")
+  Container(experiment_compiler, "Experiment Compiler", "Python", "Builds lawful GymBasis × DecisionBasis × ExperimentBasis combinations.")
+  Container(learning, "Learning Compiler", "Python", "Clusters failures into shared defects and basis repairs.")
+  Container(manufacturer, "ggen Manufacturer", "Rust", "Compiles admitted ontology/graphs into artifacts and specializations.")
+  Container(runtime, "AutoFDE Runtime", "Rust", "Executes admitted plans through governed actuation.")
+  Container(evidence, "Evidence & Standing", "RDF / SHACL / Receipts", "Independently verifies consequence, replay, identity, and standing.")
+}
+
+Rel(worlds, gym_registry, "Discovered/adapted")
+Rel(benchmarks, experiment_compiler, "Benchmark contracts / evaluators")
+Rel(gym_registry, gym_basis, "Provides registered environment metadata")
+Rel(gym_basis, projection, "Canonical source of truth")
+Rel(projection, decision_basis, "Provides decision-system views")
+Rel(decision_basis, experiment_compiler, "Architecture space")
+Rel(gym_basis, experiment_compiler, "World space")
+Rel(experiment_compiler, manufacturer, "Selected experiment configurations")
+Rel(manufacturer, runtime, "Generated governed bundles")
+Rel(runtime, evidence, "Produces receipts, traces, replay, consequence")
+Rel(evidence, learning, "Verified results and failures")
+Rel(learning, decision_basis, "Basis repairs")
+Rel(learning, gym_basis, "World-model repairs when needed")
+Rel(researcher, experiment_compiler, "Sets objectives / constraints")

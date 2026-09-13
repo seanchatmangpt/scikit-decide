@@ -1,0 +1,618 @@
+{
+  "schema": "autofde-lab.gym-fleet-reconstitution/1",
+  "program_id": "GYM-FLEET-RECONSTITUTE-2026-08-13",
+  "observation_day": "2026-08-13",
+  "corpus_repository": "seanchatmangpt/autofde-lab",
+  "corpus_base_sha": "a9982e09d3c4956720a360fb47d0a776309910ef",
+  "head_binding": "PER_REPOSITORY_DEFAULT_BRANCH_HEAD_AT_OBSERVATION_DAY",
+  "authority": "AUTHORED_INPUT_ONLY",
+  "direct_actuation": false,
+  "final_admission_allowed": false,
+  "standing": "UNKNOWN",
+  "expected_repository_count": 10,
+  "required_broker": "BRCE",
+  "reconstitution_law": [
+    "PRESERVE: every source commit named in this manifest must remain independently fetchable at its exact sha; no repository history may be rewritten, squashed, or force-pushed out from under a recorded sha as a side effect of reconstitution.",
+    "FENCE: reconstitution reads and records; it never merges, force-pushes, deletes a branch, or closes a PR on the target repositories as a side effect of authoring this manifest.",
+    "RECONSTRUCTION_LAYERS: candidate state (ACTIVE_CANDIDATE branches, open PRs) and integrated state (merged, default-branch history) are distinct layers and must never be conflated in a single disposition value.",
+    "RECEIPT_CHAIN: every repositories[].sources[] entry SHOULD carry a content_receipts object of {path: sha256hex}, computed by fetching the real bytes of each tracked path at the recorded sha via the GitHub Contents API and hashing them with sha256 (labeled sha256-observation); this is not required on every entry, and its absence on a given entry is not itself a defect, but where present it must be a real, independently computed digest, never asserted from memory.",
+    "FALSIFIER_EXACT_SOURCE_COMMIT: the verifier must hard-refuse if a recorded sha does not resolve to a real, fetchable commit on the named repository.",
+    "FALSIFIER_EXACT_SOURCE_TREE: the verifier must hard-refuse if a recorded content_receipts digest does not match a fresh sha256 computation over the real bytes at the recorded sha.",
+    "FALSIFIER_NO_UNCOMPUTED_DIGEST_CLAIM: the verifier must hard-refuse any content_receipts value that is not exactly 64 lowercase hex characters (a well-formed sha256 digest); a malformed or truncated digest string must never be silently accepted or padded.",
+    "FALSIFIER_NO_DIRECT_ACTUATION: the verifier must hard-refuse any manifest or receipt asserting direct_actuation=true or final_admission_allowed=true, since this program authors input only.",
+    "FALSIFIER_DEPENDENCY_CYCLE: the verifier must hard-refuse if depends_on edges form a cycle across repositories[].",
+    "FALSIFIER_UNDECLARED_VALIDATION: the verifier must hard-refuse a repository entry whose validation_commands were not observed in that repository's own real CI/workflow definitions or scripts at the recorded sha."
+  ],
+  "required_receipt_obligations": [
+    "exact_source_commit",
+    "exact_source_tree",
+    "doctrine_observation",
+    "validation_command_inventory",
+    "negative_falsifier",
+    "deterministic_replay",
+    "ggen_receipt_v2",
+    "independent_verifier",
+    "clean_room_replay"
+  ],
+  "repositories": [
+    {
+      "repository": "seanchatmangpt/gymact",
+      "default_branch": "main",
+      "role": "BOUNDED_GYM_ACTUATION_KERNEL",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "3399a8667256dab7cd6876910b6b21882ce69544",
+      "depends_on": [],
+      "sources": [
+        {
+          "id": "gymact-main-head",
+          "sha": "3399a8667256dab7cd6876910b6b21882ce69544",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 43,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "PARTIAL_ALIVE",
+          "scope": "default-branch HEAD; PR #43 (bridge/canonical-rdf-capability-vocabulary) is the highest-numbered real open PR on this repository at observation time, cited for reference only, not literally about this HEAD commit.",
+          "content_receipts": {
+            "README.md": "2bcb42dea14cf5592f673857f35d8b9600a031c60ac06ee3227e8cebbac12bc9",
+            "pyproject.toml": "b8c2638aba668bc93c471a5916dd58b0b7ef5cc9d574bf86bb6bb8847130d226",
+            ".github/workflows/ci.yml": "8123ce7562faf55053230223f0590aa1fc1f36468cc68a6e4f4fd09a109f121e"
+          }
+        },
+        {
+          "id": "gymact-canonical-rdf-capability-vocabulary-candidate",
+          "sha": "04a0d16c923516daf2858a7aa04563300652f773",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 43,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "bridge/canonical-rdf-capability-vocabulary: real open PR #43 (\"feat: canonical RDF capability vocabulary bridge\") against this exact branch, verified via gh api repos/seanchatmangpt/gymact/pulls/43 (head.ref=bridge/canonical-rdf-capability-vocabulary, head.sha matches, base=main, merged=false).",
+          "content_receipts": {
+            "README.md": "2bcb42dea14cf5592f673857f35d8b9600a031c60ac06ee3227e8cebbac12bc9",
+            "pyproject.toml": "b8c2638aba668bc93c471a5916dd58b0b7ef5cc9d574bf86bb6bb8847130d226",
+            ".github/workflows/ci.yml": "8123ce7562faf55053230223f0590aa1fc1f36468cc68a6e4f4fd09a109f121e"
+          }
+        }
+      ],
+      "validation_commands": [
+        "gymact validate-profile",
+        "pytest -v --disable-socket",
+        "python scripts/ocel_standing.py"
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/ggen-marketplace",
+      "default_branch": "main",
+      "role": "DETERMINISTIC_ARTIFACT_MANUFACTURING_MANIFEST",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "27662ad1a545a26d9f9d2402c60c4be908147bf8",
+      "depends_on": [],
+      "sources": [
+        {
+          "id": "ggen-marketplace-main-head",
+          "sha": "27662ad1a545a26d9f9d2402c60c4be908147bf8",
+          "kind": "MERGE_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 26,
+          "pr_state": "closed",
+          "merged": true,
+          "observed_standing": "PARTIAL_ALIVE",
+          "scope": "default-branch HEAD; PR #26 (agent/chicago-tdd-tools-provenance-correction-v1) is the highest-numbered real PR on this repository, merged 2026-08-13, and its merge commit is the recorded HEAD at observation time.",
+          "content_receipts": {
+            "README.md": "720b0e2d9e22b42f12044e1c18d949598ca93ea046a92f54566fb4a7d2543cc1",
+            ".github/workflows/ci.yml": "da37ab944a65f8b3a79a09bdb4aadd5a8afc2cfc6641e9f67f7ed3f579bf56f1"
+          }
+        }
+      ],
+      "validation_commands": [
+        "python3 scripts/marketplace.py validate",
+        "python3 scripts/qualify_packs.py",
+        "python3 scripts/check_cross_pack_references.py --mode gate"
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/fdegym",
+      "default_branch": "main",
+      "role": "FORTUNE5_DFCM_CLOUD_GYM",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "398e42c55dd7e6471aa3488b194fc0662a74f30c",
+      "depends_on": ["seanchatmangpt/gymact", "seanchatmangpt/ggen-marketplace"],
+      "sources": [
+        {
+          "id": "fdegym-main-head",
+          "sha": "c0c4f8f2d2f2b8703452341e9135c3382be7123d",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 1,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "default-branch HEAD at observation time; PR #1 is the highest-numbered real open PR on this repository, head feat/fortune5-dfcm-cloud-gym, not literally about this HEAD commit.",
+          "content_receipts": {
+            "README.md": "28e964d4ca8870623f125d71d7e779ea2186de4f36c35c74297192d953735188"
+          }
+        },
+        {
+          "id": "fdegym-fortune5-dfcm-cloud-gym-candidate",
+          "sha": "398e42c55dd7e6471aa3488b194fc0662a74f30c",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 1,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "PARTIAL_ALIVE",
+          "scope": "feat/fortune5-dfcm-cloud-gym: real open PR #1 against this exact branch, verified via gh api pulls?head=seanchatmangpt:feat/fortune5-dfcm-cloud-gym.",
+          "content_receipts": {
+            "README.md": "34135187129a48246c68dd190a3923470db1d5366700f762e887f3018469effe",
+            "pyproject.toml": "6c05046bd2a6f43c9b5c61b6d207d3bbcc0577c84773c34d8ad7fe13f554b938",
+            ".github/workflows/ci.yml": "acf8a25a2f2be938ee77c05e503cd57cb611f3e3fd8628a68b6cf2f405ac4fe9"
+          }
+        },
+        {
+          "id": "fdegym-gym-maturity-5x7-candidate",
+          "sha": "fa6872d0c5001fb57a2d0407b0d4c09ea014914b",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 1,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "agent/gym-maturity-5x7-v1: branch exists on this repository at observation time; PR #1 is cited as the highest-numbered real open PR on this repository, not literally about this branch.",
+          "content_receipts": {
+            "README.md": "28e964d4ca8870623f125d71d7e779ea2186de4f36c35c74297192d953735188",
+            "gym.toml": "9c71b6cc26914c153daa55c7a1a9efb3d8726b6660b6fee743ab7e68af7f7bfd",
+            ".github/workflows/gym-maturity.yml": "cfd42cd42f0bf8ea6fafcd82d53b977bceab93344ea127582c9e897366a624ed"
+          }
+        }
+      ],
+      "validation_commands": [
+        "ruff check src tests",
+        "pytest",
+        "fdegym catalog",
+        "fdegym scenarios"
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/awesome-ai-gyms",
+      "default_branch": "main",
+      "role": "GYM_FLEET_CURATION_INDEX",
+      "product_reconstitution": false,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "8059c9a068230bc40104af37595ed9417b984b16",
+      "depends_on": [],
+      "sources": [
+        {
+          "id": "awesome-ai-gyms-main-head",
+          "sha": "8059c9a068230bc40104af37595ed9417b984b16",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 2,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "default-branch HEAD; PR #2 (head agent/gym-maturity-5x7-v1, base main) is the highest-numbered real open PR on this repository, cited for reference, not literally about this HEAD commit.",
+          "content_receipts": {
+            "README.md": "76dbe1983a78cc7791d5fea60b29023fd3f2dd2f5bfe73726a93a83bcca27bdb"
+          }
+        },
+        {
+          "id": "awesome-ai-gyms-gym-maturity-5x7-candidate",
+          "sha": "3518f92cbe57b4760240a8ede66e15d101333b6e",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 2,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "agent/gym-maturity-5x7-v1: real current branch HEAD, re-fetched this session via gh api repos/seanchatmangpt/awesome-ai-gyms/branches/agent/gym-maturity-5x7-v1 (prior sha in this manifest was stale, identical to the main-head entry above, and did not reflect this branch's own tip). PR #2 re-confirmed open at this session with head=agent/gym-maturity-5x7-v1, base=main via gh api repos/seanchatmangpt/awesome-ai-gyms/pulls/2 -- it still targets this branch. content_receipts were not recomputed against this corrected sha in this pass and are intentionally omitted rather than carried over from the stale sha."
+        },
+        {
+          "id": "awesome-ai-gyms-dfcm-gym-hub-candidate",
+          "sha": "c47ec2e0ac8f4760a2abb9a89b6178e6f3fcdae5",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 1,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "agent/dfcm-gym-hub: real current branch HEAD, fetched this session via gh api repos/seanchatmangpt/awesome-ai-gyms/branches/agent/dfcm-gym-hub. PR #1 (\"feat: build DFCM AI gym discovery registry\") confirmed open at this session with head=agent/dfcm-gym-hub, base=main via gh api repos/seanchatmangpt/awesome-ai-gyms/pulls/1 -- head sha matches this branch tip exactly. PR body: builds Awesome AI Gyms as a DFCM-first discovery registry, normalizing 190 canonical candidate gyms across 26 categories from six external curation sources, with exact-commit pins, a canonical TSV registry, DFCM contract, public schema, exact-pinned crawler, validator, deterministic README projection, tests, and CI.",
+          "content_receipts": {
+            "README.md": "fd235e19c2d0d1a3a400afbf53ecb53c159c2db20db24740d5a503d1032f084b",
+            ".github/workflows/registry.yml": "60b069fc441213cef86287a2845c5291c26eafc7a931c25a6d116f623a030367"
+          }
+        }
+      ],
+      "validation_commands": [
+        "python -m pip install -e .",
+        "python -m pytest",
+        "python -m compileall -q ."
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/ww3gym",
+      "default_branch": "main",
+      "role": "NATO_MULTI_DOMAIN_PLANNING_GYM",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "e6eac12b06d5f7eea37e80781e3be17a95128001",
+      "depends_on": ["seanchatmangpt/gymact", "seanchatmangpt/ggen-marketplace"],
+      "sources": [
+        {
+          "id": "ww3gym-main-head",
+          "sha": "b5ee587def7b31b85921de6cc915d0b9609309e3",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 3,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "default-branch HEAD at observation time; PR #3 (head agent/ggen-ci-boost-v1) is the highest-numbered real open PR on this repository, not literally about this HEAD commit.",
+          "content_receipts": {
+            "README.md": "59239e3e664c2981c830047ed29c42ed28f75806ebfe9a67b7f1f553c9d04987"
+          }
+        },
+        {
+          "id": "ww3gym-nato-planning-candidate",
+          "sha": "e6eac12b06d5f7eea37e80781e3be17a95128001",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 1,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "PARTIAL_ALIVE",
+          "scope": "agent/ww3gym-nato-planning: real open PR #1 against this exact branch, verified via gh api pulls?head=seanchatmangpt:agent/ww3gym-nato-planning.",
+          "content_receipts": {
+            "README.md": "dad17147a9370b3026f3653cf1dd0c7eb6a42287b91aee14264df720b2e5ef7d",
+            "pyproject.toml": "45c34e50c32099c670f4bafde8ea0311c356004ab633bcef78cf3bfc3446ea95",
+            ".github/workflows/verify.yml": "a33412dd68ac307b617fc094342cd5c04013030fefa2bba84ff3b5a1dfafa4f9"
+          }
+        },
+        {
+          "id": "ww3gym-gym-maturity-5x7-candidate",
+          "sha": "ef894cd39a43a15d39d42708934efdc1e89263e8",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 3,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "agent/gym-maturity-5x7-v1: branch exists on this repository at observation time; PR #3 is cited as the highest-numbered real open PR on this repository, not literally about this branch.",
+          "content_receipts": {
+            "README.md": "59239e3e664c2981c830047ed29c42ed28f75806ebfe9a67b7f1f553c9d04987"
+          }
+        }
+      ],
+      "validation_commands": [
+        "python -m pip install -e '.[verify]'",
+        "PYTHONPATH=src python -m unittest discover -s tests -v",
+        "ww3gym demo"
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/rrgym",
+      "default_branch": "main",
+      "role": "FORTUNE5_RAPID_RESPONSE_INCIDENT_GYM",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "62ba89f4bc223751f9055701091ab1617c9ec2bb",
+      "depends_on": ["seanchatmangpt/gymact", "seanchatmangpt/ggen-marketplace"],
+      "sources": [
+        {
+          "id": "rrgym-main-head",
+          "sha": "475519ccd2bde53cd17500389e098a68c9044059",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 4,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "default-branch HEAD at observation time; PR #4 (head agent/ggen-ci-boost-v1) is the highest-numbered real open PR on this repository, not literally about this HEAD commit.",
+          "content_receipts": {
+            "README.md": "932d01e67c2c48b0ffea56bcc0d35bf4241f35988ea9e8dd1e9c23e0bc16cff9"
+          }
+        },
+        {
+          "id": "rrgym-v26-8-12-fortune5-candidate",
+          "sha": "62ba89f4bc223751f9055701091ab1617c9ec2bb",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 1,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "PARTIAL_ALIVE",
+          "scope": "agent/rrgym-v26-8-12-fortune5: real open PR #1 against this exact branch, verified via gh api pulls?head=seanchatmangpt:agent/rrgym-v26-8-12-fortune5. content_receipts below were independently recomputed and re-verified after the prior pass's digests were found truncated by one trailing hex character each.",
+          "content_receipts": {
+            "README.md": "d06c72a107d27c03dde8025a192c09dea1841d767a537d29f517a46117f61b28",
+            ".github/workflows/ci.yml": "cb2922d19a594c3f4a9e5c4c03840a9bebde9fe6d12e55f1f1f21f7c6895b13c"
+          }
+        },
+        {
+          "id": "rrgym-gym-maturity-5x7-candidate",
+          "sha": "3c3ed27a50b7a4b6e700eb928b7c9b9f63f32fae",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 4,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "agent/gym-maturity-5x7-v1: branch exists on this repository at observation time; PR #4 is cited as the highest-numbered real open PR on this repository, not literally about this branch.",
+          "content_receipts": {
+            "README.md": "932d01e67c2c48b0ffea56bcc0d35bf4241f35988ea9e8dd1e9c23e0bc16cff9",
+            "gym.toml": "ea1c60c089fb715fdbace6c481bb474e7373b5badc6b4e3ebc9dff521fd161a9"
+          }
+        },
+        {
+          "id": "rrgym-institutional-kernel-v1-candidate",
+          "sha": "75a5d1a51f85601e2f8f45c75ba8c27805adab51",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 2,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "agent/institutional-kernel-v1: real open PR #2 (feat: establish deterministic institutional kernel substrate), verified head sha matches this branch HEAD via gh api pulls/2. PR body self-reports the exact-head remote artifact as BUILD_BROKEN (package.json references unpublished src/canonical.mjs, src/model.mjs, src/receipts.mjs verifier/fixture files that the GitHub connector refused to publish), distinct from a claimed-but-unverified local-only ALIVE standing for the same source tree; observed_standing here is UNKNOWN because no test was independently run against this exact tree this session.",
+          "content_receipts": {
+            "README.md": "932d01e67c2c48b0ffea56bcc0d35bf4241f35988ea9e8dd1e9c23e0bc16cff9"
+          }
+        }
+      ],
+      "validation_commands": [
+        "npm test",
+        "npm run check",
+        "npm run doctor"
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/lifegym",
+      "default_branch": "main",
+      "role": "EXECUTABLE_LIFE_SIMULATION_WORLD_GYM",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "6c46a76395a0fa7c4c1015c8f520851400c3433c",
+      "depends_on": ["seanchatmangpt/gymact", "seanchatmangpt/ggen-marketplace"],
+      "sources": [
+        {
+          "id": "lifegym-main-head",
+          "sha": "75bb520f07143ec618a2086b94125434a65f7104",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 3,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "default-branch HEAD at observation time; PR #3 (head agent/ggen-ci-boost-v1) is the highest-numbered real open PR on this repository, not literally about this HEAD commit.",
+          "content_receipts": {
+            "README.md": "dd9ad516ece477c04a5b9924422a75dc33f0430e36eaf1735a624f61a97dbb9c"
+          }
+        },
+        {
+          "id": "lifegym-executable-world-candidate",
+          "sha": "6c46a76395a0fa7c4c1015c8f520851400c3433c",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 1,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "PARTIAL_ALIVE",
+          "scope": "agent/lifegym-executable-world: real open PR #1 against this exact branch, verified via gh api pulls?head=seanchatmangpt:agent/lifegym-executable-world.",
+          "content_receipts": {
+            "README.md": "dd9ad516ece477c04a5b9924422a75dc33f0430e36eaf1735a624f61a97dbb9c",
+            "pyproject.toml": "7736809c22b4c4239c675f063f315f87b78e3445ca48ce4ed1c5a8804055a2d5",
+            ".github/workflows/ci.yml": "b384877e9bcd5e8adb6a4dc75efa1fd9c8d7f030387411e62a7edb7cfab92cc4"
+          }
+        },
+        {
+          "id": "lifegym-gym-maturity-5x7-candidate",
+          "sha": "27693a33b396bc8cafb99a18f1128612678c5690",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 3,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "agent/gym-maturity-5x7-v1: branch exists on this repository at observation time; PR #3 is cited as the highest-numbered real open PR on this repository, not literally about this branch.",
+          "content_receipts": {
+            "README.md": "dd9ad516ece477c04a5b9924422a75dc33f0430e36eaf1735a624f61a97dbb9c",
+            "gym.toml": "8dcffa263e508f81d30a84552fb7384e086a01b4fdedafe56867d5bf720caede"
+          }
+        }
+      ],
+      "validation_commands": [
+        "python -m pip install pytest==8.3.5 rdflib==7.5.0",
+        "python -m pytest -q tests/test_lifegym.py",
+        "python -m compileall -q src tests"
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/biblegym",
+      "default_branch": "main",
+      "role": "GLOBAL_CHURCHES_DOCTRINE_GYM",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "6c57799ea41c66c3c8a5e9d05c36385f3238e5cb",
+      "depends_on": ["seanchatmangpt/gymact", "seanchatmangpt/ggen-marketplace"],
+      "sources": [
+        {
+          "id": "biblegym-main-head",
+          "sha": "06decf3df2e6c506bc0f662f37d51b0b9011b610",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 3,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "default-branch HEAD at observation time; PR #3 (head agent/ggen-ci-boost-v1) is the highest-numbered real open PR on this repository, not literally about this HEAD commit.",
+          "content_receipts": {
+            "README.md": "c72410a9aaa345794786b99e1c7dc0a43332dbb412db9c16fd15f8ef38359bfe"
+          }
+        },
+        {
+          "id": "biblegym-global-churches-candidate",
+          "sha": "6c57799ea41c66c3c8a5e9d05c36385f3238e5cb",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 1,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "PARTIAL_ALIVE",
+          "scope": "feat/biblegym-global-churches-v26.8.12: real open PR #1 against this exact branch, verified via gh api pulls?head=seanchatmangpt:feat/biblegym-global-churches-v26.8.12.",
+          "content_receipts": {
+            "README.md": "6e8f8f3c2f4dfad5322501415c7a6e144f0952cb38dc5c01b97bf1caf25fc006",
+            "pyproject.toml": "be3ebb7de92f9e6bb75711cc3c907b59516ba417d511dafaf5c61939b5f47fdf",
+            ".github/workflows/ci.yml": "9728d84eebd55ea360fdc59802f4cdb622b7c6447c79da4450b6adc1b97095a3"
+          }
+        },
+        {
+          "id": "biblegym-gym-maturity-5x7-candidate",
+          "sha": "7040424dc9dfa57816c9ec1dfc7614ba90e60733",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 3,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "agent/gym-maturity-5x7-v1: branch exists on this repository at observation time; PR #3 is cited as the highest-numbered real open PR on this repository, not literally about this branch.",
+          "content_receipts": {
+            "README.md": "c72410a9aaa345794786b99e1c7dc0a43332dbb412db9c16fd15f8ef38359bfe",
+            "gym.toml": "84fd100e4f12ca7d19ac1f2b2cc8e59a0b2d2925731d179e12421b07ee6c9ed8"
+          }
+        }
+      ],
+      "validation_commands": [
+        "python -m pip install -e .",
+        "python -m unittest discover -s tests -v",
+        "python -m compileall -q src tests"
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/claudecodegym",
+      "default_branch": "main",
+      "role": "CLAUDE_CODE_AGENTIC_TOOLUSE_GYM",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "9ad6330374b35c9e4f75846b7869dbdcbb2e989f",
+      "depends_on": ["seanchatmangpt/gymact", "seanchatmangpt/ggen-marketplace"],
+      "sources": [
+        {
+          "id": "claudecodegym-main-head",
+          "sha": "117fc76a5afff88bdfaae9bd526d78c7d96e8643",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED",
+          "pull_request": 3,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "default-branch HEAD at observation time; PR #3 (head agent/ggen-ci-boost-v1) is the highest-numbered real open PR on this repository, not literally about this HEAD commit.",
+          "content_receipts": {
+            "README.md": "e0392ccfc20c48d2629810dce51e8c6c51b5fa013b1304138720807a3e32fe9d"
+          }
+        },
+        {
+          "id": "claudecodegym-ggen-claude-code-corpus-candidate",
+          "sha": "9ad6330374b35c9e4f75846b7869dbdcbb2e989f",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 1,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "PARTIAL_ALIVE",
+          "scope": "feat/gymact-ggen-claude-code-corpus: real open PR #1 against this exact branch, verified via gh api pulls?head=seanchatmangpt:feat/gymact-ggen-claude-code-corpus.",
+          "content_receipts": {
+            "README.md": "407f9e954926662d2174ed34984fd85437dcd9ae5c1ca8a6cbed76ae0f91380b",
+            "pyproject.toml": "b8de94f76f5a4f6a70d7990125f72eccfd607f1ce7af1e74a866d9cd16b61787",
+            ".github/workflows/ci.yml": "00c0600e8684c11b5777d528ee1ff243ffb183e3182dd2af6722057449b90115"
+          }
+        },
+        {
+          "id": "claudecodegym-gym-maturity-5x7-candidate",
+          "sha": "16a53272dee4dd597fa3a000575e680e13eb0dda",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 3,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "agent/gym-maturity-5x7-v1: branch exists on this repository at observation time; PR #3 is cited as the highest-numbered real open PR on this repository, not literally about this branch.",
+          "content_receipts": {
+            "README.md": "e0392ccfc20c48d2629810dce51e8c6c51b5fa013b1304138720807a3e32fe9d",
+            "gym.toml": "37272ece3af63446dac6cc110637fa30460056b1e4da41c1c57f4e7964ad05ce"
+          }
+        }
+      ],
+      "validation_commands": [
+        "python -m pip install -e '.[dev]'",
+        "python -m pytest",
+        "python -m compileall -q src tests"
+      ]
+    },
+    {
+      "repository": "seanchatmangpt/chatgptgym",
+      "default_branch": "agent/chatgpt-cloud-gym",
+      "role": "CHATGPT_CLOUD_AGENT_GYM",
+      "product_reconstitution": true,
+      "reconstruction_strategy": "ACTIVE_CANDIDATE",
+      "canonical_reconstruction_sha": "adc83a4918c577299645465b82f75dfd16712659",
+      "depends_on": ["seanchatmangpt/gymact", "seanchatmangpt/ggen-marketplace"],
+      "sources": [
+        {
+          "id": "chatgptgym-default-branch-head",
+          "sha": "adc83a4918c577299645465b82f75dfd16712659",
+          "kind": "HEAD_COMMIT",
+          "disposition": "INTEGRATED_BRANCH",
+          "pull_request": 3,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "repository default_branch is itself agent/chatgpt-cloud-gym (not main); PR #3 (head agent/ggen-ci-boost-v1) is the highest-numbered real open PR on this repository, not literally about this default-branch HEAD.",
+          "content_receipts": {
+            "README.md": "143924e4bc89a87110a6606e7ceb83726188406176bec0ab72bc3bf584fc77dc",
+            "pyproject.toml": "fb548fa721e93320d7b28f53a22807c1063b0d295ad2382ec1a6941d7687df8b",
+            ".github/workflows/ci.yml": "411b59e7ed90696aad5c372acaa03d6197f6a0d76ca5c3d28b5659e85f6b6035"
+          }
+        },
+        {
+          "id": "chatgptgym-chatgpt-cloud-gym-candidate",
+          "sha": "adc83a4918c577299645465b82f75dfd16712659",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 1,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "PARTIAL_ALIVE",
+          "scope": "agent/chatgpt-cloud-gym: real open PR #1 against this exact branch, verified via gh api pulls?head=seanchatmangpt:agent/chatgpt-cloud-gym; same sha as the default-branch HEAD entry above since this branch is the repository's default branch.",
+          "content_receipts": {
+            "README.md": "143924e4bc89a87110a6606e7ceb83726188406176bec0ab72bc3bf584fc77dc",
+            "pyproject.toml": "fb548fa721e93320d7b28f53a22807c1063b0d295ad2382ec1a6941d7687df8b",
+            ".github/workflows/ci.yml": "411b59e7ed90696aad5c372acaa03d6197f6a0d76ca5c3d28b5659e85f6b6035"
+          }
+        },
+        {
+          "id": "chatgptgym-gym-maturity-5x7-candidate",
+          "sha": "6f4fbb93155e0209ab57c9203c24447a969013dc",
+          "kind": "HEAD_COMMIT",
+          "disposition": "ACTIVE_CANDIDATE",
+          "pull_request": 3,
+          "pr_state": "open",
+          "merged": false,
+          "observed_standing": "UNKNOWN",
+          "scope": "agent/gym-maturity-5x7-v1: branch exists on this repository at observation time; PR #3 is cited as the highest-numbered real open PR on this repository, not literally about this branch.",
+          "content_receipts": {
+            "README.md": "143924e4bc89a87110a6606e7ceb83726188406176bec0ab72bc3bf584fc77dc",
+            "pyproject.toml": "fb548fa721e93320d7b28f53a22807c1063b0d295ad2382ec1a6941d7687df8b",
+            ".github/workflows/ci.yml": "411b59e7ed90696aad5c372acaa03d6197f6a0d76ca5c3d28b5659e85f6b6035"
+          }
+        }
+      ],
+      "validation_commands": [
+        "python -m pip install pytest==9.0.2 rdflib==7.5.0",
+        "python -m pytest -q",
+        "python -m compileall -q src tests"
+      ]
+    }
+  ]
+}

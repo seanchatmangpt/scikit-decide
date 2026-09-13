@@ -1,0 +1,64 @@
+@prefix arch: <urn:autofde-lab:architecture:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:architecture:catalog:08_flow> a owl:Ontology ;
+    dcterms:title "Generated architecture catalog bundle: 08_flow" ;
+    owl:imports <urn:autofde-lab:ontology:architecture> .
+
+<urn:autofde-lab:architecture:diagram:36_flow_chatman_equation:diagram> a arch:Diagram,
+        arch:FlowDiagram ;
+    dcterms:title "36 flow chatman equation" ;
+    arch:diagramKind arch:FlowDiagram ;
+    arch:elementCount 8 ;
+    arch:mermaidSyntax "flowchart" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 7 ;
+    arch:sourceDigest "14bd65e3a976e3a9f61c24399b390bb443dc5e9ff119748dcd98f19bf8db21ad" ;
+    arch:sourcePath "docs/diagrams/36_flow_chatman_equation.mmd" .
+
+<urn:autofde-lab:architecture:diagram:37_flow_dcm_pruning:diagram> a arch:Diagram,
+        arch:FlowDiagram ;
+    dcterms:title "37 flow dcm pruning" ;
+    arch:diagramKind arch:FlowDiagram ;
+    arch:elementCount 14 ;
+    arch:mermaidSyntax "flowchart" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 14 ;
+    arch:sourceDigest "025928d3e9048308e29b9b50d0f074316464c260302360c902ae1d7bcbd5d0fa" ;
+    arch:sourcePath "docs/diagrams/37_flow_dcm_pruning.mmd" .
+
+<urn:autofde-lab:architecture:diagram:38_flow_gymact_canonicalization:diagram> a arch:Diagram,
+        arch:FlowDiagram ;
+    dcterms:title "38 flow gymact canonicalization" ;
+    arch:diagramKind arch:FlowDiagram ;
+    arch:elementCount 14 ;
+    arch:mermaidSyntax "flowchart" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 17 ;
+    arch:sourceDigest "d16aba3a1f3768b3d9f733e9a9c4169395fcb173f37001c8c5bd0543074576fe" ;
+    arch:sourcePath "docs/diagrams/38_flow_gymact_canonicalization.mmd" .
+
+<urn:autofde-lab:architecture:diagram:39_flow_failure_routing:diagram> a arch:Diagram,
+        arch:FlowDiagram ;
+    dcterms:title "39 flow failure routing" ;
+    arch:diagramKind arch:FlowDiagram ;
+    arch:elementCount 13 ;
+    arch:mermaidSyntax "flowchart" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 14 ;
+    arch:sourceDigest "1eb777e474192efd0a7c9daaddd44d0b8337a0e267bdbb1f1a8f800c41dfc446" ;
+    arch:sourcePath "docs/diagrams/39_flow_failure_routing.mmd" .
+
+<urn:autofde-lab:architecture:diagram:40_flow_sota_measurement:diagram> a arch:Diagram,
+        arch:FlowDiagram ;
+    dcterms:title "40 flow sota measurement" ;
+    arch:diagramKind arch:FlowDiagram ;
+    arch:elementCount 15 ;
+    arch:mermaidSyntax "flowchart" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 14 ;
+    arch:sourceDigest "c9baa86917b9f4359e63141f15c9bf89785a287ea616abdbf172af4200ad2d19" ;
+    arch:sourcePath "docs/diagrams/40_flow_sota_measurement.mmd" .
+

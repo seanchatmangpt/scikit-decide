@@ -2,16 +2,16 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-"""Chicago-school tests for skdecide.self_play.self_play_rollout.
+"""Chicago-school tests for autofde_lab.self_play.self_play_rollout.
 
 All tests exercise the real, registered RockPaperScissors domain and the
-real skdecide.utils.rollout machinery (solver=None, uniform-random policy).
+real autofde_lab.utils.rollout machinery (solver=None, uniform-random policy).
 No mocks or stubs are used anywhere in this file; every assertion is a
 state-based check against numbers actually produced by a real rollout.
 """
 
-from skdecide.hub.domain.rock_paper_scissors.rock_paper_scissors import Move
-from skdecide.self_play import self_play_rollout
+from autofde_lab.hub.domain.rock_paper_scissors.rock_paper_scissors import Move
+from autofde_lab.self_play import self_play_rollout
 
 
 def test_real_self_play_rollout_returns_exact_episode_count():
@@ -81,8 +81,8 @@ def test_real_self_play_rollout_honors_max_steps_bound():
 
     # Re-run with return of raw episodes to check per-episode step counts
     # directly against the real rollout output (not just the aggregate).
-    from skdecide.hub.domain.rock_paper_scissors import RockPaperScissors
-    from skdecide.utils import rollout
+    from autofde_lab.hub.domain.rock_paper_scissors import RockPaperScissors
+    from autofde_lab.utils import rollout
 
     domain = RockPaperScissors(max_moves=max_steps)
     episodes = rollout(

@@ -17,5 +17,5 @@ IF (BUILD_PYTHON_BINDING OR ONLY_PYTHON)
     TARGET_LINK_LIBRARIES(py_ppddldethindsight ${LIBS} skdecide_pddl py_ff)
 
     CMAKE_POLICY(SET CMP0079 NEW)
-    TARGET_LINK_LIBRARIES(__skdecide_hub_cpp PRIVATE py_ppddldethindsight)
+    TARGET_LINK_LIBRARIES(__autofde_lab_hub_cpp PRIVATE py_ppddldethindsight)
 ENDIF ()

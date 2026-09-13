@@ -1,0 +1,24 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:manufacture>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab lawful manufacture vocabulary" ;
+    dcterms:description "Captures provenance for canonical source manufactured from admitted semantic law. Manufacture provenance never creates a special source-code namespace or directory." ;
+    dcterms:created "2026-08-08"^^xsd:date .
+
+afl:SemanticConstitution a owl:Class , prov:Entity ; rdfs:label "Semantic constitution" .
+afl:ManufactureRule a owl:Class , prov:Entity ; rdfs:label "Manufacture rule" .
+afl:ManufactureRun a owl:Class , prov:Activity ; rdfs:label "Manufacture run" .
+afl:CanonicalSourceArtifact a owl:Class , prov:Entity ; rdfs:label "Canonical source artifact" ; rdfs:comment "A normal source artifact in its semantically correct project location. Manufacture is provenance, never architecture." .
+afl:ManufactureReceipt a owl:Class , prov:Entity ; rdfs:label "Manufacture receipt" .
+
+afl:usesConstitution a owl:ObjectProperty ; rdfs:domain afl:ManufactureRun ; rdfs:range afl:SemanticConstitution ; rdfs:label "uses constitution" .
+afl:usesManufactureRule a owl:ObjectProperty ; rdfs:domain afl:ManufactureRun ; rdfs:range afl:ManufactureRule ; rdfs:label "uses manufacture rule" .
+afl:manufacturesArtifact a owl:ObjectProperty ; rdfs:domain afl:ManufactureRun ; rdfs:range afl:CanonicalSourceArtifact ; rdfs:subPropertyOf prov:generated ; rdfs:label "manufactures artifact" .
+afl:receiptForManufacture a owl:ObjectProperty ; rdfs:domain afl:ManufactureReceipt ; rdfs:range afl:ManufactureRun ; rdfs:label "receipt for manufacture" .
+afl:canonicalProjectPath a owl:DatatypeProperty ; rdfs:domain afl:CanonicalSourceArtifact ; rdfs:range xsd:string ; rdfs:label "canonical project path" .

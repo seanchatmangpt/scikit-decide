@@ -5,10 +5,10 @@ from typing import Any
 
 import pytest
 
-from skdecide.fabric.service import DecisionFabric
+from autofde_lab.fabric.service import DecisionFabric
 
 typer_testing = pytest.importorskip("typer.testing")
-app = importlib.import_module("skdecide.fabric.cli").app
+app = importlib.import_module("autofde_lab.fabric.cli").app
 CliRunner = typer_testing.CliRunner
 runner = CliRunner()
 
@@ -17,7 +17,7 @@ def test_catalog_and_match_project_shared_fabric(
     fabric: DecisionFabric,
     monkeypatch: Any,
 ) -> None:
-    monkeypatch.setattr("skdecide.fabric.cli.get_fabric", lambda _path=None: fabric)
+    monkeypatch.setattr("autofde_lab.fabric.cli.get_fabric", lambda _path=None: fabric)
 
     catalog = runner.invoke(app, ["catalog"])
     match = runner.invoke(app, ["match", "Counter"])
@@ -29,7 +29,7 @@ def test_catalog_and_match_project_shared_fabric(
 
 
 def test_solve_emits_receipt(fabric: DecisionFabric, monkeypatch: Any) -> None:
-    monkeypatch.setattr("skdecide.fabric.cli.get_fabric", lambda _path=None: fabric)
+    monkeypatch.setattr("autofde_lab.fabric.cli.get_fabric", lambda _path=None: fabric)
 
     result = runner.invoke(
         app,
@@ -52,7 +52,7 @@ def test_cli_rejects_non_object_json(
     fabric: DecisionFabric,
     monkeypatch: Any,
 ) -> None:
-    monkeypatch.setattr("skdecide.fabric.cli.get_fabric", lambda _path=None: fabric)
+    monkeypatch.setattr("autofde_lab.fabric.cli.get_fabric", lambda _path=None: fabric)
 
     result = runner.invoke(
         app,

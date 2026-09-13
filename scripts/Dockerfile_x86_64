@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=skdecide_dev
+ARG BASE_IMAGE=autofde_lab_dev
 
 FROM $BASE_IMAGE as build
 

@@ -1,0 +1,49 @@
+{
+  "gym": "agentgym",
+  "task": "agentenv-textcraft/craft-golden_sword",
+  "source_ref": "vendor/gyms/agentgym/agentenv-textcraft/agentenv_textcraft/recipes/{golden_sword,stick,birch_planks}.json (real Minecraft crafting recipe files loaded by CraftingTree._load_recipes and validated by TextCraftEnv.step's craft/get regex actions in environment.py)",
+  "initial_facts": [],
+  "goal_facts": ["golden_sword_crafted"],
+  "steps": [
+    {
+      "id": "get_gold_ingot",
+      "description": "get 2 minecraft:gold_ingot (gold_ingot's only recipe file, gold_ingot.json, is type 'minecraft:smelting', which CraftingTree._load_recipes skips, so it is not craftable and is a valid 'get' target per environment.py's get-action check).",
+      "preconditions": [],
+      "establishes": ["has_gold_ingot"],
+      "cost": 1.0,
+      "source": "agentenv_textcraft/recipes/gold_ingot.json (type minecraft:smelting) + environment.py TextCraftEnv.step 'get' branch"
+    },
+    {
+      "id": "get_birch_log",
+      "description": "get 1 minecraft:birch_log (a raw block with no crafting recipe file in agentenv_textcraft/recipes/, so it is a valid 'get' target).",
+      "preconditions": [],
+      "establishes": ["has_birch_log"],
+      "cost": 1.0,
+      "source": "environment.py TextCraftEnv.step 'get' branch; absence of a birch_log recipe file in agentenv_textcraft/recipes/"
+    },
+    {
+      "id": "craft_birch_planks",
+      "description": "craft 4 minecraft:birch_planks using 1 minecraft:birch_log, per birch_planks.json's minecraft:crafting_shapeless recipe (ingredients: [{tag: minecraft:birch_logs}], result: {item: minecraft:birch_planks, count: 4}).",
+      "preconditions": ["has_birch_log"],
+      "establishes": ["has_birch_planks"],
+      "cost": 1.0,
+      "source": "agentenv_textcraft/recipes/birch_planks.json"
+    },
+    {
+      "id": "craft_stick",
+      "description": "craft 4 minecraft:stick using 2 minecraft:birch_planks, per stick.json's minecraft:crafting_shaped recipe (pattern ['#','#'], key {'#': {tag: minecraft:planks}}, result: {item: minecraft:stick, count: 4}).",
+      "preconditions": ["has_birch_planks"],
+      "establishes": ["has_stick"],
+      "cost": 1.0,
+      "source": "agentenv_textcraft/recipes/stick.json"
+    },
+    {
+      "id": "craft_golden_sword",
+      "description": "craft minecraft:golden_sword using 2 minecraft:gold_ingot, 1 minecraft:stick, per golden_sword.json's minecraft:crafting_shaped recipe (pattern ['X','X','#'], key {'#': {item: minecraft:stick}, 'X': {item: minecraft:gold_ingot}}, result: {item: minecraft:golden_sword}).",
+      "preconditions": ["has_gold_ingot", "has_stick"],
+      "establishes": ["golden_sword_crafted"],
+      "cost": 1.0,
+      "source": "agentenv_textcraft/recipes/golden_sword.json"
+    }
+  ]
+}
