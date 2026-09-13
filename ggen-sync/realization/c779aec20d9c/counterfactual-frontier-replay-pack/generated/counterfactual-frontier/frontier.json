@@ -1,0 +1,8 @@
+{
+  "schema": "ggen.counterfactual-frontier/1",
+  "authority": "SELECT|CONSTRUCT|VERIFY",
+  "actuation_performed": false,
+  "frontier": [
+  {"candidate":"https://ggen.dev/ontology/counterfactual-frontier-replay#candidateC","reversibility":1,"expected_reuse":1,"expected_capability_space_delta":5}
+  ]
+}

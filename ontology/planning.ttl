@@ -1,0 +1,55 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:planning>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab planning federation vocabulary" ;
+    dcterms:description "Models planner attempts as candidate producers. No producer has a private path to commitment; candidates meet in one governed candidate set before selection." ;
+    dcterms:created "2026-08-08"^^xsd:date .
+
+afl:PlanningProblem a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:planning> ;
+    rdfs:label "Planning problem" .
+afl:Planner a owl:Class , prov:Agent ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:planning> ;
+    rdfs:label "Planner" .
+afl:PlannerAttempt a owl:Class , prov:Activity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:planning> ;
+    rdfs:label "Planner attempt" .
+afl:PlanCandidate a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:planning> ;
+    rdfs:label "Plan candidate" ; rdfs:comment "A candidate future proposed by any producer. It is not commitment authority." .
+afl:CandidateSet a owl:Class , prov:Collection ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:planning> ;
+    rdfs:label "Candidate set" ; rdfs:comment "The common constitutional meeting point for every candidate producer." .
+afl:Critique a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:planning> ;
+    rdfs:label "Critique" .
+afl:Validation a owl:Class , prov:Activity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:planning> ;
+    rdfs:label "Validation" .
+afl:GovernedCandidate a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:planning> ;
+    rdfs:label "Governed candidate" ; rdfs:comment "A plan candidate that obtained standing through the common candidate-set critique and validation path." .
+afl:Disagreement a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:planning> ;
+    rdfs:label "Disagreement" .
+afl:DiscriminatingProbe a owl:Class , prov:Activity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:planning> ;
+    rdfs:label "Discriminating probe" ; rdfs:comment "An experiment or observation selected to distinguish unresolved planner/model hypotheses." .
+
+afl:attemptedBy a owl:ObjectProperty ; rdfs:domain afl:PlannerAttempt ; rdfs:range afl:Planner ; rdfs:label "attempted by" .
+afl:solvesProblem a owl:ObjectProperty ; rdfs:domain afl:PlannerAttempt ; rdfs:range afl:PlanningProblem ; rdfs:label "solves problem" .
+afl:producedCandidate a owl:ObjectProperty ; rdfs:domain afl:PlannerAttempt ; rdfs:range afl:PlanCandidate ; rdfs:subPropertyOf prov:generated ; rdfs:label "produced candidate" .
+afl:candidateForTrial a owl:ObjectProperty ; rdfs:domain afl:PlanCandidate ; rdfs:range afl:Trial ; rdfs:subPropertyOf afl:belongsToTrial ; rdfs:label "candidate for trial" .
+afl:containsCandidate a owl:ObjectProperty ; rdfs:domain afl:CandidateSet ; rdfs:range afl:PlanCandidate ; rdfs:subPropertyOf prov:hadMember ; rdfs:label "contains candidate" .
+afl:critiquesCandidate a owl:ObjectProperty ; rdfs:domain afl:Critique ; rdfs:range afl:PlanCandidate ; rdfs:label "critiques candidate" .
+afl:validatesCandidate a owl:ObjectProperty ; rdfs:domain afl:Validation ; rdfs:range afl:PlanCandidate ; rdfs:label "validates candidate" .
+afl:admittedFromCandidateSet a owl:ObjectProperty ; rdfs:domain afl:GovernedCandidate ; rdfs:range afl:CandidateSet ; rdfs:label "admitted from candidate set" .
+afl:governsCandidate a owl:ObjectProperty ; rdfs:domain afl:GovernedCandidate ; rdfs:range afl:PlanCandidate ; rdfs:subPropertyOf prov:wasDerivedFrom ; rdfs:label "governs candidate" .
+afl:recordsDisagreement a owl:ObjectProperty ; rdfs:domain afl:CandidateSet ; rdfs:range afl:Disagreement ; rdfs:label "records disagreement" .
+afl:designedFromDisagreement a owl:ObjectProperty ; rdfs:domain afl:DiscriminatingProbe ; rdfs:range afl:Disagreement ; rdfs:label "designed from disagreement" .

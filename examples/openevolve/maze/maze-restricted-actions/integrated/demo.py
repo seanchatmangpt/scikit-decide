@@ -24,11 +24,11 @@ from difflib import unified_diff
 from docopt import docopt
 from dotenv import load_dotenv
 
-from skdecide import rollout
-from skdecide.hub.solver.openevolve import (
+from autofde_lab import rollout
+from autofde_lab.hub.solver.openevolve import (
     IntegratedOpenEvolve,
 )
-from skdecide.hub.solver.openevolve.code_utils import check_diff_outside_evolveblocks
+from autofde_lab.hub.solver.openevolve.code_utils import check_diff_outside_evolveblocks
 
 load_dotenv()
 if "OPENAI_API_KEY" not in os.environ:

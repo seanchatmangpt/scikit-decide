@@ -1,0 +1,17 @@
+C4Context
+title GymAct — System Context
+
+Person(decision, "Agent / Planner / Policy / Program", "Any decision system operating on the same canonical world basis.")
+System(gymact, "GymAct", "Canonical intermediate representation and execution substrate for consequential environments.")
+System_Ext(lab, "AutoFDE SOTA Lab", "Searches solution and experiment space.")
+System_Ext(runtime, "AutoFDE Runtime", "Commits lawful plans and performs governed execution.")
+System_Ext(worlds, "External Environments", "Browsers, cloud, codebases, databases, local systems, simulated worlds.")
+System_Ext(ggen, "ggen", "Generates adapters and protocol scaffolding.")
+
+Rel(worlds, gymact, "Adapted into GymBasis")
+Rel(ggen, gymact, "Manufactures adapters/projections")
+Rel(gymact, decision, "Supplies canonical or provenance-bound projection")
+Rel(decision, gymact, "Proposes actions / plans")
+Rel(lab, gymact, "Runs experiments and reads evidence")
+Rel(runtime, gymact, "Executes governed DO path")
+Rel(gymact, runtime, "Returns receipts, replay, observations, and verification")

@@ -6,25 +6,25 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-from skdecide import Domain, Space, Value
-from skdecide.builders.domain import Renderable
-from skdecide.builders.domain.agent import SingleAgent
-from skdecide.builders.domain.concurrency import Sequential
-from skdecide.builders.domain.dynamics import (
+from autofde_lab import Domain, Space, Value
+from autofde_lab.builders.domain import Renderable
+from autofde_lab.builders.domain.agent import SingleAgent
+from autofde_lab.builders.domain.concurrency import Sequential
+from autofde_lab.builders.domain.dynamics import (
     DeterministicTransitions,
 )
-from skdecide.builders.domain.events import Actions
-from skdecide.builders.domain.initialization import (
+from autofde_lab.builders.domain.events import Actions
+from autofde_lab.builders.domain.initialization import (
     DeterministicInitialized,
 )
-from skdecide.builders.domain.memory import Markovian
-from skdecide.builders.domain.observability import (
+from autofde_lab.builders.domain.memory import Markovian
+from autofde_lab.builders.domain.observability import (
     FullyObservable,
 )
-from skdecide.builders.domain.value import PositiveCosts
-from skdecide.hub.domain.maze.maze import Action, State
-from skdecide.hub.domain.maze.maze import Maze as HubMaze
-from skdecide.hub.space.gym import ListSpace
+from autofde_lab.builders.domain.value import PositiveCosts
+from autofde_lab.hub.domain.maze.maze import Action, State
+from autofde_lab.hub.domain.maze.maze import Maze as HubMaze
+from autofde_lab.hub.space.gym import ListSpace
 
 
 class D(

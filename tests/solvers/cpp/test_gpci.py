@@ -20,14 +20,14 @@ from __future__ import annotations
 from enum import Enum
 from typing import NamedTuple
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     ImplicitSpace,
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     DeterministicInitialized,
     EnumerableTransitions,
@@ -38,7 +38,7 @@ from skdecide.builders.domain import (
     Sequential,
     SingleAgent,
 )
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
 
 
 class State(NamedTuple):
@@ -312,19 +312,19 @@ def rollout(domain, solver, max_steps=100):
 
 class TestGPCI:
     def test_import(self):
-        from skdecide.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.gpci import GPCI
 
         assert GPCI is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.gpci import GPCI
 
         dom = StochasticGridDomain()
         assert GPCI.check_domain(dom)
 
     def test_no_dead_ends_probability_one(self):
         """On a grid without dead-ends, P*(s0) should be 1.0."""
-        from skdecide.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.gpci import GPCI
 
         with GPCI(
             domain_factory=lambda: StochasticGridDomain(),
@@ -336,8 +336,8 @@ class TestGPCI:
 
     def test_no_dead_ends_matches_vi(self):
         """On a grid without dead-ends, C*(s0) should match VI's V*(s0)."""
-        from skdecide.hub.solver.gpci import GPCI
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: StochasticGridDomain(),
@@ -358,7 +358,7 @@ class TestGPCI:
 
     def test_avoidable_dead_end_grid(self):
         """On grid with avoidable dead-ends, P*(s0) should be < 1.0 but > 0."""
-        from skdecide.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.gpci import GPCI
 
         with GPCI(
             domain_factory=lambda: DeadEndGridDomain(),
@@ -372,7 +372,7 @@ class TestGPCI:
 
     def test_unavoidable_dead_end_chain(self):
         """On chain with unavoidable dead-end, P*(s0) = 0.5."""
-        from skdecide.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.gpci import GPCI
 
         with GPCI(
             domain_factory=lambda: DeadEndChainDomain(),
@@ -386,7 +386,7 @@ class TestGPCI:
 
     def test_dead_end_probability_zero(self):
         """P*(dead_end) should be 0.0."""
-        from skdecide.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.gpci import GPCI
 
         with GPCI(
             domain_factory=lambda: DeadEndChainDomain(),
@@ -398,7 +398,7 @@ class TestGPCI:
 
     def test_goal_state(self):
         """P*(goal) = 1.0 and C*(goal) = 0.0."""
-        from skdecide.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.gpci import GPCI
 
         with GPCI(
             domain_factory=lambda: DeadEndChainDomain(),
@@ -412,7 +412,7 @@ class TestGPCI:
 
     def test_rollout_stochastic_grid(self):
         """Rollout on stochastic grid should reach goal reliably."""
-        from skdecide.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.gpci import GPCI
 
         dom = StochasticGridDomain()
         with GPCI(
@@ -429,7 +429,7 @@ class TestGPCI:
 
     def test_rollout_dead_end_chain(self):
         """Rollout on dead-end chain should reach goal ~50% of the time."""
-        from skdecide.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.gpci import GPCI
 
         dom = DeadEndChainDomain()
         n_trials = 200
@@ -448,7 +448,7 @@ class TestGPCI:
 
     def test_statistics(self):
         """Statistics should be reasonable."""
-        from skdecide.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.gpci import GPCI
 
         with GPCI(
             domain_factory=lambda: StochasticGridDomain(),
@@ -462,8 +462,8 @@ class TestGPCI:
 
     def test_deterministic_grid_matches_vi(self):
         """GPCI on deterministic grid should match VI cost."""
-        from skdecide.hub.solver.gpci import GPCI
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: DeterministicGridDomain(),
@@ -486,7 +486,7 @@ class TestGPCI:
 
     def test_current_phase_in_callback(self):
         """Callback should observe PROBABILITY and COST phases."""
-        from skdecide.hub.solver.gpci import GPCI, GPCIPhase
+        from autofde_lab.hub.solver.gpci import GPCI, GPCIPhase
 
         observed_phases = set()
 
@@ -506,7 +506,7 @@ class TestGPCI:
 
     def test_policy(self):
         """get_policy should return a non-empty dict."""
-        from skdecide.hub.solver.gpci import GPCI
+        from autofde_lab.hub.solver.gpci import GPCI
 
         with GPCI(
             domain_factory=lambda: StochasticGridDomain(),

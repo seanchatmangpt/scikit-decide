@@ -15,14 +15,14 @@ TIREWORLD_PROBLEM = os.path.join(PDDL_DIR, "tireworld", "p01.pddl")
 
 @pytest.fixture
 def blocks_domain():
-    from skdecide.hub.domain.pddl import PDDLDomain
+    from autofde_lab.hub.domain.pddl import PDDLDomain
 
     return PDDLDomain(BLOCKS_DOMAIN, BLOCKS_PROBLEM)
 
 
 @pytest.fixture
 def tireworld_domain():
-    from skdecide.hub.domain.pddl import PPDDLDomain
+    from autofde_lab.hub.domain.pddl import PPDDLDomain
 
     return PPDDLDomain(TIREWORLD_DOMAIN, TIREWORLD_PROBLEM)
 
@@ -111,7 +111,7 @@ class TestPDDLDomain:
 
     def test_astar_solve_blocks(self, blocks_domain):
         """End-to-end: A* should solve blocks-3-0 (goal: B on C)."""
-        from skdecide import utils
+        from autofde_lab import utils
 
         Astar = utils.load_registered_solver("Astar")
         domain = blocks_domain

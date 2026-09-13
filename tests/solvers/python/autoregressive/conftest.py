@@ -8,8 +8,8 @@ import numpy as np
 from numpy import typing as npt
 from pytest_cases import fixture
 
-from skdecide import Domain, Space, TransitionOutcome, Value
-from skdecide.builders.domain import (
+from autofde_lab import Domain, Space, TransitionOutcome, Value
+from autofde_lab.builders.domain import (
     FullyObservable,
     Initializable,
     Markovian,
@@ -17,7 +17,7 @@ from skdecide.builders.domain import (
     Sequential,
     SingleAgent,
 )
-from skdecide.hub.space.gym import GymSpace, ListSpace, MaskableMultiDiscreteSpace
+from autofde_lab.hub.space.gym import GymSpace, ListSpace, MaskableMultiDiscreteSpace
 
 
 class StateEncoding(Enum):

@@ -1,0 +1,165 @@
+name: SREGym-Lite signature matrix
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "LiteLLM/DSPy model id"
+        required: true
+        default: "groq/openai/gpt-oss-120b"
+      noise:
+        description: "Enable SREGym noise for every episode"
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  SREGYM_SHA: ba07faf1a322f9b6d4a279643bb796aa2f36f64b
+
+jobs:
+  suite-plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      problems: ${{ steps.suite.outputs.problems }}
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Materialize exact upstream suite definition
+        run: |
+          git clone --filter=blob:none https://github.com/SREGym/SREGym.git sregym-suite
+          git -C sregym-suite checkout --detach "$SREGYM_SHA"
+          test "$(git -C sregym-suite rev-parse HEAD)" = "$SREGYM_SHA"
+      - id: suite
+        name: Derive the 21 problem identities from pinned SREGym-Lite.md
+        shell: bash
+        run: |
+          problems="$(python - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          text = Path('sregym-suite/docs/SREGym-Lite.md').read_text()
+          marker = '## Included problems'
+          if marker not in text:
+              raise SystemExit('pinned SREGym-Lite.md has no Included problems section')
+          section = text.split(marker, 1)[1]
+          problems = re.findall(r'^- `([^`]+)`$', section, flags=re.MULTILINE)
+          if len(problems) != 21 or len(set(problems)) != 21:
+              raise SystemExit(f'expected 21 unique Lite problems, got {len(problems)}')
+          print(json.dumps(problems, separators=(',', ':')))
+          PY
+          )"
+          echo "problems=$problems" >> "$GITHUB_OUTPUT"
+          echo "Pinned Lite matrix: $problems" >> "$GITHUB_STEP_SUMMARY"
+
+  episode:
+    needs: suite-plan
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        problem: ${{ fromJSON(needs.suite-plan.outputs.problems) }}
+    uses: ./.github/workflows/sregym-kind-live.yml
+    with:
+      problem: ${{ matrix.problem }}
+      model: ${{ inputs.model }}
+      noise: ${{ inputs.noise }}
+    secrets: inherit
+
+  aggregate:
+    if: always()
+    needs: [suite-plan, episode]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: sregym-autofde-*
+          path: collected
+          merge-multiple: true
+      - name: Admit complete exact-subject Lite scorecard
+        env:
+          EXPECTED_AUTOFDE_HEAD: ${{ github.sha }}
+          EXPECTED_SREGYM_HEAD: ${{ env.SREGYM_SHA }}
+        run: |
+          python - <<'PY'
+          import json
+          import statistics
+          from pathlib import Path
+
+          summaries = []
+          for path in Path('collected').rglob('*.json'):
+              try:
+                  payload = json.loads(path.read_text())
+              except Exception:
+                  continue
+              if payload.get('schema') == 'urn:autofde-lab:sregym-episode-summary:v1':
+                  summaries.append(payload)
+
+          if len(summaries) != 21:
+              raise SystemExit(f'REFUSED:INCOMPLETE_LITE_POPULATION observed={len(summaries)} expected=21')
+          problems = [item['problem_id'] for item in summaries]
+          if len(set(problems)) != 21:
+              raise SystemExit('REFUSED:DUPLICATE_LITE_PROBLEM_IDENTITY')
+
+          import os
+          expected_autofde = os.environ['EXPECTED_AUTOFDE_HEAD']
+          expected_sregym = os.environ['EXPECTED_SREGYM_HEAD']
+          for item in summaries:
+              subject = item['subject']
+              if subject['autofde_head'] != expected_autofde:
+                  raise SystemExit('REFUSED:AUTOFDE_SUBJECT_DRIFT')
+              if subject['sregym_head'] != expected_sregym:
+                  raise SystemExit('REFUSED:SREGYM_SUBJECT_DRIFT')
+
+          total = len(summaries)
+          diagnosis = sum(item['diagnosis_success'] for item in summaries)
+          mitigation = sum(item['mitigation_success'] for item in summaries)
+          e2e = sum(item['e2e_success'] for item in summaries)
+          deploy_failed = sum(item['deploy_failed'] for item in summaries)
+          ttl = [item['ttl_seconds'] for item in summaries if item['ttl_seconds'] is not None]
+          ttm = [item['ttm_seconds'] for item in summaries if item['ttm_seconds'] is not None]
+          scorecard = {
+              'schema': 'urn:autofde-lab:sregym-lite-scorecard:v1',
+              'autofde_head': expected_autofde,
+              'sregym_head': expected_sregym,
+              'population': total,
+              'diagnosis_successes': diagnosis,
+              'diagnosis_rate': diagnosis / total,
+              'mitigation_successes': mitigation,
+              'mitigation_rate': mitigation / total,
+              'e2e_successes': e2e,
+              'e2e_rate': e2e / total,
+              'deploy_failures': deploy_failed,
+              'median_ttl_seconds': statistics.median(ttl) if ttl else None,
+              'median_ttm_seconds': statistics.median(ttm) if ttm else None,
+              'problems': sorted(problems),
+              'standing': 'OBSERVED_COMPLETE_LITE_SCORECARD',
+          }
+          Path('sregym-lite-scorecard.json').write_text(json.dumps(scorecard, indent=2, sort_keys=True) + '\n')
+          summary = (
+              f"## SREGym-Lite exact-head scorecard\n\n"
+              f"- Population: {total}/21\n"
+              f"- Diagnosis: {diagnosis}/{total} ({diagnosis/total:.1%})\n"
+              f"- Mitigation: {mitigation}/{total} ({mitigation/total:.1%})\n"
+              f"- E2E: {e2e}/{total} ({e2e/total:.1%})\n"
+              f"- Deploy failures: {deploy_failed}\n"
+              f"- AutoFDE head: `{expected_autofde}`\n"
+              f"- SREGym head: `{expected_sregym}`\n"
+          )
+          Path('sregym-lite-scorecard.md').write_text(summary)
+          print(summary)
+          PY
+          cat sregym-lite-scorecard.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sregym-lite-exact-head-scorecard
+          path: |
+            sregym-lite-scorecard.json
+            sregym-lite-scorecard.md

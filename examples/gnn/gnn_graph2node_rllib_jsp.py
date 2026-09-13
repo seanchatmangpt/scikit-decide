@@ -2,9 +2,9 @@ import numpy as np
 from domains import UnmaskedGraphJspDomain
 from graph_jsp_env.disjunctive_graph_jsp_env import DisjunctiveGraphJspEnv
 
-from skdecide.hub.solver.ray_rllib import RayRLlib
-from skdecide.hub.solver.ray_rllib.gnn.algorithms.ppo import GraphPPO
-from skdecide.utils import rollout
+from autofde_lab.hub.solver.ray_rllib import RayRLlib
+from autofde_lab.hub.solver.ray_rllib.gnn.algorithms.ppo import GraphPPO
+from autofde_lab.utils import rollout
 
 jsp = np.array(
     [

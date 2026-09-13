@@ -1,0 +1,18 @@
+stateDiagram-v2
+    [*] --> Requested
+    Requested --> AuthorityCheck
+    AuthorityCheck --> Refused: authority missing/denied
+    AuthorityCheck --> DependencyCheck: authority admitted
+    DependencyCheck --> Refused: dependency unavailable
+    DependencyCheck --> ConstructingProvider: dependencies fresh
+    ConstructingProvider --> Materializing
+    Materializing --> Refused: provider returns materialize refusal
+    Materializing --> EpisodeReady: accepted + episode identity
+    EpisodeReady --> Observed: initial observation captured
+    Observed --> Active
+    Active --> Acting: admitted ActuationIntent
+    Acting --> Active: result + observation recorded
+    Active --> Teardown
+    Teardown --> Closed
+    Refused --> [*]
+    Closed --> [*]

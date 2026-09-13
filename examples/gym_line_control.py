@@ -10,15 +10,15 @@ import gymnasium as gym
 import numpy as np
 from gymnasium.error import DependencyNotInstalled
 
-from skdecide import TransitionOutcome, Value
-from skdecide.builders.domain import Renderable
-from skdecide.hub.domain.gym import (
+from autofde_lab import TransitionOutcome, Value
+from autofde_lab.builders.domain import Renderable
+from autofde_lab.hub.domain.gym import (
     DeterministicInitializedGymDomain,
     GymDiscreteActionDomain,
     GymWidthDomain,
 )
-from skdecide.hub.solver.riw import RIW
-from skdecide.utils import rollout
+from autofde_lab.hub.solver.riw import RIW
+from autofde_lab.utils import rollout
 
 HORIZON = 500
 

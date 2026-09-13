@@ -14,7 +14,7 @@ from typing import NamedTuple, Optional
 import pytest
 from pathos.helpers import mp
 
-from skdecide import (
+from autofde_lab import (
     DeterministicPlanningDomain,
     EnvironmentOutcome,
     ImplicitSpace,
@@ -23,9 +23,9 @@ from skdecide import (
     TransitionOutcome,
     Value,
 )
-from skdecide.builders.domain import UnrestrictedActions
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
-from skdecide.utils import load_registered_solver
+from autofde_lab.builders.domain import UnrestrictedActions
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.utils import load_registered_solver
 
 logger = logging.getLogger(__name__)
 

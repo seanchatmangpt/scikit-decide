@@ -8,7 +8,7 @@ import re
 import numpy as np
 import pytest
 
-from skdecide.hub.solver.openevolve.api_extraction import (
+from autofde_lab.hub.solver.openevolve.api_extraction import (
     ApiExtractionParams,
     generate_public_api,
 )

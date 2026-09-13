@@ -4,25 +4,25 @@ def test_thrust():
     import numpy as np
     from openap.thrust import Thrust
 
-    from skdecide.hub.domain.flight_planning.aircraft_performance.bean.aircraft_state import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.bean.aircraft_state import (
         AircraftState,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.performance_model_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.performance_model_enum import (
         PerformanceModelEnum,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.phase_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.phase_enum import (
         PhaseEnum,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.propulsion.service.propulsion_service import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.propulsion.service.propulsion_service import (
         PropulsionService,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.rating_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.rating_enum import (
         RatingEnum,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.weather.service.atmosphere_service import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.weather.service.atmosphere_service import (
         AtmosphereService,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.weather.settings.isa_atmosphere_settings import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.weather.settings.isa_atmosphere_settings import (
         IsaAtmosphereSettings,
     )
 
@@ -84,25 +84,25 @@ def test_fuelflow():
     import numpy as np
     from openap.fuel import FuelFlow
 
-    from skdecide.hub.domain.flight_planning.aircraft_performance.bean.aircraft_state import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.bean.aircraft_state import (
         AircraftState,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.performance_model_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.performance_model_enum import (
         PerformanceModelEnum,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.phase_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.phase_enum import (
         PhaseEnum,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.propulsion.service.propulsion_service import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.propulsion.service.propulsion_service import (
         PropulsionService,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.performance.rating_enum import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.performance.rating_enum import (
         RatingEnum,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.weather.service.atmosphere_service import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.weather.service.atmosphere_service import (
         AtmosphereService,
     )
-    from skdecide.hub.domain.flight_planning.aircraft_performance.weather.settings.isa_atmosphere_settings import (
+    from autofde_lab.hub.domain.flight_planning.aircraft_performance.weather.settings.isa_atmosphere_settings import (
         IsaAtmosphereSettings,
     )
 

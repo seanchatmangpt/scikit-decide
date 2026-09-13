@@ -1,0 +1,25 @@
+{
+  "gym": "androidworld",
+  "task": "MarkorCreateNoteAndSms",
+  "source_ref": "vendor/gyms/androidworld/android_world/task_evals/composite/markor_sms.py",
+  "initial_facts": [],
+  "goal_facts": ["note_shared_via_sms"],
+  "steps": [
+    {
+      "id": "create_markor_note",
+      "description": "Create a new note in Markor named {file_name} with the given text content, per markor.MarkorCreateNote invoked as self.markor_task in initialize_task().",
+      "preconditions": [],
+      "establishes": ["note_created"],
+      "cost": 1.0,
+      "source": "markor_sms.py MarkorCreateNoteAndSms.initialize_task() -- self.markor_task = markor.MarkorCreateNote(...)"
+    },
+    {
+      "id": "share_note_via_sms",
+      "description": "Share the entire content of the note with the phone number {number} via SMS using Simple SMS Messenger, per the task's own template: 'Share the entire content of the note with the phone number {number} via SMS using Simple SMS Messenger'.",
+      "preconditions": ["note_created"],
+      "establishes": ["note_shared_via_sms"],
+      "cost": 1.0,
+      "source": "markor_sms.py MarkorCreateNoteAndSms.template and self.sms_task = sms_validators.SimpleSMSSendSms(...)"
+    }
+  ]
+}

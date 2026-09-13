@@ -1,0 +1,16 @@
+flowchart TD
+    F["Observed failure / counterexample"] --> Q1{"World representation defect?"}
+    Q1 -- Yes --> GW["Δ GymBasis<br/>GymAct repair"]
+    Q1 -- No --> Q2{"Projection / decision architecture defect?"}
+    Q2 -- Yes --> DB["Δ DecisionBasis<br/>Lab repair"]
+    Q2 -- No --> Q3{"Execution / authority / governance defect?"}
+    Q3 -- Yes --> RT["Δ AutoFDE Runtime / authority path"]
+    Q3 -- No --> Q4{"External dependency / benchmark condition?"}
+    Q4 -- Yes --> BL["Typed BLOCKED standing"]
+    Q4 -- No --> UK["UNKNOWN / needs discriminating probe"]
+
+    GW --> R["Regenerate affected artifacts"]
+    DB --> R
+    RT --> R
+    R --> T["Re-run target + regression fossils"]
+    T --> E["Independent evidence / standing"]

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://autofde-lab.dev/schemas/receipt.schema.json",
+  "title": "autofde-lab receipt record",
+  "description": "The portable contract between this Python prototype (autofde_lab.receipts) and any future Rust reimplementation. Whatever produces receipts must satisfy this shape; the Python code is not the interface, this schema is.",
+  "type": "object",
+  "required": ["kind", "body", "issued_at_ms", "digest"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "autofde-receipt-v1"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["open", "close"]
+    },
+    "issued_at_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "digest": {
+      "type": "string",
+      "description": "sha256 hex digest of {kind, body} only (not issued_at_ms, not digest itself, not schema_version). A future Rust port may swap the hash algorithm, but must preserve this exact input shape.",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "body": {
+      "type": "object",
+      "oneOf": [
+        {
+          "title": "open receipt body",
+          "required": ["sequence", "action", "previous_receipt_digest", "opened_at_ms"],
+          "properties": {
+            "sequence": { "type": "integer", "minimum": 1 },
+            "action": { "type": "object" },
+            "previous_receipt_digest": { "type": "string" },
+            "opened_at_ms": { "type": "integer", "minimum": 0 }
+          }
+        },
+        {
+          "title": "close receipt body",
+          "required": [
+            "sequence", "action", "open_receipt_digest", "previous_receipt_digest",
+            "outcome", "postcondition_satisfied", "evidence", "closed_at_ms"
+          ],
+          "properties": {
+            "sequence": { "type": "integer", "minimum": 1 },
+            "action": { "type": "object" },
+            "open_receipt_digest": { "type": "string" },
+            "previous_receipt_digest": { "type": "string" },
+            "outcome": { "type": "string", "enum": ["succeeded", "failed"] },
+            "postcondition_satisfied": { "type": "boolean" },
+            "evidence": { "type": ["object", "null"] },
+            "closed_at_ms": { "type": "integer", "minimum": 0 }
+          }
+        }
+      ]
+    }
+  }
+}

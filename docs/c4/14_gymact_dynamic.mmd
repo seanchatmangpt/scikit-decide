@@ -1,0 +1,22 @@
+C4Dynamic
+title GymAct — Materialize, Observe, Actuate, Verify
+
+Person(decision, "Decision System")
+System(gymact, "GymAct")
+System_Ext(provider, "Environment Provider")
+System_Ext(authority, "Authority Resolver")
+System_Ext(verifier, "Independent Verifier")
+
+Rel(decision, gymact, "1. Request materialization with config + authority_ref")
+Rel(gymact, authority, "2. Resolve materialization authority")
+Rel(gymact, provider, "3. Materialize episode")
+Rel(provider, gymact, "4. Return episode + capabilities")
+Rel(gymact, provider, "5. Observe current state")
+Rel(provider, gymact, "6. Return observation")
+Rel(gymact, decision, "7. Return canonical GymBasis/projection")
+Rel(decision, gymact, "8. Submit bounded action intent")
+Rel(gymact, authority, "9. Resolve actuation authority")
+Rel(gymact, provider, "10. Actuate capability")
+Rel(provider, gymact, "11. Return action result + new observation")
+Rel(gymact, verifier, "12. Emit receipts/replay/postcondition evidence")
+Rel(verifier, decision, "13. Return verified consequence / typed refusal")

@@ -1,0 +1,23 @@
+C4Component
+title ggen Manufacturing Plane — Components
+
+Container_Boundary(ggen, "ggen") {
+  Component(parser, "RDF / Ontology Parser")
+  Component(shacl, "SHACL Validator")
+  Component(selector, "Target Projection Selector")
+  Component(template, "Template Renderer")
+  Component(codegen, "Code / Config Generator")
+  Component(manifest, "Manifest Builder")
+  Component(hash, "Digest / BLAKE3 Hasher")
+  Component(receipt, "Receipt Signer")
+  Component(drift, "Artifact Drift Detector")
+}
+
+Rel(parser, shacl, "Parsed graph")
+Rel(shacl, selector, "Validated semantic source")
+Rel(selector, template, "Projection choice")
+Rel(template, codegen, "Rendered artifacts")
+Rel(codegen, manifest, "Artifact inventory")
+Rel(manifest, hash, "Manifest bytes")
+Rel(hash, receipt, "Digest")
+Rel(codegen, drift, "Generated output baseline")

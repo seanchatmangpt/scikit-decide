@@ -1,0 +1,346 @@
+{
+  "eventTypes": [
+    {
+      "name": "act",
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "materialize",
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "verify",
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "objectTypes": [
+    {
+      "name": "episode",
+      "attributes": []
+    },
+    {
+      "name": "environment",
+      "attributes": []
+    },
+    {
+      "name": "capability",
+      "attributes": []
+    }
+  ],
+  "events": [
+    {
+      "id": "aaf153b65b0a4f58afcdc40ce074cd85",
+      "type": "materialize",
+      "time": "2026-08-08T17:38:05.483223+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "5a1a39fedb174045a19dece5cd3fe949"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "c12dd5d4b974c33d3a0c4ecf86d1de8074b0150c66882ee8e57517c11362f01c"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "a366ab7b0c87452283234b01f61d1bdd",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:environment:ccf6f4bf7aea4120af65135c80a4d9b1",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:operation:materialize",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "75d4f052a3c24f17a713dea4a8c4404b",
+      "type": "act",
+      "time": "2026-08-08T17:38:05.484152+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "9847ca7e1d4c4f3bbb8cbf88a362b141"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "c12dd5d4b974c33d3a0c4ecf86d1de8074b0150c66882ee8e57517c11362f01c"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "2f15daeb1c8957f982635810d4d4e8b7dd15cd61ae23a68cc577348861c00199"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "a366ab7b0c87452283234b01f61d1bdd",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:environment:ccf6f4bf7aea4120af65135c80a4d9b1",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:capability:pick_key",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "2275a251d4cd4b22b4561ae3c31b72c0",
+      "type": "verify",
+      "time": "2026-08-08T17:38:05.484620+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "9847ca7e1d4c4f3bbb8cbf88a362b141"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "c12dd5d4b974c33d3a0c4ecf86d1de8074b0150c66882ee8e57517c11362f01c"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "2f15daeb1c8957f982635810d4d4e8b7dd15cd61ae23a68cc577348861c00199"
+        },
+        {
+          "name": "verification_id",
+          "value": "95267f02c0c04ff8b8f920d863fea3c6"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "a366ab7b0c87452283234b01f61d1bdd",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:environment:ccf6f4bf7aea4120af65135c80a4d9b1",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:capability:pick_key",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "e188d3f8f2694c3f9183604ba8c7ac8f",
+      "type": "act",
+      "time": "2026-08-08T17:38:05.485136+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "153740e3199048beab81e5bb762739fb"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "2f15daeb1c8957f982635810d4d4e8b7dd15cd61ae23a68cc577348861c00199"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "97bc2f5d4bae921a92f29ec17c4dcfaafcea7c76b3669fa1a5fad431fa917b0e"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "a366ab7b0c87452283234b01f61d1bdd",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:environment:ccf6f4bf7aea4120af65135c80a4d9b1",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:capability:open_lock",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "075a092b0a304fc3943288fb7a19c3c8",
+      "type": "verify",
+      "time": "2026-08-08T17:38:05.485472+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "153740e3199048beab81e5bb762739fb"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "2f15daeb1c8957f982635810d4d4e8b7dd15cd61ae23a68cc577348861c00199"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "97bc2f5d4bae921a92f29ec17c4dcfaafcea7c76b3669fa1a5fad431fa917b0e"
+        },
+        {
+          "name": "verification_id",
+          "value": "a21b0542e3144f24b6e9cbb5d826a225"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "a366ab7b0c87452283234b01f61d1bdd",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:environment:ccf6f4bf7aea4120af65135c80a4d9b1",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:capability:open_lock",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "9c02c0112d8b4bb6b8fdf34bfca4951c",
+      "type": "act",
+      "time": "2026-08-08T17:38:05.485915+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "857c9afa548a4cf784ef4b93037f9228"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "97bc2f5d4bae921a92f29ec17c4dcfaafcea7c76b3669fa1a5fad431fa917b0e"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "6f843d89a224d5144b01e7dcae0d84dfef578567caf18c23842f4685cfe3c297"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "a366ab7b0c87452283234b01f61d1bdd",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:environment:ccf6f4bf7aea4120af65135c80a4d9b1",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:capability:force_latch",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "c3d097bc5a1049de9c00758f5c06721c",
+      "type": "verify",
+      "time": "2026-08-08T17:38:05.486243+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "857c9afa548a4cf784ef4b93037f9228"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "97bc2f5d4bae921a92f29ec17c4dcfaafcea7c76b3669fa1a5fad431fa917b0e"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "6f843d89a224d5144b01e7dcae0d84dfef578567caf18c23842f4685cfe3c297"
+        },
+        {
+          "name": "verification_id",
+          "value": "29e572a564a944ad96d2a6c2b4b889f9"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "a366ab7b0c87452283234b01f61d1bdd",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:environment:ccf6f4bf7aea4120af65135c80a4d9b1",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:lock-and-key:capability:force_latch",
+          "qualifier": "capability"
+        }
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "a366ab7b0c87452283234b01f61d1bdd",
+      "type": "episode",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:lock-and-key:environment:ccf6f4bf7aea4120af65135c80a4d9b1",
+      "type": "environment",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:lock-and-key:capability:force_latch",
+      "type": "capability",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:lock-and-key:capability:open_lock",
+      "type": "capability",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:lock-and-key:capability:pick_key",
+      "type": "capability",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:operation:materialize",
+      "type": "capability",
+      "attributes": []
+    }
+  ]
+}

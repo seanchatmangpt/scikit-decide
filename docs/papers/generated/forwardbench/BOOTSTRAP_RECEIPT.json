@@ -1,0 +1,34 @@
+{
+  "authority": "SELECT_ONLY; no live cloud gym deployed",
+  "autofde_adapter": "SELECT_ONLY_ALIVE",
+  "benchmarks": 80,
+  "ggen_initial_graph_hash": "66f7c801e6e011ca12ffac8a4df435097988362c52b44d6dc02d1022c4975240",
+  "ggen_release": "v26.8.6",
+  "paper_result_reproduction": "NOT_REPRODUCED",
+  "papers_declared": 52,
+  "papers_fetched_sha256_verified": 52,
+  "rdf_triples": 2765,
+  "repository_resolution_failures": 0,
+  "schema_version": 1,
+  "sha256": "a0f6c32b2d096e575c744ba61bad62270831535a63310df709e2183accb25123",
+  "smoke": {
+    "browsergym": {
+      "pin": "9e779f087de9a65668b6974d11f9ce9816026e96",
+      "registered_envs": 1,
+      "standing": "BOOTSTRAPS"
+    },
+    "cube-standard": {
+      "executed_debug_scenarios": 3,
+      "pin": "9ca7c062d211450df05eb8318a1e847b5373b689",
+      "standing": "SCENARIO_RUNS",
+      "upstream_tests": "18/18"
+    },
+    "harbor": {
+      "pin": "e485e8a6c538a3ba42fe890e61fbd14572c590aa",
+      "standing": "BOOTSTRAPS"
+    }
+  },
+  "smoke_evidence_run": 31205154790,
+  "standing": "PARTIAL_ALIVE",
+  "vendor_gitlinks": 52
+}

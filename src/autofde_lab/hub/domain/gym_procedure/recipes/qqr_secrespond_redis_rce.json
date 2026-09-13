@@ -1,0 +1,137 @@
+{
+  "gym": "qqr",
+  "task": "secrespond/redis-rce",
+  "source_ref": "vendor/gyms/qqr/data/secrespond/ranges/redis-rce/checklist.en.md",
+  "initial_facts": [],
+  "goal_facts": ["incident_remediated"],
+  "steps": [
+    {
+      "id": "terminate_mining_process",
+      "description": "Terminate the mining process disguised as /var/tmp/.redis-bgsave (CHK-01).",
+      "preconditions": [],
+      "establishes": ["mining_process_terminated"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-01 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "delete_mining_binary",
+      "description": "Delete the mining binary at /var/tmp/.redis-bgsave and check /var/tmp, /tmp for copies (CHK-02).",
+      "preconditions": ["mining_process_terminated"],
+      "establishes": ["mining_binary_removed"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-02 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "rebuild_authorized_keys",
+      "description": "Delete the attacker's SSH public key (comment attacker@redis-pwned) and rebuild /root/.ssh/authorized_keys, since the whole file is polluted with Redis RDB binary data (CHK-03).",
+      "preconditions": ["mining_binary_removed"],
+      "establishes": ["ssh_key_remediated"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-03 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "clean_crontab",
+      "description": "Delete or rebuild the Redis-written /var/spool/cron/crontabs/root file, checking both crontab -l and the filesystem level (CHK-04).",
+      "preconditions": ["ssh_key_remediated"],
+      "establishes": ["crontab_cleaned"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-04 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "harden_redis_bind",
+      "description": "Change Redis bind configuration from 0.0.0.0 to 127.0.0.1 (CHK-05).",
+      "preconditions": ["crontab_cleaned"],
+      "establishes": ["redis_bind_hardened"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-05 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "set_redis_requirepass",
+      "description": "Set Redis requirepass to a strong password (CHK-06).",
+      "preconditions": ["redis_bind_hardened"],
+      "establishes": ["redis_requirepass_set"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-06 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "enable_protected_mode",
+      "description": "Enable Redis protected-mode (CHK-07).",
+      "preconditions": ["redis_requirepass_set"],
+      "establishes": ["redis_protected_mode_enabled"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-07 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "run_redis_as_dedicated_user",
+      "description": "Change Redis to run as a dedicated redis user instead of root, updating file permissions and the systemd service user (CHK-08).",
+      "preconditions": ["redis_protected_mode_enabled"],
+      "establishes": ["redis_runs_unprivileged"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-08 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "rename_dangerous_commands",
+      "description": "Use rename-command to rename/disable CONFIG, SAVE, BGSAVE, FLUSHALL, DEBUG (CHK-09).",
+      "preconditions": ["redis_runs_unprivileged"],
+      "establishes": ["redis_commands_renamed"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-09 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "disable_ssh_root_login",
+      "description": "Change sshd_config PermitRootLogin to no/prohibit-password, run sshd -t, restart sshd (CHK-10).",
+      "preconditions": ["redis_commands_renamed"],
+      "establishes": ["ssh_root_login_disabled"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-10 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "restrict_sudoers_nopasswd",
+      "description": "Restrict /etc/sudoers.d/deploy's NOPASSWD:ALL to specific commands or remove it, validate with visudo -c (CHK-11).",
+      "preconditions": ["ssh_root_login_disabled"],
+      "establishes": ["sudoers_restricted"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-11 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "remove_ssh_rc_persistence",
+      "description": "Delete /root/.ssh/rc (disguised as a Redis connection health check) and check other users' ~/.ssh/rc (CHK-13).",
+      "preconditions": ["sudoers_restricted"],
+      "establishes": ["ssh_rc_persistence_removed"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-13 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "remove_initd_persistence",
+      "description": "Remove /etc/init.d/redis-watchdog and run update-rc.d remove, then verify (CHK-14).",
+      "preconditions": ["ssh_rc_persistence_removed"],
+      "establishes": ["initd_persistence_removed"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-14 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "verify_redis_hardening",
+      "description": "Verify all five Redis hardening items (bind + requirepass + protected-mode + run-as user + rename-command) after restarting Redis (CHK-22).",
+      "preconditions": ["initd_persistence_removed"],
+      "establishes": ["redis_hardening_verified"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-22 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "restrict_port_6379",
+      "description": "Restrict Redis port 6379 with firewall/security-group/iptables rules so it is no longer open to the public network (CHK-23).",
+      "preconditions": ["redis_hardening_verified"],
+      "establishes": ["port_6379_restricted"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-23 plan-score Correctness/Completeness"
+    },
+    {
+      "id": "verify_services_restart",
+      "description": "Verify Redis, Nginx, and SSH all run normally after remediation (CHK-24).",
+      "preconditions": ["port_6379_restricted"],
+      "establishes": ["incident_remediated"],
+      "cost": 1.0,
+      "source": "checklist.en.md CHK-24 plan-score Correctness/Completeness"
+    }
+  ]
+}

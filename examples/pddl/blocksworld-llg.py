@@ -15,10 +15,10 @@ sb3-autoregressive: components of the action are predicted one by one,
 
 import os
 
-from skdecide import EnvironmentOutcome, rollout
-from skdecide.hub.domain.plado import ActionEncoding, PladoPddlDomain, StateEncoding
-from skdecide.hub.solver.stable_baselines import StableBaseline
-from skdecide.hub.solver.stable_baselines.autoregressive.ppo.autoregressive_ppo import (
+from autofde_lab import EnvironmentOutcome, rollout
+from autofde_lab.hub.domain.plado import ActionEncoding, PladoPddlDomain, StateEncoding
+from autofde_lab.hub.solver.stable_baselines import StableBaseline
+from autofde_lab.hub.solver.stable_baselines.autoregressive.ppo.autoregressive_ppo import (
     AutoregressiveGraphPPO,
 )
 

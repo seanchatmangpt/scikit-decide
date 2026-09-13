@@ -1,0 +1,86 @@
+name: PSRO observed-closure qualification
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - "src/autofde_lab/reasoning/cross_play_schedule_psro.py"
+      - "tests/reasoning/test_cross_play_schedule_psro_chicago.py"
+      - ".github/workflows/psro-observed-closure.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  observed-closure:
+    name: Exact-head PSRO observed-closure court
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          submodules: false
+          persist-credentials: false
+
+      - name: Assert exact subject identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="${{ github.event.pull_request.head.sha }}"
+          actual="$(git rev-parse HEAD)"
+          [[ "$actual" == "$expected" ]] || {
+            echo "::error title=REFUSED:EXACT_HEAD_MISMATCH::actual=$actual expected=$expected"
+            exit 2
+          }
+          printf 'exact_head=%s\n' "$actual"
+
+      - name: Materialize bounded C++ SDK source capsule
+        shell: bash
+        run: |
+          set -euo pipefail
+          git submodule update --init --depth 1 -- \
+            cpp/sdk/Catch2 \
+            cpp/sdk/backward-cpp \
+            cpp/sdk/json \
+            cpp/sdk/nng \
+            cpp/sdk/nngpp \
+            cpp/sdk/pybind11 \
+            cpp/sdk/spdlog \
+            cpp/sdk/PEGTL
+
+      - name: Install C++ build headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libboost-dev
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install focused solver validation capsule
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install \
+            "wasm4pm-compat-pydantic @ git+https://github.com/seanchatmangpt/wasm4pm-compat.git@577e2d1d8bdfe27d96f61c63f3ea120994e8bfda#subdirectory=python"
+          python -m pip install \
+            "gymact @ git+https://github.com/seanchatmangpt/gymact.git@524d0bc8633d8534f500d67f27384ce9368c0863"
+          python -m pip install -e ".[solvers]" "pytest==8.3.5"
+
+      - name: Reject mockist seams in the owning court
+        shell: bash
+        run: |
+          ! grep -nE 'unittest\.mock|\bMock\(|\bMagicMock\(|\bpatch\(|monkeypatch' \
+            tests/reasoning/test_cross_play_schedule_psro_chicago.py
+
+      - name: Execute real cross-play PSRO strategy court
+        run: >-
+          python -m pytest
+          tests/reasoning/test_cross_play_schedule_psro_chicago.py
+          -v

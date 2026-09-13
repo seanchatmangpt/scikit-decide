@@ -14,14 +14,14 @@ from __future__ import annotations
 from enum import Enum
 from typing import NamedTuple
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     ImplicitSpace,
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     DeterministicInitialized,
     EnumerableTransitions,
@@ -32,7 +32,7 @@ from skdecide.builders.domain import (
     Sequential,
     SingleAgent,
 )
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
 
 
 class State(NamedTuple):
@@ -190,7 +190,7 @@ class TestLDFSDeterministic:
     """Test LDFS on a small deterministic 4x4 grid."""
 
     def test_solves_and_finds_optimal_cost(self):
-        from skdecide.hub.solver.ldfs import LDFS
+        from autofde_lab.hub.solver.ldfs import LDFS
 
         dom = DeterministicGridDomain(4, 4)
 
@@ -207,7 +207,7 @@ class TestLDFSDeterministic:
         assert len(actions) == 6
 
     def test_optimal_policy_directions(self):
-        from skdecide.hub.solver.ldfs import LDFS
+        from autofde_lab.hub.solver.ldfs import LDFS
 
         dom = DeterministicGridDomain(4, 4)
 
@@ -223,7 +223,7 @@ class TestLDFSDeterministic:
         assert all(a in (Action.right, Action.down) for a in actions)
 
     def test_optimal_value_at_initial_state(self):
-        from skdecide.hub.solver.ldfs import LDFS
+        from autofde_lab.hub.solver.ldfs import LDFS
 
         with LDFS(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -238,7 +238,7 @@ class TestLDFSDeterministic:
 
     def test_solved_states(self):
         """After solving, the initial state should be labeled solved."""
-        from skdecide.hub.solver.ldfs import LDFS
+        from autofde_lab.hub.solver.ldfs import LDFS
 
         with LDFS(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -253,7 +253,7 @@ class TestLDFSDeterministic:
 
     def test_explores_fewer_states_than_vi(self):
         """LDFS should explore fewer states than VI on a grid with a good heuristic."""
-        from skdecide.hub.solver.ldfs import LDFS
+        from autofde_lab.hub.solver.ldfs import LDFS
 
         with LDFS(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -269,8 +269,8 @@ class TestLDFSDeterministic:
 
     def test_matches_vi_value(self):
         """LDFS and VI should converge to the same optimal value."""
-        from skdecide.hub.solver.ldfs import LDFS
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.ldfs import LDFS
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -292,7 +292,7 @@ class TestLDFSDeterministic:
         assert abs(v_vi.cost - v_ldfs.cost) < 0.01
 
     def test_callback_called(self):
-        from skdecide.hub.solver.ldfs import LDFS
+        from autofde_lab.hub.solver.ldfs import LDFS
 
         call_count = [0]
 
@@ -313,7 +313,7 @@ class TestLDFSDeterministic:
 
     def test_last_trajectory_nonempty(self):
         """get_last_trajectory() should return (state, action) pairs after solving."""
-        from skdecide.hub.solver.ldfs import LDFS
+        from autofde_lab.hub.solver.ldfs import LDFS
 
         with LDFS(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -338,7 +338,7 @@ class TestLDFSDeterministic:
 
     def test_last_trajectory_in_callback(self):
         """Trajectory should be accessible from callback and contain (state, action) pairs."""
-        from skdecide.hub.solver.ldfs import LDFS
+        from autofde_lab.hub.solver.ldfs import LDFS
 
         trajectories = []
 
@@ -365,7 +365,7 @@ class TestLDFSDeterministic:
 
     def test_last_trajectory_updates_across_iterations(self):
         """Trajectory should update across multiple LDFS iterations, not freeze."""
-        from skdecide.hub.solver.ldfs import LDFS
+        from autofde_lab.hub.solver.ldfs import LDFS
 
         trajectories = []
 
@@ -408,7 +408,7 @@ class TestLDFSDeterministic:
 
 class TestLDFSStochastic:
     def test_converges(self):
-        from skdecide.hub.solver.ldfs import LDFS
+        from autofde_lab.hub.solver.ldfs import LDFS
 
         with LDFS(
             domain_factory=lambda: StochasticGridDomain(3, 3),
@@ -422,8 +422,8 @@ class TestLDFSStochastic:
         assert State(0, 0) in solved
 
     def test_matches_vi_value(self):
-        from skdecide.hub.solver.ldfs import LDFS
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.ldfs import LDFS
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: StochasticGridDomain(3, 3),
@@ -449,7 +449,7 @@ class TestIDAstar:
     """Test IDAstar (LDFS specialization for deterministic domains)."""
 
     def test_solves_deterministic_grid(self):
-        from skdecide.hub.solver.ldfs import IDAstar
+        from autofde_lab.hub.solver.ldfs import IDAstar
 
         dom = DeterministicGridDomain(4, 4)
 
@@ -464,7 +464,7 @@ class TestIDAstar:
         assert len(actions) == 6
 
     def test_optimal_value(self):
-        from skdecide.hub.solver.ldfs import IDAstar
+        from autofde_lab.hub.solver.ldfs import IDAstar
 
         with IDAstar(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -477,7 +477,7 @@ class TestIDAstar:
 
     def test_matches_ldfs_value(self):
         """IDAstar and LDFS should produce the same result on deterministic domains."""
-        from skdecide.hub.solver.ldfs import LDFS, IDAstar
+        from autofde_lab.hub.solver.ldfs import LDFS, IDAstar
 
         heuristic = lambda d, s: Value(cost=abs(3 - s.x) + abs(3 - s.y))
 
@@ -501,7 +501,7 @@ class TestIDAstar:
 
     def test_get_plan(self):
         """get_plan() should return the optimal action sequence."""
-        from skdecide.hub.solver.ldfs import IDAstar
+        from autofde_lab.hub.solver.ldfs import IDAstar
 
         with IDAstar(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -515,7 +515,7 @@ class TestIDAstar:
 
     def test_domain_check_rejects_stochastic(self):
         """IDAstar should reject stochastic domains via check_domain."""
-        from skdecide.hub.solver.ldfs import IDAstar
+        from autofde_lab.hub.solver.ldfs import IDAstar
 
         dom = StochasticGridDomain(3, 3)
         assert not IDAstar.check_domain(dom)

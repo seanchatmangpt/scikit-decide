@@ -4,14 +4,14 @@ import shutil
 import matplotlib
 from stable_baselines3 import PPO as SB3_PPO
 
-from skdecide.hub.domain.rddl import (
+from autofde_lab.hub.domain.rddl import (
     RDDLDomain,
     RDDLDomainRL,
     RDDLDomainSimplifiedSpaces,
 )
-from skdecide.hub.solver.cgp import CGP
-from skdecide.hub.solver.stable_baselines import StableBaseline
-from skdecide.utils import load_registered_domain, rollout
+from autofde_lab.hub.solver.cgp import CGP
+from autofde_lab.hub.solver.stable_baselines import StableBaseline
+from autofde_lab.utils import load_registered_domain, rollout
 
 
 def test_pyrddlgymdomain_sb3():

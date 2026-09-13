@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from skdecide.fabric.cache import SQLiteERRCCache
+from autofde_lab.fabric.cache import SQLiteERRCCache
 
 
 def test_cache_records_hits_misses_and_namespaces() -> None:

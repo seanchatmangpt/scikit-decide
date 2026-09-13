@@ -1,0 +1,15 @@
+PREFIX afl: <urn:autofde-lab:>
+
+SELECT ?component ?failureMode ?topology ?severity
+       ?componentLabel ?failureModeLabel ?topologyLabel ?severityLabel
+WHERE {
+  ?component a afl:Component .
+  ?failureMode a afl:FailureMode .
+  ?topology a afl:AppTopology .
+  ?severity a afl:Severity .
+  BIND(REPLACE(STR(?component), "urn:autofde-lab:", "") AS ?componentLabel)
+  BIND(REPLACE(STR(?failureMode), "urn:autofde-lab:", "") AS ?failureModeLabel)
+  BIND(REPLACE(STR(?topology), "urn:autofde-lab:", "") AS ?topologyLabel)
+  BIND(REPLACE(STR(?severity), "urn:autofde-lab:", "") AS ?severityLabel)
+}
+ORDER BY ?componentLabel ?failureModeLabel ?topologyLabel ?severityLabel

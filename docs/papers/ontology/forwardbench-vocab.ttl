@@ -1,0 +1,39 @@
+@prefix afb: <https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pplan: <http://purl.org/net/p-plan#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+afb: a owl:Ontology ;
+  dct:title "AutoFDE ForwardBench execution vocabulary" ;
+  dct:description "Minimal local vocabulary for execution facts not supplied by public scholarly/software/provenance ontologies." ;
+  dct:conformsTo <http://purl.org/dc/terms/>, <http://purl.org/spar/fabio/>, <http://purl.org/ontology/bibo/>, <http://purl.org/spar/cito/>, <http://usefulinc.com/ns/doap#>, <http://www.w3.org/ns/prov#>, <http://purl.org/net/p-plan#>, <http://www.w3.org/ns/dcat#>, <http://www.w3.org/2004/02/skos/core#>, <http://www.w3.org/ns/shacl#>, <http://www.w3.org/ns/odrl/2/> .
+
+afb:Benchmark a owl:Class ; rdfs:subClassOf dcat:Dataset, schema:Dataset .
+afb:VendorProject a owl:Class ; rdfs:subClassOf doap:Project, schema:SoftwareSourceCode .
+afb:ExecutionPlan a owl:Class ; rdfs:subClassOf prov:Plan, pplan:Plan .
+afb:slug a owl:DatatypeProperty ; rdfs:range xsd:string .
+afb:adapterFamily a owl:DatatypeProperty ; rdfs:range xsd:string .
+afb:sourceStanding a owl:DatatypeProperty ; rdfs:range xsd:string .
+afb:resolutionStanding a owl:DatatypeProperty ; rdfs:range xsd:string .
+afb:smokeStanding a owl:DatatypeProperty ; rdfs:range xsd:string .
+afb:retrievalStanding a owl:DatatypeProperty ; rdfs:range xsd:string .
+afb:vendorPath a owl:DatatypeProperty ; rdfs:range xsd:string .
+afb:repositoryUrl a owl:DatatypeProperty ; rdfs:range xsd:anyURI .
+afb:requestedRef a owl:DatatypeProperty ; rdfs:range xsd:string .
+afb:pinnedRevision a owl:DatatypeProperty ; rdfs:range xsd:string .
+afb:smokeProfile a owl:DatatypeProperty ; rdfs:range xsd:string .
+afb:localSafe a owl:DatatypeProperty ; rdfs:range xsd:boolean .
+afb:requiresAuthority a owl:DatatypeProperty ; rdfs:range xsd:boolean .
+afb:arxivId a owl:DatatypeProperty ; rdfs:range xsd:string .
+afb:sha256 a owl:DatatypeProperty ; rdfs:range xsd:string .
+afb:vendorProject a owl:ObjectProperty ; rdfs:range afb:VendorProject .
+afb:usesPlan a owl:ObjectProperty ; rdfs:range afb:ExecutionPlan .

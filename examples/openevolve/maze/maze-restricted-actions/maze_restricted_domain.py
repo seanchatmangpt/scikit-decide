@@ -6,11 +6,11 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-from skdecide import DeterministicPlanningDomain, Space, Value
-from skdecide.builders.domain import Renderable
-from skdecide.hub.domain.maze.maze import Action, State
-from skdecide.hub.domain.maze.maze import Maze as HubMaze
-from skdecide.hub.space.gym import ListSpace
+from autofde_lab import DeterministicPlanningDomain, Space, Value
+from autofde_lab.builders.domain import Renderable
+from autofde_lab.hub.domain.maze.maze import Action, State
+from autofde_lab.hub.domain.maze.maze import Maze as HubMaze
+from autofde_lab.hub.space.gym import ListSpace
 
 
 class D(DeterministicPlanningDomain, Renderable):

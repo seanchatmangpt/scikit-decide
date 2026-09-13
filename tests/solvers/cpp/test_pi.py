@@ -14,13 +14,13 @@ from __future__ import annotations
 from enum import Enum
 from typing import NamedTuple
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     DeterministicInitialized,
     EnumerableTransitions,
@@ -30,7 +30,7 @@ from skdecide.builders.domain import (
     Sequential,
     SingleAgent,
 )
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
 
 # --- Domain definitions (shared with test_vi.py) ---
 
@@ -188,7 +188,7 @@ class TestPIDeterministic:
     """
 
     def test_solves_and_finds_optimal_cost(self):
-        from skdecide.hub.solver.pi import PI
+        from autofde_lab.hub.solver.pi import PI
 
         dom = DeterministicGridDomain(4, 4)
 
@@ -205,7 +205,7 @@ class TestPIDeterministic:
         assert len(actions) == 6
 
     def test_optimal_policy_directions(self):
-        from skdecide.hub.solver.pi import PI
+        from autofde_lab.hub.solver.pi import PI
 
         dom = DeterministicGridDomain(4, 4)
 
@@ -221,7 +221,7 @@ class TestPIDeterministic:
         assert all(a in (Action.right, Action.down) for a in actions)
 
     def test_optimal_value_at_initial_state(self):
-        from skdecide.hub.solver.pi import PI
+        from autofde_lab.hub.solver.pi import PI
 
         with PI(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -235,7 +235,7 @@ class TestPIDeterministic:
         assert abs(v.reward - (-6.0)) < 0.01
 
     def test_explored_states_count(self):
-        from skdecide.hub.solver.pi import PI
+        from autofde_lab.hub.solver.pi import PI
 
         with PI(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -249,7 +249,7 @@ class TestPIDeterministic:
         assert len(explored) == 16
 
     def test_policy_completeness(self):
-        from skdecide.hub.solver.pi import PI
+        from autofde_lab.hub.solver.pi import PI
 
         with PI(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -268,7 +268,7 @@ class TestPIDeterministic:
 
     def test_few_iterations(self):
         """PI should converge in very few iterations on a small grid."""
-        from skdecide.hub.solver.pi import PI
+        from autofde_lab.hub.solver.pi import PI
 
         with PI(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -283,7 +283,7 @@ class TestPIDeterministic:
 
     def test_initial_policy_warm_start(self):
         """Providing a good initial policy should converge in fewer iterations."""
-        from skdecide.hub.solver.pi import PI
+        from autofde_lab.hub.solver.pi import PI
 
         def good_policy(d, s):
             if s.x < d.num_cols - 1:
@@ -304,7 +304,7 @@ class TestPIDeterministic:
         assert len(actions) == 6
 
     def test_policy_changed_states_empty_after_convergence(self):
-        from skdecide.hub.solver.pi import PI
+        from autofde_lab.hub.solver.pi import PI
 
         with PI(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -318,7 +318,7 @@ class TestPIDeterministic:
         assert len(changed) == 0
 
     def test_callback_called(self):
-        from skdecide.hub.solver.pi import PI
+        from autofde_lab.hub.solver.pi import PI
 
         iteration_counts = []
 
@@ -339,8 +339,8 @@ class TestPIDeterministic:
 
     def test_matches_vi_value(self):
         """PI and VI should converge to the same optimal value."""
-        from skdecide.hub.solver.pi import PI
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.pi import PI
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: DeterministicGridDomain(4, 4),
@@ -364,7 +364,7 @@ class TestPIDeterministic:
 
 class TestPIStochastic:
     def test_converges(self):
-        from skdecide.hub.solver.pi import PI
+        from autofde_lab.hub.solver.pi import PI
 
         with PI(
             domain_factory=lambda: StochasticGridDomain(3, 3),
@@ -379,8 +379,8 @@ class TestPIStochastic:
 
     def test_matches_vi_value(self):
         """PI and VI should agree on the stochastic grid."""
-        from skdecide.hub.solver.pi import PI
-        from skdecide.hub.solver.vi import VI
+        from autofde_lab.hub.solver.pi import PI
+        from autofde_lab.hub.solver.vi import VI
 
         with VI(
             domain_factory=lambda: StochasticGridDomain(3, 3),

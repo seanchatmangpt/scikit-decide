@@ -1,0 +1,34 @@
+sequenceDiagram
+    autonumber
+    participant C as Census
+    participant VB as VendorBenchmarkProvider
+    participant BR as Bridge
+    participant AR as Authority Resolver
+    participant O as Oracle Projection
+    participant L as SOTA Lab
+    participant E as Evaluator
+
+    C->>VB: Inspect provider family
+    VB-->>C: Shared constructor + materialization authority requirements
+    C->>L: Classify oracle semantics
+    L->>BR: Apply generic constructor introspection
+    BR->>AR: MaterializationIntent(authority_ref)
+    AR-->>BR: ADMITTED / REFUSED
+    alt Refused or dependency blocked
+        BR-->>L: Typed blocker
+    else Materialized
+        BR->>O: Bind evaluator semantics
+        alt Category A reward-file
+            O-->>L: Shared reward-file oracle + config
+        else Category B exit-code
+            O-->>L: Shared exit-code oracle + config
+        else Category C JSON-field
+            O-->>L: Shared JSON-field oracle + config
+        else Category D in-process evaluator
+            O-->>L: Requires new evaluator capability shape
+        else Category E no oracle
+            O-->>L: Permanent refusal boundary
+        end
+        L->>E: Execute only authority-safe admitted benchmark
+        E-->>L: Score / failure / typed blocker
+    end

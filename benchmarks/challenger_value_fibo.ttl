@@ -1,0 +1,37 @@
+@prefix chall: <https://chatmangpt.com/autofde/challenger/value/> .
+@prefix fibo-fnd-acc-cur: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix cmns-qtu: <https://www.omg.org/spec/Commons/QuantitiesAndUnits/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Source ontology is the ggen-vendored FIBO Currency Amount ontology at
+# ggen@c37b46015b8e5ab40be771d61aafe3d7c7af084c.
+chall:ChallengerEconomicEnvelope
+    dct:source <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> ;
+    chall:ggenSourceCommit "c37b46015b8e5ab40be771d61aafe3d7c7af084c" ;
+    chall:loadedEngineeringHourlyRate chall:LoadedEngineeringHourlyRate100USD ;
+    chall:scenario chall:FiveMinuteScenario,
+                   chall:FifteenMinuteScenario,
+                   chall:ThirtyMinuteScenario .
+
+chall:LoadedEngineeringHourlyRate100USD
+    a fibo-fnd-acc-cur:MonetaryAmount ;
+    cmns-qtu:hasNumericValue "100.00"^^xsd:decimal ;
+    fibo-fnd-acc-cur:hasCurrency <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/USDollar> ;
+    chall:unit "USD/hour" .
+
+chall:FiveMinuteScenario
+    chall:minutesPerMatchedEpisode "5"^^xsd:integer ;
+    chall:standing "DERIVED_SCENARIO_NOT_REALIZED_SAVINGS" .
+
+chall:FifteenMinuteScenario
+    chall:minutesPerMatchedEpisode "15"^^xsd:integer ;
+    chall:standing "DERIVED_SCENARIO_NOT_REALIZED_SAVINGS" .
+
+chall:ThirtyMinuteScenario
+    chall:minutesPerMatchedEpisode "30"^^xsd:integer ;
+    chall:standing "DERIVED_SCENARIO_NOT_REALIZED_SAVINGS" .
+
+# Value calculus:
+#   derived_value_usd = MATCHED_compiled_episodes * minutes/60 * loaded_hourly_rate
+# FALLBACK_NOVELTY and REFUSED_EVIDENCE contribute zero displaced-cognition value.

@@ -1,0 +1,33 @@
+{
+  "gym": "browsergym",
+  "task": "miniwob.click-menu-2 (Play item, Playback submenu variant)",
+  "source_ref": "vendor/gyms/browsergym/tests/miniwob/test_click-menu-2.py",
+  "initial_facts": [],
+  "goal_facts": ["item_clicked"],
+  "steps": [
+    {
+      "id": "click_menu_button",
+      "description": "page.get_by_text(\"Menu\").click() -- click the top-level 'Menu' button to open the menu.",
+      "preconditions": [],
+      "establishes": ["menu_open"],
+      "cost": 1.0,
+      "source": "test_click-menu-2.py lines 49-53 (first env.step action)"
+    },
+    {
+      "id": "click_playback_submenu",
+      "description": "page.get_by_text(\"Playback\").click() -- click the 'Playback' submenu, required when the target item (Prev/Stop/Play/Next) lives under it.",
+      "preconditions": ["menu_open"],
+      "establishes": ["playback_submenu_open"],
+      "cost": 1.0,
+      "source": "test_click-menu-2.py lines 59-69 (submenu branch for ui-icon-seek-start/stop/play/seek-end)"
+    },
+    {
+      "id": "click_target_item",
+      "description": "page.locator(\".ui-icon-play\").click() -- click the target menu item (here: the 'Play' item, icon class ui-icon-play) to complete the task.",
+      "preconditions": ["playback_submenu_open"],
+      "establishes": ["item_clicked"],
+      "cost": 1.0,
+      "source": "test_click-menu-2.py lines 71-78 (final env.step action, asserts reward == 1 and term == True)"
+    }
+  ]
+}

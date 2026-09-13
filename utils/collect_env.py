@@ -19,7 +19,7 @@ except (ImportError, NameError, AttributeError, OSError):
     TORCH_AVAILABLE = False
 
 try:
-    from skdecide import __version__ as skdecide_version
+    from autofde_lab import __version__ as skdecide_version
 except ImportError:
     skdecide_version = "Not available"
 

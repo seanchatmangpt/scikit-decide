@@ -1,0 +1,219 @@
+[08/09/26 19:12:20] INFO     __main__ - 🔧 Config — agent: autofde_lab_dspy,    
+                             agent_model: groq/openai/gpt-oss-20b, judge_model: 
+                             groq/openai/gpt-oss-20b, reasoning_effort: agent   
+                             default, agent_api_base: unset, judge_api_base:    
+                             unset                                              
+                    INFO     __main__ - 🔍 Running pre-flight check for judge   
+                             model...                                           
+🔧 Initializing LLM backend — model: groq/openai/gpt-oss-20b, api_base: unset
+                    INFO     __main__ - ✅ Judge pre-flight check passed        
+╭───────────────────────────── SREGym API Server ──────────────────────────────╮
+│  ____  ____  _____ ____                                                      │
+│ / ___||  _ \| ____/ ___|_   _ _ __ ___                                       │
+│ \___ \| |_) |  _|| |  _| | | | '_ ` _ \                                      │
+│  ___) |  _ <| |__| |_| | |_| | | | | | |                                     │
+│ |____/|_| \_\_____\____|\__, |_| |_| |_|                                     │
+│                         |___/                                                │
+│                                                                              │
+╰──────────────────────────── http://0.0.0.0:8000 ─────────────────────────────╯
+Available Endpoints                                                             
+
+ • POST /submit: { "solution": "<your-solution>" } → grades the current stage   
+ • GET /status: returns { "stage": "setup" | "diagnosis" | "mitigation" |       
+   "tearing_down" | "done" }                                                    
+/Users/sac/autofde-lab/vendor/gyms/sregym/.venv/lib/python3.12/site-packages/websockets/legacy/__init__.py:6: DeprecationWarning: websockets.legacy is deprecated; see https://websockets.readthedocs.io/en/stable/howto/upgrade.html for upgrade instructions
+  warnings.warn(  # deprecated in 14.0 - 2024-11-09
+/Users/sac/autofde-lab/vendor/gyms/sregym/.venv/lib/python3.12/site-packages/uvicorn/protocols/websockets/websockets_impl.py:17: DeprecationWarning: websockets.server.WebSocketServerProtocol is deprecated
+  from websockets.server import WebSocketServerProtocol
+                    INFO     uvicorn.error - Started server process [8455]      
+                    INFO     uvicorn.error - Waiting for application startup.   
+                    INFO     uvicorn.error - Application startup complete.      
+                    INFO     uvicorn.error - Uvicorn running on                 
+                             http://0.0.0.0:8000 (Press CTRL+C to quit)         
+[19:12:21] Starting agent now: autofde_lab_dspy                      main.py:219
+           🔒 Starting Kubernetes API proxy to hide chaos            main.py:223
+           namespaces...                                                        
+[08/09/26 19:12:21] INFO     all.sregym.conductor - Starting Kubernetes API     
+                             filtering proxy...                                 
+                    INFO     all.infra.k8s_proxy - Kubernetes API filtering     
+                             proxy started on port 16443                        
+                    INFO     all.infra.k8s_proxy - Hidden namespaces: {'khaos', 
+                             'chaos-mesh'}                                      
+                    INFO     all.infra.k8s_proxy - Hidden labels: {'app':       
+                             {'locust-fetcher', 'load-generator'}, 'job':       
+                             {'workload'}, 'opentelemetry.io/name':             
+                             {'load-generator'}}                                
+                    INFO     all.infra.k8s_proxy - Generated agent kubeconfig at
+                             /Users/sac/.cache/tmp/sregym-agent-kubeconfig      
+                    INFO     all.sregym.conductor - Agent kubeconfig generated  
+                             at: /Users/sac/.cache/tmp/sregym-agent-kubeconfig  
+           🎯 Running single problem: scale_pod_zero_social_net      main.py:242
+                                                                     main.py:312
+           🔍 Starting problem: scale_pod_zero_social_net (Attempt 1            
+           of 1)                                                                
+[08/09/26 19:12:22] INFO     all.sregym.conductor - [Session Start] Problem ID: 
+                             scale_pod_zero_social_net                          
+                    INFO     all.sregym.conductor - [STAGE] Start testing on    
+                             problem: scale_pod_zero_social_net                 
+                    INFO     all.sregym.conductor - Fixing Kubernetes... to     
+                             normal state.                                      
+                    INFO     all.sregym.conductor - [FIX] Imbalance leftover if 
+                             any                                                
+                    INFO     all.sregym.conductor - [FIX] KubeletCrash leftover 
+                             if any                                             
+Starting kubelet in kind-worker...
+Kubelet started in kind-worker
+Starting kubelet in kind-worker2...
+Kubelet started in kind-worker2
+Starting kubelet in kind-worker3...
+Kubelet started in kind-worker3
+Waiting for worker nodes {'kind-worker', 'kind-worker2', 'kind-worker3'} to become Ready...
+All worker nodes are Ready.
+[08/09/26 19:12:25] INFO     all.sregym.conductor - [FIX]                       
+                             KubeletEvictionThresholdMisconfig leftover if any  
+Recovering disk pressure in kind-worker...
+Waiting for node kind-worker to become Ready...
+Node kind-worker is Ready.
+Recovering disk pressure in kind-worker2...
+Waiting for node kind-worker2 to become Ready...
+Node kind-worker2 is Ready.
+Recovering disk pressure in kind-worker3...
+Waiting for node kind-worker3 to become Ready...
+Node kind-worker3 is Ready.
+[08/09/26 19:12:27] INFO     all.sregym.conductor - [FIX] Calico                
+                             IPPool/strictAffinity leftover if any              
+                    INFO     all.sregym.conductor - [FIX] Calico route-reflector
+                             label drift leftovers if any                       
+                    ERROR    all.infra.kubectl - Command failed (exit 1):       
+                             kubectl get bgppeer cluster-peer-policy -o json    
+                               stderr: Error from server (NotFound):            
+                             bgppeers.crd.projectcalico.org                     
+                             "cluster-peer-policy" not found                    
+                    ERROR    all.infra.kubectl - Command failed (exit 1):       
+                             kubectl get bgpconfiguration default -o json       
+                               stderr: Error from server (NotFound):            
+                             bgpconfigurations.crd.projectcalico.org "default"  
+                             not found                                          
+                    ERROR    all.infra.kubectl - Command failed (exit 1):       
+                             kubectl get namespace platform-checks -o json      
+                               stderr: Error from server (NotFound): namespaces 
+                             "platform-checks" not found                        
+                    ERROR    all.infra.kubectl - Command failed (exit 1):       
+                             kubectl -n khaos get configmap network-case-state  
+                             -o json                                            
+                               stderr: Error from server (NotFound): namespaces 
+                             "khaos" not found                                  
+                    INFO     all.sregym.conductor - [FIX] Stale CoreDNS NXDOMAIN
+                             templates if any                                   
+No NXDOMAIN templates found in CoreDNS config; nothing to do
+                    INFO     all.sregym.conductor - [FIX] Leftover dm-flakey    
+                             infrastructure if any                              
+[dm-flakey] ⚠️ Could not remove dm-flakey on kind-control-plane (may not exist): No running Khaos pod found on node kind-control-plane
+[dm-flakey] ⚠️ Could not remove dm-flakey on kind-worker (may not exist): No running Khaos pod found on node kind-worker
+[dm-flakey] ⚠️ Could not remove dm-flakey on kind-worker2 (may not exist): No running Khaos pod found on node kind-worker2
+[dm-flakey] ⚠️ Could not remove dm-flakey on kind-worker3 (may not exist): No running Khaos pod found on node kind-worker3
+[08/09/26 19:12:28] INFO     all.sregym.conductor - [FIX] NightlyRebalanceOOM   
+                             kube-system actor leftover if any                  
+                    INFO     all.sregym.conductor - [FIX] Clock drift leftover  
+                             if any                                             
+No leftover node-probe pods found; nothing to do
+                    INFO     all.sregym.conductor - Fix Kubernetes completed.   
+                    INFO     all.sregym.conductor - No tasklist.yml found.      
+                             Defaulting to running diagnosis and mitigation for 
+                             this problem.                                      
+                    INFO     all.sregym.conductor - Undeploying app leftovers...
+                    INFO     all.infra.helm - Helm Uninstall: social-network in 
+                             namespace social-network                           
+                    WARNING  all.infra.helm - Release social-network does not   
+                             exist. Skipping uninstall.                         
+[19:12:28] No jobs found with label 'job=workload' in namespace   kubectl.py:322
+           'social-network'.                                                    
+           Waiting for namespace deletion...                      kubectl.py:239
+[19:12:34] Namespace 'social-network' has been deleted.           kubectl.py:247
+[08/09/26 19:12:34] INFO     all.infra.kubectl - Namespace 'social-network'     
+                             deleted successfully.                              
+                    INFO     all.sregym.conductor - App leftovers undeployed.   
+                    INFO     all.sregym.conductor - Deploying app...            
+                    INFO     all.infra.cluster_state - Baseline state loaded    
+                             from                                               
+                             /Users/sac/cache_dir/cluster_baseline_state.json   
+                    INFO     all.sregym.conductor - [DEPLOY] Loaded persisted   
+                             cluster baseline state                             
+                    INFO     all.sregym.conductor - [DEPLOY] Setting up         
+                             metrics-server…                                    
+[19:12:35] Waiting for all pods in namespace 'kube-system' to be  kubectl.py:194
+           ready...                                                             
+[19:12:42] All pods in namespace 'kube-system' are ready.         kubectl.py:223
+[08/09/26 19:12:42] INFO     all.sregym.conductor - [DEPLOY] Setting up OpenEBS…
+[19:12:43] Waiting for all pods in namespace 'openebs' to be      kubectl.py:194
+           ready...                                                             
+           All pods in namespace 'openebs' are ready.             kubectl.py:223
+[08/09/26 19:12:43] INFO     all.sregym.conductor - [DEPLOY] Ensuring OpenEBS   
+                             LocalPV-Device StorageClass…                       
+                    INFO     all.sregym.conductor - [DEPLOY]                    
+                             StorageClass/openebs-device already exists; leaving
+                             it unchanged                                       
+                    INFO     all.sregym.conductor - [DEPLOY] Deploying          
+                             Prometheus…                                        
+                    WARNING  all.infra.prometheus - Prometheus is already       
+                             running. Skipping redeployment.                    
+                    INFO     all.sregym.conductor - [DEPLOY] Deploying Jaeger…  
+                    INFO     all.sregym.jaeger - Jaeger deployed successfully.  
+                    INFO     all.sregym.conductor - [DEPLOY] Deploying OTel     
+                             Collector…                                         
+[08/09/26 19:12:44] INFO     all.sregym.otel_collector - OTel Collector deployed
+                             successfully.                                      
+                    INFO     all.sregym.conductor - [DEPLOY] Deploying Loki…    
+                    WARNING  all.infra.loki - Loki is already running. Skipping 
+                             redeployment.                                      
+                    WARNING  all.infra.loki - Promtail is already running.      
+                             Skipping redeployment.                             
+                    INFO     all.sregym.conductor - [DEPLOY] Deploying MCP      
+                             server…                                            
+                    INFO     all.sregym.mcp_server - MCP server RBAC resources  
+                             ensured.                                           
+                    INFO     all.sregym.mcp_server - MCP server already running,
+                             skipping redeploy.                                 
+                    INFO     all.sregym.mcp_server - Port-forward is absent or  
+                             stale, restarting.                                 
+[08/09/26 19:12:47] INFO     all.sregym.mcp_server - Port forwarding established
+                             at 9954. MCP_SERVER_PORT set.                      
+                    INFO     all.sregym.conductor - [ENV] Set up necessary      
+                             components: metrics-server, Khaos, OpenEBS,        
+                             Prometheus, Jaeger, Loki                           
+                    INFO     all.sregym.conductor - [DEPLOY] Deploying and      
+                             starting workload                                  
+                    ERROR    all.infra.kubectl - Command failed (exit 1):       
+                             kubectl get namespace social-network               
+                               stderr: Error from server (NotFound): namespaces 
+                             "social-network" not found                         
+                    INFO     all.application - Namespace social-network not     
+                             found. Creating namespace.                         
+                    INFO     all.application - Namespace social-network created 
+                             successfully: namespace/social-network created     
+                                                                                
+                    ERROR    all.infra.kubectl - Command failed (exit 1):       
+                             kubectl get secret mongodb-tls -n social-network   
+                               stderr: Error from server (NotFound): secrets    
+                             "mongodb-tls" not found                            
+[08/09/26 19:12:48] INFO     all.infra.helm - Helm Install: social-network in   
+                             namespace social-network                           
+[19:13:32] Waiting for all pods in namespace 'social-network' to  kubectl.py:194
+           be ready...                                                          
+[19:24:33] Error checking pod statuses: (504)                     kubectl.py:227
+           Reason: Gateway Timeout                                              
+           HTTP response headers: HTTPHeaderDict({'Audit-Id':                   
+           '5eb8d8fb-f93a-4be6-b949-50bf11f8292d',                              
+           'Cache-Control': 'no-cache, private', 'Date': 'Mon, 10               
+           Aug 2026 02:24:33 GMT', 'Content-Length': '152',                     
+           'Content-Type': 'text/plain; charset=utf-8'})                        
+           HTTP response body:                                                  
+           {"metadata":{},"status":"Failure","message":"Timeout:                
+           request did not complete within the allotted                         
+           timeout","reason":"Timeout","details":{},"code":504}                 
+                                                                                
+                                                                                
+[08/09/26 19:24:47] INFO     uvicorn.error - Shutting down                      
+                    INFO     uvicorn.error - Waiting for application shutdown.  
+                    INFO     uvicorn.error - Application shutdown complete.     
+                    INFO     uvicorn.error - Finished server process [8455]     

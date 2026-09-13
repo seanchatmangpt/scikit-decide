@@ -1,0 +1,73 @@
+{
+  "gym": "general-agentbench",
+  "task": "terminal-bench/openssl-selfsigned-cert",
+  "source_ref": "vendor/gyms/general-agentbench/benchmarks/terminal-bench/tasks/openssl-selfsigned-cert/{task.yaml,solution.sh}",
+  "initial_facts": [],
+  "goal_facts": ["cert_verification_script_passing"],
+  "steps": [
+    {
+      "id": "create_ssl_dir",
+      "description": "mkdir -p /app/ssl -- create a directory at /app/ssl/ to store all files.",
+      "preconditions": [],
+      "establishes": ["ssl_dir_created"],
+      "cost": 1.0,
+      "source": "task.yaml instruction step 1; solution.sh 'Create directory structure'"
+    },
+    {
+      "id": "generate_private_key",
+      "description": "openssl genrsa -out /app/ssl/server.key 2048 -- generate a 2048-bit RSA private key.",
+      "preconditions": ["ssl_dir_created"],
+      "establishes": ["private_key_generated"],
+      "cost": 1.0,
+      "source": "task.yaml instruction step 2; solution.sh 'Generate private key'"
+    },
+    {
+      "id": "chmod_private_key",
+      "description": "chmod 600 /app/ssl/server.key -- ensure proper permissions (600) for the key file.",
+      "preconditions": ["private_key_generated"],
+      "establishes": ["private_key_permissions_set"],
+      "cost": 1.0,
+      "source": "task.yaml instruction step 2; solution.sh 'Set correct permissions'"
+    },
+    {
+      "id": "create_selfsigned_cert",
+      "description": "openssl req -new -x509 -key /app/ssl/server.key -out /app/ssl/server.crt -days 365 -subj \"/O=DevOps Team/CN=dev-internal.company.local\" -- create the self-signed certificate.",
+      "preconditions": ["private_key_permissions_set"],
+      "establishes": ["cert_created"],
+      "cost": 1.0,
+      "source": "task.yaml instruction step 3; solution.sh 'Create self-signed certificate'"
+    },
+    {
+      "id": "create_combined_pem",
+      "description": "cat /app/ssl/server.key /app/ssl/server.crt > /app/ssl/server.pem -- create the combined PEM file.",
+      "preconditions": ["cert_created"],
+      "establishes": ["pem_created"],
+      "cost": 1.0,
+      "source": "task.yaml instruction step 4; solution.sh 'Create combined PEM file'"
+    },
+    {
+      "id": "write_verification_txt",
+      "description": "openssl x509 -in /app/ssl/server.crt -noout -subject/-dates/-fingerprint -sha256 >> /app/ssl/verification.txt -- verify certificate details (subject, dates, SHA-256 fingerprint).",
+      "preconditions": ["pem_created"],
+      "establishes": ["verification_txt_written"],
+      "cost": 1.0,
+      "source": "task.yaml instruction step 5; solution.sh 'Gather certificate information'"
+    },
+    {
+      "id": "write_check_cert_script",
+      "description": "cat > /app/check_cert.py -- create the Python script that loads the certificate and verifies CN/expiration; chmod +x /app/check_cert.py.",
+      "preconditions": ["verification_txt_written"],
+      "establishes": ["check_cert_script_written"],
+      "cost": 1.0,
+      "source": "task.yaml instruction step 6; solution.sh 'Create verification script'"
+    },
+    {
+      "id": "run_check_cert_script",
+      "description": "python /app/check_cert.py -- run the verification script; must print 'Certificate verification successful'.",
+      "preconditions": ["check_cert_script_written"],
+      "establishes": ["cert_verification_script_passing"],
+      "cost": 1.0,
+      "source": "solution.sh final line 'python /app/check_cert.py'"
+    }
+  ]
+}

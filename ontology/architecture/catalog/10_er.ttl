@@ -1,0 +1,64 @@
+@prefix arch: <urn:autofde-lab:architecture:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:architecture:catalog:10_er> a owl:Ontology ;
+    dcterms:title "Generated architecture catalog bundle: 10_er" ;
+    owl:imports <urn:autofde-lab:ontology:architecture> .
+
+<urn:autofde-lab:architecture:diagram:46_er_gym_registry:diagram> a arch:Diagram,
+        arch:ERDiagram ;
+    dcterms:title "46 er gym registry" ;
+    arch:diagramKind arch:ERDiagram ;
+    arch:elementCount 7 ;
+    arch:mermaidSyntax "erDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 6 ;
+    arch:sourceDigest "c47c29a3c93d81cf80273e27c3c937305f6d52d0589235e23d751ab702ea0727" ;
+    arch:sourcePath "docs/diagrams/46_er_gym_registry.mmd" .
+
+<urn:autofde-lab:architecture:diagram:47_er_trial_evidence:diagram> a arch:Diagram,
+        arch:ERDiagram ;
+    dcterms:title "47 er trial evidence" ;
+    arch:diagramKind arch:ERDiagram ;
+    arch:elementCount 11 ;
+    arch:mermaidSyntax "erDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 10 ;
+    arch:sourceDigest "d914481d9a59a26faf51ac76d421372a558cf9eda2d015268bef405590264641" ;
+    arch:sourcePath "docs/diagrams/47_er_trial_evidence.mmd" .
+
+<urn:autofde-lab:architecture:diagram:48_er_benchmark_frontier:diagram> a arch:Diagram,
+        arch:ERDiagram ;
+    dcterms:title "48 er benchmark frontier" ;
+    arch:diagramKind arch:ERDiagram ;
+    arch:elementCount 7 ;
+    arch:mermaidSyntax "erDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 8 ;
+    arch:sourceDigest "1c6b24e14cdd56428df635838c01591943b783e81091b85e617a11d7f7c4efa1" ;
+    arch:sourcePath "docs/diagrams/48_er_benchmark_frontier.mmd" .
+
+<urn:autofde-lab:architecture:diagram:49_er_basis_learning:diagram> a arch:Diagram,
+        arch:ERDiagram ;
+    dcterms:title "49 er basis learning" ;
+    arch:diagramKind arch:ERDiagram ;
+    arch:elementCount 10 ;
+    arch:mermaidSyntax "erDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 9 ;
+    arch:sourceDigest "3edccea74856efa242056803158936ca1b94fcc831ce2b1a0a7e8e53bd71f2af" ;
+    arch:sourcePath "docs/diagrams/49_er_basis_learning.mmd" .
+
+<urn:autofde-lab:architecture:diagram:50_er_vendor_oracle_taxonomy:diagram> a arch:Diagram,
+        arch:ERDiagram ;
+    dcterms:title "50 er vendor oracle taxonomy" ;
+    arch:diagramKind arch:ERDiagram ;
+    arch:elementCount 7 ;
+    arch:mermaidSyntax "erDiagram" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 6 ;
+    arch:sourceDigest "aa4cf3ccf22f84ac9f4f05b1a26ebdcea309dbb663a34d767b2aed9f92e96829" ;
+    arch:sourcePath "docs/diagrams/50_er_vendor_oracle_taxonomy.mmd" .
+

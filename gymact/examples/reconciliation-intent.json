@@ -1,0 +1,11 @@
+{
+  "subject": "cloudgoat",
+  "operation": "act",
+  "scenario_id": "authorized-range",
+  "episode_id": "example-cloud-episode",
+  "payload": {
+    "desired_transition": "apply"
+  },
+  "authority_ref": "required-for-live-cloud",
+  "idempotency_key": "example-cloud-episode:apply:1"
+}

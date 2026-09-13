@@ -1,0 +1,9 @@
+# Provider plugin cache and any local state. State must never be committed:
+# this configuration is authored to never be applied, and a committed state
+# file would imply otherwise.
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log

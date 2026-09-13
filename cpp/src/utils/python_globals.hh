@@ -28,7 +28,12 @@ public:
       _python_sys_maxsize = py::module::import("sys")
                                 .attr("maxsize")
                                 .template cast<std::size_t>();
-      _skdecide = py::module::import("skdecide");
+      // Python package path only. The surrounding C++ identifiers (_skdecide,
+      // skdecide()) are internal member names and carry no external contract;
+      // the package moved in Phase 3 and the extension name became
+      // __autofde_lab_hub_cpp in Phase 5. Importing the legacy alias here
+      // would fire its DeprecationWarning on every native extension load.
+      _skdecide = py::module::import("autofde_lab");
       _initialized = true;
     }
   }

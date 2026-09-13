@@ -1,0 +1,31 @@
+C4Deployment
+title AutoFDE SOTA Lab — Deployment
+
+Deployment_Node(orchestrator, "Experiment Orchestrator", "CI runner / workstation / cluster head") {
+  Container(lab_api, "Lab API / CLI", "Python")
+  Container(scheduler, "Experiment Scheduler", "Python")
+  Container(store, "Results & Evidence Store", "RDF / JSON / SQLite")
+}
+Deployment_Node(workers, "Experiment Workers", "Parallel processes / containers") {
+  Container(worker, "Trial Worker", "Python")
+  Container(planners, "Planner / Agent Plugins", "Python / external binaries / APIs")
+}
+Deployment_Node(gym_host, "GymAct Execution Host", "Local or remote") {
+  Container(gymact, "GymAct", "Python")
+  Container(providers, "Gym Providers", "Local / Docker / browser / cloud")
+}
+Deployment_Node(manufacture, "Manufacturing Host") {
+  Container(ggen, "ggen", "Rust")
+}
+Deployment_Node(eval, "External Evaluation") {
+  Container(official, "Benchmark Evaluator / Leaderboard", "Official or faithful evaluator")
+}
+
+Rel(lab_api, scheduler, "Submits experiment matrix")
+Rel(scheduler, worker, "Dispatches trials")
+Rel(worker, planners, "Invokes decision systems")
+Rel(worker, gymact, "Executes trial")
+Rel(gymact, providers, "Materializes and actuates")
+Rel(worker, store, "Writes evidence/results")
+Rel(lab_api, ggen, "Requests regeneration")
+Rel(lab_api, official, "Submits or compares scores")

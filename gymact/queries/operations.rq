@@ -1,0 +1,16 @@
+PREFIX ga: <https://github.com/seanchatmangpt/autofde-lab/ns/gymact#>
+PREFIX dct: <http://purl.org/dc/terms/>
+SELECT ?code ?rust_variant ?title ?phase ?ordinal ?consequence ?authority_mode ?replay_class ?mainline
+WHERE {
+  ?op a ga:Operation ;
+      ga:operationCode ?code ;
+      ga:rustVariant ?rust_variant ;
+      dct:title ?title ;
+      ga:phase ?phase ;
+      ga:ordinal ?ordinal ;
+      ga:consequenceClass ?consequence ;
+      ga:authorityMode ?authority_mode ;
+      ga:replayClass ?replay_class ;
+      ga:mainline ?mainline .
+}
+ORDER BY ?ordinal

@@ -1,0 +1,57 @@
+{
+  "gym": "workarena",
+  "task": "SetProblemAsDuplicateTask",
+  "source_ref": "vendor/gyms/workarena/src/browsergym/workarena/tasks/mark_duplicate_problem.py cheat() lines 83-110",
+  "initial_facts": [],
+  "goal_facts": ["problem_marked_duplicate"],
+  "steps": [
+    {
+      "id": "search_target_problem_by_number",
+      "description": "Search for the private task by searching for the target problem's number (frame.wait_for_selector(f\"[aria-label='Preview record: {target_problem_number}']\").click()).",
+      "preconditions": [],
+      "establishes": ["target_problem_found"],
+      "cost": 1.0,
+      "source": "mark_duplicate_problem.py cheat() lines 87-89"
+    },
+    {
+      "id": "open_target_problem_record",
+      "description": "Click on the private task to open it (frame.get_by_text(\"Open Record\").click()).",
+      "preconditions": ["target_problem_found"],
+      "establishes": ["target_problem_open"],
+      "cost": 1.0,
+      "source": "mark_duplicate_problem.py cheat() lines 91-95"
+    },
+    {
+      "id": "open_duplicate_mode",
+      "description": "Open the duplicate mode (frame.get_by_text(\"Mark Duplicate\").first.click()).",
+      "preconditions": ["target_problem_open"],
+      "establishes": ["duplicate_mode_open"],
+      "cost": 1.0,
+      "source": "mark_duplicate_problem.py cheat() lines 97-99"
+    },
+    {
+      "id": "close_duplicate_popup",
+      "description": "Close the pop-up to edit the duplicate problem in the same window (frame.get_by_text(\"Close\").last.click()).",
+      "preconditions": ["duplicate_mode_open"],
+      "establishes": ["duplicate_popup_closed"],
+      "cost": 1.0,
+      "source": "mark_duplicate_problem.py cheat() lines 100-101"
+    },
+    {
+      "id": "fill_duplicate_of_field",
+      "description": "Fill the 'duplicate_of' field with the source problem's number and press Enter (frame.locator('[aria-labelledby=\"label.problem.duplicate_of\"]').fill(source_problem['number']); page.keyboard.press(\"Enter\")).",
+      "preconditions": ["duplicate_popup_closed"],
+      "establishes": ["duplicate_of_field_filled"],
+      "cost": 1.0,
+      "source": "mark_duplicate_problem.py cheat() lines 102-106"
+    },
+    {
+      "id": "click_update",
+      "description": "Click 'update' to save the problem record, marking the target problem as a duplicate of the source problem (frame.get_by_text(\"update\").first.click()).",
+      "preconditions": ["duplicate_of_field_filled"],
+      "establishes": ["problem_marked_duplicate"],
+      "cost": 1.0,
+      "source": "mark_duplicate_problem.py cheat() line 110; validated by validate() checking target_problem_record['duplicate_of'] == source_problem sys_id"
+    }
+  ]
+}

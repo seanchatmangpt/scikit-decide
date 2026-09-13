@@ -1,0 +1,21 @@
+sequenceDiagram
+    autonumber
+    participant G1 as Gym A
+    participant L as Lab Induction
+    participant B as Shared Basis
+    participant T as Regression/Falsifier Suite
+    participant G2 as Previously Untested Gym
+    participant E as Evidence Kernel
+
+    G1->>L: Counterexample / failure trace
+    L->>L: Root-cause latent semantic defect
+    L->>B: Propose shared basis repair ΔB
+    B->>T: Re-run target + adversarial non-regression tests
+    T-->>B: Repair target passes; prior law preserved
+    B->>G1: Re-run with ΔB
+    G1-->>E: Real executed witness
+    E-->>L: Level 4 conforms
+    B->>G2: Apply identical ΔB, zero new edits
+    G2-->>E: Real executed witness
+    E-->>L: Level 4 conforms
+    Note over L,B: Observed leverage: 1 discovered law → N consequential worlds

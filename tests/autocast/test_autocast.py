@@ -2,9 +2,9 @@ from __future__ import annotations
 
 import pytest
 
-from skdecide import *
-from skdecide.builders.domain import *
-from skdecide.core import autocast
+from autofde_lab import *
+from autofde_lab.builders.domain import *
+from autofde_lab.core import autocast
 
 
 # FIXTURES

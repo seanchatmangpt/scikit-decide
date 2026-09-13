@@ -9,7 +9,7 @@ from __future__ import annotations
 import tempfile
 from pathlib import Path
 
-from skdecide.caching import (
+from autofde_lab.caching import (
     AttestationSigner,
     CacheConfig,
     CacheFabric,
@@ -26,7 +26,7 @@ from skdecide.caching import (
 
 
 def main() -> None:
-    root = Path(tempfile.mkdtemp(prefix="skdecide-enterprise-cache-"))
+    root = Path(tempfile.mkdtemp(prefix="autofde_lab-enterprise-cache-"))
     fabric = CacheFabric(CacheConfig(persistent_path=root / "cache.sqlite"))
     signer = AttestationSigner(b"example-key-material-32-bytes!!!", key_id="demo")
     ledger = ProvenanceLedger(root / "attestations.jsonl", signer=signer)

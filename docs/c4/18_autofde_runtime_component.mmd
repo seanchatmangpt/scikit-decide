@@ -1,0 +1,24 @@
+C4Component
+title AutoFDE Runtime — Components
+
+Container_Boundary(runtime, "AutoFDE Runtime") {
+  Component(manifest, "Manifest Verifier")
+  Component(digest, "Digest / Identity Checker")
+  Component(plan_gate, "Plan Admission Gate")
+  Component(auth_gate, "Authority Resolver")
+  Component(dispatch, "Action Dispatcher")
+  Component(idempotency, "Idempotency Guard")
+  Component(receipt, "Receipt Builder")
+  Component(replay, "Replay Builder")
+  Component(refusal, "Typed Refusal Mapper")
+}
+
+Rel(manifest, digest, "Validates artifact identity")
+Rel(digest, plan_gate, "Supplies trusted bundle identity")
+Rel(plan_gate, auth_gate, "Passes admitted action intent")
+Rel(auth_gate, idempotency, "Authorizes bounded execution")
+Rel(idempotency, dispatch, "Prevents duplicate unsafe DO")
+Rel(dispatch, receipt, "Records result")
+Rel(receipt, replay, "Builds replay")
+Rel(dispatch, refusal, "Maps blocked/failed paths")
+Rel(refusal, receipt, "Records refusal evidence")

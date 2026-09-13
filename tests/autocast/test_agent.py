@@ -1,5 +1,5 @@
-from skdecide import Domain, RLDomain
-from skdecide.core import autocast_all
+from autofde_lab import Domain, RLDomain
+from autofde_lab.core import autocast_all
 
 
 def test_get_agents_with_autocast():

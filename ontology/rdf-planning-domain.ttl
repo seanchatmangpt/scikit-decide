@@ -1,0 +1,143 @@
+@prefix pd: <urn:autofde-lab:planning-domain:> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:rdf-planning-domain>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab RDF planning-domain vocabulary" ;
+    dcterms:description "A minimal, PDDL-equivalent RDF schema for classical STRIPS planning domains and problems: types, predicates, actions with typed parameters/preconditions/effects, an initial state, and a goal. Compiled to PDDL text by autofde_lab.fabric.rdf_domain and consumed unmodified by the existing pddl_engine.py subprocess contract. This is the INPUT half of the RDF<->plan loop; it performs no execution (see ontology/CLAUDE.md's 'Projection is not execution' boundary, which this does not cross)." ;
+    dcterms:created "2026-08-18"^^xsd:date .
+
+# -- Domain-level classes ----------------------------------------------
+
+pd:Domain a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:rdf-planning-domain> ;
+    rdfs:label "Planning domain" ;
+    rdfs:comment "Corresponds to a PDDL (:domain ...) block. Carries a name, a set of types, predicates, and actions." .
+
+pd:Type a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:rdf-planning-domain> ;
+    rdfs:label "Object type" ;
+    rdfs:comment "Corresponds to a PDDL :types entry. Optional -- a domain with no pd:Type instances compiles to an untyped (:requirements :strips) domain, matching the toy blocks fixture." .
+
+pd:Predicate a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:rdf-planning-domain> ;
+    rdfs:label "Predicate (fluent)" ;
+    rdfs:comment "Corresponds to one entry in PDDL :predicates, e.g. (on ?x ?y)." .
+
+pd:Action a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:rdf-planning-domain> ;
+    rdfs:label "Action" ;
+    rdfs:comment "Corresponds to a PDDL (:action name :parameters (...) :precondition (...) :effect (...)) block." .
+
+pd:Parameter a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:rdf-planning-domain> ;
+    rdfs:label "Action parameter" ;
+    rdfs:comment "A single ?var in an action's :parameters list, optionally typed." .
+
+# -- Literal (ground) formula classes ------------------------------------
+# Preconditions and effects are represented as an ordered list of literals,
+# each either a positive atom (pd:Atom) or a negated atom
+# (pd:NegatedAtom, effect-only in this minimal subset -- matching the
+# blocks fixture, which uses only conjunctions of positive/negative
+# literals, never disjunction/quantification/derived predicates).
+
+pd:Atom a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:rdf-planning-domain> ;
+    rdfs:label "Positive atom" ;
+    rdfs:comment "(predicate arg1 arg2 ...) appearing positively in a precondition, effect, or init/goal state." .
+
+pd:NegatedAtom a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:rdf-planning-domain> ;
+    rdfs:label "Negated atom" ;
+    rdfs:comment "(not (predicate arg1 arg2 ...)) appearing in an effect or goal. Preconditions may also negate an atom (matches PDDL :strips + :negative-preconditions, which scikit-decide's backend supports)." .
+
+# -- Problem-level classes -----------------------------------------------
+
+pd:Problem a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:rdf-planning-domain> ;
+    rdfs:label "Planning problem" ;
+    rdfs:comment "Corresponds to a PDDL (define (problem ...) (:domain ...) (:objects ...) (:init ...) (:goal ...)) block." .
+
+pd:Object a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:rdf-planning-domain> ;
+    rdfs:label "Problem object" ;
+    rdfs:comment "One entry in a problem's :objects list, optionally typed." .
+
+# -- Properties: domain structure ----------------------------------------
+
+pd:domainName a owl:DatatypeProperty ; rdfs:domain pd:Domain ; rdfs:range xsd:string ;
+    rdfs:label "domain name" ; rdfs:comment "Becomes the symbol in PDDL (define (domain <domainName>) ...)." .
+
+pd:hasType a owl:ObjectProperty ; rdfs:domain pd:Domain ; rdfs:range pd:Type ;
+    rdfs:label "has type" .
+pd:typeName a owl:DatatypeProperty ; rdfs:domain pd:Type ; rdfs:range xsd:string ;
+    rdfs:label "type name" .
+pd:supertype a owl:ObjectProperty ; rdfs:domain pd:Type ; rdfs:range pd:Type ;
+    rdfs:label "supertype" ; rdfs:comment "PDDL :types 'child - parent' subtyping." .
+
+pd:hasPredicate a owl:ObjectProperty ; rdfs:domain pd:Domain ; rdfs:range pd:Predicate ;
+    rdfs:label "has predicate" .
+pd:predicateName a owl:DatatypeProperty ; rdfs:domain pd:Predicate ; rdfs:range xsd:string ;
+    rdfs:label "predicate name" .
+pd:hasParameter a owl:ObjectProperty ; rdfs:domain [ owl:unionOf (pd:Predicate pd:Action) ] ; rdfs:range pd:Parameter ;
+    rdfs:label "has parameter" ; rdfs:comment "Ordered via pd:parameterIndex; used for both a predicate's argument list and an action's :parameters list." .
+
+pd:hasAction a owl:ObjectProperty ; rdfs:domain pd:Domain ; rdfs:range pd:Action ;
+    rdfs:label "has action" .
+pd:actionName a owl:DatatypeProperty ; rdfs:domain pd:Action ; rdfs:range xsd:string ;
+    rdfs:label "action name" .
+
+pd:parameterName a owl:DatatypeProperty ; rdfs:domain pd:Parameter ; rdfs:range xsd:string ;
+    rdfs:label "parameter name" ; rdfs:comment "Written without the leading '?' -- the compiler adds it." .
+pd:parameterType a owl:ObjectProperty ; rdfs:domain pd:Parameter ; rdfs:range pd:Type ;
+    rdfs:label "parameter type" ; rdfs:comment "Optional. Omitted entirely for an untyped domain (:requirements :strips)." .
+pd:parameterIndex a owl:DatatypeProperty ; rdfs:domain pd:Parameter ; rdfs:range xsd:integer ;
+    rdfs:label "parameter index" ; rdfs:comment "0-based position, since RDF has no native ordered list for this shape." .
+
+pd:precondition a owl:ObjectProperty ; rdfs:domain pd:Action ;
+    rdfs:range [ owl:unionOf (pd:Atom pd:NegatedAtom) ] ;
+    rdfs:label "precondition literal" ; rdfs:comment "One conjunct of the action's :precondition (and ...)." .
+pd:effect a owl:ObjectProperty ; rdfs:domain pd:Action ;
+    rdfs:range [ owl:unionOf (pd:Atom pd:NegatedAtom) ] ;
+    rdfs:label "effect literal" ; rdfs:comment "One conjunct of the action's :effect (and ...)." .
+
+# -- Properties: atom structure ------------------------------------------
+
+pd:ofPredicate a owl:DatatypeProperty ;
+    rdfs:domain [ owl:unionOf (pd:Atom pd:NegatedAtom) ] ; rdfs:range xsd:string ;
+    rdfs:label "of predicate" ; rdfs:comment "Predicate name this atom instantiates, e.g. \"on\". A plain string, not a pd:Predicate reference, so ground init/goal atoms and action literals share one shape." .
+
+pd:ArgumentBinding a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:rdf-planning-domain> ;
+    rdfs:label "Argument binding" ;
+    rdfs:comment "One ordered argument slot of an atom: a name plus its index, given its own node (mirroring pd:Parameter) so the name/index correspondence is never dependent on triple-insertion order in the store." .
+
+pd:hasArgument a owl:ObjectProperty ;
+    rdfs:domain [ owl:unionOf (pd:Atom pd:NegatedAtom) ] ; rdfs:range pd:ArgumentBinding ;
+    rdfs:label "has argument" .
+pd:argument a owl:DatatypeProperty ; rdfs:domain pd:ArgumentBinding ; rdfs:range xsd:string ;
+    rdfs:label "argument" ; rdfs:comment "An action parameter name (written without '?') inside an action's precondition/effect, or an object name inside init/goal." .
+pd:argumentIndex a owl:DatatypeProperty ; rdfs:domain pd:ArgumentBinding ; rdfs:range xsd:integer ;
+    rdfs:label "argument index" ; rdfs:comment "0-based position within the atom's argument list." .
+
+# -- Properties: problem structure ---------------------------------------
+
+pd:problemName a owl:DatatypeProperty ; rdfs:domain pd:Problem ; rdfs:range xsd:string ;
+    rdfs:label "problem name" .
+pd:forDomain a owl:ObjectProperty ; rdfs:domain pd:Problem ; rdfs:range pd:Domain ;
+    rdfs:label "for domain" .
+pd:hasObject a owl:ObjectProperty ; rdfs:domain pd:Problem ; rdfs:range pd:Object ;
+    rdfs:label "has object" .
+pd:objectName a owl:DatatypeProperty ; rdfs:domain pd:Object ; rdfs:range xsd:string ;
+    rdfs:label "object name" .
+pd:objectType a owl:ObjectProperty ; rdfs:domain pd:Object ; rdfs:range pd:Type ;
+    rdfs:label "object type" ; rdfs:comment "Optional, mirrors pd:parameterType." .
+pd:init a owl:ObjectProperty ; rdfs:domain pd:Problem ;
+    rdfs:range [ owl:unionOf (pd:Atom pd:NegatedAtom) ] ;
+    rdfs:label "initial-state literal" ; rdfs:comment "One ground fact in :init. pd:argument values here are pd:Object names." .
+pd:goal a owl:ObjectProperty ; rdfs:domain pd:Problem ;
+    rdfs:range [ owl:unionOf (pd:Atom pd:NegatedAtom) ] ;
+    rdfs:label "goal literal" ; rdfs:comment "One conjunct of the problem's :goal (and ...)." .

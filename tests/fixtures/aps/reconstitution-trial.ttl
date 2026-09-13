@@ -1,0 +1,87 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix ex: <urn:autofde-lab:test:aps:> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+ex:trial a afl:ReconstitutionTrial ;
+    afl:trialId "aps-adaptation-chicago" ;
+    afl:reconstitutionKnowledge ex:knowledge ;
+    afl:reconstitutionContract ex:contract ;
+    afl:reconstitutionCandidate ex:strategy ;
+    afl:reconstitutionFalsifier ex:falsifier ;
+    afl:reconstitutionWitness ex:witness ;
+    afl:reconstitutionStanding ex:standing .
+
+ex:source-observation a prov:Entity .
+ex:knowledge a afl:AdmittedKnowledge ;
+    afl:belongsToTrial ex:trial ;
+    prov:wasDerivedFrom ex:source-observation ;
+    afl:admissionWitness ex:witness .
+
+ex:invariant a afl:Invariant .
+ex:postcondition a afl:Postcondition .
+ex:refusal a afl:Refusal ;
+    afl:refusalCode "AUTHORITY_REQUIRED" ;
+    afl:refusalReason "DO requires an explicit authority envelope" .
+ex:contract a afl:ProtocolContract ;
+    afl:contractInvariant ex:invariant ;
+    afl:contractPostcondition ex:postcondition ;
+    afl:contractRefusal ex:refusal ;
+    afl:contractConsequence afl:DO ;
+    afl:contractAuthority ex:authority .
+
+ex:candidate-set a afl:CandidateSet ; afl:containsCandidate ex:strategy .
+ex:strategy a afl:ManufacturingStrategyCandidate ;
+    afl:candidateForTrial ex:trial ;
+    afl:strategyForCandidateSet ex:candidate-set .
+ex:falsifier a afl:CandidateFalsifier ;
+    afl:falsifiesCandidate ex:strategy ;
+    afl:implementedByProbe ex:probe .
+ex:probe a afl:DiscriminatingProbe .
+
+ex:governed a afl:GovernedCandidate ;
+    afl:admittedFromCandidateSet ex:candidate-set ;
+    afl:governsCandidate ex:strategy .
+ex:commitment a afl:POWLCommitment ; afl:commitsTo ex:governed .
+ex:intent a afl:ProtocolActuationIntent ;
+    afl:intentCommitment ex:commitment ;
+    afl:intentAuthority ex:authority .
+
+ex:agent a prov:Agent .
+ex:capability a afl:Capability .
+ex:authority a afl:AuthorityEnvelope ;
+    afl:authoritySubject ex:agent ;
+    afl:authorityCapability ex:capability ;
+    afl:authorizesActuation ex:actuation .
+ex:actuation a afl:Actuation ;
+    afl:realizesCommitment ex:commitment ;
+    afl:authorizedBy ex:authority ;
+    afl:exercisesCapability ex:capability .
+
+ex:observer a afl:Observer .
+ex:observation a afl:PostconditionObservation ;
+    afl:observesActuation ex:actuation ;
+    afl:assertsPostcondition ex:postcondition ;
+    afl:performedBy ex:observer .
+ex:receipt a afl:Receipt ;
+    afl:evidencesActuation ex:actuation ;
+    afl:evidencesObservation ex:observation .
+ex:receipt-dag a afl:ReceiptDAG ; afl:containsReceipt ex:receipt .
+ex:manifest a afl:ArtifactManifest .
+ex:verifier a afl:VerifierRun ; afl:readsManifest ex:manifest .
+ex:replay a afl:Replay ; afl:replaysReceipt ex:receipt ; afl:replayOfTrial ex:trial .
+ex:witness a afl:EvidenceWitness ;
+    afl:witnessFor ex:trial ;
+    afl:governedCandidate ex:governed ;
+    afl:commitment ex:commitment ;
+    afl:authority ex:authority ;
+    afl:actuation ex:actuation ;
+    afl:postconditionObservation ex:observation ;
+    afl:receiptDag ex:receipt-dag ;
+    afl:replay ex:replay ;
+    afl:manifest ex:manifest ;
+    afl:derivedByVerifier ex:verifier .
+
+ex:standing a afl:StandingAssertion ;
+    afl:standingSubject ex:trial ;
+    afl:standingValue afl:ALIVE ;
+    afl:derivedFromWitness ex:witness .

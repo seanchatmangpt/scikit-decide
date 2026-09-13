@@ -1,0 +1,29 @@
+"""Generated projection of the Fortune-5 reference ontology; do not hand-edit."""
+
+from __future__ import annotations
+
+from .space import Axis, Option
+
+ONTOLOGY_IRI = "urn:autofde-lab:fortune5:ontology"
+MANUFACTURE = "ggen"
+PUBLIC_ONTOLOGY_FOUNDATIONS = (
+    "http://purl.org/dc/terms/",
+    "http://www.w3.org/2004/02/skos/core#",
+    "http://www.w3.org/ns/prov#",
+)
+
+CATALOG_ROWS: tuple[tuple[str, str], ...] = (
+{% for row in sparql_results %}
+    ("{{ row.axisName }}", "{{ row.optionName }}"),
+{% endfor %}
+)
+
+
+def _build_axes() -> tuple[Axis, ...]:
+    grouped: dict[str, list[Option]] = {}
+    for axis_name, option_name in CATALOG_ROWS:
+        grouped.setdefault(axis_name, []).append(Option(option_name))
+    return tuple(Axis(name, tuple(options)) for name, options in grouped.items())
+
+
+AXES = _build_axes()

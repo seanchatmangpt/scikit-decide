@@ -1,0 +1,22 @@
+# Template for registering scikit-decide as mfw's `classical` engine.
+# Paths are placeholders: mfw canonicalizes `program` before spawning, so the
+# values must be absolute at use time. Substitute @ENGINE@ and @VALIDATOR@.
+#
+# Both roles are required. mfw refuses a planner-only configuration at config
+# load -- "exactly one independent validator role is required; observed 0" --
+# so a planner cannot be its own witness. That refusal is the reason this
+# template exists rather than a one-role file.
+
+[classical]
+program = "@ENGINE@"
+args = ["{domain}", "{problem}", "{plan}"]
+version_args = ["--help"]
+output_mode = "file"
+success_codes = [0]
+
+[validator]
+program = "@VALIDATOR@"
+args = ["-v", "-t", "0.001", "{domain}", "{problem}", "{plan}"]
+version_args = ["-h"]
+output_mode = "none"
+success_codes = [0]

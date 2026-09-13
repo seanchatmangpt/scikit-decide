@@ -1,0 +1,416 @@
+[
+  {
+    "planner": "AOstar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.015096666058525443,
+    "detail": ""
+  },
+  {
+    "planner": "Astar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.015147667028941214,
+    "detail": ""
+  },
+  {
+    "planner": "pLRTAstar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.014044375042431056,
+    "detail": ""
+  },
+  {
+    "planner": "LRTAstar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.01482554106041789,
+    "detail": ""
+  },
+  {
+    "planner": "MCTS",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.164818083983846,
+    "detail": ""
+  },
+  {
+    "planner": "UCT",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.1670595419127494,
+    "detail": ""
+  },
+  {
+    "planner": "BFWS",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.016568582970649004,
+    "detail": ""
+  },
+  {
+    "planner": "IW",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.016789000015705824,
+    "detail": ""
+  },
+  {
+    "planner": "RIW",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.018257834017276764,
+    "detail": ""
+  },
+  {
+    "planner": "LRTDP",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.017792042111977935,
+    "detail": ""
+  },
+  {
+    "planner": "ILAOstar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.0156356249935925,
+    "detail": ""
+  },
+  {
+    "planner": "pAstar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.01529062504414469,
+    "detail": ""
+  },
+  {
+    "planner": "MARTDP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014068791992031038,
+    "detail": "ValueError: SKDECIDE exception: MA-RTDP algorithm needs python domain for implementing get_agent_applicable_actions()"
+  },
+  {
+    "planner": "MAHD",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.011422417010180652,
+    "detail": "TypeError: MAHD.__init__() got an unexpected keyword argument 'domain_factory'"
+  },
+  {
+    "planner": "MaxentIRL",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014111500000581145,
+    "detail": "AttributeError: 'Discrete' object has no attribute 'low'"
+  },
+  {
+    "planner": "POMCP",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.021246207994408906,
+    "detail": ""
+  },
+  {
+    "planner": "pPOMCP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013538833009079099,
+    "detail": "AttributeError: 'pPOMCP' object has no attribute '_belief'"
+  },
+  {
+    "planner": "RayRLlib",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01106887508649379,
+    "detail": "TypeError: RayRLlib.__init__() missing 2 required positional arguments: 'algo_class' and 'train_iterations'"
+  },
+  {
+    "planner": "SimpleGreedy",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "decrement",
+      "increment"
+    ],
+    "duration_s": 0.01348174992017448,
+    "detail": ""
+  },
+  {
+    "planner": "StableBaseline",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.011356082977727056,
+    "detail": "TypeError: StableBaseline.__init__() missing 2 required positional arguments: 'algo_class' and 'baselines_policy'"
+  },
+  {
+    "planner": "UPSolver",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.011536791920661926,
+    "detail": "TypeError: UPSolver.__init__() missing 1 required positional argument: 'operation_mode'"
+  },
+  {
+    "planner": "VI",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.015226084040477872,
+    "detail": ""
+  },
+  {
+    "planner": "PI",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.015084082959219813,
+    "detail": ""
+  },
+  {
+    "planner": "LDFS",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.014770874986425042,
+    "detail": ""
+  },
+  {
+    "planner": "IDAstar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.014761875034309924,
+    "detail": ""
+  },
+  {
+    "planner": "RTDPBel",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 1.4851403339998797,
+    "detail": ""
+  },
+  {
+    "planner": "SSiPP",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.016156041994690895,
+    "detail": ""
+  },
+  {
+    "planner": "FRET",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.01576075004413724,
+    "detail": ""
+  },
+  {
+    "planner": "MDPLP",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.015846708905883133,
+    "detail": ""
+  },
+  {
+    "planner": "SSPLP",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.016271290951408446,
+    "detail": ""
+  },
+  {
+    "planner": "IDual",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.015982332988642156,
+    "detail": ""
+  },
+  {
+    "planner": "GPCI",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.014914833009243011,
+    "detail": ""
+  },
+  {
+    "planner": "SARSOP",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.013621791964396834,
+    "detail": ""
+  },
+  {
+    "planner": "DESPOT",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.08383562497328967,
+    "detail": ""
+  },
+  {
+    "planner": "EHC",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.014928249991498888,
+    "detail": ""
+  },
+  {
+    "planner": "FF",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.012596374959684908,
+    "detail": "TypeError: FF solver requires a PDDLDomain or PPDDLDomain"
+  },
+  {
+    "planner": "FFReplan",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013900000019930303,
+    "detail": "TypeError: FFReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLReplan",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.016491458052769303,
+    "detail": "TypeError: PPDDLReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "FFDetHindsight",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01560612500179559,
+    "detail": "TypeError: FFDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLDetHindsight",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.014712042058818042,
+    "detail": "TypeError: PPDDLDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPReplan",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.017084625083953142,
+    "detail": ""
+  },
+  {
+    "planner": "SSPDetHindsight",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.0225123749114573,
+    "detail": ""
+  },
+  {
+    "planner": "RFF",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015257416991516948,
+    "detail": "TypeError: RFF solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLPlanMerger",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015334250056184828,
+    "detail": "TypeError: PPDDLPlanMerger solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPPlanMerger",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.01594737498089671,
+    "detail": ""
+  },
+  {
+    "planner": "Witness",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.015330457943491638,
+    "detail": ""
+  },
+  {
+    "planner": "HSVI",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.015481290989555418,
+    "detail": ""
+  },
+  {
+    "planner": "GoalHSVI",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 0.016210083034820855,
+    "detail": ""
+  },
+  {
+    "planner": "DSPyPolicy",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "increment"
+    ],
+    "duration_s": 1.5813993329647928,
+    "detail": ""
+  }
+]

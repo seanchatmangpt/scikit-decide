@@ -14,14 +14,14 @@ from enum import Enum
 from math import sqrt
 from typing import NamedTuple
 
-from skdecide import (
+from autofde_lab import (
     DeterministicPlanningDomain,
     ImplicitSpace,
     Space,
     Value,
 )
-from skdecide.builders.domain import UnrestrictedActions
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.builders.domain import UnrestrictedActions
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
 
 
 class State(NamedTuple):
@@ -125,7 +125,7 @@ class TestLRTDP:
 
     def test_terminal_value(self):
         """terminal_value parameter should be accepted without error."""
-        from skdecide.hub.solver.lrtdp import LRTDP
+        from autofde_lab.hub.solver.lrtdp import LRTDP
 
         with LRTDP(
             domain_factory=lambda: GridDomain(),
@@ -142,7 +142,7 @@ class TestLRTDP:
 
     def test_explored_states(self):
         """get_explored_states should return a non-empty set including the initial state."""
-        from skdecide.hub.solver.lrtdp import LRTDP
+        from autofde_lab.hub.solver.lrtdp import LRTDP
 
         with LRTDP(
             domain_factory=lambda: GridDomain(),
@@ -161,7 +161,7 @@ class TestLRTDP:
 
     def test_solved_states(self):
         """get_solved_states should include the initial state after convergence."""
-        from skdecide.hub.solver.lrtdp import LRTDP
+        from autofde_lab.hub.solver.lrtdp import LRTDP
 
         with LRTDP(
             domain_factory=lambda: GridDomain(),
@@ -187,7 +187,7 @@ class TestLRTAstar:
         LRTAstar (RTDP without labels) is not guaranteed to find the optimal
         solution in bounded time, so we only check that a valid plan is found.
         """
-        from skdecide.hub.solver.lrtdp import LRTAstar
+        from autofde_lab.hub.solver.lrtdp import LRTAstar
 
         dom = GridDomain()
 
@@ -205,7 +205,7 @@ class TestLRTAstar:
 
     def test_get_plan(self):
         """LRTAstar.get_plan() should return a non-empty action sequence."""
-        from skdecide.hub.solver.lrtdp import LRTAstar
+        from autofde_lab.hub.solver.lrtdp import LRTAstar
 
         with LRTAstar(
             domain_factory=lambda: GridDomain(),
@@ -220,14 +220,14 @@ class TestLRTAstar:
 
     def test_domain_check(self):
         """LRTAstar should accept the deterministic GridDomain."""
-        from skdecide.hub.solver.lrtdp import LRTAstar
+        from autofde_lab.hub.solver.lrtdp import LRTAstar
 
         dom = GridDomain()
         assert LRTAstar.check_domain(dom)
 
     def test_get_last_trajectory(self):
         """get_last_trajectory() should return (state, action) pairs from the last trial."""
-        from skdecide.hub.solver.lrtdp import LRTDP
+        from autofde_lab.hub.solver.lrtdp import LRTDP
 
         trajectories_seen = []
 

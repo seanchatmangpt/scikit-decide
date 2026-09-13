@@ -1,0 +1,144 @@
+[project]
+name = "autofde-lab-constitution"
+version = "0.1.0"
+description = "Direct Python projection of the working-backwards AutoFDE Lab semantic constitution (PR #37) into src/autofde_lab/constitution/ -- no generated/ directory, manufacture is provenance."
+authors = ["AutoFDE Lab"]
+license = "MIT"
+
+[ontology]
+source = "ontology/lab.ttl"
+imports = [
+    "ontology/world.ttl",
+    "ontology/planning.ttl",
+    "ontology/process.ttl",
+    "ontology/authority.ttl",
+    "ontology/evidence.ttl",
+    "ontology/standing.ttl",
+    "ontology/interop.ttl",
+    "ontology/k8s-fault-taxonomy.ttl",
+    "ontology/world-transformation-taxonomy.ttl",
+    "ontology/togaf-artifacts.ttl",
+    "ontology/gymact-certification.ttl",
+    "ontology/autofde-lab-capabilities.ttl",
+    "ontology/planner-league.ttl",
+]
+base_iri = "urn:autofde-lab:"
+
+[ontology.prefixes]
+afl = "urn:autofde-lab:"
+owl = "http://www.w3.org/2002/07/owl#"
+rdfs = "http://www.w3.org/2000/01/rdf-schema#"
+rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+dcterms = "http://purl.org/dc/terms/"
+prov = "http://www.w3.org/ns/prov#"
+skos = "http://www.w3.org/2004/02/skos/core#"
+xsd = "http://www.w3.org/2001/XMLSchema#"
+
+[generation]
+output_dir = "."
+
+[[generation.rules]]
+name = "constitution-lab"
+query = { file = "queries/constitution/lab.rq" }
+template = { file = "templates/constitution_module.py.tera" }
+output_file = "src/autofde_lab/constitution/lab.py"
+mode = "Create"
+
+[[generation.rules]]
+name = "constitution-world"
+query = { file = "queries/constitution/world.rq" }
+template = { file = "templates/constitution_module.py.tera" }
+output_file = "src/autofde_lab/constitution/world.py"
+mode = "Create"
+
+[[generation.rules]]
+name = "constitution-planning"
+query = { file = "queries/constitution/planning.rq" }
+template = { file = "templates/constitution_module.py.tera" }
+output_file = "src/autofde_lab/constitution/planning.py"
+mode = "Create"
+
+[[generation.rules]]
+name = "constitution-process"
+query = { file = "queries/constitution/process.rq" }
+template = { file = "templates/constitution_module.py.tera" }
+output_file = "src/autofde_lab/constitution/process.py"
+mode = "Create"
+
+[[generation.rules]]
+name = "constitution-authority"
+query = { file = "queries/constitution/authority.rq" }
+template = { file = "templates/constitution_module.py.tera" }
+output_file = "src/autofde_lab/constitution/authority.py"
+mode = "Create"
+
+[[generation.rules]]
+name = "constitution-evidence"
+query = { file = "queries/constitution/evidence.rq" }
+template = { file = "templates/constitution_module.py.tera" }
+output_file = "src/autofde_lab/constitution/evidence.py"
+mode = "Create"
+
+[[generation.rules]]
+name = "constitution-standing"
+query = { file = "queries/constitution/standing.rq" }
+template = { file = "templates/constitution_module.py.tera" }
+output_file = "src/autofde_lab/constitution/standing.py"
+mode = "Create"
+
+[[generation.rules]]
+name = "constitution-interop"
+query = { file = "queries/constitution/interop.rq" }
+template = { file = "templates/constitution_module.py.tera" }
+output_file = "src/autofde_lab/constitution/interop.py"
+mode = "Create"
+
+[[generation.rules]]
+name = "k8s-fault-universes"
+query = { file = "queries/k8s-fault/cross_product.rq" }
+template = { file = "templates/k8s_fault_universe.py.tera" }
+output_file = "src/autofde_lab/reasoning/universes/k8s_fault_universes.py"
+mode = "Create"
+
+[[generation.rules]]
+name = "world-transformation-scenarios"
+query = { file = "queries/world-transformation/scenario_projection.rq" }
+template = { file = "templates/world_transformation_scenario.py.tera" }
+output_file = "src/autofde_lab/reasoning/scenarios/world_transformation_scenarios.py"
+mode = "Create"
+
+[[generation.rules]]
+name = "togaf-artifacts"
+query = { file = "queries/togaf-artifacts/artifacts.rq" }
+template = { file = "templates/constitution_module.py.tera" }
+output_file = "src/autofde_lab/reasoning/togaf_artifacts.py"
+mode = "Create"
+
+[[generation.rules]]
+name = "gymact-certification"
+query = { file = "queries/gymact-certification/manifest.rq" }
+template = { file = "templates/constitution_module.py.tera" }
+output_file = "src/autofde_lab/reasoning/gymact_certification_types.py"
+mode = "Create"
+
+[[generation.rules]]
+name = "planner-league-catalog"
+query = { file = "queries/planner-league/catalog.rq" }
+template = { file = "templates/planner_league_catalog.py.tera" }
+output_file = "src/autofde_lab/planner_league/catalog.py"
+mode = "Overwrite"
+
+[sync]
+enabled = true
+on_change = "manual"
+validate_after = true
+conflict_mode = "fail"
+
+[rdf]
+formats = ["turtle"]
+default_format = "turtle"
+strict_validation = false
+
+[templates]
+enable_caching = true
+auto_reload = true

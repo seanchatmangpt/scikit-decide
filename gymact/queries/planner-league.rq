@@ -1,0 +1,70 @@
+PREFIX skdt: <urn:skdecide:term:>
+PREFIX league: <urn:autofde-lab:planner-league:>
+
+SELECT ?kind ?id ?aux1 ?aux2
+WHERE {
+  {
+    ?subject a skdt:Solver ;
+             skdt:identifier ?id .
+    BIND("planner" AS ?kind)
+    BIND("" AS ?aux1)
+    BIND("" AS ?aux2)
+  }
+  UNION
+  {
+    ?subject a league:Role ;
+             league:identifier ?id ;
+             league:objectiveId ?aux1 ;
+             league:actionProjectionId ?aux2 .
+    BIND("role" AS ?kind)
+  }
+  UNION
+  {
+    ?subject a league:PlannerCapabilityField ;
+             league:identifier ?id .
+    BIND("capability_field" AS ?kind)
+    BIND("" AS ?aux1)
+    BIND("" AS ?aux2)
+  }
+  UNION
+  {
+    ?subject a league:WorldClass ;
+             league:identifier ?id .
+    BIND("world" AS ?kind)
+    BIND("" AS ?aux1)
+    BIND("" AS ?aux2)
+  }
+  UNION
+  {
+    ?subject a league:ObservationProjection ;
+             league:identifier ?id .
+    BIND("observation" AS ?kind)
+    BIND("" AS ?aux1)
+    BIND("" AS ?aux2)
+  }
+  UNION
+  {
+    ?subject a league:ActionProjection ;
+             league:identifier ?id .
+    BIND("action" AS ?kind)
+    BIND("" AS ?aux1)
+    BIND("" AS ?aux2)
+  }
+  UNION
+  {
+    ?subject a league:Budget ;
+             league:identifier ?id .
+    BIND("budget" AS ?kind)
+    BIND("" AS ?aux1)
+    BIND("" AS ?aux2)
+  }
+  UNION
+  {
+    ?subject a league:ExperimentDimension ;
+             league:identifier ?id .
+    BIND("dimension" AS ?kind)
+    BIND("" AS ?aux1)
+    BIND("" AS ?aux2)
+  }
+}
+ORDER BY ?kind ?id

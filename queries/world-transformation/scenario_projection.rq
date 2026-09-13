@@ -1,0 +1,54 @@
+PREFIX afl: <urn:autofde-lab:>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+# One row per (scenario, sub-item) -- not a cross-product (see
+# ontology/world-transformation-taxonomy.ttl's design note): a
+# world-transformation scenario's observations/objectives/constraints are
+# scenario-specific facts, so this UNION-of-BGP shape (mirroring
+# queries/constitution/process.rq's real rowKind pattern) lets the template
+# group rows back into one function per scenario via Tera's `group_by`/
+# `filter`, the same real client-side grouping that template already uses.
+SELECT ?rowKind ?scenarioLabel
+       ?metricName ?metricValue
+       ?objectiveKindLabel ?objectiveComparatorLabel ?objectiveThreshold ?objectiveUnit
+       ?constraintKindLabel ?constraintComparatorLabel ?constraintThreshold ?constraintUnit ?constraintNote
+WHERE {
+  ?scenario a afl:WorldTransformationScenario .
+  BIND(REPLACE(STR(?scenario), "urn:autofde-lab:", "") AS ?scenarioLabel)
+  {
+    BIND("scenario" AS ?rowKind)
+  }
+  UNION
+  {
+    ?scenario afl:hasObservation ?obs .
+    ?obs afl:metricName ?metricName ; afl:metricValue ?metricValue .
+    BIND("observation" AS ?rowKind)
+  }
+  UNION
+  {
+    ?scenario afl:hasObjective ?objective .
+    ?objective afl:hasObjectiveKind ?objectiveKind ; afl:objectiveThreshold ?objectiveThreshold .
+    BIND(REPLACE(STR(?objectiveKind), "urn:autofde-lab:", "") AS ?objectiveKindLabel)
+    OPTIONAL {
+      ?objective afl:hasObjectiveComparator ?objectiveComparator .
+      BIND(REPLACE(STR(?objectiveComparator), "urn:autofde-lab:", "") AS ?objectiveComparatorLabel)
+    }
+    OPTIONAL { ?objective afl:objectiveUnit ?objectiveUnit }
+    BIND("objective" AS ?rowKind)
+  }
+  UNION
+  {
+    ?scenario afl:hasConstraint ?constraint .
+    ?constraint afl:hasConstraintKind ?constraintKind .
+    BIND(REPLACE(STR(?constraintKind), "urn:autofde-lab:", "") AS ?constraintKindLabel)
+    OPTIONAL {
+      ?constraint afl:hasConstraintComparator ?constraintComparator .
+      BIND(REPLACE(STR(?constraintComparator), "urn:autofde-lab:", "") AS ?constraintComparatorLabel)
+    }
+    OPTIONAL { ?constraint afl:constraintThreshold ?constraintThreshold }
+    OPTIONAL { ?constraint afl:constraintUnit ?constraintUnit }
+    OPTIONAL { ?constraint afl:constraintNote ?constraintNote }
+    BIND("constraint" AS ?rowKind)
+  }
+}
+ORDER BY ?scenarioLabel ?rowKind ?metricName

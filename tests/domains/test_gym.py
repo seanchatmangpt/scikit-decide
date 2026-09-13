@@ -4,16 +4,16 @@ from collections.abc import Callable
 import gymnasium as gym
 import numpy as np
 
-from skdecide.hub.domain.gym import (
+from autofde_lab.hub.domain.gym import (
     GymDiscreteActionDomain,
     GymDomain,
     GymPlanningDomain,
     GymWidthDomain,
 )
-from skdecide.hub.domain.gym.gym import AsGymnasiumEnv
-from skdecide.hub.domain.maze.maze import Maze
-from skdecide.hub.solver.cgp import CGP
-from skdecide.hub.space.gym.gym import ListSpace
+from autofde_lab.hub.domain.gym.gym import AsGymnasiumEnv
+from autofde_lab.hub.domain.maze.maze import Maze
+from autofde_lab.hub.solver.cgp import CGP
+from autofde_lab.hub.space.gym.gym import ListSpace
 
 
 class D(GymPlanningDomain, GymWidthDomain, GymDiscreteActionDomain):

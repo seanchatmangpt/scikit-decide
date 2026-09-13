@@ -1,0 +1,15 @@
+C4Context
+title ggen Manufacturing Plane — System Context
+
+Person(architect, "Ontology / Basis Author")
+System(ggen, "ggen", "Ontology-driven manufacturer.")
+System_Ext(lab, "AutoFDE SOTA Lab", "Produces admitted basis revisions and selected specializations.")
+System_Ext(gymact, "GymAct", "Defines canonical world contracts and adapters.")
+System_Ext(runtime, "AutoFDE Runtime", "Consumes generated governed bundles.")
+System_Ext(repo, "Source Repository", "Stores hand-authored ontology, templates, and generated artifacts.")
+
+Rel(architect, ggen, "Authors ontology/templates indirectly through admitted source")
+Rel(lab, ggen, "Requests regeneration from admitted basis")
+Rel(gymact, ggen, "Supplies canonical world ontology/contracts")
+Rel(ggen, repo, "Writes generated artifacts")
+Rel(ggen, runtime, "Produces governed runtime bundle")

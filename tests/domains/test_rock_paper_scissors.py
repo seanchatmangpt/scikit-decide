@@ -1,7 +1,7 @@
-from skdecide.hub.domain.rock_paper_scissors.rock_paper_scissors import (
+from autofde_lab.hub.domain.rock_paper_scissors.rock_paper_scissors import (
     RockPaperScissors,
 )
-from skdecide.utils import rollout
+from autofde_lab.utils import rollout
 
 
 def test_rock_paper_scissors():

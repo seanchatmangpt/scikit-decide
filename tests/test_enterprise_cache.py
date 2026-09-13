@@ -10,12 +10,12 @@ from types import SimpleNamespace
 
 import pytest
 
-from skdecide._cache.enterprise import (
+from autofde_lab._cache.enterprise import (
     CacheFailureMode,
     EnterpriseCacheGateway,
     EnterpriseGatewayConfig,
 )
-from skdecide._cache.governance import (
+from autofde_lab._cache.governance import (
     CacheGovernanceError,
     DataClassification,
     EnterpriseContext,
@@ -23,28 +23,28 @@ from skdecide._cache.governance import (
     NamespaceRule,
     PolicyEngine,
 )
-from skdecide._cache.observability import (
+from autofde_lab._cache.observability import (
     ObserverFailurePolicy,
     ReceiptFanout,
     SLOTargets,
     SLOTracker,
 )
-from skdecide._cache.provenance import (
+from autofde_lab._cache.provenance import (
     AttestationKeyring,
     AttestationSigner,
     CacheAttestation,
     ProvenanceLedger,
 )
-from skdecide._cache.quarantine import QuarantineJournal
-from skdecide._cache.quotas import QuotaExceededError, QuotaManager, QuotaSpec
-from skdecide._cache.rollout import (
+from autofde_lab._cache.quarantine import QuarantineJournal
+from autofde_lab._cache.quotas import QuotaExceededError, QuotaManager, QuotaSpec
+from autofde_lab._cache.rollout import (
     CircuitBreaker,
     CircuitBreakerConfig,
     CircuitState,
     RolloutController,
     RolloutPolicy,
 )
-from skdecide._cache.types import (
+from autofde_lab._cache.types import (
     CacheCorruptionError,
     CacheMode,
     CacheResult,
@@ -246,7 +246,7 @@ def test_multiple_processes_append_one_valid_ledger(tmp_path: Path):
     script = textwrap.dedent(
         """
         import sys
-        from skdecide._cache.provenance import (
+        from autofde_lab._cache.provenance import (
             AttestationSigner, CacheAttestation, ProvenanceLedger,
         )
         path, worker = sys.argv[1], sys.argv[2]
@@ -414,7 +414,7 @@ def test_gateway_clamps_policy_injects_identity_and_attests(tmp_path: Path):
     call = fabric.calls[0]
     assert call["policy"].ttl_seconds == 86400
     assert "tenant:flight-controls" in call["tags"]
-    assert call["metadata"]["skdecide.enterprise.release_id"] == "r26.8.5"
+    assert call["metadata"]["autofde_lab.enterprise.release_id"] == "r26.8.5"
     assert managed.health().ledger_records == 1
 
 
@@ -474,5 +474,5 @@ def test_gateway_governs_invalidation_and_refuses_metadata_spoofing(tmp_path: Pa
             namespace="flight-controls/optimizer/prod/model",
             method="evaluate",
             compute=lambda: 1,
-            metadata={"skdecide.enterprise.release_id": "spoofed"},
+            metadata={"autofde_lab.enterprise.release_id": "spoofed"},
         )

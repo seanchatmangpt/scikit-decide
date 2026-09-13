@@ -1,0 +1,148 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:world-transformation-taxonomy>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab world-transformation scenario vocabulary" ;
+    dcterms:description "Reframes the SREGym-inspired corpus from a debugging-only shape (observed deviation -> restore known-good state) to the wider shape: observed world -> inferred desired state -> semantic delta -> candidate transformation -> manufacture -> verify, with debugging as the special case where the desired state is already known. Deliberately reuses ontology/world.ttl's real afl:AdmittedObservation for the observed side rather than declaring a new parallel observation type, and ontology/authority.ttl's real afl:AuthorityEnvelope rather than redeclaring it -- only afl:WorldTransformationScenario, afl:Objective, and afl:Constraint are genuinely new vocabulary here, confirmed absent from every existing ontology file in this repo before this file was authored. Schema and one worked example only in this generation -- no live desired-state inference, delta computation, planner-portfolio wiring, or manufacture/verify implementation is built by this file or its generated projection; every scenario's manufacture/verify step is an inert POWL Atom, never actuated. Never reads, imports, or subprocesses vendor/gyms/sregym (see .claude/rules/gym-actuation-boundary.md) -- the one worked example's numbers are original and illustrative, not derived from or copied out of that vendored checkout." ;
+    dcterms:created "2026-08-11"^^xsd:date .
+
+#: The scenario aggregate itself -- an owl:Class with object properties to
+#: its real sub-parts, following process.ttl's Activity/property pattern,
+#: not k8s-fault-taxonomy.ttl's enumerated-individuals cross-product pattern
+#: (a world-transformation scenario's facts are scenario-specific, not
+#: independently combinable across scenarios).
+afl:WorldTransformationScenario a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:world-transformation-taxonomy> ;
+    rdfs:label "World transformation scenario" ;
+    rdfs:comment "Current state + objectives + constraints + authority -> inferred desired state. Debugging is the special case where the desired state is already known and the delta is a deviation to restore." .
+
+afl:hasObservation a owl:ObjectProperty ;
+    rdfs:domain afl:WorldTransformationScenario ;
+    rdfs:range afl:AdmittedObservation ;
+    rdfs:label "has observation" ;
+    rdfs:comment "Reuses ontology/world.ttl's real afl:AdmittedObservation -- a scenario's observed facts are real admitted observations, not a new parallel type." .
+
+afl:hasObjective a owl:ObjectProperty ;
+    rdfs:domain afl:WorldTransformationScenario ;
+    rdfs:range afl:Objective ;
+    rdfs:label "has objective" .
+
+afl:hasConstraint a owl:ObjectProperty ;
+    rdfs:domain afl:WorldTransformationScenario ;
+    rdfs:range afl:Constraint ;
+    rdfs:label "has constraint" .
+
+afl:hasAuthorityEnvelope a owl:ObjectProperty ;
+    rdfs:domain afl:WorldTransformationScenario ;
+    rdfs:range afl:AuthorityEnvelope ;
+    rdfs:label "has authority envelope" ;
+    rdfs:comment "Reuses ontology/authority.ttl's real afl:AuthorityEnvelope -- never redeclared here." .
+
+#: A metric-value shape for afl:AdmittedObservation. world.ttl itself
+#: defines no such shape (confirmed by direct read) -- added here, on the
+#: existing class, rather than inventing a parallel observation type.
+afl:metricName a owl:DatatypeProperty ;
+    rdfs:domain afl:AdmittedObservation ;
+    rdfs:range xsd:string ;
+    rdfs:label "metric name" .
+
+afl:metricValue a owl:DatatypeProperty ;
+    rdfs:domain afl:AdmittedObservation ;
+    rdfs:range xsd:double ;
+    rdfs:label "metric value" .
+
+#: Objective axis -- a target to approach, not a hard bound (see afl:Constraint).
+afl:Objective a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:world-transformation-taxonomy> ;
+    rdfs:label "Objective" ;
+    rdfs:comment "A target the desired state should approach. Distinct from afl:Constraint: standing-law.md's admission discipline treats 'must never violate' differently from 'should approach', and collapsing the two would lose exactly that distinction." .
+
+afl:objectiveKind a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:world-transformation-taxonomy> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "Objective kind" .
+afl:ObjectiveKindScheme a skos:ConceptScheme ; skos:prefLabel "AutoFDE objective kind" .
+afl:LatencySLO a afl:objectiveKind ; skos:inScheme afl:ObjectiveKindScheme ; skos:prefLabel "LatencySLO" .
+afl:AvailabilityTarget a afl:objectiveKind ; skos:inScheme afl:ObjectiveKindScheme ; skos:prefLabel "AvailabilityTarget" .
+afl:CostCeiling a afl:objectiveKind ; skos:inScheme afl:ObjectiveKindScheme ; skos:prefLabel "CostCeiling" .
+afl:DataResidency a afl:objectiveKind ; skos:inScheme afl:ObjectiveKindScheme ; skos:prefLabel "DataResidency" .
+afl:SecurityPosture a afl:objectiveKind ; skos:inScheme afl:ObjectiveKindScheme ; skos:prefLabel "SecurityPosture" .
+
+afl:objectiveComparator a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:world-transformation-taxonomy> ;
+    rdfs:subClassOf skos:Concept ; rdfs:label "Objective comparator" .
+afl:ComparatorScheme a skos:ConceptScheme ; skos:prefLabel "AutoFDE objective comparator" .
+afl:LessThan a afl:objectiveComparator ; skos:inScheme afl:ComparatorScheme ; skos:prefLabel "LessThan" .
+afl:GreaterThanOrEqual a afl:objectiveComparator ; skos:inScheme afl:ComparatorScheme ; skos:prefLabel "GreaterThanOrEqual" .
+afl:Equals a afl:objectiveComparator ; skos:inScheme afl:ComparatorScheme ; skos:prefLabel "Equals" .
+
+afl:hasObjectiveKind a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:Objective ; rdfs:range afl:objectiveKind ; rdfs:label "objective kind" .
+afl:hasObjectiveComparator a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:Objective ; rdfs:range afl:objectiveComparator ; rdfs:label "objective comparator" .
+afl:objectiveThreshold a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:Objective ; rdfs:range xsd:double ; rdfs:label "objective threshold" .
+afl:objectiveUnit a owl:DatatypeProperty ;
+    rdfs:domain afl:Objective ; rdfs:range xsd:string ; rdfs:label "objective unit" .
+
+#: Constraint axis -- a hard bound, same shape as Objective, kept as a
+#: distinct class (see afl:Objective's comment).
+afl:Constraint a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:world-transformation-taxonomy> ;
+    rdfs:label "Constraint" ;
+    rdfs:comment "A hard bound the desired state must never violate. Distinct from afl:Objective -- see that class's comment." .
+
+afl:hasConstraintKind a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:Constraint ; rdfs:range afl:objectiveKind ; rdfs:label "constraint kind" .
+afl:hasConstraintComparator a owl:ObjectProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:Constraint ; rdfs:range afl:objectiveComparator ; rdfs:label "constraint comparator" .
+afl:constraintThreshold a owl:DatatypeProperty , owl:FunctionalProperty ;
+    rdfs:domain afl:Constraint ; rdfs:range xsd:double ; rdfs:label "constraint threshold" .
+afl:constraintUnit a owl:DatatypeProperty ;
+    rdfs:domain afl:Constraint ; rdfs:range xsd:string ; rdfs:label "constraint unit" .
+afl:constraintNote a owl:DatatypeProperty ;
+    rdfs:domain afl:Constraint ; rdfs:range xsd:string ; rdfs:label "constraint note" ;
+    rdfs:comment "Free-text bound for non-numeric constraints, e.g. 'no cross-region requirement' or 'customer data must remain private', which have no meaningful comparator/threshold pair." .
+
+# ---------------------------------------------------------------------------
+# One real, hand-authored worked example: the user's own checkout-latency
+# illustration (this session's conversation), not sourced from sregym.
+# ---------------------------------------------------------------------------
+
+afl:CheckoutLatencyScenario_v1 a afl:WorldTransformationScenario ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:world-transformation-taxonomy> ;
+    rdfs:label "Checkout latency scenario v1" ;
+    afl:hasObservation afl:obs_api_instance_count , afl:obs_sql_primary_count ,
+        afl:obs_db_publicly_reachable , afl:obs_p95_latency_ms , afl:obs_failure_budget_exhausted ;
+    afl:hasObjective afl:obj_latency_slo , afl:obj_availability_target ;
+    afl:hasConstraint afl:con_cost_ceiling , afl:con_no_cross_region , afl:con_data_residency .
+
+afl:obs_api_instance_count a afl:AdmittedObservation ;
+    afl:metricName "api_instance_count" ; afl:metricValue "3"^^xsd:double .
+afl:obs_sql_primary_count a afl:AdmittedObservation ;
+    afl:metricName "sql_primary_count" ; afl:metricValue "1"^^xsd:double .
+afl:obs_db_publicly_reachable a afl:AdmittedObservation ;
+    afl:metricName "db_publicly_reachable" ; afl:metricValue "1"^^xsd:double .
+afl:obs_p95_latency_ms a afl:AdmittedObservation ;
+    afl:metricName "p95_latency_ms" ; afl:metricValue "780.0"^^xsd:double .
+afl:obs_failure_budget_exhausted a afl:AdmittedObservation ;
+    afl:metricName "failure_budget_exhausted" ; afl:metricValue "1"^^xsd:double .
+
+afl:obj_latency_slo a afl:Objective ;
+    afl:hasObjectiveKind afl:LatencySLO ; afl:hasObjectiveComparator afl:LessThan ;
+    afl:objectiveThreshold "250.0"^^xsd:double ; afl:objectiveUnit "ms" .
+afl:obj_availability_target a afl:Objective ;
+    afl:hasObjectiveKind afl:AvailabilityTarget ; afl:hasObjectiveComparator afl:GreaterThanOrEqual ;
+    afl:objectiveThreshold "99.9"^^xsd:double ; afl:objectiveUnit "percent" .
+
+afl:con_cost_ceiling a afl:Constraint ;
+    afl:hasConstraintKind afl:CostCeiling ; afl:hasConstraintComparator afl:LessThan ;
+    afl:constraintThreshold "18000.0"^^xsd:double ; afl:constraintUnit "usd_per_month" .
+afl:con_no_cross_region a afl:Constraint ;
+    afl:hasConstraintKind afl:DataResidency ; afl:constraintNote "no cross-region requirement" .
+afl:con_data_residency a afl:Constraint ;
+    afl:hasConstraintKind afl:DataResidency ; afl:constraintNote "customer data must remain private" .

@@ -30,11 +30,33 @@ convention.
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Callable
 
 import pytest
 
-from conftest import requires_real_turbo_fieldfare_binary_and_model
+# `requires_real_turbo_fieldfare_binary_and_model` is redefined locally rather
+# than imported from `tests/conftest.py`: `tests/` has no `__init__.py`
+# markers (see `.claude/rules/standing-law.md`'s "Former standing exception"
+# section on the bare-conftest module-name collision this repo hit before),
+# so `tests/conftest.py` and any sibling `tests/<subdir>/conftest.py` both
+# import under the same bare module name `conftest` in pytest's default
+# "prepend" mode. `from conftest import requires_real_turbo_fieldfare_binary_and_model`
+# is therefore order-dependent on which conftest.py pytest happened to import
+# first in this process -- exactly the real `ImportError` already found and
+# fixed the same way in `tests/test_self_play_dspy_groq_chicago.py`.
+_TURBO_FIELDFARE_DIR = Path.home() / "turbo-fieldfare"
+_SERVER_BINARY = _TURBO_FIELDFARE_DIR / ".build" / "release" / "TurboFieldfareServer"
+_MODEL_PATH = _TURBO_FIELDFARE_DIR / "scratch" / "gemma4.gturbo"
+
+requires_real_turbo_fieldfare_binary_and_model = pytest.mark.skipif(
+    not (_SERVER_BINARY.exists() and _MODEL_PATH.exists()),
+    reason=(
+        f"Real TurboFieldfareServer binary ({_SERVER_BINARY}) or real model "
+        f"weights ({_MODEL_PATH}) not present -- build/install them per "
+        "turbo-fieldfare's README before running this real end-to-end test."
+    ),
+)
 
 
 @requires_real_turbo_fieldfare_binary_and_model
@@ -47,8 +69,8 @@ def test_real_dspy_policy_solves_real_single_agent_maze_and_returns_a_real_legal
     domain's real action space, with no crash from the SingleAgent ->
     MultiAgent-declared-T_domain shape mismatch this test exists to cover.
     """
-    from skdecide.hub.domain.maze import Maze
-    from skdecide.hub.solver.dspy_policy import DSPyPolicy
+    from autofde_lab.hub.domain.maze import Maze
+    from autofde_lab.hub.solver.dspy_policy import DSPyPolicy
 
     def domain_factory() -> Maze:
         return Maze()
@@ -72,8 +94,8 @@ def test_real_dspy_policy_solves_real_single_agent_simple_grid_world_and_returns
     Real solver: DSPyPolicy.
     Real check: real legal action returned, same SingleAgent shape as Maze.
     """
-    from skdecide.hub.domain.simple_grid_world import SimpleGridWorld
-    from skdecide.hub.solver.dspy_policy import DSPyPolicy
+    from autofde_lab.hub.domain.simple_grid_world import SimpleGridWorld
+    from autofde_lab.hub.solver.dspy_policy import DSPyPolicy
 
     def domain_factory() -> SimpleGridWorld:
         return SimpleGridWorld()
@@ -98,8 +120,8 @@ def test_real_dspy_policy_solves_real_single_agent_mastermind_and_returns_a_real
     Real check: real legal guess returned even though the domain is only
     partially observable (observation is a real `Score`, not a state).
     """
-    from skdecide.hub.domain.mastermind import MasterMind
-    from skdecide.hub.solver.dspy_policy import DSPyPolicy
+    from autofde_lab.hub.domain.mastermind import MasterMind
+    from autofde_lab.hub.solver.dspy_policy import DSPyPolicy
 
     def domain_factory() -> MasterMind:
         return MasterMind()
@@ -125,8 +147,8 @@ def test_real_dspy_policy_solves_real_multi_agent_rock_paper_scissors_and_return
     real legal `Move` per real agent name, using the real multi-agent branch
     of `_get_next_action` (the shape this solver originally supported).
     """
-    from skdecide.hub.domain.rock_paper_scissors import RockPaperScissors
-    from skdecide.hub.solver.dspy_policy import DSPyPolicy
+    from autofde_lab.hub.domain.rock_paper_scissors import RockPaperScissors
+    from autofde_lab.hub.solver.dspy_policy import DSPyPolicy
 
     max_moves = 2
 
@@ -152,16 +174,16 @@ def test_real_rollout_utility_with_real_dspy_policy_on_real_single_agent_maze_ru
 ):
     """Real domain: Maze.
     Real solver: DSPyPolicy.
-    Real rollout: `skdecide.utils.rollout` (the generic single-agent-capable
-    rollout, unlike `skdecide.self_play.self_play_rollout` which is
+    Real rollout: `autofde_lab.utils.rollout` (the generic single-agent-capable
+    rollout, unlike `autofde_lab.self_play.self_play_rollout` which is
     RockPaperScissors-specific), 2 real episodes, small `max_steps`.
     Real check: rollout completes without crashing and returns one real
     episode entry per requested episode, each with at least one real,
     legal action recorded.
     """
-    from skdecide.hub.domain.maze import Maze
-    from skdecide.hub.solver.dspy_policy import DSPyPolicy
-    from skdecide.utils import rollout
+    from autofde_lab.hub.domain.maze import Maze
+    from autofde_lab.hub.solver.dspy_policy import DSPyPolicy
+    from autofde_lab.utils import rollout
 
     max_steps = 3
 

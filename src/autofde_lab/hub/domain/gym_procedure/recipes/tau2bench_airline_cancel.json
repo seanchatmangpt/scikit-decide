@@ -1,0 +1,49 @@
+{
+  "gym": "tau2-bench",
+  "task": "airline/task_7",
+  "source_ref": "vendor/gyms/tau2-bench/data/tau2/domains/airline/tasks.json (task id \"7\", evaluation_criteria.actions)",
+  "initial_facts": [],
+  "goal_facts": ["reservation_xehm4b_cancelled", "reservation_59xx6w_cancelled"],
+  "steps": [
+    {
+      "id": "get_reservation_details_xehm4b",
+      "description": "get_reservation_details(reservation_id=\"XEHM4B\")",
+      "preconditions": [],
+      "establishes": ["have_details_xehm4b"],
+      "cost": 1.0,
+      "source": "tasks.json task id 7, evaluation_criteria.actions[0] (action_id 7_0)"
+    },
+    {
+      "id": "get_reservation_details_59xx6w",
+      "description": "get_reservation_details(reservation_id=\"59XX6W\")",
+      "preconditions": ["have_details_xehm4b"],
+      "establishes": ["have_details_59xx6w"],
+      "cost": 1.0,
+      "source": "tasks.json task id 7, evaluation_criteria.actions[1] (action_id 7_1)"
+    },
+    {
+      "id": "upgrade_xehm4b_to_business",
+      "description": "update_reservation_flights(reservation_id=\"XEHM4B\", cabin=\"business\", flights=[{flight_number: HAT005, date: 2024-05-20}, {flight_number: HAT178, date: 2024-05-30}], payment_id=\"credit_card_2408938\")",
+      "preconditions": ["have_details_59xx6w"],
+      "establishes": ["xehm4b_upgraded_business"],
+      "cost": 1.0,
+      "source": "tasks.json task id 7, evaluation_criteria.actions[2] (action_id 7_2)"
+    },
+    {
+      "id": "cancel_reservation_xehm4b",
+      "description": "cancel_reservation(reservation_id=\"XEHM4B\")",
+      "preconditions": ["xehm4b_upgraded_business"],
+      "establishes": ["reservation_xehm4b_cancelled"],
+      "cost": 1.0,
+      "source": "tasks.json task id 7, evaluation_criteria.actions[3] (action_id 7_3)"
+    },
+    {
+      "id": "cancel_reservation_59xx6w",
+      "description": "cancel_reservation(reservation_id=\"59XX6W\")",
+      "preconditions": ["reservation_xehm4b_cancelled"],
+      "establishes": ["reservation_59xx6w_cancelled"],
+      "cost": 1.0,
+      "source": "tasks.json task id 7, evaluation_criteria.actions[4] (action_id 7_4)"
+    }
+  ]
+}

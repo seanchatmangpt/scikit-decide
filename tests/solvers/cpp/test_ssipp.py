@@ -16,14 +16,14 @@ from typing import NamedTuple
 
 import pytest
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     ImplicitSpace,
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     DeterministicInitialized,
     EnumerableTransitions,
@@ -34,7 +34,7 @@ from skdecide.builders.domain import (
     Sequential,
     SingleAgent,
 )
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
 
 
 class State(NamedTuple):
@@ -193,12 +193,12 @@ def rollout(domain, solver, max_steps=100):
 
 class TestSSiPP:
     def test_import(self):
-        from skdecide.hub.solver.ssipp import SSiPP
+        from autofde_lab.hub.solver.ssipp import SSiPP
 
         assert SSiPP is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.ssipp import SSiPP
+        from autofde_lab.hub.solver.ssipp import SSiPP
 
         dom = DeterministicGridDomain()
         assert SSiPP.check_domain(dom)
@@ -206,7 +206,7 @@ class TestSSiPP:
     @pytest.mark.parametrize("inner_solver", ["LRTDP", "ILAOstar", "LDFS"])
     def test_deterministic_grid(self, inner_solver):
         """SSiPP should find optimal cost=6 on 4x4 deterministic grid."""
-        from skdecide.hub.solver.ssipp import SSiPP
+        from autofde_lab.hub.solver.ssipp import SSiPP
 
         goal = State(3, 3)
         h = lambda d, s: Value(cost=abs(s.x - goal.x) + abs(s.y - goal.y))
@@ -226,7 +226,7 @@ class TestSSiPP:
 
     def test_stochastic_grid(self):
         """SSiPP should find a near-optimal policy on stochastic grid."""
-        from skdecide.hub.solver.ssipp import SSiPP
+        from autofde_lab.hub.solver.ssipp import SSiPP
 
         goal = State(2, 2)
         h = lambda d, s: Value(cost=abs(s.x - goal.x) + abs(s.y - goal.y))
@@ -247,7 +247,7 @@ class TestSSiPP:
 
     def test_explored_states(self):
         """get_explored_states should return non-empty set after solving."""
-        from skdecide.hub.solver.ssipp import SSiPP
+        from autofde_lab.hub.solver.ssipp import SSiPP
 
         goal = State(3, 3)
         h = lambda d, s: Value(cost=abs(s.x - goal.x) + abs(s.y - goal.y))
@@ -262,7 +262,7 @@ class TestSSiPP:
 
     def test_boundary_states(self):
         """get_boundary_states should return non-empty set."""
-        from skdecide.hub.solver.ssipp import SSiPP
+        from autofde_lab.hub.solver.ssipp import SSiPP
 
         goal = State(3, 3)
         h = lambda d, s: Value(cost=abs(s.x - goal.x) + abs(s.y - goal.y))
@@ -277,7 +277,7 @@ class TestSSiPP:
 
     def test_nb_sub_ssps(self):
         """Should solve with at least one sub-SSP iteration."""
-        from skdecide.hub.solver.ssipp import SSiPP
+        from autofde_lab.hub.solver.ssipp import SSiPP
 
         goal = State(3, 3)
         h = lambda d, s: Value(cost=abs(s.x - goal.x) + abs(s.y - goal.y))
@@ -291,7 +291,7 @@ class TestSSiPP:
 
     def test_small_depth(self):
         """SSiPP should work with small depth=2."""
-        from skdecide.hub.solver.ssipp import SSiPP
+        from autofde_lab.hub.solver.ssipp import SSiPP
 
         goal = State(3, 3)
         h = lambda d, s: Value(cost=abs(s.x - goal.x) + abs(s.y - goal.y))
@@ -313,8 +313,8 @@ class TestSSiPP:
         deterministic 4x4 grid. After enough iterations, SSiPP's V(s0)
         should match V*(s0) = 6.
         """
-        from skdecide.hub.solver.lrtdp import LRTDP
-        from skdecide.hub.solver.ssipp import SSiPP
+        from autofde_lab.hub.solver.lrtdp import LRTDP
+        from autofde_lab.hub.solver.ssipp import SSiPP
 
         goal = State(3, 3)
         h = lambda d, s: Value(cost=abs(s.x - goal.x) + abs(s.y - goal.y))
@@ -345,8 +345,8 @@ class TestSSiPP:
         With depth=4 (covering all 9 states), SSiPP should closely match
         LRTDP's optimal value after repeated solves.
         """
-        from skdecide.hub.solver.lrtdp import LRTDP
-        from skdecide.hub.solver.ssipp import SSiPP
+        from autofde_lab.hub.solver.lrtdp import LRTDP
+        from autofde_lab.hub.solver.ssipp import SSiPP
 
         goal = State(2, 2)
         h = lambda d, s: Value(cost=abs(s.x - goal.x) + abs(s.y - goal.y))
@@ -373,7 +373,7 @@ class TestSSiPP:
 
     def test_solving_time(self):
         """get_solving_time should return a non-negative value."""
-        from skdecide.hub.solver.ssipp import SSiPP
+        from autofde_lab.hub.solver.ssipp import SSiPP
 
         goal = State(3, 3)
         h = lambda d, s: Value(cost=abs(s.x - goal.x) + abs(s.y - goal.y))
@@ -393,7 +393,7 @@ class TestSSiPP:
         recursively for each state. The fix makes get_policy() directly return the
         internal _policy map that's accumulated across sub-SSP iterations.
         """
-        from skdecide.hub.solver.ssipp import SSiPP
+        from autofde_lab.hub.solver.ssipp import SSiPP
 
         goal = State(3, 3)
         h = lambda d, s: Value(cost=abs(s.x - goal.x) + abs(s.y - goal.y))

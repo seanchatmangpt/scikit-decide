@@ -1,0 +1,15 @@
+{
+  "schema": "urn:autofde:fortune5:scenario-catalog:v1",
+  "scenarios": [
+    {"id":"S01","name":"Global platform greenfield","stress":["multi-region","identity","data","cost","operations","exit"]},
+    {"id":"S02","name":"Primary region loss","stress":["RTO/RPO","failover","data consistency","DNS/network","capacity"]},
+    {"id":"S03","name":"Cloud/provider exit","stress":["portability","data egress","identity substitution","service equivalents","contract exit"]},
+    {"id":"S04","name":"Data sovereignty split","stress":["residency","replication","analytics","support access","retention"]},
+    {"id":"S05","name":"Identity compromise","stress":["credential revocation","blast radius","break-glass","workload identity","audit"]},
+    {"id":"S06","name":"Cost shock / quota exhaustion","stress":["autoscaling","budget","capacity","degraded mode","commitments"]},
+    {"id":"S07","name":"M&A integration","stress":["identity federation","network overlap","data ownership","app rationalization","operating model"]},
+    {"id":"S08","name":"AI agent governance","stress":["tool authority","model substitution","prompt/data boundary","evaluation","receipt/replay"]},
+    {"id":"S09","name":"Software supply-chain compromise","stress":["artifact provenance","dependency quarantine","roll-forward/back","SBOM/attestation","blast radius"]},
+    {"id":"S10","name":"Major schema/API evolution","stress":["backward compatibility","migration coexistence","consumer discovery","rollback","data correction"]}
+  ]
+}

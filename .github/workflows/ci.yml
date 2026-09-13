@@ -66,7 +66,7 @@ jobs:
             "pynng>=0.6.2" \
             "pathos>=0.2.7" \
             "discrete-optimization>=0.9.0"
-      - run: python -m compileall -q src/skdecide/_cache src/skdecide/caching.py
+      - run: python -m compileall -q src/autofde_lab/_cache src/autofde_lab/caching.py
       - env:
           PYTHONPATH: src
         run: python -m pytest -q tests/test_caching.py tests/test_enterprise_cache.py
@@ -155,7 +155,7 @@ jobs:
           python -m pip install "build==1.2.2"
           python -m build --sdist
           tar -tzf dist/*.tar.gz > sdist-files.txt
-          grep -Eq '/src/skdecide/_cache/' sdist-files.txt
+          grep -Eq '/src/autofde_lab/_cache/' sdist-files.txt
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: source-distribution
@@ -192,7 +192,14 @@ jobs:
           chmod +x bin/minizinc.AppImage
           (cd bin && ./minizinc.AppImage --appimage-extract)
           echo "$GITHUB_WORKSPACE/bin/squashfs-root/usr/bin" >> "$GITHUB_PATH"
-          echo "LD_LIBRARY_PATH=$GITHUB_WORKSPACE/bin/squashfs-root/usr/lib" >> "$GITHUB_ENV"
+          # Do NOT export the AppImage's lib dir as a job-wide LD_LIBRARY_PATH:
+          # it shadows the runner's libpcre2 and breaks /usr/bin/git
+          # (`symbol lookup error: undefined symbol: pcre2_maketables_free_8`,
+          # exit 127) -- confirmed live on run 33942465338 once #110 made the
+          # next step clone git-sourced deps, and it even fails checkout's
+          # post-job `git version`. Publish the path and scope it to the two
+          # steps that actually run minizinc.
+          echo "MINIZINC_LIB=$GITHUB_WORKSPACE/bin/squashfs-root/usr/lib" >> "$GITHUB_ENV"
       - uses: astral-sh/setup-uv@cec208311dfd045dd5311c1add060b2062131d57 # v8.0.0
         with:
           version: "0.9.2"
@@ -202,13 +209,45 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          wheel=$(find wheels -maxdepth 1 -name 'scikit_decide*.whl' -print -quit)
+          wheel=$(find wheels -maxdepth 1 -name 'autofde_lab*.whl' -print -quit)
           test -n "$wheel"
-          uv pip install --system "${wheel}[all]" --group test \
+          # uv honors pyproject.toml's [tool.uv.sources] git redirects
+          # (wasm4pm-compat-pydantic, gymact) only when resolving the
+          # *project* from its lock -- never when installing a prebuilt
+          # wheel path, whose METADATA carries bare names. Confirmed live
+          # after PR#108 (run 33939249689): `uv pip install wheel[all]`
+          # still fails with `No solution found ... wasm4pm-compat-pydantic
+          # was not found in the package registry`. So export the frozen
+          # lock's resolved requirement set (git URLs included, markers
+          # kept) and install that; then the wheel itself with --no-deps.
+          uv export --frozen --format requirements-txt --extra all --group test \
+            --no-dev --no-hashes --no-emit-project -o /tmp/autofde-lab-all.txt
+          uv pip install --system -r /tmp/autofde-lab-all.txt \
             "ortools!=9.15.6755" "llvmlite>=0.45"
-          minizinc --version
+          uv pip install --system --no-deps "$wheel"
+          LD_LIBRARY_PATH="$MINIZINC_LIB" minizinc --version
       - name: Run integration partitions
         shell: bash
+        env:
+          # Scoped here (not job-wide) so the git-backed install step above
+          # keeps the runner's own libraries; see the MiniZinc step comment.
+          LD_LIBRARY_PATH: ${{ env.MINIZINC_LIB }}
+          # Same fix the Justfile already documents and applies locally
+          # (see its own PYTHONPATH comment): Ray's spawned worker
+          # processes (this partition's tests/solvers/python/test_gnn_ray_rllib.py
+          # and the autoregressive sb3 suite) don't inherit pytest's
+          # in-process sys.path insertion when unpickling test-defined
+          # classes to reimport them by name in a separate process -- they
+          # only see the PYTHONPATH env var as set at worker launch.
+          # Confirmed live on run 33957629757 (first run in which this job
+          # ever got past the wheel-install step, since #110/#113 fixed
+          # that): every Ray-worker test failed with
+          # `ModuleNotFoundError: No module named 'solvers'`
+          # (`ray::GraphRolloutWorker.__init__()` -> RaySystemError). Not a
+          # regression from this session's own PRs (none touch tests/solvers
+          # or Ray config) -- the install had simply never succeeded far
+          # enough for this gap to be observable before.
+          PYTHONPATH: ${{ github.workspace }}
         run: |
           set -euo pipefail
           pytest -vv tests/solvers/python \
@@ -242,13 +281,30 @@ jobs:
         with:
           name: wheel-ubuntu-latest-3.10
           path: wheels
+      - uses: astral-sh/setup-uv@cec208311dfd045dd5311c1add060b2062131d57 # v8.0.0
+        with:
+          enable-cache: true
       - name: Install wheel and build documentation
         shell: bash
         run: |
           set -euo pipefail
-          wheel=$(find wheels -maxdepth 1 -name 'scikit_decide*.whl' -print -quit)
+          wheel=$(find wheels -maxdepth 1 -name 'autofde_lab*.whl' -print -quit)
           test -n "$wheel"
-          python -m pip install "${wheel}[all]"
+          # The `receipts` extra's wasm4pm-compat-pydantic (and `gymact`)
+          # exist only via [tool.uv.sources] git redirects in pyproject.toml,
+          # not on PyPI and not in the wheel's METADATA. uv honors those
+          # redirects only when resolving the *project* from its lock --
+          # not for a prebuilt wheel path, which is why PR#108's
+          # `uv pip install wheel[all]` still failed live (run 33939249689:
+          # `No solution found ... wasm4pm-compat-pydantic was not found in
+          # the package registry`). Export the frozen lock's resolved set
+          # (git URLs included, markers kept) and install that; then the
+          # wheel with --no-deps.
+          py="$(python -c 'import sys; print(sys.executable)')"
+          uv export --frozen --format requirements-txt --extra all \
+            --no-dev --no-hashes --no-emit-project -o /tmp/autofde-lab-all.txt
+          uv pip install --python "$py" -r /tmp/autofde-lab-all.txt
+          uv pip install --python "$py" --no-deps "$wheel"
           yarn install --frozen-lockfile
           yarn docs:build
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
@@ -306,6 +362,26 @@ jobs:
           artifacts: dist/*
           tag: ${{ github.ref_name }}
           generateReleaseNotes: true
+      - name: Refuse to publish anything but this fork's own distribution
+        # This job is tag-gated (line 286) and this repo has zero tags as of
+        # the AutoFDE Lab rename, so it has never fired. Before the rename it
+        # could still have attempted to publish a wheel named "scikit-decide"
+        # -- Airbus's PyPI package -- from a fork, on any stray v* tag with
+        # PYPI_API_TOKEN set. It would have 403'd rather than succeeded,
+        # which was luck, not design. This step makes the check structural:
+        # every dist artifact's declared name must equal this fork's own.
+        run: |
+          for f in dist/*; do
+            case "$f" in
+              *.whl) name=$(unzip -p "$f" '*.dist-info/METADATA' | grep -m1 '^Name: ' | cut -d' ' -f2) ;;
+              *.tar.gz) name=$(tar -xzOf "$f" '*/PKG-INFO' | grep -m1 '^Name: ' | cut -d' ' -f2) ;;
+              *) continue ;;
+            esac
+            if [ "$name" != "autofde-lab" ]; then
+              echo "REFUSED: $f declares distribution name '$name', expected 'autofde-lab'" >&2
+              exit 1
+            fi
+          done
       - name: Publish to PyPI when configured
         env:
           PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}

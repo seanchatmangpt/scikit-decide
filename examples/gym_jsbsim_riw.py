@@ -13,16 +13,16 @@ import gymnasium as gym
 from gym_jsbsim.catalogs.catalog import Catalog as prp
 from gym_jsbsim.envs.taxi_utils import *
 
-from skdecide import Domain, TransitionOutcome, Value
-from skdecide.builders.domain import DeterministicInitialized
-from skdecide.hub.domain.gym import (
+from autofde_lab import Domain, TransitionOutcome, Value
+from autofde_lab.builders.domain import DeterministicInitialized
+from autofde_lab.hub.domain.gym import (
     GymDiscreteActionDomain,
     GymDomainHashable,
     GymDomainStateProxy,
     GymWidthDomain,
 )
-from skdecide.hub.solver.riw import RIW
-from skdecide.utils import rollout
+from autofde_lab.hub.solver.riw import RIW
+from autofde_lab.utils import rollout
 
 # ENV_NAME = 'GymJsbsim-HeadingControlTask-v0'
 ENV_NAME = "GymJsbsim-TaxiapControlTask-v0"
