@@ -1,27 +1,3 @@
-
-                    _  __    _  __              __             _      __
-       _____ _____ (_)/ /__ (_)/ /_        ____/ /___   _____ (_)____/ /___
-      / ___// ___// // //_// // __/______ / __  // _ \ / ___// // __  // _ \
-     (__  )/ /__ / // ,<  / // /_ /_____// /_/ //  __// /__ / // /_/ //  __/
-    /____/ \___//_//_/|_|/_/ \__/        \__,_/ \___/ \___//_/ \__,_/ \___/
-
-<br>
-<p align="center">
-  <a href="https://github.com/seanchatmangpt/autofde-lab/actions/workflows/ci.yml?query=branch%3Amaster">
-    <img src="https://img.shields.io/github/actions/workflow/status/seanchatmangpt/autofde-lab/ci.yml?branch=master&logo=github&label=CI%20status" alt="actions status">
-  </a>
-  <a href="https://github.com/seanchatmangpt/autofde-lab/tags">
-    <img src="https://img.shields.io/github/tag/seanchatmangpt/autofde-lab.svg?label=current%20version" alt="version">
-  </a>
-  <a href="https://github.com/seanchatmangpt/autofde-lab/stargazers">
-    <img src="https://img.shields.io/github/stars/seanchatmangpt/autofde-lab.svg" alt="stars">
-  </a>
-  <a href="https://github.com/seanchatmangpt/autofde-lab/network">
-    <img src="https://img.shields.io/github/forks/seanchatmangpt/autofde-lab.svg" alt="forks">
-  </a>
-</p>
-<br>
-
 # AutoFDE Lab
 
 AutoFDE Lab is the foundation layer of the **Chatman Ecosystem**'s Forward Deployment OS: the
@@ -92,88 +68,49 @@ of the new ontology profile against its own shapes → `Conforms: True`.
 Docs never establish standing on their own (`docs/CLAUDE.md`) — every "works" claim above
 points at a real command and its real output, not prose alone.
 
-## Main features
+## Core boundaries
 
-<!--features-list-start-->
+- Planner, policy, role, and agent are distinct objects.
+- SELECT, CONSTRUCT, and DO are distinct operations.
+- Planner/model output, proofs, hooks, and generated files have no ambient execution authority.
+- GymAct may execute bounded benchmark and rehearsal worlds when authority is explicitly admitted.
+- Benchmark authority does not imply production authority.
+- Irreversible DO requires a brokered path and receipt evidence.
+- Acknowledgement, effect, verification, score, and standing are distinct evidence stages.
 
-- **Problem solving:** describe your decision-making problem once and auto-match compatible solvers.\
-  _For instance planning/scheduling problems can be solved by RL solvers using GNNs._
-- **Growing catalog:** enjoy a growing list of domains & solvers catalog, supported by the community.
-- **Open & Extensible:** scikit-decide is open source and is able to wrap existing state-of-the-art domains/solvers.
-- **Domains available:**
-  - [Gym(nasium)](https://gymnasium.farama.org/) environments for reinforcement learning (RL)
-  - [PDDL](https://planning.wiki/) (Planning Domain Definition Language) via [unified-planning](https://github.com/aiplan4eu/unified-planning) and [plado](https://github.com/massle/plado) libraries
-    - encoding in gym(nasium) spaces compatible with RL
-    - graph representations for RL (inspired by [Lifted Learning Graph](https://doi.org/10.1609/aaai.v38i18.29986)) :new:
-  - [RDDL](https://users.cecs.anu.edu.au/~ssanner/IPPC_2011/RDDL.pdf) (Relational Dynamic Influence Diagram Language) using [pyrddl-gym](https://github.com/pyrddlgym-project) library.
-  - Flight planning, based on [openap](https://openap.dev/) or in-house Poll-Schumann for performance model
-  - Scheduling, based on rcpsp problem from [discrete-optimization](https://airbus.github.io/discrete-optimization) library
-  - Toy domains like: maze, mastermind, rock-paper-scissors
-- **Solvers available:**
-  - RL solvers from ray.rllib and stable-baselines3
-    - existing algos with action masking
-    - adaptation of RL algos for graph observation, based on GNNs from [pytorch-geometric](https://pytorch-geometric.readthedocs.io/) :new:
-    - autoregressive models with action masking component by component for parametric actions :new:
-  - Planning solvers from [unified-planning](https://github.com/aiplan4eu/unified-planning) library
-  - RDDL solvers jax and gurobi-based based on pyRDDLGym-jax and pyRDDLGym-gurobi from [pyrddl-gym project](https://github.com/pyrddlgym-project)
-  - Search solvers coded in scikit-decide library:
-    - A*, AO*, Improved-LAO*
-    - Value Iteration (VI), Policy Iteration (PI)
-    - Labeled RTDP, Learning Real-Time A*
-    - LDFS (Label-correcting Depth-First Search), Iterative Deepening A*
-    - SSiPP (Short-Sighted Planning), FRET (Find, Revise, Eliminate Traps)
-    - iDual (LP-based SSP solver), Goal Probability and Cost Iteration (GPCI)
-    - Best First Width Search, Iterated Width (IW), Rollout IW (RIW)
-    - Monte Carlo Tree Search (MCTS), POMCP
-    - DESPOT, SARSOP, Witness (POMDP solvers)
-    - RTDP-Bel (belief-space RTDP), HSVI / GoalHSVI
-    - SSPReplan, SSPDetHindsight, SSPPlanMerger (determinization approaches)
-    - Multi-Agent RTDP, Multi-Agent Heuristic meta-solver (MAHD)
-  - (Probabilistic) PDDL (PPDDL) solvers:
-    - FF planner
-    - FFReplan / PPDDLReplan (replanning with pluggable inner solvers)
-    - FFDetHindsight / PPDDLDetHindsight (determinization in hindsight)
-    - RFF / PPDDLPlanMerger (plan aggregation into a policy)
-  - PDDL heuristics (with their probabilistic extensions):
-    - Delete-Relaxation heuristics
-    - FF Heuristic
-  - PDDL+ parser and simulators with Probabilistic PDDL extensions
-    - Lifted applicable action filtering using Clingo
-    - Z3-based event synchronization in python using [z3-solver](https://pypi.org/project/z3-solver/)
-  - Evolution strategy: Cartesian Genetic Programming (CGP)
-  - Scheduling solvers from [discrete-optimization](https://airbus.github.io/discrete-optimization),
-    - itself wrapping [ortools](https://developers.google.com/optimization), [gurobi](https://www.gurobi.com/),
-    [toulbar](https://toulbar2.github.io/toulbar2/#), [minizinc](https://www.minizinc.org/),
-    [deap](https://deap.readthedocs.io/) (genetic algorithm), [didppy](https://didppy.readthedocs.io/) (dynamic programming),
-    - and coding local search (hill climber, simulated annealing), Large Neighborhood Search (LNS), and
-    genetic programming based hyper-heuristic (GPHH)
-- **Tuning solvers hyperparameters**
-  - hyperparameters definition
-  - automated study with optuna
+## Planner league
 
-<!--features-list-end-->
+The planner catalog is treated as a population. A policy composes a planner, parameters, objective, observation projection, and action projection. A role supplies game semantics, constraints, information, cost, termination, and authority. Only compatible planner-role-world combinations are admitted for execution.
+
+Cross-play inside manufactured worlds yields empirical payoff and receipt evidence rather than speculative planner rankings.
+
+## Evidence vocabulary
+
+Claims use `UNKNOWN`, `PARTIAL_ALIVE`, `ALIVE`, `BLOCKED`, `BUILD_BROKEN`, `UNSUPPORTED`, and typed `REFUSED`. `ALIVE` requires observed execution against the exact admitted subject and the required verifier.
+
+## Source authority
+
+Where the repository declares RDF/ontology, queries, and templates canonical, ggen renders projections from those sources. Generated files are not independent editing surfaces.
 
 ## Installation
 
-Quick version:
-```shell
+```bash
 pip install autofde-lab[all]
 ```
-For more details, see the [online documentation](https://seanchatmangpt.github.io/autofde-lab/install).
 
-## Documentation
+For development:
 
-The latest documentation is available [online](https://seanchatmangpt.github.io/autofde-lab).
+```bash
+uv sync --extra=all -v
+just test
+```
 
-## Examples
+Run the broader applicable suite before publishing a broad behavioral change:
 
-Some educational notebooks are available in `notebooks/` folder.
-Links to launch them online with [binder](https://mybinder.org/) are provided in the
-[Notebooks section](https://seanchatmangpt.github.io/autofde-lab/notebooks) of the online documentation.
+```bash
+just test-full
+```
 
-More examples can be found as Python scripts in the `examples/` folder, showing how to import or define a domain,
-and how to run or solve it. Most of the examples rely on scikit-decide Hub, an extensible catalog of domains/solvers.
+## Provenance
 
-## Contributing
-
-See more about how to contribute in the [online documentation](https://seanchatmangpt.github.io/autofde-lab/contribute).
+AutoFDE Lab is forked from Airbus AI Research's scikit-decide. Upstream copyright and license provenance remain intact; see `NOTICE` and `LICENSE`.

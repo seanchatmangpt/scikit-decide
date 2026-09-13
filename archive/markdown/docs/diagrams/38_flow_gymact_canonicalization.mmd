@@ -1,0 +1,26 @@
+flowchart LR
+    E["External Environment"] --> A["Environment Adapter"]
+    A --> G["Canonical GymBasis"]
+    G --> P1["Typed Projection"]
+    G --> P2["Textual Projection"]
+    G --> P3["PDDL / Numeric Projection"]
+    G --> P4["POWL / Process Projection"]
+
+    P1 --> D1["Decision System A"]
+    P2 --> D2["Decision System B"]
+    P3 --> D3["Decision System C"]
+    P4 --> D4["Decision System D"]
+
+    D1 --> X["Execution Kernel"]
+    D2 --> X
+    D3 --> X
+    D4 --> X
+
+    X --> O["Observed Consequence"]
+    O --> V["Verification & Replay"]
+    V --> G
+
+    G -. provenance + information-loss metadata .-> P1
+    G -. provenance + information-loss metadata .-> P2
+    G -. provenance + information-loss metadata .-> P3
+    G -. provenance + information-loss metadata .-> P4

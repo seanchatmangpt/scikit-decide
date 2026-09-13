@@ -1,0 +1,19 @@
+@prefix afb: <https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+afb:BenchmarkShape a sh:NodeShape ;
+  sh:targetClass afb:Benchmark ;
+  sh:property [ sh:path afb:slug ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+  sh:property [ sh:path dct:title ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path afb:adapterFamily ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path afb:sourceStanding ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path afb:localSafe ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ;
+  sh:property [ sh:path afb:requiresAuthority ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ] .
+
+afb:VendorShape a sh:NodeShape ;
+  sh:targetClass afb:VendorProject ;
+  sh:property [ sh:path afb:slug ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path afb:repositoryUrl ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path afb:vendorPath ; sh:minCount 1 ; sh:maxCount 1 ] .

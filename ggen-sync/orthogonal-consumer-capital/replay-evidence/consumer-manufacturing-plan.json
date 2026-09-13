@@ -1,0 +1,1 @@
+{"schema":"ggen.orthogonal-consumer-capital/1","authority":"SELECT|CONSTRUCT|VERIFY","consequential_do":false,"targets":[{"repository":"seanchatmangpt/autofde-lab","expected_yield":140,"dependency_unlocks":6,"composition_unlocks":1,"future_capacity":20}]}

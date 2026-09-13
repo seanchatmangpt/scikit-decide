@@ -1,0 +1,429 @@
+{
+  "eventTypes": [
+    {
+      "name": "act",
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "materialize",
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "verify",
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "objectTypes": [
+    {
+      "name": "episode",
+      "attributes": []
+    },
+    {
+      "name": "environment",
+      "attributes": []
+    },
+    {
+      "name": "capability",
+      "attributes": []
+    }
+  ],
+  "events": [
+    {
+      "id": "001bc1cd0fcf4192b0f615381bf47f4e",
+      "type": "materialize",
+      "time": "2026-08-08T15:39:48.534596+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "ee097265763548beaed7f5bc07e7c187"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "2cc33b89e86ff478f2e6163b77f337848f88fe68cb18c5c8553db5a02fe6689c"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "2698aa956e2e42a585a171c44be30e65",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:environment:dc1fe1cedaa14068b13ab686c1d56456",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:operation:materialize",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "32ba4a581df74fd1856ab31938c07b77",
+      "type": "act",
+      "time": "2026-08-08T15:39:48.535436+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "be769506239f434e9fd1daaa2c84425e"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "2cc33b89e86ff478f2e6163b77f337848f88fe68cb18c5c8553db5a02fe6689c"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "a4678b61466ba15e1463bbd9c05341c1c6143fb4ebc2bd579df8dd9efd2f5827"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "2698aa956e2e42a585a171c44be30e65",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:environment:dc1fe1cedaa14068b13ab686c1d56456",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:capability:mine",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "271f717639474289a915300c541b6da0",
+      "type": "verify",
+      "time": "2026-08-08T15:39:48.535851+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "be769506239f434e9fd1daaa2c84425e"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "2cc33b89e86ff478f2e6163b77f337848f88fe68cb18c5c8553db5a02fe6689c"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "a4678b61466ba15e1463bbd9c05341c1c6143fb4ebc2bd579df8dd9efd2f5827"
+        },
+        {
+          "name": "verification_id",
+          "value": "4e07b789a5fe4b2fb64e7f6ecfc5b020"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "2698aa956e2e42a585a171c44be30e65",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:environment:dc1fe1cedaa14068b13ab686c1d56456",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:capability:mine",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "605afc80a04e449b827c2986fabe0509",
+      "type": "act",
+      "time": "2026-08-08T15:39:48.536265+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "e7c46dab15f44c5a9e9260b3a2d26a95"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "a4678b61466ba15e1463bbd9c05341c1c6143fb4ebc2bd579df8dd9efd2f5827"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "b8955967c1f078b9f07ccc251edd38e6303f413120668c7ce01d40f6ac640539"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "2698aa956e2e42a585a171c44be30e65",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:environment:dc1fe1cedaa14068b13ab686c1d56456",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:capability:refine",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "5f30f889b8de4064aa9354f8c1fdb40f",
+      "type": "verify",
+      "time": "2026-08-08T15:39:48.536569+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "e7c46dab15f44c5a9e9260b3a2d26a95"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "a4678b61466ba15e1463bbd9c05341c1c6143fb4ebc2bd579df8dd9efd2f5827"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "b8955967c1f078b9f07ccc251edd38e6303f413120668c7ce01d40f6ac640539"
+        },
+        {
+          "name": "verification_id",
+          "value": "bd95522695d6435dbaf2c5745c05f931"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "2698aa956e2e42a585a171c44be30e65",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:environment:dc1fe1cedaa14068b13ab686c1d56456",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:capability:refine",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "1431cf97b7bd4846a8f7107f9499c1c4",
+      "type": "act",
+      "time": "2026-08-08T15:39:48.536940+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "5e3158e9e25b4a26a22dfa9abddf3c82"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "b8955967c1f078b9f07ccc251edd38e6303f413120668c7ce01d40f6ac640539"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "c4859a43e1037ec396a6c4641cd333282ada7310b3568b5a02fc5e26a97b5296"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "2698aa956e2e42a585a171c44be30e65",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:environment:dc1fe1cedaa14068b13ab686c1d56456",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:capability:assemble",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "46ebcee0ac9540cfb2c716bd2d186ff5",
+      "type": "verify",
+      "time": "2026-08-08T15:39:48.537229+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "5e3158e9e25b4a26a22dfa9abddf3c82"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "b8955967c1f078b9f07ccc251edd38e6303f413120668c7ce01d40f6ac640539"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "c4859a43e1037ec396a6c4641cd333282ada7310b3568b5a02fc5e26a97b5296"
+        },
+        {
+          "name": "verification_id",
+          "value": "07897767acf94e41972ab81d6ab3af15"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "2698aa956e2e42a585a171c44be30e65",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:environment:dc1fe1cedaa14068b13ab686c1d56456",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:capability:assemble",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "d7534de811b54f53988f9ef3a5a23946",
+      "type": "act",
+      "time": "2026-08-08T15:39:48.537561+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "7223accfbd054bdeb012ff3eacc9bd81"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "c4859a43e1037ec396a6c4641cd333282ada7310b3568b5a02fc5e26a97b5296"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "0a5eaac2355b483a1dc4e83c681013e7c57dedb613d26ae94b7279385133b7f8"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "2698aa956e2e42a585a171c44be30e65",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:environment:dc1fe1cedaa14068b13ab686c1d56456",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:capability:burn_catalyst",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "bb35897bd94d48f392df497e4203f572",
+      "type": "verify",
+      "time": "2026-08-08T15:39:48.537830+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "7223accfbd054bdeb012ff3eacc9bd81"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "c4859a43e1037ec396a6c4641cd333282ada7310b3568b5a02fc5e26a97b5296"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "0a5eaac2355b483a1dc4e83c681013e7c57dedb613d26ae94b7279385133b7f8"
+        },
+        {
+          "name": "verification_id",
+          "value": "9f49ba3f1d074dbf87c24986e3c94df8"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "2698aa956e2e42a585a171c44be30e65",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:environment:dc1fe1cedaa14068b13ab686c1d56456",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:capability:burn_catalyst",
+          "qualifier": "capability"
+        }
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "2698aa956e2e42a585a171c44be30e65",
+      "type": "episode",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:resource-flow:environment:dc1fe1cedaa14068b13ab686c1d56456",
+      "type": "environment",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:operation:materialize",
+      "type": "capability",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:resource-flow:capability:assemble",
+      "type": "capability",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:resource-flow:capability:burn_catalyst",
+      "type": "capability",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:resource-flow:capability:mine",
+      "type": "capability",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:resource-flow:capability:refine",
+      "type": "capability",
+      "attributes": []
+    }
+  ]
+}

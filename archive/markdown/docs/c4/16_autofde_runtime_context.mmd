@@ -1,0 +1,17 @@
+C4Context
+title AutoFDE Runtime — System Context
+
+Person(operator, "Authorized Operator")
+System(runtime, "AutoFDE Runtime", "Tiny governed EXPLOIT-only consequence runtime.")
+System_Ext(lab, "AutoFDE SOTA Lab", "Discovers and admits candidates.")
+System_Ext(ggen, "ggen", "Manufactures immutable/digest-pinned bundles.")
+System_Ext(gymact, "GymAct", "Consequential world substrate.")
+System_Ext(verifier, "Independent Standing Verifier", "Derives standing from evidence.")
+
+Rel(operator, runtime, "Grants/controls authority")
+Rel(lab, ggen, "Requests manufacture of admitted candidate")
+Rel(ggen, runtime, "Delivers governed executable bundle")
+Rel(runtime, gymact, "Performs lawful DO")
+Rel(gymact, verifier, "Produces observation / receipts / replay")
+Rel(verifier, runtime, "Returns standing")
+Rel(runtime, lab, "Returns production evidence")

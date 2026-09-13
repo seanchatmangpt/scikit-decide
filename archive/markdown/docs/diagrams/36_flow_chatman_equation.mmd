@@ -1,0 +1,13 @@
+flowchart LR
+    O["O<br/>Observation"] --> OA["O*<br/>Admitted Observation"]
+    OA --> P["Π<br/>Selected Plan / Policy"]
+    P --> MU["μ<br/>Lawful Manufacture"]
+    MU --> E["E<br/>Authorized Execution"]
+    E --> OP["O'<br/>Observed Consequence"]
+    OP --> V["V<br/>Independent Verification"]
+    V --> R["R<br/>Receipt / Replay / Standing"]
+
+    OA -. bounds .-> P
+    P -. manifest .-> MU
+    MU -. authority envelope .-> E
+    OP -. identity-preserving evidence .-> V

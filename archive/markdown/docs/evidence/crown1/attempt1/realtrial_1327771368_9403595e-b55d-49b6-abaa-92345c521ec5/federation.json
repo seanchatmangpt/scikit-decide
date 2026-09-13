@@ -1,0 +1,544 @@
+[
+  {
+    "planner": "AOstar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.014947958989068866,
+    "detail": ""
+  },
+  {
+    "planner": "Astar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.014637624961324036,
+    "detail": ""
+  },
+  {
+    "planner": "pLRTAstar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.014605041942559183,
+    "detail": ""
+  },
+  {
+    "planner": "LRTAstar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.01550945802591741,
+    "detail": ""
+  },
+  {
+    "planner": "MCTS",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.01666337496135384,
+    "detail": ""
+  },
+  {
+    "planner": "UCT",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.01728079200256616,
+    "detail": ""
+  },
+  {
+    "planner": "BFWS",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.01507016597315669,
+    "detail": ""
+  },
+  {
+    "planner": "IW",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.01523858297150582,
+    "detail": ""
+  },
+  {
+    "planner": "RIW",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.015295540913939476,
+    "detail": "proposed inapplicable action 'toggle_switch[index=4]' at step 0; applicable=['toggle_switch[index=0]']"
+  },
+  {
+    "planner": "LRTDP",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.015887249959632754,
+    "detail": ""
+  },
+  {
+    "planner": "ILAOstar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.015162999974563718,
+    "detail": ""
+  },
+  {
+    "planner": "pAstar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.014224999933503568,
+    "detail": ""
+  },
+  {
+    "planner": "MARTDP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.012860874994657934,
+    "detail": "ValueError: SKDECIDE exception: MA-RTDP algorithm needs python domain for implementing get_agent_applicable_actions()"
+  },
+  {
+    "planner": "MAHD",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.010636915918439627,
+    "detail": "TypeError: MAHD.__init__() got an unexpected keyword argument 'domain_factory'"
+  },
+  {
+    "planner": "MaxentIRL",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01309629192110151,
+    "detail": "AttributeError: 'Discrete' object has no attribute 'low'"
+  },
+  {
+    "planner": "POMCP",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.1507337080547586,
+    "detail": ""
+  },
+  {
+    "planner": "pPOMCP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013209458906203508,
+    "detail": "AttributeError: 'pPOMCP' object has no attribute '_belief'"
+  },
+  {
+    "planner": "RayRLlib",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.011361374985426664,
+    "detail": "TypeError: RayRLlib.__init__() missing 2 required positional arguments: 'algo_class' and 'train_iterations'"
+  },
+  {
+    "planner": "SimpleGreedy",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.013457459048368037,
+    "detail": ""
+  },
+  {
+    "planner": "StableBaseline",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.010540250106714666,
+    "detail": "TypeError: StableBaseline.__init__() missing 2 required positional arguments: 'algo_class' and 'baselines_policy'"
+  },
+  {
+    "planner": "UPSolver",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.010509041952900589,
+    "detail": "TypeError: UPSolver.__init__() missing 1 required positional argument: 'operation_mode'"
+  },
+  {
+    "planner": "VI",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.014438583049923182,
+    "detail": ""
+  },
+  {
+    "planner": "PI",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.01547320804093033,
+    "detail": ""
+  },
+  {
+    "planner": "LDFS",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.016780250007286668,
+    "detail": ""
+  },
+  {
+    "planner": "IDAstar",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.015989125007763505,
+    "detail": ""
+  },
+  {
+    "planner": "RTDPBel",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 5.551565292058513,
+    "detail": ""
+  },
+  {
+    "planner": "SSiPP",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.01587983302306384,
+    "detail": ""
+  },
+  {
+    "planner": "FRET",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.015891875023953617,
+    "detail": ""
+  },
+  {
+    "planner": "MDPLP",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.015463375020772219,
+    "detail": ""
+  },
+  {
+    "planner": "SSPLP",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.014870416023768485,
+    "detail": ""
+  },
+  {
+    "planner": "IDual",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.014977084007114172,
+    "detail": ""
+  },
+  {
+    "planner": "GPCI",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.014608041965402663,
+    "detail": ""
+  },
+  {
+    "planner": "SARSOP",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.013464082963764668,
+    "detail": "proposed inapplicable action 'toggle_switch[index=1]' at step 0; applicable=['toggle_switch[index=0]']"
+  },
+  {
+    "planner": "DESPOT",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.39366258296649903,
+    "detail": ""
+  },
+  {
+    "planner": "EHC",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.015250166994519532,
+    "detail": ""
+  },
+  {
+    "planner": "FF",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.012492624926380813,
+    "detail": "TypeError: FF solver requires a PDDLDomain or PPDDLDomain"
+  },
+  {
+    "planner": "FFReplan",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01328537508379668,
+    "detail": "TypeError: FFReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLReplan",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013173207989893854,
+    "detail": "TypeError: PPDDLReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "FFDetHindsight",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013012500014156103,
+    "detail": "TypeError: FFDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLDetHindsight",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013122417032718658,
+    "detail": "TypeError: PPDDLDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPReplan",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.014494999893940985,
+    "detail": ""
+  },
+  {
+    "planner": "SSPDetHindsight",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.028008167049847543,
+    "detail": ""
+  },
+  {
+    "planner": "RFF",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013200000044889748,
+    "detail": "TypeError: RFF solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLPlanMerger",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.013031332986429334,
+    "detail": "TypeError: PPDDLPlanMerger solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPPlanMerger",
+    "outcome": "PLAN_CANDIDATE",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]",
+      "toggle_switch[index=2]",
+      "toggle_switch[index=3]",
+      "toggle_switch[index=4]",
+      "engage_master"
+    ],
+    "duration_s": 0.016748041030950844,
+    "detail": ""
+  },
+  {
+    "planner": "Witness",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.014712583972141147,
+    "detail": "proposed inapplicable action 'toggle_switch[index=1]' at step 0; applicable=['toggle_switch[index=0]']"
+  },
+  {
+    "planner": "HSVI",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.015064166975207627,
+    "detail": "proposed inapplicable action 'toggle_switch[index=1]' at step 0; applicable=['toggle_switch[index=0]']"
+  },
+  {
+    "planner": "GoalHSVI",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.020761249936185777,
+    "detail": "proposed inapplicable action 'toggle_switch[index=1]' at step 0; applicable=['toggle_switch[index=0]']"
+  },
+  {
+    "planner": "DSPyPolicy",
+    "outcome": "TIMEOUT",
+    "plan": [
+      "toggle_switch[index=0]",
+      "toggle_switch[index=1]"
+    ],
+    "duration_s": 4.913067874964327,
+    "detail": ""
+  }
+]

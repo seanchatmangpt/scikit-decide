@@ -1,0 +1,72 @@
+module.exports = {
+    lang: 'en-US',
+    title: 'AutoFDE Lab',
+    description: 'AutoFDE Lab documentation site (forked from scikit-decide)',
+    base: `/autofde-lab${process.env.DOCS_VERSION_PATH || '/'}`,
+
+    locales: {
+        '/': {
+            lang: 'en-US',
+            title: 'AutoFDE Lab',
+            description: 'AutoFDE Lab documentation (forked from scikit-decide)',
+        },
+    },
+
+    themeConfig: {
+        repo: 'seanchatmangpt/autofde-lab',
+        logo: '/logo.svg',
+        editLinks: false,
+        docsDir: '',
+        editLinkText: '',
+        lastUpdated: false,
+        locales: {
+            '/': {
+                selectLanguageName: 'en-US',
+            },
+        },
+        nav: [
+            {
+                text: 'Home',
+                link: '/'
+            },
+            {
+                text: 'Install',
+                link: '/install'
+            },
+            {
+                text: 'Guide',
+                link: '/guide/'
+            },
+            {
+                text: 'Notebooks',
+                link: '/notebooks/'
+            },
+            {
+                text: 'Code generators',
+                link: '/codegen/'
+            },
+            {
+                text: 'Reference',
+                link: '/reference/'
+            },
+            {
+                text: 'Contribute',
+                link: '/contribute'
+            },
+        ],
+        sidebar: 'auto',
+        markdown: {
+            toc: {
+                includeLevel: [2]
+            }
+        },
+    },
+
+    plugins: {
+        '@vuepress/plugin-back-to-top': {},
+        'mathjax': {
+            target: 'svg',
+            macros: { '*': '\\times' }
+        },
+    },
+}

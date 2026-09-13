@@ -1,0 +1,83 @@
+{
+  "probe_log": [
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=0",
+        "solved=False",
+        "steps=0",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=1",
+        "steps=1"
+      ],
+      "delta_removed": [
+        "counter=0",
+        "steps=0"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=0",
+        "solved=False",
+        "steps=0",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=-1",
+        "steps=1"
+      ],
+      "delta_removed": [
+        "counter=0",
+        "steps=0"
+      ]
+    },
+    {
+      "action": "increment",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=1",
+        "solved=False",
+        "steps=1",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=2",
+        "steps=2"
+      ],
+      "delta_removed": [
+        "counter=1",
+        "steps=1"
+      ]
+    },
+    {
+      "action": "decrement",
+      "applicable": true,
+      "observed_pre_facts": [
+        "containerized=True",
+        "counter=-1",
+        "solved=False",
+        "steps=1",
+        "target=3"
+      ],
+      "delta_added": [
+        "counter=-2",
+        "steps=2"
+      ],
+      "delta_removed": [
+        "counter=-1",
+        "steps=1"
+      ]
+    }
+  ],
+  "representation_losses": {
+    "reward": "UNREPRESENTABLE:CONTINUOUS_DIMENSION_HAS_NO_SOUND_PROPOSITIONAL_ENCODING"
+  }
+}
