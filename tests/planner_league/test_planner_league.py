@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import dataclasses
 import json
 from pathlib import Path
 
@@ -108,6 +109,27 @@ def test_payoff_hypergraph_rejects_unreceipted_execution() -> None:
         PayoffObservation(match, 1.0, -1.0, receipt_id="")
     with pytest.raises(ValueError, match="REFUSED:UNRECEIPTED_PAYOFF"):
         PayoffObservation(match, 1.0, -1.0, receipt_id="r-1", execution_observed=False)
+
+
+def test_payoff_hypergraph_refuses_a_non_payoff_observation() -> None:
+    # Found by the V2030.1.1 cap 1 adversarial refute pass (#114):
+    # `PayoffHypergraph.add()` accepted a `LeagueSolveOutcome` (candidate-
+    # plan evidence, deliberately never a receipted `PayoffObservation`)
+    # silently, and only failed later, in `_scores()`, with an unrelated
+    # `AttributeError` -- a second, unguarded door into the hypergraph.
+    # `PayoffObservation.__post_init__` gates receipting; this pins that
+    # `add()` itself gates *type*, so only that one door is ever open.
+    graph = PayoffHypergraph()
+
+    @dataclasses.dataclass(frozen=True, slots=True)
+    class NotAPayoffObservation:
+        match: object = None
+
+    with pytest.raises(
+        TypeError, match="REFUSED:PAYOFF_HYPERGRAPH_REQUIRES_PAYOFF_OBSERVATION"
+    ):
+        graph.add(NotAPayoffObservation())  # type: ignore[arg-type]
+    assert graph.observations == []
 
 
 def test_empirical_best_response_requires_complete_mixture_evidence() -> None:
