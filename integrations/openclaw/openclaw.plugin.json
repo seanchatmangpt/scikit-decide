@@ -6,36 +6,11 @@
   "activation": {
     "onStartup": true
   },
-  "contracts": {
-    "tools": [
-      "skdecide_catalog",
-      "skdecide_describe",
-      "skdecide_match",
-      "skdecide_run"
-    ]
-  },
-  "toolMetadata": {
-    "skdecide_catalog": {
-      "replaySafe": true
-    },
-    "skdecide_describe": {
-      "replaySafe": true
-    },
-    "skdecide_match": {
-      "optional": true,
-      "replaySafe": false
-    },
-    "skdecide_run": {
-      "optional": true,
-      "replaySafe": false
-    }
-  },
   "skills": [
     "./skills"
   ],
   "configSchema": {
     "type": "object",
-    "additionalProperties": false,
     "properties": {
       "python": {
         "type": "string",
@@ -61,7 +36,8 @@
         "default": 4194304,
         "description": "Combined stdout/stderr capture bound."
       }
-    }
+    },
+    "additionalProperties": false
   },
   "uiHints": {
     "python": {
@@ -75,6 +51,30 @@
     },
     "maxOutputBytes": {
       "label": "Maximum bridge output bytes"
+    }
+  },
+  "contracts": {
+    "tools": [
+      "skdecide_catalog",
+      "skdecide_describe",
+      "skdecide_match",
+      "skdecide_run"
+    ]
+  },
+  "toolMetadata": {
+    "skdecide_catalog": {
+      "replaySafe": true
+    },
+    "skdecide_describe": {
+      "replaySafe": true
+    },
+    "skdecide_match": {
+      "optional": true,
+      "replaySafe": false
+    },
+    "skdecide_run": {
+      "optional": true,
+      "replaySafe": false
     }
   }
 }
