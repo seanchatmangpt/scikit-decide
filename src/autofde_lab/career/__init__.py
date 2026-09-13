@@ -9,9 +9,9 @@ Post-LLM Résumé and Role-Brief Templates) for the methodology this module
 implements as real, callable code.
 """
 
-from skdecide.career.resume import (
-    CareerGraph,
+from autofde_lab.career.resume import (
     Capability,
+    CareerGraph,
     Evidence,
     Outcome,
     Resume,

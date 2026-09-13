@@ -3,7 +3,7 @@
 # LICENSE file in the root directory of this source tree.
 
 """Chicago-school, JTBD-framed end-to-end tests for
-skdecide.career.resume.generate_resume.
+autofde_lab.career.resume.generate_resume.
 
 Each test states a Job To Be Done ("When I am <actor> and I need <job>, I
 want <outcome>") and then exercises the real, real `CareerGraph` ->
@@ -14,7 +14,13 @@ the real strings/structure `generate_resume` actually produced.
 
 import pytest
 
-from skdecide.career import CareerGraph, Capability, Evidence, Outcome, generate_resume
+from autofde_lab.career import (
+    Capability,
+    CareerGraph,
+    Evidence,
+    Outcome,
+    generate_resume,
+)
 
 
 def test_candidate_with_one_verified_outcome_gets_a_complete_resume():
