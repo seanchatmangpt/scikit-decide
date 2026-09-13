@@ -111,10 +111,6 @@ Run the broader applicable suite before publishing a broad behavioral change:
 just test-full
 ```
 
-## Documentation
-
-Current documentation is rooted in `docs/README.md`. Historical Markdown is archived separately so prior evidence remains auditable without competing with current doctrine.
-
 ## Provenance
 
 AutoFDE Lab is forked from Airbus AI Research's scikit-decide. Upstream copyright and license provenance remain intact; see `NOTICE` and `LICENSE`.
