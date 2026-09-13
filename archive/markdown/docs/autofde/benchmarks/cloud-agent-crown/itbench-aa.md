@@ -1,8 +1,8 @@
 # ITBench-AA — AutoFDE SOTA Crown Plan
 
-**Status:** `PLAN / UNKNOWN`  
-**Research snapshot:** 2026-08-07  
-**Surface:** `EXPLORE`  
+**Status:** `PLAN / UNKNOWN`
+**Research snapshot:** 2026-08-07
+**Surface:** `EXPLORE`
 **Class:** offline Kubernetes root-cause entity identification
 
 ## Observed frontier

@@ -3099,4 +3099,3 @@ data:plan-native a afb:ExecutionPlan ;
     dct:title "NATIVE_COMMAND ForwardBench bounded execution plan" ;
     prov:value "SELECT/CONSTRUCT only until explicit environment authority is present" ;
     afb:adapterFamily "NATIVE_COMMAND" .
-

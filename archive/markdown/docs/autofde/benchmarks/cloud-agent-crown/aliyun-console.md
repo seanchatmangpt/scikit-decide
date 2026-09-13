@@ -1,8 +1,8 @@
 # Aliyun Cloud Console 278-task benchmark — AutoFDE SOTA Crown Plan
 
-**Status:** `PLAN / UNKNOWN`  
-**Research snapshot:** 2026-08-07  
-**Surface:** `EXPLORE`  
+**Status:** `PLAN / UNKNOWN`
+**Research snapshot:** 2026-08-07
+**Surface:** `EXPLORE`
 **Class:** real-world cloud-console web-agent execution
 
 ## Observed frontier

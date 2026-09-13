@@ -1,8 +1,8 @@
 # Cloud-OpsBench — AutoFDE SOTA Crown Plan
 
-**Status:** `PLAN / UNKNOWN`  
-**Research snapshot:** 2026-08-07  
-**Surface:** `EXPLORE`  
+**Status:** `PLAN / UNKNOWN`
+**Research snapshot:** 2026-08-07
+**Surface:** `EXPLORE`
 **Class:** reproducible Kubernetes root-cause analysis from state snapshots
 
 ## Observed frontier

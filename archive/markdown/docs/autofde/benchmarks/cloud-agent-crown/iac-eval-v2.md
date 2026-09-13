@@ -1,8 +1,8 @@
 # IaC-Eval v2 — AutoFDE SOTA Crown Plan
 
-**Status:** `PLAN / UNKNOWN`  
-**Research snapshot:** 2026-08-07  
-**Surface:** `EXPLORE`  
+**Status:** `PLAN / UNKNOWN`
+**Research snapshot:** 2026-08-07
+**Surface:** `EXPLORE`
 **Class:** AWS Terraform generation with validate/plan/OPA verification
 
 ## Observed frontier

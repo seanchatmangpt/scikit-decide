@@ -1,7 +1,7 @@
 # AutoFDE Cloud Agent Benchmark Crown Campaign
 
-**Status:** `PLAN / UNKNOWN`  
-**Research snapshot:** 2026-08-07  
+**Status:** `PLAN / UNKNOWN`
+**Research snapshot:** 2026-08-07
 **Repository surface:** `EXPLORE`
 
 This directory contains one falsifiable SOTA-crown plan per cloud-agent benchmark. It deliberately separates benchmark planning from consequential execution and from marketing claims.

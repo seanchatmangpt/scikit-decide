@@ -113,4 +113,3 @@ Source: `ontology/autofde-lab-capabilities.ttl` (83 capabilities).
 | `pAstar` | ALIVE | solvers | SingleAgent, Sequential, PositiveCosts, Markovian, Goals, FullyObservable, DeterministicTransitions, Actions | `autofde_lab.hub.solver.p_astar.p_astar` |
 | `pLRTAstar` | ALIVE | solvers | SingleAgent, Sequential, PositiveCosts, Markovian, Goals, FullyObservable, DeterministicTransitions, Actions | `autofde_lab.hub.solver.lrtastar.lrtastar` |
 | `pPOMCP` | ALIVE | solvers | UncertainInitialized, SingleAgent, Sequential, PositiveCosts, PartiallyObservable, History, Goals, EnumerableTransitions, Actions | `autofde_lab.hub.solver.pomcp.pomcp` |
-

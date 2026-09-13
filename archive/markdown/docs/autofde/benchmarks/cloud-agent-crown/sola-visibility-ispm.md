@@ -1,8 +1,8 @@
 # Sola-Visibility-ISPM — AutoFDE SOTA Crown Plan
 
-**Status:** `PLAN / UNKNOWN`  
-**Research snapshot:** 2026-08-07  
-**Surface:** `EXPLORE`  
+**Status:** `PLAN / UNKNOWN`
+**Research snapshot:** 2026-08-07
+**Surface:** `EXPLORE`
 **Class:** AWS + Okta + Google Workspace identity security visibility
 
 ## Observed frontier

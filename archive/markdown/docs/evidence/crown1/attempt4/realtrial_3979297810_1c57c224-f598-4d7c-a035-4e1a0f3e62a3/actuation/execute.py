@@ -1,21 +1,35 @@
+import asyncio
+import importlib
+import json
+import sys
 
-import asyncio, importlib, json, sys
 
-
-async def main(module_path, class_name, provider_name, config, plan, expected_list, payloads, ledger_path):
-    from gymact import GymAct, MaterializationIntent
-    from gymact.models import ActuationIntent
+async def main(
+    module_path,
+    class_name,
+    provider_name,
+    config,
+    plan,
+    expected_list,
+    payloads,
+    ledger_path,
+):
     from gymact.crown_runtime import execute_verified
+    from gymact.models import ActuationIntent
+    from gymact.ocel import digest_ocel_log, receipts_to_ocel, validate_ocel_log
+    from gymact.replay import ReplayExpectation, ReplayMode, replay_ledger
     from gymact.sqlite_ledger import SQLiteReceiptLedger
-    from gymact.ocel import receipts_to_ocel, validate_ocel_log, digest_ocel_log
-    from gymact.replay import replay_ledger, ReplayExpectation, ReplayMode
+
+    from gymact import GymAct, MaterializationIntent
 
     provider_cls = getattr(importlib.import_module(module_path), class_name)
     ledger = SQLiteReceiptLedger(ledger_path)
     gym = GymAct(receipt_ledger=ledger)
     gym.register_provider(provider_cls())
 
-    m = await gym.materialize(MaterializationIntent(provider=provider_name, config=config))
+    m = await gym.materialize(
+        MaterializationIntent(provider=provider_name, config=config)
+    )
     episode_id = m.episode.episode_id
 
     probe_provider = provider_cls()
@@ -27,7 +41,9 @@ async def main(module_path, class_name, provider_name, config, plan, expected_li
     for i, binding in enumerate(plan):
         cap = caps[binding]
         step_expected = expected_list[i]
-        intent = ActuationIntent(episode_id=episode_id, capability=cap.iri, payload=payloads[i])
+        intent = ActuationIntent(
+            episode_id=episode_id, capability=cap.iri, payload=payloads[i]
+        )
         vt = await execute_verified(gym, intent, step_expected)
         receipt_standing = (
             vt.receipt.standing.value
@@ -59,21 +75,24 @@ async def main(module_path, class_name, provider_name, config, plan, expected_li
         standing = receipt_standing
         if applicable is False:
             standing = "REFUSED"
-            reason = "PROVIDER_REPORTED_INAPPLICABLE:" + str(
-                (effect or {}).get("result_text", "")
-            )[:160]
+            reason = (
+                "PROVIDER_REPORTED_INAPPLICABLE:"
+                + str((effect or {}).get("result_text", ""))[:160]
+            )
 
-        transitions.append({
-            "action": binding,
-            "step_index": i,
-            "expected": step_expected,
-            "standing": standing,
-            "receipt_standing": receipt_standing,
-            "provider_applicable": applicable,
-            "world_changed": bool(getattr(vt.receipt, "world_changed", False)),
-            "verified": vt.receipt.verified,
-            "reason": reason,
-        })
+        transitions.append(
+            {
+                "action": binding,
+                "step_index": i,
+                "expected": step_expected,
+                "standing": standing,
+                "receipt_standing": receipt_standing,
+                "provider_applicable": applicable,
+                "world_changed": bool(getattr(vt.receipt, "world_changed", False)),
+                "verified": vt.receipt.verified,
+                "reason": reason,
+            }
+        )
 
     final_expected = expected_list[-1] if expected_list else {}
     final = await gym.observe(episode_id)
@@ -156,6 +175,16 @@ async def main(module_path, class_name, provider_name, config, plan, expected_li
 
 if __name__ == "__main__":
     a = sys.argv
-    out = asyncio.run(main(a[1], a[2], a[3], json.loads(a[4]), json.loads(a[5]),
-                          json.loads(a[6]), json.loads(a[7]), a[8]))
+    out = asyncio.run(
+        main(
+            a[1],
+            a[2],
+            a[3],
+            json.loads(a[4]),
+            json.loads(a[5]),
+            json.loads(a[6]),
+            json.loads(a[7]),
+            a[8],
+        )
+    )
     print(json.dumps(out, default=str))

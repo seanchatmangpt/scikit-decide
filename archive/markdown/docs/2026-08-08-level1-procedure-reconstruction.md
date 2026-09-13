@@ -87,4 +87,3 @@ withheld. But the sample is n=6, two of six failed by solving a different real t
 specified (task/scope selection, not fabrication), and no independent audit of the falsifiers
 above has been performed in this pass — so this is evidence at the scale of six judged trials,
 not a general claim that phi-learning is reliable, and it should not be read past that scale.
-

@@ -1,8 +1,8 @@
 # SREGym — AutoFDE SOTA Crown Plan
 
-**Status:** `PLAN / UNKNOWN`  
-**Research snapshot:** 2026-08-07  
-**Surface:** `EXPLORE`  
+**Status:** `PLAN / UNKNOWN`
+**Research snapshot:** 2026-08-07
+**Surface:** `EXPLORE`
 **Class:** live SRE diagnosis + mitigation under Kubernetes noise
 
 **2026-08-10 update — architecture closed, no result yet:** the "Required crown

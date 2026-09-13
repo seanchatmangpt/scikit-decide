@@ -1,8 +1,8 @@
 # Multi-IaC-Eval / Multi-IaC-Bench — AutoFDE SOTA Crown Plan
 
-**Status:** `PLAN / UNKNOWN`  
-**Research snapshot:** 2026-08-07  
-**Surface:** `EXPLORE`  
+**Status:** `PLAN / UNKNOWN`
+**Research snapshot:** 2026-08-07
+**Surface:** `EXPLORE`
 **Class:** CloudFormation, Terraform, CDK Python, and CDK TypeScript mutation
 
 ## Observed frontier
