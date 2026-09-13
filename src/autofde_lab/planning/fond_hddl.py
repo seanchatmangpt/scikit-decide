@@ -1,13 +1,13 @@
-"""Candidate-only closure checks between FOND policies and HDDL progress witnesses.
+"""Candidate-only frontier closure between FOND policies and HDDL progress.
 
-A FOND world-state policy is not equivalent to an HDDL policy: HTN progress is part
-of the planning state.  This module therefore refuses to erase hierarchy.  Callers
-must provide an explicit per-state decomposition/progress witness that names the
-primitive HDDL actions currently permitted by the retained task network.
+FOND world state and HDDL task-network progress are different state dimensions.
+A world-state-only candidate policy is compatible with retained hierarchy progress
+only when its selected primitive action is permitted by every admitted HDDL
+progress witness for that reachable world state.
 
-The checks below establish only candidate-level closure.  They do not prove that a
-witness was produced by a trusted HDDL engine, do not admit a plan or policy, and do
-not confer SELECT/CONSTRUCT/DO authority.
+This is deliberately a frontier check, not a synchronized FOND×HDDL product proof.
+It does not establish witness provenance, hierarchy-progress transitions, plan
+admission, authorization, or actuation.
 """
 
 from __future__ import annotations
@@ -16,6 +16,7 @@ from dataclasses import dataclass
 from typing import Mapping
 
 from .fond_policy import (
+    ActionId,
     CandidatePolicy,
     FONDProblem,
     PolicyCheck,
@@ -27,66 +28,84 @@ from .fond_policy import (
 
 @dataclass(frozen=True)
 class HDDLProgressWitness:
-    """Retained HTN progress for one reachable FOND state.
-
-    ``task_network_state`` is an opaque identity supplied by the HDDL side; it must
-    not be reconstructed from world state. ``permitted_primitive_actions`` is the
-    primitive frontier exposed by that retained hierarchy state.
-    """
+    """One retained HDDL task-network progress state and its primitive frontier."""
 
     task_network_state: str
-    permitted_primitive_actions: frozenset[str]
+    permitted_primitive_actions: frozenset[ActionId]
 
 
 @dataclass(frozen=True)
-class FONDHDDLClosureCheck:
+class FONDHDDLFrontierCheck:
+    """Typed evidence for candidate-level FOND↔HDDL frontier compatibility."""
+
     policy_check: PolicyCheck
     valid: bool
     missing_hierarchy_witness_states: frozenset[StateId]
+    malformed_hierarchy_witness_states: frozenset[StateId]
     hierarchy_closed_action_states: frozenset[StateId]
     hierarchy_rejected_action_states: frozenset[StateId]
-    claim_ceiling: str = "candidate_fond_hddl_closure_only"
+    rejected_progress_witnesses: frozenset[tuple[StateId, str]]
+    claim_ceiling: str = "candidate_fond_hddl_frontier_only"
 
 
-def check_fond_hddl_closure(
+def check_fond_hddl_frontier_closure(
     problem: FONDProblem,
     policy: CandidatePolicy,
     *,
     semantics: PolicySemantics,
-    hierarchy_witnesses: Mapping[StateId, HDDLProgressWitness],
-) -> FONDHDDLClosureCheck:
-    """Check FOND policy validity plus per-state HDDL primitive-frontier closure.
+    hierarchy_witnesses: Mapping[StateId, frozenset[HDDLProgressWitness]],
+) -> FONDHDDLFrontierCheck:
+    """Check FOND validity plus universal HDDL primitive-frontier compatibility.
 
-    Every reachable non-goal state must retain an explicit HTN-progress witness.
-    The selected FOND action must be in that witness's primitive action frontier.
-    A missing witness is a typed failure rather than permission to flatten the HTN.
+    Every reachable non-goal world state must retain at least one explicit HDDL
+    progress witness. Because hierarchy progress is not recoverable from world
+    state alone, a world-state-only FOND action is accepted only when *every*
+    admitted progress witness for that world state permits the selected primitive
+    action. A missing or malformed witness is a typed failure, never permission to
+    flatten or infer the task network.
+
+    The result remains candidate-only and carries no SELECT/CONSTRUCT/DO authority.
     """
 
     policy_check = check_candidate_policy(problem, policy, semantics=semantics)
     missing: set[StateId] = set()
+    malformed: set[StateId] = set()
     accepted: set[StateId] = set()
     rejected: set[StateId] = set()
+    rejected_progress: set[tuple[StateId, str]] = set()
 
     for state in policy_check.reachable_states - problem.goal_states:
-        witness = hierarchy_witnesses.get(state)
-        if witness is None or not witness.task_network_state:
+        witnesses = hierarchy_witnesses.get(state)
+        if not witnesses:
             missing.add(state)
+            continue
+        if any(not witness.task_network_state for witness in witnesses):
+            malformed.add(state)
             continue
 
         action = policy.actions.get(state)
         if action is None:
             # The FOND checker already records this as a missing policy state.
             continue
-        if action in witness.permitted_primitive_actions:
-            accepted.add(state)
-        else:
-            rejected.add(state)
 
-    valid = policy_check.valid and not missing and not rejected
-    return FONDHDDLClosureCheck(
+        blocked = {
+            (state, witness.task_network_state)
+            for witness in witnesses
+            if action not in witness.permitted_primitive_actions
+        }
+        if blocked:
+            rejected.add(state)
+            rejected_progress.update(blocked)
+        else:
+            accepted.add(state)
+
+    valid = policy_check.valid and not missing and not malformed and not rejected
+    return FONDHDDLFrontierCheck(
         policy_check=policy_check,
         valid=valid,
         missing_hierarchy_witness_states=frozenset(missing),
+        malformed_hierarchy_witness_states=frozenset(malformed),
         hierarchy_closed_action_states=frozenset(accepted),
         hierarchy_rejected_action_states=frozenset(rejected),
+        rejected_progress_witnesses=frozenset(rejected_progress),
     )

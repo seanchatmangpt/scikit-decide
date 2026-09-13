@@ -16,9 +16,7 @@ def test_strong_accepts_acyclic_branching_policy() -> None:
             ("s2", "finish"): frozenset({"goal"}),
         },
     )
-    policy = CandidatePolicy(
-        actions={"s0": "advance", "s1": "finish", "s2": "finish"}
-    )
+    policy = CandidatePolicy(actions={"s0": "advance", "s1": "finish", "s2": "finish"})
 
     check = check_candidate_policy(problem, policy, semantics=PolicySemantics.STRONG)
 
@@ -44,6 +42,29 @@ def test_strong_rejects_cycle_that_strong_cyclic_accepts() -> None:
     assert strong.non_goal_cycle_states == frozenset({"s0"})
     assert strong_cyclic.valid
     assert strong_cyclic.non_goal_cycle_states == frozenset({"s0"})
+
+
+def test_multistate_cycle_distinguishes_strong_from_strong_cyclic() -> None:
+    problem = FONDProblem(
+        initial_state="s0",
+        goal_states=frozenset({"goal"}),
+        transitions={
+            ("s0", "advance"): frozenset({"s1", "goal"}),
+            ("s1", "retry"): frozenset({"s0"}),
+        },
+    )
+    policy = CandidatePolicy(actions={"s0": "advance", "s1": "retry"})
+
+    strong = check_candidate_policy(problem, policy, semantics=PolicySemantics.STRONG)
+    strong_cyclic = check_candidate_policy(
+        problem, policy, semantics=PolicySemantics.STRONG_CYCLIC
+    )
+
+    assert not strong.valid
+    assert strong.non_goal_cycle_states == frozenset({"s0", "s1"})
+    assert strong_cyclic.valid
+    assert strong_cyclic.non_goal_cycle_states == frozenset({"s0", "s1"})
+    assert not strong_cyclic.cannot_reach_goal_states
 
 
 def test_strong_cyclic_rejects_closed_non_goal_component() -> None:
