@@ -16,7 +16,7 @@ def test_up_bridge_domain_random(state_encoding, action_encoding):
     import unified_planning
     from unified_planning.shortcuts import Fluent, InstantaneousAction, Not
 
-    from skdecide.hub.domain.up import UPDomain
+    from autofde_lab.hub.domain.up import UPDomain
 
     x = Fluent("x")
     y = Fluent("y")
@@ -77,8 +77,8 @@ def test_up_bridge_domain_planning():
     import unified_planning
     from unified_planning.shortcuts import Fluent, InstantaneousAction, Not
 
-    from skdecide.hub.domain.up import UPDomain
-    from skdecide.hub.solver.p_astar import Astar
+    from autofde_lab.hub.domain.up import UPDomain
+    from autofde_lab.hub.solver.p_astar import Astar
 
     x = Fluent("x")
     y = Fluent("y")
@@ -149,9 +149,9 @@ def test_up_bridge_domain_rl():
         UserType,
     )
 
-    from skdecide.hub.domain.up import UPDomain
-    from skdecide.hub.solver.ray_rllib import RayRLlib
-    from skdecide.utils import rollout
+    from autofde_lab.hub.domain.up import UPDomain
+    from autofde_lab.hub.solver.ray_rllib import RayRLlib
+    from autofde_lab.utils import rollout
 
     Location = UserType("Location")
     robot_at = unified_planning.model.Fluent("robot_at", BoolType(), l=Location)

@@ -8,11 +8,11 @@ from typing import NamedTuple
 import pytest
 from openevolve.config import Config
 
-from skdecide import EnumerableSpace, rollout
-from skdecide.builders.domain import FullyObservable, Goals
-from skdecide.hub.domain.maze import Maze
-from skdecide.hub.domain.maze.maze import Action
-from skdecide.hub.solver.openevolve import IntegratedOpenEvolve, ProxyOpenEvolve
+from autofde_lab import EnumerableSpace, rollout
+from autofde_lab.builders.domain import FullyObservable, Goals
+from autofde_lab.hub.domain.maze import Maze
+from autofde_lab.hub.domain.maze.maze import Action
+from autofde_lab.hub.solver.openevolve import IntegratedOpenEvolve, ProxyOpenEvolve
 
 
 @pytest.fixture

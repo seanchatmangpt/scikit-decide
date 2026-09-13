@@ -1,0 +1,55 @@
+classDiagram
+    class TrialRecord {
+      +trial_id: str
+      +seed: int
+      +outcome: str
+    }
+    class CandidateRecord {
+      +candidate_id: str
+      +plan_digest: str
+    }
+    class CommitmentRecord {
+      +commitment_id: str
+      +candidate_ref: str
+    }
+    class ActuationRecord {
+      +actuation_id: str
+      +capability: str
+    }
+    class ObservationRecord {
+      +observation_id: str
+      +state_digest: str
+    }
+    class ReceiptRecord {
+      +receipt_id: str
+      +digest: str
+    }
+    class ReplayRecord {
+      +replay_id: str
+      +valid: bool
+    }
+    class ArtifactManifest {
+      +manifest_id: str
+      +artifact_digest: str
+    }
+    class Standing {
+      <<abstract>>
+      +reason: str
+    }
+    class Level4AliveEvidence
+    class BlockedEvidence
+    class UnknownEvidence
+    class FailedEvidence
+
+    TrialRecord o-- CandidateRecord
+    CandidateRecord --> CommitmentRecord
+    CommitmentRecord --> ActuationRecord
+    ActuationRecord --> ObservationRecord
+    ActuationRecord --> ReceiptRecord
+    ReceiptRecord --> ReplayRecord
+    TrialRecord --> ArtifactManifest
+    Standing <|-- Level4AliveEvidence
+    Standing <|-- BlockedEvidence
+    Standing <|-- UnknownEvidence
+    Standing <|-- FailedEvidence
+    TrialRecord --> Standing

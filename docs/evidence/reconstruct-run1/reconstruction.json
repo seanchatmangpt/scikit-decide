@@ -1,0 +1,172 @@
+{
+  "manifest_digest": "64121fbac6f4cfe29b0b68bf138c9c3f2f7d466dc61294bdde9772947587c7de",
+  "denominator": 10,
+  "frozen_identities": [
+    69813132,
+    663999732,
+    890266799,
+    1327771368,
+    1382812562,
+    1635849486,
+    1645242857,
+    1811868735,
+    3979297810,
+    4064909771
+  ],
+  "reconstructed_alive_set": [
+    663999732,
+    1382812562,
+    3979297810
+  ],
+  "missing_identities": [
+    69813132,
+    890266799,
+    1327771368,
+    1635849486,
+    1645242857,
+    1811868735,
+    4064909771
+  ],
+  "foreign_identities": [],
+  "unknown_members": [
+    69813132,
+    890266799,
+    1327771368,
+    1635849486,
+    1645242857,
+    1811868735,
+    4064909771
+  ],
+  "not_alive_members": [],
+  "complete": false,
+  "trials": [
+    {
+      "identity": 890266799,
+      "provider": "cube_counter",
+      "trial_dir": "/Users/sac/autofde-lab/docs/evidence/reconstruct-run1/realtrial_890266799_dd3f31a6-5a03-4b25-8f29-0e5d7b4de74f",
+      "producer_outcome": "NO_TYPED_VALID_PLAN",
+      "verifier_verdict": "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3",
+      "established_edges": [],
+      "missing_reasons": [
+        "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3"
+      ]
+    },
+    {
+      "identity": 4064909771,
+      "provider": "switchboard",
+      "trial_dir": "/Users/sac/autofde-lab/docs/evidence/reconstruct-run1/realtrial_4064909771_26a26769-5f6f-4f65-b2b5-732b869af701",
+      "producer_outcome": "NO_TYPED_VALID_PLAN",
+      "verifier_verdict": "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3",
+      "established_edges": [],
+      "missing_reasons": [
+        "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3"
+      ]
+    },
+    {
+      "identity": 3979297810,
+      "provider": "resource_flow",
+      "trial_dir": "/Users/sac/autofde-lab/docs/evidence/reconstruct-run1/realtrial_3979297810_087eafe3-6e84-4d3c-bedb-97680e94a37d",
+      "producer_outcome": "EXECUTED",
+      "verifier_verdict": "ALIVE_EVIDENCE_RECONSTRUCTED",
+      "established_edges": [
+        "plan_candidate->commitment",
+        "commitment->actuation",
+        "authority->actuation",
+        "actuation->postcondition",
+        "postcondition->independent",
+        "receipt->dag",
+        "replay->receipt"
+      ],
+      "missing_reasons": []
+    },
+    {
+      "identity": 1811868735,
+      "provider": "lock_and_key",
+      "trial_dir": "/Users/sac/autofde-lab/docs/evidence/reconstruct-run1/realtrial_1811868735_f3b7b085-524a-468f-b2cd-b6c1a144c8db",
+      "producer_outcome": "NO_TYPED_VALID_PLAN",
+      "verifier_verdict": "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3",
+      "established_edges": [],
+      "missing_reasons": [
+        "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3"
+      ]
+    },
+    {
+      "identity": 1635849486,
+      "provider": "cube_container_counter",
+      "trial_dir": "/Users/sac/autofde-lab/docs/evidence/reconstruct-run1/realtrial_1635849486_4d9ec49f-dd54-438e-a60b-fee24c98b252",
+      "producer_outcome": "NO_TYPED_VALID_PLAN",
+      "verifier_verdict": "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3",
+      "established_edges": [],
+      "missing_reasons": [
+        "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3"
+      ]
+    },
+    {
+      "identity": 1645242857,
+      "provider": "cube_counter",
+      "trial_dir": "/Users/sac/autofde-lab/docs/evidence/reconstruct-run1/realtrial_1645242857_65e46f7a-22d3-4ff5-852a-b0ed838b6c45",
+      "producer_outcome": "NO_TYPED_VALID_PLAN",
+      "verifier_verdict": "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3",
+      "established_edges": [],
+      "missing_reasons": [
+        "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3"
+      ]
+    },
+    {
+      "identity": 1327771368,
+      "provider": "switchboard",
+      "trial_dir": "/Users/sac/autofde-lab/docs/evidence/reconstruct-run1/realtrial_1327771368_2a037a7b-e687-44ee-b8e6-e4e2ca66521c",
+      "producer_outcome": "NO_TYPED_VALID_PLAN",
+      "verifier_verdict": "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3",
+      "established_edges": [],
+      "missing_reasons": [
+        "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3"
+      ]
+    },
+    {
+      "identity": 663999732,
+      "provider": "resource_flow",
+      "trial_dir": "/Users/sac/autofde-lab/docs/evidence/reconstruct-run1/realtrial_663999732_b2a06367-ecaa-4e1a-8239-7f594f4f7f0f",
+      "producer_outcome": "EXECUTED",
+      "verifier_verdict": "ALIVE_EVIDENCE_RECONSTRUCTED",
+      "established_edges": [
+        "plan_candidate->commitment",
+        "commitment->actuation",
+        "authority->actuation",
+        "actuation->postcondition",
+        "postcondition->independent",
+        "receipt->dag",
+        "replay->receipt"
+      ],
+      "missing_reasons": []
+    },
+    {
+      "identity": 1382812562,
+      "provider": "lock_and_key",
+      "trial_dir": "/Users/sac/autofde-lab/docs/evidence/reconstruct-run1/realtrial_1382812562_d4809624-5eae-4eaa-a9be-6a7084524df4",
+      "producer_outcome": "EXECUTED",
+      "verifier_verdict": "ALIVE_EVIDENCE_RECONSTRUCTED",
+      "established_edges": [
+        "plan_candidate->commitment",
+        "commitment->actuation",
+        "authority->actuation",
+        "actuation->postcondition",
+        "postcondition->independent",
+        "receipt->dag",
+        "replay->receipt"
+      ],
+      "missing_reasons": []
+    },
+    {
+      "identity": 69813132,
+      "provider": "cube_container_counter",
+      "trial_dir": "/Users/sac/autofde-lab/docs/evidence/reconstruct-run1/realtrial_69813132_3cf1aee5-65d3-44ab-a7f4-562f336292da",
+      "producer_outcome": "NO_TYPED_VALID_PLAN",
+      "verifier_verdict": "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3",
+      "established_edges": [],
+      "missing_reasons": [
+        "UNKNOWN:ARTIFACTS_ABSENT:ocel,commitment.ttl,receipts.sqlite3"
+      ]
+    }
+  ]
+}

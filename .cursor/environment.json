@@ -1,0 +1,5 @@
+{
+  "name": "autofde-lab",
+  "user": "ubuntu",
+  "install": "bash .cursor/install.sh"
+}

@@ -3,7 +3,7 @@ from typing import Optional
 
 from maze_restricted_domain_no_goals import Maze
 
-from skdecide import Space
+from autofde_lab import Space
 
 
 # EVOLVE-BLOCK-START

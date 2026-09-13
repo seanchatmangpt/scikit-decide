@@ -1,0 +1,529 @@
+{
+  "eventTypes": [
+    {
+      "attributes": [
+        {
+          "name": "horizon",
+          "type": "integer"
+        },
+        {
+          "name": "seed",
+          "type": "integer"
+        },
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ],
+      "name": "materialize"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "type": "integer"
+        }
+      ],
+      "name": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        },
+        {
+          "name": "trace_length",
+          "type": "integer"
+        },
+        {
+          "name": "verify_mode",
+          "type": "string"
+        }
+      ],
+      "name": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ],
+      "name": "teardown"
+    }
+  ],
+  "events": [
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "seed",
+          "value": 12345
+        },
+        {
+          "name": "horizon",
+          "value": 30
+        }
+      ],
+      "id": "ev:materialize",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.040638000Z",
+      "type": "materialize"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 0
+        }
+      ],
+      "id": "ev:act:0",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058179000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 1
+        }
+      ],
+      "id": "ev:act:1",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058195000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 2
+        }
+      ],
+      "id": "ev:act:2",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058203000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 3
+        }
+      ],
+      "id": "ev:act:3",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058208000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 4
+        }
+      ],
+      "id": "ev:act:4",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058213000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 5
+        }
+      ],
+      "id": "ev:act:5",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058217000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 6
+        }
+      ],
+      "id": "ev:act:6",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058221000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 7
+        }
+      ],
+      "id": "ev:act:7",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058226000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 8
+        }
+      ],
+      "id": "ev:act:8",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058230000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 9
+        }
+      ],
+      "id": "ev:act:9",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058235000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 10
+        }
+      ],
+      "id": "ev:act:10",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058239000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 11
+        }
+      ],
+      "id": "ev:act:11",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058243000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 12
+        }
+      ],
+      "id": "ev:act:12",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058248000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 13
+        }
+      ],
+      "id": "ev:act:13",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058252000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 14
+        }
+      ],
+      "id": "ev:act:14",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058261000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 15
+        }
+      ],
+      "id": "ev:act:15",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058265000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "step_index",
+          "value": 16
+        }
+      ],
+      "id": "ev:act:16",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.058269000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "verify_mode",
+          "value": "seeded-trajectory-replay"
+        },
+        {
+          "name": "trace_length",
+          "value": 17
+        }
+      ],
+      "id": "ev:verify",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.066566000Z",
+      "type": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        }
+      ],
+      "id": "ev:teardown",
+      "relationships": [
+        {
+          "objectId": "episode:rddl",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:rddl",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-13T18:46:57.066584000Z",
+      "type": "teardown"
+    }
+  ],
+  "objectTypes": [
+    {
+      "attributes": [],
+      "name": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "type": "string"
+        }
+      ],
+      "name": "domain"
+    }
+  ],
+  "objects": [
+    {
+      "attributes": [],
+      "id": "episode:rddl",
+      "relationships": [],
+      "type": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "time": "1970-01-01T00:00:00.000000000Z",
+          "value": "RDDLDomain"
+        }
+      ],
+      "id": "domain:rddl",
+      "relationships": [],
+      "type": "domain"
+    }
+  ]
+}

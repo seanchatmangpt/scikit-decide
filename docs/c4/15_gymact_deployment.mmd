@@ -1,0 +1,26 @@
+C4Deployment
+title GymAct — Deployment
+
+Deployment_Node(client, "Decision Client") {
+  Container(decision, "Agent / Planner / Policy / Program", "Any")
+}
+Deployment_Node(gym_host, "GymAct Host", "Python runtime") {
+  Container(gymact, "GymAct Kernel", "Python")
+  Container(registry, "Provider Registry", "Python")
+  Container(ledger, "Receipt Ledger", "SQLite / append-only")
+}
+Deployment_Node(provider_host, "Provider Host", "May be local, Docker, browser, cloud, or remote") {
+  Container(provider, "Gym Provider", "Python adapter")
+  Container(environment, "Consequential Environment", "External system")
+}
+Deployment_Node(verification, "Verification Host") {
+  Container(verifier, "Independent Verifier", "Python / SHACL / RDF")
+}
+
+Rel(decision, gymact, "Gym API")
+Rel(gymact, registry, "Resolve provider")
+Rel(gymact, provider, "Materialize / observe / actuate")
+Rel(provider, environment, "Native interaction")
+Rel(gymact, ledger, "Write receipts")
+Rel(ledger, verifier, "Replay/evidence input")
+Rel(provider, verifier, "Independent consequence observation where available")

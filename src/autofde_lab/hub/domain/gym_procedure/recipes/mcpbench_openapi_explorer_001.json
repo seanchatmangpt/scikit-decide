@@ -1,0 +1,57 @@
+{
+  "gym": "mcp-bench",
+  "task": "OpenAPI Explorer/openapi_explorer_001",
+  "source_ref": "vendor/gyms/mcp-bench/tasks/mcpbench_tasks_single_runner_format.json (server_tasks[0].tasks[1], task_id \"openapi_explorer_001\", task_description numbered steps 1-6)",
+  "initial_facts": [],
+  "goal_facts": ["consolidated_report_produced"],
+  "steps": [
+    {
+      "id": "get_openai_overview",
+      "description": "Call OpenAPI Explorer:getApiOverview with id=\"openai\" to retrieve the full list of operations and securitySchemes.",
+      "preconditions": [],
+      "establishes": ["have_openai_overview"],
+      "cost": 1.0,
+      "source": "task_description step 1"
+    },
+    {
+      "id": "get_openai_create_operation_details",
+      "description": "From the OpenAI overview, select every operation whose operationId contains \"create\"; for each, call OpenAPI Explorer:getApiOperation to extract requestBody.schema.required and count required fields.",
+      "preconditions": ["have_openai_overview"],
+      "establishes": ["have_openai_create_operation_counts"],
+      "cost": 1.0,
+      "source": "task_description step 2"
+    },
+    {
+      "id": "get_github_overview",
+      "description": "Call OpenAPI Explorer:getApiOverview with id=\"github\" to retrieve the full list of operations and securitySchemes.",
+      "preconditions": ["have_openai_create_operation_counts"],
+      "establishes": ["have_github_overview"],
+      "cost": 1.0,
+      "source": "task_description step 3"
+    },
+    {
+      "id": "get_github_repos_operation_details",
+      "description": "From the GitHub overview, select every operation whose path begins with \"/repos\"; for each, call OpenAPI Explorer:getApiOperation to extract path/query/requestBody parameters and count required ones.",
+      "preconditions": ["have_github_overview"],
+      "establishes": ["have_github_repos_operation_counts"],
+      "cost": 1.0,
+      "source": "task_description step 4"
+    },
+    {
+      "id": "extract_security_schemes",
+      "description": "Extract and list each security scheme type (e.g. apiKey, oauth2) defined in both specs.",
+      "preconditions": ["have_github_repos_operation_counts"],
+      "establishes": ["have_security_schemes"],
+      "cost": 1.0,
+      "source": "task_description step 5"
+    },
+    {
+      "id": "compile_consolidated_report",
+      "description": "Compare the two specs and produce a consolidated JSON report (authSchemes, createOperations, repoOperations, crossComparison.operationsWithHighParamCount, crossComparison.commonSecurityTypes).",
+      "preconditions": ["have_security_schemes"],
+      "establishes": ["consolidated_report_produced"],
+      "cost": 1.0,
+      "source": "task_description step 6"
+    }
+  ]
+}

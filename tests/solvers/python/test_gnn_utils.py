@@ -2,7 +2,7 @@ import torch as th
 import torch_geometric as thg
 from pytest_cases import fixture, param_fixture
 
-from skdecide.hub.solver.utils.gnn.advanced_gnn import AdvancedGNN
+from autofde_lab.hub.solver.utils.gnn.advanced_gnn import AdvancedGNN
 
 
 @fixture

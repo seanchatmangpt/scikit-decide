@@ -1,9 +1,9 @@
 import pyRDDLGym_jax.examples.configs
 from pyRDDLGym_jax.core.simulator import JaxRDDLSimulator
 
-from skdecide.hub.domain.rddl import RDDLDomain
-from skdecide.hub.solver.rddl.rddl import RDDLGurobiSolver, RDDLJaxSolver
-from skdecide.utils import load_registered_solver, rollout
+from autofde_lab.hub.domain.rddl import RDDLDomain
+from autofde_lab.hub.solver.rddl.rddl import RDDLGurobiSolver, RDDLJaxSolver
+from autofde_lab.utils import load_registered_solver, rollout
 
 
 def test_pyrddlgymdomain_jax():

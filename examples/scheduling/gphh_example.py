@@ -6,12 +6,14 @@ import pickle
 
 import numpy as np
 
-from examples.scheduling.rcpsp_datasets import get_complete_path, get_data_available
-from skdecide import rollout
-from skdecide.hub.domain.rcpsp.rcpsp_sk import RCPSP
-from skdecide.hub.domain.rcpsp.rcpsp_sk_parser import load_domain
-from skdecide.hub.solver.do_solver.do_solver_scheduling import DOSolver, SolvingMethod
-from skdecide.hub.solver.do_solver.gphh import (
+from autofde_lab import rollout
+from autofde_lab.hub.domain.rcpsp.rcpsp_sk import RCPSP
+from autofde_lab.hub.domain.rcpsp.rcpsp_sk_parser import load_domain
+from autofde_lab.hub.solver.do_solver.do_solver_scheduling import (
+    DOSolver,
+    SolvingMethod,
+)
+from autofde_lab.hub.solver.do_solver.gphh import (
     GPHH,
     EvaluationGPHH,
     FeatureEnum,
@@ -30,10 +32,11 @@ from skdecide.hub.solver.do_solver.gphh import (
     min_operator,
     protected_div,
 )
-from skdecide.hub.solver.do_solver.sgs_policies import (
+from autofde_lab.hub.solver.do_solver.sgs_policies import (
     BasePolicyMethod,
     PolicyMethodParams,
 )
+from examples.scheduling.rcpsp_datasets import get_complete_path, get_data_available
 
 
 def fitness_makespan_correlation():
@@ -505,7 +508,7 @@ def run_features():
 def run_comparaison_stochastic():
     import random
 
-    from skdecide.hub.domain.rcpsp.rcpsp_sk import (
+    from autofde_lab.hub.domain.rcpsp.rcpsp_sk import (
         RCPSP,
         build_n_determinist_from_stochastic,
         build_stochastic_from_deterministic,

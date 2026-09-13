@@ -15,9 +15,9 @@ Results can be viewed on optuna-dashboard with:
 
 import logging
 
-from skdecide import rollout
-from skdecide.builders.domain.scheduling.scheduling_domains import SingleModeRCPSP
-from skdecide.hub.solver.do_solver import BasePolicyMethod, DOSolver, PolicyMethodParams
+from autofde_lab import rollout
+from autofde_lab.builders.domain.scheduling.scheduling_domains import SingleModeRCPSP
+from autofde_lab.hub.solver.do_solver import BasePolicyMethod, DOSolver, PolicyMethodParams
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s:%(levelname)s:%(message)s")
@@ -232,7 +232,7 @@ def run_optuna_multisolve(
 def run_example_study():
     from discrete_optimization.rcpsp.parser import get_data_available
 
-    from skdecide.hub.domain.rcpsp.rcpsp_sk_parser import load_domain
+    from autofde_lab.hub.domain.rcpsp.rcpsp_sk_parser import load_domain
 
     file = [f for f in get_data_available() if "j1201_1.sm" in f][0]
     rcpsp_domain = load_domain(file)

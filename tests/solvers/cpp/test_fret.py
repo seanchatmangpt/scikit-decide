@@ -19,14 +19,14 @@ from typing import NamedTuple
 
 import pytest
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     ImplicitSpace,
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     DeterministicInitialized,
     EnumerableTransitions,
@@ -37,7 +37,7 @@ from skdecide.builders.domain import (
     Sequential,
     SingleAgent,
 )
-from skdecide.hub.space.gym import EnumSpace, MultiDiscreteSpace
+from autofde_lab.hub.space.gym import EnumSpace, MultiDiscreteSpace
 
 
 class State(NamedTuple):
@@ -193,19 +193,19 @@ class DeterministicGridDomain(DBase):
 
 class TestFRET:
     def test_import(self):
-        from skdecide.hub.solver.fret import FRET
+        from autofde_lab.hub.solver.fret import FRET
 
         assert FRET is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.fret import FRET
+        from autofde_lab.hub.solver.fret import FRET
 
         dom = DeadEndChainDomain()
         assert FRET.check_domain(dom)
 
     def test_finds_dead_ends(self):
         """FRET should detect the absorbing dead-end state."""
-        from skdecide.hub.solver.fret import FRET
+        from autofde_lab.hub.solver.fret import FRET
 
         with FRET(
             domain_factory=lambda: DeadEndChainDomain(),
@@ -220,7 +220,7 @@ class TestFRET:
 
     def test_trapped_sccs(self):
         """get_trapped_sccs should return non-empty SCCs during solving."""
-        from skdecide.hub.solver.fret import FRET
+        from autofde_lab.hub.solver.fret import FRET
 
         with FRET(
             domain_factory=lambda: DeadEndChainDomain(),
@@ -245,8 +245,8 @@ class TestFRET:
 
     def test_optimal_on_clean_grid(self):
         """On grid without dead ends, FRET should match LRTDP's V*."""
-        from skdecide.hub.solver.fret import FRET
-        from skdecide.hub.solver.lrtdp import LRTDP
+        from autofde_lab.hub.solver.fret import FRET
+        from autofde_lab.hub.solver.lrtdp import LRTDP
 
         h = lambda d, s: Value(cost=abs(s.x - 3) + abs(s.y - 3))
 
@@ -271,7 +271,7 @@ class TestFRET:
     @pytest.mark.parametrize("inner_solver", ["LRTDP", "LDFS", "VI"])
     def test_with_each_inner_solver(self, inner_solver):
         """FRET should work with all supported inner solvers."""
-        from skdecide.hub.solver.fret import FRET
+        from autofde_lab.hub.solver.fret import FRET
 
         h = lambda d, s: Value(cost=abs(s.x - 3) + abs(s.y - 3))
 
@@ -286,7 +286,7 @@ class TestFRET:
 
     def test_fret_iterations(self):
         """On dead-end domain, FRET should need ≥2 iterations."""
-        from skdecide.hub.solver.fret import FRET
+        from autofde_lab.hub.solver.fret import FRET
 
         with FRET(
             domain_factory=lambda: DeadEndChainDomain(),
@@ -299,7 +299,7 @@ class TestFRET:
 
     def test_solving_time(self):
         """get_solving_time should return non-negative value."""
-        from skdecide.hub.solver.fret import FRET
+        from autofde_lab.hub.solver.fret import FRET
 
         h = lambda d, s: Value(cost=abs(s.x - 3) + abs(s.y - 3))
 

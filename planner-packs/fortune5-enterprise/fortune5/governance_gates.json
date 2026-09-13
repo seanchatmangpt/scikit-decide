@@ -1,0 +1,14 @@
+{
+  "schema": "urn:autofde:fortune5:governance-gates:v1",
+  "gates": [
+    {"id":"G0","name":"Observation admission","requires":["subject identity","evidence provenance","current-state digest"],"refuse_if":["unbound subject","unadmitted evidence"]},
+    {"id":"G1","name":"Business architecture","requires":["business capability","objective/KPI","owner","value/risk hypothesis"],"refuse_if":["technology-only objective"]},
+    {"id":"G2","name":"Architecture fitness","requires":["all applicable viewpoints","NFR tier","data classification","identity model","integration contracts"],"refuse_if":["missing mandatory viewpoint"]},
+    {"id":"G3","name":"Risk/control admission","requires":["control baseline","threat/failure model","policy checks","exceptions with owner/expiry"],"refuse_if":["ambient authority","unbounded exception"]},
+    {"id":"G4","name":"Resilience/operations","requires":["SLO","telemetry","rollback/recovery","capacity/quotas","runbook or autonomous remediation contract"],"refuse_if":["no verifier","no recovery for consequential change"]},
+    {"id":"G5","name":"Economic/portfolio","requires":["cost envelope","unit economics","dependency plan","migration/exit strategy"],"refuse_if":["unknown exit path for material lock-in"]},
+    {"id":"G6","name":"Pre-DO handoff","requires":["selected next edge","preconditions","principal/capability/resource authority","verifier","recovery"],"refuse_if":["plan attempts DO"]},
+    {"id":"G7","name":"Post-DO standing","requires":["independent observation","effect verification","receipt","replay","updated risk/state"],"refuse_if":["success inferred from command exit alone"]},
+    {"id":"G8","name":"Industrialize cognition","requires":["repeated verified pattern","regression corpus","semantic rule/projection candidate"],"refuse_if":["unverified model prose"]}
+  ]
+}

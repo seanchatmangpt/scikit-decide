@@ -2,12 +2,18 @@ name: OpenClaw interoperability
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - "src/autofde_lab/openclaw_*.py"
+      - "tests/test_openclaw_bridge.py"
+      - "integrations/openclaw/**"
+      - ".github/workflows/openclaw-crown.yml"
   push:
     branches:
       - master
       - feat/openclaw-ecosystem-interop-crown
     paths:
-      - "src/skdecide/openclaw_*.py"
+      - "src/autofde_lab/openclaw_*.py"
       - "tests/test_openclaw_bridge.py"
       - "integrations/openclaw/**"
       - ".github/workflows/openclaw-crown.yml"
@@ -39,7 +45,7 @@ jobs:
       - name: Verify bounded Python bridge
         run: |
           python -m pip install "pytest>=6.2.2,<8.4" "numpy>=2.0"
-          python -m py_compile src/skdecide/openclaw_runtime.py src/skdecide/openclaw_bridge.py
+          python -m py_compile src/autofde_lab/openclaw_runtime.py src/autofde_lab/openclaw_bridge.py
           python -m pytest tests/test_openclaw_bridge.py -q
 
       - name: Install exact OpenClaw toolchain
@@ -71,7 +77,7 @@ jobs:
           npx --prefix integrations/openclaw openclaw mcp add scikit-decide \
             --command python \
             --arg=-m \
-            --arg=skdecide.openclaw_bridge \
+            --arg=autofde_lab.openclaw_bridge \
             --arg=mcp \
             --cwd "$GITHUB_WORKSPACE" \
             --env "PYTHONPATH=$GITHUB_WORKSPACE/src" \

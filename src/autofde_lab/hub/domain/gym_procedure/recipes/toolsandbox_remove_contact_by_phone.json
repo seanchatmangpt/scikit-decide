@@ -1,0 +1,33 @@
+{
+  "gym": "toolsandbox",
+  "task": "multiple_tool_call_scenarios.remove_contact_by_phone",
+  "source_ref": "vendor/gyms/toolsandbox/tool_sandbox/scenarios/multiple_tool_call_scenarios.py lines 642-716 (ScenarioExtension name=\"remove_contact_by_phone\")",
+  "initial_facts": [],
+  "goal_facts": ["user_notified_removed"],
+  "steps": [
+    {
+      "id": "search_contacts_by_phone",
+      "description": "Call search_contacts(phone_number=\"+12453344098\") to resolve the phone number to the matching contact (Fredrik Thordendal) before removing it.",
+      "preconditions": [],
+      "establishes": ["contact_resolved"],
+      "cost": 1.0,
+      "source": "multiple_tool_call_scenarios.py Milestone[0] SnapshotConstraint tool_trace={\"tool_name\": \"search_contacts\", \"arguments\": {\"phone_number\": \"+12453344098\"}} (line ~671)"
+    },
+    {
+      "id": "remove_contact",
+      "description": "Call remove_contact to delete the resolved contact (Fredrik Thordendal) from the CONTACT database namespace.",
+      "preconditions": ["contact_resolved"],
+      "establishes": ["contact_removed"],
+      "cost": 1.0,
+      "source": "multiple_tool_call_scenarios.py Milestone[1] SnapshotConstraint removal_similarity over DatabaseNamespace.CONTACT, reference_milestone_node_index=0 (line ~683-698)"
+    },
+    {
+      "id": "reply_to_user",
+      "description": "Reply to the user: \"Phone number +12453344098 has been removed from your contact\".",
+      "preconditions": ["contact_removed"],
+      "establishes": ["user_notified_removed"],
+      "cost": 1.0,
+      "source": "multiple_tool_call_scenarios.py Milestone[2] SnapshotConstraint sender=AGENT recipient=USER content=\"Phone number +12453344098 has been removed from your contact\" (line ~699-713)"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+@prefix ga: <https://github.com/seanchatmangpt/autofde-lab/ns/gymact#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pplan: <http://purl.org/net/p-plan#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix prof: <http://www.w3.org/ns/dx/prof/> .
+
+ga: a owl:Ontology ;
+  dct:title "GymAct benchmark environment actuation ontology" ;
+  dct:description "Transport-neutral semantics for materializing, running, observing, actuating, verifying, scoring, checkpointing, restoring, and tearing down executable benchmark environments." ;
+  dct:conformsTo prov:, pplan:, sosa:, qudt:, odrl:, skos:, schema:, earl:, dqv:, prof: .
+
+# NOTE (public-ontology-profile alignment, seanchatmangpt/gymact prep pass):
+# these ga:* classes remain the query/template-facing TBox that
+# operations.rq / profiles.rq / subjects.rq / errc.rq and every
+# generated/*.tera template key off of -- they are NOT being replaced here,
+# because doing so would require rewriting all 10 ggen.toml generation
+# rules and 3 validation gates at once, on an already-green branch. Instead
+# each class is additively declared equivalent to (or a subclass of) its
+# nearest public-vocabulary counterpart, per this session's ontology
+# review, so a future GymAct-proper (seanchatmangpt/gymact) can adopt the
+# public terms directly as its TBox without losing this mapping. See
+# docs/papers/GYMACT_HANDOFF.md for the full rationale and mapping table.
+ga:Gym a owl:Class ; rdfs:subClassOf schema:SoftwareApplication .
+ga:Scenario a owl:Class ; rdfs:subClassOf prov:Entity, pplan:Plan .
+ga:Episode a owl:Class ; rdfs:subClassOf prov:Activity .
+ga:Operation a owl:Class ; rdfs:subClassOf pplan:Step .
+ga:InteractionProfile a owl:Class ; rdfs:subClassOf prov:Plan, prof:Profile .
+ga:ActuationIntent a owl:Class ; rdfs:subClassOf prov:Entity .
+ga:Observation a owl:Class ; owl:equivalentClass sosa:Observation .
+ga:Effect a owl:Class ; rdfs:subClassOf prov:Entity, sosa:Result .
+ga:Score a owl:Class ; owl:equivalentClass qudt:QuantityValue ; rdfs:subClassOf dqv:QualityMeasurement .
+ga:Receipt a owl:Class ; rdfs:subClassOf prov:Entity, prov:Bundle .
+ga:Verification a owl:Class ; rdfs:subClassOf earl:Assertion .
+ga:Verification ga:realizesOperation ga:op-verify .
+
+ga:slug a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:operationCode a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:rustVariant a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:phase a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:ordinal a owl:DatatypeProperty ; rdfs:range xsd:integer .
+ga:consequenceClass a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:interactionModel a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:adapterFamily a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:authorityMode a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:replayClass a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:mainline a owl:DatatypeProperty ; rdfs:range xsd:boolean .
+ga:mapsAdapterFamily a owl:DatatypeProperty ; rdfs:range xsd:string .
+ga:supportsOperation a owl:ObjectProperty ; rdfs:range ga:Operation .
+ga:realizesOperation a owl:ObjectProperty ; rdfs:range ga:Operation .
+
+ga:op-discover a ga:Operation ;
+  dct:title "Discover" ; ga:operationCode "discover" ; ga:rustVariant "Discover" ;
+  ga:phase "DISCOVERY" ; ga:ordinal 10 ; ga:consequenceClass "READ" ;
+  ga:authorityMode "NONE" ; ga:replayClass "PURE" ; ga:mainline true .
+
+ga:op-materialize a ga:Operation ;
+  dct:title "Materialize" ; ga:operationCode "materialize" ; ga:rustVariant "Materialize" ;
+  ga:phase "SETUP" ; ga:ordinal 20 ; ga:consequenceClass "PREPARE" ;
+  ga:authorityMode "ENVIRONMENT_DEFINED" ; ga:replayClass "IDEMPOTENT" ; ga:mainline true .
+
+ga:op-configure a ga:Operation ;
+  dct:title "Configure" ; ga:operationCode "configure" ; ga:rustVariant "Configure" ;
+  ga:phase "SETUP" ; ga:ordinal 30 ; ga:consequenceClass "PREPARE" ;
+  ga:authorityMode "ENVIRONMENT_DEFINED" ; ga:replayClass "IDEMPOTENT" ; ga:mainline true .
+
+ga:op-reset a ga:Operation ;
+  dct:title "Reset" ; ga:operationCode "reset" ; ga:rustVariant "Reset" ;
+  ga:phase "EPISODE" ; ga:ordinal 40 ; ga:consequenceClass "PREPARE" ;
+  ga:authorityMode "ENVIRONMENT_DEFINED" ; ga:replayClass "IDEMPOTENT" ; ga:mainline true .
+
+ga:op-start a ga:Operation ;
+  dct:title "Start" ; ga:operationCode "start" ; ga:rustVariant "Start" ;
+  ga:phase "EPISODE" ; ga:ordinal 50 ; ga:consequenceClass "PREPARE" ;
+  ga:authorityMode "ENVIRONMENT_DEFINED" ; ga:replayClass "EFFECTFUL" ; ga:mainline true .
+
+ga:op-observe a ga:Operation ;
+  dct:title "Observe" ; ga:operationCode "observe" ; ga:rustVariant "Observe" ;
+  ga:phase "INTERACTION" ; ga:ordinal 60 ; ga:consequenceClass "READ" ;
+  ga:authorityMode "NONE" ; ga:replayClass "PURE" ; ga:mainline true .
+
+ga:op-act a ga:Operation ;
+  dct:title "Act" ; ga:operationCode "act" ; ga:rustVariant "Act" ;
+  ga:phase "INTERACTION" ; ga:ordinal 70 ; ga:consequenceClass "DO" ;
+  ga:authorityMode "REQUIRED_WHEN_CONSEQUENTIAL" ; ga:replayClass "EFFECTFUL" ; ga:mainline true .
+
+ga:op-verify a ga:Operation ;
+  dct:title "Verify" ; ga:operationCode "verify" ; ga:rustVariant "Verify" ;
+  ga:phase "EVALUATION" ; ga:ordinal 80 ; ga:consequenceClass "VERIFY" ;
+  ga:authorityMode "NONE" ; ga:replayClass "PURE" ; ga:mainline true .
+
+ga:op-score a ga:Operation ;
+  dct:title "Score" ; ga:operationCode "score" ; ga:rustVariant "Score" ;
+  ga:phase "EVALUATION" ; ga:ordinal 90 ; ga:consequenceClass "VERIFY" ;
+  ga:authorityMode "NONE" ; ga:replayClass "PURE" ; ga:mainline true .
+
+ga:op-checkpoint a ga:Operation ;
+  dct:title "Checkpoint" ; ga:operationCode "checkpoint" ; ga:rustVariant "Checkpoint" ;
+  ga:phase "RECOVERY" ; ga:ordinal 100 ; ga:consequenceClass "READ" ;
+  ga:authorityMode "ENVIRONMENT_DEFINED" ; ga:replayClass "IDEMPOTENT" ; ga:mainline false .
+
+ga:op-restore a ga:Operation ;
+  dct:title "Restore" ; ga:operationCode "restore" ; ga:rustVariant "Restore" ;
+  ga:phase "RECOVERY" ; ga:ordinal 110 ; ga:consequenceClass "DO" ;
+  ga:authorityMode "REQUIRED_WHEN_CONSEQUENTIAL" ; ga:replayClass "EFFECTFUL" ; ga:mainline false .
+
+ga:op-teardown a ga:Operation ;
+  dct:title "Teardown" ; ga:operationCode "teardown" ; ga:rustVariant "Teardown" ;
+  ga:phase "CLOSE" ; ga:ordinal 120 ; ga:consequenceClass "DO" ;
+  ga:authorityMode "ENVIRONMENT_DEFINED" ; ga:replayClass "IDEMPOTENT" ; ga:mainline true .

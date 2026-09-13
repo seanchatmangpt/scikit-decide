@@ -63,7 +63,7 @@ function invokeBridge(
   return new Promise((resolve, reject) => {
     const child = spawn(
       python,
-      ["-m", "skdecide.openclaw_bridge", "call", tool, "--arguments", JSON.stringify(params)],
+      ["-m", "autofde_lab.openclaw_bridge", "call", tool, "--arguments", JSON.stringify(params)],
       {
         cwd: config.cwd || undefined,
         env: process.env,

@@ -1,19 +1,19 @@
 module.exports = {
     lang: 'en-US',
-    title: 'Scikit-decide',
-    description: 'This is scikit-decide documentation site',
-    base: `/scikit-decide${process.env.DOCS_VERSION_PATH || '/'}`,
+    title: 'AutoFDE Lab',
+    description: 'AutoFDE Lab documentation site (forked from scikit-decide)',
+    base: `/autofde-lab${process.env.DOCS_VERSION_PATH || '/'}`,
 
     locales: {
         '/': {
             lang: 'en-US',
-            title: 'Scikit-decide',
-            description: 'This is scikit-decide documentation',
+            title: 'AutoFDE Lab',
+            description: 'AutoFDE Lab documentation (forked from scikit-decide)',
         },
     },
 
     themeConfig: {
-        repo: 'airbus/scikit-decide',
+        repo: 'seanchatmangpt/autofde-lab',
         logo: '/logo.svg',
         editLinks: false,
         docsDir: '',

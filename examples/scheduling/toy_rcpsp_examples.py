@@ -3,12 +3,12 @@ from collections.abc import Collection
 from enum import Enum
 from typing import Optional
 
-from skdecide import DiscreteDistribution, Distribution, rollout
-from skdecide.builders.domain.scheduling.modes import (
+from autofde_lab import DiscreteDistribution, Distribution, rollout
+from autofde_lab.builders.domain.scheduling.modes import (
     ConstantModeConsumption,
     ModeConsumption,
 )
-from skdecide.builders.domain.scheduling.scheduling_domains import (
+from autofde_lab.builders.domain.scheduling.scheduling_domains import (
     MultiModeRCPSPWithCost,
     SchedulingObjectiveEnum,
     SingleModeRCPSP,
@@ -451,7 +451,7 @@ def run_example():
 
 
 def run_astar():
-    from skdecide.hub.solver.p_astar import Astar
+    from autofde_lab.hub.solver.p_astar import Astar
 
     domain = MyExampleRCPSPDomain()
     # domain = MyExampleSRCPSPDomain()
@@ -471,7 +471,7 @@ def run_astar():
     )[0]
     print("Cost :", sum([v.cost for v in values]))
 
-    from skdecide.hub.solver.do_solver.sk_to_do_binding import (
+    from autofde_lab.hub.solver.do_solver.sk_to_do_binding import (
         from_last_state_to_solution,
     )
 
@@ -490,11 +490,11 @@ def run_astar():
 
 
 def run_do():
-    from skdecide.hub.solver.do_solver.do_solver_scheduling import (
+    from autofde_lab.hub.solver.do_solver.do_solver_scheduling import (
         DOSolver,
         SolvingMethod,
     )
-    from skdecide.hub.solver.do_solver.sgs_policies import (
+    from autofde_lab.hub.solver.do_solver.sgs_policies import (
         BasePolicyMethod,
         PolicyMethodParams,
     )
@@ -524,7 +524,7 @@ def run_do():
         return_episodes=True,
     )[0]
     print("Cost :", sum([v.cost for v in values]))
-    from skdecide.hub.solver.do_solver.sk_to_do_binding import (
+    from autofde_lab.hub.solver.do_solver.sk_to_do_binding import (
         from_last_state_to_solution,
     )
 
@@ -547,7 +547,7 @@ def run_graph_exploration():
     domain.set_inplace_environment(False)
     state = domain.get_initial_state()
     print("Initial state : ", state)
-    from skdecide.hub.domain.graph_domain.graph_domain_builders import (
+    from autofde_lab.hub.domain.graph_domain.graph_domain_builders import (
         DFS_MDP_Exploration,
     )
 
@@ -590,7 +590,7 @@ def run_graph_exploration_conditional():
     print("Initial state : ", state)
     from itertools import count
 
-    from skdecide.hub.domain.graph_domain.graph_domain_builders import (
+    from autofde_lab.hub.domain.graph_domain.graph_domain_builders import (
         DFS_MDP_Exploration,
     )
 

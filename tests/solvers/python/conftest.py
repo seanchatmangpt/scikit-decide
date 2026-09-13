@@ -1,7 +1,32 @@
 """Fixtures to be reused by several test files."""
 
 import logging
+import os
 from typing import Any, Callable, Dict, Optional, Union
+
+# Disable ray's "uv run" runtime-env auto-detection *before* ray is ever
+# imported by any test module in this directory. When the test suite is
+# launched via `uv run pytest ...`, newer ray versions
+# (ray._private.worker._maybe_modify_runtime_env +
+# ray._private.runtime_env.uv_runtime_env_hook.hook) auto-detect that the
+# driver process was started by `uv run` and try to replicate that uv
+# context on remote/actor worker processes -- including validating that
+# the project's pyproject.toml lives inside the runtime_env's working_dir,
+# and in some cases relaunching worker processes through a `uv run`-aware
+# wrapper that can resolve the wrong virtualenv (observed for real:
+# `ModuleNotFoundError: No module named 'ray'` inside a raylet worker
+# subprocess, after a `VIRTUAL_ENV=.../.venv does not match the project
+# environment path .venv` warning). None of this is needed here: these
+# tests spawn local worker processes on the same machine, using the same
+# already-active venv/interpreter as the driver -- there is no separate,
+# genuinely `uv run`-launched cluster environment to replicate.
+# `RAY_ENABLE_UV_RUN_RUNTIME_ENV` is ray's own documented flag
+# (ray._private.ray_constants.RAY_ENABLE_UV_RUN_RUNTIME_ENV) for turning
+# this off; setting it here (module-level, so it runs at collection time
+# before any test file's own `import ray`) covers every test file in this
+# directory instead of duplicating the same `os.environ.setdefault` call
+# per file.
+os.environ.setdefault("RAY_ENABLE_UV_RUN_RUNTIME_ENV", "0")
 
 
 def _patch_matplotlib_get_cmap():
@@ -28,7 +53,7 @@ from gymnasium.spaces import Box, Discrete, Graph, GraphInstance
 from pytest_cases import fixture, fixture_union, param_fixture
 from torch_geometric.nn import global_add_pool
 
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     FullyObservable,
     Initializable,
     Markovian,
@@ -38,10 +63,10 @@ from skdecide.builders.domain import (
     SingleAgent,
     UnrestrictedActions,
 )
-from skdecide.core import Mask, Space, TransitionOutcome, Value
-from skdecide.domains import DeterministicPlanningDomain, Domain
-from skdecide.hub.domain.maze.maze import DEFAULT_MAZE, Action, Maze, State
-from skdecide.hub.space.gym import DictSpace, DiscreteSpace, GymSpace, ListSpace
+from autofde_lab.core import Mask, Space, TransitionOutcome, Value
+from autofde_lab.domains import DeterministicPlanningDomain, Domain
+from autofde_lab.hub.domain.maze.maze import DEFAULT_MAZE, Action, Maze, State
+from autofde_lab.hub.space.gym import DictSpace, DiscreteSpace, GymSpace, ListSpace
 
 
 class D(DeterministicPlanningDomain, Renderable):

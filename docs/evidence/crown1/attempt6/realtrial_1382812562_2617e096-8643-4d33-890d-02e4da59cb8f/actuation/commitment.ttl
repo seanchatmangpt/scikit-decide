@@ -1,0 +1,6 @@
+@prefix powl: <urn:powl:> .
+<urn:trial:2617e096-8643-4d33-890d-02e4da59cb8f> a powl:Commitment ;
+    powl:planDigest "f9ea21cb5cb498d8" ;
+    powl:modelDigest "1f4a503b8518c3f1" ;
+    powl:planLength 3 ;
+    powl:sequence ("force_latch" "pick_key[key=1]" "open_lock") .

@@ -1,0 +1,38 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+<urn:autofde-lab:shape:GovernedCandidate>
+    a sh:NodeShape ;
+    sh:targetClass afl:GovernedCandidate ;
+    sh:property [
+        sh:path afl:governsCandidate ;
+        sh:class afl:PlanCandidate ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "A GovernedCandidate must bind exactly one PlanCandidate." ;
+    ] ;
+    sh:property [
+        sh:path afl:admittedFromCandidateSet ;
+        sh:class afl:CandidateSet ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "A GovernedCandidate must be admitted from exactly one common CandidateSet." ;
+    ] .
+
+<urn:autofde-lab:shape:POWLCommitment>
+    a sh:NodeShape ;
+    sh:targetClass afl:POWLCommitment ;
+    sh:property [
+        sh:path afl:commitsTo ;
+        sh:class afl:GovernedCandidate ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "A POWLCommitment must commit to exactly one GovernedCandidate; a raw PlanCandidate is not sufficient." ;
+    ] ;
+    sh:property [
+        sh:path afl:committedProcess ;
+        sh:class afl:POWLProcess ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "A POWLCommitment must bind exactly one POWL process." ;
+    ] .

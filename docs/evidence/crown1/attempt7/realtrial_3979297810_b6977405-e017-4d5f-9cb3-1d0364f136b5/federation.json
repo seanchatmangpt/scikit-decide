@@ -1,0 +1,373 @@
+[
+  {
+    "planner": "AOstar",
+    "outcome": "CRASHED",
+    "plan": [],
+    "duration_s": 0.03268504189327359,
+    "detail": "planner process exited with code 1 without returning an attempt"
+  },
+  {
+    "planner": "Astar",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.02149412501603365,
+    "detail": "proposed inapplicable action 'assemble' at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "pLRTAstar",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.060444542090408504,
+    "detail": "proposed inapplicable action None at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "LRTAstar",
+    "outcome": "REFUSED",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.02016416599508375,
+    "detail": "proposed inapplicable action 'assemble' at step 1; applicable=[]"
+  },
+  {
+    "planner": "MCTS",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01869854109827429,
+    "detail": "RuntimeError: Cannot sample an empty space."
+  },
+  {
+    "planner": "UCT",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.019404167076572776,
+    "detail": "RuntimeError: Cannot sample an empty space."
+  },
+  {
+    "planner": "BFWS",
+    "outcome": "REFUSED",
+    "plan": [
+      "mine"
+    ],
+    "duration_s": 0.02129349997267127,
+    "detail": "proposed inapplicable action 'mine' at step 1; applicable=['refine']"
+  },
+  {
+    "planner": "IW",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.020603041048161685,
+    "detail": "proposed inapplicable action 'refine' at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "RIW",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.02005366689991206,
+    "detail": "RuntimeError: In sequential mode, nodes labelled as unsolved must have unsolved children."
+  },
+  {
+    "planner": "LRTDP",
+    "outcome": "REFUSED",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.019677083007991314,
+    "detail": "proposed inapplicable action 'mine' at step 1; applicable=[]"
+  },
+  {
+    "planner": "ILAOstar",
+    "outcome": "CRASHED",
+    "plan": [],
+    "duration_s": 0.031151333008892834,
+    "detail": "planner process exited with code 1 without returning an attempt"
+  },
+  {
+    "planner": "pAstar",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.019168625003658235,
+    "detail": "KeyError: State(facts=frozenset({'dead_end=False', 'catalyst=True', 'output=0', 'mine_rate=1', 'refined=0', 'raw=0', 'capacity=4', 'target=3', 'solved=False'}))"
+  },
+  {
+    "planner": "MARTDP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.017129290965385735,
+    "detail": "ValueError: SKDECIDE exception: MA-RTDP algorithm needs python domain for implementing get_agent_applicable_actions()"
+  },
+  {
+    "planner": "MAHD",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.015517415944486856,
+    "detail": "TypeError: MAHD.__init__() got an unexpected keyword argument 'domain_factory'"
+  },
+  {
+    "planner": "MaxentIRL",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.017284082947298884,
+    "detail": "AttributeError: 'Discrete' object has no attribute 'low'"
+  },
+  {
+    "planner": "POMCP",
+    "outcome": "REFUSED",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.038285584072582424,
+    "detail": "proposed inapplicable action 'burn_catalyst' at step 1; applicable=[]"
+  },
+  {
+    "planner": "pPOMCP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01742766599636525,
+    "detail": "AttributeError: 'pPOMCP' object has no attribute '_belief'"
+  },
+  {
+    "planner": "RayRLlib",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01484774996060878,
+    "detail": "TypeError: RayRLlib.__init__() missing 2 required positional arguments: 'algo_class' and 'train_iterations'"
+  },
+  {
+    "planner": "SimpleGreedy",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01723925000987947,
+    "detail": "ValueError: max() iterable argument is empty"
+  },
+  {
+    "planner": "StableBaseline",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01508462498895824,
+    "detail": "TypeError: StableBaseline.__init__() missing 2 required positional arguments: 'algo_class' and 'baselines_policy'"
+  },
+  {
+    "planner": "UPSolver",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01556541700847447,
+    "detail": "TypeError: UPSolver.__init__() missing 1 required positional argument: 'operation_mode'"
+  },
+  {
+    "planner": "VI",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.01952904206700623,
+    "detail": "proposed inapplicable action 'refine' at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "PI",
+    "outcome": "REFUSED",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.019214667030610144,
+    "detail": "proposed inapplicable action 'assemble' at step 1; applicable=[]"
+  },
+  {
+    "planner": "LDFS",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 25.01252404099796,
+    "detail": "killed after 20.0s wall clock (native solve did not return)"
+  },
+  {
+    "planner": "IDAstar",
+    "outcome": "TIMEOUT",
+    "plan": [],
+    "duration_s": 25.012543249991722,
+    "detail": "killed after 20.0s wall clock (native solve did not return)"
+  },
+  {
+    "planner": "RTDPBel",
+    "outcome": "REFUSED",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 1.459846792044118,
+    "detail": "proposed inapplicable action 'mine' at step 1; applicable=[]"
+  },
+  {
+    "planner": "SSiPP",
+    "outcome": "REFUSED",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.022249417030252516,
+    "detail": "proposed inapplicable action 'mine' at step 1; applicable=[]"
+  },
+  {
+    "planner": "FRET",
+    "outcome": "REFUSED",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.020723709021694958,
+    "detail": "proposed inapplicable action 'burn_catalyst' at step 1; applicable=[]"
+  },
+  {
+    "planner": "MDPLP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.0213562079006806,
+    "detail": "IndexError: map::at:  key not found"
+  },
+  {
+    "planner": "SSPLP",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.021025208057835698,
+    "detail": "IndexError: map::at:  key not found"
+  },
+  {
+    "planner": "IDual",
+    "outcome": "REFUSED",
+    "plan": [
+      "mine"
+    ],
+    "duration_s": 0.020877499948255718,
+    "detail": "proposed inapplicable action 'mine' at step 1; applicable=['refine']"
+  },
+  {
+    "planner": "GPCI",
+    "outcome": "REFUSED",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.020157083054073155,
+    "detail": "proposed inapplicable action 'mine' at step 1; applicable=[]"
+  },
+  {
+    "planner": "SARSOP",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.01874483295250684,
+    "detail": "proposed inapplicable action 'refine' at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "DESPOT",
+    "outcome": "REFUSED",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.08338462503161281,
+    "detail": "proposed inapplicable action 'burn_catalyst' at step 1; applicable=[]"
+  },
+  {
+    "planner": "EHC",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01936883304733783,
+    "detail": "RuntimeError: SKDECIDE exception: EHC failed \u2014 no improving state found"
+  },
+  {
+    "planner": "FF",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.018210125039331615,
+    "detail": "TypeError: FF solver requires a PDDLDomain or PPDDLDomain"
+  },
+  {
+    "planner": "FFReplan",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.018359500099904835,
+    "detail": "TypeError: FFReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLReplan",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01786116708535701,
+    "detail": "TypeError: PPDDLReplan solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "FFDetHindsight",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.017390166060067713,
+    "detail": "TypeError: FFDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLDetHindsight",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.01987479196395725,
+    "detail": "TypeError: PPDDLDetHindsight solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPReplan",
+    "outcome": "REFUSED",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.022028459003195167,
+    "detail": "proposed inapplicable action 'assemble' at step 1; applicable=[]"
+  },
+  {
+    "planner": "SSPDetHindsight",
+    "outcome": "REFUSED",
+    "plan": [
+      "burn_catalyst"
+    ],
+    "duration_s": 0.030030749971047044,
+    "detail": "proposed inapplicable action 'burn_catalyst' at step 1; applicable=[]"
+  },
+  {
+    "planner": "RFF",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.021158833988010883,
+    "detail": "TypeError: RFF solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "PPDDLPlanMerger",
+    "outcome": "FAILED",
+    "plan": [],
+    "duration_s": 0.019159624935127795,
+    "detail": "TypeError: PPDDLPlanMerger solver requires a PPDDLDomain (with _task attribute)"
+  },
+  {
+    "planner": "SSPPlanMerger",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.06060362490825355,
+    "detail": "proposed inapplicable action 'assemble' at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "Witness",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.019401749945245683,
+    "detail": "proposed inapplicable action 'refine' at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "HSVI",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.018580667092464864,
+    "detail": "proposed inapplicable action 'refine' at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "GoalHSVI",
+    "outcome": "REFUSED",
+    "plan": [],
+    "duration_s": 0.019901667023077607,
+    "detail": "proposed inapplicable action 'refine' at step 0; applicable=['burn_catalyst', 'mine']"
+  },
+  {
+    "planner": "DSPyPolicy",
+    "outcome": "REFUSED",
+    "plan": [
+      "mine"
+    ],
+    "duration_s": 10.977914792019874,
+    "detail": "proposed inapplicable action 'mine' at step 1; applicable=['refine']"
+  }
+]

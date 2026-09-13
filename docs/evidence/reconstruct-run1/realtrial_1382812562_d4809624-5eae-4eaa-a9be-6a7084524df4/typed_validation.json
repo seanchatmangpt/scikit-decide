@@ -1,0 +1,17 @@
+{
+  "n_distinct_candidates": 1,
+  "unsound_candidates_rejected": 0,
+  "verdicts": [
+    {
+      "planner": "typed_search",
+      "representation": "typed_model",
+      "plan": [
+        "force_latch",
+        "pick_key[key=1]",
+        "open_lock"
+      ],
+      "valid": true,
+      "reason": "VALID"
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+@prefix f5: <urn:autofde-lab:fortune5:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+f5:ontology a owl:Ontology, prov:Entity ;
+    dcterms:title "AutoFDE Lab Fortune-5 combinatorial enterprise reference profile" ;
+    dcterms:description "Vendor-neutral, non-client-specific possibility graph for bounded Fortune-5-scale enterprise and Kubernetes exploration; grants no execution authority." ;
+    dcterms:created "2026-08-11"^^xsd:date ;
+    prov:wasAttributedTo f5:autofde-lab .
+
+f5:autofde-lab a prov:Agent ; dcterms:title "AutoFDE Lab" .
+f5:Axis a owl:Class ; rdfs:subClassOf skos:ConceptScheme .
+f5:Option a owl:Class ; rdfs:subClassOf skos:Concept .
+f5:axisName a owl:DatatypeProperty ; rdfs:subPropertyOf dcterms:identifier .
+f5:axisOrder a owl:DatatypeProperty .
+f5:hasOption a owl:ObjectProperty ; rdfs:subPropertyOf skos:hasTopConcept .
+f5:optionName a owl:DatatypeProperty ; rdfs:subPropertyOf skos:prefLabel .
+f5:optionOrder a owl:DatatypeProperty .
+
+f5:a-enterprise a f5:Axis ; f5:axisName "enterprise" ; f5:axisOrder 10 ;
+    f5:hasOption f5:o-enterprise-enterprise-01, f5:o-enterprise-enterprise-02, f5:o-enterprise-enterprise-03, f5:o-enterprise-enterprise-04, f5:o-enterprise-enterprise-05 .
+f5:o-enterprise-enterprise-01 a f5:Option ; f5:optionName "enterprise-01" ; f5:optionOrder 10 .
+f5:o-enterprise-enterprise-02 a f5:Option ; f5:optionName "enterprise-02" ; f5:optionOrder 20 .
+f5:o-enterprise-enterprise-03 a f5:Option ; f5:optionName "enterprise-03" ; f5:optionOrder 30 .
+f5:o-enterprise-enterprise-04 a f5:Option ; f5:optionName "enterprise-04" ; f5:optionOrder 40 .
+f5:o-enterprise-enterprise-05 a f5:Option ; f5:optionName "enterprise-05" ; f5:optionOrder 50 .
+
+f5:a-cloud a f5:Axis ; f5:axisName "cloud" ; f5:axisOrder 20 ;
+    f5:hasOption f5:o-cloud-aws, f5:o-cloud-azure, f5:o-cloud-gcp .
+f5:o-cloud-aws a f5:Option ; f5:optionName "aws" ; f5:optionOrder 10 .
+f5:o-cloud-azure a f5:Option ; f5:optionName "azure" ; f5:optionOrder 20 .
+f5:o-cloud-gcp a f5:Option ; f5:optionName "gcp" ; f5:optionOrder 30 .
+
+f5:a-geography a f5:Axis ; f5:axisName "geography" ; f5:axisOrder 30 ;
+    f5:hasOption f5:o-geography-americas, f5:o-geography-emea, f5:o-geography-apac, f5:o-geography-regulated .
+f5:o-geography-americas a f5:Option ; f5:optionName "americas" ; f5:optionOrder 10 .
+f5:o-geography-emea a f5:Option ; f5:optionName "emea" ; f5:optionOrder 20 .
+f5:o-geography-apac a f5:Option ; f5:optionName "apac" ; f5:optionOrder 30 .
+f5:o-geography-regulated a f5:Option ; f5:optionName "regulated" ; f5:optionOrder 40 .
+
+f5:a-environment a f5:Axis ; f5:axisName "environment" ; f5:axisOrder 40 ;
+    f5:hasOption f5:o-environment-dev, f5:o-environment-test, f5:o-environment-stage, f5:o-environment-prod, f5:o-environment-dr .
+f5:o-environment-dev a f5:Option ; f5:optionName "dev" ; f5:optionOrder 10 .
+f5:o-environment-test a f5:Option ; f5:optionName "test" ; f5:optionOrder 20 .
+f5:o-environment-stage a f5:Option ; f5:optionName "stage" ; f5:optionOrder 30 .
+f5:o-environment-prod a f5:Option ; f5:optionName "prod" ; f5:optionOrder 40 .
+f5:o-environment-dr a f5:Option ; f5:optionName "dr" ; f5:optionOrder 50 .
+
+f5:a-cluster-profile a f5:Axis ; f5:axisName "cluster_profile" ; f5:axisOrder 50 ;
+    f5:hasOption f5:o-cluster-profile-shared, f5:o-cluster-profile-dedicated, f5:o-cluster-profile-regulated, f5:o-cluster-profile-edge .
+f5:o-cluster-profile-shared a f5:Option ; f5:optionName "shared" ; f5:optionOrder 10 .
+f5:o-cluster-profile-dedicated a f5:Option ; f5:optionName "dedicated" ; f5:optionOrder 20 .
+f5:o-cluster-profile-regulated a f5:Option ; f5:optionName "regulated" ; f5:optionOrder 30 .
+f5:o-cluster-profile-edge a f5:Option ; f5:optionName "edge" ; f5:optionOrder 40 .
+
+f5:a-workload a f5:Axis ; f5:axisName "workload" ; f5:axisOrder 60 ;
+    f5:hasOption f5:o-workload-web, f5:o-workload-api, f5:o-workload-worker, f5:o-workload-batch, f5:o-workload-stream, f5:o-workload-data, f5:o-workload-ml, f5:o-workload-agent .
+f5:o-workload-web a f5:Option ; f5:optionName "web" ; f5:optionOrder 10 .
+f5:o-workload-api a f5:Option ; f5:optionName "api" ; f5:optionOrder 20 .
+f5:o-workload-worker a f5:Option ; f5:optionName "worker" ; f5:optionOrder 30 .
+f5:o-workload-batch a f5:Option ; f5:optionName "batch" ; f5:optionOrder 40 .
+f5:o-workload-stream a f5:Option ; f5:optionName "stream" ; f5:optionOrder 50 .
+f5:o-workload-data a f5:Option ; f5:optionName "data" ; f5:optionOrder 60 .
+f5:o-workload-ml a f5:Option ; f5:optionName "ml" ; f5:optionOrder 70 .
+f5:o-workload-agent a f5:Option ; f5:optionName "agent" ; f5:optionOrder 80 .
+
+f5:a-traffic a f5:Axis ; f5:axisName "traffic" ; f5:axisOrder 70 ;
+    f5:hasOption f5:o-traffic-internal, f5:o-traffic-internet, f5:o-traffic-partner, f5:o-traffic-event-driven .
+f5:o-traffic-internal a f5:Option ; f5:optionName "internal" ; f5:optionOrder 10 .
+f5:o-traffic-internet a f5:Option ; f5:optionName "internet" ; f5:optionOrder 20 .
+f5:o-traffic-partner a f5:Option ; f5:optionName "partner" ; f5:optionOrder 30 .
+f5:o-traffic-event-driven a f5:Option ; f5:optionName "event-driven" ; f5:optionOrder 40 .
+
+f5:a-data-class a f5:Axis ; f5:axisName "data_class" ; f5:axisOrder 80 ;
+    f5:hasOption f5:o-data-class-public, f5:o-data-class-internal, f5:o-data-class-confidential, f5:o-data-class-restricted .
+f5:o-data-class-public a f5:Option ; f5:optionName "public" ; f5:optionOrder 10 .
+f5:o-data-class-internal a f5:Option ; f5:optionName "internal" ; f5:optionOrder 20 .
+f5:o-data-class-confidential a f5:Option ; f5:optionName "confidential" ; f5:optionOrder 30 .
+f5:o-data-class-restricted a f5:Option ; f5:optionName "restricted" ; f5:optionOrder 40 .
+
+f5:a-availability a f5:Axis ; f5:axisName "availability" ; f5:axisOrder 90 ;
+    f5:hasOption f5:o-availability-standard, f5:o-availability-ha, f5:o-availability-mission-critical .
+f5:o-availability-standard a f5:Option ; f5:optionName "standard" ; f5:optionOrder 10 .
+f5:o-availability-ha a f5:Option ; f5:optionName "ha" ; f5:optionOrder 20 .
+f5:o-availability-mission-critical a f5:Option ; f5:optionName "mission-critical" ; f5:optionOrder 30 .
+
+f5:a-release a f5:Axis ; f5:axisName "release" ; f5:axisOrder 100 ;
+    f5:hasOption f5:o-release-rolling, f5:o-release-canary, f5:o-release-blue-green, f5:o-release-immutable .
+f5:o-release-rolling a f5:Option ; f5:optionName "rolling" ; f5:optionOrder 10 .
+f5:o-release-canary a f5:Option ; f5:optionName "canary" ; f5:optionOrder 20 .
+f5:o-release-blue-green a f5:Option ; f5:optionName "blue-green" ; f5:optionOrder 30 .
+f5:o-release-immutable a f5:Option ; f5:optionName "immutable" ; f5:optionOrder 40 .
+
+f5:a-identity a f5:Axis ; f5:axisName "identity" ; f5:axisOrder 110 ;
+    f5:hasOption f5:o-identity-workload-identity, f5:o-identity-oidc, f5:o-identity-service-account .
+f5:o-identity-workload-identity a f5:Option ; f5:optionName "workload-identity" ; f5:optionOrder 10 .
+f5:o-identity-oidc a f5:Option ; f5:optionName "oidc" ; f5:optionOrder 20 .
+f5:o-identity-service-account a f5:Option ; f5:optionName "service-account" ; f5:optionOrder 30 .
+
+f5:a-policy a f5:Axis ; f5:axisName "policy" ; f5:axisOrder 120 ;
+    f5:hasOption f5:o-policy-baseline, f5:o-policy-restricted, f5:o-policy-zero-trust .
+f5:o-policy-baseline a f5:Option ; f5:optionName "baseline" ; f5:optionOrder 10 .
+f5:o-policy-restricted a f5:Option ; f5:optionName "restricted" ; f5:optionOrder 20 .
+f5:o-policy-zero-trust a f5:Option ; f5:optionName "zero-trust" ; f5:optionOrder 30 .
+
+f5:a-runtime-ai a f5:Axis ; f5:axisName "runtime_ai" ; f5:axisOrder 130 ;
+    f5:hasOption f5:o-runtime-ai-none, f5:o-runtime-ai-rag, f5:o-runtime-ai-agentic, f5:o-runtime-ai-inference .
+f5:o-runtime-ai-none a f5:Option ; f5:optionName "none" ; f5:optionOrder 10 .
+f5:o-runtime-ai-rag a f5:Option ; f5:optionName "rag" ; f5:optionOrder 20 .
+f5:o-runtime-ai-agentic a f5:Option ; f5:optionName "agentic" ; f5:optionOrder 30 .
+f5:o-runtime-ai-inference a f5:Option ; f5:optionName "inference" ; f5:optionOrder 40 .
+
+f5:a-fault a f5:Axis ; f5:axisName "fault" ; f5:axisOrder 140 ;
+    f5:hasOption f5:o-fault-healthy, f5:o-fault-config-drift, f5:o-fault-target-port, f5:o-fault-dns, f5:o-fault-rbac, f5:o-fault-secret, f5:o-fault-network-policy, f5:o-fault-quota, f5:o-fault-oom, f5:o-fault-cpu-throttle, f5:o-fault-pvc, f5:o-fault-image-pull, f5:o-fault-crash-loop, f5:o-fault-cert, f5:o-fault-ingress, f5:o-fault-dependency, f5:o-fault-schema, f5:o-fault-backpressure, f5:o-fault-node-pressure, f5:o-fault-zone-loss .
+f5:o-fault-healthy a f5:Option ; f5:optionName "healthy" ; f5:optionOrder 10 .
+f5:o-fault-config-drift a f5:Option ; f5:optionName "config-drift" ; f5:optionOrder 20 .
+f5:o-fault-target-port a f5:Option ; f5:optionName "target-port" ; f5:optionOrder 30 .
+f5:o-fault-dns a f5:Option ; f5:optionName "dns" ; f5:optionOrder 40 .
+f5:o-fault-rbac a f5:Option ; f5:optionName "rbac" ; f5:optionOrder 50 .
+f5:o-fault-secret a f5:Option ; f5:optionName "secret" ; f5:optionOrder 60 .
+f5:o-fault-network-policy a f5:Option ; f5:optionName "network-policy" ; f5:optionOrder 70 .
+f5:o-fault-quota a f5:Option ; f5:optionName "quota" ; f5:optionOrder 80 .
+f5:o-fault-oom a f5:Option ; f5:optionName "oom" ; f5:optionOrder 90 .
+f5:o-fault-cpu-throttle a f5:Option ; f5:optionName "cpu-throttle" ; f5:optionOrder 100 .
+f5:o-fault-pvc a f5:Option ; f5:optionName "pvc" ; f5:optionOrder 110 .
+f5:o-fault-image-pull a f5:Option ; f5:optionName "image-pull" ; f5:optionOrder 120 .
+f5:o-fault-crash-loop a f5:Option ; f5:optionName "crash-loop" ; f5:optionOrder 130 .
+f5:o-fault-cert a f5:Option ; f5:optionName "cert" ; f5:optionOrder 140 .
+f5:o-fault-ingress a f5:Option ; f5:optionName "ingress" ; f5:optionOrder 150 .
+f5:o-fault-dependency a f5:Option ; f5:optionName "dependency" ; f5:optionOrder 160 .
+f5:o-fault-schema a f5:Option ; f5:optionName "schema" ; f5:optionOrder 170 .
+f5:o-fault-backpressure a f5:Option ; f5:optionName "backpressure" ; f5:optionOrder 180 .
+f5:o-fault-node-pressure a f5:Option ; f5:optionName "node-pressure" ; f5:optionOrder 190 .
+f5:o-fault-zone-loss a f5:Option ; f5:optionName "zone-loss" ; f5:optionOrder 200 .

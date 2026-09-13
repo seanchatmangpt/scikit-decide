@@ -1,0 +1,33 @@
+{
+  "gym": "the-agent-company",
+  "task": "admin-check-employees-budget-and-reply",
+  "source_ref": "vendor/gyms/the-agent-company/workspaces/tasks/admin-check-employees-budget-and-reply/{task.md,checkpoints.md}",
+  "initial_facts": [],
+  "goal_facts": ["replied_with_budget_answer"],
+  "steps": [
+    {
+      "id": "collect_equipment_requests",
+      "description": "Collect equipment requests (name and quantity) from three department managers -- Jessica Lee (Marketing), Huang Jie (Product), Chen Xinyi (HR) -- at http://the-agent-company.com:3000/home.",
+      "preconditions": [],
+      "establishes": ["requests_collected"],
+      "cost": 1.0,
+      "source": "task.md step 1; checkpoints.md Checkpoint 1 (chat history exists between agent and Jessica Lee, Huang Jie, Chen Xinyi)"
+    },
+    {
+      "id": "retrieve_equipment_prices",
+      "description": "Retrieve equipment prices from 'Documents/Administrative Specialist/products.pdf' on owncloud (http://the-agent-company.com:8092).",
+      "preconditions": ["requests_collected"],
+      "establishes": ["prices_retrieved"],
+      "cost": 1.0,
+      "source": "task.md step 2; checkpoints.md Checkpoint 2 (check accessed owncloud)"
+    },
+    {
+      "id": "reply_with_budget_answer",
+      "description": "Each department (Marketing, Product, HR) has a $10000 equipment budget. Send a response to every department's managers stating the total cost and whether the department's budget is sufficient.",
+      "preconditions": ["prices_retrieved"],
+      "establishes": ["replied_with_budget_answer"],
+      "cost": 1.0,
+      "source": "task.md step 3; checkpoints.md Checkpoint 3 (check agent replied with the correct answer)"
+    }
+  ]
+}

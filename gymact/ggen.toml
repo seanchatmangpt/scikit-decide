@@ -1,0 +1,147 @@
+[project]
+name = "gymact"
+version = "0.1.0"
+description = "Transport-neutral, ontology-first actuation ABI for executable benchmark environments."
+authors = ["AutoFDE Lab"]
+license = "MIT"
+
+[ontology]
+source = "ontology/gymact.ttl"
+imports = [
+  "ontology/profiles.ttl",
+  "ontology/errc.ttl",
+  "ontology/closed-vertical.ttl",
+  "../docs/papers/papers.ttl",
+  "../docs/papers/gym-lock.ttl",
+  "../docs/papers/smoke-lock.ttl",
+  "../ontology/autofde-lab-capabilities.ttl",
+  "../ontology/planner-league.ttl",
+]
+base_iri = "https://github.com/seanchatmangpt/autofde-lab/data/gymact/"
+
+[ontology.prefixes]
+ga = "https://github.com/seanchatmangpt/autofde-lab/ns/gymact#"
+afb = "https://github.com/seanchatmangpt/autofde-lab/ns/forwardbench#"
+dct = "http://purl.org/dc/terms/"
+prov = "http://www.w3.org/ns/prov#"
+pplan = "http://purl.org/net/p-plan#"
+sosa = "http://www.w3.org/ns/sosa/"
+qudt = "http://qudt.org/schema/qudt/"
+odrl = "http://www.w3.org/ns/odrl/2/"
+
+[generation]
+output_dir = "."
+
+[[generation.rules]]
+name = "protocol-json"
+query = { file = "queries/operations.rq" }
+template = { file = "templates/protocol.json.tera" }
+output_file = "generated/protocol.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "profiles-json"
+query = { file = "queries/profiles.rq" }
+template = { file = "templates/profiles.json.tera" }
+output_file = "generated/profiles.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "subjects-json"
+query = { file = "queries/subjects.rq" }
+template = { file = "templates/subjects.json.tera" }
+output_file = "generated/subjects.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "mcp-tools"
+query = { file = "queries/operations.rq" }
+template = { file = "templates/mcp-tools.json.tera" }
+output_file = "generated/mcp-tools.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "a2a-skills"
+query = { file = "queries/operations.rq" }
+template = { file = "templates/a2a-skills.json.tera" }
+output_file = "generated/a2a-skills.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "bpmn"
+query = { file = "queries/operations.rq" }
+template = { file = "templates/gymact.bpmn.tera" }
+output_file = "generated/gymact.bpmn"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "rust-abi"
+query = { file = "queries/operations.rq" }
+template = { file = "templates/lib.rs.tera" }
+output_file = "generated/rust/lib.rs"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "wit-abi"
+query = { file = "queries/operations.rq" }
+template = { file = "templates/gymact.wit.tera" }
+output_file = "generated/wit/gymact.wit"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "errc-json"
+query = { file = "queries/errc.rq" }
+template = { file = "templates/errc.json.tera" }
+output_file = "generated/errc.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "errc-migration-queue"
+query = { file = "queries/errc-migration.rq" }
+template = { file = "templates/migration-queue.json.tera" }
+output_file = "generated/migration-queue.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "errc-report"
+query = { file = "queries/errc.rq" }
+template = { file = "templates/ERRC.md.tera" }
+output_file = "generated/ERRC.md"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "azure-closed-vertical-bundle"
+query = { file = "queries/closed-vertical.rq" }
+template = { file = "templates/closed-vertical.json.tera" }
+output_file = "generated/azure-closed-vertical.json"
+mode = "Overwrite"
+
+[[generation.rules]]
+name = "planner-league-catalog"
+query = { file = "queries/planner-league.rq" }
+template = { file = "templates/planner-league.json.tera" }
+output_file = "generated/planner-league.json"
+mode = "Overwrite"
+
+[validation]
+gates = [
+  "queries/gate-core-operations.rq",
+  "queries/gate-unmapped-adapters.rq",
+  "queries/gate-errc.rq",
+]
+strict_mode = true
+
+[sync]
+enabled = true
+on_change = "manual"
+validate_after = true
+conflict_mode = "fail"
+
+[rdf]
+formats = ["turtle"]
+default_format = "turtle"
+strict_validation = false
+
+[templates]
+enable_caching = true
+auto_reload = true

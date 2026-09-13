@@ -1,12 +1,35 @@
 import logging
 import os
 
+# Disable ray's "uv run" runtime-env auto-detection *before* ray is imported/used.
+# When the test suite is launched via `uv run pytest ...`, newer ray versions
+# (see ray._private.worker._maybe_modify_runtime_env and
+# ray._private.runtime_env.uv_runtime_env_hook.hook) auto-detect that the
+# driver process was started by `uv run` and try to replicate that uv context
+# on remote workers. Part of that replication validates that the project's
+# pyproject.toml lives inside the runtime env's `working_dir`. We intentionally
+# set `working_dir` to this test file's own directory below (so that ray
+# workers can unpickle/import the GraphMaze domain classes defined in this
+# module) which is a *subdirectory* of the repo root containing pyproject.toml,
+# so that validation always fails with:
+#   RuntimeError: Your <repo>/pyproject.toml is not in the working_dir
+#   <repo>/tests/solvers/python, so the workers will not have access to the file.
+# This is not a real problem here: these tests spawn local worker processes on
+# the same machine, using the same already-active venv/interpreter as the
+# driver -- there is no separate `uv run`-launched cluster environment that
+# actually needs to be replicated. `RAY_ENABLE_UV_RUN_RUNTIME_ENV` is ray's own
+# documented flag (see ray._private.ray_constants.RAY_ENABLE_UV_RUN_RUNTIME_ENV)
+# for turning this uv auto-detection off; disabling it here restores the
+# regular runtime_env behavior (our explicit `working_dir` below is honored
+# as-is, with no pyproject.toml/uv-specific validation).
+os.environ.setdefault("RAY_ENABLE_UV_RUN_RUNTIME_ENV", "0")
+
 import ray
 from pytest_cases import fixture
 
-from skdecide.hub.solver.ray_rllib import RayRLlib
-from skdecide.hub.solver.ray_rllib.gnn.algorithms import GraphPPO
-from skdecide.utils import rollout
+from autofde_lab.hub.solver.ray_rllib import RayRLlib
+from autofde_lab.hub.solver.ray_rllib.gnn.algorithms import GraphPPO
+from autofde_lab.utils import rollout
 
 
 @fixture
@@ -23,6 +46,20 @@ def ray_init():
 def graphppo_config():
     return (
         GraphPPO.get_default_config()
+        # This solver's GNN rollout/action-masking code (GraphRolloutWorker,
+        # Graph2NodeRolloutWorker, Policy-based custom models) is written
+        # against RLlib's old API stack. Ray made the new API stack the
+        # default from 2.40 onward. RayRLlib.__init__ only forces the old
+        # stack when it builds its *own* default config (see comment there);
+        # since this fixture builds and passes an explicit `config=...`, it
+        # must opt into the old stack itself, or actor creation crashes with
+        # `TypeError: cannot unpack non-iterable NoneType object` deep in
+        # Policy.exploration.get_exploration_action (an old-stack API that
+        # doesn't get populated under the new stack).
+        .api_stack(
+            enable_rl_module_and_learner=False,
+            enable_env_runner_and_connector_v2=False,
+        )
         # set num of CPU<1 to avoid hanging for ever in github actions on macos 11
         .resources(
             num_cpus_per_worker=0.5,

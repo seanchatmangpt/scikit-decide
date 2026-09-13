@@ -14,112 +14,127 @@ on:
         default: "docs/.vuepress/dist"
         type: string
       doc-version:
-        description: "version of the library for which we are building the doc. If empty, then it is main branch doc."
-        required: FALSE
+        description: "Version of the library for which documentation is built"
+        required: false
         default: ""
         type: string
       notebooks-repo-url:
-        description: |
-          Url of the repository containing the notebooks, used to generate github and colab links.
-          By default, the current repository url.
+        description: "Repository URL used to generate GitHub and Colab links"
         required: false
         default: ""
         type: string
       notebooks-branch:
-        description: |
-          Branch containing the notebooks, used to generate github and colab links.
-          By default, the current branch.
+        description: "Repository branch used to generate GitHub and Colab links"
         required: false
         default: ""
         type: string
       doc-prerequisites-cmdline:
-        description: |
-          Command line to run before building doc.
+        description: "Optional trusted command run before documentation construction"
         required: false
         default: ""
         type: string
 
+permissions:
+  contents: read
+
 jobs:
   build-doc:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     env:
       python-version: "3.10"
     steps:
-      - name: Set env variables for github links in doc
+      - name: Set documentation link context
+        env:
+          NOTEBOOKS_REPO_INPUT: ${{ inputs.notebooks-repo-url }}
+          NOTEBOOKS_BRANCH_INPUT: ${{ inputs.notebooks-branch }}
+          PR_HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+        shell: bash
         run: |
-          # notebooks source repo and branch. First try to use workflow inputs
-          AUTODOC_NOTEBOOKS_REPO_URL=${{ inputs.notebooks-repo-url }}
-          AUTODOC_NOTEBOOKS_BRANCH=${{ inputs.notebooks-branch }}
-          # use github context if not defined in inputs
-          if [[ $GITHUB_REF == refs/pull* ]];
-          then
-              if [ -z "${AUTODOC_NOTEBOOKS_REPO_URL}" ]; then
-                AUTODOC_NOTEBOOKS_REPO_URL="${GITHUB_SERVER_URL}/${{ github.event.pull_request.head.repo.full_name }}"
-              fi
-              if [ -z "${AUTODOC_NOTEBOOKS_BRANCH}" ]; then
-                AUTODOC_NOTEBOOKS_BRANCH=${GITHUB_HEAD_REF}
-              fi
-          elif [[ $GITHUB_REF == refs/heads* ]];
-          then
-              if [ -z "${AUTODOC_NOTEBOOKS_REPO_URL}" ]; then
-                AUTODOC_NOTEBOOKS_REPO_URL=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}
-              fi
-              if [ -z "${AUTODOC_NOTEBOOKS_BRANCH}" ]; then
-                AUTODOC_NOTEBOOKS_BRANCH=${GITHUB_REF/refs\/heads\//}
-              fi
-          elif [[ $GITHUB_REF == refs/tags* ]];
-          then
-              if [ -z "${AUTODOC_NOTEBOOKS_REPO_URL}" ]; then
-                AUTODOC_NOTEBOOKS_REPO_URL=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}
-              fi
-              if [ -z "${AUTODOC_NOTEBOOKS_BRANCH}" ]; then
-                AUTODOC_NOTEBOOKS_BRANCH=${GITHUB_REF/refs\/tags\//}
-              fi
+          set -euo pipefail
+          AUTODOC_NOTEBOOKS_REPO_URL="$NOTEBOOKS_REPO_INPUT"
+          AUTODOC_NOTEBOOKS_BRANCH="$NOTEBOOKS_BRANCH_INPUT"
+          if [[ "$GITHUB_REF" == refs/pull* ]]; then
+            AUTODOC_NOTEBOOKS_REPO_URL=${AUTODOC_NOTEBOOKS_REPO_URL:-"$GITHUB_SERVER_URL/$PR_HEAD_REPOSITORY"}
+            AUTODOC_NOTEBOOKS_BRANCH=${AUTODOC_NOTEBOOKS_BRANCH:-$GITHUB_HEAD_REF}
+          elif [[ "$GITHUB_REF" == refs/heads* ]]; then
+            AUTODOC_NOTEBOOKS_REPO_URL=${AUTODOC_NOTEBOOKS_REPO_URL:-"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"}
+            AUTODOC_NOTEBOOKS_BRANCH=${AUTODOC_NOTEBOOKS_BRANCH:-${GITHUB_REF#refs/heads/}}
+          elif [[ "$GITHUB_REF" == refs/tags* ]]; then
+            AUTODOC_NOTEBOOKS_REPO_URL=${AUTODOC_NOTEBOOKS_REPO_URL:-"$GITHUB_SERVER_URL/$GITHUB_REPOSITORY"}
+            AUTODOC_NOTEBOOKS_BRANCH=${AUTODOC_NOTEBOOKS_BRANCH:-${GITHUB_REF#refs/tags/}}
           fi
-          # export in GITHUB_ENV for next steps
-          echo "AUTODOC_NOTEBOOKS_REPO_URL=${AUTODOC_NOTEBOOKS_REPO_URL}" >> $GITHUB_ENV
-          echo "AUTODOC_NOTEBOOKS_BRANCH=${AUTODOC_NOTEBOOKS_BRANCH}" >> $GITHUB_ENV
-          # check computed variables
-          echo "Notebooks source: ${AUTODOC_NOTEBOOKS_REPO_URL}/tree/${AUTODOC_NOTEBOOKS_BRANCH}"
-      - uses: actions/checkout@v6
-      - name: Setup python
-        uses: actions/setup-python@v6
+          echo "AUTODOC_NOTEBOOKS_REPO_URL=$AUTODOC_NOTEBOOKS_REPO_URL" >> "$GITHUB_ENV"
+          echo "AUTODOC_NOTEBOOKS_BRANCH=$AUTODOC_NOTEBOOKS_BRANCH" >> "$GITHUB_ENV"
+          echo "Notebooks source: $AUTODOC_NOTEBOOKS_REPO_URL/tree/$AUTODOC_NOTEBOOKS_BRANCH"
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Setup Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: ${{ env.python-version }}
-          cache: "pip"
-          cache-dependency-path: |
-            pyproject.toml
-      - name: Download wheel
-        uses: actions/download-artifact@v8
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Download Linux wheel
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           pattern: wheels-ubuntu*-${{ env.python-version }}
           merge-multiple: true
           path: wheels
-      - name: Install scikit-decide wheel and dependencies
+      - name: Install uv
+        uses: astral-sh/setup-uv@cec208311dfd045dd5311c1add060b2062131d57 # v8.0.0
+        with:
+          enable-cache: true
+      - name: Install documentation dependencies
+        shell: bash
         run: |
-          python -m pip install -U pip setuptools
-          # find proper wheel and install it
+          set -euo pipefail
           python_version=${{ env.python-version }}
-          wheelfile=$(ls ./wheels/scikit_decide*-cp${python_version/\./}-*manylinux*.whl)
-          pip install ${wheelfile}[all]
-      - name: set env.DOCS_VERSION_PATH aka subpath where the doc will be deployed
-        # DOCS_VERSION_PATH is used by yarn docs:build to preprend links to javascript with proper subpath
-        # See docs/.vuepress/config.js
-        id: set-doc-version-path
+          # Package was renamed scikit-decide -> autofde-lab; the wheel is
+          # autofde_lab-*.whl (same stale-glob class PR#105 fixed in ci.yml).
+          wheelfile=$(find wheels -maxdepth 1 -name "autofde_lab*-cp${python_version/./}-*manylinux*.whl" -print -quit)
+          test -n "$wheelfile"
+          # The `receipts` extra's wasm4pm-compat-pydantic (and `gymact`)
+          # exist only via [tool.uv.sources] git redirects in pyproject.toml,
+          # not on PyPI and not in the wheel's METADATA. uv honors those
+          # redirects only when resolving the *project* from its lock -- not
+          # for a prebuilt wheel path (PR#107's `uv pip install wheel[all]`
+          # was therefore a no-op fix; see ci.yml's docs job for the live
+          # run). Export the frozen lock's resolved set and install that;
+          # then the wheel with --no-deps.
+          py="$(python -c 'import sys; print(sys.executable)')"
+          uv export --frozen --format requirements-txt --extra all \
+            --no-dev --no-hashes --no-emit-project -o /tmp/autofde-lab-all.txt
+          uv pip install --python "$py" -r /tmp/autofde-lab-all.txt
+          uv pip install --python "$py" --no-deps "$wheelfile"
+      - name: Run documentation prerequisites
+        if: inputs.doc-prerequisites-cmdline != ''
+        env:
+          DOC_PREREQUISITES: ${{ inputs.doc-prerequisites-cmdline }}
+        shell: bash
+        run: bash -euo pipefail -c "$DOC_PREREQUISITES"
+      - name: Set documentation version path
+        env:
+          DOC_VERSION: ${{ inputs.doc-version }}
+        shell: bash
         run: |
-          doc_version=${{ inputs.doc-version }}
-          if [ -z "${doc_version}" ]; then
+          set -euo pipefail
+          doc_version="$DOC_VERSION"
+          if [[ -z "$doc_version" ]]; then
             doc_version_path="/"
           else
-            doc_version_path="/version/${doc_version}/"
+            doc_version_path="/version/$doc_version/"
           fi
-          echo "DOCS_VERSION_PATH=${doc_version_path}" >> $GITHUB_ENV
-      - name: generate documentation
+          echo "DOCS_VERSION_PATH=$doc_version_path" >> "$GITHUB_ENV"
+      - name: Generate documentation
         run: |
-          yarn global add vuepress && yarn install
+          yarn install --frozen-lockfile
           yarn docs:build
-      - name: upload as artifact
-        uses: actions/upload-artifact@v7
+      - name: Upload documentation artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: ${{ inputs.doc-artifact-name }}
           path: ${{ inputs.doc-path }}
+          if-no-files-found: error
+          retention-days: 7

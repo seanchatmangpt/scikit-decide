@@ -1,7 +1,7 @@
 from typing import Optional
 
-from skdecide import Domain, Space, Value
-from skdecide.builders.domain import (
+from autofde_lab import Domain, Space, Value
+from autofde_lab.builders.domain import (
     DeterministicInitialized,
     DeterministicTransitions,
     FullyObservable,
@@ -12,8 +12,8 @@ from skdecide.builders.domain import (
     SingleAgent,
     UnrestrictedActions,
 )
-from skdecide.hub.domain.maze.maze import Action, State
-from skdecide.hub.domain.maze.maze import Maze as HubMaze
+from autofde_lab.hub.domain.maze.maze import Action, State
+from autofde_lab.hub.domain.maze.maze import Maze as HubMaze
 
 
 class D(

@@ -1,0 +1,43 @@
+schema = "chatman.federated-capability-owner.v1"
+version = "26.9.1"
+repository = "seanchatmangpt/autofde-lab"
+owner_id = "repository:autofde-lab"
+control_plane_repository = "seanchatmangpt/chatman-ecosystem"
+control_plane_subject = "git:7430dfc9b3ca138e703430d25de7c6f48a8d6ade"
+base_sha = "d444c70b11dbb57b97813262132530c327ca8aa3"
+release_component = "autofde-lab"
+release_role = "explore"
+release_dependencies = ["bcinr", "gymact"]
+allowed_authorities = ["classify"]
+simulation_only = false
+do_mode = "none"
+ambient_do = false
+automatic_irreversible_do = false
+
+[[capability]]
+id = "capability:admit-planner-policy-role-separation"
+relationship = "owner"
+standing = "CANDIDATE"
+broker_required = false
+receipt_required = true
+
+[[capability]]
+id = "capability:plan-decision-frontier"
+relationship = "owner"
+standing = "CANDIDATE"
+broker_required = false
+receipt_required = true
+
+[[capability]]
+id = "capability:falsify-candidate-plan"
+relationship = "owner"
+standing = "CANDIDATE"
+broker_required = false
+receipt_required = true
+
+[[capability]]
+id = "capability:admit-capability-plan"
+relationship = "owner"
+standing = "CANDIDATE"
+broker_required = false
+receipt_required = true

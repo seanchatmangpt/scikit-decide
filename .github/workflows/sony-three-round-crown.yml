@@ -1,0 +1,111 @@
+name: Sony Three-Round FDE Crown
+
+on:
+  pull_request:
+    paths:
+      - "src/autofde_lab/sony/**"
+      - "src/autofde_lab/powl/**"
+      - "src/autofde_lab/fabric/brce.py"
+      - "src/autofde_lab/fortune5/**"
+      - ".github/workflows/sony-three-round-crown.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sony-fde-crown-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exact-head-sony-crown:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out exact candidate
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Assert exact subject identity
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          actual="$(git rev-parse HEAD)"
+          test "$actual" = "$EXPECTED_HEAD"
+          printf 'exact_head=%s\n' "$actual"
+
+      - name: Install Python 3.12
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+
+      - name: Install bounded runtime dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            "numpy==2.2.6" \
+            "wrapt>=2.2.1,<3" \
+            "pynng>=0.6.2" \
+            "pathos>=0.2.7" \
+            "discrete-optimization>=0.9.0"
+
+      - name: Compile crown surfaces
+        run: |
+          python -m compileall -q \
+            src/autofde_lab/sony \
+            src/autofde_lab/powl \
+            src/autofde_lab/fabric/brce.py \
+            src/autofde_lab/fortune5
+
+      - name: Execute same-subject Sony crown
+        env:
+          PYTHONPATH: src
+        run: |
+          rm -rf "$RUNNER_TEMP/sony-crown"
+          python -m autofde_lab.sony.crown \
+            --workspace "$RUNNER_TEMP/sony-crown" \
+            --output sony-crown-receipt.json
+
+      - name: Verify bounded crown receipt
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          receipt = json.loads(Path("sony-crown-receipt.json").read_text(encoding="utf-8"))
+          assert receipt["schema"] == "autofde.sony-three-round-crown/1"
+          assert receipt["standing"] == "ALIVE"
+          assert receipt["claim_ceiling"] == "BOUNDED_LOCAL_SONY_ROLE_ACCEPTANCE_ONLY_NO_SONY_CLOUD_AUTHORITY"
+          assert receipt["scenario_authority"] == "NONE"
+          assert receipt["architecture"]["cloud"] == "azure"
+          assert receipt["architecture"]["environment"] == "prod"
+          assert receipt["architecture"]["runtime_ai"] == "agentic"
+          assert receipt["architecture"]["policy"] == "zero-trust"
+          assert receipt["powl_status"] == "COMPLETED"
+          assert receipt["peak_concurrency"] == 3
+          assert receipt["structural_replay"] == "REPLAY_MATCH"
+          assert len(receipt["requirement_ids"]) == 10
+          assert len(set(receipt["requirement_ids"])) == 10
+          assert len(receipt["activity_receipts"]) == 5
+          assert len(set(receipt["activity_receipts"])) == 5
+          assert all(value.startswith("sha256:") for value in receipt["activity_receipts"])
+          assert receipt["activity_replays"] == ["REPLAY_MATCH"] * 5
+          assert receipt["raw_upper_bound"] > 1_000_000
+          assert {pin["repo"] for pin in receipt["ecosystem_pins"]} == {
+              "seanchatmangpt/ggen",
+              "seanchatmangpt/gymact",
+              "seanchatmangpt/wasm4pm-compat",
+          }
+          PY
+
+      - name: Upload exact-head crown receipt
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: sony-three-round-crown-${{ github.event.pull_request.head.sha || github.sha }}
+          path: sony-crown-receipt.json
+          if-no-files-found: error
+          retention-days: 30

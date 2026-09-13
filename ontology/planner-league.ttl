@@ -1,0 +1,123 @@
+@prefix league: <urn:autofde-lab:planner-league:> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Role-Conditioned Planner League Self-Play.
+#
+# This graph names experiment semantics. It deliberately does NOT grant
+# execution authority to planners. Planner inventory is imported from the
+# generated skdecide capability graph; this file must not duplicate it.
+
+league:PlannerCapabilityField a rdfs:Class .
+league:Role a rdfs:Class .
+league:Objective a rdfs:Class .
+league:ObservationProjection a rdfs:Class .
+league:ActionProjection a rdfs:Class .
+league:WorldClass a rdfs:Class .
+league:Budget a rdfs:Class .
+league:ExperimentDimension a rdfs:Class .
+
+league:identifier a rdf:Property .
+league:objectiveId a rdf:Property .
+league:actionProjectionId a rdf:Property .
+
+# Planner capability schema. "authority" is intentionally absent: planners
+# search/construct; authority remains downstream of the candidate plan.
+league:planner_id a league:PlannerCapabilityField ; league:identifier "planner_id" .
+league:domains a league:PlannerCapabilityField ; league:identifier "domains" .
+league:state_representation a league:PlannerCapabilityField ; league:identifier "state_representation" .
+league:action_representation a league:PlannerCapabilityField ; league:identifier "action_representation" .
+league:determinism a league:PlannerCapabilityField ; league:identifier "deterministic_stochastic" .
+league:execution_mode a league:PlannerCapabilityField ; league:identifier "offline_online" .
+league:observability a league:PlannerCapabilityField ; league:identifier "full_partial_observability" .
+league:agency a league:PlannerCapabilityField ; league:identifier "single_multi_agent" .
+league:temporal_support a league:PlannerCapabilityField ; league:identifier "temporal_support" .
+league:numeric_support a league:PlannerCapabilityField ; league:identifier "numeric_support" .
+league:resource_constraints a league:PlannerCapabilityField ; league:identifier "resource_constraints" .
+league:optimality_guarantee a league:PlannerCapabilityField ; league:identifier "optimality_guarantee" .
+league:completeness_guarantee a league:PlannerCapabilityField ; league:identifier "completeness_guarantee" .
+league:planning_horizon a league:PlannerCapabilityField ; league:identifier "planning_horizon" .
+league:expected_complexity a league:PlannerCapabilityField ; league:identifier "expected_complexity_class" .
+league:latency_envelope a league:PlannerCapabilityField ; league:identifier "latency_envelope" .
+league:memory_envelope a league:PlannerCapabilityField ; league:identifier "memory_envelope" .
+league:parameter_schema a league:PlannerCapabilityField ; league:identifier "parameter_schema" .
+league:plan_output_type a league:PlannerCapabilityField ; league:identifier "plan_output_type" .
+league:refusal_conditions a league:PlannerCapabilityField ; league:identifier "refusal_conditions" .
+
+# Role supplies game semantics; planner supplies the search algorithm.
+league:blue_defender a league:Role ;
+  league:identifier "blue_defender" ;
+  league:objectiveId "restore_and_preserve_service" ;
+  league:actionProjectionId "candidate_plan" .
+league:red_disturbance a league:Role ;
+  league:identifier "red_disturbance" ;
+  league:objectiveId "manufacture_admitted_disturbance" ;
+  league:actionProjectionId "disturbance_intent" .
+league:sre_recovery a league:Role ;
+  league:identifier "sre_recovery" ;
+  league:objectiveId "minimize_recovery_loss" ;
+  league:actionProjectionId "candidate_plan" .
+league:enterprise_architect a league:Role ;
+  league:identifier "enterprise_architect" ;
+  league:objectiveId "maximize_reversible_enterprise_fit" ;
+  league:actionProjectionId "candidate_plan" .
+league:logistics_coordinator a league:Role ;
+  league:identifier "logistics_coordinator" ;
+  league:objectiveId "minimize_flow_cost" ;
+  league:actionProjectionId "candidate_plan" .
+league:capacity_planner a league:Role ;
+  league:identifier "capacity_planner" ;
+  league:objectiveId "satisfy_capacity_under_budget" ;
+  league:actionProjectionId "candidate_plan" .
+league:incident_commander a league:Role ;
+  league:identifier "incident_commander" ;
+  league:objectiveId "minimize_incident_consequence" ;
+  league:actionProjectionId "candidate_plan" .
+league:plan_constructor a league:Role ;
+  league:identifier "plan_constructor" ;
+  league:objectiveId "construct_goal_reaching_plan" ;
+  league:actionProjectionId "candidate_plan" .
+league:plan_falsifier a league:Role ;
+  league:identifier "plan_falsifier" ;
+  league:objectiveId "find_plan_counterexample" ;
+  league:actionProjectionId "falsification_intent" .
+league:world_model_falsifier a league:Role ;
+  league:identifier "world_model_falsifier" ;
+  league:objectiveId "find_minimal_ranking_reversal" ;
+  league:actionProjectionId "world_mutation_intent" .
+league:reward_falsifier a league:Role ;
+  league:identifier "reward_falsifier" ;
+  league:objectiveId "find_reward_specification_failure" ;
+  league:actionProjectionId "falsification_intent" .
+league:assumption_falsifier a league:Role ;
+  league:identifier "assumption_falsifier" ;
+  league:objectiveId "find_minimal_observation_failure" ;
+  league:actionProjectionId "information_partition_intent" .
+
+league:generic_enterprise a league:WorldClass ; league:identifier "generic_enterprise" .
+league:cyber_incident a league:WorldClass ; league:identifier "cyber_incident" .
+league:identity_degradation a league:WorldClass ; league:identifier "identity_degradation" .
+league:mission_critical_dependency a league:WorldClass ; league:identifier "mission_critical_dependency" .
+
+league:full_observation a league:ObservationProjection ; league:identifier "full_observation" .
+league:partial_observation a league:ObservationProjection ; league:identifier "partial_observation" .
+league:stale_observation a league:ObservationProjection ; league:identifier "stale_observation" .
+
+league:candidate_plan a league:ActionProjection ; league:identifier "candidate_plan" .
+league:disturbance_intent a league:ActionProjection ; league:identifier "disturbance_intent" .
+league:falsification_intent a league:ActionProjection ; league:identifier "falsification_intent" .
+league:world_mutation_intent a league:ActionProjection ; league:identifier "world_mutation_intent" .
+league:information_partition_intent a league:ActionProjection ; league:identifier "information_partition_intent" .
+
+league:latency_tight a league:Budget ; league:identifier "latency_tight" .
+league:balanced a league:Budget ; league:identifier "balanced" .
+league:deep_search a league:Budget ; league:identifier "deep_search" .
+
+league:planner_dimension a league:ExperimentDimension ; league:identifier "planner" .
+league:role_dimension a league:ExperimentDimension ; league:identifier "role" .
+league:opponent_planner_dimension a league:ExperimentDimension ; league:identifier "opponent_planner" .
+league:opponent_role_dimension a league:ExperimentDimension ; league:identifier "opponent_role" .
+league:world_dimension a league:ExperimentDimension ; league:identifier "world" .
+league:observation_dimension a league:ExperimentDimension ; league:identifier "observation" .
+league:objective_dimension a league:ExperimentDimension ; league:identifier "objective" .
+league:budget_dimension a league:ExperimentDimension ; league:identifier "budget" .

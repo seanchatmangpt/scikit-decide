@@ -13,9 +13,9 @@ Import modules.
 import gymnasium as gym
 from stable_baselines3 import PPO
 
-from skdecide.hub.domain.gym import GymDomain
-from skdecide.hub.solver.stable_baselines import StableBaseline
-from skdecide.utils import rollout
+from autofde_lab.hub.domain.gym import GymDomain
+from autofde_lab.hub.solver.stable_baselines import StableBaseline
+from autofde_lab.utils import rollout
 
 # %%
 """

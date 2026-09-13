@@ -1,0 +1,1 @@
+{"schema_version":1,"plans":[{%- for row in sparql_results %}{"adapter":{{ row.adapter | json_encode() }},"title":{{ row.title | json_encode() }},"steps":["Observe","SelectAdapter","PrepareSandbox","RunScenario","VerifyEffect","ReceiptTrajectory"]}{% if not loop.last %},{% endif %}{%- endfor %}]}

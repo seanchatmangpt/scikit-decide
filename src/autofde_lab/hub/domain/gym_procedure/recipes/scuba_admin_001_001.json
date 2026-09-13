@@ -1,0 +1,81 @@
+{
+  "gym": "scuba",
+  "task": "admin_001_001",
+  "source_ref": "vendor/gyms/scuba/data/test_demo_aug.json (task_id=admin_001_001, ground_truth_dict, memory field 'Sample 1' Successful plan, which matches this task's instance_dict exactly)",
+  "initial_facts": [],
+  "goal_facts": ["report_saved"],
+  "steps": [
+    {
+      "id": "log_in",
+      "description": "Log in to Salesforce.",
+      "preconditions": [],
+      "establishes": ["logged_in"],
+      "cost": 1.0,
+      "source": "test_demo_aug.json memory Sample 1 plan bullet 1"
+    },
+    {
+      "id": "open_reports",
+      "description": "Open App Launcher, search for \"reports,\" and open Reports.",
+      "preconditions": ["logged_in"],
+      "establishes": ["reports_open"],
+      "cost": 1.0,
+      "source": "test_demo_aug.json memory Sample 1 plan bullet 2"
+    },
+    {
+      "id": "click_new_report",
+      "description": "Click New Report.",
+      "preconditions": ["reports_open"],
+      "establishes": ["new_report_dialog_open"],
+      "cost": 1.0,
+      "source": "test_demo_aug.json memory Sample 1 plan bullet 3"
+    },
+    {
+      "id": "select_leads_report_type",
+      "description": "In Report Type, search for \"leads,\" select Leads, and click Start Report.",
+      "preconditions": ["new_report_dialog_open"],
+      "establishes": ["leads_report_started"],
+      "cost": 1.0,
+      "source": "test_demo_aug.json memory Sample 1 plan bullet 4; ground_truth_dict.object_name=Leads"
+    },
+    {
+      "id": "clear_default_filters",
+      "description": "Clear default filters (Email, Street, Rating) if present.",
+      "preconditions": ["leads_report_started"],
+      "establishes": ["default_filters_cleared"],
+      "cost": 1.0,
+      "source": "test_demo_aug.json memory Sample 1 plan bullet 5"
+    },
+    {
+      "id": "add_lead_status_column",
+      "description": "Add the Lead Status column: use Add Column search to find \"lead status\" and add it.",
+      "preconditions": ["default_filters_cleared"],
+      "establishes": ["lead_status_column_added"],
+      "cost": 1.0,
+      "source": "test_demo_aug.json memory Sample 1 plan bullet 6; ground_truth_dict.field_name=STATUS"
+    },
+    {
+      "id": "add_lead_status_standard_filter",
+      "description": "Open Filters panel and add a standard filter: search/select Lead Status, set equals to \"Open - Not Contacted\" and Apply.",
+      "preconditions": ["lead_status_column_added"],
+      "establishes": ["standard_filter_applied"],
+      "cost": 1.0,
+      "source": "test_demo_aug.json memory Sample 1 plan bullet 7; ground_truth_dict.filters=[[STATUS, equals, Open - Not Contacted]]"
+    },
+    {
+      "id": "refresh_preview",
+      "description": "Click Refresh to update the preview.",
+      "preconditions": ["standard_filter_applied"],
+      "establishes": ["preview_refreshed"],
+      "cost": 1.0,
+      "source": "test_demo_aug.json memory Sample 1 plan bullet 8"
+    },
+    {
+      "id": "save_report",
+      "description": "Save the report: enter report name \"MyLeadRPT\" and click Save.",
+      "preconditions": ["preview_refreshed"],
+      "establishes": ["report_saved"],
+      "cost": 1.0,
+      "source": "test_demo_aug.json memory Sample 1 plan bullet 9; ground_truth_dict.report_name=MyLeadRPT"
+    }
+  ]
+}

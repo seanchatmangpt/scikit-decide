@@ -1,0 +1,53 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:interop>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab interoperability contract vocabulary" ;
+    dcterms:description "Foreign representations enter through explicit revision-bound, loss-aware contracts. Adapters may translate representation but may not silently translate meaning." ;
+    dcterms:created "2026-08-08"^^xsd:date .
+
+afl:InteropContract
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:interop> ;
+    rdfs:label "Interop contract" .
+afl:InteropAdapter
+    a owl:Class , prov:Agent ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:interop> ;
+    rdfs:label "Interop adapter" .
+afl:ExternalRepresentation
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:interop> ;
+    rdfs:label "External representation" .
+afl:Projection
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:interop> ;
+    rdfs:label "Projection" .
+afl:SemanticLoss
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:interop> ;
+    rdfs:label "Semantic loss" .
+afl:LossReport
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:interop> ;
+    rdfs:label "Loss report" .
+afl:InteropContractReceipt
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:interop> ;
+    rdfs:label "Interop contract receipt" ;
+    rdfs:comment "Binds an adapter to the exact external repository/API contract and revision used as its oracle." .
+
+afl:targetsRepresentation a owl:ObjectProperty ; rdfs:domain afl:InteropContract ; rdfs:range afl:ExternalRepresentation ; rdfs:label "targets representation" .
+afl:usesContract a owl:ObjectProperty ; rdfs:domain afl:InteropAdapter ; rdfs:range afl:InteropContract ; rdfs:label "uses contract" .
+afl:projectsRepresentation a owl:ObjectProperty ; rdfs:domain afl:Projection ; rdfs:range afl:ExternalRepresentation ; rdfs:label "projects representation" .
+afl:producedByAdapter a owl:ObjectProperty ; rdfs:domain afl:Projection ; rdfs:range afl:InteropAdapter ; rdfs:label "produced by adapter" .
+afl:reportsLoss a owl:ObjectProperty ; rdfs:domain afl:LossReport ; rdfs:range afl:SemanticLoss ; rdfs:label "reports loss" .
+afl:lossReportFor a owl:ObjectProperty ; rdfs:domain afl:LossReport ; rdfs:range afl:Projection ; rdfs:label "loss report for" .
+afl:contractReceiptFor a owl:ObjectProperty ; rdfs:domain afl:InteropContractReceipt ; rdfs:range afl:InteropContract ; rdfs:label "contract receipt for" .
+afl:adapterRevision a owl:ObjectProperty ; rdfs:domain afl:InteropContractReceipt ; rdfs:range afl:SourceRevision ; rdfs:label "adapter revision" .
+afl:externalRevision a owl:ObjectProperty ; rdfs:domain afl:InteropContractReceipt ; rdfs:range afl:DependencyRevision ; rdfs:label "external revision" .
+afl:semanticsPreserved a owl:DatatypeProperty ; rdfs:domain afl:LossReport ; rdfs:range xsd:boolean ; rdfs:label "semantics preserved" .

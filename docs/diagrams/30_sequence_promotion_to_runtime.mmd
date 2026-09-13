@@ -1,0 +1,23 @@
+sequenceDiagram
+    autonumber
+    participant L as AutoFDE SOTA Lab
+    participant G as ggen
+    participant R as AutoFDE Runtime
+    participant GA as GymAct
+    participant V as Independent Verifier
+    participant Ledger as Receipt Ledger
+
+    L->>L: Admit winning candidate + manifest inputs
+    L->>G: Manufacture immutable specialization
+    G->>G: Validate graph + render artifacts
+    G-->>L: Digest-pinned bundle + generation receipt
+    L->>R: Promote admitted bundle
+    R->>R: Verify manifest + artifact identity
+    R->>R: Admission gate + authority gate
+    R->>GA: Execute lawful action sequence
+    GA-->>R: Observed consequences
+    R->>Ledger: Append execution receipts
+    Ledger->>V: Receipt/replay chain
+    GA->>V: Independent consequence observation
+    V-->>R: Derived standing
+    R-->>L: Production evidence for next learning cycle

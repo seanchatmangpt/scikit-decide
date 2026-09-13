@@ -1,0 +1,72 @@
+@prefix pd: <urn:autofde-lab:planning-domain:> .
+@prefix ex: <urn:autofde-lab:planning-domain:blocks:> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Real toy fixture, expressed as RDF: the exact single-block blocks-world
+# domain/problem used by autofde-lab's own tests at
+# src/autofde_lab/planning/tests/fixtures/blocks-domain.pddl and
+# blocks-problem.pddl, re-expressed to conform to
+# ontology/rdf-planning-domain.ttl. Untyped (matches the fixture's
+# (:requirements :strips) with no :types block).
+
+ex:domain a pd:Domain ;
+    pd:domainName "blocks" ;
+    pd:hasPredicate ex:pred-on, ex:pred-ontable, ex:pred-clear, ex:pred-handempty, ex:pred-holding ;
+    pd:hasAction ex:action-pick-up, ex:action-put-down .
+
+ex:pred-on a pd:Predicate ; pd:predicateName "on" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ], [ pd:parameterName "y" ; pd:parameterIndex 1 ] .
+ex:pred-ontable a pd:Predicate ; pd:predicateName "ontable" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-clear a pd:Predicate ; pd:predicateName "clear" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+ex:pred-handempty a pd:Predicate ; pd:predicateName "handempty" .
+ex:pred-holding a pd:Predicate ; pd:predicateName "holding" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] .
+
+ex:action-pick-up a pd:Action ;
+    pd:actionName "pick-up" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "clear" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ,
+        [ a pd:Atom ; pd:ofPredicate "ontable" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ,
+        [ a pd:Atom ; pd:ofPredicate "handempty" ] ;
+    pd:effect
+        [ a pd:NegatedAtom ; pd:ofPredicate "ontable" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ,
+        [ a pd:NegatedAtom ; pd:ofPredicate "clear" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ,
+        [ a pd:NegatedAtom ; pd:ofPredicate "handempty" ] ,
+        [ a pd:Atom ; pd:ofPredicate "holding" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+ex:action-put-down a pd:Action ;
+    pd:actionName "put-down" ;
+    pd:hasParameter [ pd:parameterName "x" ; pd:parameterIndex 0 ] ;
+    pd:precondition
+        [ a pd:Atom ; pd:ofPredicate "holding" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ;
+    pd:effect
+        [ a pd:NegatedAtom ; pd:ofPredicate "holding" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ,
+        [ a pd:Atom ; pd:ofPredicate "clear" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] ,
+        [ a pd:Atom ; pd:ofPredicate "handempty" ] ,
+        [ a pd:Atom ; pd:ofPredicate "ontable" ;
+          pd:hasArgument [ pd:argument "x" ; pd:argumentIndex 0 ] ] .
+
+ex:problem a pd:Problem ;
+    pd:problemName "blocks-1" ;
+    pd:forDomain ex:domain ;
+    pd:hasObject [ pd:objectName "a" ] ;
+    pd:init
+        [ a pd:Atom ; pd:ofPredicate "ontable" ;
+          pd:hasArgument [ pd:argument "a" ; pd:argumentIndex 0 ] ] ,
+        [ a pd:Atom ; pd:ofPredicate "clear" ;
+          pd:hasArgument [ pd:argument "a" ; pd:argumentIndex 0 ] ] ,
+        [ a pd:Atom ; pd:ofPredicate "handempty" ] ;
+    pd:goal
+        [ a pd:Atom ; pd:ofPredicate "holding" ;
+          pd:hasArgument [ pd:argument "a" ; pd:argumentIndex 0 ] ] .

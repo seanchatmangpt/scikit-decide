@@ -28,8 +28,8 @@ import sys
 from docopt import docopt
 from dotenv import load_dotenv
 
-from skdecide import rollout
-from skdecide.hub.solver.openevolve import (
+from autofde_lab import rollout
+from autofde_lab.hub.solver.openevolve import (
     IntegratedOpenEvolve,
 )
 

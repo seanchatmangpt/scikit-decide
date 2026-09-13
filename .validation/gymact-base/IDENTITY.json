@@ -1,0 +1,26 @@
+{
+  "schema": "urn:autofde-lab:gymact-base-capsule:v1",
+  "source_repository": "seanchatmangpt/gymact",
+  "base_sha": "c839d76125bde97b9eb3dfd82f0e08a1b9dcdf96",
+  "version": "26.8.7",
+  "purpose": "dependency-closed offline replay base for autonomous discovery crown",
+  "files": {
+    "src/gymact/action_contract.py": "9688a05081a9a68a0f604a48d6179bbfa7c6d5a7",
+    "src/gymact/authority.py": "fc99cac2bce81d614bc20dc020870585433beeb9",
+    "src/gymact/brce.py": "7f2cb5591f89705523d3ccd654dd6b0782dd3ea2",
+    "src/gymact/crown_runtime.py": "0c043cd3ec8075a2e710aa2ff39e6c1e4f7be783",
+    "src/gymact/evidence.py": "5d71f9f9cca1c8d085a39204c6182a0d9b4a07f9",
+    "src/gymact/kernel.py": "0803761e63623804b48b413309db621122d38695",
+    "src/gymact/limits.py": "d0aeec91c6aed7a9b00d6613b69682d9e7ba4d64",
+    "src/gymact/models.py": "68cd1b9e5dbe2fb5ead267f927be302117846e7d",
+    "src/gymact/ocel.py": "c54316d056850d698de9c98d42b9146ebb17d805",
+    "src/gymact/ontology/__init__.py": "09678ce2da02aee985249c00df882ef43743cf18",
+    "src/gymact/ontology/profile.shacl.ttl": "88bf1fcfd6010f5b98ba2f63c23d0a50164793ee",
+    "src/gymact/ontology/profile.ttl": "b43f47b8214f107b10057a81be3d2a6db61bc0ef",
+    "src/gymact/process.py": "059c4a804588f9c6c3ee9fe4e8697cc0b59761dc",
+    "src/gymact/providers.py": "01162b221df61d0b78a3213ddc62e7781092af11",
+    "src/gymact/runtime.py": "cdca3be483570214c18fbb84f9cdcbb120f45f4b",
+    "src/gymact/schemas/ocel20-schema.json": "b8949edbe4373b7a8d40ca2404d579ce08ed78fd",
+    "src/gymact/semantic.py": "8bb1721e9e0e32ecd0f020d82471b080c9e56b46"
+  }
+}

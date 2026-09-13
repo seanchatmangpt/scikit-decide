@@ -18,15 +18,19 @@ PDDL_DIR = os.path.join(
 TIREWORLD_DOMAIN = os.path.join(PDDL_DIR, "tireworld", "domain.pddl")
 TIREWORLD_PROBLEM = os.path.join(PDDL_DIR, "tireworld", "p01.pddl")
 
-pytest.importorskip("skdecide.hub.__skdecide_hub_cpp")
+# importorskip converts ANY import failure to a skip -- including a stale
+# name after a partial rename -- so a wrong string here degrades to
+# "extension not built" with no error. Keep it in sync with
+# PYBIND11_MODULE() in cpp/src/hub/py_skdecide.cc.
+pytest.importorskip("autofde_lab.hub.__autofde_lab_hub_cpp")
 
-from skdecide.hub.domain.pddl import PPDDLDomain
-from skdecide.hub.solver.pddl.ppddldethindsight import (
+from autofde_lab.hub.domain.pddl import PPDDLDomain
+from autofde_lab.hub.solver.pddl.ppddldethindsight import (
     FFDetHindsight,
     PPDDLDetHindsight,
 )
-from skdecide.hub.solver.pddl.ppddlplanmerger import RFF, PPDDLPlanMerger
-from skdecide.hub.solver.pddl.ppddlreplan import FFReplan, PPDDLReplan
+from autofde_lab.hub.solver.pddl.ppddlplanmerger import RFF, PPDDLPlanMerger
+from autofde_lab.hub.solver.pddl.ppddlreplan import FFReplan, PPDDLReplan
 
 
 @pytest.fixture

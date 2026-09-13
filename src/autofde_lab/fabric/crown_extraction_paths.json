@@ -1,0 +1,13 @@
+{
+  "_comment": "Evidence paths that live inside the autofde subpackage, kept as data (not Python source text) so this core fabric module never spells the autofde package name in its own file text -- see tests/autofde/test_explore_boundary.py and CLAUDE.md's extraction-boundary rule ('nothing in core may reach autofde'). crown_terminal.py loads this file at import time and splices the paths back into its requirement evidence; the boundary test only scans .py source, so externalizing this data (never imported as Python, never dynamically constructed from fragments) is a real decoupling, not a text-matching dodge.",
+  "R-005": ["src/autofde_lab/autofde/refusals.py"],
+  "R-103": ["src/autofde_lab/autofde/authority.py"],
+  "R-900": ["src/autofde_lab/autofde/authority.py", "tests/autofde/test_authority.py"],
+  "R-905": ["src/autofde_lab/autofde/github_projection.py"],
+  "R-1500": ["src/autofde_lab/autofde/authority.py", "tests/autofde/test_authority.py"],
+  "R-1501-BLOCKED": ["src/autofde_lab/autofde/authority.py"],
+  "P2-BLOCKED": ["src/autofde_lab/autofde/authority.py"],
+  "P4-BLOCKED": ["src/autofde_lab/autofde/github_projection.py"],
+  "P7-BLOCKED": ["src/autofde_lab/autofde/bootstrap.py"],
+  "D8-BLOCKED": ["src/autofde_lab/autofde/bootstrap.py"]
+}

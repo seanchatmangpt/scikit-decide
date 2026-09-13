@@ -25,3 +25,218 @@
 [submodule "cpp/tests/data/pddl"]
 	path = cpp/tests/data/pddl
 	url = https://github.com/fteicht/pddl-instances.git
+[submodule "forwardbench-agentbench"]
+	path = vendor/gyms/agentbench
+	url = https://github.com/THUDM/AgentBench.git
+	update = none
+[submodule "forwardbench-agentdojo"]
+	path = vendor/gyms/agentdojo
+	url = https://github.com/ethz-spylab/agentdojo.git
+	update = none
+[submodule "forwardbench-agentgym"]
+	path = vendor/gyms/agentgym
+	url = https://github.com/WooooDyy/AgentGym.git
+	update = none
+[submodule "forwardbench-agentlab"]
+	path = vendor/gyms/agentlab
+	url = https://github.com/ServiceNow/AgentLab.git
+	update = none
+[submodule "forwardbench-aiopslab"]
+	path = vendor/gyms/aiopslab
+	url = https://github.com/microsoft/AIOpsLab.git
+	update = none
+[submodule "forwardbench-androidworld"]
+	path = vendor/gyms/androidworld
+	url = https://github.com/google-research/android_world.git
+	update = none
+[submodule "forwardbench-asb"]
+	path = vendor/gyms/asb
+	url = https://github.com/agiresearch/ASB.git
+	update = none
+[submodule "forwardbench-assetopsbench"]
+	path = vendor/gyms/assetopsbench
+	url = https://github.com/IBM/AssetOpsBench.git
+	update = none
+[submodule "forwardbench-azuregoat"]
+	path = vendor/gyms/azuregoat
+	url = https://github.com/ine-labs/AzureGoat.git
+	update = none
+[submodule "forwardbench-bountytasks"]
+	path = vendor/gyms/bountytasks
+	url = https://github.com/bountybench/bountytasks.git
+	update = none
+[submodule "forwardbench-browsergym"]
+	path = vendor/gyms/browsergym
+	url = https://github.com/ServiceNow/BrowserGym.git
+	update = none
+[submodule "forwardbench-cloudfoxable"]
+	path = vendor/gyms/cloudfoxable
+	url = https://github.com/BishopFox/cloudfoxable.git
+	update = none
+[submodule "forwardbench-cloudgoat"]
+	path = vendor/gyms/cloudgoat
+	url = https://github.com/RhinoSecurityLabs/cloudgoat.git
+	update = none
+[submodule "forwardbench-crmarena"]
+	path = vendor/gyms/crmarena
+	url = https://github.com/SalesforceAIResearch/CRMArena.git
+	update = none
+[submodule "forwardbench-cube-harness"]
+	path = vendor/gyms/cube-harness
+	url = https://github.com/The-AI-Alliance/cube-harness.git
+	update = none
+[submodule "forwardbench-cube-standard"]
+	path = vendor/gyms/cube-standard
+	url = https://github.com/The-AI-Alliance/cube-standard.git
+	update = none
+[submodule "forwardbench-cybench"]
+	path = vendor/gyms/cybench
+	url = https://github.com/andyzorigin/cybench.git
+	update = none
+[submodule "forwardbench-cybergym-e2e"]
+	path = vendor/gyms/cybergym-e2e
+	url = https://github.com/sunblaze-ucb/cybergym-e2e.git
+	update = none
+[submodule "forwardbench-devops-gym"]
+	path = vendor/gyms/devops-gym
+	url = https://github.com/ucsb-mlsec/DevOps-Gym.git
+	update = none
+[submodule "forwardbench-doomarena"]
+	path = vendor/gyms/doomarena
+	url = https://github.com/ServiceNow/DoomArena.git
+	update = none
+[submodule "forwardbench-enterprisebench"]
+	path = vendor/gyms/enterprisebench
+	url = https://github.com/ast-fri/EnterpriseBench.git
+	update = none
+[submodule "forwardbench-gcpgoat"]
+	path = vendor/gyms/gcpgoat
+	url = https://github.com/ine-labs/GCPGoat.git
+	update = none
+[submodule "forwardbench-general-agentbench"]
+	path = vendor/gyms/general-agentbench
+	url = https://github.com/cxcscmu/General-AgentBench.git
+	update = none
+[submodule "forwardbench-harbor"]
+	path = vendor/gyms/harbor
+	url = https://github.com/harbor-framework/harbor.git
+	update = none
+[submodule "forwardbench-inspect-evals"]
+	path = vendor/gyms/inspect-evals
+	url = https://github.com/UKGovernmentBEIS/inspect_evals.git
+	update = none
+[submodule "forwardbench-itbench"]
+	path = vendor/gyms/itbench
+	url = https://github.com/itbench-hub/ITBench.git
+	update = none
+[submodule "forwardbench-kubernetes-goat"]
+	path = vendor/gyms/kubernetes-goat
+	url = https://github.com/madhuakula/kubernetes-goat.git
+	update = none
+[submodule "forwardbench-mcp-bench"]
+	path = vendor/gyms/mcp-bench
+	url = https://github.com/Accenture/mcp-bench.git
+	update = none
+[submodule "forwardbench-mcp-universe"]
+	path = vendor/gyms/mcp-universe
+	url = https://github.com/SalesforceAIResearch/MCP-Universe.git
+	update = none
+[submodule "forwardbench-mcpmark"]
+	path = vendor/gyms/mcpmark
+	url = https://github.com/eval-sys/mcpmark.git
+	update = none
+[submodule "forwardbench-o11y-bench"]
+	path = vendor/gyms/o11y-bench
+	url = https://github.com/grafana/o11y-bench.git
+	update = none
+[submodule "forwardbench-osworld"]
+	path = vendor/gyms/osworld
+	url = https://github.com/xlang-ai/OSWorld.git
+	update = none
+[submodule "forwardbench-qqr"]
+	path = vendor/gyms/qqr
+	url = https://github.com/Alibaba-NLP/qqr.git
+	update = none
+[submodule "forwardbench-r2e-gym"]
+	path = vendor/gyms/r2e-gym
+	url = https://github.com/R2E-Gym/R2E-Gym.git
+	update = none
+[submodule "forwardbench-rcaeval"]
+	path = vendor/gyms/rcaeval
+	url = https://github.com/phamquiluan/RCAEval.git
+	update = none
+[submodule "forwardbench-sadservers"]
+	path = vendor/gyms/sadservers
+	url = https://github.com/SadServers/sadservers.git
+	update = none
+[submodule "forwardbench-scuba"]
+	path = vendor/gyms/scuba
+	url = https://github.com/SalesforceAIResearch/SCUBA.git
+	update = none
+[submodule "forwardbench-sec-bench"]
+	path = vendor/gyms/sec-bench
+	url = https://github.com/SEC-bench/SEC-bench.git
+	update = none
+[submodule "forwardbench-sre-bench"]
+	path = vendor/gyms/sre-bench
+	url = https://github.com/agentkube/SRE-bench.git
+	update = none
+[submodule "forwardbench-sregym"]
+	path = vendor/gyms/sregym
+	url = https://github.com/SREGym/SREGym.git
+	update = none
+[submodule "forwardbench-st-webagentbench"]
+	path = vendor/gyms/st-webagentbench
+	url = https://github.com/segev-shlomov/ST-WebAgentBench.git
+	update = none
+[submodule "forwardbench-swe-bench"]
+	path = vendor/gyms/swe-bench
+	url = https://github.com/SWE-bench/SWE-bench.git
+	update = none
+[submodule "forwardbench-tau2-bench"]
+	path = vendor/gyms/tau2-bench
+	url = https://github.com/sierra-research/tau2-bench.git
+	update = none
+[submodule "forwardbench-terminal-bench"]
+	path = vendor/gyms/terminal-bench
+	url = https://github.com/harbor-framework/terminal-bench-2.git
+	update = none
+[submodule "forwardbench-terminal-bench-pro"]
+	path = vendor/gyms/terminal-bench-pro
+	url = https://github.com/alibaba/terminal-bench-pro.git
+	update = none
+[submodule "forwardbench-terragoat"]
+	path = vendor/gyms/terragoat
+	# Re-pointed to a fork whose `main` carries upstream's own real
+	# `fix_outdated_tf` branch content (commit 6b1c6d4), verified this
+	# session: `terraform init` fails on bridgecrewio/terragoat's pinned
+	# master (pre-0.12 legacy HCL quoted type constraints), succeeds cleanly
+	# on this fork's main. Not a fabricated fix -- upstream authored it,
+	# just never merged it to master. See gym-lock.ttl's pinnedRevision and
+	# smoke-lock.ttl's vendor-terragoat entry for the full evidence chain.
+	url = https://github.com/seanchatmangpt/terragoat.git
+	update = none
+[submodule "forwardbench-the-agent-company"]
+	path = vendor/gyms/the-agent-company
+	url = https://github.com/TheAgentCompany/TheAgentCompany.git
+	update = none
+[submodule "forwardbench-toolsandbox"]
+	path = vendor/gyms/toolsandbox
+	url = https://github.com/apple/ToolSandbox.git
+	update = none
+[submodule "forwardbench-tua-bench"]
+	path = vendor/gyms/tua-bench
+	url = https://github.com/facebookresearch/TUA-Bench.git
+	update = none
+[submodule "forwardbench-webarena"]
+	path = vendor/gyms/webarena
+	url = https://github.com/web-arena-x/webarena.git
+	update = none
+[submodule "forwardbench-wonderbread"]
+	path = vendor/gyms/wonderbread
+	url = https://github.com/HazyResearch/wonderbread.git
+	update = none
+[submodule "forwardbench-workarena"]
+	path = vendor/gyms/workarena
+	url = https://github.com/ServiceNow/WorkArena.git
+	update = none

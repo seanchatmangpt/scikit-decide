@@ -1,0 +1,140 @@
+name: Fetch ForwardBench papers
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-forwardbench-papers
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout current ref
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Resolve manifest identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > /tmp/paper_ids
+          import tomllib
+          from pathlib import Path
+          manifest = tomllib.loads(Path('docs/papers/manifest.toml').read_text())
+          papers = manifest['paper']
+          assert len(papers) == len({p['id'] for p in papers}), 'duplicate paper id'
+          for paper in papers:
+              assert paper['markdown'] == f"{paper['id']}.md"
+              assert Path('docs/papers', paper['markdown']).is_file(), paper['id']
+              print(paper['id'])
+          PY
+          echo "manifest_count=$(wc -l < /tmp/paper_ids)" >> "$GITHUB_ENV"
+
+      - name: Fetch and validate PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p docs/papers/pdf
+          : > /tmp/failures
+          while IFS= read -r id; do
+            dst="docs/papers/pdf/${id}.pdf"
+            tmp="${dst}.tmp"
+            rm -f "$tmp"
+
+            if [[ -f "$dst" && "$(head -c 5 "$dst")" == "%PDF-" ]]; then
+              echo "PRESENT $id"
+              continue
+            fi
+
+            urls=(
+              "https://arxiv.org/pdf/${id}"
+              "https://export.arxiv.org/pdf/${id}"
+            )
+            if [[ "$id" == "2502.05352" ]]; then
+              urls=(
+                "https://raw.githubusercontent.com/itbench-hub/ITBench/main/it_bench_arxiv.pdf"
+                "${urls[@]}"
+              )
+            fi
+
+            ok=0
+            for url in "${urls[@]}"; do
+              if curl --fail --silent --show-error --location \
+                  --retry 3 --retry-delay 1 --connect-timeout 20 \
+                  --max-time 120 --output "$tmp" "$url"; then
+                if [[ "$(head -c 5 "$tmp")" == "%PDF-" ]]; then
+                  mv "$tmp" "$dst"
+                  echo "FETCHED $id $url"
+                  ok=1
+                  break
+                fi
+              fi
+              rm -f "$tmp"
+            done
+
+            if [[ "$ok" -ne 1 ]]; then
+              echo "$id" | tee -a /tmp/failures >&2
+            fi
+          done < /tmp/paper_ids
+
+          if [[ -s /tmp/failures ]]; then
+            echo "Failed paper identities:" >&2
+            cat /tmp/failures >&2
+            exit 1
+          fi
+
+          (
+            cd docs/papers/pdf
+            sha256sum ./*.pdf | sort > SHA256SUMS
+          )
+
+          actual="$(find docs/papers/pdf -maxdepth 1 -name '*.pdf' -type f | wc -l)"
+          test "$actual" -eq "$manifest_count"
+          echo "pdf_count=$actual" >> "$GITHUB_ENV"
+
+      - name: Update retrieval standing
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          manifest = Path('docs/papers/manifest.toml')
+          text = manifest.read_text()
+          text = text.replace(
+              'pdf_transport = "BLOCKED:LOCAL_DNS_ARXIV_ORIGIN"',
+              'pdf_transport = "GITHUB_ACTIONS_REMOTE_FETCH"',
+          )
+          text = text.replace(
+              'standing = "PDF_NOT_FETCHED|NOT_REPRODUCED"',
+              'standing = "PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED"',
+              1,
+          )
+          text = text.replace(
+              'HTML_METADATA_CONVERTED|PDF_NOT_FETCHED|NOT_REPRODUCED',
+              'HTML_METADATA_CONVERTED|PDF_FETCHED_SHA256_VERIFIED|NOT_REPRODUCED',
+          )
+          manifest.write_text(text)
+          PY
+
+      - name: Commit fetched papers and standing
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/papers
+          if git diff --cached --quiet; then
+            echo 'No paper changes to commit.'
+            exit 0
+          fi
+          git commit -m "docs: vendor ForwardBench paper PDFs"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          echo "Verified ${pdf_count}/${manifest_count} manifest PDFs."

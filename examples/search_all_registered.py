@@ -4,7 +4,7 @@
 
 from pprint import pprint
 
-from skdecide.utils import (
+from autofde_lab.utils import (
     get_registered_domains,
     get_registered_solvers,
     load_registered_domain,

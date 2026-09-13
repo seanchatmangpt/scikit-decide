@@ -1,0 +1,22 @@
+# MESSAGE: GymAct ERRC item is incomplete or violates a migration boundary
+PREFIX ga: <https://github.com/seanchatmangpt/autofde-lab/ns/gymact#>
+PREFIX dct: <http://purl.org/dc/terms/>
+SELECT ?item WHERE {
+  ?item a ga:ERRCItem .
+  FILTER(
+    NOT EXISTS { ?item dct:title ?title } ||
+    NOT EXISTS { ?item ga:errcAction ?action } ||
+    NOT EXISTS { ?item ga:priority ?priority } ||
+    NOT EXISTS { ?item ga:targetOwner ?owner } ||
+    NOT EXISTS { ?item ga:migrationTiming ?timing } ||
+    NOT EXISTS { ?item ga:sourcePath ?path } ||
+    NOT EXISTS { ?item ga:expectedImpact ?impact } ||
+    NOT EXISTS { ?item ga:effort ?effort } ||
+    NOT EXISTS { ?item ga:migrationTrigger ?trigger } ||
+    NOT EXISTS { ?item ga:falsifier ?falsifier } ||
+    EXISTS {
+      ?item ga:migrationTiming "STAY_OUTSIDE" ; ga:targetOwner "GYMACT" .
+    }
+  )
+}
+ORDER BY ?item

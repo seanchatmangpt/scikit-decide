@@ -1,0 +1,59 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:enterprise-architecture>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab Fortune-5 enterprise architecture decision vocabulary" ;
+    dcterms:description "Canonical dimensions for evidence-bounded enterprise architecture portfolio governance. These concepts classify candidates and experiments; they grant no execution or organizational authority." ;
+    dcterms:created "2026-08-12"^^xsd:date .
+
+afl:EnterpriseArchitectureDimension a owl:Class ; rdfs:subClassOf skos:Concept .
+afl:EnterpriseArchitectureViewpoint a owl:Class ; rdfs:subClassOf afl:EnterpriseArchitectureDimension .
+afl:EnterpriseRequirementKind a owl:Class ; rdfs:subClassOf afl:EnterpriseArchitectureDimension .
+afl:EnterpriseRiskClass a owl:Class ; rdfs:subClassOf afl:EnterpriseArchitectureDimension .
+afl:EnterpriseArchitecturePrinciple a owl:Class ; rdfs:subClassOf afl:EnterpriseArchitectureDimension .
+
+afl:BusinessViewpoint a afl:EnterpriseArchitectureViewpoint ; skos:prefLabel "Business" .
+afl:DataViewpoint a afl:EnterpriseArchitectureViewpoint ; skos:prefLabel "Data" .
+afl:ApplicationViewpoint a afl:EnterpriseArchitectureViewpoint ; skos:prefLabel "Application" .
+afl:TechnologyViewpoint a afl:EnterpriseArchitectureViewpoint ; skos:prefLabel "Technology" .
+afl:SecurityViewpoint a afl:EnterpriseArchitectureViewpoint ; skos:prefLabel "Security" .
+afl:ResilienceViewpoint a afl:EnterpriseArchitectureViewpoint ; skos:prefLabel "Resilience" .
+afl:OperationsViewpoint a afl:EnterpriseArchitectureViewpoint ; skos:prefLabel "Operations" .
+afl:GovernanceViewpoint a afl:EnterpriseArchitectureViewpoint ; skos:prefLabel "Governance" .
+afl:FinOpsViewpoint a afl:EnterpriseArchitectureViewpoint ; skos:prefLabel "FinOps" .
+afl:ComplianceViewpoint a afl:EnterpriseArchitectureViewpoint ; skos:prefLabel "Compliance" .
+
+afl:BusinessObjectiveRequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "BusinessObjective" .
+afl:AvailabilitySLORequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "AvailabilitySLO" .
+afl:LatencySLORequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "LatencySLO" .
+afl:RTORequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "RTO" .
+afl:RPORequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "RPO" .
+afl:DataResidencyRequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "DataResidency" .
+afl:SecurityControlRequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "SecurityControl" .
+afl:CostCeilingRequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "CostCeiling" .
+afl:CapacityRequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "Capacity" .
+afl:MigrationDeadlineRequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "MigrationDeadline" .
+afl:ChangeWindowRequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "ChangeWindow" .
+afl:VendorDependencyRequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "VendorDependency" .
+afl:AuthorityPolicyRequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "AuthorityPolicy" .
+afl:ComplianceControlRequirement a afl:EnterpriseRequirementKind ; skos:prefLabel "ComplianceControl" .
+
+afl:OperationalRisk a afl:EnterpriseRiskClass ; skos:prefLabel "Operational" .
+afl:SecurityRisk a afl:EnterpriseRiskClass ; skos:prefLabel "Security" .
+afl:ComplianceRisk a afl:EnterpriseRiskClass ; skos:prefLabel "Compliance" .
+afl:FinancialRisk a afl:EnterpriseRiskClass ; skos:prefLabel "Financial" .
+afl:MigrationRisk a afl:EnterpriseRiskClass ; skos:prefLabel "Migration" .
+afl:VendorRisk a afl:EnterpriseRiskClass ; skos:prefLabel "Vendor" .
+afl:DataRisk a afl:EnterpriseRiskClass ; skos:prefLabel "Data" .
+afl:ResilienceRisk a afl:EnterpriseRiskClass ; skos:prefLabel "Resilience" .
+
+afl:EvidenceBoundedPrinciple a afl:EnterpriseArchitecturePrinciple ; skos:prefLabel "EvidenceBounded" .
+afl:ZeroUnreceiptedActuationPrinciple a afl:EnterpriseArchitecturePrinciple ; skos:prefLabel "ZeroUnreceiptedActuation" .
+afl:ReversibleBeforeIrreversiblePrinciple a afl:EnterpriseArchitecturePrinciple ; skos:prefLabel "ReversibleBeforeIrreversible" .
+afl:NoSelfCertificationPrinciple a afl:EnterpriseArchitecturePrinciple ; skos:prefLabel "NoSelfCertification" .
+afl:OrganizationalStandingExternalPrinciple a afl:EnterpriseArchitecturePrinciple ; skos:prefLabel "OrganizationalStandingExternal" .

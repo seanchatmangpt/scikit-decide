@@ -3,19 +3,19 @@ import logging
 import torch as th
 import torch_geometric as thg
 
-from skdecide.hub.solver.stable_baselines import StableBaseline
-from skdecide.hub.solver.stable_baselines.gnn import GraphPPO
-from skdecide.hub.solver.stable_baselines.gnn.a2c import GraphA2C
-from skdecide.hub.solver.stable_baselines.gnn.common.torch_layers import (
+from autofde_lab.hub.solver.stable_baselines import StableBaseline
+from autofde_lab.hub.solver.stable_baselines.gnn import GraphPPO
+from autofde_lab.hub.solver.stable_baselines.gnn.a2c import GraphA2C
+from autofde_lab.hub.solver.stable_baselines.gnn.common.torch_layers import (
     GraphFeaturesExtractor,
 )
-from skdecide.hub.solver.stable_baselines.gnn.dqn.dqn import GraphDQN
-from skdecide.hub.solver.stable_baselines.gnn.ppo.ppo import Graph2NodePPO
-from skdecide.hub.solver.stable_baselines.gnn.ppo_mask import MaskableGraphPPO
-from skdecide.hub.solver.stable_baselines.gnn.ppo_mask.ppo_mask import (
+from autofde_lab.hub.solver.stable_baselines.gnn.dqn.dqn import GraphDQN
+from autofde_lab.hub.solver.stable_baselines.gnn.ppo.ppo import Graph2NodePPO
+from autofde_lab.hub.solver.stable_baselines.gnn.ppo_mask import MaskableGraphPPO
+from autofde_lab.hub.solver.stable_baselines.gnn.ppo_mask.ppo_mask import (
     MaskableGraph2NodePPO,
 )
-from skdecide.utils import rollout
+from autofde_lab.utils import rollout
 
 
 def test_observation_space(graph_domain_factory):

@@ -1,0 +1,86 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:ontology:world>
+    a owl:Ontology ;
+    dcterms:title "AutoFDE Lab world and observation vocabulary" ;
+    dcterms:description "Separates raw observation from admitted observation and keeps state transitions bound to an explicit world and trial." ;
+    dcterms:created "2026-08-08"^^xsd:date .
+
+afl:World
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:world> ;
+    rdfs:label "World" .
+
+afl:WorldState
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:world> ;
+    rdfs:label "World state" .
+
+afl:Environment
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:world> ;
+    rdfs:label "Environment" .
+
+afl:Observation
+    a owl:Class , prov:Entity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:world> ;
+    rdfs:label "Observation" ;
+    rdfs:comment "Raw observed information. Observation is not admission." .
+
+afl:AdmittedObservation
+    a owl:Class ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:world> ;
+    rdfs:subClassOf afl:Observation ;
+    rdfs:label "Admitted observation" ;
+    rdfs:comment "An observation accepted for a bounded decision or experiment after its required admission checks." .
+
+afl:ObservationAdmission
+    a owl:Class , prov:Activity ;
+    rdfs:isDefinedBy <urn:autofde-lab:ontology:world> ;
+    rdfs:label "Observation admission" .
+
+afl:observedFrom
+    a owl:ObjectProperty ;
+    rdfs:domain afl:Observation ;
+    rdfs:range afl:World ;
+    rdfs:label "observed from" .
+
+afl:aboutState
+    a owl:ObjectProperty ;
+    rdfs:domain afl:Observation ;
+    rdfs:range afl:WorldState ;
+    rdfs:label "about state" .
+
+afl:admitsObservation
+    a owl:ObjectProperty ;
+    rdfs:domain afl:ObservationAdmission ;
+    rdfs:range afl:AdmittedObservation ;
+    rdfs:label "admits observation" .
+
+afl:derivedFromObservation
+    a owl:ObjectProperty ;
+    rdfs:domain afl:AdmittedObservation ;
+    rdfs:range afl:Observation ;
+    rdfs:subPropertyOf prov:wasDerivedFrom ;
+    rdfs:label "derived from observation" .
+
+afl:beforeState
+    a owl:ObjectProperty ;
+    rdfs:range afl:WorldState ;
+    rdfs:label "before state" .
+
+afl:afterState
+    a owl:ObjectProperty ;
+    rdfs:range afl:WorldState ;
+    rdfs:label "after state" .
+
+afl:perturbsWorld
+    a owl:ObjectProperty ;
+    rdfs:domain afl:Perturbation ;
+    rdfs:range afl:World ;
+    rdfs:label "perturbs world" .

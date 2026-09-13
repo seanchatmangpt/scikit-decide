@@ -1,0 +1,7 @@
+@prefix ga:   <https://gymact.dev/ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+# Deliberately missing dct:identifier -- violates ga:EpisodeShape's
+# sh:minCount 1 on dct:identifier.
+ga:episode-violating-1
+    a prov:Activity .

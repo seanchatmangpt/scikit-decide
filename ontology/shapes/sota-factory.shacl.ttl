@@ -1,0 +1,52 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:shape:BenchmarkPortfolio>
+    a sh:NodeShape ;
+    sh:targetClass afl:BenchmarkPortfolio ;
+    sh:property [ sh:path afl:hasPortfolioTarget ; sh:minCount 1 ; sh:class afl:BenchmarkTarget ] .
+
+<urn:autofde-lab:shape:BenchmarkTarget>
+    a sh:NodeShape ;
+    sh:targetClass afl:BenchmarkTarget ;
+    sh:property [ sh:path afl:benchmarkId ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path afl:benchmarkRevision ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path afl:primaryMetric ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path afl:expectedTaskCount ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:positiveInteger ] ;
+    sh:property [ sh:path afl:hasFrontierObservation ; sh:minCount 1 ] ;
+    sh:property [ sh:path afl:evaluatorReference ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path afl:frontierSourceReference ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] .
+
+<urn:autofde-lab:shape:DecisionBasis>
+    a sh:NodeShape ;
+    sh:targetClass afl:DecisionBasis ;
+    sh:property [ sh:path afl:hasModelChoice ; sh:minCount 1 ; sh:maxCount 1 ; sh:class afl:ModelChoice ] ;
+    sh:property [ sh:path afl:hasPlannerChoice ; sh:minCount 1 ; sh:maxCount 1 ; sh:class afl:PlannerChoice ] ;
+    sh:property [ sh:path afl:hasToolPolicyChoice ; sh:minCount 1 ; sh:maxCount 1 ; sh:class afl:ToolPolicyChoice ] ;
+    sh:property [ sh:path afl:hasRepairPolicyChoice ; sh:minCount 1 ; sh:maxCount 1 ; sh:class afl:RepairPolicyChoice ] ;
+    sh:property [ sh:path afl:hasReplanningPolicyChoice ; sh:minCount 1 ; sh:maxCount 1 ; sh:class afl:ReplanningPolicyChoice ] ;
+    sh:property [ sh:path afl:hasVerificationPolicyChoice ; sh:minCount 1 ; sh:maxCount 1 ; sh:class afl:VerificationPolicyChoice ] ;
+    sh:property [ sh:path afl:hasProjectionPolicyChoice ; sh:minCount 1 ; sh:maxCount 1 ; sh:class afl:ProjectionPolicyChoice ] ;
+    sh:property [ sh:path afl:hasMemoryPolicyChoice ; sh:minCount 1 ; sh:maxCount 1 ; sh:class afl:MemoryPolicyChoice ] ;
+    sh:property [ sh:path afl:hasBudgetPolicy ; sh:minCount 1 ; sh:maxCount 1 ; sh:class afl:BudgetPolicy ] .
+
+<urn:autofde-lab:shape:BenchmarkScore>
+    a sh:NodeShape ;
+    sh:targetClass afl:BenchmarkScore ;
+    sh:property [ sh:path afl:attemptedCount ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:nonNegativeInteger ] ;
+    sh:property [ sh:path afl:passedCount ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:nonNegativeInteger ] ;
+    sh:property [ sh:path afl:measuredScore ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:decimal ] ;
+    sh:property [ sh:path afl:frontierStanding ; sh:minCount 1 ; sh:maxCount 1 ; sh:class afl:FrontierStandingValue ] .
+
+<urn:autofde-lab:shape:DefinitionOfDoneReport>
+    a sh:NodeShape ;
+    sh:targetClass afl:DefinitionOfDoneReport ;
+    sh:property [ sh:path afl:done ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ] ;
+    sh:property [ sh:path afl:hasProofObligation ; sh:minCount 5 ; sh:class afl:ProofObligation ] .
+
+<urn:autofde-lab:shape:ProofObligation>
+    a sh:NodeShape ;
+    sh:targetClass afl:ProofObligation ;
+    sh:property [ sh:path afl:obligationId ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path afl:obligationSatisfied ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ] .

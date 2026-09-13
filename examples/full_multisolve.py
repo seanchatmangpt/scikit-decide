@@ -33,13 +33,13 @@ import gymnasium as gym
 import numpy as np
 from stable_baselines3 import PPO
 
-from skdecide import Value
-from skdecide.hub.domain.gym import (
+from autofde_lab import Value
+from autofde_lab.hub.domain.gym import (
     GymDiscreteActionDomain,
     GymPlanningDomain,
     GymWidthDomain,
 )
-from skdecide.utils import (
+from autofde_lab.utils import (
     load_registered_domain,
     load_registered_solver,
     match_solvers,

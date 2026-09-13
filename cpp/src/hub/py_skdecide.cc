@@ -44,7 +44,7 @@ void init_pywitness(py::module &m);
 #endif
 void init_pypddl(py::module &m);
 
-PYBIND11_MODULE(__skdecide_hub_cpp, m) {
+PYBIND11_MODULE(__autofde_lab_hub_cpp, m) {
   skdecide::Globals::init();
   init_pyaostar(m);
   init_pyastar(m);

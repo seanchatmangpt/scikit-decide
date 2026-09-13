@@ -7,10 +7,10 @@ from typing import Any, Callable, Optional
 
 from openevolve.evaluation_result import EvaluationResult
 
-from skdecide import Domain, Solver, rollout
-from skdecide.builders.solver import Policies
-from skdecide.hub.domain.maze import Maze
-from skdecide.hub.domain.maze.maze import Action
+from autofde_lab import Domain, Solver, rollout
+from autofde_lab.builders.solver import Policies
+from autofde_lab.hub.domain.maze import Maze
+from autofde_lab.hub.domain.maze.maze import Action
 
 sys.path.append(f"{os.path.dirname(os.path.abspath(__file__))}/..")
 from restricted_action_maze import Maze

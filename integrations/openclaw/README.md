@@ -4,7 +4,7 @@ This package projects scikit-decide's registered Python domain and solver entry 
 
 - a generated and validated native tool plugin (`skdecide_catalog`, `skdecide_describe`, `skdecide_match`, `skdecide_run`);
 - a bundled AgentSkills-compatible `SKILL.md`;
-- a stdio MCP server backed by `python -m skdecide.openclaw_bridge mcp` and configured through OpenClaw's MCP CLI.
+- a stdio MCP server backed by `python -m autofde_lab.openclaw_bridge mcp` and configured through OpenClaw's MCP CLI.
 
 The bridge admits registered names only, applies explicit episode/step/time/output bounds, and emits a receipt for every success, refusal, or failure.
 
@@ -40,7 +40,7 @@ openclaw skills info scikit-decide --json
 openclaw mcp add scikit-decide \
   --command python \
   --arg=-m \
-  --arg=skdecide.openclaw_bridge \
+  --arg=autofde_lab.openclaw_bridge \
   --arg=mcp \
   --cwd "$(pwd)" \
   --env "PYTHONPATH=$(pwd)/src"
@@ -74,7 +74,7 @@ The OpenClaw process must use a Python environment that can import scikit-decide
 ## Focused replay
 
 ```bash
-python -m py_compile src/skdecide/openclaw_runtime.py src/skdecide/openclaw_bridge.py
+python -m py_compile src/autofde_lab/openclaw_runtime.py src/autofde_lab/openclaw_bridge.py
 python -m pytest tests/test_openclaw_bridge.py -q
 cd integrations/openclaw
 npm run check

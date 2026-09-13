@@ -18,7 +18,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import NamedTuple
 
-from skdecide import (
+from autofde_lab import (
     DiscreteDistribution,
     Domain,
     EnumerableSpace,
@@ -26,7 +26,7 @@ from skdecide import (
     SingleValueDistribution,
     Value,
 )
-from skdecide.builders.domain import (
+from autofde_lab.builders.domain import (
     Actions,
     EnumerableTransitions,
     Goals,
@@ -38,7 +38,7 @@ from skdecide.builders.domain import (
     SingleAgent,
     UncertainInitialized,
 )
-from skdecide.hub.space.gym import EnumSpace
+from autofde_lab.hub.space.gym import EnumSpace
 
 # --- Tiger POMDP domain (cost version for Goal-HSVI) ---
 
@@ -278,19 +278,19 @@ class TigerDomainReward(
 
 class TestGoalHSVI:
     def test_import(self):
-        from skdecide.hub.solver.hsvi import GoalHSVI
+        from autofde_lab.hub.solver.hsvi import GoalHSVI
 
         assert GoalHSVI is not None
 
     def test_domain_check(self):
-        from skdecide.hub.solver.hsvi import GoalHSVI
+        from autofde_lab.hub.solver.hsvi import GoalHSVI
 
         dom = TigerDomainCost()
         assert GoalHSVI.check_domain(dom)
 
     def test_solves_tiger(self):
         """Goal-HSVI should converge on the Tiger POMDP."""
-        from skdecide.hub.solver.hsvi import GoalHSVI
+        from autofde_lab.hub.solver.hsvi import GoalHSVI
 
         with GoalHSVI(
             domain_factory=lambda: TigerDomainCost(),
@@ -308,7 +308,7 @@ class TestGoalHSVI:
 
     def test_point_belief_optimal_action(self):
         """With tiger known to be left, Goal-HSVI should find open_right."""
-        from skdecide.hub.solver.hsvi import GoalHSVI
+        from autofde_lab.hub.solver.hsvi import GoalHSVI
 
         with GoalHSVI(
             domain_factory=lambda: TigerDomainCost(),
@@ -328,7 +328,7 @@ class TestGoalHSVI:
 
     def test_point_belief_optimal_value(self):
         """With tiger_left known, cost should be 0 (just open right door)."""
-        from skdecide.hub.solver.hsvi import GoalHSVI
+        from autofde_lab.hub.solver.hsvi import GoalHSVI
 
         with GoalHSVI(
             domain_factory=lambda: TigerDomainCost(),
@@ -348,7 +348,7 @@ class TestGoalHSVI:
 
     def test_observation_interface(self):
         """Test the observation-based interaction interface."""
-        from skdecide.hub.solver.hsvi import GoalHSVI
+        from autofde_lab.hub.solver.hsvi import GoalHSVI
 
         dom = TigerDomainCost()
 
@@ -376,7 +376,7 @@ class TestGoalHSVI:
 
     def test_belief_interface(self):
         """Test the explicit belief-based query interface."""
-        from skdecide.hub.solver.hsvi import GoalHSVI
+        from autofde_lab.hub.solver.hsvi import GoalHSVI
 
         with GoalHSVI(
             domain_factory=lambda: TigerDomainCost(),
@@ -401,7 +401,7 @@ class TestGoalHSVI:
 
     def test_solving_time(self):
         """get_solving_time should return a non-negative value."""
-        from skdecide.hub.solver.hsvi import GoalHSVI
+        from autofde_lab.hub.solver.hsvi import GoalHSVI
 
         with GoalHSVI(
             domain_factory=lambda: TigerDomainCost(),
@@ -420,13 +420,13 @@ class TestGoalHSVI:
 
 class TestHSVI:
     def test_import(self):
-        from skdecide.hub.solver.hsvi import HSVI
+        from autofde_lab.hub.solver.hsvi import HSVI
 
         assert HSVI is not None
 
     def test_solves_tiger_reward(self):
         """HSVI should find a solution for the discounted reward Tiger POMDP."""
-        from skdecide.hub.solver.hsvi import HSVI
+        from autofde_lab.hub.solver.hsvi import HSVI
 
         with HSVI(
             domain_factory=lambda: TigerDomainReward(),
@@ -444,7 +444,7 @@ class TestHSVI:
 
     def test_point_belief_action(self):
         """With tiger_left known, HSVI should find open_right (reward 10)."""
-        from skdecide.hub.solver.hsvi import HSVI
+        from autofde_lab.hub.solver.hsvi import HSVI
 
         with HSVI(
             domain_factory=lambda: TigerDomainReward(),
@@ -469,7 +469,7 @@ class TestHSVI:
 class TestGoalHSVIParallel:
     def test_solves_tiger_parallel(self):
         """Goal-HSVI should converge on the Tiger POMDP with parallel=True."""
-        from skdecide.hub.solver.hsvi import GoalHSVI
+        from autofde_lab.hub.solver.hsvi import GoalHSVI
 
         with GoalHSVI(
             domain_factory=lambda: TigerDomainCost(),
@@ -487,7 +487,7 @@ class TestGoalHSVIParallel:
 
     def test_point_belief_optimal_action_parallel(self):
         """With tiger known to be left, parallel Goal-HSVI should find open_right."""
-        from skdecide.hub.solver.hsvi import GoalHSVI
+        from autofde_lab.hub.solver.hsvi import GoalHSVI
 
         with GoalHSVI(
             domain_factory=lambda: TigerDomainCost(),
@@ -507,7 +507,7 @@ class TestGoalHSVIParallel:
 
     def test_belief_interface_parallel(self):
         """Test the explicit belief-based query interface with parallel=True."""
-        from skdecide.hub.solver.hsvi import GoalHSVI
+        from autofde_lab.hub.solver.hsvi import GoalHSVI
 
         with GoalHSVI(
             domain_factory=lambda: TigerDomainCost(),
@@ -537,7 +537,7 @@ class TestGoalHSVIParallel:
 class TestHSVIParallel:
     def test_solves_tiger_reward_parallel(self):
         """HSVI should find a solution with parallel=True."""
-        from skdecide.hub.solver.hsvi import HSVI
+        from autofde_lab.hub.solver.hsvi import HSVI
 
         with HSVI(
             domain_factory=lambda: TigerDomainReward(),
@@ -556,7 +556,7 @@ class TestHSVIParallel:
 
     def test_point_belief_action_parallel(self):
         """With tiger_left known, parallel HSVI should find open_right."""
-        from skdecide.hub.solver.hsvi import HSVI
+        from autofde_lab.hub.solver.hsvi import HSVI
 
         with HSVI(
             domain_factory=lambda: TigerDomainReward(),

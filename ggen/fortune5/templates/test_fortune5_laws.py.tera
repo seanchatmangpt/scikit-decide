@@ -1,0 +1,75 @@
+"""Transient ggen-manufactured Fortune-5 combinatorial law court."""
+
+from math import prod
+
+from autofde_lab.fortune5 import (
+    FORTUNE5_SPACE,
+    Axis,
+    CompatibilityLaw,
+    Option,
+    StateSpace,
+    pairwise_token_count,
+)
+
+EXPECTED_ROWS = (
+{% for row in sparql_results %}
+    ("{{ row.axisName }}", "{{ row.optionName }}"),
+{% endfor %}
+)
+
+
+def test_ontology_projection_matches_runtime() -> None:
+    from autofde_lab.fortune5.catalog import (
+        CATALOG_ROWS,
+        PUBLIC_ONTOLOGY_FOUNDATIONS,
+    )
+
+    assert CATALOG_ROWS == EXPECTED_ROWS
+    assert PUBLIC_ONTOLOGY_FOUNDATIONS == (
+        "http://purl.org/dc/terms/",
+        "http://www.w3.org/2004/02/skos/core#",
+        "http://www.w3.org/ns/prov#",
+    )
+
+
+def test_raw_upper_bound_is_exact_product_without_materialization() -> None:
+    expected = prod(len(axis.options) for axis in FORTUNE5_SPACE.axes)
+    assert expected == 1_327_104_000
+    assert FORTUNE5_SPACE.raw_upper_bound == expected
+
+
+def test_complete_second_order_basis_is_small_and_pairwise_total() -> None:
+    candidates = FORTUNE5_SPACE.pairwise_candidates(candidate_limit=5_000)
+    assert len(candidates) == 1_605
+    expected_tokens = sum(
+        len(left.options) * len(right.options)
+        for index, left in enumerate(FORTUNE5_SPACE.axes)
+        for right in FORTUNE5_SPACE.axes[index + 1 :]
+    )
+    assert expected_tokens == 2_415
+    assert pairwise_token_count(candidates) == expected_tokens
+
+
+def test_scenarios_are_powerless_candidates() -> None:
+    scenario = FORTUNE5_SPACE.raw_coordinate_at(0)
+    assert scenario.authority == "NONE"
+    assert scenario.standing == "CANDIDATE"
+    assert not hasattr(scenario, "execute")
+    assert not hasattr(scenario, "actuate")
+
+
+def test_coordinate_replay_round_trip_binds_state_space_identity() -> None:
+    for index in (0, 73, 74_001, FORTUNE5_SPACE.raw_upper_bound - 1):
+        scenario = FORTUNE5_SPACE.raw_coordinate_at(index)
+        assert scenario.space_digest == FORTUNE5_SPACE.digest
+        assert FORTUNE5_SPACE.raw_index_of(scenario) == index
+
+
+def test_constitution_drift_changes_candidate_identity() -> None:
+    base = StateSpace((Axis("cloud", (Option("aws"), Option("azure"))),))
+    changed = StateSpace(
+        (Axis("cloud", (Option("aws"), Option("azure"))),),
+        (CompatibilityLaw.from_mappings(forbid={"cloud": "azure"}),),
+    )
+    assert base.digest != changed.digest
+    assert base.scenario({"cloud": "aws"}).digest != changed.scenario({"cloud": "aws"}).digest

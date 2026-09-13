@@ -1,0 +1,27 @@
+C4Container
+title ggen Manufacturing Plane — Containers
+
+Person(architect, "Ontology / Basis Author")
+System_Ext(lab, "AutoFDE SOTA Lab")
+System_Ext(gymact, "GymAct")
+System_Ext(runtime, "AutoFDE Runtime")
+
+System_Boundary(ggen, "ggen Manufacturing Plane") {
+  Container(graph_loader, "Admitted Graph Loader", "Rust", "Loads ontology, shapes, and admitted graph.")
+  Container(validator, "Graph / Shape Validator", "Rust / SHACL", "Rejects invalid or underconstrained source graphs.")
+  Container(template_engine, "Projection / Template Engine", "Rust", "Compiles graph facts into target-specific artifacts.")
+  Container(generator, "Artifact Generator", "Rust", "Emits source, config, manifests, adapters, and experiment scaffolding.")
+  Container(receipt, "Generation Receipt Builder", "Rust", "Produces signed/digested manufacture receipts.")
+  Container(diff, "Regeneration / Drift Checker", "Rust", "Detects hand edits and artifact drift.")
+}
+
+Rel(architect, graph_loader, "Admitted source")
+Rel(lab, graph_loader, "Basis revisions / selected specialization")
+Rel(gymact, graph_loader, "Gym ontology/contracts")
+Rel(graph_loader, validator, "Graph")
+Rel(validator, template_engine, "Validated graph")
+Rel(template_engine, generator, "Target projections")
+Rel(generator, receipt, "Generated artifacts")
+Rel(generator, diff, "Artifacts")
+Rel(receipt, runtime, "Governed bundle + receipt")
+Rel(diff, lab, "Drift/refusal evidence")

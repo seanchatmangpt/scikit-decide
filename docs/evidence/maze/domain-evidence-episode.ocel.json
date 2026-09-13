@@ -1,0 +1,1696 @@
+{
+  "eventTypes": [
+    {
+      "attributes": [
+        {
+          "name": "candidate_order",
+          "type": "integer"
+        },
+        {
+          "name": "elapsed_seconds",
+          "type": "float"
+        },
+        {
+          "name": "plan_length",
+          "type": "integer"
+        },
+        {
+          "name": "strategy",
+          "type": "string"
+        }
+      ],
+      "name": "solver_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "type": "string"
+        },
+        {
+          "name": "step_index",
+          "type": "integer"
+        }
+      ],
+      "name": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "candidate_order",
+          "type": "integer"
+        },
+        {
+          "name": "elapsed_seconds",
+          "type": "float"
+        },
+        {
+          "name": "strategy",
+          "type": "string"
+        }
+      ],
+      "name": "verifier_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "goal_reached",
+          "type": "boolean"
+        },
+        {
+          "name": "standing",
+          "type": "string"
+        },
+        {
+          "name": "verify_mode",
+          "type": "string"
+        },
+        {
+          "name": "winning_strategy",
+          "type": "string"
+        },
+        {
+          "name": "winning_verify_strategy",
+          "type": "string"
+        }
+      ],
+      "name": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ],
+      "name": "teardown"
+    }
+  ],
+  "events": [
+    {
+      "attributes": [
+        {
+          "name": "strategy",
+          "value": "astar-plain"
+        },
+        {
+          "name": "candidate_order",
+          "value": 1
+        },
+        {
+          "name": "elapsed_seconds",
+          "value": 0.8070919513702393
+        },
+        {
+          "name": "plan_length",
+          "value": 58
+        }
+      ],
+      "id": "ev:solver_selected:1",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417032000Z",
+      "type": "solver_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 0
+        }
+      ],
+      "id": "ev:act:0",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417231000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 1
+        }
+      ],
+      "id": "ev:act:1",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417251000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 2
+        }
+      ],
+      "id": "ev:act:2",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417260000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 3
+        }
+      ],
+      "id": "ev:act:3",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417267000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 4
+        }
+      ],
+      "id": "ev:act:4",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417272000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 5
+        }
+      ],
+      "id": "ev:act:5",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417280000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 6
+        }
+      ],
+      "id": "ev:act:6",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417286000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 7
+        }
+      ],
+      "id": "ev:act:7",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417292000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 8
+        }
+      ],
+      "id": "ev:act:8",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417299000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 9
+        }
+      ],
+      "id": "ev:act:9",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417309000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 10
+        }
+      ],
+      "id": "ev:act:10",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417315000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 11
+        }
+      ],
+      "id": "ev:act:11",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417321000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 12
+        }
+      ],
+      "id": "ev:act:12",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417326000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 13
+        }
+      ],
+      "id": "ev:act:13",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417331000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 14
+        }
+      ],
+      "id": "ev:act:14",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417337000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 15
+        }
+      ],
+      "id": "ev:act:15",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417344000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 16
+        }
+      ],
+      "id": "ev:act:16",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417349000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 17
+        }
+      ],
+      "id": "ev:act:17",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417354000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 18
+        }
+      ],
+      "id": "ev:act:18",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417361000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 19
+        }
+      ],
+      "id": "ev:act:19",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417367000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 20
+        }
+      ],
+      "id": "ev:act:20",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417373000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 21
+        }
+      ],
+      "id": "ev:act:21",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417379000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 22
+        }
+      ],
+      "id": "ev:act:22",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417384000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 23
+        }
+      ],
+      "id": "ev:act:23",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417390000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 24
+        }
+      ],
+      "id": "ev:act:24",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417396000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 25
+        }
+      ],
+      "id": "ev:act:25",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417402000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 26
+        }
+      ],
+      "id": "ev:act:26",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417408000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 27
+        }
+      ],
+      "id": "ev:act:27",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417413000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 28
+        }
+      ],
+      "id": "ev:act:28",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417419000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 29
+        }
+      ],
+      "id": "ev:act:29",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417425000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 30
+        }
+      ],
+      "id": "ev:act:30",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417433000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 31
+        }
+      ],
+      "id": "ev:act:31",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417440000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 32
+        }
+      ],
+      "id": "ev:act:32",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417445000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.up"
+        },
+        {
+          "name": "step_index",
+          "value": 33
+        }
+      ],
+      "id": "ev:act:33",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417450000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.up"
+        },
+        {
+          "name": "step_index",
+          "value": 34
+        }
+      ],
+      "id": "ev:act:34",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417456000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 35
+        }
+      ],
+      "id": "ev:act:35",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417461000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 36
+        }
+      ],
+      "id": "ev:act:36",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417466000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 37
+        }
+      ],
+      "id": "ev:act:37",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417471000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 38
+        }
+      ],
+      "id": "ev:act:38",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417476000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 39
+        }
+      ],
+      "id": "ev:act:39",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417481000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 40
+        }
+      ],
+      "id": "ev:act:40",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417486000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 41
+        }
+      ],
+      "id": "ev:act:41",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417491000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 42
+        }
+      ],
+      "id": "ev:act:42",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417497000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 43
+        }
+      ],
+      "id": "ev:act:43",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417502000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 44
+        }
+      ],
+      "id": "ev:act:44",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417507000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 45
+        }
+      ],
+      "id": "ev:act:45",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417515000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 46
+        }
+      ],
+      "id": "ev:act:46",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417520000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 47
+        }
+      ],
+      "id": "ev:act:47",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417525000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.left"
+        },
+        {
+          "name": "step_index",
+          "value": 48
+        }
+      ],
+      "id": "ev:act:48",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417531000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 49
+        }
+      ],
+      "id": "ev:act:49",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417536000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 50
+        }
+      ],
+      "id": "ev:act:50",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417541000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 51
+        }
+      ],
+      "id": "ev:act:51",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417546000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 52
+        }
+      ],
+      "id": "ev:act:52",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417550000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 53
+        }
+      ],
+      "id": "ev:act:53",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417557000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 54
+        }
+      ],
+      "id": "ev:act:54",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417563000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 55
+        }
+      ],
+      "id": "ev:act:55",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417568000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.right"
+        },
+        {
+          "name": "step_index",
+          "value": 56
+        }
+      ],
+      "id": "ev:act:56",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417574000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "action_id",
+          "value": "Action.down"
+        },
+        {
+          "name": "step_index",
+          "value": 57
+        }
+      ],
+      "id": "ev:act:57",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.417580000Z",
+      "type": "act"
+    },
+    {
+      "attributes": [
+        {
+          "name": "strategy",
+          "value": "fresh-instance-replay"
+        },
+        {
+          "name": "candidate_order",
+          "value": 1
+        },
+        {
+          "name": "elapsed_seconds",
+          "value": 0.00045108795166015625
+        }
+      ],
+      "id": "ev:verifier_selected:1",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.418058000Z",
+      "type": "verifier_selected"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "goal_reached",
+          "value": true
+        },
+        {
+          "name": "verify_mode",
+          "value": "fresh-instance-replay"
+        },
+        {
+          "name": "winning_strategy",
+          "value": "astar-plain"
+        },
+        {
+          "name": "winning_verify_strategy",
+          "value": "fresh-instance-replay"
+        }
+      ],
+      "id": "ev:verify",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.418076000Z",
+      "type": "verify"
+    },
+    {
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        }
+      ],
+      "id": "ev:teardown",
+      "relationships": [
+        {
+          "objectId": "episode:maze",
+          "qualifier": ""
+        },
+        {
+          "objectId": "domain:maze",
+          "qualifier": ""
+        }
+      ],
+      "time": "2026-08-14T00:14:29.418089000Z",
+      "type": "teardown"
+    }
+  ],
+  "objectTypes": [
+    {
+      "attributes": [],
+      "name": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "type": "string"
+        }
+      ],
+      "name": "domain"
+    }
+  ],
+  "objects": [
+    {
+      "attributes": [],
+      "id": "episode:maze",
+      "relationships": [],
+      "type": "episode"
+    },
+    {
+      "attributes": [
+        {
+          "name": "domain_class",
+          "time": "1970-01-01T00:00:00.000000000Z",
+          "value": "Maze"
+        }
+      ],
+      "id": "domain:maze",
+      "relationships": [],
+      "type": "domain"
+    }
+  ]
+}

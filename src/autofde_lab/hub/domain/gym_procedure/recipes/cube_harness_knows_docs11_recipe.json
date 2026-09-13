@@ -1,0 +1,89 @@
+{
+  "gym": "cube-harness",
+  "task": "knows.docs_11_personal_recipe_ocr.1",
+  "source_ref": "vendor/gyms/cube-harness/cubes/knows-cube/src/knows_cube/task_metadata.json (id=knows.docs_11_personal_recipe_ocr.1, abstract_description)",
+  "initial_facts": [],
+  "goal_facts": ["tips_filled_from_online_recipes"],
+  "steps": [
+    {
+      "id": "identify_recipe_name_from_image",
+      "description": "Look at the image saved in Drive to identify the correct recipe name (OCR).",
+      "preconditions": [],
+      "establishes": ["knows_recipe_name"],
+      "cost": 1.0,
+      "source": "task_metadata.json abstract_description: 'First, replace the name of the recipe with the correct recipe name by looking at the image saved in the drive...'"
+    },
+    {
+      "id": "replace_recipe_name_in_template",
+      "description": "Replace the Recipe Coral template's placeholder name with the identified recipe name.",
+      "preconditions": ["knows_recipe_name"],
+      "establishes": ["recipe_name_replaced"],
+      "cost": 1.0,
+      "source": "task_metadata.json abstract_description: 'First, replace the name of the recipe with the correct recipe name...'"
+    },
+    {
+      "id": "copy_ingredient_list",
+      "description": "Copy the ingredient list into the template.",
+      "preconditions": ["recipe_name_replaced"],
+      "establishes": ["ingredients_copied"],
+      "cost": 1.0,
+      "source": "task_metadata.json abstract_description: 'Then, copy the ingredient list into the template and paste the instructions into the corresponding field.'"
+    },
+    {
+      "id": "paste_instructions",
+      "description": "Paste the instructions into the corresponding field.",
+      "preconditions": ["ingredients_copied"],
+      "establishes": ["instructions_pasted"],
+      "cost": 1.0,
+      "source": "task_metadata.json abstract_description: 'Then, copy the ingredient list into the template and paste the instructions into the corresponding field.'"
+    },
+    {
+      "id": "get_and_cite_tips",
+      "description": "Get tips from an online source, citing source URLs and using direct quotes for all tips.",
+      "preconditions": ["instructions_pasted"],
+      "establishes": ["tips_cited"],
+      "cost": 1.0,
+      "source": "task_metadata.json abstract_description: 'Get tips from an online source, and make sure to cite source urls for tips below the tips entries. Use direct quotes for all tips.'"
+    },
+    {
+      "id": "replace_default_image",
+      "description": "Replace the default image with a cropped image from the original Drive link that shows the recipe text clearly.",
+      "preconditions": ["tips_cited"],
+      "establishes": ["image_replaced"],
+      "cost": 1.0,
+      "source": "task_metadata.json abstract_description: 'Replace the default image with a cropped image from the original drive link that shows the recipe text clearly.'"
+    },
+    {
+      "id": "fill_remaining_template_fields",
+      "description": "Fill out the rest of the template with relevant information from the recipe.",
+      "preconditions": ["image_replaced"],
+      "establishes": ["template_filled"],
+      "cost": 1.0,
+      "source": "task_metadata.json abstract_description: 'Fill out the rest of the template with relevant information from the recipe.'"
+    },
+    {
+      "id": "search_similar_recipes",
+      "description": "Search the internet for at least 3 similar recipes.",
+      "preconditions": ["template_filled"],
+      "establishes": ["similar_recipes_found"],
+      "cost": 1.0,
+      "source": "task_metadata.json abstract_description: 'Then search the internet for at least 3 similar recipes and put them on separate pages with the same format as the first recipe.'"
+    },
+    {
+      "id": "create_pages_for_similar_recipes",
+      "description": "Put each of the similar recipes on separate pages with the same format as the first recipe, with the source link below each title, each page visually distinct.",
+      "preconditions": ["similar_recipes_found"],
+      "establishes": ["similar_recipe_pages_created"],
+      "cost": 1.0,
+      "source": "task_metadata.json abstract_description: 'Put the link for the source of each additional recipe on a line below the title fitting with the formatting. Make sure each page of recipes is visually distinct from the others.'"
+    },
+    {
+      "id": "fill_tips_from_online_recipes",
+      "description": "Finally, check the other online recipes and fill in the tips with useful information found from them.",
+      "preconditions": ["similar_recipe_pages_created"],
+      "establishes": ["tips_filled_from_online_recipes"],
+      "cost": 1.0,
+      "source": "task_metadata.json abstract_description: 'Finally, check the other online recipes and fill in the tips with some useful information that you found.'"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+@prefix arch: <urn:autofde-lab:architecture:> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:autofde-lab:architecture:catalog:01_c4_ecosystem> a owl:Ontology ;
+    dcterms:title "Generated architecture catalog bundle: 01_c4_ecosystem" ;
+    owl:imports <urn:autofde-lab:ontology:architecture> .
+
+<urn:autofde-lab:architecture:diagram:01_ecosystem_context:diagram> a arch:C4ContextDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE Ecosystem — System Context" ;
+    arch:diagramKind arch:C4ContextDiagram ;
+    arch:elementCount 7 ;
+    arch:mermaidSyntax "C4Context" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 8 ;
+    arch:sourceDigest "64a2e9592aa2981e6a3c3e2e8987d507b5268f45a1114f648722e29d9268a42c" ;
+    arch:sourcePath "docs/c4/01_ecosystem_context.mmd" .
+
+<urn:autofde-lab:architecture:diagram:02_ecosystem_container:diagram> a arch:C4ContainerDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE Ecosystem — Container View" ;
+    arch:diagramKind arch:C4ContainerDiagram ;
+    arch:elementCount 13 ;
+    arch:mermaidSyntax "C4Container" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 14 ;
+    arch:sourceDigest "8c098789360f5ad471c4f035941689ec0ca0399b36fa5cc0da271f78ec1a2ee1" ;
+    arch:sourcePath "docs/c4/02_ecosystem_container.mmd" .
+
+<urn:autofde-lab:architecture:diagram:03_ecosystem_component:diagram> a arch:C4ComponentDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE Ecosystem — Cross-System Components" ;
+    arch:diagramKind arch:C4ComponentDiagram ;
+    arch:elementCount 17 ;
+    arch:mermaidSyntax "C4Component" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 16 ;
+    arch:sourceDigest "ff9834f3fac34cc9df2367d04ad3e771500e9e8abfc418b2410f208b3de96247" ;
+    arch:sourcePath "docs/c4/03_ecosystem_component.mmd" .
+
+<urn:autofde-lab:architecture:diagram:04_ecosystem_dynamic:diagram> a arch:C4DynamicDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE Ecosystem — Discover → Falsify → Admit → Execute → Learn" ;
+    arch:diagramKind arch:C4DynamicDiagram ;
+    arch:elementCount 7 ;
+    arch:mermaidSyntax "C4Dynamic" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 12 ;
+    arch:sourceDigest "8997156937688192ae2a58d5cf49504133b973afdf993cea30f275c241378abf" ;
+    arch:sourcePath "docs/c4/04_ecosystem_dynamic.mmd" .
+
+<urn:autofde-lab:architecture:diagram:05_ecosystem_deployment:diagram> a arch:C4DeploymentDiagram,
+        arch:Diagram ;
+    dcterms:title "AutoFDE Ecosystem — Deployment View" ;
+    arch:diagramKind arch:C4DeploymentDiagram ;
+    arch:elementCount 13 ;
+    arch:mermaidSyntax "C4Deployment" ;
+    arch:parseStanding "PARSED" ;
+    arch:relationshipCount 9 ;
+    arch:sourceDigest "351541b8f8724f4169664a774a06d7bb151296a605219ec16ea461eb22cfc944" ;
+    arch:sourcePath "docs/c4/05_ecosystem_deployment.mmd" .
+

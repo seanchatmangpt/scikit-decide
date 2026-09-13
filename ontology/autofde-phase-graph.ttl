@@ -1,0 +1,235 @@
+# Copyright (c) AIRBUS and its affiliates.
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+#
+# AutoFDE phase graph — T-Box and A-Box.
+#
+# HAND-AUTHORED. Unlike ontology/autofde-lab-capabilities.ttl, which is generated
+# by `python -m skdecide.fabric.ontology` and must never be hand-edited, this
+# file is written by hand and is the declared vocabulary that the projection in
+# src/skdecide/autofde/ is checked against.
+#
+# The central distinction this vocabulary exists to keep: afde:precedes is a
+# WORK-EXECUTION relation ("must finish before"). It is deliberately given no
+# counterpart in the Terraform provisioning graph, whose edges mean "needs this
+# object's id to exist" and are invariant under work order.
+
+@prefix afde: <https://scikit-decide.local/autofde#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+afde: a owl:Ontology ;
+    rdfs:label "AutoFDE phase graph" ;
+    rdfs:comment "Phases, work items, and work precedence. Structure only: nothing here actuates, admits, brokers, or issues receipts." .
+
+########################################################################
+# T-Box
+########################################################################
+
+afde:Phase a owl:Class ;
+    rdfs:label "Phase" ;
+    rdfs:comment "A major phase of work. Projects to a GitHub milestone." .
+
+afde:WorkItem a owl:Class ;
+    rdfs:label "Work item" ;
+    rdfs:comment "A unit of work. Projects to exactly one GitHub issue." .
+
+afde:Classification a owl:Class ;
+    rdfs:label "Classification" ;
+    rdfs:comment "A work item's kind. Projects to a Kind:* label." .
+
+afde:Status a owl:Class ;
+    rdfs:label "Status" ;
+    rdfs:comment "Lifecycle standing of a work item." .
+
+afde:precedes a owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:label "precedes" ;
+    rdfs:domain afde:WorkItem ;
+    rdfs:range afde:WorkItem ;
+    rdfs:comment "WORK-EXECUTION precedence: the subject must finish before the object may start. Absence of this relation between two items asserts genuine concurrency, not unknown order. Has NO representation in the Terraform provisioning graph; it is carried in generated issue-body metadata." .
+
+afde:phasePrecedes a owl:ObjectProperty , owl:TransitiveProperty ;
+    rdfs:label "phase precedes" ;
+    rdfs:domain afde:Phase ;
+    rdfs:range afde:Phase .
+
+afde:inPhase a owl:ObjectProperty ;
+    rdfs:domain afde:WorkItem ;
+    rdfs:range afde:Phase .
+
+afde:hasClassification a owl:ObjectProperty ;
+    rdfs:domain afde:WorkItem ;
+    rdfs:range afde:Classification .
+
+afde:hasStatus a owl:ObjectProperty ;
+    rdfs:domain afde:WorkItem ;
+    rdfs:range afde:Status .
+
+afde:supersedes a owl:ObjectProperty ;
+    rdfs:domain afde:WorkItem ;
+    rdfs:range afde:WorkItem ;
+    rdfs:comment "Lineage. A replanned work item is a NEW node with a fresh occurrence identity, never a mutation of the node it supersedes." .
+
+afde:nodeId a owl:DatatypeProperty ; rdfs:range xsd:string .
+afde:title a owl:DatatypeProperty ; rdfs:range xsd:string .
+afde:dueDate a owl:DatatypeProperty ; rdfs:range xsd:string .
+afde:occurrence a owl:DatatypeProperty ; rdfs:range xsd:integer .
+
+afde:Active a afde:Status .
+afde:Superseded a afde:Status .
+
+afde:Semantic a afde:Classification ; afde:title "Kind:Semantic" .
+afde:Infrastructure a afde:Classification ; afde:title "Kind:Infrastructure" .
+afde:Runtime a afde:Classification ; afde:title "Kind:Runtime" .
+afde:Cloud a afde:Classification ; afde:title "Kind:Cloud" .
+afde:Verification a afde:Classification ; afde:title "Kind:Verification" .
+
+########################################################################
+# A-Box — this repository's admitted phase graph
+#
+#   Semantic Foundation -> Project Infrastructure
+#                       -> (Runtime Kernel || Azure Pack) -> Breach Clock Crown
+#
+# Runtime Kernel and Azure Pack are INDEPENDENT: no afde:phasePrecedes assertion
+# relates them in either direction, and none may be added.
+########################################################################
+
+afde:semantic-foundation a afde:Phase ;
+    afde:nodeId "semantic-foundation" ;
+    afde:title "Semantic Foundation" ;
+    afde:dueDate "2026-08-14" .
+
+afde:project-infrastructure a afde:Phase ;
+    afde:nodeId "project-infrastructure" ;
+    afde:title "Project Infrastructure" ;
+    afde:dueDate "2026-08-21" .
+
+afde:runtime-kernel a afde:Phase ;
+    afde:nodeId "runtime-kernel" ;
+    afde:title "Runtime Kernel" ;
+    afde:dueDate "2026-09-04" .
+
+afde:azure-pack a afde:Phase ;
+    afde:nodeId "azure-pack" ;
+    afde:title "Azure Pack" ;
+    afde:dueDate "2026-09-04" .
+
+afde:breach-clock-crown a afde:Phase ;
+    afde:nodeId "breach-clock-crown" ;
+    afde:title "Breach Clock Crown" ;
+    afde:dueDate "2026-09-18" .
+
+afde:semantic-foundation afde:phasePrecedes afde:project-infrastructure .
+afde:project-infrastructure afde:phasePrecedes afde:runtime-kernel .
+afde:project-infrastructure afde:phasePrecedes afde:azure-pack .
+afde:runtime-kernel afde:phasePrecedes afde:breach-clock-crown .
+afde:azure-pack afde:phasePrecedes afde:breach-clock-crown .
+
+# --- work items -------------------------------------------------------
+
+afde:sf-ontology a afde:WorkItem ;
+    afde:nodeId "sf-ontology" ;
+    afde:title "Author the AutoFDE phase-graph ontology" ;
+    afde:inPhase afde:semantic-foundation ;
+    afde:hasClassification afde:Semantic ;
+    afde:hasStatus afde:Active ;
+    afde:occurrence 1 .
+
+afde:sf-refusal-vocab a afde:WorkItem ;
+    afde:nodeId "sf-refusal-vocab" ;
+    afde:title "Name every AutoFDE refusal" ;
+    afde:inPhase afde:semantic-foundation ;
+    afde:hasClassification afde:Semantic ;
+    afde:hasStatus afde:Active ;
+    afde:occurrence 1 .
+
+afde:pi-ci-gate-v0 a afde:WorkItem ;
+    afde:nodeId "pi-ci-gate-v0" ;
+    afde:title "First CI gate attempt (superseded)" ;
+    afde:inPhase afde:project-infrastructure ;
+    afde:hasClassification afde:Infrastructure ;
+    afde:hasStatus afde:Superseded ;
+    afde:occurrence 1 .
+
+afde:pi-ci-gate a afde:WorkItem ;
+    afde:nodeId "pi-ci-gate" ;
+    afde:title "CI gate on the round-trip law" ;
+    afde:inPhase afde:project-infrastructure ;
+    afde:hasClassification afde:Infrastructure ;
+    afde:hasStatus afde:Active ;
+    afde:supersedes afde:pi-ci-gate-v0 ;
+    afde:occurrence 2 .
+
+afde:pi-terraform-module a afde:WorkItem ;
+    afde:nodeId "pi-terraform-module" ;
+    afde:title "Declarative GitHub project management module" ;
+    afde:inPhase afde:project-infrastructure ;
+    afde:hasClassification afde:Infrastructure ;
+    afde:hasStatus afde:Active ;
+    afde:occurrence 1 .
+
+afde:rk-scheduler a afde:WorkItem ;
+    afde:nodeId "rk-scheduler" ;
+    afde:title "Bounded plan-structure scheduler" ;
+    afde:inPhase afde:runtime-kernel ;
+    afde:hasClassification afde:Runtime ;
+    afde:hasStatus afde:Active ;
+    afde:occurrence 1 .
+
+afde:rk-bounds a afde:WorkItem ;
+    afde:nodeId "rk-bounds" ;
+    afde:title "Execution bound accounting" ;
+    afde:inPhase afde:runtime-kernel ;
+    afde:hasClassification afde:Runtime ;
+    afde:hasStatus afde:Active ;
+    afde:occurrence 1 .
+
+afde:ap-landing-zone a afde:WorkItem ;
+    afde:nodeId "ap-landing-zone" ;
+    afde:title "Azure landing zone" ;
+    afde:inPhase afde:azure-pack ;
+    afde:hasClassification afde:Cloud ;
+    afde:hasStatus afde:Active ;
+    afde:occurrence 1 .
+
+afde:ap-identity a afde:WorkItem ;
+    afde:nodeId "ap-identity" ;
+    afde:title "Workload identity federation" ;
+    afde:inPhase afde:azure-pack ;
+    afde:hasClassification afde:Cloud ;
+    afde:hasStatus afde:Active ;
+    afde:occurrence 1 .
+
+afde:bc-clock a afde:WorkItem ;
+    afde:nodeId "bc-clock" ;
+    afde:title "Breach clock" ;
+    afde:inPhase afde:breach-clock-crown ;
+    afde:hasClassification afde:Verification ;
+    afde:hasStatus afde:Active ;
+    afde:occurrence 1 .
+
+afde:bc-attestation a afde:WorkItem ;
+    afde:nodeId "bc-attestation" ;
+    afde:title "Breach attestation record" ;
+    afde:inPhase afde:breach-clock-crown ;
+    afde:hasClassification afde:Verification ;
+    afde:hasStatus afde:Active ;
+    afde:occurrence 1 .
+
+# --- work precedence (transitive reduction) ---------------------------
+#
+# No afde:precedes assertion relates any rk-* item to any ap-* item. That
+# absence is the assertion of concurrency; adding one would be a defect.
+
+afde:sf-ontology       afde:precedes afde:pi-terraform-module .
+afde:sf-refusal-vocab  afde:precedes afde:pi-ci-gate-v0 .
+afde:sf-refusal-vocab  afde:precedes afde:pi-ci-gate .
+afde:pi-terraform-module afde:precedes afde:rk-scheduler .
+afde:pi-terraform-module afde:precedes afde:ap-landing-zone .
+afde:rk-scheduler      afde:precedes afde:rk-bounds .
+afde:ap-landing-zone   afde:precedes afde:ap-identity .
+afde:rk-bounds         afde:precedes afde:bc-clock .
+afde:ap-identity       afde:precedes afde:bc-clock .
+afde:bc-clock          afde:precedes afde:bc-attestation .

@@ -17,7 +17,7 @@ from typing import Any
 from generate_features_list import create_homepage_with_features_list
 from generate_nb_index import create_notebooks_docpage
 
-import skdecide
+import autofde_lab
 
 logger = logging.getLogger(__name__)
 
@@ -187,7 +187,7 @@ def doc_escape(md):
 def write_signature(md, member):
     if "signature" in member:
         escape_json_sig = json_escape(member["signature"])
-        md += f'<skdecide-signature name= "{member["name"]}" :sig="{escape_json_sig}"></skdecide-signature>\n\n'
+        md += f'<autofde_lab-signature name= "{member["name"]}" :sig="{escape_json_sig}"></autofde_lab-signature>\n\n'
     return md
 
 
@@ -200,7 +200,7 @@ if __name__ == "__main__":
 
     # Get all scikit-decide (sub)modules
     modules = []
-    for m in find_abs_modules(skdecide):
+    for m in find_abs_modules(autofde_lab):
         try:
             module = importlib.import_module(m)
             modules.append(module)
@@ -321,7 +321,7 @@ if __name__ == "__main__":
             md += f"{module['doc']}\n\n"
 
         # Write domain spec summary
-        md += "::: tip Domain specification\n<skdecide-summary></skdecide-summary>\n:::\n\n"
+        md += "::: tip Domain specification\n<autofde_lab-summary></autofde_lab-summary>\n:::\n\n"
 
         # Write members
         for member in module["members"]:
@@ -380,7 +380,7 @@ if __name__ == "__main__":
             section = e["section"][:i]
             if section not in sections:
                 title = "Reference"
-                if section[-1] != "skdecide":
+                if section[-1] != "autofde_lab":
                     title = section[-1]
                     reference += "\n"
                 reference += f"{''.join(['#'] * i)} {title}\n\n"
@@ -405,7 +405,7 @@ if __name__ == "__main__":
         characteristics = [
             module
             for module in autodocs
-            if module["ref"].startswith(f"skdecide.builders.{element}.")
+            if module["ref"].startswith(f"autofde_lab.builders.{element}.")
             and ".scheduling." not in module["ref"]
         ]  # TODO: add separate scheduling domain/solver generator?
         default_characteristics = {
@@ -416,7 +416,7 @@ if __name__ == "__main__":
         for template in [
             member
             for module in autodocs
-            if module["ref"] == f"skdecide.{element}s"
+            if module["ref"] == f"autofde_lab.{element}s"
             for member in module["members"]
         ]:
             if template["name"] == element.capitalize():
@@ -469,9 +469,9 @@ if __name__ == "__main__":
             "navbar: false\n"
             "sidebar: false\n"
             "---\n\n"
-            f"<skdecide-spec{' isSolver' if element == 'solver' else ''}>\n\n" + spec
+            f"<autofde_lab-spec{' isSolver' if element == 'solver' else ''}>\n\n" + spec
         )
-        spec += "</skdecide-spec>\n\n"
+        spec += "</autofde_lab-spec>\n\n"
 
         with open(f"{docdir}/codegen/_{element}spec.md", "w") as f:
             f.write(spec)
@@ -480,7 +480,7 @@ if __name__ == "__main__":
     state["objects"] = {
         member["name"]: f"/reference/_skdecide.core.html#{member['name'].lower()}"
         for module in autodocs
-        if module["ref"] == "skdecide.core"
+        if module["ref"] == "autofde_lab.core"
         for member in module["members"]
     }
     for element in ["domain", "solver"]:
@@ -489,7 +489,7 @@ if __name__ == "__main__":
         tmp_signatures = {}
         for module in autodocs:
             if (
-                module["ref"].startswith(f"skdecide.builders.{element}.")
+                module["ref"].startswith(f"autofde_lab.builders.{element}.")
                 and ".scheduling." not in module["ref"]
             ):  # TODO: also store scheduling domain/state state (separately?) once scheduling domain/solver generator implemented
                 not_implemented = set()
@@ -509,7 +509,7 @@ if __name__ == "__main__":
                                 types_dict[member_name] = member["ref"]
                     tmp_methods[level_name] = list(not_implemented)
                     tmp_types[level_name] = types_dict
-            elif module["ref"] == f"skdecide.{element}s":
+            elif module["ref"] == f"autofde_lab.{element}s":
                 for template in module["members"]:
                     if template["name"] == element.capitalize():
                         tmp_methods[element] = []

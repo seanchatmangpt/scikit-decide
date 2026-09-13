@@ -1,0 +1,27 @@
+@prefix afl: <urn:autofde-lab:> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+<urn:autofde-lab:shape:ActuationAuthority>
+    a sh:NodeShape ;
+    sh:targetClass afl:Actuation ;
+    sh:property [
+        sh:path afl:realizesCommitment ;
+        sh:class afl:POWLCommitment ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Every modeled consequential actuation must realize exactly one explicit POWL commitment." ;
+    ] ;
+    sh:property [
+        sh:path afl:authorizedBy ;
+        sh:class afl:AuthorityEnvelope ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Every modeled consequential actuation must carry exactly one explicit AuthorityEnvelope." ;
+    ] ;
+    sh:property [
+        sh:path afl:belongsToTrial ;
+        sh:class afl:Trial ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Every modeled actuation must be bound to exactly one Trial identity." ;
+    ] .
