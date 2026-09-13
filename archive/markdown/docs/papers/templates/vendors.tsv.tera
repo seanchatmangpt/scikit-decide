@@ -1,0 +1,4 @@
+# slug	repository	path	requested_ref	adapter	smoke	local_safe	requires_authority	pin	resolution	smoke_standing
+{%- for row in sparql_results %}
+{{ row["slug"] }}	{{ row["repo"] }}	{{ row["path"] }}	{{ row["requested_ref"] }}	{{ row["adapter"] }}	{{ row["smoke"] }}	{{ row["local_safe"] }}	{{ row["requires_authority"] }}	{{ row["pinned_revision"] | default(value="") }}	{{ row["resolution_standing"] | default(value="UNRESOLVED") }}	{{ row["smoke_standing"] | default(value="NOT_RUN") }}
+{%- endfor %}

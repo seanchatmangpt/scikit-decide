@@ -1,0 +1,180 @@
+{
+  "eventTypes": [
+    {
+      "name": "act",
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "materialize",
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "verify",
+      "attributes": [
+        {
+          "name": "standing",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "objectTypes": [
+    {
+      "name": "episode",
+      "attributes": []
+    },
+    {
+      "name": "environment",
+      "attributes": []
+    },
+    {
+      "name": "capability",
+      "attributes": []
+    }
+  ],
+  "events": [
+    {
+      "id": "970c09cfde5e4d368ea93f6e6c07e1ea",
+      "type": "materialize",
+      "time": "2026-08-08T17:36:11.714819+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "1a88724e671e4f9aab551c1624d8262e"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "2cc33b89e86ff478f2e6163b77f337848f88fe68cb18c5c8553db5a02fe6689c"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "7a2ea3da7f254d749df500a78edb1c0d",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:environment:d65647c5ad574a0fb53d38ecb7ca1973",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:operation:materialize",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "7c41d5b525ea45f688510cd5a95b31a7",
+      "type": "act",
+      "time": "2026-08-08T17:36:11.715765+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "45e6b1e6635844a6bdfc6ac3d50cc939"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "2cc33b89e86ff478f2e6163b77f337848f88fe68cb18c5c8553db5a02fe6689c"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "51a37f17c34bb13c0a46c5955bfd3b4f021f0d694380757ada0103c493768859"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "7a2ea3da7f254d749df500a78edb1c0d",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:environment:d65647c5ad574a0fb53d38ecb7ca1973",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:capability:burn_catalyst",
+          "qualifier": "capability"
+        }
+      ]
+    },
+    {
+      "id": "94d7575b9f3a4d9586dcc889f2a24907",
+      "type": "verify",
+      "time": "2026-08-08T17:36:11.716168+00:00",
+      "attributes": [
+        {
+          "name": "standing",
+          "value": "ALIVE"
+        },
+        {
+          "name": "idempotency_key",
+          "value": "45e6b1e6635844a6bdfc6ac3d50cc939"
+        },
+        {
+          "name": "pre_state_digest",
+          "value": "2cc33b89e86ff478f2e6163b77f337848f88fe68cb18c5c8553db5a02fe6689c"
+        },
+        {
+          "name": "post_state_digest",
+          "value": "51a37f17c34bb13c0a46c5955bfd3b4f021f0d694380757ada0103c493768859"
+        },
+        {
+          "name": "verification_id",
+          "value": "af45480299fa484d8fbee73c8ac494ad"
+        }
+      ],
+      "relationships": [
+        {
+          "objectId": "7a2ea3da7f254d749df500a78edb1c0d",
+          "qualifier": "episode"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:environment:d65647c5ad574a0fb53d38ecb7ca1973",
+          "qualifier": "environment"
+        },
+        {
+          "objectId": "urn:gymact:resource-flow:capability:burn_catalyst",
+          "qualifier": "capability"
+        }
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "id": "7a2ea3da7f254d749df500a78edb1c0d",
+      "type": "episode",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:resource-flow:environment:d65647c5ad574a0fb53d38ecb7ca1973",
+      "type": "environment",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:operation:materialize",
+      "type": "capability",
+      "attributes": []
+    },
+    {
+      "id": "urn:gymact:resource-flow:capability:burn_catalyst",
+      "type": "capability",
+      "attributes": []
+    }
+  ]
+}

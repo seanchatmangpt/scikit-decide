@@ -1,0 +1,52 @@
+erDiagram
+    FAILURE ||--|| FAILURE_SIGNATURE : summarized_as
+    FAILURE_SIGNATURE }o--|| FAILURE_CLUSTER : grouped_into
+    FAILURE_CLUSTER ||--o{ HYPOTHESIS : suggests
+    HYPOTHESIS ||--o{ DISCRIMINATING_PROBE : tested_by
+    HYPOTHESIS ||--o| REPAIR_CANDIDATE : proposes
+    REPAIR_CANDIDATE ||--o{ FALSIFICATION_RESULT : tested_by
+    REPAIR_CANDIDATE ||--o| ADMITTED_REPAIR : admitted_as
+    ADMITTED_REPAIR ||--|| BASIS_REVISION : produces
+    BASIS_REVISION ||--o{ AFFECTED_EXPERIMENT : regenerates
+
+    FAILURE {
+      string failure_id PK
+      string trial_id
+      string category
+    }
+    FAILURE_SIGNATURE {
+      string signature_id PK
+      string digest
+    }
+    FAILURE_CLUSTER {
+      string cluster_id PK
+      string latent_defect
+    }
+    HYPOTHESIS {
+      string hypothesis_id PK
+      string claim
+    }
+    DISCRIMINATING_PROBE {
+      string probe_id PK
+      string design
+    }
+    REPAIR_CANDIDATE {
+      string repair_id PK
+      string target_basis
+    }
+    FALSIFICATION_RESULT {
+      string falsifier_id PK
+      boolean passed
+    }
+    ADMITTED_REPAIR {
+      string admitted_repair_id PK
+      string receipt_ref
+    }
+    BASIS_REVISION {
+      string revision_id PK
+      string basis_digest
+    }
+    AFFECTED_EXPERIMENT {
+      string experiment_id PK
+      string regeneration_status
+    }

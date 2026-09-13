@@ -1,0 +1,189 @@
+{
+  "schema": "skdecide.release-manifest/v1",
+  "milestone": "Persistent Agent Laboratory",
+  "version": {
+    "resolved": false,
+    "standing": "UNKNOWN",
+    "declared_in_pyproject": "dynamic",
+    "pyproject_reference": "pyproject.toml:28",
+    "build_derived_identifier": "0.1.dev768+gd81479000",
+    "git_tag_count": 0,
+    "note": "No release version exists. 26.8.6 belongs to a different project (ggen) and is not used here."
+  },
+  "commit": {
+    "sha": "e32e8705659d420432986f8919c23786cfd90438",
+    "short": "e32e870",
+    "range": "1ef12de..e32e870",
+    "commit_count": 13,
+    "committed_at": "2026-08-06T17:51:54-07:00"
+  },
+  "repository": {
+    "origin": "https://github.com/seanchatmangpt/scikit-decide",
+    "is_fork": true,
+    "pyproject_name": "scikit-decide",
+    "pyproject_repository_url": "https://github.com/airbus/scikit-decide",
+    "upstream_pypi_distribution": "scikit-decide",
+    "distribution_name_standing": "BLOCKED:FORK_DISTRIBUTION_NAME_COLLIDES_WITH_UPSTREAM_PYPI"
+  },
+  "standing_dimensions": {
+    "technicalStanding": "per-boundary, see boundaries",
+    "organizationalStanding": "UNKNOWN",
+    "enterpriseStanding": "UNKNOWN",
+    "note": "No component in this repository computes organizationalStanding. Every boundary row below is a technicalStanding claim only."
+  },
+  "test_result_pre_compression": {
+    "label": "integrated run, pre-compression baseline",
+    "passed": 675,
+    "skipped": 4,
+    "failed": 0,
+    "exit_code": 0,
+    "scope": [
+      "tests/powl",
+      "tests/agent",
+      "tests/ocel",
+      "tests/adapters",
+      "tests/ecosystem",
+      "tests/fabric",
+      "tests/autofde",
+      "tests/domains/python/test_breach_clock_unit.py"
+    ],
+    "supersedes_current_suite": false,
+    "note": "Four compression commits landed after this measurement; it does not describe the current suite."
+  },
+  "boundaries": [
+    {
+      "id": "integrated-suite-pre-compression",
+      "technicalStanding": "ALIVE",
+      "witness": "675 passed, 4 skipped, 0 failed, exit 0"
+    },
+    {
+      "id": "integrated-suite-post-compression",
+      "technicalStanding": "UNKNOWN",
+      "witness": null,
+      "blocker": "compression in progress; whole suite not re-run"
+    },
+    {
+      "id": "whole-suite-pytest-collection",
+      "technicalStanding": "BUILD_BROKEN",
+      "errors": [
+        "tests/solvers/python/test_pomcp.py basename collision with tests/solvers/cpp/test_pomcp.py",
+        "tests/test_self_play_dspy_advanced_planning_chicago.py import failure",
+        "tests/test_self_play_dspy_all_domains_chicago.py import failure",
+        "tests/test_self_play_dspy_turbofieldfare_chicago.py import failure"
+      ]
+    },
+    {
+      "id": "terraform-fmt",
+      "technicalStanding": "ALIVE",
+      "witness": "terraform fmt -check -recursive exit 0"
+    },
+    {
+      "id": "terraform-validate",
+      "technicalStanding": "ALIVE",
+      "witness": "Success! The configuration is valid."
+    },
+    {
+      "id": "terraform-contract-tests-mocked",
+      "technicalStanding": "ALIVE",
+      "witness": "terraform test: 24 passed, 0 failed, mocked providers",
+      "scope_note": "Azure deployment contracts and mocked infrastructure validation only."
+    },
+    {
+      "id": "terraform-refusal-guards",
+      "technicalStanding": "ALIVE",
+      "witness": "refusal guards observed printing pass individually"
+    },
+    {
+      "id": "real-azure-apply",
+      "technicalStanding": "NOT_RUN",
+      "blockers": [
+        "BLOCKED:NO_APPROVED_TEST_SUBSCRIPTION",
+        "BLOCKED:AZURE_CLI_ABSENT"
+      ],
+      "note": "Two independent blockers; either alone is sufficient. az is not installed."
+    },
+    {
+      "id": "test-compression",
+      "technicalStanding": "PARTIAL_ALIVE",
+      "witness": "one suite pair reduced 176 -> 73 items",
+      "per_file": [
+        {"file": "tests/autofde/test_explore_boundary.py", "before": 45, "after": 5},
+        {"file": "tests/autofde/test_terraform_guards.py", "before": 32, "after": 10},
+        {"file": "tests/adapters/test_azure_adapters.py", "before": 38, "after": 18},
+        {"file": "tests/adapters/test_adapters.py", "before": 28, "after": 9},
+        {"file": "tests/autofde/test_work_graph_projection.py", "before": 33, "after": 31}
+      ],
+      "final_suite_count": null,
+      "note": "In progress. No final suite count exists."
+    },
+    {
+      "id": "tests-domains-python-test_plado_domain",
+      "technicalStanding": "BUILD_BROKEN",
+      "failing_params": 4,
+      "param_pattern": "*_sb3[*-llg]",
+      "error": "RuntimeError: scatter(): Expected self.dtype to be equal to src.dtype",
+      "location": "hub/solver/stable_baselines/autoregressive/common/distributions.py:135",
+      "attributable_to_milestone": false,
+      "attribution_evidence": "no commit in 1ef12de..e32e870 touches src/autofde_lab/hub/; no changed module appears in the traceback",
+      "proven_pre_existing": false,
+      "pre_existence_standing": "UNKNOWN",
+      "pre_existence_note": "Establishing pre-existence requires a control build at 1ef12de in its own environment; not done."
+    },
+    {
+      "id": "fault-matrix",
+      "technicalStanding": "NOT_RUN",
+      "witness": null,
+      "evidence_of_absence": "tests/autofde/ contains only test_explore_boundary.py, test_terraform_guards.py, test_work_graph_projection.py; zero hits for fault_matrix across src/, tests/, docs/, infra/",
+      "note": "Explicitly not PARTIAL_ALIVE: no bounded working checkpoint exists."
+    },
+    {
+      "id": "self-manufacturing-loop",
+      "technicalStanding": "NOT_RUN",
+      "chain": ["CAPABILITY_ABSENT", "generate work", "manufacture", "admit", "resume"],
+      "evidence_of_absence": "zero hits for CAPABILITY_ABSENT, self-manufactur, self_manufactur across src/, tests/, docs/, infra/",
+      "note": "No stage of the chain is implemented. Explicitly not PARTIAL_ALIVE."
+    },
+    {
+      "id": "clean-checkout-green",
+      "technicalStanding": "NOT_RUN",
+      "blocker": "not exercised for this commit"
+    },
+    {
+      "id": "packaging-and-publication",
+      "technicalStanding": "NOT_RUN",
+      "blocker": "BLOCKED:FORK_DISTRIBUTION_NAME_COLLIDES_WITH_UPSTREAM_PYPI",
+      "note": "Nothing tagged, built, packaged, or published. Prerequisite, not cosmetic."
+    }
+  ],
+  "release_gate": {
+    "criteria": [
+      "all distinct falsifiers preserved",
+      "all collapsed redraws mutation-proven",
+      "all aggregate tests anti-vacuous",
+      "admitted suite green",
+      "clean checkout green",
+      "acceptable wall-clock"
+    ],
+    "is_item_count_gate": false,
+    "met": false,
+    "note": "Not '<= N pytest items'. No criterion is recorded as met end to end at this commit."
+  },
+  "explore_surfaces": {
+    "boundary_document": "docs/autofde/EXPLORE.md",
+    "paths": [
+      "src/autofde_lab/autofde/",
+      "infra/azure/",
+      "infra/github/",
+      "docs/autofde/",
+      "tests/autofde/",
+      "demo/"
+    ],
+    "note": "No standing row produced under an explore surface transfers to the AutoFDE product."
+  },
+  "documents": [
+    "docs/release/RELEASE_NOTES.md",
+    "docs/release/STANDING_MATRIX.md",
+    "docs/release/KNOWN_LIMITATIONS.md",
+    "docs/release/release-manifest.json"
+  ]
+}

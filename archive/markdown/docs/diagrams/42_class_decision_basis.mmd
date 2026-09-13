@@ -1,0 +1,46 @@
+classDiagram
+    class DecisionSystemSpec {
+      +decision_id: str
+      +input_projection: str
+      +state_representation: str
+    }
+    class Planner {
+      +planner_id: str
+      +family: str
+    }
+    class Policy {
+      +policy_id: str
+      +deterministic: bool
+    }
+    class MemoryPolicy {
+      +memory_kind: str
+      +retention: str
+    }
+    class VerifierStrategy {
+      +verifier_id: str
+      +independent: bool
+    }
+    class RepairPolicy {
+      +repair_kind: str
+      +max_repairs: int
+    }
+    class ReplanningPolicy {
+      +local_only: bool
+      +trigger: str
+    }
+    class ProcessRepresentation {
+      +representation: str
+    }
+    class CompilationPolicy {
+      +compile_when_stable: bool
+      +target: str
+    }
+
+    DecisionSystemSpec o-- Planner
+    DecisionSystemSpec o-- Policy
+    DecisionSystemSpec o-- MemoryPolicy
+    DecisionSystemSpec o-- VerifierStrategy
+    DecisionSystemSpec o-- RepairPolicy
+    DecisionSystemSpec o-- ReplanningPolicy
+    DecisionSystemSpec o-- ProcessRepresentation
+    DecisionSystemSpec o-- CompilationPolicy

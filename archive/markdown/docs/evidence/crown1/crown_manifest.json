@@ -1,0 +1,67 @@
+{
+  "seeds": [
+    890266799,
+    4064909771,
+    3979297810,
+    1811868735,
+    1635849486,
+    1645242857,
+    1327771368,
+    663999732,
+    1382812562,
+    69813132
+  ],
+  "providers": [
+    "cube_counter",
+    "switchboard",
+    "resource_flow",
+    "lock_and_key",
+    "cube_container_counter",
+    "cube_counter",
+    "switchboard",
+    "resource_flow",
+    "lock_and_key",
+    "cube_container_counter"
+  ],
+  "configs": [
+    {
+      "target": 5
+    },
+    {
+      "seed": 4064909771,
+      "n_switches": 5
+    },
+    {
+      "seed": 3979297810,
+      "capacity": 4,
+      "target": 3
+    },
+    {
+      "seed": 1811868735,
+      "depth": 3
+    },
+    {
+      "target": 2
+    },
+    {
+      "target": 3
+    },
+    {
+      "seed": 1327771368,
+      "n_switches": 5
+    },
+    {
+      "seed": 663999732,
+      "capacity": 4,
+      "target": 2
+    },
+    {
+      "seed": 1382812562,
+      "depth": 2
+    },
+    {
+      "target": 2
+    }
+  ],
+  "manifest_digest": "64121fbac6f4cfe29b0b68bf138c9c3f2f7d466dc61294bdde9772947587c7de"
+}

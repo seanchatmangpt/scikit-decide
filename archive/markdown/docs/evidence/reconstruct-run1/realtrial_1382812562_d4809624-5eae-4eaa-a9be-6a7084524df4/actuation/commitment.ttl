@@ -1,0 +1,8 @@
+@prefix powl: <urn:powl:> .
+<urn:trial:d4809624-5eae-4eaa-a9be-6a7084524df4> a powl:Commitment ;
+    powl:planDigest "f9ea21cb5cb498d8" ;
+    powl:modelDigest "1f4a503b8518c3f1" ;
+    powl:planLength 3 ;
+    powl:sequence ("force_latch" "pick_key[key=1]" "open_lock") ;
+    powl:episodeId "68e802bac96d4d3ba636d06be62eb46e" ;
+    powl:environmentId "urn:gymact:lock-and-key:environment:fdad7c7845f044cab0c465c977238dbb" .
